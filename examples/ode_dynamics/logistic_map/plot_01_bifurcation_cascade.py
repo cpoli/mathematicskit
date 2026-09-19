@@ -12,8 +12,8 @@ which the dynamics are chaotic -- the classic Feigenbaum scenario.
 import matplotlib.pyplot as plt
 import numpy as np
 
-from mathkit.ode_dynamics.systems.logistic_map import bifurcation_diagram, estimate_feigenbaum_delta
-from mathkit.ode_dynamics.visualizers.plots import plot_bifurcation_diagram
+from mathematicskit.ode_dynamics.systems.logistic_map import bifurcation_diagram, estimate_feigenbaum_delta
+from mathematicskit.ode_dynamics.visualizers.plots import plot_bifurcation_diagram
 
 # %%
 # The bifurcation diagram

@@ -2,21 +2,21 @@ r"""
 Least-squares polynomial regression and its conditioning
 =============================================================
 
-:class:`~mathkit.numerical_analysis.systems.regression.PolynomialRegression`
+:class:`~mathematicskit.numerical_analysis.systems.regression.PolynomialRegression`
 fits a degree-``d`` polynomial by solving the normal equations
 :math:`V^T V c = V^T y`. This script fits noisy cubic data, checks the
 :math:`R^2` and residuals, and then shows the fit's condition number
 (estimated via power iteration on the normal-equations matrix) growing
 sharply with degree -- squaring the design matrix's own condition number
 is exactly why the normal-equations approach is eventually replaced by a
-QR-based least-squares solve in :mod:`mathkit.linalg`.
+QR-based least-squares solve in :mod:`mathematicskit.linalg`.
 """
 
 # %%
 import matplotlib.pyplot as plt
 import numpy as np
 
-from mathkit.numerical_analysis import PolynomialRegression
+from mathematicskit.numerical_analysis import PolynomialRegression
 
 # %%
 # Fit noisy cubic data

@@ -1,5 +1,5 @@
-mathkit.special_functions
-===========================
+mathematicskit.special_functions
+================================
 
 
 .. include:: /_generated/nav/special_functions.rst
@@ -11,6 +11,6 @@ via ``numpy.polynomial``; and the discrete Fourier transform via
 ``numpy.fft``, plus a from-scratch radix-2 FFT kept as a pedagogical
 comparison against a naive DFT and ``numpy.fft``.
 
-.. automodule:: mathkit.special_functions
+.. automodule:: mathematicskit.special_functions
    :members:
    :undoc-members:

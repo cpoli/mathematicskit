@@ -1,7 +1,7 @@
 Examples
 ========
 
-This gallery walks through every public feature of ``mathkit.combinatorics``:
+This gallery walks through every public feature of ``mathematicskit.combinatorics``:
 permutation/combination counting and generation, Pascal's triangle,
 integer partitions, the inclusion-exclusion principle, and Stirling/
 Catalan/Bell numbers.

@@ -10,7 +10,7 @@ to :math:`1/e` remarkably quickly.
 # %%
 import math
 
-from mathkit.combinatorics import derangement_count
+from mathematicskit.combinatorics import derangement_count
 
 # %%
 # Probability of a total derangement, for increasing n

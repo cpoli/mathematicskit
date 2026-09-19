@@ -10,8 +10,8 @@ box-counting dimension, comparing against the known closed-form value
 # %%
 import numpy as np
 
-from mathkit.fractals_chaos import SierpinskiTriangle, box_counting_dimension
-from mathkit.fractals_chaos.visualizers.plots import plot_box_counting, plot_ifs_points
+from mathematicskit.fractals_chaos import SierpinskiTriangle, box_counting_dimension
+from mathematicskit.fractals_chaos.visualizers.plots import plot_box_counting, plot_ifs_points
 
 # %%
 # Generate the point cloud and estimate its dimension

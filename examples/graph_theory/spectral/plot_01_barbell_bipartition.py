@@ -9,9 +9,9 @@ algebraic connectivity reflects how easily the graph is disconnected
 """
 
 # %%
-from mathkit.graph_theory import Graph, spectral_analysis
-from mathkit.graph_theory.utils.generators import complete_graph
-from mathkit.graph_theory.visualizers.plots import plot_spectral_bipartition
+from mathematicskit.graph_theory import Graph, spectral_analysis
+from mathematicskit.graph_theory.utils.generators import complete_graph
+from mathematicskit.graph_theory.visualizers.plots import plot_spectral_bipartition
 
 # %%
 # Build the barbell graph: two K5 cliques joined by one edge

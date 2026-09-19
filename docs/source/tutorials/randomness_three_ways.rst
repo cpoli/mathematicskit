@@ -3,9 +3,9 @@
 Randomness, Three Ways
 =========================
 
-Three of mathkit's domains lean on randomness for entirely different
-purposes: :mod:`mathkit.probability` uses it to *estimate* an integral
-and to *simulate* a stochastic process, while :mod:`mathkit.statistics`
+Three of mathematicskit's domains lean on randomness for entirely different
+purposes: :mod:`mathematicskit.probability` uses it to *estimate* an integral
+and to *simulate* a stochastic process, while :mod:`mathematicskit.statistics`
 uses it to *quantify uncertainty* about a real dataset with no
 convenient closed-form sampling distribution. All three share the same
 underlying tool -- a pseudo-random number generator -- put to very
@@ -15,14 +15,14 @@ Monte Carlo integration: estimating pi
 --------------------------------------------
 
 The area under a quarter circle of radius 1 is :math:`\pi/4`;
-:func:`~mathkit.probability.systems.monte_carlo.monte_carlo_integrate`
+:func:`~mathematicskit.probability.systems.monte_carlo.monte_carlo_integrate`
 estimates exactly this integral by sampling points uniformly and
 averaging:
 
 .. code-block:: python
 
    import numpy as np
-   from mathkit.probability import monte_carlo_integrate
+   from mathematicskit.probability import monte_carlo_integrate
 
    result = monte_carlo_integrate(lambda x: np.sqrt(1.0 - x**2), 0.0, 1.0, n=200000, seed=0)
    print(result.estimate, result.std_error)
@@ -40,7 +40,7 @@ stationary distribution:
 
 .. code-block:: python
 
-   from mathkit.probability import MarkovChain
+   from mathematicskit.probability import MarkovChain
 
    chain = MarkovChain([[0.9, 0.1], [0.5, 0.5]])
    print(chain.stationary_distribution())
@@ -58,13 +58,13 @@ The bootstrap: uncertainty without a formula
 A skewed dataset -- say, waiting times drawn from an exponential
 distribution -- has no simple closed-form confidence interval for its
 mean once outliers are a concern.
-:func:`~mathkit.statistics.systems.bootstrap.bootstrap_confidence_interval`
+:func:`~mathematicskit.statistics.systems.bootstrap.bootstrap_confidence_interval`
 sidesteps the need for one entirely, by resampling the *data itself*
 thousands of times:
 
 .. code-block:: python
 
-   from mathkit.statistics import bootstrap_confidence_interval
+   from mathematicskit.statistics import bootstrap_confidence_interval
 
    rng = np.random.default_rng(0)
    samples = rng.exponential(scale=3.0, size=500)

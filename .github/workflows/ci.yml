@@ -34,7 +34,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
           cache: pip
       - run: pip install -e ".[test]"
-      - run: MPLBACKEND=Agg pytest -q --cov=mathkit --cov-report=xml
+      - run: MPLBACKEND=Agg pytest -q --cov=mathematicskit --cov-report=xml
       - name: Upload coverage to Codecov
         if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
         uses: codecov/codecov-action@v4
@@ -42,7 +42,7 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage.xml
           fail_ci_if_error: false
-      - run: MPLBACKEND=Agg pytest --doctest-modules mathkit --ignore-glob="*/tests/*" -q
+      - run: MPLBACKEND=Agg pytest --doctest-modules mathematicskit --ignore-glob="*/tests/*" -q
 
   typecheck:
     name: Type check (mypy, advisory)
@@ -54,4 +54,4 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -e ".[dev]"
-      - run: mypy mathkit
+      - run: mypy mathematicskit

@@ -8,7 +8,7 @@ correctly.
 """
 
 # %%
-from mathkit.graph_theory import Graph, bellman_ford_shortest_paths, dijkstra_shortest_paths, floyd_warshall_shortest_paths
+from mathematicskit.graph_theory import Graph, bellman_ford_shortest_paths, dijkstra_shortest_paths, floyd_warshall_shortest_paths
 
 # %%
 # A graph with non-negative weights: Dijkstra and Bellman-Ford agree

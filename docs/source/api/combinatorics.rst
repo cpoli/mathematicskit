@@ -1,5 +1,5 @@
-mathkit.combinatorics
-=======================
+mathematicskit.combinatorics
+============================
 
 
 .. include:: /_generated/nav/combinatorics.rst
@@ -11,6 +11,6 @@ pedagogical illustration; integer partitions and Young/Ferrers diagrams;
 the inclusion-exclusion principle and derangements; Stirling numbers,
 Catalan numbers, and Bell numbers.
 
-.. automodule:: mathkit.combinatorics
+.. automodule:: mathematicskit.combinatorics
    :members:
    :undoc-members:

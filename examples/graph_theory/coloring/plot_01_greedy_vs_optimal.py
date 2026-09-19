@@ -8,9 +8,9 @@ exact backtracking search.
 """
 
 # %%
-from mathkit.graph_theory import backtracking_coloring, greedy_coloring
-from mathkit.graph_theory.utils.generators import cycle_graph
-from mathkit.graph_theory.visualizers.plots import plot_graph
+from mathematicskit.graph_theory import backtracking_coloring, greedy_coloring
+from mathematicskit.graph_theory.utils.generators import cycle_graph
+from mathematicskit.graph_theory.visualizers.plots import plot_graph
 
 # %%
 # A 5-cycle: chromatic number 3 (odd cycles are never bipartite)

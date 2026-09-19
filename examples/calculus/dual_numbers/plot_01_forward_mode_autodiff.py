@@ -13,8 +13,8 @@ import math
 
 import numpy as np
 
-from mathkit.calculus.systems.dual_numbers import derivative
-from mathkit.calculus.systems.finite_differences import central_difference
+from mathematicskit.calculus.systems.dual_numbers import derivative
+from mathematicskit.calculus.systems.finite_differences import central_difference
 
 # %%
 # Exact derivative, compared against central differences at various h

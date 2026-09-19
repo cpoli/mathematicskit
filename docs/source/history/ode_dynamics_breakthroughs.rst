@@ -13,7 +13,7 @@ Breakthroughs in Dynamical Systems
 A dynamical system's *qualitative* behavior -- does it settle down, spiral
 in, oscillate forever, or wander chaotically -- can often be understood
 without ever solving the equations exactly. This chronology traces the
-ideas behind :mod:`mathkit.ode_dynamics`: the classification of linear
+ideas behind :mod:`mathematicskit.ode_dynamics`: the classification of linear
 flows near a fixed point, the discovery of self-sustained oscillation,
 and the slow, then sudden, realization that simple deterministic systems
 can behave unpredictably.
@@ -38,10 +38,10 @@ trace-determinant classification still taught today.
    \tau = \operatorname{tr}(J), \qquad \Delta = \det(J), \qquad
    \lambda_{1,2} = \frac{\tau \pm \sqrt{\tau^2 - 4\Delta}}{2}
 
-*Implementation:* :func:`mathkit.ode_dynamics.systems.stability.classify_fixed_point_2d`
+*Implementation:* :func:`mathematicskit.ode_dynamics.systems.stability.classify_fixed_point_2d`
 implements exactly this :math:`(\tau,\Delta)`-plane classification, and
-:class:`~mathkit.ode_dynamics.systems.phase_portrait.Linear2D`/
-:class:`~mathkit.ode_dynamics.systems.phase_portrait.Nonlinear2D` render
+:class:`~mathematicskit.ode_dynamics.systems.phase_portrait.Linear2D`/
+:class:`~mathematicskit.ode_dynamics.systems.phase_portrait.Nonlinear2D` render
 the corresponding phase portraits.
 
 *References:* H. Poincare, "Sur les courbes definies par une equation
@@ -68,9 +68,9 @@ region must approach a periodic orbit.
 
    \ddot x - \mu(1-x^2)\dot x + x = 0
 
-*Implementation:* :class:`mathkit.ode_dynamics.systems.limit_cycles.VanDerPolOscillator`
+*Implementation:* :class:`mathematicskit.ode_dynamics.systems.limit_cycles.VanDerPolOscillator`
 integrates exactly this equation, with
-:func:`~mathkit.ode_dynamics.systems.limit_cycles.estimate_limit_cycle_amplitude`
+:func:`~mathematicskit.ode_dynamics.systems.limit_cycles.estimate_limit_cycle_amplitude`
 measuring the amplitude the system settles into regardless of where it
 starts.
 
@@ -114,9 +114,9 @@ creating or destroying a pair of fixed points, a pitchfork bifurcation
 splitting one stable state into two, and a Hopf bifurcation birthing a
 limit cycle from a spiral fixed point that loses stability.
 
-*Implementation:* :func:`mathkit.ode_dynamics.systems.bifurcations.saddle_node_fixed_points`,
-:func:`~mathkit.ode_dynamics.systems.bifurcations.pitchfork_fixed_points`,
-and :func:`~mathkit.ode_dynamics.systems.bifurcations.hopf_limit_cycle_radius`
+*Implementation:* :func:`mathematicskit.ode_dynamics.systems.bifurcations.saddle_node_fixed_points`,
+:func:`~mathematicskit.ode_dynamics.systems.bifurcations.pitchfork_fixed_points`,
+and :func:`~mathematicskit.ode_dynamics.systems.bifurcations.hopf_limit_cycle_radius`
 give the closed-form fixed points/limit-cycle radius for each normal
 form, checked directly against numerical integration.
 
@@ -138,10 +138,10 @@ of the first, and remains one of the most striking, examples of a
 *universal* quantitative law governing the transition to chaos, holding
 across wildly different physical systems.
 
-*Implementation:* :class:`mathkit.ode_dynamics.systems.logistic_map.LogisticMap`
-and :func:`~mathkit.ode_dynamics.systems.logistic_map.bifurcation_diagram`
+*Implementation:* :class:`mathematicskit.ode_dynamics.systems.logistic_map.LogisticMap`
+and :func:`~mathematicskit.ode_dynamics.systems.logistic_map.bifurcation_diagram`
 reproduce the cascade directly;
-:func:`~mathkit.ode_dynamics.systems.logistic_map.estimate_feigenbaum_delta`
+:func:`~mathematicskit.ode_dynamics.systems.logistic_map.estimate_feigenbaum_delta`
 estimates :math:`\delta` from the first few numerically located
 bifurcation points.
 
@@ -164,9 +164,9 @@ turning an illegibly tangled orbit into a scatter of points whose own
 pattern -- a few dots for periodic motion, a structureless (or
 fractal-looking) haze for chaos -- makes the underlying dynamics legible.
 
-*Implementation:* :class:`mathkit.ode_dynamics.systems.poincare.DuffingOscillator`
+*Implementation:* :class:`mathematicskit.ode_dynamics.systems.poincare.DuffingOscillator`
 integrates exactly Duffing's equation, and
-:func:`~mathkit.ode_dynamics.systems.poincare.stroboscopic_poincare_section`
+:func:`~mathematicskit.ode_dynamics.systems.poincare.stroboscopic_poincare_section`
 implements exactly this once-per-drive-period sampling.
 
 *References:* G. Duffing, *Erzwungene Schwingungen bei veränderlicher

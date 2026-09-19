@@ -8,9 +8,9 @@ directions avoid the zig-zagging that slows gradient descent down.
 """
 
 # %%
-from mathkit.optimization import GradientDescent, NonlinearConjugateGradient, quadratic_bowl, quadratic_bowl_grad
-from mathkit.optimization.utils.comparison import compare_optimizers
-from mathkit.optimization.visualizers.plots import plot_convergence_comparison
+from mathematicskit.optimization import GradientDescent, NonlinearConjugateGradient, quadratic_bowl, quadratic_bowl_grad
+from mathematicskit.optimization.utils.comparison import compare_optimizers
+from mathematicskit.optimization.visualizers.plots import plot_convergence_comparison
 
 # %%
 # Compare both methods from the same starting point

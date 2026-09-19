@@ -9,7 +9,7 @@ polygon area formula.
 # %%
 import numpy as np
 
-from mathkit.geometry import polygon_area, polygon_centroid
+from mathematicskit.geometry import polygon_area, polygon_centroid
 
 # %%
 # A regular hexagon of side length 1

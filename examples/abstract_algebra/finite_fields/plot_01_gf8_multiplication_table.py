@@ -8,7 +8,7 @@ multiplicative inverse.
 """
 
 # %%
-from mathkit.abstract_algebra import GF, Polynomial, find_irreducible_polynomial, is_irreducible
+from mathematicskit.abstract_algebra import GF, Polynomial, find_irreducible_polynomial, is_irreducible
 
 # %%
 # Find the defining irreducible polynomial

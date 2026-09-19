@@ -10,7 +10,7 @@ mean, on the same skewed dataset.
 # %%
 import numpy as np
 
-from mathkit.statistics import bootstrap_confidence_interval, mean_confidence_interval
+from mathematicskit.statistics import bootstrap_confidence_interval, mean_confidence_interval
 
 # %%
 # A skewed dataset where the mean and median tell different stories

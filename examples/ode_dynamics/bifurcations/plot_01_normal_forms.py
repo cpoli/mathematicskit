@@ -12,7 +12,7 @@ splitting, and birth-of-a-limit-cycle shapes.
 import matplotlib.pyplot as plt
 import numpy as np
 
-from mathkit.ode_dynamics.systems.bifurcations import hopf_limit_cycle_radius, pitchfork_fixed_points, saddle_node_fixed_points
+from mathematicskit.ode_dynamics.systems.bifurcations import hopf_limit_cycle_radius, pitchfork_fixed_points, saddle_node_fixed_points
 
 # %%
 # Saddle-node: two fixed points collide and annihilate

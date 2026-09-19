@@ -12,7 +12,7 @@ Breakthroughs in Combinatorics
 Counting things exactly -- not approximately, not asymptotically, but
 exactly -- turns out to be a surprisingly deep subject, full of hidden
 bijections between problems that look nothing alike on the surface. This
-chronology traces the ideas behind :mod:`mathkit.combinatorics`, from
+chronology traces the ideas behind :mod:`mathematicskit.combinatorics`, from
 Pascal's triangle to the partition function whose exact evaluation
 Ramanujan and Hardy needed an entirely new method of complex analysis to
 reach.
@@ -38,10 +38,10 @@ entry is the sum of the two entries above it.
 
    \binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k}
 
-*Implementation:* :func:`mathkit.combinatorics.systems.pascals_triangle.pascals_triangle`
+*Implementation:* :func:`mathematicskit.combinatorics.systems.pascals_triangle.pascals_triangle`
 builds exactly this triangle via the recurrence, kept hand-rolled purely
 as a pedagogical illustration alongside the primary API,
-:func:`~mathkit.combinatorics.systems.counting.combinations_count`,
+:func:`~mathematicskit.combinatorics.systems.counting.combinations_count`,
 which wraps :func:`scipy.special.comb`.
 
 *References:* B. Pascal, *Traite du triangle arithmetique* (Paris:
@@ -66,10 +66,10 @@ and so on.
 
    D_n = n! \sum_{k=0}^{n} \frac{(-1)^k}{k!}
 
-*Implementation:* :func:`mathkit.combinatorics.systems.inclusion_exclusion.derangement_count`
+*Implementation:* :func:`mathematicskit.combinatorics.systems.inclusion_exclusion.derangement_count`
 implements exactly this count via the equivalent integer recurrence
 :math:`D_n = (n-1)(D_{n-1}+D_{n-2})`, and
-:func:`~mathkit.combinatorics.systems.inclusion_exclusion.union_size_inclusion_exclusion`
+:func:`~mathematicskit.combinatorics.systems.inclusion_exclusion.union_size_inclusion_exclusion`
 implements the general inclusion-exclusion principle the derangement
 count is a specific application of.
 
@@ -96,7 +96,7 @@ integer sequence with many independent combinatorial meanings.
 
    C_0 = 1, \qquad C_{n+1} = \sum_{i=0}^{n} C_i C_{n-i}
 
-*Implementation:* :func:`mathkit.combinatorics.systems.special_numbers.catalan_number`
+*Implementation:* :func:`mathematicskit.combinatorics.systems.special_numbers.catalan_number`
 implements exactly Catalan's own recurrence (rather than the equivalent
 closed form :math:`\binom{2n}{n}/(n+1)`, kept as a cross-check in this
 domain's tests), and is verified directly against brute-force
@@ -120,10 +120,10 @@ numbers (the *total* number of ways to partition a set into any number
 of blocks at all), named for Eric Temple Bell's 1934 paper studying
 their generating function.
 
-*Implementation:* :func:`mathkit.combinatorics.systems.special_numbers.stirling_first_kind`
-and :func:`~mathkit.combinatorics.systems.special_numbers.stirling_second_kind`
+*Implementation:* :func:`mathematicskit.combinatorics.systems.special_numbers.stirling_first_kind`
+and :func:`~mathematicskit.combinatorics.systems.special_numbers.stirling_second_kind`
 implement both families via their defining recurrences;
-:func:`mathkit.combinatorics.utils.bell_number.bell_number` sums the
+:func:`mathematicskit.combinatorics.utils.bell_number.bell_number` sums the
 second kind over every possible number of blocks.
 
 *References:* J. Stirling, *Methodus Differentialis* (London: Bowyer,
@@ -148,13 +148,13 @@ Hardy's 1918 circle method finally gave :math:`p(n)` a genuine
 asymptotic formula, after nearly two and a half centuries of the
 function resisting any closed form at all.
 
-*Implementation:* :func:`mathkit.combinatorics.systems.partitions.partition_function`
+*Implementation:* :func:`mathematicskit.combinatorics.systems.partitions.partition_function`
 computes :math:`p(n)` exactly via Euler's own pentagonal-number-theorem
 recurrence (rather than Hardy and Ramanujan's asymptotic circle-method
 formula, which this domain does not implement);
-:func:`~mathkit.combinatorics.systems.partitions.integer_partitions`
+:func:`~mathematicskit.combinatorics.systems.partitions.integer_partitions`
 enumerates every partition explicitly, and
-:class:`mathkit.combinatorics.core.base.YoungDiagram` implements exactly
+:class:`mathematicskit.combinatorics.core.base.YoungDiagram` implements exactly
 Young's diagram and its conjugation.
 
 *References:* A. Young, "On Quantitative Substitutional Analysis,"

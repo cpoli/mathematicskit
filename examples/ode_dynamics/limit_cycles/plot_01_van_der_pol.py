@@ -11,8 +11,8 @@ is set entirely by the initial condition).
 # %%
 import matplotlib.pyplot as plt
 
-from mathkit.ode_dynamics.systems.limit_cycles import VanDerPolOscillator, estimate_limit_cycle_amplitude
-from mathkit.ode_dynamics.visualizers.plots import plot_phase_portrait
+from mathematicskit.ode_dynamics.systems.limit_cycles import VanDerPolOscillator, estimate_limit_cycle_amplitude
+from mathematicskit.ode_dynamics.visualizers.plots import plot_phase_portrait
 
 # %%
 # Trajectories from very different initial conditions converge

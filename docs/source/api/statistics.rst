@@ -1,5 +1,5 @@
-mathkit.statistics
-====================
+mathematicskit.statistics
+=========================
 
 
 .. include:: /_generated/nav/statistics.rst
@@ -9,6 +9,6 @@ confidence intervals for means/proportions/variances; ordinary
 least-squares regression with residual diagnostics; and bootstrap
 resampling via ``scipy.stats.bootstrap``.
 
-.. automodule:: mathkit.statistics
+.. automodule:: mathematicskit.statistics
    :members:
    :undoc-members:

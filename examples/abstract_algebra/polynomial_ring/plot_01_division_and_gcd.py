@@ -9,7 +9,7 @@ integer division.
 """
 
 # %%
-from mathkit.abstract_algebra import Polynomial, poly_divmod, poly_gcd, poly_mul
+from mathematicskit.abstract_algebra import Polynomial, poly_divmod, poly_gcd, poly_mul
 
 # %%
 # Divide x^3 - 1 by x - 1

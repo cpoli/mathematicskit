@@ -10,8 +10,8 @@ hand-rolled Graham scan kept for comparison.
 # %%
 import numpy as np
 
-from mathkit.geometry import convex_hull, graham_scan
-from mathkit.geometry.visualizers.plots import plot_convex_hull
+from mathematicskit.geometry import convex_hull, graham_scan
+from mathematicskit.geometry.visualizers.plots import plot_convex_hull
 
 # %%
 # Generate random points and compute both hulls

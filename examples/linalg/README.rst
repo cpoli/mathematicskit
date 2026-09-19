@@ -1,7 +1,7 @@
 Examples
 ========
 
-This gallery walks through every public feature of ``mathkit.linalg``:
+This gallery walks through every public feature of ``mathematicskit.linalg``:
 LU/QR/Cholesky decompositions, symmetric eigenvalue algorithms, SVD,
 iterative Krylov solvers, and least-squares stability.
 

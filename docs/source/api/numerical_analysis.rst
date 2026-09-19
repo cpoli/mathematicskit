@@ -1,5 +1,5 @@
-mathkit.numerical_analysis
-============================
+mathematicskit.numerical_analysis
+=================================
 
 
 .. include:: /_generated/nav/numerical_analysis.rst
@@ -16,6 +16,6 @@ Runge phenomenon; least-squares polynomial regression via
 (``numpy.linalg.cond``-based condition number, the hand-rolled Lebesgue
 constant and empirical convergence order).
 
-.. automodule:: mathkit.numerical_analysis
+.. automodule:: mathematicskit.numerical_analysis
    :members:
    :undoc-members:

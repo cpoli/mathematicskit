@@ -14,7 +14,7 @@ Graph theory's founding problem was a recreational puzzle about a
 Prussian city's bridges; two and a half centuries later its algorithms
 route internet traffic, plan delivery networks, and cluster social
 networks. This chronology traces the ideas behind
-:mod:`mathkit.graph_theory`, from Euler's original impossibility proof
+:mod:`mathematicskit.graph_theory`, from Euler's original impossibility proof
 to the spectral methods that read a graph's structure directly out of a
 matrix's eigenvalues.
 
@@ -36,8 +36,8 @@ did not satisfy. It is universally credited as the founding paper of
 graph theory, even though Euler's own paper never draws anything that
 looks like a modern graph diagram.
 
-*Connection:* every algorithm in :mod:`mathkit.graph_theory` operates on
-:class:`mathkit.graph_theory.core.base.Graph`, the same
+*Connection:* every algorithm in :mod:`mathematicskit.graph_theory` operates on
+:class:`mathematicskit.graph_theory.core.base.Graph`, the same
 vertices-and-edges abstraction Euler introduced to solve this problem.
 
 *References:* L. Euler, "Solutio problematis ad geometriam situs
@@ -57,10 +57,10 @@ shortest-known-distance frontier one vertex at a time, and remains the
 standard algorithm for single-source shortest paths whenever edge
 weights are non-negative.
 
-*Implementation:* :func:`mathkit.graph_theory.systems.shortest_paths.dijkstra_shortest_paths`
+*Implementation:* :func:`mathematicskit.graph_theory.systems.shortest_paths.dijkstra_shortest_paths`
 wraps :func:`scipy.sparse.csgraph.dijkstra`; for graphs with negative
 edge weights (where Dijkstra's greedy assumption breaks down),
-:func:`~mathkit.graph_theory.systems.shortest_paths.bellman_ford_shortest_paths`
+:func:`~mathematicskit.graph_theory.systems.shortest_paths.bellman_ford_shortest_paths`
 wraps the Bellman-Ford algorithm (Richard Bellman, 1958; Lester Ford
 Jr., 1956) instead.
 
@@ -83,9 +83,9 @@ similar time, but via genuinely different strategies -- forest-building
 versus tree-growing -- a difference visible directly by running them side
 by side on the same graph.
 
-*Implementation:* :func:`mathkit.graph_theory.systems.spanning_tree.kruskal_mst`
+*Implementation:* :func:`mathematicskit.graph_theory.systems.spanning_tree.kruskal_mst`
 wraps :func:`scipy.sparse.csgraph.minimum_spanning_tree` (Kruskal-based);
-:func:`~mathkit.graph_theory.systems.spanning_tree.prim_mst` keeps
+:func:`~mathematicskit.graph_theory.systems.spanning_tree.prim_mst` keeps
 Prim's algorithm hand-rolled specifically for this side-by-side
 comparison, not as a competing primary API.
 
@@ -112,7 +112,7 @@ guaranteed polynomial time by Jack Edmonds and Richard Karp in 1972 and
 given its efficient blocking-flow implementation by Yefim Dinic in 1970,
 remains the conceptual backbone of every modern max-flow solver.
 
-*Implementation:* :func:`mathkit.graph_theory.systems.max_flow.max_flow_min_cut`
+*Implementation:* :func:`mathematicskit.graph_theory.systems.max_flow.max_flow_min_cut`
 wraps :func:`scipy.sparse.csgraph.maximum_flow` (Dinic's algorithm by
 default), and derives the corresponding minimum cut directly from the
 resulting flow's residual graph, exactly the certificate the max-flow
@@ -139,9 +139,9 @@ result. The general graph-coloring problem (using as few colors as
 possible for an arbitrary, not necessarily planar, graph) is NP-complete,
 with no known efficient exact algorithm for large graphs.
 
-*Implementation:* :func:`mathkit.graph_theory.systems.coloring.greedy_coloring`
+*Implementation:* :func:`mathematicskit.graph_theory.systems.coloring.greedy_coloring`
 implements the fast (but not always optimal) greedy heuristic;
-:func:`~mathkit.graph_theory.systems.coloring.backtracking_coloring`
+:func:`~mathematicskit.graph_theory.systems.coloring.backtracking_coloring`
 implements exact exhaustive search, feasible only for small graphs,
 exactly the exponential cost the problem's NP-completeness predicts.
 
@@ -163,7 +163,7 @@ how well-connected it is; the corresponding eigenvector's sign pattern
 gives a natural way to split a graph's vertices into two well-separated
 communities, the simplest form of spectral clustering.
 
-*Implementation:* :func:`mathkit.graph_theory.systems.spectral.spectral_analysis`
+*Implementation:* :func:`mathematicskit.graph_theory.systems.spectral.spectral_analysis`
 computes exactly this Laplacian (via
 :func:`scipy.sparse.csgraph.laplacian`), its full spectrum (via
 :func:`numpy.linalg.eigh`), and the Fiedler-vector bipartition.

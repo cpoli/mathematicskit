@@ -10,8 +10,8 @@ against its own weight function.
 # %%
 import numpy as np
 
-from mathkit.special_functions import chebyshev_polynomial, hermite_polynomial, inner_product, laguerre_polynomial, legendre_polynomial
-from mathkit.special_functions.visualizers.plots import plot_polynomial_family
+from mathematicskit.special_functions import chebyshev_polynomial, hermite_polynomial, inner_product, laguerre_polynomial, legendre_polynomial
+from mathematicskit.special_functions.visualizers.plots import plot_polynomial_family
 
 # %%
 # Plot each family

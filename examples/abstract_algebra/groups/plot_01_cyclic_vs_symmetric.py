@@ -8,8 +8,8 @@ structure, visible directly in their Cayley tables.
 """
 
 # %%
-from mathkit.abstract_algebra import CyclicGroup, PermutationGroup, group_properties, is_cyclic
-from mathkit.abstract_algebra.visualizers.plots import plot_cayley_table
+from mathematicskit.abstract_algebra import CyclicGroup, PermutationGroup, group_properties, is_cyclic
+from mathematicskit.abstract_algebra.visualizers.plots import plot_cayley_table
 
 # %%
 # Z_6: cyclic, abelian

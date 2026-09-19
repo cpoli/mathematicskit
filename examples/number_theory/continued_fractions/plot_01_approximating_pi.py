@@ -10,8 +10,8 @@ value.
 # %%
 import numpy as np
 
-from mathkit.number_theory import best_rational_approximation, continued_fraction_expansion
-from mathkit.number_theory.visualizers.plots import plot_convergent_errors
+from mathematicskit.number_theory import best_rational_approximation, continued_fraction_expansion
+from mathematicskit.number_theory.visualizers.plots import plot_convergent_errors
 
 # %%
 # Expand pi and inspect its convergents

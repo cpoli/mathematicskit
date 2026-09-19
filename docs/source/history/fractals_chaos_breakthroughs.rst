@@ -9,7 +9,7 @@ Breakthroughs in Fractals and Chaos
    "Clouds are not spheres, mountains are not cones, coastlines are not
    circles." -- Benoit Mandelbrot, *The Fractal Geometry of Nature*, 1982
 
-The objects in :mod:`mathkit.fractals_chaos` -- self-similar sets with a
+The objects in :mod:`mathematicskit.fractals_chaos` -- self-similar sets with a
 non-integer dimension, cellular automata that build astonishing
 complexity from a single bit-flip rule -- share a common thread: each
 was, at its discovery, a mathematical curiosity dismissed as pathological
@@ -34,7 +34,7 @@ century before Mandelbrot's reframing (below) made "monster" sets like
 Cantor's the central objects of an entire field.
 
 *Connection:* the same self-similar, remove-and-recurse logic underlies
-:func:`mathkit.fractals_chaos.systems.box_counting.box_counting_dimension`'s
+:func:`mathematicskit.fractals_chaos.systems.box_counting.box_counting_dimension`'s
 subject matter directly: the Cantor set's box-counting dimension,
 :math:`\log 2/\log 3 \approx 0.631`, is the canonical first example of a
 non-integer fractal dimension.
@@ -58,10 +58,10 @@ fraction between 1 and 2.
 
    D = \frac{\log 3}{\log 2} \approx 1.585 \quad \text{(Sierpinski triangle)}
 
-*Implementation:* :class:`mathkit.fractals_chaos.systems.ifs.SierpinskiTriangle`
-and :class:`~mathkit.fractals_chaos.systems.ifs.SierpinskiCarpet`
+*Implementation:* :class:`mathematicskit.fractals_chaos.systems.ifs.SierpinskiTriangle`
+and :class:`~mathematicskit.fractals_chaos.systems.ifs.SierpinskiCarpet`
 generate both directly via the chaos game, with
-:func:`mathkit.fractals_chaos.systems.box_counting.box_counting_dimension`
+:func:`mathematicskit.fractals_chaos.systems.box_counting.box_counting_dimension`
 recovering exactly the :math:`\log 3/\log 2` (triangle) and
 :math:`\log 8/\log 3` (carpet) dimensions numerically.
 
@@ -85,7 +85,7 @@ men worked entirely without computers, relying on pure complex analysis
 to characterize sets that would remain essentially unvisualized for over
 sixty years, until the machinery to actually render them existed.
 
-*Implementation:* :func:`mathkit.fractals_chaos.systems.mandelbrot_julia.julia_set`
+*Implementation:* :func:`mathematicskit.fractals_chaos.systems.mandelbrot_julia.julia_set`
 computes exactly this Fatou/Julia-set boundary for :math:`z\mapsto
 z^2+c` via escape-time iteration.
 
@@ -111,8 +111,8 @@ orbit).
 
    \lambda = \lim_{n\to\infty} \frac{1}{n}\sum_{k=0}^{n-1}\ln|f'(x_k)|
 
-*Implementation:* :func:`mathkit.fractals_chaos.systems.lyapunov.lyapunov_exponent_1d_map`
-and :func:`~mathkit.fractals_chaos.systems.lyapunov.lyapunov_exponent_flow`
+*Implementation:* :func:`mathematicskit.fractals_chaos.systems.lyapunov.lyapunov_exponent_1d_map`
+and :func:`~mathematicskit.fractals_chaos.systems.lyapunov.lyapunov_exponent_flow`
 compute exactly this exponent for a 1D map and a flow respectively, the
 latter via the Benettin et al. shadow-trajectory renormalization method.
 
@@ -136,7 +136,7 @@ called the Mandelbrot set, a map of every complex :math:`c` for which
 the corresponding Julia set stays connected, became one of the most
 recognizable images in all of mathematics.
 
-*Implementation:* :func:`mathkit.fractals_chaos.systems.mandelbrot_julia.mandelbrot_set`
+*Implementation:* :func:`mathematicskit.fractals_chaos.systems.mandelbrot_julia.mandelbrot_set`
 generates exactly this set via Numba-accelerated escape-time iteration.
 
 *References:* B. B. Mandelbrot, *Les objets fractals: forme, hasard et
@@ -155,9 +155,9 @@ popularized it with an image that instantly made the technique famous:
 a strikingly lifelike fern, generated from just four simple affine
 transformations and their carefully chosen probabilities.
 
-*Implementation:* :class:`mathkit.fractals_chaos.systems.ifs.BarnsleyFern`
+*Implementation:* :class:`mathematicskit.fractals_chaos.systems.ifs.BarnsleyFern`
 implements exactly Barnsley's four-map fern via
-:func:`mathkit.fractals_chaos.utils.ifs_utils.chaos_game`.
+:func:`mathematicskit.fractals_chaos.utils.ifs_utils.chaos_game`.
 
 *References:* M. F. Barnsley, *Fractals Everywhere* (Boston: Academic
 Press, 1988), Ch. 3.
@@ -178,8 +178,8 @@ total -- include rules generating structures as intricate as the
 Sierpinski triangle (rule 90) and behavior Wolfram classified as
 genuinely chaotic (rule 30).
 
-*Implementation:* :class:`mathkit.fractals_chaos.systems.cellular_automata.GameOfLife`
-and :class:`~mathkit.fractals_chaos.systems.cellular_automata.ElementaryCA`
+*Implementation:* :class:`mathematicskit.fractals_chaos.systems.cellular_automata.GameOfLife`
+and :class:`~mathematicskit.fractals_chaos.systems.cellular_automata.ElementaryCA`
 implement both exactly, the latter using Wolfram's own rule-numbering
 convention.
 

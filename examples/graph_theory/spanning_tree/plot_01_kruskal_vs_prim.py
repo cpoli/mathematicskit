@@ -9,8 +9,8 @@ edge.
 """
 
 # %%
-from mathkit.graph_theory import Graph, kruskal_mst, prim_mst
-from mathkit.graph_theory.visualizers.plots import plot_graph
+from mathematicskit.graph_theory import Graph, kruskal_mst, prim_mst
+from mathematicskit.graph_theory.visualizers.plots import plot_graph
 
 # %%
 # Build a weighted graph

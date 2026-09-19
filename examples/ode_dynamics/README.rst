@@ -1,7 +1,7 @@
 Examples
 ========
 
-This gallery walks through every public feature of ``mathkit.ode_dynamics``:
+This gallery walks through every public feature of ``mathematicskit.ode_dynamics``:
 fixed-point stability classification, phase portraits, the logistic
 map's route to chaos, canonical bifurcation normal forms, the Van der
 Pol limit cycle, and Poincare sections of the driven Duffing oscillator.

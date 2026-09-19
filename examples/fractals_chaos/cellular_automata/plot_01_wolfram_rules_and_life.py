@@ -10,8 +10,8 @@ using the classic "glider" spaceship.
 # %%
 import numpy as np
 
-from mathkit.fractals_chaos import ElementaryCA, GameOfLife
-from mathkit.fractals_chaos.visualizers.plots import plot_ca_spacetime
+from mathematicskit.fractals_chaos import ElementaryCA, GameOfLife
+from mathematicskit.fractals_chaos.visualizers.plots import plot_ca_spacetime
 
 # %%
 # Rule 30: chaotic, used as a pseudo-random number generator by Wolfram's Mathematica

@@ -1,5 +1,5 @@
-mathkit.abstract_algebra
-==========================
+mathematicskit.abstract_algebra
+===============================
 
 
 .. include:: /_generated/nav/abstract_algebra.rst
@@ -13,6 +13,6 @@ remainder, gcd) over :math:`\mathbb{Z}`, :math:`\mathbb{Q}`, and finite
 fields. Every algorithm is hand-rolled -- finite group/ring/field theory
 has no ``numpy``/``scipy`` equivalent.
 
-.. automodule:: mathkit.abstract_algebra
+.. automodule:: mathematicskit.abstract_algebra
    :members:
    :undoc-members:

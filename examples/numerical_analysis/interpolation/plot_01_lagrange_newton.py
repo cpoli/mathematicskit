@@ -3,8 +3,8 @@ Lagrange vs. Newton divided-difference interpolation
 ======================================================
 
 There is exactly one polynomial of degree :math:`\leq n` through
-:math:`n+1` distinct points, so :class:`~mathkit.numerical_analysis.systems.interpolation.LagrangeInterpolant`
-and :class:`~mathkit.numerical_analysis.systems.interpolation.NewtonDividedDifference`
+:math:`n+1` distinct points, so :class:`~mathematicskit.numerical_analysis.systems.interpolation.LagrangeInterpolant`
+and :class:`~mathematicskit.numerical_analysis.systems.interpolation.NewtonDividedDifference`
 -- built from completely different representations (a sum of basis
 polynomials vs. nested divided differences) -- must produce identical
 curves. Both are also exact for any polynomial up to the interpolation
@@ -15,7 +15,7 @@ degree, which this script verifies directly.
 import matplotlib.pyplot as plt
 import numpy as np
 
-from mathkit.numerical_analysis import LagrangeInterpolant, NewtonDividedDifference
+from mathematicskit.numerical_analysis import LagrangeInterpolant, NewtonDividedDifference
 
 # %%
 # Same data, two representations

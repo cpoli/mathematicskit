@@ -12,7 +12,7 @@ where the integrand needs them.
 import matplotlib.pyplot as plt
 import numpy as np
 
-from mathkit.calculus.systems.quadrature import AdaptiveQuadrature, GaussianQuadrature, SimpsonsRule, TrapezoidalRule
+from mathematicskit.calculus.systems.quadrature import AdaptiveQuadrature, GaussianQuadrature, SimpsonsRule, TrapezoidalRule
 
 # %%
 # Convergence vs. number of evaluations

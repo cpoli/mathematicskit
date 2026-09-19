@@ -1,7 +1,7 @@
 Examples
 ========
 
-This gallery walks through every public feature of ``mathkit.abstract_algebra``:
+This gallery walks through every public feature of ``mathematicskit.abstract_algebra``:
 cyclic and permutation groups, subgroups and cosets, finite fields, and
 polynomial ring arithmetic.
 

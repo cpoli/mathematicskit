@@ -1,5 +1,5 @@
-mathkit.ode_dynamics
-======================
+mathematicskit.ode_dynamics
+===========================
 
 
 .. include:: /_generated/nav/ode_dynamics.rst
@@ -9,6 +9,6 @@ portraits for 2D systems; the logistic map's period-doubling route to
 chaos; saddle-node/pitchfork/Hopf bifurcation normal forms; the Van der
 Pol limit cycle; and Poincare sections of the driven Duffing oscillator.
 
-.. automodule:: mathkit.ode_dynamics
+.. automodule:: mathematicskit.ode_dynamics
    :members:
    :undoc-members:

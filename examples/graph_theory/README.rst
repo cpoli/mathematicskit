@@ -1,7 +1,7 @@
 Examples
 ========
 
-This gallery walks through every public feature of ``mathkit.graph_theory``:
+This gallery walks through every public feature of ``mathematicskit.graph_theory``:
 shortest paths, minimum spanning trees, maximum flow/minimum cut, graph
 coloring, and spectral graph theory.
 

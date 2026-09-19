@@ -1,7 +1,7 @@
 Examples
 ========
 
-This gallery walks through every public feature of ``mathkit.geometry``:
+This gallery walks through every public feature of ``mathematicskit.geometry``:
 convex hull, Delaunay triangulation/Voronoi diagrams, segment
 intersection/point-in-polygon, polygon area/centroid, and the
 Frenet-Serret frame.

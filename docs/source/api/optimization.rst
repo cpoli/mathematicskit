@@ -1,5 +1,5 @@
-mathkit.optimization
-======================
+mathematicskit.optimization
+===========================
 
 
 .. include:: /_generated/nav/optimization.rst
@@ -12,6 +12,6 @@ quadratic-penalty method for constrained problems; and convergence-rate
 comparison utilities on shared test functions (Rosenbrock, a quadratic
 bowl).
 
-.. automodule:: mathkit.optimization
+.. automodule:: mathematicskit.optimization
    :members:
    :undoc-members:

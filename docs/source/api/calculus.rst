@@ -1,5 +1,5 @@
-mathkit.calculus
-==================
+mathematicskit.calculus
+=======================
 
 
 .. include:: /_generated/nav/calculus.rst
@@ -12,6 +12,6 @@ automatic differentiation via dual numbers and a reverse-mode
 subject); Taylor/Maclaurin series expansion and convergence-radius
 estimation.
 
-.. automodule:: mathkit.calculus
+.. automodule:: mathematicskit.calculus
    :members:
    :undoc-members:

@@ -12,7 +12,7 @@ function.
 # %%
 import math
 
-from mathkit.calculus.systems.autodiff import Variable, gradient
+from mathematicskit.calculus.systems.autodiff import Variable, gradient
 
 # %%
 # Gradient of a simple multivariable function

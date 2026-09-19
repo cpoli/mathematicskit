@@ -9,8 +9,8 @@ increasing the shape parameter builds up a sum of exponentials.
 # %%
 import numpy as np
 
-from mathkit.probability import Exponential, Gamma, Normal
-from mathkit.probability.visualizers.plots import plot_distribution
+from mathematicskit.probability import Exponential, Gamma, Normal
+from mathematicskit.probability.visualizers.plots import plot_distribution
 
 # %%
 # Gamma(1, rate) matches Exponential(rate) exactly

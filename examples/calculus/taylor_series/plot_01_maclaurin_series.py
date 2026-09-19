@@ -12,8 +12,8 @@ diverge) no matter how many terms are added.
 import matplotlib.pyplot as plt
 import numpy as np
 
-from mathkit.calculus.systems.taylor_series import estimate_radius_of_convergence, evaluate_series, maclaurin_coefficients
-from mathkit.calculus.utils.series_utils import truncation_error
+from mathematicskit.calculus.systems.taylor_series import estimate_radius_of_convergence, evaluate_series, maclaurin_coefficients
+from mathematicskit.calculus.utils.series_utils import truncation_error
 
 # %%
 # Convergence inside the radius: log(1+x) at x=0.5 (R=1)

@@ -1,7 +1,7 @@
 Examples
 ========
 
-This gallery walks through every public feature of ``mathkit.statistics``:
+This gallery walks through every public feature of ``mathematicskit.statistics``:
 descriptive statistics, hypothesis tests, confidence intervals,
 ordinary least-squares regression, and bootstrap resampling.
 

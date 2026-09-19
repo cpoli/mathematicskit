@@ -8,8 +8,8 @@ diagram and its conjugate.
 """
 
 # %%
-from mathkit.combinatorics import YoungDiagram, integer_partitions, partition_function
-from mathkit.combinatorics.visualizers.plots import plot_partition_counts, plot_young_diagram
+from mathematicskit.combinatorics import YoungDiagram, integer_partitions, partition_function
+from mathematicskit.combinatorics.visualizers.plots import plot_partition_counts, plot_young_diagram
 
 # %%
 # Enumerate the partitions of 6

@@ -12,7 +12,7 @@ problem being solved.
 # %%
 import numpy as np
 
-from mathkit.linalg import svd_decompose
+from mathematicskit.linalg import svd_decompose
 
 # %%
 # Reconstruct a random matrix from its SVD

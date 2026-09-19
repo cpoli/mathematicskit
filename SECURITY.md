@@ -1,18 +1,18 @@
 # Security Policy
 
-mathkit is a scientific computing library (numerical mathematics
+mathematicskit is a scientific computing library (numerical mathematics
 algorithms and visualizations). It does not handle authentication,
 network services, or untrusted user input in the way a web application
 or server would — the realistic security surface is mainly:
 
 - Deserializing untrusted data (e.g. loading a pickled/`.npy` object from
-  an untrusted source and passing it into mathkit).
+  an untrusted source and passing it into mathematicskit).
 - Vulnerabilities in dependencies (numpy, scipy, matplotlib, numba,
   plotly, sympy).
 
 ## Reporting a Vulnerability
 
-If you believe you've found a security vulnerability in mathkit, please
+If you believe you've found a security vulnerability in mathematicskit, please
 **do not open a public GitHub issue**. Instead, use GitHub's private
 vulnerability reporting:
 

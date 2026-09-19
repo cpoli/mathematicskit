@@ -14,9 +14,9 @@ points, eliminates the divergence entirely.
 import matplotlib.pyplot as plt
 import numpy as np
 
-from mathkit.numerical_analysis import ChebyshevInterpolant, LagrangeInterpolant, chebyshev_nodes, runge_function
-from mathkit.numerical_analysis.systems.chebyshev import runge_phenomenon_errors
-from mathkit.numerical_analysis.utils.error_analysis import lebesgue_constant
+from mathematicskit.numerical_analysis import ChebyshevInterpolant, LagrangeInterpolant, chebyshev_nodes, runge_function
+from mathematicskit.numerical_analysis.systems.chebyshev import runge_phenomenon_errors
+from mathematicskit.numerical_analysis.utils.error_analysis import lebesgue_constant
 
 # %%
 # Degree-20 interpolant: equally spaced vs. Chebyshev nodes

@@ -1,7 +1,7 @@
 Examples
 ========
 
-This gallery walks through every public feature of ``mathkit.fractals_chaos``:
+This gallery walks through every public feature of ``mathematicskit.fractals_chaos``:
 Lyapunov exponent estimation, box-counting fractal dimension, Mandelbrot/
 Julia set generation, iterated function systems, and cellular automata.
 

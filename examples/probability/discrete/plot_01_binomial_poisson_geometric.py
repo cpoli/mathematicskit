@@ -10,8 +10,8 @@ memoryless property.
 # %%
 import numpy as np
 
-from mathkit.probability import Binomial, Geometric, Poisson
-from mathkit.probability.visualizers.plots import plot_distribution
+from mathematicskit.probability import Binomial, Geometric, Poisson
+from mathematicskit.probability.visualizers.plots import plot_distribution
 
 # %%
 # Binomial approaches Poisson for large n, small p, fixed np

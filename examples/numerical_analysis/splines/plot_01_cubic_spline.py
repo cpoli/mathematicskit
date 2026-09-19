@@ -15,7 +15,7 @@ splines over one global polynomial.
 import matplotlib.pyplot as plt
 import numpy as np
 
-from mathkit.numerical_analysis import CubicSpline, LagrangeInterpolant
+from mathematicskit.numerical_analysis import CubicSpline, LagrangeInterpolant
 
 # %%
 # Fit natural and clamped splines to the same data

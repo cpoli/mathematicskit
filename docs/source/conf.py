@@ -1,4 +1,4 @@
-"""Sphinx configuration for mathkit."""
+"""Sphinx configuration for mathematicskit."""
 
 import os
 import sys
@@ -7,10 +7,10 @@ from pathlib import Path
 sys.path.insert(0, os.path.abspath("../.."))
 
 
-project = "mathkit"
-copyright = "2026, mathkit contributors"
-author = "mathkit team"
-release = "0.1.0"
+project = "mathematicskit"
+copyright = "2026, mathematicskit contributors"
+author = "mathematicskit team"
+release = "0.2.0"
 
 extensions = [
     "sphinx.ext.autodoc",
@@ -166,7 +166,7 @@ sphinx_gallery_conf = {
     # already handles, and is required for it to not warn about falling
     # back to file-path resolution on every single invocation.
     "backreferences_dir": "gen_modules/backreferences",
-    "doc_module": ("mathkit",),
+    "doc_module": ("mathematicskit",),
 }
 
 # Many domains share common attribute names (e.g. "x", "n") across unrelated
@@ -175,9 +175,9 @@ sphinx_gallery_conf = {
 suppress_warnings = ["ref.python", "config.cache"]
 
 html_theme = "pydata_sphinx_theme"
-html_logo = "_static/images/mathkit_logo_transparent.png"
+html_logo = "_static/images/mathematicskit_logo_transparent.png"
 html_theme_options = {
-    "github_url": "https://github.com/cpoli/mathkit",
+    "github_url": "https://github.com/cpoli/mathematicskit",
     "icon_links": [
         {
             "name": "PyPI",
@@ -191,7 +191,7 @@ html_theme_options = {
     "navigation_with_keys": True,
     "navigation_depth": 2,
     "logo": {
-        "alt_text": "mathkit logo",
+        "alt_text": "mathematicskit logo",
     },
 }
 html_static_path = ["_static"]
@@ -199,14 +199,7 @@ html_static_path = ["_static"]
 
 def _card(link, blurb, link_title):
     """One sphinx-design grid-item-card, indented for direct concatenation into a ``.. grid::`` block."""
-    return (
-        f"   .. grid-item-card:: {link_title}\n"
-        f"      :link: {link}\n"
-        f"      :link-type: doc\n"
-        f"\n"
-        f"      {blurb}\n"
-        f"\n"
-    )
+    return f"   .. grid-item-card:: {link_title}\n      :link: {link}\n      :link-type: doc\n\n      {blurb}\n\n"
 
 
 def _grid(cards):
@@ -226,7 +219,7 @@ def _grouped_grid(link_fn):
         if not members:
             continue
         parts.append(f".. rubric:: {category}\n\n")
-        parts.append(_grid([_card(link_fn(s), s["blurb"], f"mathkit.{s['name']}") for s in members]))
+        parts.append(_grid([_card(link_fn(s), s["blurb"], f"mathematicskit.{s['name']}") for s in members]))
         parts.append("\n")
     return "".join(parts)
 
@@ -274,7 +267,7 @@ def _generate_subpackage_docs(app):
     hub_dir = out / "subpackages"
     for s in SUBPACKAGES:
         name = s["name"]
-        title = f"mathkit.{name}"
+        title = f"mathematicskit.{name}"
         cards = _grid(
             [
                 _card(
@@ -304,7 +297,7 @@ def _generate_subpackage_docs(app):
     for s in SUBPACKAGES:
         name = s["name"]
         links = [
-            f":doc:`mathkit.{name} hub </_generated/subpackages/{name}>`",
+            f":doc:`mathematicskit.{name} hub </_generated/subpackages/{name}>`",
             f":doc:`History </history/{s['history_doc']}>`",
             f":doc:`Examples </{s['examples_doc']}>`",
             f":doc:`API reference </api/{name}>`",

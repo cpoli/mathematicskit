@@ -7,7 +7,7 @@ divides 12, and that its left cosets partition the whole group.
 """
 
 # %%
-from mathkit.abstract_algebra import CyclicGroup, all_subgroups, cyclic_subgroup, left_cosets
+from mathematicskit.abstract_algebra import CyclicGroup, all_subgroups, cyclic_subgroup, left_cosets
 
 # %%
 # Every subgroup of Z_12

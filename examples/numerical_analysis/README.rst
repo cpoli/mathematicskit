@@ -1,7 +1,7 @@
 Examples
 ========
 
-This gallery walks through every public feature of ``mathkit.numerical_analysis``:
+This gallery walks through every public feature of ``mathematicskit.numerical_analysis``:
 scalar root finding with convergence-order verification, polynomial
 interpolation (Lagrange, Newton divided-difference, cubic splines,
 Chebyshev nodes), and least-squares polynomial regression.

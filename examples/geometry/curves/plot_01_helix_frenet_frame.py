@@ -11,9 +11,9 @@ curvature varies).
 # %%
 import numpy as np
 
-from mathkit.geometry import frenet_serret_frame
-from mathkit.geometry.utils.curves_library import ellipse, helix
-from mathkit.geometry.visualizers.plots import plot_curve_frame
+from mathematicskit.geometry import frenet_serret_frame
+from mathematicskit.geometry.utils.curves_library import ellipse, helix
+from mathematicskit.geometry.visualizers.plots import plot_curve_frame
 
 # %%
 # Helix: constant curvature and torsion

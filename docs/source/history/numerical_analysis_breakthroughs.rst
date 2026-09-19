@@ -13,7 +13,7 @@ Breakthroughs in Numerical Analysis
 Long before there was anything to compute *with*, there was already a
 mature theory of how to compute -- bisecting a bracket, iterating a
 promising guess, fitting a curve through scattered points. This
-chronology traces the ideas behind :mod:`mathkit.numerical_analysis`,
+chronology traces the ideas behind :mod:`mathematicskit.numerical_analysis`,
 from the first rigorous convergence proofs for root-finding to the
 discovery that the *placement* of interpolation nodes matters as much
 as their number.
@@ -34,10 +34,10 @@ recent as a *named, analyzed* method, but it is the most elementary
 possible root-finder: it needs nothing but the intermediate value
 theorem, and it never diverges.
 
-*Implementation:* :class:`mathkit.numerical_analysis.systems.root_finding.Bisection`
+*Implementation:* :class:`mathematicskit.numerical_analysis.systems.root_finding.Bisection`
 exposes its full per-iterate history for exactly the convergence-order
 analysis below; the classic "Babylonian" square-root iteration is
-:class:`~mathkit.numerical_analysis.systems.root_finding.FixedPointIteration`
+:class:`~mathematicskit.numerical_analysis.systems.root_finding.FixedPointIteration`
 applied to :math:`g(x) = \tfrac12(x + a/x)`.
 
 .. minigallery:: ../../examples/numerical_analysis/root_finding/plot_01_methods_compared.py
@@ -59,9 +59,9 @@ needing a derivative and a good enough starting guess.
 
    x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}
 
-*Implementation:* :class:`mathkit.numerical_analysis.systems.root_finding.NewtonRaphson`
+*Implementation:* :class:`mathematicskit.numerical_analysis.systems.root_finding.NewtonRaphson`
 implements exactly this iteration, and
-:func:`mathkit.numerical_analysis.utils.error_analysis.estimate_convergence_order`
+:func:`mathematicskit.numerical_analysis.utils.error_analysis.estimate_convergence_order`
 measures its quadratic convergence order directly from the iterate
 history, cross-checked against :func:`scipy.optimize.newton` in the
 test suite.
@@ -84,8 +84,8 @@ Differentialis*), and both forms represent exactly the same unique
 degree-:math:`n` polynomial -- a fact used directly below to
 cross-check one construction against the other.
 
-*Implementation:* :class:`mathkit.numerical_analysis.systems.interpolation.LagrangeInterpolant`
-and :class:`~mathkit.numerical_analysis.systems.interpolation.NewtonDividedDifference`
+*Implementation:* :class:`mathematicskit.numerical_analysis.systems.interpolation.LagrangeInterpolant`
+and :class:`~mathematicskit.numerical_analysis.systems.interpolation.NewtonDividedDifference`
 implement both forms and are tested against each other for exact
 agreement on the same data, and against :class:`scipy.interpolate.BarycentricInterpolator`
 as an external check.
@@ -109,8 +109,8 @@ the interpolating polynomial's error bound (governed by the Lebesgue
 constant) to grow exponentially with degree, no matter how smooth
 :math:`f` is.
 
-*Implementation:* :func:`mathkit.numerical_analysis.systems.chebyshev.runge_function`
-and :func:`~mathkit.numerical_analysis.systems.chebyshev.runge_phenomenon_errors`
+*Implementation:* :func:`mathematicskit.numerical_analysis.systems.chebyshev.runge_function`
+and :func:`~mathematicskit.numerical_analysis.systems.chebyshev.runge_phenomenon_errors`
 reproduce exactly this divergence for equally spaced nodes, and its
 cure below, side by side.
 
@@ -132,10 +132,10 @@ at these Chebyshev nodes keeps the Lebesgue constant growing only
 logarithmically in the degree, eliminating Runge's divergence for the
 same smooth functions that defeated equally spaced nodes.
 
-*Implementation:* :func:`mathkit.numerical_analysis.systems.chebyshev.chebyshev_nodes`
-and :class:`~mathkit.numerical_analysis.systems.chebyshev.ChebyshevInterpolant`
+*Implementation:* :func:`mathematicskit.numerical_analysis.systems.chebyshev.chebyshev_nodes`
+and :class:`~mathematicskit.numerical_analysis.systems.chebyshev.ChebyshevInterpolant`
 implement exactly this remedy, evaluated via the numerically stable
-barycentric formula; :func:`mathkit.numerical_analysis.utils.error_analysis.lebesgue_constant`
+barycentric formula; :func:`mathematicskit.numerical_analysis.utils.error_analysis.lebesgue_constant`
 makes the growth-rate difference between the two node choices directly
 measurable.
 
@@ -160,7 +160,7 @@ turning a draftsman's tool into a numerical-analysis method for
 producing a smooth curve through data without Runge's-phenomenon-style
 oscillation, even at equally spaced nodes.
 
-*Implementation:* :class:`mathkit.numerical_analysis.systems.splines.CubicSpline`
+*Implementation:* :class:`mathematicskit.numerical_analysis.systems.splines.CubicSpline`
 implements both the natural and clamped boundary conditions, built on
 :class:`scipy.interpolate.CubicSpline`'s banded-system solve.
 
@@ -182,11 +182,11 @@ priority dispute, though both are now credited jointly. Fitting a
 polynomial of degree :math:`d` to noisy data by least squares reduces
 to solving a linear system for the coefficients that minimize the sum
 of squared residuals, the same fitting principle behind nearly every
-regression method in :mod:`mathkit.statistics`.
+regression method in :mod:`mathematicskit.statistics`.
 
-*Implementation:* :class:`mathkit.numerical_analysis.systems.regression.PolynomialRegression`
+*Implementation:* :class:`mathematicskit.numerical_analysis.systems.regression.PolynomialRegression`
 solves exactly this problem via :func:`numpy.linalg.lstsq`, with
-:func:`mathkit.numerical_analysis.utils.error_analysis.condition_number`
+:func:`mathematicskit.numerical_analysis.utils.error_analysis.condition_number`
 flagging the numerical instability that creeps in as the fitted degree
 grows.
 

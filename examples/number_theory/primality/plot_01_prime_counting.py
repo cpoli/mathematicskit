@@ -10,8 +10,8 @@ approximation :math:`n/\ln n`.
 # %%
 import math
 
-from mathkit.number_theory import is_prime_miller_rabin, sieve_of_eratosthenes
-from mathkit.number_theory.visualizers.plots import plot_prime_counting
+from mathematicskit.number_theory import is_prime_miller_rabin, sieve_of_eratosthenes
+from mathematicskit.number_theory.visualizers.plots import plot_prime_counting
 
 # %%
 # Sieve and count

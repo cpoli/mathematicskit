@@ -1,7 +1,7 @@
-# Contributing to mathkit
+# Contributing to mathematicskit
 
-Thanks for considering a contribution. mathkit is organized as one
-subpackage per mathematics domain (`mathkit/<name>/`), each with its own
+Thanks for considering a contribution. mathematicskit is organized as one
+subpackage per mathematics domain (`mathematicskit/<name>/`), each with its own
 `core/` (ABCs and shared engine machinery, plus numba-accelerated kernels
 where needed), `systems/` (concrete models/algorithms), `utils/`
 (supporting numerics), `visualizers/` (matplotlib/plotly plotting), and
@@ -23,7 +23,7 @@ pre-commit install
 ruff check .                 # lint
 ruff format .                # format
 MPLBACKEND=Agg pytest -q     # unit tests
-MPLBACKEND=Agg pytest --doctest-modules mathkit --ignore-glob="*/tests/*"   # docstring examples
+MPLBACKEND=Agg pytest --doctest-modules mathematicskit --ignore-glob="*/tests/*"   # docstring examples
 ```
 
 All three run in CI (`.github/workflows/ci.yml`) on every PR, across
@@ -60,7 +60,7 @@ cd docs && make html
 - Call `numpy`/`scipy` directly for anything they already implement
   (decompositions, eigensolvers, linear/iterative solvers, root finders,
   quadrature, FFT, statistical distributions, optimization routines,
-  etc.) rather than reimplementing it — mathkit's value-add is its own
+  etc.) rather than reimplementing it — mathematicskit's value-add is its own
   dataclass-result API, docstrings, visualizers, tests, and examples
   wrapped around those calls, not reinventing numerical primitives that
   are already correct and well-tested upstream. Only hand-write an
@@ -89,7 +89,7 @@ welcome but not required.
 
 ## Tests
 
-Tests live alongside each subpackage (`mathkit/<name>/tests/`), not in a
+Tests live alongside each subpackage (`mathematicskit/<name>/tests/`), not in a
 top-level `tests/` directory. A new system/model needs:
 
 - At least one test that checks a closed-form / analytically-known

@@ -13,7 +13,7 @@ Breakthroughs in Probability Theory
 Probability theory began as a gambler's question -- how should stakes be
 divided in an interrupted game of chance -- and only slowly grew into the
 rigorous, measure-theoretic subject it is today. This chronology traces
-the ideas behind :mod:`mathkit.probability`: the discrete and continuous
+the ideas behind :mod:`mathematicskit.probability`: the discrete and continuous
 distributions, the limit theorems that explain why the normal
 distribution shows up everywhere, and the Markov chains that model
 memoryless random processes.
@@ -35,7 +35,7 @@ the remaining games could have played out -- the same combinatorial
 counting that gives the binomial distribution its name and its
 :math:`\binom{n}{k}` weights.
 
-*Implementation:* :class:`mathkit.probability.systems.discrete.Binomial`
+*Implementation:* :class:`mathematicskit.probability.systems.discrete.Binomial`
 implements exactly the distribution this counting problem generalizes
 to, via :class:`scipy.stats.binom`.
 
@@ -51,7 +51,7 @@ its true probability -- the first rigorous law of large numbers, and the
 theoretical justification for the entire enterprise of estimating
 probabilities from observed frequency.
 
-*Implementation:* :func:`mathkit.probability.systems.limit_theorems.law_of_large_numbers_trace`
+*Implementation:* :func:`mathematicskit.probability.systems.limit_theorems.law_of_large_numbers_trace`
 demonstrates exactly this convergence directly, tracking the running
 sample mean as it settles toward the true mean with increasing sample
 size.
@@ -74,11 +74,11 @@ converges to a normal distribution -- explaining, more than any other
 single result, why the bell curve appears so pervasively across
 completely unrelated measurement problems.
 
-*Implementation:* :func:`mathkit.probability.systems.limit_theorems.central_limit_theorem_sample_means`
+*Implementation:* :func:`mathematicskit.probability.systems.limit_theorems.central_limit_theorem_sample_means`
 demonstrates exactly this convergence for repeated sample means of a
 non-normal (e.g. Poisson) distribution, cross-checked against
 :func:`scipy.stats.kstest` in the test suite;
-:class:`~mathkit.probability.systems.continuous.Normal` is the limiting
+:class:`~mathematicskit.probability.systems.continuous.Normal` is the limiting
 distribution itself.
 
 *References:* A. de Moivre, *The Doctrine of Chances*, 2nd ed. (London:
@@ -102,7 +102,7 @@ default model for rare, independent counting processes across
 essentially every applied field, from radioactive decay to call-center
 arrivals.
 
-*Implementation:* :class:`mathkit.probability.systems.discrete.Poisson`
+*Implementation:* :class:`mathematicskit.probability.systems.discrete.Poisson`
 implements exactly this limiting distribution, and its convergence from
 the binomial for large :math:`n`, small :math:`p` is checked directly in
 this domain's own examples.
@@ -137,7 +137,7 @@ bears his name. Markov's own first application, famously, was a
 letter-by-letter statistical analysis of vowel/consonant sequences in
 Pushkin's poem *Eugene Onegin*.
 
-*Implementation:* :class:`mathkit.probability.systems.markov_chain.MarkovChain`
+*Implementation:* :class:`mathematicskit.probability.systems.markov_chain.MarkovChain`
 implements exactly this framework -- transition matrices, stationary
 distributions via :func:`numpy.linalg.eig`/power iteration, and
 absorption probabilities via :func:`numpy.linalg.solve`.
@@ -163,10 +163,10 @@ distribution via a biased random walk became the foundation of Markov
 chain Monte Carlo, one of the most consequential computational
 techniques of the twentieth century.
 
-*Implementation:* :func:`mathkit.probability.systems.monte_carlo.monte_carlo_integrate`
+*Implementation:* :func:`mathematicskit.probability.systems.monte_carlo.monte_carlo_integrate`
 implements the basic method directly;
-:func:`~mathkit.probability.systems.monte_carlo.importance_sampling_integrate`
-and :func:`~mathkit.probability.systems.monte_carlo.control_variates_integrate`
+:func:`~mathematicskit.probability.systems.monte_carlo.importance_sampling_integrate`
+and :func:`~mathematicskit.probability.systems.monte_carlo.control_variates_integrate`
 implement two of the classic variance-reduction techniques built on top
 of it.
 

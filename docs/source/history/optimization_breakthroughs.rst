@@ -17,7 +17,7 @@ in mathematics, but a systematic *theory* of optimization, with
 convergence guarantees and complexity bounds rather than case-by-case
 cleverness, is a product of the 20th century. This chronology traces the
 descent methods and constrained-optimization theory behind
-:mod:`mathkit.optimization`.
+:mod:`mathematicskit.optimization`.
 
 .. contents:: Timeline
    :local:
@@ -39,9 +39,9 @@ the conjugate-direction methods developed over a century later.
 
    x_{k+1} = x_k - \alpha \nabla f(x_k)
 
-*Implementation:* :class:`mathkit.optimization.systems.gradient_descent.GradientDescent`
+*Implementation:* :class:`mathematicskit.optimization.systems.gradient_descent.GradientDescent`
 implements exactly this fixed-step rule;
-:class:`~mathkit.optimization.systems.gradient_descent.GradientDescentLineSearch`
+:class:`~mathematicskit.optimization.systems.gradient_descent.GradientDescentLineSearch`
 adds Nocedal & Wright's backtracking line search to choose the step
 size adaptively at each iterate.
 
@@ -67,9 +67,9 @@ thesis (independently rediscovered by Harold Kuhn and Albert Tucker in
 first-order KKT conditions still used to certify a constrained optimum
 today.
 
-*Implementation:* :func:`mathkit.optimization.systems.constrained.lagrange_stationary_point`
+*Implementation:* :func:`mathematicskit.optimization.systems.constrained.lagrange_stationary_point`
 solves exactly the equality-constrained Lagrange system directly;
-:func:`~mathkit.optimization.systems.constrained.verify_kkt` checks the
+:func:`~mathematicskit.optimization.systems.constrained.verify_kkt` checks the
 full Karush-Kuhn-Tucker conditions (stationarity, primal/dual
 feasibility, complementary slackness) numerically at a candidate point.
 
@@ -95,7 +95,7 @@ only decades later, the simplex method is famously efficient in
 practice, and remains, alongside modern interior-point methods, one of
 the two workhorses of large-scale linear programming.
 
-*Implementation:* :func:`mathkit.optimization.systems.linear_programming.linear_program`
+*Implementation:* :func:`mathematicskit.optimization.systems.linear_programming.linear_program`
 wraps :func:`scipy.optimize.linprog`, which dispatches between a dual
 simplex method and an interior-point method depending on problem
 structure.
@@ -120,7 +120,7 @@ information. Polak and Ribiere's 1969 alternative choice of
 :math:`\beta_k`, with a standard nonnegativity safeguard, tends to
 recover faster after an inaccurate line search in practice.
 
-*Implementation:* :class:`mathkit.optimization.systems.conjugate_gradient.NonlinearConjugateGradient`
+*Implementation:* :class:`mathematicskit.optimization.systems.conjugate_gradient.NonlinearConjugateGradient`
 implements both the Fletcher-Reeves and Polak-Ribiere variants.
 
 *References:* R. Fletcher and C. M. Reeves, "Function Minimization by
@@ -144,10 +144,10 @@ successive gradient evaluations -- superlinear convergence without ever
 forming a single second derivative, still the default general-purpose
 optimizer in most numerical software four decades later.
 
-*Implementation:* :class:`mathkit.optimization.systems.newton_quasi_newton.BFGS`
+*Implementation:* :class:`mathematicskit.optimization.systems.newton_quasi_newton.BFGS`
 wraps :func:`scipy.optimize.minimize`'s ``"BFGS"`` method, recording the
 iterate path via its callback;
-:class:`~mathkit.optimization.systems.newton_quasi_newton.NewtonMethod`
+:class:`~mathematicskit.optimization.systems.newton_quasi_newton.NewtonMethod`
 wraps the ``"Newton-CG"`` method for the case where an exact Hessian (or
 Hessian-vector product) is available.
 
@@ -173,10 +173,10 @@ from the feasible side), and let that penalty weight increase toward
 infinity across the sequence. The limit of the resulting unconstrained
 minimizers converges to the constrained optimum.
 
-*Implementation:* :class:`mathkit.optimization.systems.constrained.PenaltyMethod`
+*Implementation:* :class:`mathematicskit.optimization.systems.constrained.PenaltyMethod`
 implements exactly this sequential quadratic-penalty scheme, solving
 each unconstrained sub-problem with
-:class:`~mathkit.optimization.systems.newton_quasi_newton.BFGS`.
+:class:`~mathematicskit.optimization.systems.newton_quasi_newton.BFGS`.
 
 *References:* A. V. Fiacco and G. P. McCormick, *Nonlinear Programming:
 Sequential Unconstrained Minimization Techniques* (New York: Wiley,
@@ -200,7 +200,7 @@ convergence rates against each other.
 
    f(x, y) = 100(y-x^2)^2 + (1-x)^2
 
-*Implementation:* :func:`mathkit.optimization.utils.test_functions.rosenbrock`
+*Implementation:* :func:`mathematicskit.optimization.utils.test_functions.rosenbrock`
 (with its gradient and Hessian) is exactly this function, used
 throughout this domain's tests and examples as the shared benchmark
 comparing gradient descent, conjugate gradient, Newton's method, and

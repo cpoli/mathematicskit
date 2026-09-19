@@ -1,7 +1,7 @@
 Examples
 ========
 
-This gallery walks through every public feature of ``mathkit.calculus``:
+This gallery walks through every public feature of ``mathematicskit.calculus``:
 finite-difference differentiation and Richardson extrapolation,
 quadrature rules, forward- and reverse-mode automatic differentiation,
 and Taylor series.

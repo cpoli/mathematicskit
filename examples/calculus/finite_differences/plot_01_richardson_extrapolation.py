@@ -14,7 +14,7 @@ floating-point cancellation error).
 import matplotlib.pyplot as plt
 import numpy as np
 
-from mathkit.calculus.systems.finite_differences import backward_difference, central_difference, forward_difference, richardson_extrapolation
+from mathematicskit.calculus.systems.finite_differences import backward_difference, central_difference, forward_difference, richardson_extrapolation
 
 # %%
 # Error vs. step size for the three basic differences

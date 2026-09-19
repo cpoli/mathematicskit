@@ -3,11 +3,8 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-# PyPI distribution name; the importable module is still "mathkit" (see
-# [tool.setuptools.packages.find] below) -- "mathkit" itself is already
-# taken on PyPI by an unrelated package.
 name = "mathematicskit"
-version = "0.1.0"
+version = "0.2.0"
 description = "Unified computational mathematics toolkit: numerical analysis, linear algebra, calculus, dynamical systems, optimization, probability, statistics, number theory, combinatorics, graph theory, abstract algebra, geometry, special functions, and fractals/chaos -- all hand-rolled from first principles."
 readme = "README.md"
 requires-python = ">=3.9"
@@ -59,33 +56,33 @@ docs = [
 dev = ["mathematicskit[test,docs]", "ruff>=0.6", "mypy>=1.10", "pre-commit>=3.7"]
 
 [project.urls]
-Homepage = "https://github.com/cpoli/mathkit"
-Issues = "https://github.com/cpoli/mathkit/issues"
-Changelog = "https://github.com/cpoli/mathkit/blob/main/CHANGELOG.md"
-Documentation = "https://cpoli.github.io/mathkit/"
+Homepage = "https://github.com/cpoli/mathematicskit"
+Issues = "https://github.com/cpoli/mathematicskit/issues"
+Changelog = "https://github.com/cpoli/mathematicskit/blob/main/CHANGELOG.md"
+Documentation = "https://cpoli.github.io/mathematicskit/"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["mathkit*"]
+include = ["mathematicskit*"]
 
 [tool.pytest.ini_options]
 testpaths = [
-    "mathkit/abstract_algebra/tests",
-    "mathkit/calculus/tests",
-    "mathkit/combinatorics/tests",
-    "mathkit/fractals_chaos/tests",
-    "mathkit/geometry/tests",
-    "mathkit/graph_theory/tests",
-    "mathkit/integrators/tests",
-    "mathkit/linalg/tests",
-    "mathkit/number_theory/tests",
-    "mathkit/numerical_analysis/tests",
-    "mathkit/ode_dynamics/tests",
-    "mathkit/optimization/tests",
-    "mathkit/probability/tests",
-    "mathkit/special_functions/tests",
-    "mathkit/statistics/tests",
-    "mathkit/tests",
+    "mathematicskit/abstract_algebra/tests",
+    "mathematicskit/calculus/tests",
+    "mathematicskit/combinatorics/tests",
+    "mathematicskit/fractals_chaos/tests",
+    "mathematicskit/geometry/tests",
+    "mathematicskit/graph_theory/tests",
+    "mathematicskit/integrators/tests",
+    "mathematicskit/linalg/tests",
+    "mathematicskit/number_theory/tests",
+    "mathematicskit/numerical_analysis/tests",
+    "mathematicskit/ode_dynamics/tests",
+    "mathematicskit/optimization/tests",
+    "mathematicskit/probability/tests",
+    "mathematicskit/special_functions/tests",
+    "mathematicskit/statistics/tests",
+    "mathematicskit/tests",
 ]
 
 [tool.ruff]
@@ -104,7 +101,7 @@ ignore = [
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"mathkit/*/tests/*" = ["E501", "E402"] # E402: pytest.importorskip(...) before imports, for optional-dependency tests
+"mathematicskit/*/tests/*" = ["E501", "E402"] # E402: pytest.importorskip(...) before imports, for optional-dependency tests
 "docs/*" = ["E501", "I001", "E402"]
 
 [tool.ruff.format]

@@ -10,7 +10,7 @@ three, alongside an effect-size measure (Cohen's d).
 # %%
 import numpy as np
 
-from mathkit.statistics import cohens_d, one_way_anova, two_sample_t_test
+from mathematicskit.statistics import cohens_d, one_way_anova, two_sample_t_test
 
 # %%
 # Simulated data: three treatment groups

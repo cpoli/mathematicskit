@@ -13,7 +13,7 @@ Breakthroughs in Number Theory
 Number theory is the oldest continuously studied branch of mathematics
 still yielding both deep theorems and, unexpectedly, some of the most
 consequential applied technology of the digital age. This chronology
-traces the ideas behind :mod:`mathkit.number_theory`, from Euclid's
+traces the ideas behind :mod:`mathematicskit.number_theory`, from Euclid's
 original algorithm to the discovery that its arithmetic underlies modern
 public-key cryptography.
 
@@ -38,10 +38,10 @@ original recursive structure.
 
    \gcd(a, b) = \gcd(b, a \bmod b), \qquad ax + by = \gcd(a, b)
 
-*Implementation:* :func:`mathkit.number_theory.systems.modular_arithmetic.extended_gcd`
+*Implementation:* :func:`mathematicskit.number_theory.systems.modular_arithmetic.extended_gcd`
 implements exactly the extended algorithm, unwinding Euclid's own
 recursion to recover Bezout's coefficients directly;
-:func:`~mathkit.number_theory.systems.modular_arithmetic.mod_inverse`
+:func:`~mathematicskit.number_theory.systems.modular_arithmetic.mod_inverse`
 uses it to compute modular inverses.
 
 *References:* Euclid, *Elements*, Book VII, Propositions 1-2 (c. 300
@@ -62,7 +62,7 @@ Euclid's algorithm above; the far harder quadratic case, :math:`x^2 -
 Dy^2 = 1`, would not be fully understood for another millennium and a
 half.
 
-*Implementation:* :func:`mathkit.number_theory.systems.diophantine.solve_linear_diophantine`
+*Implementation:* :func:`mathematicskit.number_theory.systems.diophantine.solve_linear_diophantine`
 implements exactly the linear case, via the extended Euclidean
 algorithm's Bezout coefficients.
 
@@ -90,10 +90,10 @@ denominator.
 
    x = a_0 + \cfrac{1}{a_1 + \cfrac{1}{a_2 + \cfrac{1}{a_3 + \dots}}}
 
-*Implementation:* :func:`mathkit.number_theory.systems.continued_fractions.continued_fraction_expansion`
+*Implementation:* :func:`mathematicskit.number_theory.systems.continued_fractions.continued_fraction_expansion`
 implements exactly this expansion and its convergents via the standard
 recurrence :math:`p_k = a_k p_{k-1} + p_{k-2}`;
-:func:`~mathkit.number_theory.systems.continued_fractions.best_rational_approximation`
+:func:`~mathematicskit.number_theory.systems.continued_fractions.best_rational_approximation`
 uses it to find the best rational approximation under a denominator
 bound, reproducing the classical approximation :math:`\pi \approx
 355/113` directly. The same expansion, applied to :math:`\sqrt D`, is
@@ -122,7 +122,7 @@ work by Brahmagupta and Bhaskara II, worked out in the 18th century and
 Joseph-Louis Lagrange proved terminates and gives every solution in
 1767-68.
 
-*Implementation:* :func:`mathkit.number_theory.systems.diophantine.solve_pell_equation`
+*Implementation:* :func:`mathematicskit.number_theory.systems.diophantine.solve_pell_equation`
 implements exactly this continued-fraction algorithm, reproducing the
 :math:`D=61` fundamental solution directly.
 
@@ -144,9 +144,9 @@ coprime moduli into a single equivalent one -- whose oldest special case
 appears in the 3rd-5th century Chinese text *Sunzi Suanjing*, from which
 the theorem takes its name.
 
-*Implementation:* :func:`mathkit.number_theory.systems.crt.chinese_remainder_theorem`
+*Implementation:* :func:`mathematicskit.number_theory.systems.crt.chinese_remainder_theorem`
 implements exactly this combination, and
-:func:`~mathkit.number_theory.systems.modular_arithmetic.fast_mod_pow`
+:func:`~mathematicskit.number_theory.systems.modular_arithmetic.fast_mod_pow`
 implements the fast modular exponentiation that makes large-modulus
 congruence arithmetic practical.
 
@@ -167,11 +167,11 @@ where :math:`\varphi(n)=n-1`) and is, two centuries later, the exact
 mathematical fact RSA public-key cryptography depends on to guarantee
 that decryption correctly inverts encryption.
 
-*Implementation:* :func:`mathkit.number_theory.systems.totient.euler_totient`
+*Implementation:* :func:`mathematicskit.number_theory.systems.totient.euler_totient`
 implements exactly this function via prime factorization, alongside the
 related Mobius function
-(:func:`~mathkit.number_theory.systems.totient.mobius`) and divisor-sum
-function (:func:`~mathkit.number_theory.systems.totient.divisor_sum`).
+(:func:`~mathematicskit.number_theory.systems.totient.mobius`) and divisor-sum
+function (:func:`~mathematicskit.number_theory.systems.totient.divisor_sum`).
 
 *References:* L. Euler, "Theoremata arithmetica nova methodo demonstrata,"
 Novi Commentarii Academiae Scientiarum Petropolitanae 8 (1763), 74-104
@@ -191,12 +191,12 @@ small (and freely adjustable) chance of error -- fast enough, unlike
 trial division, to certify primality for numbers hundreds of digits
 long, exactly the size RSA key generation requires.
 
-*Implementation:* :func:`mathkit.number_theory.systems.primality.is_prime_miller_rabin`
+*Implementation:* :func:`mathematicskit.number_theory.systems.primality.is_prime_miller_rabin`
 implements exactly this randomized test, cross-checked against the
 much slower but always-certain
-:func:`~mathkit.number_theory.systems.primality.is_prime_trial_division`
+:func:`~mathematicskit.number_theory.systems.primality.is_prime_trial_division`
 over a wide range in the test suite;
-:func:`~mathkit.number_theory.systems.primality.sieve_of_eratosthenes`
+:func:`~mathematicskit.number_theory.systems.primality.sieve_of_eratosthenes`
 implements the much older (c. 250 BCE) sieve of Eratosthenes for
 generating every prime up to a limit at once.
 
@@ -222,10 +222,10 @@ developed two centuries earlier for entirely different reasons. Clifford
 Cocks, working at Britain's GCHQ, had derived an equivalent scheme in
 1973, but it remained classified until 1997.
 
-*Implementation:* mathkit's toy demonstration composes
-:func:`mathkit.number_theory.systems.totient.euler_totient`,
-:func:`~mathkit.number_theory.systems.modular_arithmetic.mod_inverse`,
-and :func:`~mathkit.number_theory.systems.modular_arithmetic.fast_mod_pow`
+*Implementation:* mathematicskit's toy demonstration composes
+:func:`mathematicskit.number_theory.systems.totient.euler_totient`,
+:func:`~mathematicskit.number_theory.systems.modular_arithmetic.mod_inverse`,
+and :func:`~mathematicskit.number_theory.systems.modular_arithmetic.fast_mod_pow`
 directly, exactly reproducing an RSA key-generation, encryption, and
 decryption round trip (with small, illustrative rather than
 cryptographically secure primes).

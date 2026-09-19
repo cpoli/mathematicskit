@@ -9,8 +9,8 @@ standard errors/p-values, R^2, and a residuals-vs-fitted-values plot.
 # %%
 import numpy as np
 
-from mathkit.statistics import linear_regression
-from mathkit.statistics.visualizers.plots import plot_regression_fit, plot_residuals
+from mathematicskit.statistics import linear_regression
+from mathematicskit.statistics.visualizers.plots import plot_regression_fit, plot_residuals
 
 # %%
 # Simulate noisy linear data and fit
