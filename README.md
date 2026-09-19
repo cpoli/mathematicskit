@@ -3,8 +3,8 @@
 | | |
 |:--|:-:|
 | Package | [![PyPI version](https://img.shields.io/pypi/v/mathkit)](https://pypi.org/project/mathkit/) [![Python versions](https://img.shields.io/pypi/pyversions/mathkit)](https://pypi.org/project/mathkit/) |
-| Quality | [![License](https://img.shields.io/github/license/cpoli/mathkit)](https://github.com/cpoli/mathkit/blob/main/LICENSE) [![CI](https://github.com/cpoli/mathkit/actions/workflows/ci.yml/badge.svg)](https://github.com/cpoli/mathkit/actions/workflows/ci.yml) [![Coverage](https://img.shields.io/codecov/c/github/cpoli/mathkit)](https://codecov.io/gh/cpoli/mathkit) |
-| Documentation | [![Docs](https://readthedocs.org/projects/mathkit/badge/?version=latest)](https://mathkit.readthedocs.io) |
+| Quality | [![License](https://img.shields.io/github/license/cpoli/mathkit)](https://github.com/cpoli/mathkit/blob/main/LICENSE) [![CI](https://github.com/cpoli/mathkit/actions/workflows/ci.yml/badge.svg)](https://github.com/cpoli/mathkit/actions/workflows/ci.yml) [![Coverage](https://img.shields.io/codecov/c/github/cpoli/mathkit)](https://codecov.io/gh/cpoli/mathkit) [![Coverage (manual)](https://img.shields.io/badge/coverage-96%25-brightgreen)](#coverage) |
+| Documentation | [![Docs](https://img.shields.io/badge/docs-cpoli.github.io%2Fmathkit-blue)](https://cpoli.github.io/mathkit/) |
 | Code style | [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff) |
 | Downloads | [![Downloads](https://static.pepy.tech/badge/mathkit)](https://pepy.tech/project/mathkit) [![Downloads/Month](https://static.pepy.tech/badge/mathkit/month)](https://pepy.tech/project/mathkit) |
 | Community | [![GitHub Stars](https://img.shields.io/github/stars/cpoli/mathkit?style=social)](https://github.com/cpoli/mathkit) [![GitHub Forks](https://img.shields.io/github/forks/cpoli/mathkit?style=social)](https://github.com/cpoli/mathkit) [![Contributors](https://img.shields.io/github/contributors/cpoli/mathkit)](https://github.com/cpoli/mathkit/graphs/contributors) [![Last Commit](https://img.shields.io/github/last-commit/cpoli/mathkit)](https://github.com/cpoli/mathkit/commits/main) |
@@ -92,10 +92,37 @@ Both commands, plus `ruff check`/`ruff format --check`, run in CI on
 every PR (`.github/workflows/ci.yml`) across Python 3.9-3.12 on Linux and
 macOS. See [CONTRIBUTING.md](CONTRIBUTING.md) before opening a PR.
 
+### Coverage
+
+```bash
+MPLBACKEND=Agg pytest -q --cov=mathkit --cov-report=term
+```
+
+620 tests, 96% line coverage overall. Per-subpackage coverage:
+
+| Subpackage | Coverage | | Subpackage | Coverage |
+|:--|--:|---|:--|--:|
+| `abstract_algebra` | 97% | | `ode_dynamics` | 92% |
+| `calculus` | 95% | | `optimization` | 99% |
+| `combinatorics` | 98% | | `probability` | 98% |
+| `fractals_chaos` | 92% | | `special_functions` | 100% |
+| `geometry` | 100% | | `statistics` | 99% |
+| `graph_theory` | 99% | | `integrators` | 50% |
+| `linalg` | 95% | | `constants` | 100% |
+| `number_theory` | 99% | | | |
+| `numerical_analysis` | 97% | | | |
+
+`visualizers/` modules are smoke-tested only (correct return type/shape,
+or that `anim.save()` succeeds) rather than covered line-by-line, per the
+testing convention in [CLAUDE.md](CLAUDE.md). `integrators` sits lower
+because several of its fixed-step/adaptive methods aren't exercised
+directly by its own tests, only indirectly through the two subpackages
+(`ode_dynamics`, `fractals_chaos`) that call into it.
+
 ## Docs
 
-Built docs are hosted at <https://mathkit.readthedocs.io>. To build
-locally:
+Built docs are hosted at <https://cpoli.github.io/mathkit/>, served from
+the `gh-pages` branch. To build locally:
 
 ```bash
 pip install -e ".[docs]"
