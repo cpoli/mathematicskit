@@ -1,0 +1,1423 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>mathkit.abstract_algebra &#8212; mathkit 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=fd6457a4" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+    <script src="../_static/documentation_options.js?v=38b66d78"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/abstract_algebra';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="mathkit.calculus" href="calculus.html" />
+    <link rel="prev" title="API" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/mathkit_logo_transparent.png" class="logo__image only-light" alt="mathkit logo"/>
+    <img src="../_static/mathkit_logo_transparent.png" class="logo__image only-dark pst-js-only" alt="mathkit logo"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/mathkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/mathkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar">
+  <svg class="pst-icon" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">mathkit.abstract_algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calculus.html">mathkit.calculus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="combinatorics.html">mathkit.combinatorics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fractals_chaos.html">mathkit.fractals_chaos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geometry.html">mathkit.geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graph_theory.html">mathkit.graph_theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linalg.html">mathkit.linalg</a></li>
+<li class="toctree-l1"><a class="reference internal" href="number_theory.html">mathkit.number_theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_analysis.html">mathkit.numerical_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ode_dynamics.html">mathkit.ode_dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimization.html">mathkit.optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability.html">mathkit.probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="special_functions.html">mathkit.special_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statistics.html">mathkit.statistics</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">API</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">mathkit.abstract_algebra</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="mathkit-abstract-algebra">
+<h1>mathkit.abstract_algebra<a class="headerlink" href="#mathkit-abstract-algebra" title="Link to this heading">#</a></h1>
+<div class="subpkg-nav docutils container">
+<p><a class="reference internal" href="../_generated/subpackages/abstract_algebra.html"><span class="doc">mathkit.abstract_algebra hub</span></a> · <a class="reference internal" href="../history/abstract_algebra_breakthroughs.html"><span class="doc">History</span></a> · <a class="reference internal" href="gallery/abstract_algebra/index.html"><span class="doc">Examples</span></a> · <a class="reference internal" href="#"><span class="doc">API reference</span></a></p>
+</div>
+<p>Cyclic and permutation groups with Cayley table generation;
+group-property checks (order, identity, inverses, abelian, cyclicity);
+subgroup and coset enumeration for small groups; finite field arithmetic
+(<code class="docutils literal notranslate"><span class="pre">GF(p)</span></code> and <code class="docutils literal notranslate"><span class="pre">GF(p^n)</span></code> via irreducible polynomials over <code class="docutils literal notranslate"><span class="pre">GF(p)</span></code>);
+and polynomial ring arithmetic (addition, multiplication, division with
+remainder, gcd) over <span class="math notranslate nohighlight">\(\mathbb{Z}\)</span>, <span class="math notranslate nohighlight">\(\mathbb{Q}\)</span>, and finite
+fields. Every algorithm is hand-rolled – finite group/ring/field theory
+has no <code class="docutils literal notranslate"><span class="pre">numpy</span></code>/<code class="docutils literal notranslate"><span class="pre">scipy</span></code> equivalent.</p>
+<p id="module-mathkit.abstract_algebra">mathkit.abstract_algebra: group, ring, and field theory made computational.</p>
+<p>Every algorithm here is hand-rolled from its textbook definition –
+finite group/ring/field theory has no <code class="docutils literal notranslate"><span class="pre">numpy</span></code>/<code class="docutils literal notranslate"><span class="pre">scipy</span></code> equivalent.
+Cyclic and permutation group implementations with Cayley table
+generation; group-property checks (order, identity, inverses, abelian,
+cyclicity); subgroup and coset enumeration for small groups; finite
+field arithmetic (<code class="docutils literal notranslate"><span class="pre">GF(p)</span></code> and <code class="docutils literal notranslate"><span class="pre">GF(p^n)</span></code> via irreducible polynomials
+over <code class="docutils literal notranslate"><span class="pre">GF(p)</span></code>); and polynomial ring arithmetic (addition,
+multiplication, division with remainder, gcd) over <span class="math notranslate nohighlight">\(\mathbb{Z}\)</span>,
+<span class="math notranslate nohighlight">\(\mathbb{Q}\)</span>, and finite fields.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.CyclicGroup">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathkit.abstract_algebra.</span></span><span class="sig-name descname"><span class="pre">CyclicGroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/systems/groups.html#CyclicGroup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.CyclicGroup" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mathkit.abstract_algebra.FiniteGroup" title="mathkit.abstract_algebra.core.base.FiniteGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteGroup</span></code></a></p>
+<p>The cyclic group <span class="math notranslate nohighlight">\(\mathbb{Z}_n = \{0, 1, \dots, n-1\}\)</span> under addition mod <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
+<p>Generated by a single element (e.g. <code class="docutils literal notranslate"><span class="pre">1</span></code>); every finite cyclic
+group of order <code class="docutils literal notranslate"><span class="pre">n</span></code> is isomorphic to this one. See Dummit &amp; Foote,
+<em>Abstract Algebra</em>, 3rd ed., Sec. 1.3, 2.3.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Group order, <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;=</span> <span class="pre">1</span></code>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">CyclicGroup</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">operate</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">inverse</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">is_abelian</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<dl class="py property">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.CyclicGroup.elements">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">elements</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a></span><a class="headerlink" href="#mathkit.abstract_algebra.CyclicGroup.elements" title="Link to this definition">#</a></dt>
+<dd><p>Every group element, in a fixed (implementation-defined) order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)">list</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.CyclicGroup.identity">
+<span class="sig-name descname"><span class="pre">identity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/systems/groups.html#CyclicGroup.identity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.CyclicGroup.identity" title="Link to this definition">#</a></dt>
+<dd><p>The group’s identity element.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.CyclicGroup.inverse">
+<span class="sig-name descname"><span class="pre">inverse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/systems/groups.html#CyclicGroup.inverse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.CyclicGroup.inverse" title="Link to this definition">#</a></dt>
+<dd><p>The inverse of <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>a</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.CyclicGroup.operate">
+<span class="sig-name descname"><span class="pre">operate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/systems/groups.html#CyclicGroup.operate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.CyclicGroup.operate" title="Link to this definition">#</a></dt>
+<dd><p>The group operation, <span class="math notranslate nohighlight">\(a \cdot b\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>a</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>)</p></li>
+<li><p><strong>b</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.FiniteGroup">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathkit.abstract_algebra.</span></span><span class="sig-name descname"><span class="pre">FiniteGroup</span></span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/core/base.html#FiniteGroup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.FiniteGroup" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
+<p>Common interface for a finite group <span class="math notranslate nohighlight">\((G, \cdot)\)</span>.</p>
+<p>Concrete subclasses (<a class="reference internal" href="#mathkit.abstract_algebra.CyclicGroup" title="mathkit.abstract_algebra.systems.groups.CyclicGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">CyclicGroup</span></code></a>,
+<a class="reference internal" href="#mathkit.abstract_algebra.PermutationGroup" title="mathkit.abstract_algebra.systems.groups.PermutationGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">PermutationGroup</span></code></a>)
+provide the element set and the group operation; this base class
+derives the Cayley table, abelian check, and element orders purely
+from those. See Dummit &amp; Foote, <em>Abstract Algebra</em>, 3rd ed., Ch. 1.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mathkit.abstract_algebra.systems.groups</span><span class="w"> </span><span class="kn">import</span> <span class="n">CyclicGroup</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">CyclicGroup</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">order</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">is_abelian</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.FiniteGroup.cayley_table">
+<span class="sig-name descname"><span class="pre">cayley_table</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/core/base.html#FiniteGroup.cayley_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.FiniteGroup.cayley_table" title="Link to this definition">#</a></dt>
+<dd><p>The Cayley (multiplication) table, as element indices.</p>
+<p>Row <code class="docutils literal notranslate"><span class="pre">i</span></code>, column <code class="docutils literal notranslate"><span class="pre">j</span></code> holds the index (into <a class="reference internal" href="#mathkit.abstract_algebra.FiniteGroup.elements" title="mathkit.abstract_algebra.FiniteGroup.elements"><code class="xref py py-attr docutils literal notranslate"><span class="pre">elements</span></code></a>)
+of <code class="docutils literal notranslate"><span class="pre">elements[i]</span> <span class="pre">.</span> <span class="pre">elements[j]</span></code>. See Dummit &amp; Foote, <em>Abstract
+Algebra</em>, 3rd ed., Sec. 1.7.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>ndarray, shape (n, n), int</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.FiniteGroup.element_order">
+<span class="sig-name descname"><span class="pre">element_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/core/base.html#FiniteGroup.element_order"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.FiniteGroup.element_order" title="Link to this definition">#</a></dt>
+<dd><p>The order of element <code class="docutils literal notranslate"><span class="pre">a</span></code>: the smallest <span class="math notranslate nohighlight">\(k&gt;0\)</span> with <span class="math notranslate nohighlight">\(a^k = e\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>a</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>int</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.FiniteGroup.elements">
+<span class="property"><span class="k"><span class="pre">abstract</span></span><span class="w"> </span><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">elements</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a></span><a class="headerlink" href="#mathkit.abstract_algebra.FiniteGroup.elements" title="Link to this definition">#</a></dt>
+<dd><p>Every group element, in a fixed (implementation-defined) order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)">list</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.FiniteGroup.identity">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">identity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/core/base.html#FiniteGroup.identity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.FiniteGroup.identity" title="Link to this definition">#</a></dt>
+<dd><p>The group’s identity element.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.FiniteGroup.inverse">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">inverse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/core/base.html#FiniteGroup.inverse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.FiniteGroup.inverse" title="Link to this definition">#</a></dt>
+<dd><p>The inverse of <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.FiniteGroup.is_abelian">
+<span class="sig-name descname"><span class="pre">is_abelian</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/core/base.html#FiniteGroup.is_abelian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.FiniteGroup.is_abelian" title="Link to this definition">#</a></dt>
+<dd><p>Whether the group operation is commutative for every pair of elements.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>bool</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.FiniteGroup.operate">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">operate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/core/base.html#FiniteGroup.operate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.FiniteGroup.operate" title="Link to this definition">#</a></dt>
+<dd><p>The group operation, <span class="math notranslate nohighlight">\(a \cdot b\)</span>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.FiniteGroup.order">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">order</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#mathkit.abstract_algebra.FiniteGroup.order" title="Link to this definition">#</a></dt>
+<dd><p><span class="math notranslate nohighlight">\(|G|\)</span>, the number of elements.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.GF">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathkit.abstract_algebra.</span></span><span class="sig-name descname"><span class="pre">GF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">irreducible</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/systems/finite_fields.html#GF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.GF" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>The finite field <span class="math notranslate nohighlight">\(\mathrm{GF}(p^n)\)</span>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">n=1</span></code> (the default) is the prime field <span class="math notranslate nohighlight">\(\mathrm{GF}(p) =
+\mathbb{Z}/p\mathbb{Z}\)</span>, with elements plain integers <code class="docutils literal notranslate"><span class="pre">0,</span> <span class="pre">...,</span> <span class="pre">p-1</span></code>.
+<code class="docutils literal notranslate"><span class="pre">n&gt;1</span></code> represents elements as polynomials of degree <code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">n</span></code> over
+<span class="math notranslate nohighlight">\(\mathrm{GF}(p)\)</span>, with multiplication reduced modulo a fixed
+irreducible polynomial (found via <a class="reference internal" href="#mathkit.abstract_algebra.find_irreducible_polynomial" title="mathkit.abstract_algebra.find_irreducible_polynomial"><code class="xref py py-func docutils literal notranslate"><span class="pre">find_irreducible_polynomial()</span></code></a>
+if not supplied) – <span class="math notranslate nohighlight">\(\mathrm{GF}(p)[x]/(f(x))\)</span> is a field
+exactly when <code class="docutils literal notranslate"><span class="pre">f</span></code> is irreducible. See Dummit &amp; Foote, <em>Abstract
+Algebra</em>, 3rd ed., Sec. 13.5.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Prime.</p></li>
+<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Extension degree, <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;=</span> <span class="pre">1</span></code>.</p></li>
+<li><p><strong>irreducible</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathkit.abstract_algebra.Polynomial" title="mathkit.abstract_algebra.core.base.Polynomial"><code class="xref py py-class docutils literal notranslate"><span class="pre">Polynomial</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – A degree-<code class="docutils literal notranslate"><span class="pre">n</span></code> irreducible polynomial over <span class="math notranslate nohighlight">\(\mathrm{GF}(p)\)</span>;
+found automatically if omitted.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">field</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># GF(8)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">field</span><span class="o">.</span><span class="n">order</span>
+<span class="go">8</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">Polynomial</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">modulus</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># 1 + x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">Polynomial</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">modulus</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># x + x^2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">field</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">degree</span> <span class="o">&lt;=</span> <span class="mi">2</span>  <span class="c1"># result stays reduced mod the irreducible polynomial</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.GF.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/systems/finite_fields.html#GF.add"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.GF.add" title="Link to this definition">#</a></dt>
+<dd><p>Field addition.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.GF.elements">
+<span class="sig-name descname"><span class="pre">elements</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/systems/finite_fields.html#GF.elements"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.GF.elements" title="Link to this definition">#</a></dt>
+<dd><p>Every field element.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of int (if <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">==</span> <span class="pre">1</span></code>) or list of Polynomial (if <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;</span> <span class="pre">1</span></code>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.GF.inverse">
+<span class="sig-name descname"><span class="pre">inverse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/systems/finite_fields.html#GF.inverse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.GF.inverse" title="Link to this definition">#</a></dt>
+<dd><p>Multiplicative inverse of a nonzero element.</p>
+<p><code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">==</span> <span class="pre">1</span></code>: via Fermat’s little theorem, <span class="math notranslate nohighlight">\(a^{-1} \equiv
+a^{p-2} \pmod p\)</span>. <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;</span> <span class="pre">1</span></code>: via the polynomial extended
+Euclidean algorithm (finding <span class="math notranslate nohighlight">\(u, v\)</span> with <span class="math notranslate nohighlight">\(ua +
+v \cdot \text{irreducible} = \gcd = 1\)</span>).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.GF.multiply">
+<span class="sig-name descname"><span class="pre">multiply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/systems/finite_fields.html#GF.multiply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.GF.multiply" title="Link to this definition">#</a></dt>
+<dd><p>Field multiplication, reduced modulo the extension’s irreducible polynomial when <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;</span> <span class="pre">1</span></code>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.GF.order">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">order</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#mathkit.abstract_algebra.GF.order" title="Link to this definition">#</a></dt>
+<dd><p><span class="math notranslate nohighlight">\(|\mathrm{GF}(p^n)| = p^n\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.GroupPropertiesResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathkit.abstract_algebra.</span></span><span class="sig-name descname"><span class="pre">GroupPropertiesResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_abelian</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">identity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">element_orders</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/core/base.html#GroupPropertiesResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.GroupPropertiesResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Container for a finite group’s summary properties.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>order</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>)</p></li>
+<li><p><strong>is_abelian</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>)</p></li>
+<li><p><strong>identity</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><em>object</em></a>)</p></li>
+<li><p><strong>element_orders</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.GroupPropertiesResult.element_orders">
+<span class="sig-name descname"><span class="pre">element_orders</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a></span><a class="headerlink" href="#mathkit.abstract_algebra.GroupPropertiesResult.element_orders" title="Link to this definition">#</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">{element:</span> <span class="pre">order}</span></code> for every element.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.GroupPropertiesResult.identity">
+<span class="sig-name descname"><span class="pre">identity</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><span class="pre">object</span></a></span><a class="headerlink" href="#mathkit.abstract_algebra.GroupPropertiesResult.identity" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.GroupPropertiesResult.is_abelian">
+<span class="sig-name descname"><span class="pre">is_abelian</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><a class="headerlink" href="#mathkit.abstract_algebra.GroupPropertiesResult.is_abelian" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.GroupPropertiesResult.order">
+<span class="sig-name descname"><span class="pre">order</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#mathkit.abstract_algebra.GroupPropertiesResult.order" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.PermutationGroup">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathkit.abstract_algebra.</span></span><span class="sig-name descname"><span class="pre">PermutationGroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">degree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generators</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/systems/groups.html#PermutationGroup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.PermutationGroup" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mathkit.abstract_algebra.FiniteGroup" title="mathkit.abstract_algebra.core.base.FiniteGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteGroup</span></code></a></p>
+<p>The group generated by a set of permutations, under composition.</p>
+<p>Elements are tuples <code class="docutils literal notranslate"><span class="pre">p</span></code> with <code class="docutils literal notranslate"><span class="pre">p[i]</span></code> = the image of <code class="docutils literal notranslate"><span class="pre">i</span></code> under
+the permutation; the full element set is found by closing the
+generators under composition (a breadth-first search from the
+identity). <code class="docutils literal notranslate"><span class="pre">generators=None</span></code> builds the full symmetric group
+<span class="math notranslate nohighlight">\(S_n\)</span> (generated by an adjacent transposition and the full
+n-cycle). See Dummit &amp; Foote, <em>Abstract Algebra</em>, 3rd ed., Sec. 1.3,
+1.6.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>degree</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – The permutations act on <code class="docutils literal notranslate"><span class="pre">{0,</span> <span class="pre">...,</span> <span class="pre">degree</span> <span class="pre">-</span> <span class="pre">1}</span></code>.</p></li>
+<li><p><strong>generators</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a><em>, </em><em>optional</em>) – Generating permutations; defaults to generators of the full
+symmetric group <span class="math notranslate nohighlight">\(S_{\text{degree}}\)</span>.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># S_3, the symmetric group on 3 elements: order 6, non-abelian.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">PermutationGroup</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">order</span>
+<span class="go">6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">is_abelian</span><span class="p">()</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># A cyclic subgroup: generated by the 3-cycle (0 1 2).</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g3</span> <span class="o">=</span> <span class="n">PermutationGroup</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">generators</span><span class="o">=</span><span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g3</span><span class="o">.</span><span class="n">order</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+<dl class="py property">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.PermutationGroup.elements">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">elements</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a></span><a class="headerlink" href="#mathkit.abstract_algebra.PermutationGroup.elements" title="Link to this definition">#</a></dt>
+<dd><p>Every group element, in a fixed (implementation-defined) order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)">list</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.PermutationGroup.identity">
+<span class="sig-name descname"><span class="pre">identity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/systems/groups.html#PermutationGroup.identity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.PermutationGroup.identity" title="Link to this definition">#</a></dt>
+<dd><p>The group’s identity element.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.PermutationGroup.inverse">
+<span class="sig-name descname"><span class="pre">inverse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/systems/groups.html#PermutationGroup.inverse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.PermutationGroup.inverse" title="Link to this definition">#</a></dt>
+<dd><p>The inverse of <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>a</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.PermutationGroup.operate">
+<span class="sig-name descname"><span class="pre">operate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/systems/groups.html#PermutationGroup.operate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.PermutationGroup.operate" title="Link to this definition">#</a></dt>
+<dd><p>The group operation, <span class="math notranslate nohighlight">\(a \cdot b\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>a</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a>)</p></li>
+<li><p><strong>b</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.Polynomial">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathkit.abstract_algebra.</span></span><span class="sig-name descname"><span class="pre">Polynomial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coeffs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modulus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/core/base.html#Polynomial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.Polynomial" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A polynomial with coefficients over <span class="math notranslate nohighlight">\(\mathbb{Q}\)</span> (<code class="docutils literal notranslate"><span class="pre">modulus=None</span></code>,
+stored as exact <a class="reference external" href="https://docs.python.org/3/library/fractions.html#fractions.Fraction" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">fractions.Fraction</span></code></a>) or <span class="math notranslate nohighlight">\(\mathrm{GF}(p)\)</span>
+(<code class="docutils literal notranslate"><span class="pre">modulus=p</span></code>, coefficients reduced mod <code class="docutils literal notranslate"><span class="pre">p</span></code>).</p>
+<p>Coefficients are stored lowest-degree first: <code class="docutils literal notranslate"><span class="pre">coeffs[k]</span></code> is the
+coefficient of <span class="math notranslate nohighlight">\(x^k\)</span>. Integer (<code class="docutils literal notranslate"><span class="pre">Z</span></code>) and rational (<code class="docutils literal notranslate"><span class="pre">Q</span></code>)
+coefficients are both represented exactly as <code class="docutils literal notranslate"><span class="pre">Fraction</span></code> (<code class="docutils literal notranslate"><span class="pre">Z</span></code> is
+simply the sub-case where every coefficient happens to have
+denominator 1); this is what makes polynomial <em>division</em> with
+remainder always well-defined (needs the divisor’s leading
+coefficient to be invertible, which holds automatically in a field
+but not in <span class="math notranslate nohighlight">\(\mathbb{Z}\)</span> itself). See Dummit &amp; Foote, <em>Abstract
+Algebra</em>, 3rd ed., Ch. 9.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>coeffs</strong> (<em>sequence</em>) – Coefficients, lowest degree first.</p></li>
+<li><p><strong>modulus</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – A prime <code class="docutils literal notranslate"><span class="pre">p</span></code>, for coefficients in <span class="math notranslate nohighlight">\(\mathrm{GF}(p)\)</span>;
+<code class="docutils literal notranslate"><span class="pre">None</span></code> (the default) for <span class="math notranslate nohighlight">\(\mathbb{Q}\)</span> coefficients.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Polynomial</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>  <span class="c1"># 1 + 2x + x^2 = (1+x)^2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">q</span> <span class="o">=</span> <span class="n">Polynomial</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>  <span class="c1"># 1 + x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">quotient</span><span class="p">,</span> <span class="n">remainder</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">quotient</span><span class="o">.</span><span class="n">coeffs</span><span class="p">,</span> <span class="n">remainder</span><span class="o">.</span><span class="n">coeffs</span>
+<span class="go">([Fraction(1, 1), Fraction(1, 1)], [Fraction(0, 1)])</span>
+</pre></div>
+</div>
+<dl class="py property">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.Polynomial.degree">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">degree</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#mathkit.abstract_algebra.Polynomial.degree" title="Link to this definition">#</a></dt>
+<dd><p>The polynomial’s degree (<code class="docutils literal notranslate"><span class="pre">-1</span></code> for the zero polynomial, by convention).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.Polynomial.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/core/base.html#Polynomial.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.Polynomial.evaluate" title="Link to this definition">#</a></dt>
+<dd><p>Evaluate the polynomial at <code class="docutils literal notranslate"><span class="pre">x</span></code>, via Horner’s method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>The same type as the polynomial’s coefficients.</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.all_subgroups">
+<span class="sig-prename descclassname"><span class="pre">mathkit.abstract_algebra.</span></span><span class="sig-name descname"><span class="pre">all_subgroups</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/systems/subgroups.html#all_subgroups"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.all_subgroups" title="Link to this definition">#</a></dt>
+<dd><p>Every subgroup of a small finite group, found by closing every subset of generators.</p>
+<p>Builds the subgroup generated by each subset of <code class="xref py py-attr docutils literal notranslate"><span class="pre">group.elements</span></code> (closing
+under the group operation and inverses) and deduplicates – feasible
+only for small groups (this is exponential in <span class="math notranslate nohighlight">\(|G|\)</span>), but
+exact. See Dummit &amp; Foote, <em>Abstract Algebra</em>, 3rd ed., Sec. 2.1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>group</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathkit.abstract_algebra.FiniteGroup" title="mathkit.abstract_algebra.core.base.FiniteGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteGroup</span></code></a></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>list of list</em> – Every distinct subgroup, each as a sorted-by-first-appearance
+list of elements, including the trivial subgroup <code class="docutils literal notranslate"><span class="pre">{e}</span></code> and
+<code class="docutils literal notranslate"><span class="pre">group.elements</span></code> itself.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mathkit.abstract_algebra.systems.groups</span><span class="w"> </span><span class="kn">import</span> <span class="n">CyclicGroup</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">subgroups</span> <span class="o">=</span> <span class="n">all_subgroups</span><span class="p">(</span><span class="n">CyclicGroup</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">subgroups</span><span class="p">)</span>  <span class="c1"># divisors of 6: 1, 2, 3, 6</span>
+<span class="go">[1, 2, 3, 6]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.cyclic_subgroup">
+<span class="sig-prename descclassname"><span class="pre">mathkit.abstract_algebra.</span></span><span class="sig-name descname"><span class="pre">cyclic_subgroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/systems/subgroups.html#cyclic_subgroup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.cyclic_subgroup" title="Link to this definition">#</a></dt>
+<dd><p>The cyclic subgroup <span class="math notranslate nohighlight">\(\langle g \rangle = \{e, g, g^2, \dots\}\)</span> generated by a single element.</p>
+<p>Its size equals <code class="xref py py-meth docutils literal notranslate"><span class="pre">element_order()</span></code>(<cite>generator</cite>) – by Lagrange’s theorem, this always divides
+<span class="math notranslate nohighlight">\(|G|\)</span>. See Dummit &amp; Foote, <em>Abstract Algebra</em>, 3rd ed.,
+Sec. 2.3.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathkit.abstract_algebra.FiniteGroup" title="mathkit.abstract_algebra.core.base.FiniteGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteGroup</span></code></a></span>)</p></li>
+<li><p><strong>generator</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>list</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mathkit.abstract_algebra.systems.groups</span><span class="w"> </span><span class="kn">import</span> <span class="n">CyclicGroup</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cyclic_subgroup</span><span class="p">(</span><span class="n">CyclicGroup</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">[0, 2, 4]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.find_irreducible_polynomial">
+<span class="sig-prename descclassname"><span class="pre">mathkit.abstract_algebra.</span></span><span class="sig-name descname"><span class="pre">find_irreducible_polynomial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/systems/finite_fields.html#find_irreducible_polynomial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.find_irreducible_polynomial" title="Link to this definition">#</a></dt>
+<dd><p>Find a monic irreducible polynomial of degree <code class="docutils literal notranslate"><span class="pre">n</span></code> over <span class="math notranslate nohighlight">\(\mathrm{GF}(p)\)</span>, by brute-force search.</p>
+<p>An irreducible polynomial of every degree exists over every finite
+field (Dummit &amp; Foote, <em>Abstract Algebra</em>, 3rd ed., Corollary 13.24
+– via counting arguments), so this search always terminates. See
+Lidl &amp; Niederreiter, <em>Introduction to Finite Fields</em>, Sec. 3.1-3.3.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Prime.</p></li>
+<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Degree, <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;=</span> <span class="pre">1</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathkit.abstract_algebra.Polynomial" title="mathkit.abstract_algebra.core.base.Polynomial"><code class="xref py py-class docutils literal notranslate"><span class="pre">Polynomial</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Polynomial</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">poly</span> <span class="o">=</span> <span class="n">find_irreducible_polynomial</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">poly</span><span class="o">.</span><span class="n">degree</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_irreducible</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.group_properties">
+<span class="sig-prename descclassname"><span class="pre">mathkit.abstract_algebra.</span></span><span class="sig-name descname"><span class="pre">group_properties</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/systems/groups.html#group_properties"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.group_properties" title="Link to this definition">#</a></dt>
+<dd><p>Summarize a finite group’s order, abelian-ness, and every element’s order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>group</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathkit.abstract_algebra.FiniteGroup" title="mathkit.abstract_algebra.core.base.FiniteGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteGroup</span></code></a></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathkit.abstract_algebra.GroupPropertiesResult" title="mathkit.abstract_algebra.core.base.GroupPropertiesResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroupPropertiesResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>GroupPropertiesResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">group_properties</span><span class="p">(</span><span class="n">CyclicGroup</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">order</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">is_abelian</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">element_orders</span>
+<span class="go">{0: 1, 1: 4, 2: 2, 3: 4}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.is_cyclic">
+<span class="sig-prename descclassname"><span class="pre">mathkit.abstract_algebra.</span></span><span class="sig-name descname"><span class="pre">is_cyclic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/utils/checks.html#is_cyclic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.is_cyclic" title="Link to this definition">#</a></dt>
+<dd><p>Whether <cite>group</cite> is cyclic: some element generates the entire group.</p>
+<p>Checked by testing whether any single element has order
+<span class="math notranslate nohighlight">\(|G|\)</span> (via <code class="xref py py-meth docutils literal notranslate"><span class="pre">element_order()</span></code>).
+See Dummit &amp; Foote, <em>Abstract Algebra</em>, 3rd ed., Sec. 2.3.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>group</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathkit.abstract_algebra.FiniteGroup" title="mathkit.abstract_algebra.core.base.FiniteGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteGroup</span></code></a></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>bool</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mathkit.abstract_algebra.systems.groups</span><span class="w"> </span><span class="kn">import</span> <span class="n">CyclicGroup</span><span class="p">,</span> <span class="n">PermutationGroup</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_cyclic</span><span class="p">(</span><span class="n">CyclicGroup</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_cyclic</span><span class="p">(</span><span class="n">PermutationGroup</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>  <span class="c1"># S_3 is not cyclic (it's non-abelian)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.is_irreducible">
+<span class="sig-prename descclassname"><span class="pre">mathkit.abstract_algebra.</span></span><span class="sig-name descname"><span class="pre">is_irreducible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">poly</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/systems/finite_fields.html#is_irreducible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.is_irreducible" title="Link to this definition">#</a></dt>
+<dd><p>Whether <cite>poly</cite> is irreducible over <span class="math notranslate nohighlight">\(\mathrm{GF}(p)\)</span>: has no polynomial factor of degree <span class="math notranslate nohighlight">\(1 \leq d \leq \deg(\text{poly})/2\)</span>.</p>
+<p>Checked by trial division against every monic polynomial of degree
+<code class="docutils literal notranslate"><span class="pre">1</span></code> through <code class="docutils literal notranslate"><span class="pre">deg(poly)</span> <span class="pre">//</span> <span class="pre">2</span></code> (degree-1 divisors are equivalent
+to checking for a root in <span class="math notranslate nohighlight">\(\mathrm{GF}(p)\)</span>). Feasible for the
+small <code class="docutils literal notranslate"><span class="pre">p</span></code>, small degree cases this domain’s examples use. See
+Lidl &amp; Niederreiter, <em>Introduction to Finite Fields</em>, Sec. 3.1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>poly</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathkit.abstract_algebra.Polynomial" title="mathkit.abstract_algebra.core.base.Polynomial"><code class="xref py py-class docutils literal notranslate"><span class="pre">Polynomial</span></code></a></span>) – With <code class="docutils literal notranslate"><span class="pre">modulus</span></code> set (coefficients in <span class="math notranslate nohighlight">\(\mathrm{GF}(p)\)</span>).</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>bool</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_irreducible</span><span class="p">(</span><span class="n">Polynomial</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">modulus</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>  <span class="c1"># x^2+x+1 over GF(2)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_irreducible</span><span class="p">(</span><span class="n">Polynomial</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">modulus</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>  <span class="c1"># x^2+x = x(x+1): reducible</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.left_cosets">
+<span class="sig-prename descclassname"><span class="pre">mathkit.abstract_algebra.</span></span><span class="sig-name descname"><span class="pre">left_cosets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subgroup</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/systems/subgroups.html#left_cosets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.left_cosets" title="Link to this definition">#</a></dt>
+<dd><p>The left cosets <span class="math notranslate nohighlight">\(gH\)</span> of <cite>subgroup</cite> in <cite>group</cite>.</p>
+<p>Partitions <code class="xref py py-attr docutils literal notranslate"><span class="pre">group.elements</span></code> into
+<code class="docutils literal notranslate"><span class="pre">|G|/|H|</span></code> disjoint cosets (Lagrange’s theorem). See Dummit &amp;
+Foote, <em>Abstract Algebra</em>, 3rd ed., Sec. 3.1-3.2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathkit.abstract_algebra.FiniteGroup" title="mathkit.abstract_algebra.core.base.FiniteGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">FiniteGroup</span></code></a></span>)</p></li>
+<li><p><strong>subgroup</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></span>) – A subgroup of <cite>group</cite> (e.g. from <a class="reference internal" href="#mathkit.abstract_algebra.cyclic_subgroup" title="mathkit.abstract_algebra.cyclic_subgroup"><code class="xref py py-func docutils literal notranslate"><span class="pre">cyclic_subgroup()</span></code></a> or
+<a class="reference internal" href="#mathkit.abstract_algebra.all_subgroups" title="mathkit.abstract_algebra.all_subgroups"><code class="xref py py-func docutils literal notranslate"><span class="pre">all_subgroups()</span></code></a>).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>list of list</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mathkit.abstract_algebra.systems.groups</span><span class="w"> </span><span class="kn">import</span> <span class="n">CyclicGroup</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">CyclicGroup</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">h</span> <span class="o">=</span> <span class="n">cyclic_subgroup</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># H = {0, 3}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left_cosets</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+<span class="go">[[0, 3], [1, 4], [2, 5]]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.poly_add">
+<span class="sig-prename descclassname"><span class="pre">mathkit.abstract_algebra.</span></span><span class="sig-name descname"><span class="pre">poly_add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/systems/polynomial_ring.html#poly_add"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.poly_add" title="Link to this definition">#</a></dt>
+<dd><p>Polynomial addition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathkit.abstract_algebra.Polynomial" title="mathkit.abstract_algebra.core.base.Polynomial"><code class="xref py py-class docutils literal notranslate"><span class="pre">Polynomial</span></code></a></span>)</p></li>
+<li><p><strong>q</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathkit.abstract_algebra.Polynomial" title="mathkit.abstract_algebra.core.base.Polynomial"><code class="xref py py-class docutils literal notranslate"><span class="pre">Polynomial</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathkit.abstract_algebra.Polynomial" title="mathkit.abstract_algebra.core.base.Polynomial"><code class="xref py py-class docutils literal notranslate"><span class="pre">Polynomial</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Polynomial</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">poly_add</span><span class="p">(</span><span class="n">Polynomial</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span> <span class="n">Polynomial</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]))</span><span class="o">.</span><span class="n">coeffs</span>
+<span class="go">[Fraction(4, 1), Fraction(6, 1), Fraction(5, 1)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.poly_divmod">
+<span class="sig-prename descclassname"><span class="pre">mathkit.abstract_algebra.</span></span><span class="sig-name descname"><span class="pre">poly_divmod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/systems/polynomial_ring.html#poly_divmod"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.poly_divmod" title="Link to this definition">#</a></dt>
+<dd><p>Polynomial division with remainder: <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">=</span> <span class="pre">quotient</span> <span class="pre">*</span> <span class="pre">q</span> <span class="pre">+</span> <span class="pre">remainder</span></code>, <code class="docutils literal notranslate"><span class="pre">deg(remainder)</span> <span class="pre">&lt;</span> <span class="pre">deg(q)</span></code>.</p>
+<p>Standard polynomial long division, requiring <cite>q</cite>’s leading
+coefficient to be invertible (automatic over <span class="math notranslate nohighlight">\(\mathbb{Q}\)</span> or
+<span class="math notranslate nohighlight">\(\mathrm{GF}(p)\)</span>, both fields). See Dummit &amp; Foote, <em>Abstract
+Algebra</em>, 3rd ed., Sec. 9.2, “Division Algorithm”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathkit.abstract_algebra.Polynomial" title="mathkit.abstract_algebra.core.base.Polynomial"><code class="xref py py-class docutils literal notranslate"><span class="pre">Polynomial</span></code></a></span>)</p></li>
+<li><p><strong>q</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathkit.abstract_algebra.Polynomial" title="mathkit.abstract_algebra.core.base.Polynomial"><code class="xref py py-class docutils literal notranslate"><span class="pre">Polynomial</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>(Polynomial, Polynomial)</em> – <code class="docutils literal notranslate"><span class="pre">(quotient,</span> <span class="pre">remainder)</span></code>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">quotient</span><span class="p">,</span> <span class="n">remainder</span> <span class="o">=</span> <span class="n">poly_divmod</span><span class="p">(</span><span class="n">Polynomial</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">Polynomial</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>  <span class="c1"># (x^2-1)/(x-1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">quotient</span><span class="o">.</span><span class="n">coeffs</span><span class="p">,</span> <span class="n">remainder</span><span class="o">.</span><span class="n">coeffs</span>  <span class="c1"># x + 1, remainder 0</span>
+<span class="go">([Fraction(1, 1), Fraction(1, 1)], [Fraction(0, 1)])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.poly_gcd">
+<span class="sig-prename descclassname"><span class="pre">mathkit.abstract_algebra.</span></span><span class="sig-name descname"><span class="pre">poly_gcd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/systems/polynomial_ring.html#poly_gcd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.poly_gcd" title="Link to this definition">#</a></dt>
+<dd><p>Greatest common divisor of two polynomials, via the Euclidean algorithm.</p>
+<p><span class="math notranslate nohighlight">\(\gcd(p, q) = \gcd(q, p \bmod q)\)</span>, terminating when the
+remainder is the zero polynomial – exactly the integer Euclidean
+algorithm with polynomial division in place of integer division. See
+Dummit &amp; Foote, <em>Abstract Algebra</em>, 3rd ed., Sec. 9.2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathkit.abstract_algebra.Polynomial" title="mathkit.abstract_algebra.core.base.Polynomial"><code class="xref py py-class docutils literal notranslate"><span class="pre">Polynomial</span></code></a></span>) – Must share the same coefficient field (<code class="docutils literal notranslate"><span class="pre">modulus</span></code>).</p></li>
+<li><p><strong>q</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathkit.abstract_algebra.Polynomial" title="mathkit.abstract_algebra.core.base.Polynomial"><code class="xref py py-class docutils literal notranslate"><span class="pre">Polynomial</span></code></a></span>) – Must share the same coefficient field (<code class="docutils literal notranslate"><span class="pre">modulus</span></code>).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathkit.abstract_algebra.Polynomial" title="mathkit.abstract_algebra.core.base.Polynomial"><code class="xref py py-class docutils literal notranslate"><span class="pre">Polynomial</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Polynomial</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># gcd(x^2 - 1, x - 1) = x - 1 (up to a scalar).</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">poly_gcd</span><span class="p">(</span><span class="n">Polynomial</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">Polynomial</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">degree</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.poly_mul">
+<span class="sig-prename descclassname"><span class="pre">mathkit.abstract_algebra.</span></span><span class="sig-name descname"><span class="pre">poly_mul</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/systems/polynomial_ring.html#poly_mul"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.poly_mul" title="Link to this definition">#</a></dt>
+<dd><p>Polynomial multiplication: convolution of coefficients.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathkit.abstract_algebra.Polynomial" title="mathkit.abstract_algebra.core.base.Polynomial"><code class="xref py py-class docutils literal notranslate"><span class="pre">Polynomial</span></code></a></span>)</p></li>
+<li><p><strong>q</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathkit.abstract_algebra.Polynomial" title="mathkit.abstract_algebra.core.base.Polynomial"><code class="xref py py-class docutils literal notranslate"><span class="pre">Polynomial</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathkit.abstract_algebra.Polynomial" title="mathkit.abstract_algebra.core.base.Polynomial"><code class="xref py py-class docutils literal notranslate"><span class="pre">Polynomial</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Polynomial</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">poly_mul</span><span class="p">(</span><span class="n">Polynomial</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">Polynomial</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]))</span><span class="o">.</span><span class="n">coeffs</span>  <span class="c1"># (1+x)(1-x) = 1 - x^2</span>
+<span class="go">[Fraction(1, 1), Fraction(0, 1), Fraction(-1, 1)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathkit.abstract_algebra.poly_sub">
+<span class="sig-prename descclassname"><span class="pre">mathkit.abstract_algebra.</span></span><span class="sig-name descname"><span class="pre">poly_sub</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathkit/abstract_algebra/systems/polynomial_ring.html#poly_sub"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathkit.abstract_algebra.poly_sub" title="Link to this definition">#</a></dt>
+<dd><p>Polynomial subtraction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathkit.abstract_algebra.Polynomial" title="mathkit.abstract_algebra.core.base.Polynomial"><code class="xref py py-class docutils literal notranslate"><span class="pre">Polynomial</span></code></a></span>)</p></li>
+<li><p><strong>q</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathkit.abstract_algebra.Polynomial" title="mathkit.abstract_algebra.core.base.Polynomial"><code class="xref py py-class docutils literal notranslate"><span class="pre">Polynomial</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathkit.abstract_algebra.Polynomial" title="mathkit.abstract_algebra.core.base.Polynomial"><code class="xref py py-class docutils literal notranslate"><span class="pre">Polynomial</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Polynomial</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">API</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="calculus.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">mathkit.calculus</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.CyclicGroup"><code class="docutils literal notranslate"><span class="pre">CyclicGroup</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.CyclicGroup.elements"><code class="docutils literal notranslate"><span class="pre">CyclicGroup.elements</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.CyclicGroup.identity"><code class="docutils literal notranslate"><span class="pre">CyclicGroup.identity()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.CyclicGroup.inverse"><code class="docutils literal notranslate"><span class="pre">CyclicGroup.inverse()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.CyclicGroup.operate"><code class="docutils literal notranslate"><span class="pre">CyclicGroup.operate()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.FiniteGroup"><code class="docutils literal notranslate"><span class="pre">FiniteGroup</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.FiniteGroup.cayley_table"><code class="docutils literal notranslate"><span class="pre">FiniteGroup.cayley_table()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.FiniteGroup.element_order"><code class="docutils literal notranslate"><span class="pre">FiniteGroup.element_order()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.FiniteGroup.elements"><code class="docutils literal notranslate"><span class="pre">FiniteGroup.elements</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.FiniteGroup.identity"><code class="docutils literal notranslate"><span class="pre">FiniteGroup.identity()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.FiniteGroup.inverse"><code class="docutils literal notranslate"><span class="pre">FiniteGroup.inverse()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.FiniteGroup.is_abelian"><code class="docutils literal notranslate"><span class="pre">FiniteGroup.is_abelian()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.FiniteGroup.operate"><code class="docutils literal notranslate"><span class="pre">FiniteGroup.operate()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.FiniteGroup.order"><code class="docutils literal notranslate"><span class="pre">FiniteGroup.order</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.GF"><code class="docutils literal notranslate"><span class="pre">GF</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.GF.add"><code class="docutils literal notranslate"><span class="pre">GF.add()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.GF.elements"><code class="docutils literal notranslate"><span class="pre">GF.elements()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.GF.inverse"><code class="docutils literal notranslate"><span class="pre">GF.inverse()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.GF.multiply"><code class="docutils literal notranslate"><span class="pre">GF.multiply()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.GF.order"><code class="docutils literal notranslate"><span class="pre">GF.order</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.GroupPropertiesResult"><code class="docutils literal notranslate"><span class="pre">GroupPropertiesResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.GroupPropertiesResult.element_orders"><code class="docutils literal notranslate"><span class="pre">GroupPropertiesResult.element_orders</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.GroupPropertiesResult.identity"><code class="docutils literal notranslate"><span class="pre">GroupPropertiesResult.identity</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.GroupPropertiesResult.is_abelian"><code class="docutils literal notranslate"><span class="pre">GroupPropertiesResult.is_abelian</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.GroupPropertiesResult.order"><code class="docutils literal notranslate"><span class="pre">GroupPropertiesResult.order</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.PermutationGroup"><code class="docutils literal notranslate"><span class="pre">PermutationGroup</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.PermutationGroup.elements"><code class="docutils literal notranslate"><span class="pre">PermutationGroup.elements</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.PermutationGroup.identity"><code class="docutils literal notranslate"><span class="pre">PermutationGroup.identity()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.PermutationGroup.inverse"><code class="docutils literal notranslate"><span class="pre">PermutationGroup.inverse()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.PermutationGroup.operate"><code class="docutils literal notranslate"><span class="pre">PermutationGroup.operate()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.Polynomial"><code class="docutils literal notranslate"><span class="pre">Polynomial</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.Polynomial.degree"><code class="docutils literal notranslate"><span class="pre">Polynomial.degree</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.Polynomial.evaluate"><code class="docutils literal notranslate"><span class="pre">Polynomial.evaluate()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.all_subgroups"><code class="docutils literal notranslate"><span class="pre">all_subgroups()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.cyclic_subgroup"><code class="docutils literal notranslate"><span class="pre">cyclic_subgroup()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.find_irreducible_polynomial"><code class="docutils literal notranslate"><span class="pre">find_irreducible_polynomial()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.group_properties"><code class="docutils literal notranslate"><span class="pre">group_properties()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.is_cyclic"><code class="docutils literal notranslate"><span class="pre">is_cyclic()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.is_irreducible"><code class="docutils literal notranslate"><span class="pre">is_irreducible()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.left_cosets"><code class="docutils literal notranslate"><span class="pre">left_cosets()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.poly_add"><code class="docutils literal notranslate"><span class="pre">poly_add()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.poly_divmod"><code class="docutils literal notranslate"><span class="pre">poly_divmod()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.poly_gcd"><code class="docutils literal notranslate"><span class="pre">poly_gcd()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.poly_mul"><code class="docutils literal notranslate"><span class="pre">poly_mul()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathkit.abstract_algebra.poly_sub"><code class="docutils literal notranslate"><span class="pre">poly_sub()</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/api/abstract_algebra.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, mathkit contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

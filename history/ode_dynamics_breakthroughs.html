@@ -1,0 +1,731 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Breakthroughs in Dynamical Systems &#8212; mathkit 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=fd6457a4" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+    <script src="../_static/documentation_options.js?v=38b66d78"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'history/ode_dynamics_breakthroughs';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Breakthroughs in Optimization" href="optimization_breakthroughs.html" />
+    <link rel="prev" title="Breakthroughs in Numerical Analysis" href="numerical_analysis_breakthroughs.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/mathkit_logo_transparent.png" class="logo__image only-light" alt="mathkit logo"/>
+    <img src="../_static/mathkit_logo_transparent.png" class="logo__image only-dark pst-js-only" alt="mathkit logo"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/mathkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/mathkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar">
+  <svg class="pst-icon" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="abstract_algebra_breakthroughs.html">Breakthroughs in Abstract Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calculus_breakthroughs.html">Breakthroughs in Numerical Calculus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="combinatorics_breakthroughs.html">Breakthroughs in Combinatorics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fractals_chaos_breakthroughs.html">Breakthroughs in Fractals and Chaos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geometry_breakthroughs.html">Breakthroughs in Computational Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graph_theory_breakthroughs.html">Breakthroughs in Graph Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linalg_breakthroughs.html">Breakthroughs in Numerical Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="number_theory_breakthroughs.html">Breakthroughs in Number Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_analysis_breakthroughs.html">Breakthroughs in Numerical Analysis</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Breakthroughs in Dynamical Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimization_breakthroughs.html">Breakthroughs in Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability_breakthroughs.html">Breakthroughs in Probability Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="special_functions_breakthroughs.html">Breakthroughs in Special Functions and Transforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statistics_breakthroughs.html">Breakthroughs in Statistical Inference</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">History</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Breakthroughs in Dynamical Systems</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="breakthroughs-in-dynamical-systems">
+<h1>Breakthroughs in Dynamical Systems<a class="headerlink" href="#breakthroughs-in-dynamical-systems" title="Link to this heading">#</a></h1>
+<div class="subpkg-nav docutils container">
+<p><a class="reference internal" href="../_generated/subpackages/ode_dynamics.html"><span class="doc">mathkit.ode_dynamics hub</span></a> · <a class="reference internal" href="#"><span class="doc">History</span></a> · <a class="reference internal" href="../api/gallery/ode_dynamics/index.html"><span class="doc">Examples</span></a> · <a class="reference internal" href="../api/ode_dynamics.html"><span class="doc">API reference</span></a></p>
+</div>
+<blockquote class="epigraph">
+<div><p>“It often happens that small differences in the initial conditions
+produce very great ones in the final phenomena.” – Henri Poincare,
+<em>Science et Methode</em>, 1908</p>
+</div></blockquote>
+<p>A dynamical system’s <em>qualitative</em> behavior – does it settle down, spiral
+in, oscillate forever, or wander chaotically – can often be understood
+without ever solving the equations exactly. This chronology traces the
+ideas behind <a class="reference internal" href="../api/ode_dynamics.html#module-mathkit.ode_dynamics" title="mathkit.ode_dynamics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathkit.ode_dynamics</span></code></a>: the classification of linear
+flows near a fixed point, the discovery of self-sustained oscillation,
+and the slow, then sudden, realization that simple deterministic systems
+can behave unpredictably.</p>
+<nav class="contents local" id="timeline">
+<p class="topic-title">Timeline</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#poincare-s-qualitative-theory-of-odes" id="id1">1881 – 1886 – Poincare’s Qualitative Theory of ODEs</a></p></li>
+<li><p><a class="reference internal" href="#van-der-pol-and-the-relaxation-oscillator" id="id2">1926 – van der Pol and the Relaxation Oscillator</a></p></li>
+<li><p><a class="reference internal" href="#lorenz-and-deterministic-chaos" id="id3">1963 – Lorenz and Deterministic Chaos</a></p></li>
+<li><p><a class="reference internal" href="#poincare-andronov-and-bifurcation-theory" id="id4">1885 – 1937 – Poincare, Andronov, and Bifurcation Theory</a></p></li>
+<li><p><a class="reference internal" href="#feigenbaum-s-universality" id="id5">1978 – Feigenbaum’s Universality</a></p></li>
+<li><p><a class="reference internal" href="#duffing-ueda-and-the-stroboscopic-poincare-section" id="id6">1957 – Duffing, Ueda, and the Stroboscopic Poincare Section</a></p></li>
+<li><p><a class="reference internal" href="#see-also" id="id7">See Also</a></p></li>
+</ul>
+</nav>
+<section id="poincare-s-qualitative-theory-of-odes">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">1881 – 1886 – Poincare’s Qualitative Theory of ODEs</a><a class="headerlink" href="#poincare-s-qualitative-theory-of-odes" title="Link to this heading">#</a></h2>
+<p>Henri Poincare’s series of memoirs “Sur les courbes definies par une
+equation differentielle” founded an entirely new way of studying
+differential equations: rather than seek a closed-form solution, study
+the flow’s qualitative structure directly in the phase plane –
+classifying fixed points as nodes, saddles, spirals (foci), or centers
+by the eigenvalues of the linearized flow, exactly the
+trace-determinant classification still taught today.</p>
+<div class="math notranslate nohighlight">
+\[\tau = \operatorname{tr}(J), \qquad \Delta = \det(J), \qquad
+\lambda_{1,2} = \frac{\tau \pm \sqrt{\tau^2 - 4\Delta}}{2}\]</div>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathkit.ode_dynamics.systems.stability.classify_fixed_point_2d()</span></code>
+implements exactly this <span class="math notranslate nohighlight">\((\tau,\Delta)\)</span>-plane classification, and
+<a class="reference internal" href="../api/ode_dynamics.html#mathkit.ode_dynamics.Linear2D" title="mathkit.ode_dynamics.systems.phase_portrait.Linear2D"><code class="xref py py-class docutils literal notranslate"><span class="pre">Linear2D</span></code></a>/
+<a class="reference internal" href="../api/ode_dynamics.html#mathkit.ode_dynamics.Nonlinear2D" title="mathkit.ode_dynamics.systems.phase_portrait.Nonlinear2D"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nonlinear2D</span></code></a> render
+the corresponding phase portraits.</p>
+<p><em>References:</em> H. Poincare, “Sur les courbes definies par une equation
+differentielle,” Journal de Mathematiques Pures et Appliquees, several
+installments (1881-1886).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Every 2D linear system&#x27;s qualitative phase portrait near the origin is fixed by its Jacobian&#x27;s trace and determinant: node, saddle, spiral, or center. This script classifies six canonical matrices and plots their phase portraits side by side."><img alt="" src="../_images/sphx_glr_plot_01_classification_zoo_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/ode_dynamics/stability/plot_01_classification_zoo.html"><span class="doc">The zoo of 2D linear fixed points</span></a></p>
+  <div class="sphx-glr-thumbnail-title">The zoo of 2D linear fixed points</div>
+</div></div><div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Overlays a nonlinear system&#x27;s vector field (a quiver plot) with actual integrated trajectories, using the classic nonlinear pendulum \ddot\theta = -\sin\theta as the example."><img alt="" src="../_images/sphx_glr_plot_01_vector_fields_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/ode_dynamics/phase_portrait/plot_01_vector_fields.html"><span class="doc">Phase portraits and vector fields</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Phase portraits and vector fields</div>
+</div></div></section>
+<section id="van-der-pol-and-the-relaxation-oscillator">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">1926 – van der Pol and the Relaxation Oscillator</a><a class="headerlink" href="#van-der-pol-and-the-relaxation-oscillator" title="Link to this heading">#</a></h2>
+<p>Balthasar van der Pol, studying the vacuum-tube circuits behind early
+radio, found that a certain nonlinear damping term – damping that
+<em>removes</em> energy from large oscillations but <em>injects</em> energy into
+small ones – produces a self-sustained oscillation of a fixed amplitude
+and shape, completely independent of the initial condition, called a
+limit cycle. It is the archetypal example of the Poincare-Bendixson
+theorem’s conclusion: a bounded planar flow with no fixed point in some
+region must approach a periodic orbit.</p>
+<div class="math notranslate nohighlight">
+\[\ddot x - \mu(1-x^2)\dot x + x = 0\]</div>
+<p><em>Implementation:</em> <a class="reference internal" href="../api/ode_dynamics.html#mathkit.ode_dynamics.VanDerPolOscillator" title="mathkit.ode_dynamics.systems.limit_cycles.VanDerPolOscillator"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathkit.ode_dynamics.systems.limit_cycles.VanDerPolOscillator</span></code></a>
+integrates exactly this equation, with
+<code class="xref py py-func docutils literal notranslate"><span class="pre">estimate_limit_cycle_amplitude()</span></code>
+measuring the amplitude the system settles into regardless of where it
+starts.</p>
+<p><em>References:</em> B. van der Pol, “On Relaxation-Oscillations,” The London,
+Edinburgh, and Dublin Philosophical Magazine and Journal of Science 2(7)
+(1926), 978-992.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Trajectories starting both inside and outside the eventual limit cycle converge onto the same closed orbit -- the defining property that distinguishes a limit cycle from a linear center (whose orbit amplitude is set entirely by the initial condition)."><img alt="" src="../_images/sphx_glr_plot_01_van_der_pol_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/ode_dynamics/limit_cycles/plot_01_van_der_pol.html"><span class="doc">The Van der Pol limit cycle</span></a></p>
+  <div class="sphx-glr-thumbnail-title">The Van der Pol limit cycle</div>
+</div></div></section>
+<section id="lorenz-and-deterministic-chaos">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">1963 – Lorenz and Deterministic Chaos</a><a class="headerlink" href="#lorenz-and-deterministic-chaos" title="Link to this heading">#</a></h2>
+<p>Edward Lorenz, running a simplified 12-variable weather model on an
+early computer, restarted a simulation midway from a printout rounded to
+three decimal places instead of the machine’s full six – and watched the
+re-run diverge completely from the original within a simulated month.
+Lorenz’s three-variable convective model isolated the same sensitivity
+to initial conditions in a system simple enough to fully analyze,
+launching the modern study of deterministic chaos and giving popular
+science the phrase “the butterfly effect.”</p>
+<p><em>Connection:</em> the same trace-determinant linear-stability analysis this
+package applies throughout classifies the Lorenz system’s own fixed
+points, and the bifurcation/limit-cycle/Poincare-section machinery below
+is the general toolkit chaos theory built to make sense of what Lorenz
+found.</p>
+<p><em>References:</em> E. N. Lorenz, “Deterministic Nonperiodic Flow,” Journal of
+the Atmospheric Sciences 20(2) (1963), 130-141.</p>
+</section>
+<section id="poincare-andronov-and-bifurcation-theory">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">1885 – 1937 – Poincare, Andronov, and Bifurcation Theory</a><a class="headerlink" href="#poincare-andronov-and-bifurcation-theory" title="Link to this heading">#</a></h2>
+<p>Poincare’s qualitative program (above) raised the natural next question:
+how does a fixed point’s classification <em>change</em> as a parameter varies?
+Aleksandr Andronov’s 1929-1937 work on nonlinear oscillations gave the
+answer its systematic modern treatment, naming and classifying the
+elementary ways a system’s qualitative behavior can change discontinuously
+as a parameter crosses a critical value – a saddle-node bifurcation
+creating or destroying a pair of fixed points, a pitchfork bifurcation
+splitting one stable state into two, and a Hopf bifurcation birthing a
+limit cycle from a spiral fixed point that loses stability.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathkit.ode_dynamics.systems.bifurcations.saddle_node_fixed_points()</span></code>,
+<code class="xref py py-func docutils literal notranslate"><span class="pre">pitchfork_fixed_points()</span></code>,
+and <code class="xref py py-func docutils literal notranslate"><span class="pre">hopf_limit_cycle_radius()</span></code>
+give the closed-form fixed points/limit-cycle radius for each normal
+form, checked directly against numerical integration.</p>
+<p><em>References:</em> A. A. Andronov and L. Pontryagin, “Systemes grossiers,”
+Doklady Akademii Nauk SSSR 14(5) (1937), 247-250.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Plots the closed-form fixed points (or limit-cycle radius) of the three canonical bifurcation normal forms as a function of the control parameter r, showing the characteristic collision-and-annihilation, splitting, and birth-of-a-limit-cycle shapes."><img alt="" src="../_images/sphx_glr_plot_01_normal_forms_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/ode_dynamics/bifurcations/plot_01_normal_forms.html"><span class="doc">Saddle-node, pitchfork, and Hopf bifurcation diagrams</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Saddle-node, pitchfork, and Hopf bifurcation diagrams</div>
+</div></div></section>
+<section id="feigenbaum-s-universality">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">1978 – Feigenbaum’s Universality</a><a class="headerlink" href="#feigenbaum-s-universality" title="Link to this heading">#</a></h2>
+<p>Studying the logistic map’s period-doubling route to chaos numerically
+on a programmable calculator, Mitchell Feigenbaum noticed that the
+parameter intervals between successive period-doublings shrink by a
+constant ratio – and that the <em>same</em> ratio, <span class="math notranslate nohighlight">\(\delta \approx
+4.6692\)</span>, governs the period-doubling cascade of an enormous class of
+unrelated one-dimensional maps with a single smooth maximum. It was one
+of the first, and remains one of the most striking, examples of a
+<em>universal</em> quantitative law governing the transition to chaos, holding
+across wildly different physical systems.</p>
+<p><em>Implementation:</em> <a class="reference internal" href="../api/ode_dynamics.html#mathkit.ode_dynamics.LogisticMap" title="mathkit.ode_dynamics.systems.logistic_map.LogisticMap"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathkit.ode_dynamics.systems.logistic_map.LogisticMap</span></code></a>
+and <code class="xref py py-func docutils literal notranslate"><span class="pre">bifurcation_diagram()</span></code>
+reproduce the cascade directly;
+<code class="xref py py-func docutils literal notranslate"><span class="pre">estimate_feigenbaum_delta()</span></code>
+estimates <span class="math notranslate nohighlight">\(\delta\)</span> from the first few numerically located
+bifurcation points.</p>
+<p><em>References:</em> M. J. Feigenbaum, “Quantitative Universality for a Class
+of Nonlinear Transformations,” Journal of Statistical Physics 19(1)
+(1978), 25-52.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="As the growth-rate parameter r increases, the logistic map&#x27;s long-time attractor bifurcates from a fixed point to a period-2 cycle, then period-4, period-8, ..., accumulating at a finite r beyond which the dynamics are chaotic -- the classic Feigenbaum scenario."><img alt="" src="../_images/sphx_glr_plot_01_bifurcation_cascade_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/ode_dynamics/logistic_map/plot_01_bifurcation_cascade.html"><span class="doc">The logistic map’s period-doubling route to chaos</span></a></p>
+  <div class="sphx-glr-thumbnail-title">The logistic map's period-doubling route to chaos</div>
+</div></div></section>
+<section id="duffing-ueda-and-the-stroboscopic-poincare-section">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">1957 – Duffing, Ueda, and the Stroboscopic Poincare Section</a><a class="headerlink" href="#duffing-ueda-and-the-stroboscopic-poincare-section" title="Link to this heading">#</a></h2>
+<p>Georg Duffing’s 1918 monograph analyzed the forced, damped, cubically
+nonlinear oscillator that now bears his name; it was Yoshisuke Ueda’s
+1961 numerical experiments (published more widely from 1970 onward) that
+first revealed its chaotic regime, using exactly the tool Poincare had
+introduced in the three-body problem eight decades earlier: sample the
+state once per drive period instead of plotting a continuous trajectory,
+turning an illegibly tangled orbit into a scatter of points whose own
+pattern – a few dots for periodic motion, a structureless (or
+fractal-looking) haze for chaos – makes the underlying dynamics legible.</p>
+<p><em>Implementation:</em> <a class="reference internal" href="../api/ode_dynamics.html#mathkit.ode_dynamics.DuffingOscillator" title="mathkit.ode_dynamics.systems.poincare.DuffingOscillator"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathkit.ode_dynamics.systems.poincare.DuffingOscillator</span></code></a>
+integrates exactly Duffing’s equation, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">stroboscopic_poincare_section()</span></code>
+implements exactly this once-per-drive-period sampling.</p>
+<p><em>References:</em> G. Duffing, <em>Erzwungene Schwingungen bei veränderlicher
+Eigenfrequenz und ihre technische Bedeutung</em> (Braunschweig: Vieweg,
+1918); Y. Ueda, “Randomly Transitional Phenomena in the System Governed
+by Duffing’s Equation,” Journal of Statistical Physics 20(2) (1979),
+181-196 (a widely cited later account of the phenomenon Ueda’s
+simulations first turned up around 1961).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Sampling the Duffing oscillator&#x27;s state once per drive period (stroboscopically) collapses its effectively-3D state space (position, velocity, and drive phase) back to a 2D picture: a periodic response shows up as one (or a few) fixed points, while chaotic parameters produce a scattered, fractal-looking set of points."><img alt="" src="../_images/sphx_glr_plot_01_duffing_poincare_section_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/ode_dynamics/poincare/plot_01_duffing_poincare_section.html"><span class="doc">Poincare sections of the driven Duffing oscillator</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Poincare sections of the driven Duffing oscillator</div>
+</div></div></section>
+<section id="see-also">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../api/ode_dynamics.html"><span class="doc">mathkit.ode_dynamics</span></a></p></li>
+<li><p><a class="reference internal" href="fractals_chaos_breakthroughs.html"><span class="doc">Breakthroughs in Fractals and Chaos</span></a></p></li>
+<li><p><a class="reference internal" href="calculus_breakthroughs.html"><span class="doc">Breakthroughs in Numerical Calculus</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="numerical_analysis_breakthroughs.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Breakthroughs in Numerical Analysis</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="optimization_breakthroughs.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Breakthroughs in Optimization</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#poincare-s-qualitative-theory-of-odes">1881 – 1886 – Poincare’s Qualitative Theory of ODEs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#van-der-pol-and-the-relaxation-oscillator">1926 – van der Pol and the Relaxation Oscillator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lorenz-and-deterministic-chaos">1963 – Lorenz and Deterministic Chaos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#poincare-andronov-and-bifurcation-theory">1885 – 1937 – Poincare, Andronov, and Bifurcation Theory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feigenbaum-s-universality">1978 – Feigenbaum’s Universality</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#duffing-ueda-and-the-stroboscopic-poincare-section">1957 – Duffing, Ueda, and the Stroboscopic Poincare Section</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#see-also">See Also</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/history/ode_dynamics_breakthroughs.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, mathkit contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

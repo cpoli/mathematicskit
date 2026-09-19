@@ -1,0 +1,811 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Breakthroughs in Numerical Linear Algebra &#8212; mathkit 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=fd6457a4" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+    <script src="../_static/documentation_options.js?v=38b66d78"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'history/linalg_breakthroughs';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Breakthroughs in Number Theory" href="number_theory_breakthroughs.html" />
+    <link rel="prev" title="Breakthroughs in Graph Theory" href="graph_theory_breakthroughs.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/mathkit_logo_transparent.png" class="logo__image only-light" alt="mathkit logo"/>
+    <img src="../_static/mathkit_logo_transparent.png" class="logo__image only-dark pst-js-only" alt="mathkit logo"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/mathkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/mathkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar">
+  <svg class="pst-icon" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="abstract_algebra_breakthroughs.html">Breakthroughs in Abstract Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calculus_breakthroughs.html">Breakthroughs in Numerical Calculus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="combinatorics_breakthroughs.html">Breakthroughs in Combinatorics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fractals_chaos_breakthroughs.html">Breakthroughs in Fractals and Chaos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geometry_breakthroughs.html">Breakthroughs in Computational Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graph_theory_breakthroughs.html">Breakthroughs in Graph Theory</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Breakthroughs in Numerical Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="number_theory_breakthroughs.html">Breakthroughs in Number Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_analysis_breakthroughs.html">Breakthroughs in Numerical Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ode_dynamics_breakthroughs.html">Breakthroughs in Dynamical Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimization_breakthroughs.html">Breakthroughs in Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability_breakthroughs.html">Breakthroughs in Probability Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="special_functions_breakthroughs.html">Breakthroughs in Special Functions and Transforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statistics_breakthroughs.html">Breakthroughs in Statistical Inference</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">History</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Breakthroughs in Numerical Linear Algebra</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="breakthroughs-in-numerical-linear-algebra">
+<h1>Breakthroughs in Numerical Linear Algebra<a class="headerlink" href="#breakthroughs-in-numerical-linear-algebra" title="Link to this heading">#</a></h1>
+<div class="subpkg-nav docutils container">
+<p><a class="reference internal" href="../_generated/subpackages/linalg.html"><span class="doc">mathkit.linalg hub</span></a> · <a class="reference internal" href="#"><span class="doc">History</span></a> · <a class="reference internal" href="../api/gallery/linalg/index.html"><span class="doc">Examples</span></a> · <a class="reference internal" href="../api/linalg.html"><span class="doc">API reference</span></a></p>
+</div>
+<blockquote class="epigraph">
+<div><p>“Linear algebra is the ultimate service subject.” – Gilbert Strang,
+as quoted widely in his own lecture courses</p>
+</div></blockquote>
+<p>Solving <span class="math notranslate nohighlight">\(Ax=b\)</span> is arguably the single most-called subroutine in
+applied mathematics, and the story of how to do it <em>well</em> – not just
+correctly, but stably, in floating-point arithmetic, without needless
+loss of precision – runs from Gaussian elimination’s two-century-old
+roots through the mid-20th-century discovery that some numerically
+“obvious” reformulations are secretly disastrous. This chronology traces
+the decompositions and iterative solvers behind <a class="reference internal" href="../api/linalg.html#module-mathkit.linalg" title="mathkit.linalg"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathkit.linalg</span></code></a>.</p>
+<nav class="contents local" id="timeline">
+<p class="topic-title">Timeline</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#c-150-ce-the-nine-chapters-and-elimination" id="id1">c. 150 CE – The Nine Chapters and Elimination</a></p></li>
+<li><p><a class="reference internal" href="#gauss-and-lu-decomposition" id="id2">1809 – Gauss and LU Decomposition</a></p></li>
+<li><p><a class="reference internal" href="#cholesky-s-decomposition" id="id3">1902 – 1924 – Cholesky’s Decomposition</a></p></li>
+<li><p><a class="reference internal" href="#gram-schmidt-householder-and-qr" id="id4">1907 – 1958 – Gram-Schmidt, Householder, and QR</a></p></li>
+<li><p><a class="reference internal" href="#cauchy-and-the-eigenvalue-problem" id="id5">1829 – Cauchy and the Eigenvalue Problem</a></p></li>
+<li><p><a class="reference internal" href="#power-iteration-and-von-mises" id="id6">1929 – Power Iteration and von Mises</a></p></li>
+<li><p><a class="reference internal" href="#eckart-young-and-the-singular-value-decomposition" id="id7">1936 – Eckart, Young, and the Singular Value Decomposition</a></p></li>
+<li><p><a class="reference internal" href="#turing-von-neumann-and-the-condition-number" id="id8">1947 – 1948 – Turing, von Neumann, and the Condition Number</a></p></li>
+<li><p><a class="reference internal" href="#hestenes-stiefel-and-the-conjugate-gradient-method" id="id9">1952 – Hestenes, Stiefel, and the Conjugate Gradient Method</a></p></li>
+<li><p><a class="reference internal" href="#see-also" id="id10">See Also</a></p></li>
+</ul>
+</nav>
+<section id="c-150-ce-the-nine-chapters-and-elimination">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">c. 150 CE – The Nine Chapters and Elimination</a><a class="headerlink" href="#c-150-ce-the-nine-chapters-and-elimination" title="Link to this heading">#</a></h2>
+<p>The Chinese mathematical classic <em>Jiuzhang Suanshu</em> (“The Nine Chapters
+on the Mathematical Art”), compiled from older material by the Han
+dynasty, describes a method for solving simultaneous linear equations
+by arranging their coefficients in a rectangular array and eliminating
+unknowns column by column – procedurally identical to what Gauss would
+rediscover, and get his name attached to, sixteen centuries later.</p>
+<p><em>Implementation:</em> <a class="reference internal" href="../api/numerical_analysis.html#mathkit.numerical_analysis.PolynomialRegression" title="mathkit.numerical_analysis.systems.regression.PolynomialRegression"><code class="xref py py-func docutils literal notranslate"><span class="pre">mathkit.numerical_analysis.systems.regression.PolynomialRegression()</span></code></a>’s
+underlying solves, and every dense linear system in this package, trace
+back to exactly this elimination idea, now delegated to LAPACK via
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu.html#scipy.linalg.lu" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.linalg.lu()</span></code></a>.</p>
+</section>
+<section id="gauss-and-lu-decomposition">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">1809 – Gauss and LU Decomposition</a><a class="headerlink" href="#gauss-and-lu-decomposition" title="Link to this heading">#</a></h2>
+<p>Carl Friedrich Gauss’s elimination procedure for least-squares normal
+equations (see the numerical-analysis chronology) factors as a byproduct
+into a lower-triangular and an upper-triangular matrix, <span class="math notranslate nohighlight">\(A = LU\)</span> –
+a factorization made numerically robust by choosing, at each step, the
+largest available pivot (Partial pivoting, formalized much later, in the
+1940s-50s error-analysis literature). Once factored, solving for a new
+right-hand side costs only <span class="math notranslate nohighlight">\(O(n^2)\)</span>, not the <span class="math notranslate nohighlight">\(O(n^3)\)</span> of a
+fresh elimination.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathkit.linalg.systems.lu.lu_decompose()</span></code> wraps
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu.html#scipy.linalg.lu" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.linalg.lu()</span></code></a> for exactly this partial-pivoted factorization;
+<code class="xref py py-func docutils literal notranslate"><span class="pre">lu_solve_system()</span></code> reuses it via
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu_factor.html#scipy.linalg.lu_factor" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.linalg.lu_factor()</span></code></a>/<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu_solve.html#scipy.linalg.lu_solve" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">lu_solve()</span></code></a>.</p>
+<p><em>References:</em> C. F. Gauss, <em>Theoria Motus Corporum Coelestium</em> (Hamburg,
+1809).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Factors P A = L U and reuses the factorization to solve multiple right-hand sides and compute the determinant, both far cheaper than refactoring from scratch each time."><img alt="" src="../_images/sphx_glr_plot_01_lu_decomposition_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/linalg/lu/plot_01_lu_decomposition.html"><span class="doc">LU decomposition with partial pivoting</span></a></p>
+  <div class="sphx-glr-thumbnail-title">LU decomposition with partial pivoting</div>
+</div></div></section>
+<section id="cholesky-s-decomposition">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">1902 – 1924 – Cholesky’s Decomposition</a><a class="headerlink" href="#cholesky-s-decomposition" title="Link to this heading">#</a></h2>
+<p>Andre-Louis Cholesky, an artillery officer and geodesist working on
+triangulation surveys for the French army’s Service Geographique,
+devised around 1902-1910 a factorization specialized for exactly the
+symmetric positive-definite systems that survey adjustment produces:
+<span class="math notranslate nohighlight">\(A = LL^T\)</span> with <span class="math notranslate nohighlight">\(L\)</span> lower triangular, at roughly half the
+arithmetic cost of a general LU factorization and without LU’s need to
+search for a pivot at all, since a symmetric positive-definite matrix’s
+own diagonal entries are always usable directly. Cholesky was killed in
+action in 1918; his method was published posthumously in 1924 by
+Commandant Benoit, from Cholesky’s own manuscripts.</p>
+<div class="math notranslate nohighlight">
+\[A = LL^T, \qquad A \text{ symmetric positive-definite}\]</div>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathkit.linalg.systems.cholesky.cholesky_decompose()</span></code>
+wraps <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.cholesky.html#numpy.linalg.cholesky" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.cholesky()</span></code></a> for exactly this factorization, whose
+failure (LAPACK’s <code class="docutils literal notranslate"><span class="pre">?potrf</span></code> raising when a diagonal pivot would require
+a square root of a negative number) doubles as a positive-definiteness
+certificate in <code class="xref py py-func docutils literal notranslate"><span class="pre">is_symmetric_positive_definite()</span></code>;
+<code class="xref py py-func docutils literal notranslate"><span class="pre">cholesky_solve()</span></code> reuses the
+factorization for a forward/backward triangular solve via
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.solve_triangular.html#scipy.linalg.solve_triangular" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.linalg.solve_triangular()</span></code></a>.</p>
+<p><em>References:</em> A.-L. Cholesky (posth.), “Sur la resolution numerique des
+systemes d’equations lineaires,” manuscript (c. 1910), transcribed and
+published by Commandant Benoit, Bulletin Geodesique 2 (1924), 67-77.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Cholesky factors a symmetric positive-definite A = L L^T at roughly half the cost of LU, and the factorization succeeding at all (every sqrt argument staying positive) is itself a certificate of positive-definiteness."><img alt="" src="../_images/sphx_glr_plot_01_cholesky_solve_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/linalg/cholesky/plot_01_cholesky_solve.html"><span class="doc">Cholesky decomposition for SPD systems</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Cholesky decomposition for SPD systems</div>
+</div></div></section>
+<section id="gram-schmidt-householder-and-qr">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">1907 – 1958 – Gram-Schmidt, Householder, and QR</a><a class="headerlink" href="#gram-schmidt-householder-and-qr" title="Link to this heading">#</a></h2>
+<p>Jorgen Pedersen Gram (1883) and Erhard Schmidt (1907) formalized the
+process of building an orthonormal basis one vector at a time by
+subtracting off each new vector’s projection onto the vectors already
+built – a construction that, applied to a matrix’s columns, factors it
+as <span class="math notranslate nohighlight">\(A = QR\)</span> with <span class="math notranslate nohighlight">\(Q\)</span> orthonormal and <span class="math notranslate nohighlight">\(R\)</span> upper
+triangular. Alston Householder’s 1958 paper gave a very different, far
+more numerically stable route to the same factorization: a sequence of
+elementary reflections that zero out sub-diagonal entries directly,
+without ever explicitly re-orthogonalizing anything – the textbook
+demonstration that two mathematically equivalent formulas can behave
+completely differently once floating-point rounding enters the picture.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathkit.linalg.systems.qr.householder_qr()</span></code> wraps
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.qr.html#scipy.linalg.qr" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.linalg.qr()</span></code></a>; <code class="xref py py-func docutils literal notranslate"><span class="pre">gram_schmidt_qr()</span></code>
+keeps the classical/modified Gram-Schmidt construction hand-rolled
+specifically to demonstrate, via
+<code class="xref py py-func docutils literal notranslate"><span class="pre">orthogonality_error()</span></code>, how much
+orthogonality classical Gram-Schmidt loses for an ill-conditioned matrix
+that Householder’s reflections do not.</p>
+<p><em>References:</em> E. Schmidt, “Zur Theorie der linearen und nichtlinearen
+Integralgleichungen,” Mathematische Annalen 63 (1907), 433-476; A. S.
+Householder, “Unitary Triangularization of a Nonsymmetric Matrix,”
+Journal of the ACM 5(4) (1958), 339-342.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Both factor A = Q R, but Householder reflections stay orthogonal to machine precision even for ill-conditioned A, while classical Gram-Schmidt can lose orthogonality badly -- modified Gram-Schmidt is a partial (but not complete) remedy. This is the textbook motivation for preferring Householder in production numerical software."><img alt="" src="../_images/sphx_glr_plot_01_householder_vs_gram_schmidt_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/linalg/qr/plot_01_householder_vs_gram_schmidt.html"><span class="doc">Householder vs. Gram-Schmidt QR</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Householder vs. Gram-Schmidt QR</div>
+</div></div></section>
+<section id="cauchy-and-the-eigenvalue-problem">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">1829 – Cauchy and the Eigenvalue Problem</a><a class="headerlink" href="#cauchy-and-the-eigenvalue-problem" title="Link to this heading">#</a></h2>
+<p>Augustin-Louis Cauchy’s 1829 memoir on the principal-axis problem for
+quadratic forms proved that a real symmetric matrix has only real
+eigenvalues and an orthogonal basis of eigenvectors – the spectral
+theorem, in essence, decades before “eigenvalue” (from the German
+<em>Eigenwert</em>) entered the language via Hilbert at the turn of the 20th
+century. Practical, efficient algorithms for computing those eigenvalues
+– rather than merely proving they exist – would take more than a
+century longer to arrive.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathkit.linalg.systems.eigen.eigen_symmetric()</span></code>
+wraps <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.eigh.html#numpy.linalg.eigh" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.eigh()</span></code></a> for exactly the symmetric case Cauchy’s
+theorem covers; <code class="xref py py-func docutils literal notranslate"><span class="pre">eigen_general()</span></code> wraps
+<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.eig.html#numpy.linalg.eig" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.eig()</span></code></a> for the general (possibly complex-spectrum)
+case.</p>
+<p><em>References:</em> A.-L. Cauchy, “Sur l’équation à l’aide de laquelle on
+détermine les inégalités séculaires des mouvements des planètes,”
+Exercices de mathématiques 4 (1829).</p>
+</section>
+<section id="power-iteration-and-von-mises">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">1929 – Power Iteration and von Mises</a><a class="headerlink" href="#power-iteration-and-von-mises" title="Link to this heading">#</a></h2>
+<p>Richard von Mises and Hilda Pollaczek-Geiringer’s 1929 paper gave power
+iteration its first systematic numerical treatment: repeatedly
+multiplying a matrix into a vector and renormalizing converges to the
+eigenvector of largest-magnitude eigenvalue, with the Rayleigh quotient
+converging to the eigenvalue itself. Shifting the matrix before
+inverting (inverse iteration) instead converges to whichever eigenvalue
+sits nearest the shift – both still the conceptually simplest route to
+a single eigenpair when the full spectrum isn’t needed, and the direct
+ancestor of the shifted-QR algorithms that now compute the full spectrum
+in production libraries.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathkit.linalg.systems.eigen.power_iteration()</span></code>
+and <code class="xref py py-func docutils literal notranslate"><span class="pre">inverse_iteration()</span></code> implement
+both exactly as originally described, the one family of algorithm in
+this domain kept hand-rolled since the <em>iteration itself</em> is the point.</p>
+<p><em>References:</em> R. von Mises and H. Pollaczek-Geiringer, “Praktische
+Verfahren der Gleichungsauflösung,” Zeitschrift für Angewandte
+Mathematik und Mechanik 9 (1929), 152-164, 58-77.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="numpy.linalg.eigh finds the full spectrum directly; power iteration finds only the dominant eigenvalue; inverse iteration finds whichever eigenvalue is nearest a chosen shift. All three are compared here on the same matrix."><img alt="" src="../_images/sphx_glr_plot_01_eigenvalue_methods_compared_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/linalg/eigen/plot_01_eigenvalue_methods_compared.html"><span class="doc">Three routes to a symmetric matrix’s eigenvalues</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Three routes to a symmetric matrix's eigenvalues</div>
+</div></div></section>
+<section id="eckart-young-and-the-singular-value-decomposition">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">1936 – Eckart, Young, and the Singular Value Decomposition</a><a class="headerlink" href="#eckart-young-and-the-singular-value-decomposition" title="Link to this heading">#</a></h2>
+<p>Carl Eckart and Gale Young’s 1936 paper (building on earlier work by
+Beltrami, Jordan, and Sylvester on special cases) established the
+general singular value decomposition <span class="math notranslate nohighlight">\(A = U\Sigma V^T\)</span> for any
+rectangular matrix, and proved the low-rank approximation theorem that
+bears their names: truncating the SVD to its <span class="math notranslate nohighlight">\(k\)</span> largest singular
+values gives the <em>best possible</em> rank-<span class="math notranslate nohighlight">\(k\)</span> approximation to
+<span class="math notranslate nohighlight">\(A\)</span> in either the spectral or Frobenius norm – the theoretical
+foundation under everything from principal component analysis to modern
+recommender systems.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathkit.linalg.systems.svd.svd_decompose()</span></code> wraps
+<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.svd.html#numpy.linalg.svd" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.svd()</span></code></a>’s numerically stable bidiagonalization-based
+algorithm, the modern production route rather than Eckart and Young’s
+own eigendecomposition-of-<span class="math notranslate nohighlight">\(A^TA\)</span> construction (which squares the
+condition number being worked with).</p>
+<p><em>References:</em> C. Eckart and G. Young, “The Approximation of One Matrix
+by Another of Lower Rank,” Psychometrika 1(3) (1936), 211-218.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Computes the SVD A = U diag(S) V^T via numpy.linalg.svd (LAPACK&#x27;s bidiagonalization-based ?gesdd), the numerically stable production route -- rather than the textbook-definition route of eigendecomposing A^T A, which squares the condition number of the problem being solved."><img alt="" src="../_images/sphx_glr_plot_01_svd_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/linalg/svd/plot_01_svd.html"><span class="doc">Singular value decomposition</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Singular value decomposition</div>
+</div></div></section>
+<section id="turing-von-neumann-and-the-condition-number">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">1947 – 1948 – Turing, von Neumann, and the Condition Number</a><a class="headerlink" href="#turing-von-neumann-and-the-condition-number" title="Link to this heading">#</a></h2>
+<p>Alan Turing’s 1948 paper “Rounding-Off Errors in Matrix Processes” and
+John von Neumann and Herman Goldstine’s 1947 study of Gaussian
+elimination’s numerical behavior founded rigorous backward-error
+analysis for matrix computation, introducing what Turing called a
+matrix’s “N-condition number”: a single number, built from the ratio of
+its largest to smallest singular value, quantifying how much a linear
+system’s solution can be corrupted by small perturbations in its data –
+independent of which algorithm later solves it. The same analysis
+explained, for the first time, why some numerically “obvious”
+reformulations (forming <span class="math notranslate nohighlight">\(A^TA\)</span> explicitly for least squares,
+rather than working with <span class="math notranslate nohighlight">\(A\)</span> directly through its QR
+factorization above) quietly discard accuracy that no amount of extra
+floating-point precision recovers.</p>
+<div class="math notranslate nohighlight">
+\[\kappa_2(A) = \frac{\sigma_{\max}}{\sigma_{\min}}, \qquad
+\kappa_2(A^TA) = \kappa_2(A)^2\]</div>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathkit.linalg.systems.stability.condition_number_2norm()</span></code>
+wraps <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.cond.html#numpy.linalg.cond" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.cond()</span></code></a> for exactly this ratio;
+<code class="xref py py-func docutils literal notranslate"><span class="pre">least_squares_normal_equations()</span></code>
+and <code class="xref py py-func docutils literal notranslate"><span class="pre">least_squares_qr()</span></code> solve the
+same least-squares problem two different ways specifically to make the
+squared-condition-number penalty of the normal equations concrete and
+measurable side by side.</p>
+<p><em>References:</em> A. M. Turing, “Rounding-Off Errors in Matrix Processes,”
+Quarterly Journal of Mechanics and Applied Mathematics 1(1) (1948),
+287-308; J. von Neumann and H. H. Goldstine, “Numerical Inverting of
+Matrices of High Order,” Bulletin of the American Mathematical Society
+53(11) (1947), 1021-1099.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Solving the normal equations A^T A x = A^T b is simple but squares the condition number of A; solving via A = Q R instead avoids ever forming A^T A, so the effective conditioning stays at kappa(A) rather than kappa(A)^2."><img alt="" src="../_images/sphx_glr_plot_01_normal_equations_vs_qr_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/linalg/stability/plot_01_normal_equations_vs_qr.html"><span class="doc">Least squares: normal equations vs. QR</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Least squares: normal equations vs. QR</div>
+</div></div></section>
+<section id="hestenes-stiefel-and-the-conjugate-gradient-method">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">1952 – Hestenes, Stiefel, and the Conjugate Gradient Method</a><a class="headerlink" href="#hestenes-stiefel-and-the-conjugate-gradient-method" title="Link to this heading">#</a></h2>
+<p>Magnus Hestenes and Eduard Stiefel’s 1952 paper introduced the conjugate
+gradient method for symmetric positive-definite systems: rather than
+Gaussian elimination’s direct <span class="math notranslate nohighlight">\(O(n^3)\)</span> factorization, generate a
+sequence of search directions mutually conjugate with respect to
+<span class="math notranslate nohighlight">\(A\)</span>, converging <em>exactly</em> within <span class="math notranslate nohighlight">\(n\)</span> steps in exact
+arithmetic and, in practice, far faster for well-conditioned or
+clustered-spectrum matrices – decades before “Krylov subspace methods”
+became the standard name for the whole family it inaugurated. Yousef
+Saad and Martin Schultz’s 1986 GMRES extended the same Krylov-subspace
+idea to general (non-symmetric) systems.</p>
+<p><em>Implementation:</em> <a class="reference internal" href="../api/linalg.html#mathkit.linalg.ConjugateGradient" title="mathkit.linalg.systems.iterative.ConjugateGradient"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathkit.linalg.systems.iterative.ConjugateGradient</span></code></a>
+and <a class="reference internal" href="../api/linalg.html#mathkit.linalg.GMRES" title="mathkit.linalg.systems.iterative.GMRES"><code class="xref py py-class docutils literal notranslate"><span class="pre">GMRES</span></code></a> wrap
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.cg.html#scipy.sparse.linalg.cg" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.sparse.linalg.cg()</span></code></a>/<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.gmres.html#scipy.sparse.linalg.gmres" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">gmres()</span></code></a>
+directly, adding the residual-history tracking (via each solver’s
+callback) that a bare library call doesn’t expose.</p>
+<p><em>References:</em> M. R. Hestenes and E. Stiefel, “Methods of Conjugate
+Gradients for Solving Linear Systems,” Journal of Research of the
+National Bureau of Standards 49(6) (1952), 409-436; Y. Saad and M. H.
+Schultz, “GMRES: A Generalized Minimal Residual Algorithm for Solving
+Nonsymmetric Linear Systems,” SIAM Journal on Scientific and Statistical
+Computing 7(3) (1986), 856-869.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Both are Krylov-subspace iterative solvers that never form a dense factorization of A. Conjugate gradient requires A symmetric positive-definite; GMRES works for any nonsingular A. This script watches both converge and plots the residual-norm history."><img alt="" src="../_images/sphx_glr_plot_01_cg_and_gmres_convergence_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/linalg/iterative/plot_01_cg_and_gmres_convergence.html"><span class="doc">Conjugate gradient and GMRES convergence</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Conjugate gradient and GMRES convergence</div>
+</div></div></section>
+<section id="see-also">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../api/linalg.html"><span class="doc">mathkit.linalg</span></a></p></li>
+<li><p><a class="reference internal" href="numerical_analysis_breakthroughs.html"><span class="doc">Breakthroughs in Numerical Analysis</span></a></p></li>
+<li><p><a class="reference internal" href="graph_theory_breakthroughs.html"><span class="doc">Breakthroughs in Graph Theory</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="graph_theory_breakthroughs.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Breakthroughs in Graph Theory</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="number_theory_breakthroughs.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Breakthroughs in Number Theory</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-150-ce-the-nine-chapters-and-elimination">c. 150 CE – The Nine Chapters and Elimination</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gauss-and-lu-decomposition">1809 – Gauss and LU Decomposition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cholesky-s-decomposition">1902 – 1924 – Cholesky’s Decomposition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gram-schmidt-householder-and-qr">1907 – 1958 – Gram-Schmidt, Householder, and QR</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cauchy-and-the-eigenvalue-problem">1829 – Cauchy and the Eigenvalue Problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#power-iteration-and-von-mises">1929 – Power Iteration and von Mises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eckart-young-and-the-singular-value-decomposition">1936 – Eckart, Young, and the Singular Value Decomposition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#turing-von-neumann-and-the-condition-number">1947 – 1948 – Turing, von Neumann, and the Condition Number</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hestenes-stiefel-and-the-conjugate-gradient-method">1952 – Hestenes, Stiefel, and the Conjugate Gradient Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#see-also">See Also</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/history/linalg_breakthroughs.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, mathkit contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

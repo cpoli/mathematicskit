@@ -1,0 +1,283 @@
+:orphan:
+
+Examples
+========
+
+This gallery walks through every public feature of ``mathkit.numerical_analysis``:
+scalar root finding with convergence-order verification, polynomial
+interpolation (Lagrange, Newton divided-difference, cubic splines,
+Chebyshev nodes), and least-squares polynomial regression.
+
+See also the narrative tutorial:
+
+- :doc:`/tutorials/newtons_method_across_domains`
+
+Each script in this gallery is self-contained and can be run directly with
+``python examples/numerical_analysis/<section>/<script>.py``. Every script also
+carries an RST module docstring as its title/description and uses ``# %%``
+markers to split narrative text from code, which is exactly what
+Sphinx-Gallery renders into the pages below -- the script *is* the source of
+truth for what you see, not a copy of it.
+
+Sections
+--------
+
+- **root_finding** -- bisection, Newton-Raphson, secant, and fixed-point
+  iteration side by side on the same problem, with each method's empirical
+  convergence order verified against its theoretical rate.
+- **interpolation** -- Lagrange and Newton divided-difference polynomial
+  interpolation, shown to agree exactly and to reproduce any polynomial up
+  to the interpolation degree.
+- **splines** -- natural and clamped cubic spline interpolation, and why a
+  spline avoids the oscillation a single high-degree polynomial would show.
+- **chebyshev** -- Chebyshev interpolation nodes and the Runge phenomenon:
+  why equally spaced nodes can diverge as degree grows, and Chebyshev nodes
+  don't.
+- **regression** -- least-squares polynomial regression via the normal
+  equations, and how the fit's condition number worsens with degree.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Chebyshev nodes and the Runge phenomenon
+=========================================
+
+Why node placement matters: equally spaced interpolation nodes can make
+the error diverge as the polynomial degree grows (Runge's 1901 example),
+while Chebyshev nodes keep the error shrinking.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Interpolating Runge&#x27;s classic example, f(x) = 1/(1+25x^2), at equally spaced nodes on [-1, 1] makes the interpolation error diverge near the endpoints as the polynomial degree grows -- a famous 1901 counterexample to the intuition that more nodes always means a better fit. Clustering nodes near the endpoints instead, at the Chebyshev points, eliminates the divergence entirely.">
+
+.. only:: html
+
+  .. image:: /api/gallery/numerical_analysis/chebyshev/images/thumb/sphx_glr_plot_01_runge_phenomenon_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/numerical_analysis/chebyshev/plot_01_runge_phenomenon`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Runge phenomenon: why node placement matters</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Interpolation
+=============
+
+Lagrange and Newton divided-difference polynomial interpolation: the same
+unique interpolating polynomial, built and evaluated two different ways.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="There is exactly one polynomial of degree \leq n through n+1 distinct points, so LagrangeInterpolant and NewtonDividedDifference -- built from completely different representations (a sum of basis polynomials vs. nested divided differences) -- must produce identical curves. Both are also exact for any polynomial up to the interpolation degree, which this script verifies directly.">
+
+.. only:: html
+
+  .. image:: /api/gallery/numerical_analysis/interpolation/images/thumb/sphx_glr_plot_01_lagrange_newton_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/numerical_analysis/interpolation/plot_01_lagrange_newton`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Lagrange vs. Newton divided-difference interpolation</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Least-squares regression
+=========================
+
+Polynomial least-squares regression via the normal equations, and how the
+fit's numerical conditioning worsens as the polynomial degree grows.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="PolynomialRegression fits a degree-``d`` polynomial by solving the normal equations V^T V c = V^T y. This script fits noisy cubic data, checks the R^2 and residuals, and then shows the fit&#x27;s condition number (estimated via power iteration on the normal-equations matrix) growing sharply with degree -- squaring the design matrix&#x27;s own condition number is exactly why the normal-equations approach is eventually replaced by a QR-based least-squares solve in mathkit.linalg.">
+
+.. only:: html
+
+  .. image:: /api/gallery/numerical_analysis/regression/images/thumb/sphx_glr_plot_01_polynomial_regression_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/numerical_analysis/regression/plot_01_polynomial_regression`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Least-squares polynomial regression and its conditioning</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Root finding
+============
+
+Bisection, Newton-Raphson, secant, and fixed-point iteration compared on
+the same problem, with empirical convergence order verified against each
+method's theoretical rate.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Bisection, Newton-Raphson, secant, and fixed-point iteration all solve f(x) = x^2 - 2 = 0, i.e. find \sqrt{2}, but converge at very different rates: bisection and (generic) fixed-point iteration are linear (order 1), secant is superlinear (order \approx 1.618, the golden ratio), and Newton-Raphson is quadratic (order 2). This script runs all four and verifies each empirical order against its theoretical one via mathkit.numerical_analysis.utils.error_analysis.estimate_convergence_order.">
+
+.. only:: html
+
+  .. image:: /api/gallery/numerical_analysis/root_finding/images/thumb/sphx_glr_plot_01_methods_compared_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/numerical_analysis/root_finding/plot_01_methods_compared`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Root-finding methods and their convergence orders</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Cubic splines
+=============
+
+Natural and clamped cubic spline interpolation, and how a piecewise cubic
+avoids the oscillation a single high-degree interpolating polynomial can
+show on the same data.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="A cubic spline is a piecewise cubic through the data with continuous value, first, and second derivatives across nodes. A natural spline sets the curvature to zero at both ends; a clamped spline instead matches prescribed end-slopes. This script fits both to the same data and compares them against a single high-degree interpolating polynomial, which oscillates far more between nodes -- the practical motivation for splines over one global polynomial.">
+
+.. only:: html
+
+  .. image:: /api/gallery/numerical_analysis/splines/images/thumb/sphx_glr_plot_01_cubic_spline_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/numerical_analysis/splines/plot_01_cubic_spline`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Natural and clamped cubic splines</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+   :includehidden:
+
+
+   /api/gallery/numerical_analysis/chebyshev/index.rst
+   /api/gallery/numerical_analysis/interpolation/index.rst
+   /api/gallery/numerical_analysis/regression/index.rst
+   /api/gallery/numerical_analysis/root_finding/index.rst
+   /api/gallery/numerical_analysis/splines/index.rst
+
+
+
+.. only:: html
+
+ .. rst-class:: sphx-glr-signature
+
+    `Gallery generated by Sphinx-Gallery <https://sphinx-gallery.github.io>`_
