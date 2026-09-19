@@ -178,6 +178,14 @@ html_theme = "pydata_sphinx_theme"
 html_logo = "_static/images/mathkit_logo_transparent.png"
 html_theme_options = {
     "github_url": "https://github.com/cpoli/mathkit",
+    "icon_links": [
+        {
+            "name": "PyPI",
+            "url": "https://pypi.org/project/mathematicskit/",
+            "icon": "fa-brands fa-python",
+            "type": "fontawesome",
+        },
+    ],
     "navbar_end": ["theme-switcher", "navbar-icon-links"],
     "show_toc_level": 2,
     "navigation_with_keys": True,
