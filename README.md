@@ -2,11 +2,11 @@
 
 | | |
 |:--|:-:|
-| Package | [![PyPI version](https://img.shields.io/pypi/v/mathkit)](https://pypi.org/project/mathkit/) [![Python versions](https://img.shields.io/pypi/pyversions/mathkit)](https://pypi.org/project/mathkit/) |
+| Package | [![PyPI version](https://img.shields.io/pypi/v/mathematicskit)](https://pypi.org/project/mathematicskit/) [![Python versions](https://img.shields.io/pypi/pyversions/mathematicskit)](https://pypi.org/project/mathematicskit/) |
 | Quality | [![License](https://img.shields.io/github/license/cpoli/mathkit)](https://github.com/cpoli/mathkit/blob/main/LICENSE) [![CI](https://github.com/cpoli/mathkit/actions/workflows/ci.yml/badge.svg)](https://github.com/cpoli/mathkit/actions/workflows/ci.yml) [![Coverage](https://img.shields.io/codecov/c/github/cpoli/mathkit)](https://codecov.io/gh/cpoli/mathkit) [![Coverage (manual)](https://img.shields.io/badge/coverage-96%25-brightgreen)](#coverage) |
 | Documentation | [![Docs](https://img.shields.io/badge/docs-cpoli.github.io%2Fmathkit-blue)](https://cpoli.github.io/mathkit/) |
 | Code style | [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff) |
-| Downloads | [![Downloads](https://static.pepy.tech/badge/mathkit)](https://pepy.tech/project/mathkit) [![Downloads/Month](https://static.pepy.tech/badge/mathkit/month)](https://pepy.tech/project/mathkit) |
+| Downloads | [![Downloads](https://static.pepy.tech/badge/mathematicskit)](https://pepy.tech/project/mathematicskit) [![Downloads/Month](https://static.pepy.tech/badge/mathematicskit/month)](https://pepy.tech/project/mathematicskit) |
 | Community | [![GitHub Stars](https://img.shields.io/github/stars/cpoli/mathkit?style=social)](https://github.com/cpoli/mathkit) [![GitHub Forks](https://img.shields.io/github/forks/cpoli/mathkit?style=social)](https://github.com/cpoli/mathkit) [![Contributors](https://img.shields.io/github/contributors/cpoli/mathkit)](https://github.com/cpoli/mathkit/graphs/contributors) [![Last Commit](https://img.shields.io/github/last-commit/cpoli/mathkit)](https://github.com/cpoli/mathkit/commits/main) |
 
 A unified toolkit for computational mathematics, spanning the field end
@@ -38,6 +38,10 @@ see [Subpackages](#subpackages) for the full list, or browse the docs at
 python -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
 ```
+
+Published on PyPI as `mathematicskit` (the name `mathkit` was already
+taken by an unrelated package) -- `pip install mathematicskit`, then
+`import mathkit as mk` as usual.
 
 ## Quick start
 
