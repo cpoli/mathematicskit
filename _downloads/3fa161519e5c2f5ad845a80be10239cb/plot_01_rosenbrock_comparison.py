@@ -10,8 +10,8 @@ gradient descent's slow crawl along the curved valley floor.
 """
 
 # %%
-from mathkit.optimization import BFGS, GradientDescentLineSearch, NewtonMethod, NonlinearConjugateGradient, rosenbrock, rosenbrock_grad, rosenbrock_hess
-from mathkit.optimization.visualizers.plots import plot_contour_path, plot_convergence_comparison
+from mathematicskit.optimization import BFGS, GradientDescentLineSearch, NewtonMethod, NonlinearConjugateGradient, rosenbrock, rosenbrock_grad, rosenbrock_hess
+from mathematicskit.optimization.visualizers.plots import plot_contour_path, plot_convergence_comparison
 
 # %%
 # Run every method from the same starting point

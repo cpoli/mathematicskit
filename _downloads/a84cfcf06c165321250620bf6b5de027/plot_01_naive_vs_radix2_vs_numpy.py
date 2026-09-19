@@ -8,8 +8,8 @@ directly.
 """
 
 # %%
-from mathkit.special_functions import compare_fft_methods
-from mathkit.special_functions.visualizers.plots import plot_fft_timing_comparison
+from mathematicskit.special_functions import compare_fft_methods
+from mathematicskit.special_functions.visualizers.plots import plot_fft_timing_comparison
 
 # %%
 # Correctness cross-check

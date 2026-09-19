@@ -11,7 +11,7 @@ here on the same matrix.
 # %%
 import numpy as np
 
-from mathkit.linalg import eigen_symmetric, inverse_iteration, power_iteration
+from mathematicskit.linalg import eigen_symmetric, inverse_iteration, power_iteration
 
 # %%
 # Full spectrum: numpy.linalg.eigh

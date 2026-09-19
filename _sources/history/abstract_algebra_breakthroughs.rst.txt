@@ -15,7 +15,7 @@ skeleton -- a set with an operation satisfying a short list of axioms --
 underlies symmetry groups, number systems, and equation-solving alike,
 once the specific objects are stripped away and only the relations
 between them are kept. This chronology traces the ideas behind
-:mod:`mathkit.abstract_algebra`, from a young mathematician's
+:mod:`mathematicskit.abstract_algebra`, from a young mathematician's
 night-before-a-duel manuscript to the finite fields that now protect
 every error-corrected digital signal.
 
@@ -38,7 +38,7 @@ group theory could resolve a two-and-a-half-century-old open problem
 (why the general quintic has no radical solution) by translating it into
 a purely structural question about permutations.
 
-*Implementation:* :class:`mathkit.abstract_algebra.systems.groups.PermutationGroup`
+*Implementation:* :class:`mathematicskit.abstract_algebra.systems.groups.PermutationGroup`
 implements exactly Galois's permutation groups, building the full
 element set by closing a set of generators under composition -- the
 symmetric group :math:`S_3` example in this domain's tests is
@@ -62,7 +62,7 @@ particular representation as permutations or numbers, and introduced the
 square multiplication table (now named for him) as the concrete way to
 display any small finite group's complete structure at a glance.
 
-*Implementation:* :meth:`mathkit.abstract_algebra.core.base.FiniteGroup.cayley_table`
+*Implementation:* :meth:`mathematicskit.abstract_algebra.core.base.FiniteGroup.cayley_table`
 builds exactly this table for any concrete group implementation,
 purely from the abstract ``elements``/``operate`` interface Cayley's own
 1854 definition specifies.
@@ -89,10 +89,10 @@ of the subgroup, each exactly the subgroup's size.
 
    |H| \text{ divides } |G|, \qquad |G| = |H| \cdot [G:H]
 
-*Implementation:* :func:`mathkit.abstract_algebra.systems.subgroups.cyclic_subgroup`
-and :func:`~mathkit.abstract_algebra.systems.subgroups.all_subgroups`
+*Implementation:* :func:`mathematicskit.abstract_algebra.systems.subgroups.cyclic_subgroup`
+and :func:`~mathematicskit.abstract_algebra.systems.subgroups.all_subgroups`
 find a group's subgroups directly;
-:func:`~mathkit.abstract_algebra.systems.subgroups.left_cosets` computes
+:func:`~mathematicskit.abstract_algebra.systems.subgroups.left_cosets` computes
 exactly the coset partition Lagrange's theorem describes, verified
 directly in this domain's tests to always divide evenly.
 
@@ -115,9 +115,9 @@ Mathematical Congress gave the theory of finite fields its first fully
 rigorous, general modern treatment, proving that every finite field has
 prime-power order and that fields of the same order are all isomorphic.
 
-*Implementation:* :class:`mathkit.abstract_algebra.systems.finite_fields.GF`
+*Implementation:* :class:`mathematicskit.abstract_algebra.systems.finite_fields.GF`
 implements exactly this construction:
-:func:`~mathkit.abstract_algebra.systems.finite_fields.find_irreducible_polynomial`
+:func:`~mathematicskit.abstract_algebra.systems.finite_fields.find_irreducible_polynomial`
 finds a defining irreducible polynomial by brute-force search, and field
 arithmetic reduces every product modulo it -- the same construction that
 underlies Reed-Solomon error-correcting codes and the Advanced
@@ -142,11 +142,11 @@ making the ring of polynomials over a field a Euclidean domain in
 exactly the sense integers are, with its own Euclidean algorithm for
 computing a greatest common divisor of two polynomials.
 
-*Implementation:* :class:`mathkit.abstract_algebra.core.base.Polynomial`
+*Implementation:* :class:`mathematicskit.abstract_algebra.core.base.Polynomial`
 implements exactly this division algorithm (over :math:`\mathbb{Q}` or a
-finite field), and :func:`mathkit.abstract_algebra.systems.polynomial_ring.poly_gcd`
+finite field), and :func:`mathematicskit.abstract_algebra.systems.polynomial_ring.poly_gcd`
 implements the resulting polynomial Euclidean algorithm, structurally
-identical to :func:`mathkit.number_theory.systems.modular_arithmetic.extended_gcd`'s
+identical to :func:`mathematicskit.number_theory.systems.modular_arithmetic.extended_gcd`'s
 integer version.
 
 .. minigallery:: ../../examples/abstract_algebra/polynomial_ring/plot_01_division_and_gcd.py

@@ -8,16 +8,16 @@ very different rates: bisection and (generic) fixed-point iteration are
 linear (order 1), secant is superlinear (order :math:`\approx 1.618`,
 the golden ratio), and Newton-Raphson is quadratic (order 2). This script
 runs all four and verifies each empirical order against its theoretical
-one via :func:`mathkit.numerical_analysis.utils.error_analysis.estimate_convergence_order`.
+one via :func:`mathematicskit.numerical_analysis.utils.error_analysis.estimate_convergence_order`.
 """
 
 # %%
 import matplotlib.pyplot as plt
 import numpy as np
 
-from mathkit.numerical_analysis import Bisection, FixedPointIteration, NewtonRaphson, Secant
-from mathkit.numerical_analysis.utils.error_analysis import estimate_convergence_order
-from mathkit.numerical_analysis.visualizers.plots import plot_convergence_history
+from mathematicskit.numerical_analysis import Bisection, FixedPointIteration, NewtonRaphson, Secant
+from mathematicskit.numerical_analysis.utils.error_analysis import estimate_convergence_order
+from mathematicskit.numerical_analysis.visualizers.plots import plot_convergence_history
 
 # %%
 # Solve the same problem four ways

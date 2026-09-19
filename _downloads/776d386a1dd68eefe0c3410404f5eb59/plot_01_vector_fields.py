@@ -11,8 +11,8 @@ integrated trajectories, using the classic nonlinear pendulum
 import matplotlib.pyplot as plt
 import numpy as np
 
-from mathkit.ode_dynamics.systems.phase_portrait import Nonlinear2D, vector_field_grid
-from mathkit.ode_dynamics.visualizers.plots import plot_phase_portrait, plot_vector_field
+from mathematicskit.ode_dynamics.systems.phase_portrait import Nonlinear2D, vector_field_grid
+from mathematicskit.ode_dynamics.visualizers.plots import plot_phase_portrait, plot_vector_field
 
 # %%
 # Pendulum vector field and trajectories

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Newton’s Method, Twice &#8212; mathkit 0.1.0 documentation</title>
+    <title>Newton’s Method, Twice &#8212; mathematicskit 0.2.0 documentation</title>
   
   
   
@@ -43,7 +43,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
-    <script src="../_static/documentation_options.js?v=38b66d78"></script>
+    <script src="../_static/documentation_options.js?v=95e61db4"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/sg-tags.js?v=d80f6fa4"></script>
@@ -127,8 +127,8 @@
       
     
     
-    <img src="../_static/mathkit_logo_transparent.png" class="logo__image only-light" alt="mathkit logo"/>
-    <img src="../_static/mathkit_logo_transparent.png" class="logo__image only-dark pst-js-only" alt="mathkit logo"/>
+    <img src="../_static/mathematicskit_logo_transparent.png" class="logo__image only-light" alt="mathematicskit logo"/>
+    <img src="../_static/mathematicskit_logo_transparent.png" class="logo__image only-dark pst-js-only" alt="mathematicskit logo"/>
   
   
 </a></div>
@@ -215,7 +215,7 @@
           
           
           
-          <a href="https://github.com/cpoli/mathkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+          <a href="https://github.com/cpoli/mathematicskit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
         </li>
         <li class="nav-item">
           
@@ -341,7 +341,7 @@
           
           
           
-          <a href="https://github.com/cpoli/mathkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+          <a href="https://github.com/cpoli/mathematicskit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
         </li>
         <li class="nav-item">
           
@@ -415,19 +415,19 @@
   <section id="newton-s-method-twice">
 <h1>Newton’s Method, Twice<a class="headerlink" href="#newton-s-method-twice" title="Link to this heading">#</a></h1>
 <p>Newton’s method appears in two apparently different guises across
-mathkit: as a scalar <em>root finder</em> in
-<a class="reference internal" href="../api/numerical_analysis.html#module-mathkit.numerical_analysis" title="mathkit.numerical_analysis"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathkit.numerical_analysis</span></code></a>, and as a multivariate <em>optimizer</em> in
-<a class="reference internal" href="../api/optimization.html#module-mathkit.optimization" title="mathkit.optimization"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathkit.optimization</span></code></a>. They are, underneath, exactly the same
+mathematicskit: as a scalar <em>root finder</em> in
+<a class="reference internal" href="../api/numerical_analysis.html#module-mathematicskit.numerical_analysis" title="mathematicskit.numerical_analysis"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis</span></code></a>, and as a multivariate <em>optimizer</em> in
+<a class="reference internal" href="../api/optimization.html#module-mathematicskit.optimization" title="mathematicskit.optimization"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.optimization</span></code></a>. They are, underneath, exactly the same
 algorithm applied to two different problems – and the second is really
 the first, applied one derivative up.</p>
 <section id="newton-s-method-as-a-root-finder">
 <h2>Newton’s method as a root finder<a class="headerlink" href="#newton-s-method-as-a-root-finder" title="Link to this heading">#</a></h2>
-<p><a class="reference internal" href="../api/numerical_analysis.html#mathkit.numerical_analysis.NewtonRaphson" title="mathkit.numerical_analysis.systems.root_finding.NewtonRaphson"><code class="xref py py-class docutils literal notranslate"><span class="pre">NewtonRaphson</span></code></a>
+<p><a class="reference internal" href="../api/numerical_analysis.html#mathematicskit.numerical_analysis.NewtonRaphson" title="mathematicskit.numerical_analysis.systems.root_finding.NewtonRaphson"><code class="xref py py-class docutils literal notranslate"><span class="pre">NewtonRaphson</span></code></a>
 finds a root of <span class="math notranslate nohighlight">\(f(x)=0\)</span> by repeatedly linearizing <span class="math notranslate nohighlight">\(f\)</span> at
 the current guess and stepping to where that tangent line crosses zero:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">mathkit.numerical_analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">NewtonRaphson</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">mathkit.numerical_analysis.utils.error_analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">estimate_convergence_order</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.numerical_analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">NewtonRaphson</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.numerical_analysis.utils.error_analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">estimate_convergence_order</span>
 
 <span class="n">result</span> <span class="o">=</span> <span class="n">NewtonRaphson</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mf">2.0</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">)</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">iterations</span><span class="p">)</span>
@@ -451,12 +451,12 @@ derivative, Newton’s method for optimization uses the Hessian (the
 matrix of second partial derivatives) to correct the step:</p>
 <div class="math notranslate nohighlight">
 \[x_{k+1} = x_k - [\nabla^2 f(x_k)]^{-1} \nabla f(x_k)\]</div>
-<p><a class="reference internal" href="../api/optimization.html#mathkit.optimization.NewtonMethod" title="mathkit.optimization.systems.newton_quasi_newton.NewtonMethod"><code class="xref py py-class docutils literal notranslate"><span class="pre">NewtonMethod</span></code></a>
+<p><a class="reference internal" href="../api/optimization.html#mathematicskit.optimization.NewtonMethod" title="mathematicskit.optimization.systems.newton_quasi_newton.NewtonMethod"><code class="xref py py-class docutils literal notranslate"><span class="pre">NewtonMethod</span></code></a>
 implements exactly this (via <code class="docutils literal notranslate"><span class="pre">scipy.optimize.minimize</span></code>’s
 <code class="docutils literal notranslate"><span class="pre">&quot;Newton-CG&quot;</span></code> method, which solves the linear system above
 approximately via a truncated conjugate-gradient sub-solve rather than
 an explicit Hessian inverse):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mathkit.optimization</span><span class="w"> </span><span class="kn">import</span> <span class="n">NewtonMethod</span><span class="p">,</span> <span class="n">quadratic_bowl</span><span class="p">,</span> <span class="n">quadratic_bowl_grad</span><span class="p">,</span> <span class="n">quadratic_bowl_hess</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.optimization</span><span class="w"> </span><span class="kn">import</span> <span class="n">NewtonMethod</span><span class="p">,</span> <span class="n">quadratic_bowl</span><span class="p">,</span> <span class="n">quadratic_bowl_grad</span><span class="p">,</span> <span class="n">quadratic_bowl_hess</span>
 
 <span class="n">result</span> <span class="o">=</span> <span class="n">NewtonMethod</span><span class="p">(</span><span class="n">tol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">)</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span>
     <span class="n">quadratic_bowl</span><span class="p">,</span> <span class="n">quadratic_bowl_grad</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">]),</span> <span class="n">hess</span><span class="o">=</span><span class="n">quadratic_bowl_hess</span>
@@ -475,21 +475,21 @@ function-value error.</p>
 </section>
 <section id="why-this-matters">
 <h2>Why this matters<a class="headerlink" href="#why-this-matters" title="Link to this heading">#</a></h2>
-<p>Every method in <a class="reference internal" href="../api/optimization.html#module-mathkit.optimization" title="mathkit.optimization"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathkit.optimization</span></code></a> that records a per-iterate
-path – <a class="reference internal" href="../api/optimization.html#mathkit.optimization.GradientDescent" title="mathkit.optimization.systems.gradient_descent.GradientDescent"><code class="xref py py-class docutils literal notranslate"><span class="pre">GradientDescent</span></code></a>,
-<a class="reference internal" href="../api/optimization.html#mathkit.optimization.NonlinearConjugateGradient" title="mathkit.optimization.systems.conjugate_gradient.NonlinearConjugateGradient"><code class="xref py py-class docutils literal notranslate"><span class="pre">NonlinearConjugateGradient</span></code></a>,
-<a class="reference internal" href="../api/optimization.html#mathkit.optimization.BFGS" title="mathkit.optimization.systems.newton_quasi_newton.BFGS"><code class="xref py py-class docutils literal notranslate"><span class="pre">BFGS</span></code></a> – can be
+<p>Every method in <a class="reference internal" href="../api/optimization.html#module-mathematicskit.optimization" title="mathematicskit.optimization"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.optimization</span></code></a> that records a per-iterate
+path – <a class="reference internal" href="../api/optimization.html#mathematicskit.optimization.GradientDescent" title="mathematicskit.optimization.systems.gradient_descent.GradientDescent"><code class="xref py py-class docutils literal notranslate"><span class="pre">GradientDescent</span></code></a>,
+<a class="reference internal" href="../api/optimization.html#mathematicskit.optimization.NonlinearConjugateGradient" title="mathematicskit.optimization.systems.conjugate_gradient.NonlinearConjugateGradient"><code class="xref py py-class docutils literal notranslate"><span class="pre">NonlinearConjugateGradient</span></code></a>,
+<a class="reference internal" href="../api/optimization.html#mathematicskit.optimization.BFGS" title="mathematicskit.optimization.systems.newton_quasi_newton.BFGS"><code class="xref py py-class docutils literal notranslate"><span class="pre">BFGS</span></code></a> – can be
 compared on exactly the same convergence-order footing that
-<a class="reference internal" href="../api/numerical_analysis.html#module-mathkit.numerical_analysis" title="mathkit.numerical_analysis"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathkit.numerical_analysis</span></code></a> uses for its own root finders, via
-<code class="xref py py-func docutils literal notranslate"><span class="pre">mathkit.optimization.utils.comparison.function_value_gap()</span></code>. The
+<a class="reference internal" href="../api/numerical_analysis.html#module-mathematicskit.numerical_analysis" title="mathematicskit.numerical_analysis"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis</span></code></a> uses for its own root finders, via
+<code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.optimization.utils.comparison.function_value_gap()</span></code>. The
 two domains share a common mathematical ancestor precisely because
 optimization <em>is</em> root-finding, one derivative removed.</p>
 </section>
 <section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="../api/numerical_analysis.html"><span class="doc">mathkit.numerical_analysis</span></a></p></li>
-<li><p><a class="reference internal" href="../api/optimization.html"><span class="doc">mathkit.optimization</span></a></p></li>
+<li><p><a class="reference internal" href="../api/numerical_analysis.html"><span class="doc">mathematicskit.numerical_analysis</span></a></p></li>
+<li><p><a class="reference internal" href="../api/optimization.html"><span class="doc">mathematicskit.optimization</span></a></p></li>
 <li><p><a class="reference internal" href="../history/numerical_analysis_breakthroughs.html"><span class="doc">Breakthroughs in Numerical Analysis</span></a></p></li>
 <li><p><a class="reference internal" href="../history/optimization_breakthroughs.html"><span class="doc">Breakthroughs in Optimization</span></a></p></li>
 </ul>
@@ -566,7 +566,7 @@ optimization <em>is</em> root-finding, one derivative removed.</p>
 
   <p class="copyright">
     
-      © Copyright 2026, mathkit contributors.
+      © Copyright 2026, mathematicskit contributors.
       <br/>
     
   </p>

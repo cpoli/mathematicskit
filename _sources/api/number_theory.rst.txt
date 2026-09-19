@@ -1,5 +1,5 @@
-mathkit.number_theory
-=======================
+mathematicskit.number_theory
+============================
 
 
 .. include:: /_generated/nav/number_theory.rst
@@ -13,6 +13,6 @@ divisor-sum); and linear and Pell Diophantine equation solvers. Every
 algorithm is hand-rolled -- exact-integer number theory has no
 ``numpy``/``scipy`` equivalent.
 
-.. automodule:: mathkit.number_theory
+.. automodule:: mathematicskit.number_theory
    :members:
    :undoc-members:

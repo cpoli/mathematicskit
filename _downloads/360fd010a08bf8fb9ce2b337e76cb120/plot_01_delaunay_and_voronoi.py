@@ -9,8 +9,8 @@ the same random point set.
 # %%
 import numpy as np
 
-from mathkit.geometry import delaunay_triangulation
-from mathkit.geometry.visualizers.plots import plot_triangulation, plot_voronoi
+from mathematicskit.geometry import delaunay_triangulation
+from mathematicskit.geometry.visualizers.plots import plot_triangulation, plot_voronoi
 
 # %%
 # Random points

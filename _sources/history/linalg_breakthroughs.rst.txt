@@ -15,7 +15,7 @@ correctly, but stably, in floating-point arithmetic, without needless
 loss of precision -- runs from Gaussian elimination's two-century-old
 roots through the mid-20th-century discovery that some numerically
 "obvious" reformulations are secretly disastrous. This chronology traces
-the decompositions and iterative solvers behind :mod:`mathkit.linalg`.
+the decompositions and iterative solvers behind :mod:`mathematicskit.linalg`.
 
 .. contents:: Timeline
    :local:
@@ -31,7 +31,7 @@ by arranging their coefficients in a rectangular array and eliminating
 unknowns column by column -- procedurally identical to what Gauss would
 rediscover, and get his name attached to, sixteen centuries later.
 
-*Implementation:* :func:`mathkit.numerical_analysis.systems.regression.PolynomialRegression`'s
+*Implementation:* :func:`mathematicskit.numerical_analysis.systems.regression.PolynomialRegression`'s
 underlying solves, and every dense linear system in this package, trace
 back to exactly this elimination idea, now delegated to LAPACK via
 :func:`scipy.linalg.lu`.
@@ -48,9 +48,9 @@ largest available pivot (Partial pivoting, formalized much later, in the
 right-hand side costs only :math:`O(n^2)`, not the :math:`O(n^3)` of a
 fresh elimination.
 
-*Implementation:* :func:`mathkit.linalg.systems.lu.lu_decompose` wraps
+*Implementation:* :func:`mathematicskit.linalg.systems.lu.lu_decompose` wraps
 :func:`scipy.linalg.lu` for exactly this partial-pivoted factorization;
-:func:`~mathkit.linalg.systems.lu.lu_solve_system` reuses it via
+:func:`~mathematicskit.linalg.systems.lu.lu_solve_system` reuses it via
 :func:`scipy.linalg.lu_factor`/:func:`~scipy.linalg.lu_solve`.
 
 *References:* C. F. Gauss, *Theoria Motus Corporum Coelestium* (Hamburg,
@@ -76,12 +76,12 @@ Commandant Benoit, from Cholesky's own manuscripts.
 
    A = LL^T, \qquad A \text{ symmetric positive-definite}
 
-*Implementation:* :func:`mathkit.linalg.systems.cholesky.cholesky_decompose`
+*Implementation:* :func:`mathematicskit.linalg.systems.cholesky.cholesky_decompose`
 wraps :func:`numpy.linalg.cholesky` for exactly this factorization, whose
 failure (LAPACK's ``?potrf`` raising when a diagonal pivot would require
 a square root of a negative number) doubles as a positive-definiteness
-certificate in :func:`~mathkit.linalg.systems.cholesky.is_symmetric_positive_definite`;
-:func:`~mathkit.linalg.systems.cholesky.cholesky_solve` reuses the
+certificate in :func:`~mathematicskit.linalg.systems.cholesky.is_symmetric_positive_definite`;
+:func:`~mathematicskit.linalg.systems.cholesky.cholesky_solve` reuses the
 factorization for a forward/backward triangular solve via
 :func:`scipy.linalg.solve_triangular`.
 
@@ -106,11 +106,11 @@ without ever explicitly re-orthogonalizing anything -- the textbook
 demonstration that two mathematically equivalent formulas can behave
 completely differently once floating-point rounding enters the picture.
 
-*Implementation:* :func:`mathkit.linalg.systems.qr.householder_qr` wraps
-:func:`scipy.linalg.qr`; :func:`~mathkit.linalg.systems.qr.gram_schmidt_qr`
+*Implementation:* :func:`mathematicskit.linalg.systems.qr.householder_qr` wraps
+:func:`scipy.linalg.qr`; :func:`~mathematicskit.linalg.systems.qr.gram_schmidt_qr`
 keeps the classical/modified Gram-Schmidt construction hand-rolled
 specifically to demonstrate, via
-:func:`~mathkit.linalg.systems.qr.orthogonality_error`, how much
+:func:`~mathematicskit.linalg.systems.qr.orthogonality_error`, how much
 orthogonality classical Gram-Schmidt loses for an ill-conditioned matrix
 that Householder's reflections do not.
 
@@ -133,9 +133,9 @@ century. Practical, efficient algorithms for computing those eigenvalues
 -- rather than merely proving they exist -- would take more than a
 century longer to arrive.
 
-*Implementation:* :func:`mathkit.linalg.systems.eigen.eigen_symmetric`
+*Implementation:* :func:`mathematicskit.linalg.systems.eigen.eigen_symmetric`
 wraps :func:`numpy.linalg.eigh` for exactly the symmetric case Cauchy's
-theorem covers; :func:`~mathkit.linalg.systems.eigen.eigen_general` wraps
+theorem covers; :func:`~mathematicskit.linalg.systems.eigen.eigen_general` wraps
 :func:`numpy.linalg.eig` for the general (possibly complex-spectrum)
 case.
 
@@ -157,8 +157,8 @@ a single eigenpair when the full spectrum isn't needed, and the direct
 ancestor of the shifted-QR algorithms that now compute the full spectrum
 in production libraries.
 
-*Implementation:* :func:`mathkit.linalg.systems.eigen.power_iteration`
-and :func:`~mathkit.linalg.systems.eigen.inverse_iteration` implement
+*Implementation:* :func:`mathematicskit.linalg.systems.eigen.power_iteration`
+and :func:`~mathematicskit.linalg.systems.eigen.inverse_iteration` implement
 both exactly as originally described, the one family of algorithm in
 this domain kept hand-rolled since the *iteration itself* is the point.
 
@@ -181,7 +181,7 @@ values gives the *best possible* rank-:math:`k` approximation to
 foundation under everything from principal component analysis to modern
 recommender systems.
 
-*Implementation:* :func:`mathkit.linalg.systems.svd.svd_decompose` wraps
+*Implementation:* :func:`mathematicskit.linalg.systems.svd.svd_decompose` wraps
 :func:`numpy.linalg.svd`'s numerically stable bidiagonalization-based
 algorithm, the modern production route rather than Eckart and Young's
 own eigendecomposition-of-:math:`A^TA` construction (which squares the
@@ -214,10 +214,10 @@ floating-point precision recovers.
    \kappa_2(A) = \frac{\sigma_{\max}}{\sigma_{\min}}, \qquad
    \kappa_2(A^TA) = \kappa_2(A)^2
 
-*Implementation:* :func:`mathkit.linalg.systems.stability.condition_number_2norm`
+*Implementation:* :func:`mathematicskit.linalg.systems.stability.condition_number_2norm`
 wraps :func:`numpy.linalg.cond` for exactly this ratio;
-:func:`~mathkit.linalg.systems.stability.least_squares_normal_equations`
-and :func:`~mathkit.linalg.systems.stability.least_squares_qr` solve the
+:func:`~mathematicskit.linalg.systems.stability.least_squares_normal_equations`
+and :func:`~mathematicskit.linalg.systems.stability.least_squares_qr` solve the
 same least-squares problem two different ways specifically to make the
 squared-condition-number penalty of the normal equations concrete and
 measurable side by side.
@@ -244,8 +244,8 @@ became the standard name for the whole family it inaugurated. Yousef
 Saad and Martin Schultz's 1986 GMRES extended the same Krylov-subspace
 idea to general (non-symmetric) systems.
 
-*Implementation:* :class:`mathkit.linalg.systems.iterative.ConjugateGradient`
-and :class:`~mathkit.linalg.systems.iterative.GMRES` wrap
+*Implementation:* :class:`mathematicskit.linalg.systems.iterative.ConjugateGradient`
+and :class:`~mathematicskit.linalg.systems.iterative.GMRES` wrap
 :func:`scipy.sparse.linalg.cg`/:func:`~scipy.sparse.linalg.gmres`
 directly, adding the residual-history tracking (via each solver's
 callback) that a bare library call doesn't expose.

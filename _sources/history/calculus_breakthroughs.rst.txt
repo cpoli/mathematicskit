@@ -14,7 +14,7 @@ package by a wide margin, yet its *numerical* cousin -- how to
 differentiate or integrate a function you can only sample, or
 differentiate a computer program directly -- is a comparatively young,
 20th-century development. This chronology traces the ideas behind
-:mod:`mathkit.calculus`, from Newton and Leibniz's original invention to
+:mod:`mathematicskit.calculus`, from Newton and Leibniz's original invention to
 the reverse-mode automatic differentiation that now trains every large
 neural network.
 
@@ -36,9 +36,9 @@ scheme in this module ultimately approximates: the derivative as a
 limiting difference quotient, and the definite integral as a limiting
 sum.
 
-*Implementation:* :func:`mathkit.calculus.systems.finite_differences.central_difference`
+*Implementation:* :func:`mathematicskit.calculus.systems.finite_differences.central_difference`
 approximates exactly Newton and Leibniz's limiting difference quotient
-at finite step size; :class:`mathkit.calculus.systems.quadrature.TrapezoidalRule`
+at finite step size; :class:`mathematicskit.calculus.systems.quadrature.TrapezoidalRule`
 approximates the limiting Riemann sum.
 
 .. minigallery:: ../../examples/calculus/finite_differences/plot_01_richardson_extrapolation.py
@@ -56,8 +56,8 @@ package: every finite-difference formula's error term, every
 quadrature rule's convergence rate, and every root-finder's convergence
 order is a Taylor-series argument in disguise.
 
-*Implementation:* :func:`mathkit.calculus.systems.taylor_series.maclaurin_coefficients`
-and :func:`~mathkit.calculus.systems.taylor_series.taylor_remainder_bound`
+*Implementation:* :func:`mathematicskit.calculus.systems.taylor_series.maclaurin_coefficients`
+and :func:`~mathematicskit.calculus.systems.taylor_series.taylor_remainder_bound`
 implement exactly the series and its Lagrange remainder bound.
 
 *References:* B. Taylor, *Methodus Incrementorum Directa et Inversa*
@@ -78,7 +78,7 @@ derivative or (as Romberg integration) to the trapezoidal rule,
 Richardson extrapolation is the standard way to buy an extra order or
 two of accuracy essentially for free.
 
-*Implementation:* :func:`mathkit.calculus.systems.finite_differences.richardson_extrapolation`
+*Implementation:* :func:`mathematicskit.calculus.systems.finite_differences.richardson_extrapolation`
 implements exactly this repeated-halving, error-cancelling extrapolation
 as a triangular (Neville-style) table.
 
@@ -99,9 +99,9 @@ accurate can an :math:`n`-point quadrature rule be made? Gauss's answer
 the degree a naive equally-spaced rule with the same number of points
 achieves.
 
-*Implementation:* :class:`mathkit.calculus.systems.quadrature.GaussianQuadrature`
+*Implementation:* :class:`mathematicskit.calculus.systems.quadrature.GaussianQuadrature`
 wraps :func:`scipy.integrate.fixed_quad`, and
-:func:`~mathkit.calculus.systems.quadrature.legendre_nodes_and_weights`
+:func:`~mathematicskit.calculus.systems.quadrature.legendre_nodes_and_weights`
 wraps :func:`numpy.polynomial.legendre.leggauss` for the underlying
 node/weight computation.
 
@@ -123,7 +123,7 @@ library (published as a book in 1983, though developed through the
 1970s) gave this idea its definitive, extensively validated
 implementation, still shipped essentially unchanged inside SciPy today.
 
-*Implementation:* :class:`mathkit.calculus.systems.quadrature.AdaptiveQuadrature`
+*Implementation:* :class:`mathematicskit.calculus.systems.quadrature.AdaptiveQuadrature`
 wraps :func:`scipy.integrate.quad`, which is QUADPACK's ``QAGS`` routine
 under the hood.
 
@@ -150,10 +150,10 @@ differentiation, rediscovered and renamed "backpropagation" in the
 neural-network literature of the 1980s, is the algorithm that makes
 training a modern large neural network computationally feasible at all.
 
-*Implementation:* :class:`mathkit.calculus.systems.dual_numbers.Dual`
+*Implementation:* :class:`mathematicskit.calculus.systems.dual_numbers.Dual`
 implements forward-mode automatic differentiation exactly via dual-number
-arithmetic; :class:`~mathkit.calculus.systems.autodiff.Variable` and
-:func:`~mathkit.calculus.systems.autodiff.gradient` implement
+arithmetic; :class:`~mathematicskit.calculus.systems.autodiff.Variable` and
+:func:`~mathematicskit.calculus.systems.autodiff.gradient` implement
 reverse-mode automatic differentiation over a small computational graph.
 
 *References:* R. E. Wengert, "A Simple Automatic Derivative Evaluation

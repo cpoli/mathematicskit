@@ -1,5 +1,5 @@
-mathkit.linalg
-================
+mathematicskit.linalg
+=====================
 
 
 .. include:: /_generated/nav/linalg.rst
@@ -14,6 +14,6 @@ condition-number estimation (``numpy.linalg.cond``) and a
 least-squares stability comparison (normal equations vs. QR vs.
 ``numpy.linalg.lstsq``).
 
-.. automodule:: mathkit.linalg
+.. automodule:: mathematicskit.linalg
    :members:
    :undoc-members:

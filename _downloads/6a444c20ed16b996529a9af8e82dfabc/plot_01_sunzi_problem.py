@@ -10,7 +10,7 @@ is named for.
 """
 
 # %%
-from mathkit.number_theory import chinese_remainder_theorem
+from mathematicskit.number_theory import chinese_remainder_theorem
 
 # %%
 # Solve Sunzi's problem

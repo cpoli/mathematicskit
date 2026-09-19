@@ -12,8 +12,8 @@ phase portraits side by side.
 import matplotlib.pyplot as plt
 import numpy as np
 
-from mathkit.ode_dynamics.systems.phase_portrait import Linear2D
-from mathkit.ode_dynamics.systems.stability import classify_fixed_point_2d
+from mathematicskit.ode_dynamics.systems.phase_portrait import Linear2D
+from mathematicskit.ode_dynamics.systems.stability import classify_fixed_point_2d
 
 # %%
 # Six canonical linear systems

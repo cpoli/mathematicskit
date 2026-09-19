@@ -12,7 +12,7 @@ the onset of chaos at ``r ~ 3.56995``.
 import matplotlib.pyplot as plt
 import numpy as np
 
-from mathkit.fractals_chaos import lyapunov_exponent_1d_map
+from mathematicskit.fractals_chaos import lyapunov_exponent_1d_map
 
 # %%
 # Sweep r and estimate the exponent at each value

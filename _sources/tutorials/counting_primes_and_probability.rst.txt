@@ -4,23 +4,23 @@ Counting, Primes, and Probability
 ====================================
 
 The binomial coefficient :math:`\binom{n}{k}` is the meeting point of
-three mathkit domains that otherwise look unrelated:
-:mod:`mathkit.combinatorics` studies it as a pure counting problem,
-:mod:`mathkit.number_theory` studies the *prime factorizations* hiding
+three mathematicskit domains that otherwise look unrelated:
+:mod:`mathematicskit.combinatorics` studies it as a pure counting problem,
+:mod:`mathematicskit.number_theory` studies the *prime factorizations* hiding
 inside it and the totient function built from them, and
-:mod:`mathkit.probability` uses it, unchanged, as the weight in the
+:mod:`mathematicskit.probability` uses it, unchanged, as the weight in the
 binomial distribution's probability mass function.
 
 Counting combinations
 --------------------------
 
-:func:`~mathkit.combinatorics.systems.counting.combinations_count`
+:func:`~mathematicskit.combinatorics.systems.counting.combinations_count`
 counts the number of ways to choose 6 numbers from 20, exactly the
 combinatorics behind a lottery draw:
 
 .. code-block:: python
 
-   from mathkit.combinatorics import combinations_count
+   from mathematicskit.combinatorics import combinations_count
 
    count = combinations_count(20, 6)
    print(count)
@@ -29,7 +29,7 @@ combinatorics behind a lottery draw:
 The same number as a probability weight
 ------------------------------------------------
 
-:class:`~mathkit.probability.systems.discrete.Binomial`'s probability
+:class:`~mathematicskit.probability.systems.discrete.Binomial`'s probability
 mass function is built from exactly this same coefficient:
 
 .. math::
@@ -38,7 +38,7 @@ mass function is built from exactly this same coefficient:
 
 .. code-block:: python
 
-   from mathkit.probability import Binomial
+   from mathematicskit.probability import Binomial
 
    binom = Binomial(n=20, p=0.5)
    print(binom.pmf(6))
@@ -49,15 +49,15 @@ mass function is built from exactly this same coefficient:
 Primes and the totient function
 --------------------------------------
 
-:mod:`mathkit.number_theory` supplies the multiplicative-function
+:mod:`mathematicskit.number_theory` supplies the multiplicative-function
 machinery this combinatorial counting eventually leans on for larger
 problems -- for instance, Euler's totient function
-:func:`~mathkit.number_theory.systems.totient.euler_totient`, which for
+:func:`~mathematicskit.number_theory.systems.totient.euler_totient`, which for
 any prime :math:`p` always equals :math:`p-1`:
 
 .. code-block:: python
 
-   from mathkit.number_theory import sieve_of_eratosthenes, euler_totient
+   from mathematicskit.number_theory import sieve_of_eratosthenes, euler_totient
 
    primes = sieve_of_eratosthenes(50)
    print([int(p) for p in primes])
@@ -72,7 +72,7 @@ every integer from 1 to :math:`p-1` is automatically coprime to a prime
 \pmod n`) that RSA cryptography's key generation in
 :doc:`/history/number_theory_breakthroughs` depends on, and, via
 Fermat's Little Theorem's special case, the same fact
-:func:`mathkit.number_theory.systems.primality.is_prime_miller_rabin`
+:func:`mathematicskit.number_theory.systems.primality.is_prime_miller_rabin`
 tests probabilistically for much larger candidate primes than
 :func:`sieve_of_eratosthenes` could ever enumerate directly.
 

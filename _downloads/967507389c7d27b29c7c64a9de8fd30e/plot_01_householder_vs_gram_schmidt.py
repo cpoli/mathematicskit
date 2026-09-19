@@ -12,8 +12,8 @@ preferring Householder in production numerical software.
 # %%
 import numpy as np
 
-from mathkit.linalg import gram_schmidt_qr, householder_qr
-from mathkit.linalg.systems.qr import orthogonality_error
+from mathematicskit.linalg import gram_schmidt_qr, householder_qr
+from mathematicskit.linalg.systems.qr import orthogonality_error
 
 # %%
 # A well-conditioned matrix: all three methods agree

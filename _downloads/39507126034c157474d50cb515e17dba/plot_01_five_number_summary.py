@@ -9,8 +9,8 @@ visualizes its five-number summary as a boxplot.
 # %%
 import numpy as np
 
-from mathkit.statistics import descriptive_stats
-from mathkit.statistics.visualizers.plots import plot_boxplot
+from mathematicskit.statistics import descriptive_stats
+from mathematicskit.statistics.visualizers.plots import plot_boxplot
 
 # %%
 # Generate a right-skewed dataset and summarize it

@@ -8,7 +8,7 @@ capacity exactly equals the maximum flow value.
 """
 
 # %%
-from mathkit.graph_theory import Graph, max_flow_min_cut
+from mathematicskit.graph_theory import Graph, max_flow_min_cut
 
 # %%
 # Build the flow network

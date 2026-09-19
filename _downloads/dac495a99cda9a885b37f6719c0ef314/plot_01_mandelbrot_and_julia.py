@@ -8,8 +8,8 @@ is a connected, dendrite-like fractal.
 """
 
 # %%
-from mathkit.fractals_chaos import julia_set, mandelbrot_set
-from mathkit.fractals_chaos.visualizers.plots import plot_escape_time
+from mathematicskit.fractals_chaos import julia_set, mandelbrot_set
+from mathematicskit.fractals_chaos.visualizers.plots import plot_escape_time
 
 # %%
 # Mandelbrot set

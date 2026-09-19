@@ -12,8 +12,8 @@ produce a scattered, fractal-looking set of points.
 # %%
 import matplotlib.pyplot as plt
 
-from mathkit.ode_dynamics.systems.poincare import DuffingOscillator, stroboscopic_poincare_section
-from mathkit.ode_dynamics.visualizers.plots import plot_poincare_points
+from mathematicskit.ode_dynamics.systems.poincare import DuffingOscillator, stroboscopic_poincare_section
+from mathematicskit.ode_dynamics.visualizers.plots import plot_poincare_points
 
 # %%
 # A weakly driven system settles onto a single periodic point

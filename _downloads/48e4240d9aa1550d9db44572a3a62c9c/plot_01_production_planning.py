@@ -10,7 +10,7 @@ objective is negated.
 # %%
 import numpy as np
 
-from mathkit.optimization import linear_program
+from mathematicskit.optimization import linear_program
 
 # %%
 # Problem setup

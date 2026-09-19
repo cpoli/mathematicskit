@@ -11,7 +11,7 @@ import math
 
 import numpy as np
 
-from mathkit.special_functions import beta_function, gamma_function, log_gamma_function
+from mathematicskit.special_functions import beta_function, gamma_function, log_gamma_function
 
 # %%
 # Gamma at integers and at 1/2

@@ -1,5 +1,5 @@
-mathkit.graph_theory
-======================
+mathematicskit.graph_theory
+===========================
 
 
 .. include:: /_generated/nav/graph_theory.rst
@@ -13,6 +13,6 @@ backtracking, hand-rolled -- NP-complete, no scipy equivalent); and
 spectral graph theory (Laplacian via scipy, eigendecomposition via
 ``numpy.linalg.eigh``).
 
-.. automodule:: mathkit.graph_theory
+.. automodule:: mathematicskit.graph_theory
    :members:
    :undoc-members:

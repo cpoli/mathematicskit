@@ -3,15 +3,15 @@ A toy RSA encryption/decryption round trip
 =================================================
 
 RSA's key generation, encryption, and decryption are exactly
-:func:`~mathkit.number_theory.systems.modular_arithmetic.mod_inverse`
+:func:`~mathematicskit.number_theory.systems.modular_arithmetic.mod_inverse`
 (to find the private exponent) and
-:func:`~mathkit.number_theory.systems.modular_arithmetic.fast_mod_pow`
+:func:`~mathematicskit.number_theory.systems.modular_arithmetic.fast_mod_pow`
 (to encrypt/decrypt) -- demonstrated here with small (textbook-toy,
 NOT cryptographically secure) primes.
 """
 
 # %%
-from mathkit.number_theory import euler_totient, fast_mod_pow, mod_inverse
+from mathematicskit.number_theory import euler_totient, fast_mod_pow, mod_inverse
 
 # %%
 # Key generation

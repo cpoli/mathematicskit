@@ -11,7 +11,7 @@ ever forming ``A^T A``, so the effective conditioning stays at
 # %%
 import numpy as np
 
-from mathkit.linalg import condition_number_2norm, least_squares_normal_equations, least_squares_qr
+from mathematicskit.linalg import condition_number_2norm, least_squares_normal_equations, least_squares_qr
 
 # %%
 # Same fit, two condition numbers

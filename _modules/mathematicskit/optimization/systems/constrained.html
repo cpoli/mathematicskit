@@ -1,0 +1,783 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mathematicskit.optimization.systems.constrained &#8212; mathematicskit 0.2.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=fd6457a4" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+    <script src="../../../../_static/documentation_options.js?v=95e61db4"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/mathematicskit/optimization/systems/constrained';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../../../_static/searchtools.js"></script>
+    <script src="../../../../_static/language_data.js"></script>
+    <script src="../../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/mathematicskit_logo_transparent.png" class="logo__image only-light" alt="mathematicskit logo"/>
+    <img src="../../../../_static/mathematicskit_logo_transparent.png" class="logo__image only-dark pst-js-only" alt="mathematicskit logo"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/mathematicskit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/mathematicskit/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i><span class="visually-hidden">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/mathematicskit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/mathematicskit/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i><span class="visually-hidden">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">mathematicskit.optimization.systems.constrained</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for mathematicskit.optimization.systems.constrained</h1><div class="highlight"><pre>
+<span></span><span class="sa">r</span><span class="sd">"""Lagrange multipliers, KKT-condition verification, and a penalty-method</span>
+<span class="sd">solver for constrained nonlinear optimization.</span>
+
+<span class="sd">Equality-constrained stationary points are found by solving the Lagrange</span>
+<span class="sd">system :math:`\nabla f(x) + \sum_i \lambda_i \nabla h_i(x) = 0`,</span>
+<span class="sd">:math:`h(x) = 0` directly via :func:`scipy.optimize.root` (a</span>
+<span class="sd">well-posed square nonlinear system once multipliers are added as</span>
+<span class="sd">unknowns -- no reason to hand-write a multivariate Newton solver when</span>
+<span class="sd">mathematicskit already has one general-purpose root finder available via</span>
+<span class="sd">scipy). KKT verification at a candidate point is mathematicskit's own code,</span>
+<span class="sd">since it's a direct arithmetic check rather than a numerical algorithm</span>
+<span class="sd">with a library equivalent. See Nocedal &amp; Wright, *Numerical</span>
+<span class="sd">Optimization*, 2nd ed., Ch. 12 (KKT conditions) and Ch. 17</span>
+<span class="sd">(penalty/barrier methods).</span>
+<span class="sd">"""</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">optimize</span> <span class="k">as</span> <span class="n">sopt</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">DEFAULT_MAX_ITER</span><span class="p">,</span> <span class="n">DEFAULT_RTOL</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.optimization.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">KKTResult</span><span class="p">,</span> <span class="n">LagrangeResult</span><span class="p">,</span> <span class="n">OptimizeResult</span><span class="p">,</span> <span class="n">UnconstrainedOptimizer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.optimization.systems.newton_quasi_newton</span><span class="w"> </span><span class="kn">import</span> <span class="n">BFGS</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"lagrange_stationary_point"</span><span class="p">,</span> <span class="s2">"verify_kkt"</span><span class="p">,</span> <span class="s2">"PenaltyMethod"</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="lagrange_stationary_point">
+<a class="viewcode-back" href="../../../../api/optimization.html#mathematicskit.optimization.lagrange_stationary_point">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">lagrange_stationary_point</span><span class="p">(</span>
+    <span class="n">grad_f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">h</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">grad_h</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">x0</span><span class="p">,</span> <span class="n">lambda0</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LagrangeResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Solve the equality-constrained Lagrange stationarity system.</span>
+
+<span class="sd">    Finds ``(x*, lambda*)`` satisfying :math:`\nabla f(x^*) + J_h(x^*)^T</span>
+<span class="sd">    \lambda^* = 0` and :math:`h(x^*) = 0` simultaneously, via</span>
+<span class="sd">    :func:`scipy.optimize.root` on the stacked system -- the standard way</span>
+<span class="sd">    to *locate* a constrained stationary point once you've written down</span>
+<span class="sd">    the first-order (Lagrange) conditions symbolically. See Nocedal &amp;</span>
+<span class="sd">    Wright, *Numerical Optimization*, 2nd ed., Ch. 12.2-12.3.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    grad_f : callable</span>
+<span class="sd">        Gradient of the objective, ``grad_f(x) -&gt; ndarray`` shape (n,).</span>
+<span class="sd">    h : callable</span>
+<span class="sd">        Equality constraints, ``h(x) -&gt; ndarray`` shape (m,).</span>
+<span class="sd">    grad_h : callable</span>
+<span class="sd">        Constraint Jacobian, ``grad_h(x) -&gt; ndarray`` shape (m, n).</span>
+<span class="sd">    x0 : ndarray, shape (n,)</span>
+<span class="sd">        Initial guess for ``x``.</span>
+<span class="sd">    lambda0 : ndarray, shape (m,), optional</span>
+<span class="sd">        Initial guess for the multipliers; defaults to zeros.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    LagrangeResult</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; # minimize x^2 + y^2 subject to x + y = 1: exact solution (0.5, 0.5), lambda=-1.</span>
+<span class="sd">    &gt;&gt;&gt; grad_f = lambda z: np.array([2.0 * z[0], 2.0 * z[1]])</span>
+<span class="sd">    &gt;&gt;&gt; h = lambda z: np.array([z[0] + z[1] - 1.0])</span>
+<span class="sd">    &gt;&gt;&gt; grad_h = lambda z: np.array([[1.0, 1.0]])</span>
+<span class="sd">    &gt;&gt;&gt; result = lagrange_stationary_point(grad_f, h, grad_h, x0=np.array([0.0, 0.0]))</span>
+<span class="sd">    &gt;&gt;&gt; np.allclose(result.x, [0.5, 0.5], atol=1e-8)</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; np.allclose(result.multipliers, [-1.0], atol=1e-8)</span>
+<span class="sd">    True</span>
+<span class="sd">    """</span>
+    <span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">x0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">h</span><span class="p">(</span><span class="n">x0</span><span class="p">))</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">lam0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">if</span> <span class="n">lambda0</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">lambda0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">system</span><span class="p">(</span><span class="n">z</span><span class="p">):</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">lam</span> <span class="o">=</span> <span class="n">z</span><span class="p">[:</span><span class="n">n</span><span class="p">],</span> <span class="n">z</span><span class="p">[</span><span class="n">n</span><span class="p">:]</span>
+        <span class="n">stationarity</span> <span class="o">=</span> <span class="n">grad_f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">grad_h</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">lam</span>
+        <span class="n">feasibility</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">h</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">stationarity</span><span class="p">,</span> <span class="n">feasibility</span><span class="p">])</span>
+
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">sopt</span><span class="o">.</span><span class="n">root</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">x0</span><span class="p">,</span> <span class="n">lam0</span><span class="p">]))</span>
+    <span class="n">x_star</span><span class="p">,</span> <span class="n">lam_star</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">x</span><span class="p">[:</span><span class="n">n</span><span class="p">],</span> <span class="n">sol</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">:]</span>
+    <span class="k">return</span> <span class="n">LagrangeResult</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x_star</span><span class="p">,</span> <span class="n">multipliers</span><span class="o">=</span><span class="n">lam_star</span><span class="p">,</span> <span class="n">converged</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">success</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="verify_kkt">
+<a class="viewcode-back" href="../../../../api/optimization.html#mathematicskit.optimization.verify_kkt">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">verify_kkt</span><span class="p">(</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">grad_f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="n">h</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">grad_h</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">eq_multipliers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">g</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">grad_g</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">ineq_multipliers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-6</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">KKTResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Numerically check the KKT conditions at a candidate point.</span>
+
+<span class="sd">    Verifies, for equality constraints :math:`h(x)=0` with multipliers</span>
+<span class="sd">    :math:`\lambda` and inequality constraints :math:`g(x) \leq 0` with</span>
+<span class="sd">    multipliers :math:`\mu \geq 0`:</span>
+
+<span class="sd">    1. **Stationarity**: :math:`\nabla f(x) + \sum_i \lambda_i \nabla</span>
+<span class="sd">       h_i(x) + \sum_j \mu_j \nabla g_j(x) \approx 0`.</span>
+<span class="sd">    2. **Primal feasibility**: :math:`h(x) \approx 0`, :math:`g(x) \leq</span>
+<span class="sd">       \text{tol}`.</span>
+<span class="sd">    3. **Dual feasibility**: :math:`\mu \geq -\text{tol}`.</span>
+<span class="sd">    4. **Complementary slackness**: :math:`\mu_j g_j(x) \approx 0` for</span>
+<span class="sd">       every ``j``.</span>
+
+<span class="sd">    See Nocedal &amp; Wright, *Numerical Optimization*, 2nd ed., Ch. 12.3,</span>
+<span class="sd">    Theorem 12.1.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : ndarray, shape (n,)</span>
+<span class="sd">        Candidate point.</span>
+<span class="sd">    grad_f : callable</span>
+<span class="sd">        Objective gradient.</span>
+<span class="sd">    h, grad_h : callable, optional</span>
+<span class="sd">        Equality constraints and their Jacobian.</span>
+<span class="sd">    eq_multipliers : ndarray, optional</span>
+<span class="sd">    g, grad_g : callable, optional</span>
+<span class="sd">        Inequality constraints and their Jacobian.</span>
+<span class="sd">    ineq_multipliers : ndarray, optional</span>
+<span class="sd">    tol : float</span>
+<span class="sd">        Numerical tolerance for each check.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    KKTResult</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; # minimize x^2 + y^2 subject to x + y = 1: (0.5, 0.5) with lambda=-1 is exactly KKT-stationary.</span>
+<span class="sd">    &gt;&gt;&gt; grad_f = lambda z: np.array([2.0 * z[0], 2.0 * z[1]])</span>
+<span class="sd">    &gt;&gt;&gt; h = lambda z: np.array([z[0] + z[1] - 1.0])</span>
+<span class="sd">    &gt;&gt;&gt; grad_h = lambda z: np.array([[1.0, 1.0]])</span>
+<span class="sd">    &gt;&gt;&gt; result = verify_kkt(np.array([0.5, 0.5]), grad_f, h=h, grad_h=grad_h, eq_multipliers=np.array([-1.0]))</span>
+<span class="sd">    &gt;&gt;&gt; result.satisfied</span>
+<span class="sd">    True</span>
+<span class="sd">    """</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">stationarity</span> <span class="o">=</span> <span class="n">grad_f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">primal_feasible</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">dual_feasible</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">complementary</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">if</span> <span class="n">h</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">lam</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">h</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="n">eq_multipliers</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">eq_multipliers</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">stationarity</span> <span class="o">=</span> <span class="n">stationarity</span> <span class="o">+</span> <span class="n">grad_h</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">lam</span>
+        <span class="n">primal_feasible</span> <span class="o">=</span> <span class="n">primal_feasible</span> <span class="ow">and</span> <span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">h</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">tol</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">g</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="n">ineq_multipliers</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ineq_multipliers</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">stationarity</span> <span class="o">=</span> <span class="n">stationarity</span> <span class="o">+</span> <span class="n">grad_g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">mu</span>
+        <span class="n">g_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">primal_feasible</span> <span class="o">=</span> <span class="n">primal_feasible</span> <span class="ow">and</span> <span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">g_vals</span> <span class="o">&lt;=</span> <span class="n">tol</span><span class="p">))</span>
+        <span class="n">dual_feasible</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">mu</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="n">tol</span><span class="p">))</span>
+        <span class="n">complementary</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">mu</span> <span class="o">*</span> <span class="n">g_vals</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">tol</span><span class="p">))</span>
+
+    <span class="n">stat_residual</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">stationarity</span><span class="p">))</span>
+    <span class="n">satisfied</span> <span class="o">=</span> <span class="p">(</span><span class="n">stat_residual</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span> <span class="n">primal_feasible</span> <span class="ow">and</span> <span class="n">dual_feasible</span> <span class="ow">and</span> <span class="n">complementary</span>
+    <span class="k">return</span> <span class="n">KKTResult</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>
+        <span class="n">stationarity_residual</span><span class="o">=</span><span class="n">stat_residual</span><span class="p">,</span>
+        <span class="n">primal_feasible</span><span class="o">=</span><span class="n">primal_feasible</span><span class="p">,</span>
+        <span class="n">dual_feasible</span><span class="o">=</span><span class="n">dual_feasible</span><span class="p">,</span>
+        <span class="n">complementary_slackness</span><span class="o">=</span><span class="n">complementary</span><span class="p">,</span>
+        <span class="n">satisfied</span><span class="o">=</span><span class="n">satisfied</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="PenaltyMethod">
+<a class="viewcode-back" href="../../../../api/optimization.html#mathematicskit.optimization.PenaltyMethod">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PenaltyMethod</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Quadratic penalty method: a sequence of unconstrained minimizations</span>
+<span class="sd">    with an increasing penalty weight.</span>
+
+<span class="sd">    Reformulates :math:`\min f(x)` s.t. :math:`h(x)=0`, :math:`g(x)\leq0`</span>
+<span class="sd">    as the unconstrained problem :math:`\min_x f(x) + \mu \left[\sum_i</span>
+<span class="sd">    h_i(x)^2 + \sum_j \max(0, g_j(x))^2\right]`, solved for a sequence of</span>
+<span class="sd">    increasing :math:`\mu`, each warm-started from the previous</span>
+<span class="sd">    solution -- as :math:`\mu \to \infty` the penalized minimizer</span>
+<span class="sd">    converges to a KKT point of the original constrained problem. Each</span>
+<span class="sd">    unconstrained sub-solve uses</span>
+<span class="sd">    :class:`~mathematicskit.optimization.systems.newton_quasi_newton.BFGS` by</span>
+<span class="sd">    default. See Nocedal &amp; Wright, *Numerical Optimization*, 2nd ed.,</span>
+<span class="sd">    Ch. 17.1 ("The Quadratic Penalty Method").</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    mu0 : float</span>
+<span class="sd">        Initial penalty weight.</span>
+<span class="sd">    mu_factor : float</span>
+<span class="sd">        Multiplicative increase applied to ``mu`` after each sub-solve.</span>
+<span class="sd">    n_outer : int</span>
+<span class="sd">        Number of penalty-weight increases (outer iterations).</span>
+<span class="sd">    inner_optimizer : UnconstrainedOptimizer, optional</span>
+<span class="sd">        Solver used for each unconstrained sub-problem; defaults to</span>
+<span class="sd">        :class:`~mathematicskit.optimization.systems.newton_quasi_newton.BFGS`.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; # minimize x^2 + y^2 subject to x + y = 1: exact solution (0.5, 0.5).</span>
+<span class="sd">    &gt;&gt;&gt; f = lambda z: z[0] ** 2 + z[1] ** 2</span>
+<span class="sd">    &gt;&gt;&gt; grad_f = lambda z: np.array([2.0 * z[0], 2.0 * z[1]])</span>
+<span class="sd">    &gt;&gt;&gt; h = lambda z: np.array([z[0] + z[1] - 1.0])</span>
+<span class="sd">    &gt;&gt;&gt; grad_h = lambda z: np.array([[1.0, 1.0]])</span>
+<span class="sd">    &gt;&gt;&gt; result = PenaltyMethod(n_outer=8).minimize(f, grad_f, np.array([0.0, 0.0]), h=h, grad_h=grad_h)</span>
+<span class="sd">    &gt;&gt;&gt; np.allclose(result.x, [0.5, 0.5], atol=1e-3)</span>
+<span class="sd">    True</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mu0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">mu_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">10.0</span><span class="p">,</span> <span class="n">n_outer</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">inner_optimizer</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">UnconstrainedOptimizer</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mu0</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">mu0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mu_factor</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">mu_factor</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_outer</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_outer</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inner_optimizer</span> <span class="o">=</span> <span class="n">inner_optimizer</span> <span class="k">if</span> <span class="n">inner_optimizer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">BFGS</span><span class="p">(</span><span class="n">tol</span><span class="o">=</span><span class="n">DEFAULT_RTOL</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="n">DEFAULT_MAX_ITER</span><span class="p">)</span>
+
+<div class="viewcode-block" id="PenaltyMethod.minimize">
+<a class="viewcode-back" href="../../../../api/optimization.html#mathematicskit.optimization.PenaltyMethod.minimize">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">minimize</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">],</span>
+        <span class="n">grad_f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+        <span class="n">x0</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">h</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">grad_h</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">g</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">grad_g</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OptimizeResult</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Run the sequential penalty minimization.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        f, grad_f : callable</span>
+<span class="sd">            Objective and its gradient.</span>
+<span class="sd">        x0 : ndarray</span>
+<span class="sd">        h, grad_h : callable, optional</span>
+<span class="sd">            Equality constraints ``h(x) -&gt; ndarray`` and their Jacobian</span>
+<span class="sd">            ``grad_h(x) -&gt; ndarray`` shape (m, n).</span>
+<span class="sd">        g, grad_g : callable, optional</span>
+<span class="sd">            Inequality constraints ``g(x) &lt;= 0`` and their Jacobian.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        OptimizeResult</span>
+<span class="sd">            ``extra["mu_history"]`` records the penalty weight used at</span>
+<span class="sd">            each outer iteration.</span>
+<span class="sd">        """</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">mu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu0</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()]</span>
+        <span class="n">mu_history</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_outer</span><span class="p">):</span>
+
+            <span class="k">def</span><span class="w"> </span><span class="nf">penalized_f</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">):</span>
+                <span class="n">val</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">h</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">val</span> <span class="o">=</span> <span class="n">val</span> <span class="o">+</span> <span class="n">mu</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">h</span><span class="p">(</span><span class="n">z</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">g</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">val</span> <span class="o">=</span> <span class="n">val</span> <span class="o">+</span> <span class="n">mu</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="n">z</span><span class="p">)))</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+                <span class="k">return</span> <span class="n">val</span>
+
+            <span class="k">def</span><span class="w"> </span><span class="nf">penalized_grad</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">):</span>
+                <span class="n">grad</span> <span class="o">=</span> <span class="n">grad_f</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">h</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">grad</span> <span class="o">=</span> <span class="n">grad</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">mu</span> <span class="o">*</span> <span class="n">grad_h</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">h</span><span class="p">(</span><span class="n">z</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">g</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">active</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="n">z</span><span class="p">)))</span>
+                    <span class="n">grad</span> <span class="o">=</span> <span class="n">grad</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">mu</span> <span class="o">*</span> <span class="n">grad_g</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">active</span>
+                <span class="k">return</span> <span class="n">grad</span>
+
+            <span class="n">sub_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inner_optimizer</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">penalized_f</span><span class="p">,</span> <span class="n">penalized_grad</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">sub_result</span><span class="o">.</span><span class="n">x</span>
+            <span class="n">path</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">sub_result</span><span class="o">.</span><span class="n">path</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>
+            <span class="n">mu_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span>
+            <span class="n">mu</span> <span class="o">*=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu_factor</span>
+
+        <span class="k">return</span> <span class="n">OptimizeResult</span><span class="p">(</span>
+            <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">fun</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">path</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">path</span><span class="p">),</span> <span class="n">iterations</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">converged</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"penalty"</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="p">{</span><span class="s2">"mu_history"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mu_history</span><span class="p">)}</span>
+        <span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, mathematicskit contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

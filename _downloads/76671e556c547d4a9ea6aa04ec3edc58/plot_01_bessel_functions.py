@@ -9,7 +9,7 @@ origin) over a range of x, and finds J_0's first zero.
 # %%
 import numpy as np
 
-from mathkit.special_functions import bessel_first_kind, bessel_second_kind
+from mathematicskit.special_functions import bessel_first_kind, bessel_second_kind
 
 # %%
 # Evaluate over a range

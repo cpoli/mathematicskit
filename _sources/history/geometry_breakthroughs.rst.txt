@@ -14,7 +14,7 @@ Geometry is arguably mathematics's oldest rigorously axiomatized subject,
 yet *computational* geometry -- how to compute a convex hull, a
 triangulation, or a curve's curvature efficiently and correctly in
 finite arithmetic -- is barely fifty years old as a named discipline.
-This chronology traces the ideas behind :mod:`mathkit.geometry`, from
+This chronology traces the ideas behind :mod:`mathematicskit.geometry`, from
 Euclid's original axioms to the algorithms that now underlie every
 computer-graphics rendering pipeline and geographic information system.
 
@@ -34,8 +34,8 @@ themselves a kind of algorithm, and the shoelace-formula-style area
 computations this domain relies on descend directly from Book VI's
 theory of areas of plane figures.
 
-*Implementation:* :func:`mathkit.geometry.systems.polygon.polygon_area`
-and :func:`~mathkit.geometry.systems.polygon.polygon_centroid` compute
+*Implementation:* :func:`mathematicskit.geometry.systems.polygon.polygon_area`
+and :func:`~mathematicskit.geometry.systems.polygon.polygon_centroid` compute
 exactly the areas and centroids Euclidean geometry studies, via the
 shoelace formula.
 
@@ -60,7 +60,7 @@ measures how quickly that plane itself twists out of a flat curve.
 
    T' = \kappa N, \qquad N' = -\kappa T + \tau B, \qquad B' = -\tau N
 
-*Implementation:* :func:`mathkit.geometry.systems.curves.frenet_serret_frame`
+*Implementation:* :func:`mathematicskit.geometry.systems.curves.frenet_serret_frame`
 implements exactly this frame and both scalar invariants, computing
 derivatives via :func:`numpy.gradient` and arc length via
 :func:`scipy.integrate.cumulative_trapezoid`, cross-checked against a
@@ -88,10 +88,10 @@ entirely by the initial sort -- and remains one of the clearest
 illustrations of how a global geometric structure (the hull) can be
 built from a simple, local, per-point decision rule.
 
-*Implementation:* :func:`mathkit.geometry.systems.convex_hull.graham_scan`
+*Implementation:* :func:`mathematicskit.geometry.systems.convex_hull.graham_scan`
 implements exactly this angular sweep, kept as a pedagogical comparison
 against the primary API,
-:func:`~mathkit.geometry.systems.convex_hull.convex_hull`, which wraps
+:func:`~mathematicskit.geometry.systems.convex_hull.convex_hull`, which wraps
 :class:`scipy.spatial.ConvexHull` (the Qhull library).
 
 *References:* R. L. Graham, "An Efficient Algorithm for Determining the
@@ -112,9 +112,9 @@ triangulations numerically troublesome for interpolation and finite-
 element meshing, and are, point for point, exactly the graph dual of the
 corresponding Voronoi diagram.
 
-*Implementation:* :func:`mathkit.geometry.systems.triangulation.delaunay_triangulation`
+*Implementation:* :func:`mathematicskit.geometry.systems.triangulation.delaunay_triangulation`
 wraps :class:`scipy.spatial.Delaunay` (Qhull), and
-:func:`~mathkit.geometry.systems.triangulation.voronoi_diagram` wraps
+:func:`~mathematicskit.geometry.systems.triangulation.voronoi_diagram` wraps
 :class:`scipy.spatial.Voronoi` for its dual.
 
 *References:* B. Delaunay, "Sur la sphere vide," Bulletin de l'Academie
@@ -135,7 +135,7 @@ other -- a construction now ubiquitous well beyond mathematics, from
 modeling crystal grain boundaries to drawing service-area maps for a
 network of facilities.
 
-*Implementation:* :func:`mathkit.geometry.systems.triangulation.voronoi_diagram`
+*Implementation:* :func:`mathematicskit.geometry.systems.triangulation.voronoi_diagram`
 implements exactly this partition via :class:`scipy.spatial.Voronoi`.
 
 *References:* G. Voronoi, "Nouvelles applications des parametres
@@ -158,10 +158,10 @@ count meaning inside -- is a direct, algorithmic corollary of Jordan's
 theorem, put into essentially its modern efficient form in the
 computational-geometry literature of the early 1970s.
 
-*Implementation:* :func:`mathkit.geometry.systems.intersections.point_in_polygon`
+*Implementation:* :func:`mathematicskit.geometry.systems.intersections.point_in_polygon`
 implements exactly this ray-casting test, verified directly against a
 concave ("L"-shaped) polygon in this domain's tests;
-:func:`~mathkit.geometry.systems.intersections.segment_intersection`
+:func:`~mathematicskit.geometry.systems.intersections.segment_intersection`
 implements the companion segment-intersection primitive via Cramer's
 rule on the two segments' parametric equations.
 

@@ -11,9 +11,9 @@ Poisson's own (skewed, discrete) shape (CLT).
 # %%
 from scipy import stats
 
-from mathkit.probability import Poisson
-from mathkit.probability.systems.limit_theorems import central_limit_theorem_sample_means, law_of_large_numbers_trace
-from mathkit.probability.visualizers.plots import plot_clt_histogram
+from mathematicskit.probability import Poisson
+from mathematicskit.probability.systems.limit_theorems import central_limit_theorem_sample_means, law_of_large_numbers_trace
+from mathematicskit.probability.visualizers.plots import plot_clt_histogram
 
 dist = Poisson(mu=3.0)
 

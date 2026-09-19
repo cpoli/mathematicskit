@@ -11,8 +11,8 @@ closed forms for a fair game, used here to check the numerical solve.
 # %%
 import numpy as np
 
-from mathkit.probability import MarkovChain
-from mathkit.probability.visualizers.plots import plot_transition_matrix
+from mathematicskit.probability import MarkovChain
+from mathematicskit.probability.visualizers.plots import plot_transition_matrix
 
 # %%
 # Build the transition matrix for capital 0..N

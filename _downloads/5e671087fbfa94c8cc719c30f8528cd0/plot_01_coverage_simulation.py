@@ -10,7 +10,7 @@ true parameter -- the frequentist interpretation of "95% confidence."
 # %%
 import numpy as np
 
-from mathkit.statistics import mean_confidence_interval, proportion_confidence_interval
+from mathematicskit.statistics import mean_confidence_interval, proportion_confidence_interval
 
 # %%
 # Mean confidence interval coverage

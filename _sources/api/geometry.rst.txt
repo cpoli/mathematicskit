@@ -1,5 +1,5 @@
-mathkit.geometry
-==================
+mathematicskit.geometry
+=======================
 
 
 .. include:: /_generated/nav/geometry.rst
@@ -11,6 +11,6 @@ point-in-polygon tests; polygon area/centroid via the shoelace formula;
 and curvature, arc length, and the Frenet-Serret frame for parametric
 curves.
 
-.. automodule:: mathkit.geometry
+.. automodule:: mathematicskit.geometry
    :members:
    :undoc-members:

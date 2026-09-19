@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Counting, Primes, and Probability &#8212; mathkit 0.1.0 documentation</title>
+    <title>Counting, Primes, and Probability &#8212; mathematicskit 0.2.0 documentation</title>
   
   
   
@@ -43,7 +43,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
-    <script src="../_static/documentation_options.js?v=38b66d78"></script>
+    <script src="../_static/documentation_options.js?v=95e61db4"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/sg-tags.js?v=d80f6fa4"></script>
@@ -127,8 +127,8 @@
       
     
     
-    <img src="../_static/mathkit_logo_transparent.png" class="logo__image only-light" alt="mathkit logo"/>
-    <img src="../_static/mathkit_logo_transparent.png" class="logo__image only-dark pst-js-only" alt="mathkit logo"/>
+    <img src="../_static/mathematicskit_logo_transparent.png" class="logo__image only-light" alt="mathematicskit logo"/>
+    <img src="../_static/mathematicskit_logo_transparent.png" class="logo__image only-dark pst-js-only" alt="mathematicskit logo"/>
   
   
 </a></div>
@@ -215,7 +215,7 @@
           
           
           
-          <a href="https://github.com/cpoli/mathkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+          <a href="https://github.com/cpoli/mathematicskit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
         </li>
         <li class="nav-item">
           
@@ -341,7 +341,7 @@
           
           
           
-          <a href="https://github.com/cpoli/mathkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+          <a href="https://github.com/cpoli/mathematicskit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
         </li>
         <li class="nav-item">
           
@@ -415,18 +415,18 @@
   <section id="counting-primes-and-probability">
 <h1>Counting, Primes, and Probability<a class="headerlink" href="#counting-primes-and-probability" title="Link to this heading">#</a></h1>
 <p>The binomial coefficient <span class="math notranslate nohighlight">\(\binom{n}{k}\)</span> is the meeting point of
-three mathkit domains that otherwise look unrelated:
-<a class="reference internal" href="../api/combinatorics.html#module-mathkit.combinatorics" title="mathkit.combinatorics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathkit.combinatorics</span></code></a> studies it as a pure counting problem,
-<a class="reference internal" href="../api/number_theory.html#module-mathkit.number_theory" title="mathkit.number_theory"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathkit.number_theory</span></code></a> studies the <em>prime factorizations</em> hiding
+three mathematicskit domains that otherwise look unrelated:
+<a class="reference internal" href="../api/combinatorics.html#module-mathematicskit.combinatorics" title="mathematicskit.combinatorics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.combinatorics</span></code></a> studies it as a pure counting problem,
+<a class="reference internal" href="../api/number_theory.html#module-mathematicskit.number_theory" title="mathematicskit.number_theory"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.number_theory</span></code></a> studies the <em>prime factorizations</em> hiding
 inside it and the totient function built from them, and
-<a class="reference internal" href="../api/probability.html#module-mathkit.probability" title="mathkit.probability"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathkit.probability</span></code></a> uses it, unchanged, as the weight in the
+<a class="reference internal" href="../api/probability.html#module-mathematicskit.probability" title="mathematicskit.probability"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.probability</span></code></a> uses it, unchanged, as the weight in the
 binomial distribution’s probability mass function.</p>
 <section id="counting-combinations">
 <h2>Counting combinations<a class="headerlink" href="#counting-combinations" title="Link to this heading">#</a></h2>
 <p><code class="xref py py-func docutils literal notranslate"><span class="pre">combinations_count()</span></code>
 counts the number of ways to choose 6 numbers from 20, exactly the
 combinatorics behind a lottery draw:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mathkit.combinatorics</span><span class="w"> </span><span class="kn">import</span> <span class="n">combinations_count</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.combinatorics</span><span class="w"> </span><span class="kn">import</span> <span class="n">combinations_count</span>
 
 <span class="n">count</span> <span class="o">=</span> <span class="n">combinations_count</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
@@ -436,11 +436,11 @@ combinatorics behind a lottery draw:</p>
 </section>
 <section id="the-same-number-as-a-probability-weight">
 <h2>The same number as a probability weight<a class="headerlink" href="#the-same-number-as-a-probability-weight" title="Link to this heading">#</a></h2>
-<p><a class="reference internal" href="../api/probability.html#mathkit.probability.Binomial" title="mathkit.probability.systems.discrete.Binomial"><code class="xref py py-class docutils literal notranslate"><span class="pre">Binomial</span></code></a>’s probability
+<p><a class="reference internal" href="../api/probability.html#mathematicskit.probability.Binomial" title="mathematicskit.probability.systems.discrete.Binomial"><code class="xref py py-class docutils literal notranslate"><span class="pre">Binomial</span></code></a>’s probability
 mass function is built from exactly this same coefficient:</p>
 <div class="math notranslate nohighlight">
 \[P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}\]</div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mathkit.probability</span><span class="w"> </span><span class="kn">import</span> <span class="n">Binomial</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.probability</span><span class="w"> </span><span class="kn">import</span> <span class="n">Binomial</span>
 
 <span class="n">binom</span> <span class="o">=</span> <span class="n">Binomial</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>
@@ -452,12 +452,12 @@ mass function is built from exactly this same coefficient:</p>
 </section>
 <section id="primes-and-the-totient-function">
 <h2>Primes and the totient function<a class="headerlink" href="#primes-and-the-totient-function" title="Link to this heading">#</a></h2>
-<p><a class="reference internal" href="../api/number_theory.html#module-mathkit.number_theory" title="mathkit.number_theory"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathkit.number_theory</span></code></a> supplies the multiplicative-function
+<p><a class="reference internal" href="../api/number_theory.html#module-mathematicskit.number_theory" title="mathematicskit.number_theory"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.number_theory</span></code></a> supplies the multiplicative-function
 machinery this combinatorial counting eventually leans on for larger
 problems – for instance, Euler’s totient function
 <code class="xref py py-func docutils literal notranslate"><span class="pre">euler_totient()</span></code>, which for
 any prime <span class="math notranslate nohighlight">\(p\)</span> always equals <span class="math notranslate nohighlight">\(p-1\)</span>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mathkit.number_theory</span><span class="w"> </span><span class="kn">import</span> <span class="n">sieve_of_eratosthenes</span><span class="p">,</span> <span class="n">euler_totient</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.number_theory</span><span class="w"> </span><span class="kn">import</span> <span class="n">sieve_of_eratosthenes</span><span class="p">,</span> <span class="n">euler_totient</span>
 
 <span class="n">primes</span> <span class="o">=</span> <span class="n">sieve_of_eratosthenes</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">])</span>
@@ -473,16 +473,16 @@ every integer from 1 to <span class="math notranslate nohighlight">\(p-1\)</span
 \pmod n\)</span>) that RSA cryptography’s key generation in
 <a class="reference internal" href="../history/number_theory_breakthroughs.html"><span class="doc">Breakthroughs in Number Theory</span></a> depends on, and, via
 Fermat’s Little Theorem’s special case, the same fact
-<code class="xref py py-func docutils literal notranslate"><span class="pre">mathkit.number_theory.systems.primality.is_prime_miller_rabin()</span></code>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.number_theory.systems.primality.is_prime_miller_rabin()</span></code>
 tests probabilistically for much larger candidate primes than
 <code class="xref py py-func docutils literal notranslate"><span class="pre">sieve_of_eratosthenes()</span></code> could ever enumerate directly.</p>
 </section>
 <section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="../api/combinatorics.html"><span class="doc">mathkit.combinatorics</span></a></p></li>
-<li><p><a class="reference internal" href="../api/number_theory.html"><span class="doc">mathkit.number_theory</span></a></p></li>
-<li><p><a class="reference internal" href="../api/probability.html"><span class="doc">mathkit.probability</span></a></p></li>
+<li><p><a class="reference internal" href="../api/combinatorics.html"><span class="doc">mathematicskit.combinatorics</span></a></p></li>
+<li><p><a class="reference internal" href="../api/number_theory.html"><span class="doc">mathematicskit.number_theory</span></a></p></li>
+<li><p><a class="reference internal" href="../api/probability.html"><span class="doc">mathematicskit.probability</span></a></p></li>
 <li><p><a class="reference internal" href="../history/combinatorics_breakthroughs.html"><span class="doc">Breakthroughs in Combinatorics</span></a></p></li>
 <li><p><a class="reference internal" href="../history/number_theory_breakthroughs.html"><span class="doc">Breakthroughs in Number Theory</span></a></p></li>
 </ul>
@@ -559,7 +559,7 @@ tests probabilistically for much larger candidate primes than
 
   <p class="copyright">
     
-      © Copyright 2026, mathkit contributors.
+      © Copyright 2026, mathematicskit contributors.
       <br/>
     
   </p>

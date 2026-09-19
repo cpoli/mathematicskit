@@ -10,7 +10,7 @@ refactoring from scratch each time.
 # %%
 import numpy as np
 
-from mathkit.linalg import lu_decompose, lu_det, lu_solve
+from mathematicskit.linalg import lu_decompose, lu_det, lu_solve
 
 # %%
 # Factor once, solve for several right-hand sides

@@ -12,8 +12,8 @@ watches both converge and plots the residual-norm history.
 import matplotlib.pyplot as plt
 import numpy as np
 
-from mathkit.linalg import GMRES, ConjugateGradient, random_spd_matrix
-from mathkit.linalg.visualizers.plots import plot_residual_history
+from mathematicskit.linalg import GMRES, ConjugateGradient, random_spd_matrix
+from mathematicskit.linalg.visualizers.plots import plot_residual_history
 
 # %%
 # Conjugate gradient on an SPD system

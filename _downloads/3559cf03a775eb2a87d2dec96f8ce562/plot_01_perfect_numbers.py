@@ -10,7 +10,7 @@ Euler's totient function over a range of ``n``.
 # %%
 import numpy as np
 
-from mathkit.number_theory import divisor_sum, euler_totient
+from mathematicskit.number_theory import divisor_sum, euler_totient
 
 # %%
 # Find perfect numbers up to 10,000

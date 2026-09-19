@@ -15,7 +15,7 @@ The "special functions" -- gamma, Bessel, the orthogonal polynomial
 families -- are special precisely because they recur, unbidden, as the
 exact solutions to an enormous range of unrelated differential
 equations, from vibrating drumheads to quantum wavefunctions. This
-chronology traces the ideas behind :mod:`mathkit.special_functions`, from
+chronology traces the ideas behind :mod:`mathematicskit.special_functions`, from
 Euler's extension of the factorial to the algorithm, rediscovered from a
 much older idea, that made digital signal processing computationally
 feasible at all.
@@ -42,10 +42,10 @@ elliptic integrals.
    \Gamma(x) = \int_0^\infty t^{x-1}e^{-t}\,dt, \qquad
    B(a,b) = \frac{\Gamma(a)\Gamma(b)}{\Gamma(a+b)}
 
-*Implementation:* :func:`mathkit.special_functions.systems.gamma_beta.gamma_function`
-and :func:`~mathkit.special_functions.systems.gamma_beta.beta_function`
+*Implementation:* :func:`mathematicskit.special_functions.systems.gamma_beta.gamma_function`
+and :func:`~mathematicskit.special_functions.systems.gamma_beta.beta_function`
 wrap :func:`scipy.special.gamma`/:func:`~scipy.special.beta` directly;
-:func:`~mathkit.special_functions.systems.gamma_beta.log_gamma_function`
+:func:`~mathematicskit.special_functions.systems.gamma_beta.log_gamma_function`
 wraps the numerically stable :func:`scipy.special.gammaln` for
 arguments large enough that :math:`\Gamma` itself would overflow.
 
@@ -75,8 +75,8 @@ cylinder.
 
    x^2 y'' + xy' + (x^2 - \nu^2)y = 0
 
-*Implementation:* :func:`mathkit.special_functions.systems.bessel.bessel_first_kind`
-and :func:`~mathkit.special_functions.systems.bessel.bessel_second_kind`
+*Implementation:* :func:`mathematicskit.special_functions.systems.bessel.bessel_first_kind`
+and :func:`~mathematicskit.special_functions.systems.bessel.bessel_second_kind`
 wrap :func:`scipy.special.jv`/:func:`~scipy.special.yv` directly, and
 are checked in this domain's tests against the defining differential
 equation itself via finite differences.
@@ -101,11 +101,11 @@ closed form as :math:`T_n(x) = \cos(n\arccos x)` -- the family whose
 minimal-oscillation property is exactly what makes Chebyshev *nodes* the
 cure for Runge's phenomenon.
 
-*Implementation:* :func:`mathkit.special_functions.systems.orthogonal_polynomials.legendre_polynomial`
-and :func:`~mathkit.special_functions.systems.orthogonal_polynomials.chebyshev_polynomial`
+*Implementation:* :func:`mathematicskit.special_functions.systems.orthogonal_polynomials.legendre_polynomial`
+and :func:`~mathematicskit.special_functions.systems.orthogonal_polynomials.chebyshev_polynomial`
 wrap :func:`numpy.polynomial.legendre.legval`/:func:`~numpy.polynomial.chebyshev.chebval`
 directly, with orthogonality verified numerically via
-:func:`mathkit.special_functions.utils.orthogonality.inner_product`.
+:func:`mathematicskit.special_functions.utils.orthogonality.inner_product`.
 
 *References:* A.-M. Legendre, "Recherches sur l'attraction des
 spheroides homogenes," Memoires de Mathematique et de Physique,
@@ -128,8 +128,8 @@ exactly the eigenfunctions quantum mechanics needed: Hermite polynomials
 for the quantum harmonic oscillator, Laguerre polynomials for the radial
 part of the hydrogen atom's wavefunctions.
 
-*Implementation:* :func:`mathkit.special_functions.systems.orthogonal_polynomials.hermite_polynomial`
-and :func:`~mathkit.special_functions.systems.orthogonal_polynomials.laguerre_polynomial`
+*Implementation:* :func:`mathematicskit.special_functions.systems.orthogonal_polynomials.hermite_polynomial`
+and :func:`~mathematicskit.special_functions.systems.orthogonal_polynomials.laguerre_polynomial`
 wrap :func:`numpy.polynomial.hermite.hermval`/:func:`~numpy.polynomial.laguerre.lagval`,
 with orthogonality against each family's own weight verified numerically
 via :func:`scipy.integrate.quad` over an infinite domain.
@@ -165,13 +165,13 @@ all.
 
    X_k = \sum_{n=0}^{N-1} x_n e^{-2\pi ikn/N}
 
-*Implementation:* :func:`mathkit.special_functions.systems.fourier_transform.fft_numpy`
+*Implementation:* :func:`mathematicskit.special_functions.systems.fourier_transform.fft_numpy`
 wraps :func:`numpy.fft.fft` as the primary API;
-:func:`~mathkit.special_functions.systems.fourier_transform.dft_naive`
-and :func:`~mathkit.special_functions.systems.fourier_transform.fft_radix2`
+:func:`~mathematicskit.special_functions.systems.fourier_transform.dft_naive`
+and :func:`~mathematicskit.special_functions.systems.fourier_transform.fft_radix2`
 implement, hand-rolled, exactly the naive :math:`O(N^2)` sum and
 Cooley-Tukey's radix-2 recursive halving respectively, with
-:func:`~mathkit.special_functions.systems.fourier_transform.compare_fft_methods`
+:func:`~mathematicskit.special_functions.systems.fourier_transform.compare_fft_methods`
 timing all three directly against each other to make the
 :math:`O(N^2)` vs. :math:`O(N\log N)` gap concretely visible -- the one
 sub-module in this domain where hand-rolling, rather than a direct

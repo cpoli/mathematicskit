@@ -15,7 +15,7 @@ Where probability theory asks "given a known distribution, what data
 should we expect," statistical inference asks the reverse question:
 given the data actually observed, what can be said about the unknown
 distribution it came from. This chronology traces the ideas behind
-:mod:`mathkit.statistics`, from Gauss's original error theory to the
+:mod:`mathematicskit.statistics`, from Gauss's original error theory to the
 computer-age bootstrap that sidesteps needing a closed-form sampling
 distribution at all.
 
@@ -35,7 +35,7 @@ itself as a random variable with a definite, analyzable distribution,
 the starting point for essentially all of classical statistical
 inference that followed.
 
-*Implementation:* :func:`mathkit.statistics.systems.confidence_intervals.mean_confidence_interval`
+*Implementation:* :func:`mathematicskit.statistics.systems.confidence_intervals.mean_confidence_interval`
 and every hypothesis test in this domain build directly on exactly this
 normal (or, for small samples, Student's t) error model.
 
@@ -57,8 +57,8 @@ goodness-of-fit and independence testing today.
 
    \chi^2 = \sum_i \frac{(O_i - E_i)^2}{E_i}
 
-*Implementation:* :func:`mathkit.statistics.systems.hypothesis_tests.chi_square_goodness_of_fit`
-and :func:`~mathkit.statistics.systems.hypothesis_tests.chi_square_independence`
+*Implementation:* :func:`mathematicskit.statistics.systems.hypothesis_tests.chi_square_goodness_of_fit`
+and :func:`~mathematicskit.statistics.systems.hypothesis_tests.chi_square_independence`
 implement exactly this statistic, referred to :class:`scipy.stats.chi2`,
 cross-checked against :func:`scipy.stats.chisquare`/:func:`~scipy.stats.chi2_contingency`
 in the test suite.
@@ -82,8 +82,8 @@ publishing under their own names, to protect trade secrets), Gosset's
 from a small sample with unknown variance -- heavier-tailed than the
 normal distribution, converging to it only as the sample size grows.
 
-*Implementation:* :func:`mathkit.statistics.systems.hypothesis_tests.one_sample_t_test`
-and :func:`~mathkit.statistics.systems.hypothesis_tests.two_sample_t_test`
+*Implementation:* :func:`mathematicskit.statistics.systems.hypothesis_tests.one_sample_t_test`
+and :func:`~mathematicskit.statistics.systems.hypothesis_tests.two_sample_t_test`
 implement exactly this test, referred to :class:`scipy.stats.t`,
 cross-checked against :func:`scipy.stats.ttest_1samp`/:func:`~scipy.stats.ttest_ind`.
 
@@ -108,7 +108,7 @@ t-tests.
 
    F = \frac{\text{between-group variance}}{\text{within-group variance}}
 
-*Implementation:* :func:`mathkit.statistics.systems.hypothesis_tests.one_way_anova`
+*Implementation:* :func:`mathematicskit.statistics.systems.hypothesis_tests.one_way_anova`
 implements exactly this decomposition, referred to
 :class:`scipy.stats.f`, cross-checked against :func:`scipy.stats.f_oneway`.
 
@@ -127,9 +127,9 @@ parameter value a specified proportion (e.g. 95%) of the time -- a
 statement about the *procedure's* long-run reliability, not a
 probability statement about any one particular interval.
 
-*Implementation:* :func:`mathkit.statistics.systems.confidence_intervals.mean_confidence_interval`,
-:func:`~mathkit.statistics.systems.confidence_intervals.proportion_confidence_interval`,
-and :func:`~mathkit.statistics.systems.confidence_intervals.variance_confidence_interval`
+*Implementation:* :func:`mathematicskit.statistics.systems.confidence_intervals.mean_confidence_interval`,
+:func:`~mathematicskit.statistics.systems.confidence_intervals.proportion_confidence_interval`,
+and :func:`~mathematicskit.statistics.systems.confidence_intervals.variance_confidence_interval`
 all implement exactly this procedure for their respective parameters,
 and this domain's own tests verify the long-run coverage rate directly
 by repeated simulation.
@@ -153,7 +153,7 @@ model explains -- a full statistical apparatus around the same
 20th-century-old fitting principle, formalized progressively through
 the 19th and early 20th centuries as the theory of linear models matured.
 
-*Implementation:* :func:`mathkit.statistics.systems.regression.linear_regression`
+*Implementation:* :func:`mathematicskit.statistics.systems.regression.linear_regression`
 implements exactly this apparatus around a :func:`numpy.linalg.lstsq`
 fit, with coefficient significance referred to :class:`scipy.stats.t`.
 
@@ -172,7 +172,7 @@ sampling distribution required at all, at the cost of needing a computer
 fast enough to resample thousands of times, which by 1979 had finally
 become routinely available.
 
-*Implementation:* :func:`mathkit.statistics.systems.bootstrap.bootstrap_confidence_interval`
+*Implementation:* :func:`mathematicskit.statistics.systems.bootstrap.bootstrap_confidence_interval`
 wraps :func:`scipy.stats.bootstrap` directly, which already implements
 the percentile, "basic", and bias-corrected-and-accelerated (BCa)
 interval-construction methods Efron's original proposal and its

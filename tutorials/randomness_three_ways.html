@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Randomness, Three Ways &#8212; mathkit 0.1.0 documentation</title>
+    <title>Randomness, Three Ways &#8212; mathematicskit 0.2.0 documentation</title>
   
   
   
@@ -43,7 +43,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
-    <script src="../_static/documentation_options.js?v=38b66d78"></script>
+    <script src="../_static/documentation_options.js?v=95e61db4"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/sg-tags.js?v=d80f6fa4"></script>
@@ -127,8 +127,8 @@
       
     
     
-    <img src="../_static/mathkit_logo_transparent.png" class="logo__image only-light" alt="mathkit logo"/>
-    <img src="../_static/mathkit_logo_transparent.png" class="logo__image only-dark pst-js-only" alt="mathkit logo"/>
+    <img src="../_static/mathematicskit_logo_transparent.png" class="logo__image only-light" alt="mathematicskit logo"/>
+    <img src="../_static/mathematicskit_logo_transparent.png" class="logo__image only-dark pst-js-only" alt="mathematicskit logo"/>
   
   
 </a></div>
@@ -215,7 +215,7 @@
           
           
           
-          <a href="https://github.com/cpoli/mathkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+          <a href="https://github.com/cpoli/mathematicskit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
         </li>
         <li class="nav-item">
           
@@ -341,7 +341,7 @@
           
           
           
-          <a href="https://github.com/cpoli/mathkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+          <a href="https://github.com/cpoli/mathematicskit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
         </li>
         <li class="nav-item">
           
@@ -414,9 +414,9 @@
                   
   <section id="randomness-three-ways">
 <h1>Randomness, Three Ways<a class="headerlink" href="#randomness-three-ways" title="Link to this heading">#</a></h1>
-<p>Three of mathkit’s domains lean on randomness for entirely different
-purposes: <a class="reference internal" href="../api/probability.html#module-mathkit.probability" title="mathkit.probability"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathkit.probability</span></code></a> uses it to <em>estimate</em> an integral
-and to <em>simulate</em> a stochastic process, while <a class="reference internal" href="../api/statistics.html#module-mathkit.statistics" title="mathkit.statistics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathkit.statistics</span></code></a>
+<p>Three of mathematicskit’s domains lean on randomness for entirely different
+purposes: <a class="reference internal" href="../api/probability.html#module-mathematicskit.probability" title="mathematicskit.probability"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.probability</span></code></a> uses it to <em>estimate</em> an integral
+and to <em>simulate</em> a stochastic process, while <a class="reference internal" href="../api/statistics.html#module-mathematicskit.statistics" title="mathematicskit.statistics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.statistics</span></code></a>
 uses it to <em>quantify uncertainty</em> about a real dataset with no
 convenient closed-form sampling distribution. All three share the same
 underlying tool – a pseudo-random number generator – put to very
@@ -428,7 +428,7 @@ different mathematical use.</p>
 estimates exactly this integral by sampling points uniformly and
 averaging:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">mathkit.probability</span><span class="w"> </span><span class="kn">import</span> <span class="n">monte_carlo_integrate</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.probability</span><span class="w"> </span><span class="kn">import</span> <span class="n">monte_carlo_integrate</span>
 
 <span class="n">result</span> <span class="o">=</span> <span class="n">monte_carlo_integrate</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">200000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">estimate</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">std_error</span><span class="p">)</span>
@@ -444,7 +444,7 @@ averaging:</p>
 sunny and a 50% chance of staying rainy) settles, regardless of today’s
 weather, into a long-run fraction of sunny/rainy days given by its
 stationary distribution:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mathkit.probability</span><span class="w"> </span><span class="kn">import</span> <span class="n">MarkovChain</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.probability</span><span class="w"> </span><span class="kn">import</span> <span class="n">MarkovChain</span>
 
 <span class="n">chain</span> <span class="o">=</span> <span class="n">MarkovChain</span><span class="p">([[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]])</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">stationary_distribution</span><span class="p">())</span>
@@ -465,7 +465,7 @@ mean once outliers are a concern.
 <code class="xref py py-func docutils literal notranslate"><span class="pre">bootstrap_confidence_interval()</span></code>
 sidesteps the need for one entirely, by resampling the <em>data itself</em>
 thousands of times:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mathkit.statistics</span><span class="w"> </span><span class="kn">import</span> <span class="n">bootstrap_confidence_interval</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.statistics</span><span class="w"> </span><span class="kn">import</span> <span class="n">bootstrap_confidence_interval</span>
 
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">samples</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">exponential</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
@@ -482,8 +482,8 @@ literally resampling the one dataset in hand.</p>
 <section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="../api/probability.html"><span class="doc">mathkit.probability</span></a></p></li>
-<li><p><a class="reference internal" href="../api/statistics.html"><span class="doc">mathkit.statistics</span></a></p></li>
+<li><p><a class="reference internal" href="../api/probability.html"><span class="doc">mathematicskit.probability</span></a></p></li>
+<li><p><a class="reference internal" href="../api/statistics.html"><span class="doc">mathematicskit.statistics</span></a></p></li>
 <li><p><a class="reference internal" href="../history/probability_breakthroughs.html"><span class="doc">Breakthroughs in Probability Theory</span></a></p></li>
 <li><p><a class="reference internal" href="../history/statistics_breakthroughs.html"><span class="doc">Breakthroughs in Statistical Inference</span></a></p></li>
 </ul>
@@ -560,7 +560,7 @@ literally resampling the one dataset in hand.</p>
 
   <p class="copyright">
     
-      © Copyright 2026, mathkit contributors.
+      © Copyright 2026, mathematicskit contributors.
       <br/>
     
   </p>

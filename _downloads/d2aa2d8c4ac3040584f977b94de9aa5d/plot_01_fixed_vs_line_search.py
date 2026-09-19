@@ -8,8 +8,8 @@ converges in far fewer iterations than any single fixed step size.
 """
 
 # %%
-from mathkit.optimization import GradientDescent, GradientDescentLineSearch, quadratic_bowl, quadratic_bowl_grad
-from mathkit.optimization.visualizers.plots import plot_contour_path
+from mathematicskit.optimization import GradientDescent, GradientDescentLineSearch, quadratic_bowl, quadratic_bowl_grad
+from mathematicskit.optimization.visualizers.plots import plot_contour_path
 
 # %%
 # Run both methods from the same starting point

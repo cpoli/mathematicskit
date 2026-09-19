@@ -7,8 +7,8 @@ confirms every entry matches ``scipy.special.comb``.
 """
 
 # %%
-from mathkit.combinatorics import combinations_count, pascals_triangle
-from mathkit.combinatorics.visualizers.plots import plot_pascals_triangle
+from mathematicskit.combinatorics import combinations_count, pascals_triangle
+from mathematicskit.combinatorics.visualizers.plots import plot_pascals_triangle
 
 # %%
 # Build and cross-check

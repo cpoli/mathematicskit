@@ -7,7 +7,7 @@ count against brute-force enumeration for a smaller deck.
 """
 
 # %%
-from mathkit.combinatorics import combinations_count, generate_combinations, multinomial_coefficient
+from mathematicskit.combinatorics import combinations_count, generate_combinations, multinomial_coefficient
 
 # %%
 # Total 5-card hands from a standard 52-card deck

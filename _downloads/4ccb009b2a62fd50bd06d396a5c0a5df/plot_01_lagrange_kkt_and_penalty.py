@@ -12,7 +12,7 @@ penalty method.
 # %%
 import numpy as np
 
-from mathkit.optimization import PenaltyMethod, lagrange_stationary_point, verify_kkt
+from mathematicskit.optimization import PenaltyMethod, lagrange_stationary_point, verify_kkt
 
 f = lambda z: z[0] ** 2 + z[1] ** 2
 grad_f = lambda z: np.array([2.0 * z[0], 2.0 * z[1]])

@@ -8,7 +8,7 @@ Diophantine equation with its full solution family.
 """
 
 # %%
-from mathkit.number_theory import solve_linear_diophantine, solve_pell_equation
+from mathematicskit.number_theory import solve_linear_diophantine, solve_pell_equation
 
 # %%
 # Pell's equation for D = 61

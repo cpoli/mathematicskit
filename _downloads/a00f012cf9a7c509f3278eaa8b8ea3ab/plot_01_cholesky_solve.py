@@ -11,7 +11,7 @@ positive-definiteness.
 # %%
 import numpy as np
 
-from mathkit.linalg import cholesky_decompose, cholesky_solve, is_symmetric_positive_definite, random_spd_matrix
+from mathematicskit.linalg import cholesky_decompose, cholesky_solve, is_symmetric_positive_definite, random_spd_matrix
 
 # %%
 # Factor and solve
