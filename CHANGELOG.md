@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `examples/statistics/hypothesis_tests/plot_02_chi_square_tests.py` --
+  Pearson's chi-square goodness-of-fit and independence tests, closing
+  the last gap in the docs' history-to-example coverage (see below).
+
+### Fixed
+
+- Every entry across `docs/source/history/*_breakthroughs.rst` is now
+  linked to at least one `.. minigallery::` example. Eleven entries
+  (Nine Chapters elimination and Cauchy's eigenvalue problem in
+  `linalg`; Cantor's set and Fatou/Julia iteration in `fractals_chaos`;
+  Euler's Konigsberg bridges in `graph_theory`; Lorenz's deterministic
+  chaos in `ode_dynamics`; Poisson's distribution and Kolmogorov's
+  axioms in `probability`; Gauss's theory of errors, Pearson's
+  chi-square test, Gosset's t-distribution, and Fisher's ANOVA in
+  `statistics`) previously had no associated gallery example.
+
 ## [0.2.0] - 2026-09-19
 
 ### Changed

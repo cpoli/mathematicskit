@@ -45,6 +45,8 @@ pertinentis," Commentarii Academiae Scientiarum Petropolitanae 8 (1741),
 128-140 (presented to the St. Petersburg Academy in 1735, published
 1741).
 
+.. minigallery:: ../../examples/graph_theory/shortest_paths/plot_01_dijkstra_vs_bellman_ford.py
+
 1959 -- Dijkstra's Shortest-Path Algorithm
 ------------------------------------------------
 

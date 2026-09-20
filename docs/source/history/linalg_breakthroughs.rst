@@ -36,6 +36,8 @@ underlying solves, and every dense linear system in this package, trace
 back to exactly this elimination idea, now delegated to LAPACK via
 :func:`scipy.linalg.lu`.
 
+.. minigallery:: ../../examples/linalg/lu/plot_01_lu_decomposition.py
+
 1809 -- Gauss and LU Decomposition
 -------------------------------------
 
@@ -142,6 +144,8 @@ case.
 *References:* A.-L. Cauchy, "Sur l'équation à l'aide de laquelle on
 détermine les inégalités séculaires des mouvements des planètes,"
 Exercices de mathématiques 4 (1829).
+
+.. minigallery:: ../../examples/linalg/eigen/plot_01_eigenvalue_methods_compared.py
 
 1929 -- Power Iteration and von Mises
 -----------------------------------------

@@ -1,4 +1,5 @@
 Hypothesis tests
 ------------------
 
-z-tests, t-tests, chi-square tests, and one-way ANOVA.
+z-tests, t-tests, chi-square tests (goodness-of-fit and independence),
+and one-way ANOVA.
