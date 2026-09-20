@@ -410,15 +410,15 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.statistics.systems.regression</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Ordinary least-squares linear regression with residual diagnostics.</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Ordinary least-squares linear regression with residual diagnostics.</span>
 
 <span class="sd">Fits via :func:`numpy.linalg.lstsq`, exactly as</span>
-<span class="sd">:mod:`mathematicskit.numerical_analysis.systems.regression`'s polynomial</span>
+<span class="sd">:mod:`mathematicskit.numerical_analysis.systems.regression`&#39;s polynomial</span>
 <span class="sd">regression (this module adds the standard inferential diagnostics</span>
 <span class="sd">around it: coefficient standard errors, t-statistics/p-values, and</span>
 <span class="sd">R^2/adjusted R^2, referred to :class:`scipy.stats.t`). See DeGroot &amp;</span>
 <span class="sd">Schervish, *Probability and Statistics*, 4th ed., Ch. 11.5-11.7.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -427,17 +427,17 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.statistics.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">RegressionResult</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"linear_regression"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;linear_regression&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="linear_regression">
 <a class="viewcode-back" href="../../../../api/statistics.html#mathematicskit.statistics.linear_regression">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">linear_regression</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">add_intercept</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RegressionResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Ordinary least squares: :math:`y = X\beta + \varepsilon`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Ordinary least squares: :math:`y = X\beta + \varepsilon`.</span>
 
 <span class="sd">    Solves for :math:`\hat\beta` via :func:`numpy.linalg.lstsq`; standard</span>
 <span class="sd">    errors come from the diagonal of :math:`\hat\sigma^2 (X^TX)^{-1}`</span>
-<span class="sd">    where :math:`\hat\sigma^2 = SSR/(n-p)`, and each coefficient's</span>
+<span class="sd">    where :math:`\hat\sigma^2 = SSR/(n-p)`, and each coefficient&#39;s</span>
 <span class="sd">    t-statistic/p-value tests :math:`H_0: \beta_j = 0` against</span>
 <span class="sd">    :class:`scipy.stats.t` with :math:`n-p` degrees of freedom. See</span>
 <span class="sd">    DeGroot &amp; Schervish, *Probability and Statistics*, 4th ed.,</span>
@@ -467,7 +467,7 @@
 <span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; round(result.r_squared, 6)</span>
 <span class="sd">    1.0</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -490,7 +490,7 @@
         <span class="n">sigma2</span> <span class="o">=</span> <span class="n">ss_res</span> <span class="o">/</span> <span class="n">df_resid</span>
         <span class="n">cov_beta</span> <span class="o">=</span> <span class="n">sigma2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">design</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">design</span><span class="p">)</span>
         <span class="n">standard_errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">cov_beta</span><span class="p">))</span>
-        <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
             <span class="n">t_statistics</span> <span class="o">=</span> <span class="n">coefficients</span> <span class="o">/</span> <span class="n">standard_errors</span>
         <span class="n">p_values</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">t_statistics</span><span class="p">),</span> <span class="n">df_resid</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>

@@ -43,6 +43,8 @@ non-integer fractal dimension.
 points," Acta Mathematica 4 (1884), 381-392 (describing the
 construction, first announced in an 1883 paper).
 
+.. minigallery:: ../../examples/fractals_chaos/box_counting/plot_01_sierpinski_dimension.py
+
 1890 -- Peano and Sierpinski's Space-Filling and Gasket Curves
 --------------------------------------------------------------------
 
@@ -93,6 +95,8 @@ z^2+c` via escape-time iteration.
 rationnelles," Journal de Mathematiques Pures et Appliquees 8 (1918),
 47-245; P. Fatou, "Sur les equations fonctionnelles," Bulletin de la
 Societe Mathematique de France 47 (1919), 161-271.
+
+.. minigallery:: ../../examples/fractals_chaos/mandelbrot_julia/plot_01_mandelbrot_and_julia.py
 
 1963 -- Lorenz and the Sensitive Dependence Quantified
 ------------------------------------------------------------

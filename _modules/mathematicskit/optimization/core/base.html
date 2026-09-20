@@ -410,20 +410,20 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.optimization.core.base</h1><div class="highlight"><pre>
-<span></span><span class="sd">"""Abstract base classes and result containers for mathematicskit.optimization.</span>
+<span></span><span class="sd">&quot;&quot;&quot;Abstract base classes and result containers for mathematicskit.optimization.</span>
 
 <span class="sd">:class:`UnconstrainedOptimizer` is the shared interface for the</span>
 <span class="sd">iterate-path-exposing methods in :mod:`mathematicskit.optimization.systems`</span>
 <span class="sd">(gradient descent, nonlinear conjugate gradient, and the scipy-backed</span>
 <span class="sd">Newton/BFGS wrappers), mirroring</span>
-<span class="sd">:mod:`mathematicskit.numerical_analysis.core.base.IterativeRootFinder`'s</span>
+<span class="sd">:mod:`mathematicskit.numerical_analysis.core.base.IterativeRootFinder`&#39;s</span>
 <span class="sd">pattern of one ABC per algorithmic family paired with a stable dataclass</span>
 <span class="sd">result. :class:`KKTResult` and :class:`LagrangeResult` support the</span>
 <span class="sd">constrained-optimization utilities in</span>
 <span class="sd">:mod:`mathematicskit.optimization.systems.constrained`;</span>
 <span class="sd">:class:`LinearProgramResult` wraps</span>
 <span class="sd">:func:`~mathematicskit.optimization.systems.linear_programming.linear_program`.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -436,11 +436,11 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">DEFAULT_MAX_ITER</span><span class="p">,</span> <span class="n">DEFAULT_RTOL</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">"OptimizeResult"</span><span class="p">,</span>
-    <span class="s2">"UnconstrainedOptimizer"</span><span class="p">,</span>
-    <span class="s2">"KKTResult"</span><span class="p">,</span>
-    <span class="s2">"LagrangeResult"</span><span class="p">,</span>
-    <span class="s2">"LinearProgramResult"</span><span class="p">,</span>
+    <span class="s2">&quot;OptimizeResult&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;UnconstrainedOptimizer&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;KKTResult&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LagrangeResult&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LinearProgramResult&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 
@@ -448,39 +448,39 @@
 <a class="viewcode-back" href="../../../../api/optimization.html#mathematicskit.optimization.OptimizeResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">OptimizeResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Container for the output of an :class:`UnconstrainedOptimizer`."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for the output of an :class:`UnconstrainedOptimizer`.&quot;&quot;&quot;</span>
 
     <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray, shape (n,): The final iterate."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (n,): The final iterate.&quot;&quot;&quot;</span>
 
     <span class="n">fun</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: Objective value at ``x``."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Objective value at ``x``.&quot;&quot;&quot;</span>
 
     <span class="n">path</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray, shape (iterations + 1, n): Every iterate, starting from</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (iterations + 1, n): Every iterate, starting from</span>
 <span class="sd">    the initial guess -- the record used for convergence-rate comparison</span>
-<span class="sd">    plots (see :mod:`mathematicskit.optimization.visualizers.plots`)."""</span>
+<span class="sd">    plots (see :mod:`mathematicskit.optimization.visualizers.plots`).&quot;&quot;&quot;</span>
 
     <span class="n">iterations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="w">    </span><span class="sd">"""int: Number of iterations actually performed."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;int: Number of iterations actually performed.&quot;&quot;&quot;</span>
 
     <span class="n">converged</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="w">    </span><span class="sd">"""bool: Whether the stopping tolerance was met before `max_iter`."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;bool: Whether the stopping tolerance was met before `max_iter`.&quot;&quot;&quot;</span>
 
-    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
-<span class="w">    </span><span class="sd">"""str: Name of the method used (e.g. ``"gradient_descent_fixed"``)."""</span>
+    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;str: Name of the method used (e.g. ``&quot;gradient_descent_fixed&quot;``).&quot;&quot;&quot;</span>
 
     <span class="n">extra</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-<span class="w">    </span><span class="sd">"""dict: Free-form slot for method-specific diagnostics (e.g. the</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;dict: Free-form slot for method-specific diagnostics (e.g. the</span>
 <span class="sd">    step-size history for a line-search method, or the penalty-parameter</span>
-<span class="sd">    schedule for :class:`~mathematicskit.optimization.systems.constrained.PenaltyMethod`)."""</span></div>
+<span class="sd">    schedule for :class:`~mathematicskit.optimization.systems.constrained.PenaltyMethod`).&quot;&quot;&quot;</span></div>
 
 
 
 <div class="viewcode-block" id="UnconstrainedOptimizer">
 <a class="viewcode-back" href="../../../../api/optimization.html#mathematicskit.optimization.UnconstrainedOptimizer">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">UnconstrainedOptimizer</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Common base for iterative unconstrained-minimization algorithms.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Common base for iterative unconstrained-minimization algorithms.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -489,7 +489,7 @@
 <span class="sd">        scipy-backed methods, forwarded as their own tolerance).</span>
 <span class="sd">    max_iter : int</span>
 <span class="sd">        Maximum number of iterations before giving up.</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_RTOL</span><span class="p">,</span> <span class="n">max_iter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">DEFAULT_MAX_ITER</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tol</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">tol</span><span class="p">)</span>
@@ -499,7 +499,7 @@
 <a class="viewcode-back" href="../../../../api/optimization.html#mathematicskit.optimization.UnconstrainedOptimizer.minimize">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">minimize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">],</span> <span class="n">grad</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">x0</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OptimizeResult</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Minimize ``f`` starting from ``x0``, using its gradient ``grad``.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Minimize ``f`` starting from ``x0``, using its gradient ``grad``.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -512,7 +512,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        OptimizeResult</span>
-<span class="sd">        """</span></div>
+<span class="sd">        &quot;&quot;&quot;</span></div>
 </div>
 
 
@@ -521,28 +521,28 @@
 <a class="viewcode-back" href="../../../../api/optimization.html#mathematicskit.optimization.KKTResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">KKTResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Container for a numerical Karush-Kuhn-Tucker condition check at a candidate point."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for a numerical Karush-Kuhn-Tucker condition check at a candidate point.&quot;&quot;&quot;</span>
 
     <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray, shape (n,): The candidate point checked."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (n,): The candidate point checked.&quot;&quot;&quot;</span>
 
     <span class="n">stationarity_residual</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: :math:`\\|\\nabla f(x) + \\sum_i \\lambda_i \\nabla h_i(x) +</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: :math:`\\|\\nabla f(x) + \\sum_i \\lambda_i \\nabla h_i(x) +</span>
 <span class="sd">    \\sum_j \\mu_j \\nabla g_j(x)\\|`, the norm of the (should-be-zero)</span>
-<span class="sd">    Lagrangian gradient."""</span>
+<span class="sd">    Lagrangian gradient.&quot;&quot;&quot;</span>
 
     <span class="n">primal_feasible</span><span class="p">:</span> <span class="nb">bool</span>
-<span class="w">    </span><span class="sd">"""bool: Whether every equality constraint is (numerically) zero and</span>
-<span class="sd">    every inequality constraint is :math:`\\leq 0` at ``x``."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;bool: Whether every equality constraint is (numerically) zero and</span>
+<span class="sd">    every inequality constraint is :math:`\\leq 0` at ``x``.&quot;&quot;&quot;</span>
 
     <span class="n">dual_feasible</span><span class="p">:</span> <span class="nb">bool</span>
-<span class="w">    </span><span class="sd">"""bool: Whether every inequality multiplier :math:`\\mu_j \\geq 0`."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;bool: Whether every inequality multiplier :math:`\\mu_j \\geq 0`.&quot;&quot;&quot;</span>
 
     <span class="n">complementary_slackness</span><span class="p">:</span> <span class="nb">bool</span>
-<span class="w">    </span><span class="sd">"""bool: Whether :math:`\\mu_j g_j(x) \\approx 0` for every inequality constraint."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;bool: Whether :math:`\\mu_j g_j(x) \\approx 0` for every inequality constraint.&quot;&quot;&quot;</span>
 
     <span class="n">satisfied</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="w">    </span><span class="sd">"""bool: Whether all four KKT conditions above hold within tolerance."""</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;bool: Whether all four KKT conditions above hold within tolerance.&quot;&quot;&quot;</span></div>
 
 
 
@@ -550,20 +550,20 @@
 <a class="viewcode-back" href="../../../../api/optimization.html#mathematicskit.optimization.LagrangeResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">LagrangeResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Container for an equality-constrained stationary point found via</span>
-<span class="sd">    the Lagrange-multiplier system."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for an equality-constrained stationary point found via</span>
+<span class="sd">    the Lagrange-multiplier system.&quot;&quot;&quot;</span>
 
     <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray, shape (n,): The stationary point found."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (n,): The stationary point found.&quot;&quot;&quot;</span>
 
     <span class="n">multipliers</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray, shape (m,): The equality-constraint Lagrange multipliers."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (m,): The equality-constraint Lagrange multipliers.&quot;&quot;&quot;</span>
 
     <span class="n">converged</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="w">    </span><span class="sd">"""bool: Whether the underlying root solve succeeded."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;bool: Whether the underlying root solve succeeded.&quot;&quot;&quot;</span>
 
     <span class="n">kkt</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">KKTResult</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="w">    </span><span class="sd">"""KKTResult, optional: The KKT check at ``(x, multipliers)``, if computed."""</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;KKTResult, optional: The KKT check at ``(x, multipliers)``, if computed.&quot;&quot;&quot;</span></div>
 
 
 
@@ -571,19 +571,19 @@
 <a class="viewcode-back" href="../../../../api/optimization.html#mathematicskit.optimization.LinearProgramResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">LinearProgramResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Container for the output of :func:`~mathematicskit.optimization.systems.linear_programming.linear_program`."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for the output of :func:`~mathematicskit.optimization.systems.linear_programming.linear_program`.&quot;&quot;&quot;</span>
 
     <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray, shape (n,): The optimal solution."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (n,): The optimal solution.&quot;&quot;&quot;</span>
 
     <span class="n">fun</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: The optimal objective value."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: The optimal objective value.&quot;&quot;&quot;</span>
 
     <span class="n">success</span><span class="p">:</span> <span class="nb">bool</span>
-<span class="w">    </span><span class="sd">"""bool: Whether the solver reported success."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;bool: Whether the solver reported success.&quot;&quot;&quot;</span>
 
-    <span class="n">message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
-<span class="w">    </span><span class="sd">"""str: The underlying solver's status message."""</span></div>
+    <span class="n">message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;str: The underlying solver&#39;s status message.&quot;&quot;&quot;</span></div>
 
 </pre></div>
 

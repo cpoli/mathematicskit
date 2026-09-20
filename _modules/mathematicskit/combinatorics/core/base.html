@@ -410,30 +410,30 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.combinatorics.core.base</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""A Young/Ferrers diagram: the shared representation for</span>
-<span class="sd">mathematicskit.combinatorics's integer-partition tools.</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A Young/Ferrers diagram: the shared representation for</span>
+<span class="sd">mathematicskit.combinatorics&#39;s integer-partition tools.</span>
 
-<span class="sd">Unlike most other mathematicskit domains, this domain's algorithm families</span>
-<span class="sd">(counting, partitions, inclusion-exclusion, special numbers) don't share</span>
-<span class="sd">a common interface the way, e.g., :mod:`mathematicskit.numerical_analysis`'s</span>
-<span class="sd">root finders do, so there's no ABC here -- only the one small class with</span>
+<span class="sd">Unlike most other mathematicskit domains, this domain&#39;s algorithm families</span>
+<span class="sd">(counting, partitions, inclusion-exclusion, special numbers) don&#39;t share</span>
+<span class="sd">a common interface the way, e.g., :mod:`mathematicskit.numerical_analysis`&#39;s</span>
+<span class="sd">root finders do, so there&#39;s no ABC here -- only the one small class with</span>
 <span class="sd">real behavior (rendering, conjugation) worth sharing, following</span>
-<span class="sd">physicskit's own precedent of varying internal shape by what a family of</span>
+<span class="sd">physicskit&#39;s own precedent of varying internal shape by what a family of</span>
 <span class="sd">algorithms actually needs.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"YoungDiagram"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;YoungDiagram&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="YoungDiagram">
 <a class="viewcode-back" href="../../../../api/combinatorics.html#mathematicskit.combinatorics.YoungDiagram">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">YoungDiagram</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""A Young diagram for an integer partition :math:`\lambda = (\lambda_1 \geq \lambda_2 \geq \dots)`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A Young diagram for an integer partition :math:`\lambda = (\lambda_1 \geq \lambda_2 \geq \dots)`.</span>
 
 <span class="sd">    Rows are left-justified, of non-increasing length -- the standard</span>
 <span class="sd">    combinatorial picture of a partition, e.g. :math:`\lambda=(4,2,1)`</span>
@@ -454,20 +454,20 @@
 <span class="sd">    *</span>
 <span class="sd">    &gt;&gt;&gt; diagram.conjugate().parts</span>
 <span class="sd">    [3, 2, 1, 1]</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">parts</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parts</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parts</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"parts must be in non-increasing order"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;parts must be in non-increasing order&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">p</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parts</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"all parts must be positive"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;all parts must be positive&quot;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="YoungDiagram.ferrers_diagram">
 <a class="viewcode-back" href="../../../../api/combinatorics.html#mathematicskit.combinatorics.YoungDiagram.ferrers_diagram">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">ferrers_diagram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbol</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"*"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Render the diagram as a multi-line string of `symbol` characters.</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ferrers_diagram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbol</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;*&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Render the diagram as a multi-line string of `symbol` characters.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -476,22 +476,22 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        str</span>
-<span class="sd">        """</span>
-        <span class="k">return</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">symbol</span> <span class="o">*</span> <span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parts</span><span class="p">)</span></div>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">symbol</span> <span class="o">*</span> <span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parts</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="YoungDiagram.conjugate">
 <a class="viewcode-back" href="../../../../api/combinatorics.html#mathematicskit.combinatorics.YoungDiagram.conjugate">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">conjugate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">YoungDiagram</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""The conjugate (transpose) partition: reflect the diagram across its main diagonal.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The conjugate (transpose) partition: reflect the diagram across its main diagonal.</span>
 
-<span class="sd">        :math:`\lambda'_k` = the number of parts of :math:`\lambda` that</span>
+<span class="sd">        :math:`\lambda&#39;_k` = the number of parts of :math:`\lambda` that</span>
 <span class="sd">        are :math:`\geq k`.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        YoungDiagram</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">parts</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">YoungDiagram</span><span class="p">([])</span>
         <span class="n">max_part</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -501,7 +501,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">n</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""int: The partitioned integer, ``sum(parts)``."""</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;int: The partitioned integer, ``sum(parts)``.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parts</span><span class="p">)</span></div>
 
 </pre></div>

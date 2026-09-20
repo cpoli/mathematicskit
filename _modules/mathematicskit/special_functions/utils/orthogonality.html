@@ -410,11 +410,11 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.special_functions.utils.orthogonality</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Numerical verification of an orthogonal polynomial family's defining</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Numerical verification of an orthogonal polynomial family&#39;s defining</span>
 <span class="sd">inner-product identity -- supporting numerics for</span>
 <span class="sd">:mod:`mathematicskit.special_functions.systems.orthogonal_polynomials` and its</span>
 <span class="sd">tests, not a model in its own right.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -422,15 +422,15 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">integrate</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"inner_product"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;inner_product&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="inner_product">
 <a class="viewcode-back" href="../../../../api/special_functions.html#mathematicskit.special_functions.inner_product">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">inner_product</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">],</span> <span class="n">g</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">],</span> <span class="n">weight</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">],</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""The weighted inner product :math:`\langle f, g\rangle = \int_a^b f(x)g(x)w(x)\,dx`, via :func:`scipy.integrate.quad`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The weighted inner product :math:`\langle f, g\rangle = \int_a^b f(x)g(x)w(x)\,dx`, via :func:`scipy.integrate.quad`.</span>
 
-<span class="sd">    Used to numerically verify an orthogonal polynomial family's</span>
+<span class="sd">    Used to numerically verify an orthogonal polynomial family&#39;s</span>
 <span class="sd">    defining property directly:</span>
 <span class="sd">    :math:`\langle p_m, p_n\rangle_w = 0` for :math:`m \neq n`. See</span>
 <span class="sd">    Arfken, Weber &amp; Harris, *Mathematical Methods for Physicists*, 7th</span>
@@ -440,7 +440,7 @@
 <span class="sd">    ----------</span>
 <span class="sd">    f, g : callable</span>
 <span class="sd">    weight : callable</span>
-<span class="sd">        The family's weight function (e.g. constant 1 for Legendre,</span>
+<span class="sd">        The family&#39;s weight function (e.g. constant 1 for Legendre,</span>
 <span class="sd">        :math:`e^{-x^2}` for Hermite).</span>
 <span class="sd">    a, b : float</span>
 <span class="sd">        Integration bounds (may be infinite, e.g. ``-np.inf``/``np.inf``</span>
@@ -457,7 +457,7 @@
 <span class="sd">    &gt;&gt;&gt; p3 = lambda x: legendre_polynomial(3, x)</span>
 <span class="sd">    &gt;&gt;&gt; abs(inner_product(p2, p3, lambda x: 1.0, -1.0, 1.0)) &lt; 1e-10</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">value</span><span class="p">,</span> <span class="n">_abserr</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">weight</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div>
 

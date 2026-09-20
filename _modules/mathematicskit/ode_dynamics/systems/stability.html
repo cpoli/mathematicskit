@@ -410,15 +410,15 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.ode_dynamics.systems.stability</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Fixed-point stability analysis for 2D autonomous systems via Jacobian</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Fixed-point stability analysis for 2D autonomous systems via Jacobian</span>
 <span class="sd">linearization: the trace-determinant classification of node/saddle/</span>
 <span class="sd">spiral/center, and a multivariate Newton solver (built on</span>
 <span class="sd">:mod:`mathematicskit.linalg`) to locate fixed points numerically.</span>
 
 <span class="sd">See Strogatz, *Nonlinear Dynamics and Chaos*, 2nd ed., Ch. 5</span>
-<span class="sd">("Linear Systems") and Ch. 6.3 ("Linearization"), and Burden &amp; Faires,</span>
-<span class="sd">*Numerical Analysis*, 10th ed., Ch. 10.2 (multivariate Newton's method).</span>
-<span class="sd">"""</span>
+<span class="sd">(&quot;Linear Systems&quot;) and Ch. 6.3 (&quot;Linearization&quot;), and Burden &amp; Faires,</span>
+<span class="sd">*Numerical Analysis*, 10th ed., Ch. 10.2 (multivariate Newton&#39;s method).</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -429,13 +429,13 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.linalg.systems.lu</span><span class="w"> </span><span class="kn">import</span> <span class="n">lu_solve_system</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.ode_dynamics.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">FixedPointResult</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"classify_fixed_point_2d"</span><span class="p">,</span> <span class="s2">"find_fixed_point_newton"</span><span class="p">,</span> <span class="s2">"numerical_jacobian"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;classify_fixed_point_2d&quot;</span><span class="p">,</span> <span class="s2">&quot;find_fixed_point_newton&quot;</span><span class="p">,</span> <span class="s2">&quot;numerical_jacobian&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="classify_fixed_point_2d">
 <a class="viewcode-back" href="../../../../api/ode_dynamics.html#mathematicskit.ode_dynamics.classify_fixed_point_2d">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">classify_fixed_point_2d</span><span class="p">(</span><span class="n">jacobian</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FixedPointResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Classify a 2D linear system's fixed point from its Jacobian.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Classify a 2D linear system&#39;s fixed point from its Jacobian.</span>
 
 <span class="sd">    For :math:`\dot{\mathbf x} = J\mathbf x` (or the linearization of a</span>
 <span class="sd">    nonlinear system about a fixed point), let :math:`\tau =</span>
@@ -457,7 +457,7 @@
 <span class="sd">    ----------</span>
 <span class="sd">    jacobian : ndarray, shape (2, 2)</span>
 <span class="sd">    location : ndarray, shape (2,), optional</span>
-<span class="sd">        The fixed point's coordinates, for record-keeping; defaults to</span>
+<span class="sd">        The fixed point&#39;s coordinates, for record-keeping; defaults to</span>
 <span class="sd">        the origin.</span>
 
 <span class="sd">    Returns</span>
@@ -469,11 +469,11 @@
 <span class="sd">    &gt;&gt;&gt; import numpy as np</span>
 <span class="sd">    &gt;&gt;&gt; result = classify_fixed_point_2d(np.array([[-1.0, 0.0], [0.0, -2.0]]))</span>
 <span class="sd">    &gt;&gt;&gt; result.classification</span>
-<span class="sd">    'stable node'</span>
+<span class="sd">    &#39;stable node&#39;</span>
 <span class="sd">    &gt;&gt;&gt; result2 = classify_fixed_point_2d(np.array([[0.0, 1.0], [-1.0, 0.0]]))</span>
 <span class="sd">    &gt;&gt;&gt; result2.classification</span>
-<span class="sd">    'center'</span>
-<span class="sd">    """</span>
+<span class="sd">    &#39;center&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">j</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">jacobian</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">tau</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">j</span><span class="p">))</span>
     <span class="n">delta</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">j</span><span class="p">))</span>
@@ -486,21 +486,21 @@
         <span class="n">eigenvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">tau</span> <span class="o">+</span> <span class="n">sqrt_disc</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">,</span> <span class="p">(</span><span class="n">tau</span> <span class="o">-</span> <span class="n">sqrt_disc</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">delta</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">classification</span> <span class="o">=</span> <span class="s2">"saddle"</span>
+        <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;saddle&quot;</span>
     <span class="k">elif</span> <span class="n">delta</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">classification</span> <span class="o">=</span> <span class="s2">"non-isolated (zero eigenvalue)"</span>
+        <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;non-isolated (zero eigenvalue)&quot;</span>
     <span class="k">elif</span> <span class="n">disc</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">tau</span> <span class="o">*</span> <span class="n">tau</span> <span class="o">-</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="n">delta</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-12</span><span class="p">:</span>
-            <span class="n">classification</span> <span class="o">=</span> <span class="s2">"degenerate node"</span>
+            <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;degenerate node&quot;</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">classification</span> <span class="o">=</span> <span class="s2">"stable node"</span> <span class="k">if</span> <span class="n">tau</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">"unstable node"</span>
+            <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;stable node&quot;</span> <span class="k">if</span> <span class="n">tau</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;unstable node&quot;</span>
     <span class="k">elif</span> <span class="n">disc</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">tau</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-12</span><span class="p">:</span>
-            <span class="n">classification</span> <span class="o">=</span> <span class="s2">"center"</span>
+            <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;center&quot;</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">classification</span> <span class="o">=</span> <span class="s2">"stable spiral"</span> <span class="k">if</span> <span class="n">tau</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">"unstable spiral"</span>
+            <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;stable spiral&quot;</span> <span class="k">if</span> <span class="n">tau</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;unstable spiral&quot;</span>
     <span class="k">else</span><span class="p">:</span>  <span class="c1"># disc == 0, delta &gt; 0</span>
-        <span class="n">classification</span> <span class="o">=</span> <span class="s2">"degenerate node"</span>
+        <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;degenerate node&quot;</span>
 
     <span class="n">stable</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">eigenvalues</span><span class="o">.</span><span class="n">real</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">))</span>
     <span class="n">loc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">if</span> <span class="n">location</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">location</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
@@ -511,7 +511,7 @@
 <div class="viewcode-block" id="numerical_jacobian">
 <a class="viewcode-back" href="../../../../api/ode_dynamics.html#mathematicskit.ode_dynamics.numerical_jacobian">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">numerical_jacobian</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">h</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-6</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Central-difference Jacobian of a vector field ``f: R^n -&gt; R^n``.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Central-difference Jacobian of a vector field ``f: R^n -&gt; R^n``.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -531,7 +531,7 @@
 <span class="sd">    &gt;&gt;&gt; np.round(numerical_jacobian(f, np.array([0.0, 0.0])), 6)</span>
 <span class="sd">    array([[ 0.,  1.],</span>
 <span class="sd">           [-1.,  0.]])</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">jac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
@@ -546,7 +546,7 @@
 <div class="viewcode-block" id="find_fixed_point_newton">
 <a class="viewcode-back" href="../../../../api/ode_dynamics.html#mathematicskit.ode_dynamics.find_fixed_point_newton">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">find_fixed_point_newton</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">x0</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-10</span><span class="p">,</span> <span class="n">max_iter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Locate a fixed point of ``f(x) = 0`` via multivariate Newton's method.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Locate a fixed point of ``f(x) = 0`` via multivariate Newton&#39;s method.</span>
 
 <span class="sd">    :math:`x_{k+1} = x_k - J(x_k)^{-1} f(x_k)`, with the linear solve at</span>
 <span class="sd">    each step done via :func:`mathematicskit.linalg.systems.lu.lu_solve_system`</span>
@@ -579,7 +579,7 @@
 <span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; np.allclose(f(x), 0.0, atol=1e-8)</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">converged</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iter</span><span class="p">):</span>

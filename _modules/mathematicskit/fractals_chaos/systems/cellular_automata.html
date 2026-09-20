@@ -410,15 +410,15 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.fractals_chaos.systems.cellular_automata</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Elementary (1D) cellular automata with Wolfram rule numbering, and</span>
-<span class="sd">Conway's Game of Life as a 2D cellular automaton.</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Elementary (1D) cellular automata with Wolfram rule numbering, and</span>
+<span class="sd">Conway&#39;s Game of Life as a 2D cellular automaton.</span>
 
 <span class="sd">See Wolfram, *A New Kind of Science*, 2002, Ch. 2-3, for elementary CA</span>
-<span class="sd">and their rule numbering, and Gardner (1970), "The fantastic</span>
-<span class="sd">combinations of John Conway's new solitaire game 'life'", Scientific</span>
-<span class="sd">American 223, for Life's original presentation. Both boundary conditions</span>
+<span class="sd">and their rule numbering, and Gardner (1970), &quot;The fantastic</span>
+<span class="sd">combinations of John Conway&#39;s new solitaire game &#39;life&#39;&quot;, Scientific</span>
+<span class="sd">American 223, for Life&#39;s original presentation. Both boundary conditions</span>
 <span class="sd">are periodic (toroidal).</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -427,19 +427,19 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.fractals_chaos.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">CellularAutomaton</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"ElementaryCA"</span><span class="p">,</span> <span class="s2">"GameOfLife"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ElementaryCA&quot;</span><span class="p">,</span> <span class="s2">&quot;GameOfLife&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="ElementaryCA">
 <a class="viewcode-back" href="../../../../api/fractals_chaos.html#mathematicskit.fractals_chaos.ElementaryCA">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ElementaryCA</span><span class="p">(</span><span class="n">CellularAutomaton</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""1D elementary cellular automaton, Wolfram rule numbering (0-255).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;1D elementary cellular automaton, Wolfram rule numbering (0-255).</span>
 
-<span class="sd">    Each cell's next state is a function of its own and its two</span>
-<span class="sd">    neighbors' current states -- 8 possible 3-cell neighborhoods, so</span>
+<span class="sd">    Each cell&#39;s next state is a function of its own and its two</span>
+<span class="sd">    neighbors&#39; current states -- 8 possible 3-cell neighborhoods, so</span>
 <span class="sd">    :math:`2^8 = 256` possible rules, each identified by the 8-bit number</span>
 <span class="sd">    whose bits give the output for each neighborhood (MSB-first:</span>
-<span class="sd">    ``111, 110, 101, 100, 011, 010, 001, 000``), Wolfram's numbering</span>
+<span class="sd">    ``111, 110, 101, 100, 011, 010, 001, 000``), Wolfram&#39;s numbering</span>
 <span class="sd">    convention. See Wolfram, *A New Kind of Science*, 2002, Ch. 2.</span>
 
 <span class="sd">    Parameters</span>
@@ -450,24 +450,24 @@
 <span class="sd">        Number of cells (periodic boundary).</span>
 <span class="sd">    initial : ndarray, shape (width,), optional</span>
 <span class="sd">        Initial state (0s and 1s); defaults to a single ``1`` at the</span>
-<span class="sd">        center cell, the standard way to display a rule's characteristic</span>
+<span class="sd">        center cell, the standard way to display a rule&#39;s characteristic</span>
 <span class="sd">        pattern.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; import numpy as np</span>
-<span class="sd">    &gt;&gt;&gt; # Rule 90 is the XOR of a cell's two neighbors, producing a</span>
+<span class="sd">    &gt;&gt;&gt; # Rule 90 is the XOR of a cell&#39;s two neighbors, producing a</span>
 <span class="sd">    &gt;&gt;&gt; # discrete Sierpinski triangle from a single seed cell.</span>
 <span class="sd">    &gt;&gt;&gt; ca = ElementaryCA(rule=90, width=7)</span>
 <span class="sd">    &gt;&gt;&gt; ca.state.tolist()</span>
 <span class="sd">    [0, 0, 0, 1, 0, 0, 0]</span>
 <span class="sd">    &gt;&gt;&gt; ca.step().tolist()</span>
 <span class="sd">    [0, 0, 1, 0, 1, 0, 0]</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">initial</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">rule</span> <span class="o">&lt;=</span> <span class="mi">255</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"rule must be between 0 and 255"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;rule must be between 0 and 255&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rule</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">width</span><span class="p">)</span>
         <span class="c1"># Bit k of `rule` gives the output for the neighborhood whose</span>
@@ -479,7 +479,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">initial</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,):</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"initial must have shape (width,)"</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;initial must have shape (width,)&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">state</span>
 
 <div class="viewcode-block" id="ElementaryCA.step">
@@ -516,13 +516,13 @@
 <div class="viewcode-block" id="GameOfLife">
 <a class="viewcode-back" href="../../../../api/fractals_chaos.html#mathematicskit.fractals_chaos.GameOfLife">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">GameOfLife</span><span class="p">(</span><span class="n">CellularAutomaton</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Conway's Game of Life: a 2D outer-totalistic cellular automaton (rule B3/S23).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Conway&#39;s Game of Life: a 2D outer-totalistic cellular automaton (rule B3/S23).</span>
 
-<span class="sd">    A dead cell with exactly 3 live neighbors becomes alive ("birth"); a</span>
+<span class="sd">    A dead cell with exactly 3 live neighbors becomes alive (&quot;birth&quot;); a</span>
 <span class="sd">    live cell with 2 or 3 live neighbors survives, otherwise it dies</span>
-<span class="sd">    ("death" by isolation or overcrowding). Periodic (toroidal) boundary.</span>
+<span class="sd">    (&quot;death&quot; by isolation or overcrowding). Periodic (toroidal) boundary.</span>
 <span class="sd">    The per-cell neighbor count uses a Numba-compiled kernel</span>
-<span class="sd">    (:func:`_life_step`), following physicskit's factory/dispatcher</span>
+<span class="sd">    (:func:`_life_step`), following physicskit&#39;s factory/dispatcher</span>
 <span class="sd">    pattern for performance-critical stepping. See Gardner (1970),</span>
 <span class="sd">    Scientific American 223.</span>
 
@@ -534,7 +534,7 @@
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; import numpy as np</span>
-<span class="sd">    &gt;&gt;&gt; # A "blinker": a 3-cell line, period-2 oscillator.</span>
+<span class="sd">    &gt;&gt;&gt; # A &quot;blinker&quot;: a 3-cell line, period-2 oscillator.</span>
 <span class="sd">    &gt;&gt;&gt; grid = np.zeros((5, 5), dtype=np.int64)</span>
 <span class="sd">    &gt;&gt;&gt; grid[2, 1:4] = 1</span>
 <span class="sd">    &gt;&gt;&gt; life = GameOfLife(grid)</span>
@@ -542,12 +542,12 @@
 <span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; np.array_equal(life.step(), grid)</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">initial</span><span class="p">):</span>
         <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">initial</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"initial must be a 2D grid"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;initial must be a 2D grid&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">state</span>
 
 <div class="viewcode-block" id="GameOfLife.step">

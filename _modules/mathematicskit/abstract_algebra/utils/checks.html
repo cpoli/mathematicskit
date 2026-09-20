@@ -410,21 +410,21 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.abstract_algebra.utils.checks</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""A small structural check -- supporting numerics for</span>
-<span class="sd">mathematicskit.abstract_algebra's systems/ modules, not a model in its own right.</span>
-<span class="sd">"""</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A small structural check -- supporting numerics for</span>
+<span class="sd">mathematicskit.abstract_algebra&#39;s systems/ modules, not a model in its own right.</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.abstract_algebra.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">FiniteGroup</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"is_cyclic"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;is_cyclic&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="is_cyclic">
 <a class="viewcode-back" href="../../../../api/abstract_algebra.html#mathematicskit.abstract_algebra.is_cyclic">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">is_cyclic</span><span class="p">(</span><span class="n">group</span><span class="p">:</span> <span class="n">FiniteGroup</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Whether `group` is cyclic: some element generates the entire group.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Whether `group` is cyclic: some element generates the entire group.</span>
 
 <span class="sd">    Checked by testing whether any single element has order</span>
 <span class="sd">    :math:`|G|` (via :meth:`~mathematicskit.abstract_algebra.core.base.FiniteGroup.element_order`).</span>
@@ -443,9 +443,9 @@
 <span class="sd">    &gt;&gt;&gt; from mathematicskit.abstract_algebra.systems.groups import CyclicGroup, PermutationGroup</span>
 <span class="sd">    &gt;&gt;&gt; is_cyclic(CyclicGroup(6))</span>
 <span class="sd">    True</span>
-<span class="sd">    &gt;&gt;&gt; is_cyclic(PermutationGroup(3))  # S_3 is not cyclic (it's non-abelian)</span>
+<span class="sd">    &gt;&gt;&gt; is_cyclic(PermutationGroup(3))  # S_3 is not cyclic (it&#39;s non-abelian)</span>
 <span class="sd">    False</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">element_order</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">==</span> <span class="n">group</span><span class="o">.</span><span class="n">order</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">group</span><span class="o">.</span><span class="n">elements</span><span class="p">)</span></div>
 
 </pre></div>

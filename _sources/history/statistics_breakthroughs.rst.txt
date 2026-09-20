@@ -42,6 +42,8 @@ normal (or, for small samples, Student's t) error model.
 *References:* C. F. Gauss, *Theoria Motus Corporum Coelestium* (Hamburg:
 Perthes et Besser, 1809), Book II, Section 3.
 
+.. minigallery:: ../../examples/statistics/confidence_intervals/plot_01_coverage_simulation.py
+
 1900 -- Pearson's Chi-Square Test
 ---------------------------------------
 
@@ -69,6 +71,8 @@ Variables is Such that it Can be Reasonably Supposed to have Arisen from
 Random Sampling," Philosophical Magazine Series 5, 50(302) (1900),
 157-175.
 
+.. minigallery:: ../../examples/statistics/hypothesis_tests/plot_02_chi_square_tests.py
+
 1908 -- Gosset's t-Distribution
 -------------------------------------
 
@@ -89,6 +93,8 @@ cross-checked against :func:`scipy.stats.ttest_1samp`/:func:`~scipy.stats.ttest_
 
 *References:* Student [W. S. Gosset], "The Probable Error of a Mean,"
 Biometrika 6(1) (1908), 1-25.
+
+.. minigallery:: ../../examples/statistics/hypothesis_tests/plot_01_t_test_and_anova.py
 
 1925 -- Fisher and the Analysis of Variance
 -------------------------------------------------
@@ -114,6 +120,8 @@ implements exactly this decomposition, referred to
 
 *References:* R. A. Fisher, *Statistical Methods for Research Workers*
 (Edinburgh: Oliver and Boyd, 1925), Ch. 7.
+
+.. minigallery:: ../../examples/statistics/hypothesis_tests/plot_01_t_test_and_anova.py
 
 1937 -- Neyman's Confidence Intervals
 -------------------------------------------

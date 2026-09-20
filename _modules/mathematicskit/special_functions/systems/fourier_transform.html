@@ -410,18 +410,18 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.special_functions.systems.fourier_transform</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""The discrete Fourier transform: naive :math:`O(n^2)` DFT, a</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The discrete Fourier transform: naive :math:`O(n^2)` DFT, a</span>
 <span class="sd">hand-rolled radix-2 FFT, and ``numpy.fft`` -- compared directly.</span>
 
 <span class="sd">``numpy.fft.fft``/``scipy.fft.fft`` are the primary API for actually</span>
 <span class="sd">computing a DFT (:func:`fft_numpy`); the naive DFT and radix-2 FFT are</span>
 <span class="sd">kept hand-rolled specifically as a *pedagogical comparison* -- showing</span>
 <span class="sd">the :math:`O(n^2)` vs. :math:`O(n\log n)` speedup and cross-checking</span>
-<span class="sd">correctness -- which is this domain's one deliberate exception to</span>
-<span class="sd">"call the library directly". See Cooley &amp; Tukey (1965), *An algorithm</span>
+<span class="sd">correctness -- which is this domain&#39;s one deliberate exception to</span>
+<span class="sd">&quot;call the library directly&quot;. See Cooley &amp; Tukey (1965), *An algorithm</span>
 <span class="sd">for the machine calculation of complex Fourier series*, Math. Comp. 19,</span>
 <span class="sd">and Cormen et al., *Introduction to Algorithms*, 3rd ed., Ch. 30.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -431,13 +431,13 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.special_functions.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">FFTComparisonResult</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"dft_naive"</span><span class="p">,</span> <span class="s2">"fft_radix2"</span><span class="p">,</span> <span class="s2">"fft_numpy"</span><span class="p">,</span> <span class="s2">"compare_fft_methods"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;dft_naive&quot;</span><span class="p">,</span> <span class="s2">&quot;fft_radix2&quot;</span><span class="p">,</span> <span class="s2">&quot;fft_numpy&quot;</span><span class="p">,</span> <span class="s2">&quot;compare_fft_methods&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="dft_naive">
 <a class="viewcode-back" href="../../../../api/special_functions.html#mathematicskit.special_functions.dft_naive">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">dft_naive</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""The discrete Fourier transform, by direct evaluation of its defining sum.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The discrete Fourier transform, by direct evaluation of its defining sum.</span>
 
 <span class="sd">    :math:`X_k = \sum_{n=0}^{N-1} x_n e^{-2\pi i kn/N}`, computed as a</span>
 <span class="sd">    dense matrix-vector product -- :math:`O(N^2)` time. Kept hand-rolled</span>
@@ -460,7 +460,7 @@
 <span class="sd">    &gt;&gt;&gt; x = np.array([1.0, 2.0, 3.0, 4.0])</span>
 <span class="sd">    &gt;&gt;&gt; np.allclose(dft_naive(x), np.fft.fft(x))</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -473,11 +473,11 @@
 <div class="viewcode-block" id="fft_radix2">
 <a class="viewcode-back" href="../../../../api/special_functions.html#mathematicskit.special_functions.fft_radix2">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">fft_radix2</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""The Cooley-Tukey radix-2 fast Fourier transform.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The Cooley-Tukey radix-2 fast Fourier transform.</span>
 
 <span class="sd">    Recursively splits the DFT of length :math:`N` (a power of 2) into</span>
 <span class="sd">    two DFTs of length :math:`N/2` (even- and odd-indexed samples),</span>
-<span class="sd">    combined via the "butterfly" identity :math:`X_k = E_k + e^{-2\pi</span>
+<span class="sd">    combined via the &quot;butterfly&quot; identity :math:`X_k = E_k + e^{-2\pi</span>
 <span class="sd">    ik/N}O_k`, :math:`X_{k+N/2} = E_k - e^{-2\pi ik/N}O_k` -- giving</span>
 <span class="sd">    :math:`O(N\log N)` time overall. Requires ``len(x)`` to be a power</span>
 <span class="sd">    of 2. See Cooley &amp; Tukey (1965), Math. Comp. 19, and Cormen et al.,</span>
@@ -498,11 +498,11 @@
 <span class="sd">    &gt;&gt;&gt; x = np.array([1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0])</span>
 <span class="sd">    &gt;&gt;&gt; np.allclose(fft_radix2(x), np.fft.fft(x))</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"fft_radix2 requires a power-of-2 length, got </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;fft_radix2 requires a power-of-2 length, got </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">_fft_radix2_recursive</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
 
 
@@ -521,11 +521,11 @@
 <div class="viewcode-block" id="fft_numpy">
 <a class="viewcode-back" href="../../../../api/special_functions.html#mathematicskit.special_functions.fft_numpy">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">fft_numpy</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""The discrete Fourier transform via :func:`numpy.fft.fft`.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The discrete Fourier transform via :func:`numpy.fft.fft`.</span>
 
 <span class="sd">    The primary API for actually computing a DFT in this domain: a</span>
 <span class="sd">    highly optimized mixed-radix FFT (handling any length, not just</span>
-<span class="sd">    powers of 2). See NumPy's FFT documentation.</span>
+<span class="sd">    powers of 2). See NumPy&#39;s FFT documentation.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -540,7 +540,7 @@
 <span class="sd">    &gt;&gt;&gt; import numpy as np</span>
 <span class="sd">    &gt;&gt;&gt; np.allclose(fft_numpy(np.array([1.0, 0.0, -1.0, 0.0])), np.fft.fft([1.0, 0.0, -1.0, 0.0]))</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
 
 
@@ -548,11 +548,11 @@
 <div class="viewcode-block" id="compare_fft_methods">
 <a class="viewcode-back" href="../../../../api/special_functions.html#mathematicskit.special_functions.compare_fft_methods">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compare_fft_methods</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FFTComparisonResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Time and cross-check the naive DFT, radix-2 FFT, and ``numpy.fft`` on the same random signal.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Time and cross-check the naive DFT, radix-2 FFT, and ``numpy.fft`` on the same random signal.</span>
 
 <span class="sd">    Demonstrates the :math:`O(n^2)` vs. :math:`O(n\log n)` gap directly:</span>
-<span class="sd">    the naive DFT's time grows quadratically with `n` while the radix-2</span>
-<span class="sd">    FFT's (and ``numpy.fft``'s) grows only log-linearly, becoming</span>
+<span class="sd">    the naive DFT&#39;s time grows quadratically with `n` while the radix-2</span>
+<span class="sd">    FFT&#39;s (and ``numpy.fft``&#39;s) grows only log-linearly, becoming</span>
 <span class="sd">    dramatically faster for even moderately large `n`.</span>
 
 <span class="sd">    Parameters</span>
@@ -572,9 +572,9 @@
 <span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; result.max_error_radix2_vs_numpy &lt; 1e-8</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"n must be a power of 2, got </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;n must be a power of 2, got </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
 

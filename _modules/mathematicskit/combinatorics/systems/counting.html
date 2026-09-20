@@ -410,17 +410,17 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.combinatorics.systems.counting</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Permutation, combination, and multinomial counting, via :mod:`scipy.special`.</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Permutation, combination, and multinomial counting, via :mod:`scipy.special`.</span>
 
 <span class="sd">``scipy.special.perm``/``comb`` already compute these counts correctly</span>
 <span class="sd">(and efficiently, avoiding overflow via exact-integer arithmetic when</span>
 <span class="sd">``exact=True``); mathematicskit does not reimplement the factorial-ratio</span>
 <span class="sd">arithmetic. *Generating* the actual sequences (which ``scipy.special``</span>
-<span class="sd">does not do -- it only counts) is mathematicskit's own thin wrapper around</span>
+<span class="sd">does not do -- it only counts) is mathematicskit&#39;s own thin wrapper around</span>
 <span class="sd">:mod:`itertools`. See Cormen et al., *Introduction to Algorithms*, 3rd</span>
 <span class="sd">ed., Appendix C, and Graham, Knuth &amp; Patashnik, *Concrete Mathematics*,</span>
 <span class="sd">2nd ed., Ch. 5.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -429,13 +429,13 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">special</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"permutations_count"</span><span class="p">,</span> <span class="s2">"combinations_count"</span><span class="p">,</span> <span class="s2">"multinomial_coefficient"</span><span class="p">,</span> <span class="s2">"generate_permutations"</span><span class="p">,</span> <span class="s2">"generate_combinations"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;permutations_count&quot;</span><span class="p">,</span> <span class="s2">&quot;combinations_count&quot;</span><span class="p">,</span> <span class="s2">&quot;multinomial_coefficient&quot;</span><span class="p">,</span> <span class="s2">&quot;generate_permutations&quot;</span><span class="p">,</span> <span class="s2">&quot;generate_combinations&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="permutations_count">
 <a class="viewcode-back" href="../../../../api/combinatorics.html#mathematicskit.combinatorics.permutations_count">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">permutations_count</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Number of ways to arrange ``k`` of ``n`` distinct items in order: :math:`P(n,k) = n!/(n-k)!`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Number of ways to arrange ``k`` of ``n`` distinct items in order: :math:`P(n,k) = n!/(n-k)!`.</span>
 
 <span class="sd">    Via :func:`scipy.special.perm`. ``k=None`` (the default) counts full</span>
 <span class="sd">    permutations, :math:`P(n,n) = n!`. See Graham, Knuth &amp; Patashnik,</span>
@@ -456,7 +456,7 @@
 <span class="sd">    20</span>
 <span class="sd">    &gt;&gt;&gt; permutations_count(5)  # 5!</span>
 <span class="sd">    120</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">k</span> <span class="o">=</span> <span class="n">n</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">k</span>
     <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">special</span><span class="o">.</span><span class="n">perm</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">exact</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span></div>
 
@@ -465,7 +465,7 @@
 <div class="viewcode-block" id="combinations_count">
 <a class="viewcode-back" href="../../../../api/combinatorics.html#mathematicskit.combinatorics.combinations_count">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">combinations_count</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Number of ways to choose ``k`` of ``n`` distinct items, unordered: :math:`\binom{n}{k}`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Number of ways to choose ``k`` of ``n`` distinct items, unordered: :math:`\binom{n}{k}`.</span>
 
 <span class="sd">    Via :func:`scipy.special.comb`. See Graham, Knuth &amp; Patashnik,</span>
 <span class="sd">    *Concrete Mathematics*, 2nd ed., Sec. 5.1.</span>
@@ -484,7 +484,7 @@
 <span class="sd">    10</span>
 <span class="sd">    &gt;&gt;&gt; combinations_count(52, 5)  # 5-card poker hands</span>
 <span class="sd">    2598960</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">special</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">exact</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span></div>
 
 
@@ -492,7 +492,7 @@
 <div class="viewcode-block" id="multinomial_coefficient">
 <a class="viewcode-back" href="../../../../api/combinatorics.html#mathematicskit.combinatorics.multinomial_coefficient">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">multinomial_coefficient</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">ks</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Multinomial coefficient :math:`\dbinom{n}{k_1,\dots,k_m} = \dfrac{n!}{k_1!\cdots k_m!}`, ``sum(ks) = n``.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Multinomial coefficient :math:`\dbinom{n}{k_1,\dots,k_m} = \dfrac{n!}{k_1!\cdots k_m!}`, ``sum(ks) = n``.</span>
 
 <span class="sd">    Computed as a product of ordinary binomial coefficients (each via</span>
 <span class="sd">    :func:`scipy.special.comb`): choose :math:`k_1` of ``n``, then</span>
@@ -515,10 +515,10 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; multinomial_coefficient(10, [2, 3, 5])</span>
 <span class="sd">    2520</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">ks</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ks</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">ks</span><span class="p">)</span> <span class="o">!=</span> <span class="n">n</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"sum(ks) must equal n, got sum=</span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">ks</span><span class="p">)</span><span class="si">}</span><span class="s2">, n=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;sum(ks) must equal n, got sum=</span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">ks</span><span class="p">)</span><span class="si">}</span><span class="s2">, n=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">remaining</span> <span class="o">=</span> <span class="n">n</span>
     <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">ks</span><span class="p">:</span>
@@ -531,10 +531,10 @@
 <div class="viewcode-block" id="generate_permutations">
 <a class="viewcode-back" href="../../../../api/combinatorics.html#mathematicskit.combinatorics.generate_permutations">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">generate_permutations</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">r</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Generate every ``r``-permutation of `items`, in lexicographic order of position.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate every ``r``-permutation of `items`, in lexicographic order of position.</span>
 
 <span class="sd">    Thin wrapper around :func:`itertools.permutations` (which</span>
-<span class="sd">    ``scipy.special.perm`` doesn't provide -- it only counts).</span>
+<span class="sd">    ``scipy.special.perm`` doesn&#39;t provide -- it only counts).</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -550,7 +550,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; generate_permutations([1, 2, 3], r=2)</span>
 <span class="sd">    [(1, 2), (1, 3), (2, 1), (2, 3), (3, 1), (3, 2)]</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">permutations</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">r</span><span class="p">))</span></div>
 
 
@@ -558,7 +558,7 @@
 <div class="viewcode-block" id="generate_combinations">
 <a class="viewcode-back" href="../../../../api/combinatorics.html#mathematicskit.combinatorics.generate_combinations">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">generate_combinations</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">r</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Generate every ``r``-combination of `items`, in lexicographic order.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate every ``r``-combination of `items`, in lexicographic order.</span>
 
 <span class="sd">    Thin wrapper around :func:`itertools.combinations`.</span>
 
@@ -575,7 +575,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; generate_combinations([1, 2, 3, 4], r=2)</span>
 <span class="sd">    [(1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 4)]</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">r</span><span class="p">))</span></div>
 
 </pre></div>

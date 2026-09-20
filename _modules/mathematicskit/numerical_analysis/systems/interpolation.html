@@ -410,14 +410,14 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.numerical_analysis.systems.interpolation</h1><div class="highlight"><pre>
-<span></span><span class="sd">"""Lagrange and Newton divided-difference polynomial interpolation.</span>
+<span></span><span class="sd">&quot;&quot;&quot;Lagrange and Newton divided-difference polynomial interpolation.</span>
 
 <span class="sd">Both construct *the* (unique) degree-``n`` polynomial through ``n + 1``</span>
 <span class="sd">nodes, so they must agree exactly (up to floating-point roundoff) at any</span>
 <span class="sd">evaluation point; they differ only in representation and evaluation cost.</span>
 <span class="sd">See Burden &amp; Faires, *Numerical Analysis*, 10th ed., Ch. 3.1 (Lagrange)</span>
-<span class="sd">and Ch. 3.3 (Newton's divided differences).</span>
-<span class="sd">"""</span>
+<span class="sd">and Ch. 3.3 (Newton&#39;s divided differences).</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -425,13 +425,13 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.numerical_analysis.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Interpolant</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"LagrangeInterpolant"</span><span class="p">,</span> <span class="s2">"NewtonDividedDifference"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;LagrangeInterpolant&quot;</span><span class="p">,</span> <span class="s2">&quot;NewtonDividedDifference&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="LagrangeInterpolant">
 <a class="viewcode-back" href="../../../../api/numerical_analysis.html#mathematicskit.numerical_analysis.LagrangeInterpolant">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">LagrangeInterpolant</span><span class="p">(</span><span class="n">Interpolant</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Lagrange-form interpolating polynomial through ``(x_i, y_i)``.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Lagrange-form interpolating polynomial through ``(x_i, y_i)``.</span>
 
 <span class="sd">    .. math::</span>
 
@@ -458,12 +458,12 @@
 <span class="sd">    1.375</span>
 <span class="sd">    &gt;&gt;&gt; round(1.5**3 - 2.0 * 1.5 + 1.0, 10)</span>
 <span class="sd">    1.375</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">tolist</span><span class="p">()))</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"interpolation nodes must be distinct"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;interpolation nodes must be distinct&quot;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="LagrangeInterpolant.evaluate">
 <a class="viewcode-back" href="../../../../api/numerical_analysis.html#mathematicskit.numerical_analysis.LagrangeInterpolant.evaluate">[docs]</a>
@@ -488,7 +488,7 @@
 <div class="viewcode-block" id="NewtonDividedDifference">
 <a class="viewcode-back" href="../../../../api/numerical_analysis.html#mathematicskit.numerical_analysis.NewtonDividedDifference">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">NewtonDividedDifference</span><span class="p">(</span><span class="n">Interpolant</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Newton divided-difference form of the interpolating polynomial.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Newton divided-difference form of the interpolating polynomial.</span>
 
 <span class="sd">    .. math::</span>
 
@@ -514,12 +514,12 @@
 <span class="sd">    &gt;&gt;&gt; p = NewtonDividedDifference(x, y)</span>
 <span class="sd">    &gt;&gt;&gt; round(float(p.evaluate(1.5)), 10)</span>
 <span class="sd">    1.375</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">tolist</span><span class="p">()))</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"interpolation nodes must be distinct"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;interpolation nodes must be distinct&quot;</span><span class="p">)</span>
         <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">table</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
         <span class="n">table</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span>
@@ -531,7 +531,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">divided_difference_table</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""ndarray, shape (n, n): full divided-difference table (upper triangle populated)."""</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;ndarray, shape (n, n): full divided-difference table (upper triangle populated).&quot;&quot;&quot;</span>
         <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">table</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
         <span class="n">table</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span>

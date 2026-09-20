@@ -410,21 +410,21 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.statistics.core.base</h1><div class="highlight"><pre>
-<span></span><span class="sd">"""Result containers for mathematicskit.statistics.</span>
+<span></span><span class="sd">&quot;&quot;&quot;Result containers for mathematicskit.statistics.</span>
 
 <span class="sd">Every statistical procedure in this domain -- descriptive summaries,</span>
 <span class="sd">hypothesis tests, confidence intervals, regression, and bootstrap</span>
 <span class="sd">resampling -- returns one of the small dataclasses below (mirroring</span>
-<span class="sd">physicskit's ``SimulationResult`` pattern), rather than a bare tuple or</span>
+<span class="sd">physicskit&#39;s ``SimulationResult`` pattern), rather than a bare tuple or</span>
 <span class="sd">dict, so visualizers and downstream code have a stable interface. This</span>
-<span class="sd">domain has no natural "one ABC per algorithm family" the way, e.g.,</span>
+<span class="sd">domain has no natural &quot;one ABC per algorithm family&quot; the way, e.g.,</span>
 <span class="sd">:mod:`mathematicskit.numerical_analysis` does (each test/interval/model in</span>
 <span class="sd">``systems/`` is its own function with a distinct signature, not</span>
 <span class="sd">interchangeable implementations of one interface), so unlike most other</span>
-<span class="sd">domains' ``core/base.py`` there are no ABCs here -- following</span>
-<span class="sd">physicskit's own precedent of varying internal shape by what a family of</span>
+<span class="sd">domains&#39; ``core/base.py`` there are no ABCs here -- following</span>
+<span class="sd">physicskit&#39;s own precedent of varying internal shape by what a family of</span>
 <span class="sd">algorithms actually needs.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -434,11 +434,11 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">"DescriptiveStatsResult"</span><span class="p">,</span>
-    <span class="s2">"HypothesisTestResult"</span><span class="p">,</span>
-    <span class="s2">"ConfidenceIntervalResult"</span><span class="p">,</span>
-    <span class="s2">"RegressionResult"</span><span class="p">,</span>
-    <span class="s2">"BootstrapResult"</span><span class="p">,</span>
+    <span class="s2">&quot;DescriptiveStatsResult&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;HypothesisTestResult&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ConfidenceIntervalResult&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RegressionResult&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BootstrapResult&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 
@@ -446,33 +446,33 @@
 <a class="viewcode-back" href="../../../../api/statistics.html#mathematicskit.statistics.DescriptiveStatsResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">DescriptiveStatsResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Container for a dataset's descriptive-statistics summary."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for a dataset&#39;s descriptive-statistics summary.&quot;&quot;&quot;</span>
 
     <span class="n">n</span><span class="p">:</span> <span class="nb">int</span>
-<span class="w">    </span><span class="sd">"""int: Sample size."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;int: Sample size.&quot;&quot;&quot;</span>
 
     <span class="n">mean</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: Sample mean."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Sample mean.&quot;&quot;&quot;</span>
 
     <span class="n">variance</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: Sample variance (``ddof=1``, the unbiased estimator)."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Sample variance (``ddof=1``, the unbiased estimator).&quot;&quot;&quot;</span>
 
     <span class="n">std</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: Sample standard deviation (``ddof=1``)."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Sample standard deviation (``ddof=1``).&quot;&quot;&quot;</span>
 
     <span class="n">skewness</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: Sample skewness (Fisher-Pearson, ``scipy.stats.skew``)."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Sample skewness (Fisher-Pearson, ``scipy.stats.skew``).&quot;&quot;&quot;</span>
 
     <span class="n">kurtosis</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: Sample excess kurtosis (``scipy.stats.kurtosis``, normal</span>
-<span class="sd">    distribution has kurtosis 0 under this convention)."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Sample excess kurtosis (``scipy.stats.kurtosis``, normal</span>
+<span class="sd">    distribution has kurtosis 0 under this convention).&quot;&quot;&quot;</span>
 
     <span class="n">minimum</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">q1</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: First quartile (25th percentile)."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: First quartile (25th percentile).&quot;&quot;&quot;</span>
     <span class="n">median</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">q3</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: Third quartile (75th percentile)."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Third quartile (75th percentile).&quot;&quot;&quot;</span>
     <span class="n">maximum</span><span class="p">:</span> <span class="nb">float</span></div>
 
 
@@ -481,27 +481,27 @@
 <a class="viewcode-back" href="../../../../api/statistics.html#mathematicskit.statistics.HypothesisTestResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">HypothesisTestResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Container for the output of a hypothesis test."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for the output of a hypothesis test.&quot;&quot;&quot;</span>
 
     <span class="n">statistic</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: The test statistic (e.g. ``z``, ``t``, :math:`\\chi^2`, ``F``)."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: The test statistic (e.g. ``z``, ``t``, :math:`\\chi^2`, ``F``).&quot;&quot;&quot;</span>
 
     <span class="n">p_value</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: The p-value under the null hypothesis."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: The p-value under the null hypothesis.&quot;&quot;&quot;</span>
 
     <span class="n">df</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="w">    </span><span class="sd">"""float, optional: Degrees of freedom, where applicable."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float, optional: Degrees of freedom, where applicable.&quot;&quot;&quot;</span>
 
-    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
-<span class="w">    </span><span class="sd">"""str: e.g. ``"one_sample_t"``, ``"chi_square_independence"``."""</span>
+    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;str: e.g. ``&quot;one_sample_t&quot;``, ``&quot;chi_square_independence&quot;``.&quot;&quot;&quot;</span>
 
     <span class="n">extra</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-<span class="w">    </span><span class="sd">"""dict: Free-form diagnostics slot (e.g. group means for ANOVA)."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;dict: Free-form diagnostics slot (e.g. group means for ANOVA).&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="HypothesisTestResult.reject_null">
 <a class="viewcode-back" href="../../../../api/statistics.html#mathematicskit.statistics.HypothesisTestResult.reject_null">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">reject_null</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Whether the p-value falls below the significance level ``alpha``.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Whether the p-value falls below the significance level ``alpha``.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -510,7 +510,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        bool</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">p_value</span> <span class="o">&lt;</span> <span class="n">alpha</span></div>
 </div>
 
@@ -520,21 +520,21 @@
 <a class="viewcode-back" href="../../../../api/statistics.html#mathematicskit.statistics.ConfidenceIntervalResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">ConfidenceIntervalResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Container for a confidence interval."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for a confidence interval.&quot;&quot;&quot;</span>
 
     <span class="n">estimate</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: The point estimate (e.g. sample mean/proportion/variance)."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: The point estimate (e.g. sample mean/proportion/variance).&quot;&quot;&quot;</span>
 
     <span class="n">lower</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">upper</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">confidence_level</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.95</span>
-    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
-<span class="w">    </span><span class="sd">"""str: e.g. ``"z"``, ``"t"``, ``"chi_square_variance"``, ``"wald_proportion"``."""</span>
+    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;str: e.g. ``&quot;z&quot;``, ``&quot;t&quot;``, ``&quot;chi_square_variance&quot;``, ``&quot;wald_proportion&quot;``.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="ConfidenceIntervalResult.width">
 <a class="viewcode-back" href="../../../../api/statistics.html#mathematicskit.statistics.ConfidenceIntervalResult.width">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">width</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""float: ``upper - lower``."""</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;float: ``upper - lower``.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span></div>
 </div>
 
@@ -544,19 +544,19 @@
 <a class="viewcode-back" href="../../../../api/statistics.html#mathematicskit.statistics.RegressionResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">RegressionResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Container for an ordinary-least-squares regression fit."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for an ordinary-least-squares regression fit.&quot;&quot;&quot;</span>
 
     <span class="n">coefficients</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray, shape (p,): Fitted coefficients (intercept first, if included)."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (p,): Fitted coefficients (intercept first, if included).&quot;&quot;&quot;</span>
 
     <span class="n">standard_errors</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray, shape (p,): Standard error of each coefficient."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (p,): Standard error of each coefficient.&quot;&quot;&quot;</span>
 
     <span class="n">t_statistics</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray, shape (p,): Per-coefficient t-statistic for ``H0: beta_j = 0``."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (p,): Per-coefficient t-statistic for ``H0: beta_j = 0``.&quot;&quot;&quot;</span>
 
     <span class="n">p_values</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray, shape (p,): Per-coefficient two-sided p-value."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (p,): Per-coefficient two-sided p-value.&quot;&quot;&quot;</span>
 
     <span class="n">fitted_values</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
     <span class="n">residuals</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
@@ -569,18 +569,18 @@
 <a class="viewcode-back" href="../../../../api/statistics.html#mathematicskit.statistics.BootstrapResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">BootstrapResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Container for a bootstrap confidence interval/standard error."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for a bootstrap confidence interval/standard error.&quot;&quot;&quot;</span>
 
     <span class="n">estimate</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: The statistic computed on the original (non-resampled) data."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: The statistic computed on the original (non-resampled) data.&quot;&quot;&quot;</span>
 
     <span class="n">lower</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">upper</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">std_error</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">confidence_level</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.95</span>
-    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"BCa"</span>
-<span class="w">    </span><span class="sd">"""str: The bootstrap CI method (``scipy.stats.bootstrap``'s</span>
-<span class="sd">    ``"percentile"``, ``"basic"``, or ``"BCa"``)."""</span></div>
+    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;BCa&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;str: The bootstrap CI method (``scipy.stats.bootstrap``&#39;s</span>
+<span class="sd">    ``&quot;percentile&quot;``, ``&quot;basic&quot;``, or ``&quot;BCa&quot;``).&quot;&quot;&quot;</span></div>
 
 </pre></div>
 

@@ -410,7 +410,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.graph_theory.systems.spectral</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Spectral graph theory: the graph Laplacian, algebraic connectivity,</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Spectral graph theory: the graph Laplacian, algebraic connectivity,</span>
 <span class="sd">and spectral bipartition.</span>
 
 <span class="sd">The Laplacian itself is built via :func:`scipy.sparse.csgraph.laplacian`</span>
@@ -418,7 +418,7 @@
 <span class="sd">is symmetric for an undirected graph) -- mathematicskit does not reimplement</span>
 <span class="sd">either. See Chung, *Spectral Graph Theory*, 1997, Ch. 1, and Fiedler</span>
 <span class="sd">(1973), *Algebraic connectivity of graphs*, Czechoslovak Math. J. 23.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -427,13 +427,13 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.graph_theory.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">SpectralResult</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"spectral_analysis"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;spectral_analysis&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="spectral_analysis">
 <a class="viewcode-back" href="../../../../api/graph_theory.html#mathematicskit.graph_theory.spectral_analysis">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">spectral_analysis</span><span class="p">(</span><span class="n">graph</span><span class="p">:</span> <span class="n">Graph</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SpectralResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Graph Laplacian, its spectrum, algebraic connectivity, and spectral bipartition.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Graph Laplacian, its spectrum, algebraic connectivity, and spectral bipartition.</span>
 
 <span class="sd">    The (combinatorial) Laplacian :math:`L = D - A` (degree matrix minus</span>
 <span class="sd">    adjacency), via :func:`scipy.sparse.csgraph.laplacian`, is symmetric</span>
@@ -443,7 +443,7 @@
 <span class="sd">    positive iff the graph is connected, and larger values indicate a</span>
 <span class="sd">    more robustly connected graph; its eigenvector (the Fiedler vector)</span>
 <span class="sd">    partitions vertices by sign into two well-separated communities --</span>
-<span class="sd">    spectral clustering's simplest form. See Chung, *Spectral Graph</span>
+<span class="sd">    spectral clustering&#39;s simplest form. See Chung, *Spectral Graph</span>
 <span class="sd">    Theory*, 1997, Ch. 1, and Fiedler (1973), Czechoslovak Math. J. 23.</span>
 
 <span class="sd">    Parameters</span>
@@ -467,7 +467,7 @@
 <span class="sd">    array([-0.,  2.,  2.,  4.])</span>
 <span class="sd">    &gt;&gt;&gt; round(result.algebraic_connectivity, 6)</span>
 <span class="sd">    2.0</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">laplacian</span> <span class="o">=</span> <span class="n">csgraph</span><span class="o">.</span><span class="n">laplacian</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">to_sparse</span><span class="p">())</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
     <span class="n">eigenvalues</span><span class="p">,</span> <span class="n">eigenvectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">laplacian</span><span class="p">)</span>
     <span class="n">algebraic_connectivity</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">eigenvalues</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="n">eigenvalues</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mf">0.0</span>

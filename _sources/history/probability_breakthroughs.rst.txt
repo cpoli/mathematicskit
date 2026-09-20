@@ -111,6 +111,8 @@ this domain's own examples.
 jugements en matiere criminelle et en matiere civile* (Paris: Bachelier,
 1837).
 
+.. minigallery:: ../../examples/probability/discrete/plot_01_binomial_poisson_geometric.py
+
 1933 -- Kolmogorov's Axioms
 --------------------------------
 
@@ -123,8 +125,17 @@ stroke, two centuries of informal (and occasionally contradictory)
 reasoning about what a "probability" actually is, and every distribution
 class in this package rests, ultimately, on Kolmogorov's axioms holding.
 
+*Connection:* :class:`mathematicskit.probability.core.base.DiscreteDistribution`
+and :class:`~mathematicskit.probability.core.base.ContinuousDistribution`, the
+shared interfaces underlying every concrete distribution in this domain,
+are exactly Kolmogorov's measure-theoretic picture made concrete: a
+``pmf``/``pdf`` that is non-negative and integrates or sums to one, and
+a ``cdf`` built from it as the corresponding probability measure.
+
 *References:* A. N. Kolmogorov, *Grundbegriffe der
 Wahrscheinlichkeitsrechnung* (Berlin: Springer, 1933).
+
+.. minigallery:: ../../examples/probability/continuous/plot_01_gamma_generalizes_exponential.py
 
 1906 -- Markov Chains
 --------------------------

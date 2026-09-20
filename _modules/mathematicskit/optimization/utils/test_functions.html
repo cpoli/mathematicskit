@@ -410,15 +410,15 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.optimization.utils.test_functions</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Shared benchmark objective functions for</span>
-<span class="sd">mathematicskit.optimization's convergence-rate comparisons -- not models in</span>
-<span class="sd">their own right, but the common "test track" every method in</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Shared benchmark objective functions for</span>
+<span class="sd">mathematicskit.optimization&#39;s convergence-rate comparisons -- not models in</span>
+<span class="sd">their own right, but the common &quot;test track&quot; every method in</span>
 <span class="sd">:mod:`mathematicskit.optimization.systems` is compared on.</span>
 
 <span class="sd">See Nocedal &amp; Wright, *Numerical Optimization*, 2nd ed., Ch. 2 (the</span>
-<span class="sd">Rosenbrock function, eq. 2.22, as the standard "banana valley" torture</span>
+<span class="sd">Rosenbrock function, eq. 2.22, as the standard &quot;banana valley&quot; torture</span>
 <span class="sd">test) and any convex-optimization text for the quadratic bowl.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -426,13 +426,13 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"rosenbrock"</span><span class="p">,</span> <span class="s2">"rosenbrock_grad"</span><span class="p">,</span> <span class="s2">"rosenbrock_hess"</span><span class="p">,</span> <span class="s2">"quadratic_bowl"</span><span class="p">,</span> <span class="s2">"quadratic_bowl_grad"</span><span class="p">,</span> <span class="s2">"quadratic_bowl_hess"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;rosenbrock&quot;</span><span class="p">,</span> <span class="s2">&quot;rosenbrock_grad&quot;</span><span class="p">,</span> <span class="s2">&quot;rosenbrock_hess&quot;</span><span class="p">,</span> <span class="s2">&quot;quadratic_bowl&quot;</span><span class="p">,</span> <span class="s2">&quot;quadratic_bowl_grad&quot;</span><span class="p">,</span> <span class="s2">&quot;quadratic_bowl_hess&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="rosenbrock">
 <a class="viewcode-back" href="../../../../api/optimization.html#mathematicskit.optimization.rosenbrock">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">rosenbrock</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">100.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""The (generalized, n-dimensional) Rosenbrock "banana" function.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The (generalized, n-dimensional) Rosenbrock &quot;banana&quot; function.</span>
 
 <span class="sd">    :math:`f(x) = \sum_{i=1}^{n-1} \left[b(x_{i+1}-x_i^2)^2 +</span>
 <span class="sd">    (a-x_i)^2\right]`. A narrow, curved valley with a unique global</span>
@@ -456,7 +456,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; rosenbrock(np.array([1.0, 1.0]))</span>
 <span class="sd">    0.0</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">b</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span></div>
 
@@ -465,7 +465,7 @@
 <div class="viewcode-block" id="rosenbrock_grad">
 <a class="viewcode-back" href="../../../../api/optimization.html#mathematicskit.optimization.rosenbrock_grad">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">rosenbrock_grad</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">100.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Gradient of :func:`rosenbrock`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Gradient of :func:`rosenbrock`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -480,7 +480,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; np.allclose(rosenbrock_grad(np.array([1.0, 1.0])), 0.0)</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">xi</span><span class="p">,</span> <span class="n">xi1</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
@@ -493,7 +493,7 @@
 <div class="viewcode-block" id="rosenbrock_hess">
 <a class="viewcode-back" href="../../../../api/optimization.html#mathematicskit.optimization.rosenbrock_hess">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">rosenbrock_hess</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">100.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Hessian of :func:`rosenbrock` (tridiagonal).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Hessian of :func:`rosenbrock` (tridiagonal).</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -509,7 +509,7 @@
 <span class="sd">    &gt;&gt;&gt; H = rosenbrock_hess(np.array([1.0, 1.0]))</span>
 <span class="sd">    &gt;&gt;&gt; H.shape</span>
 <span class="sd">    (2, 2)</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">hess</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
@@ -525,7 +525,7 @@
 <div class="viewcode-block" id="quadratic_bowl">
 <a class="viewcode-back" href="../../../../api/optimization.html#mathematicskit.optimization.quadratic_bowl">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">quadratic_bowl</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">matrix</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""A convex quadratic bowl :math:`f(x) = \tfrac12 x^T A x - b^T x`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A convex quadratic bowl :math:`f(x) = \tfrac12 x^T A x - b^T x`.</span>
 
 <span class="sd">    For symmetric positive-definite ``A``, the unique minimizer is</span>
 <span class="sd">    :math:`x^* = A^{-1}b`, so this is the standard convex test problem</span>
@@ -538,7 +538,7 @@
 <span class="sd">    matrix : ndarray, shape (n, n), optional</span>
 <span class="sd">        SPD matrix ``A``; defaults to ``diag([1, 10])`` for ``n=2`` (a</span>
 <span class="sd">        mildly ill-conditioned bowl -- elongated contours -- that makes</span>
-<span class="sd">        gradient descent's zig-zagging visible).</span>
+<span class="sd">        gradient descent&#39;s zig-zagging visible).</span>
 <span class="sd">    b : ndarray, shape (n,), optional</span>
 <span class="sd">        Defaults to the zero vector (minimizer at the origin).</span>
 
@@ -550,7 +550,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; round(quadratic_bowl(np.array([0.0, 0.0])), 10)</span>
 <span class="sd">    0.0</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">])[:</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="k">if</span> <span class="n">matrix</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">bb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">if</span> <span class="n">b</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
@@ -561,7 +561,7 @@
 <div class="viewcode-block" id="quadratic_bowl_grad">
 <a class="viewcode-back" href="../../../../api/optimization.html#mathematicskit.optimization.quadratic_bowl_grad">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">quadratic_bowl_grad</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">matrix</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Gradient of :func:`quadratic_bowl`: :math:`\nabla f(x) = Ax - b`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Gradient of :func:`quadratic_bowl`: :math:`\nabla f(x) = Ax - b`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -572,7 +572,7 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    ndarray, shape (n,)</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">])[:</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="k">if</span> <span class="n">matrix</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">bb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">if</span> <span class="n">b</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
@@ -583,7 +583,7 @@
 <div class="viewcode-block" id="quadratic_bowl_hess">
 <a class="viewcode-back" href="../../../../api/optimization.html#mathematicskit.optimization.quadratic_bowl_hess">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">quadratic_bowl_hess</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">matrix</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Hessian of :func:`quadratic_bowl`: the constant matrix ``A`` itself.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Hessian of :func:`quadratic_bowl`: the constant matrix ``A`` itself.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -596,7 +596,7 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    ndarray, shape (n, n)</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">])[:</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="k">if</span> <span class="n">matrix</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span></div>
 

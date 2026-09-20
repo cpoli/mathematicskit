@@ -410,7 +410,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.optimization.systems.constrained</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Lagrange multipliers, KKT-condition verification, and a penalty-method</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Lagrange multipliers, KKT-condition verification, and a penalty-method</span>
 <span class="sd">solver for constrained nonlinear optimization.</span>
 
 <span class="sd">Equality-constrained stationary points are found by solving the Lagrange</span>
@@ -419,12 +419,12 @@
 <span class="sd">well-posed square nonlinear system once multipliers are added as</span>
 <span class="sd">unknowns -- no reason to hand-write a multivariate Newton solver when</span>
 <span class="sd">mathematicskit already has one general-purpose root finder available via</span>
-<span class="sd">scipy). KKT verification at a candidate point is mathematicskit's own code,</span>
-<span class="sd">since it's a direct arithmetic check rather than a numerical algorithm</span>
+<span class="sd">scipy). KKT verification at a candidate point is mathematicskit&#39;s own code,</span>
+<span class="sd">since it&#39;s a direct arithmetic check rather than a numerical algorithm</span>
 <span class="sd">with a library equivalent. See Nocedal &amp; Wright, *Numerical</span>
 <span class="sd">Optimization*, 2nd ed., Ch. 12 (KKT conditions) and Ch. 17</span>
 <span class="sd">(penalty/barrier methods).</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -437,7 +437,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.optimization.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">KKTResult</span><span class="p">,</span> <span class="n">LagrangeResult</span><span class="p">,</span> <span class="n">OptimizeResult</span><span class="p">,</span> <span class="n">UnconstrainedOptimizer</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.optimization.systems.newton_quasi_newton</span><span class="w"> </span><span class="kn">import</span> <span class="n">BFGS</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"lagrange_stationary_point"</span><span class="p">,</span> <span class="s2">"verify_kkt"</span><span class="p">,</span> <span class="s2">"PenaltyMethod"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;lagrange_stationary_point&quot;</span><span class="p">,</span> <span class="s2">&quot;verify_kkt&quot;</span><span class="p">,</span> <span class="s2">&quot;PenaltyMethod&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="lagrange_stationary_point">
@@ -445,12 +445,12 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">lagrange_stationary_point</span><span class="p">(</span>
     <span class="n">grad_f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">h</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">grad_h</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">x0</span><span class="p">,</span> <span class="n">lambda0</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LagrangeResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Solve the equality-constrained Lagrange stationarity system.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Solve the equality-constrained Lagrange stationarity system.</span>
 
 <span class="sd">    Finds ``(x*, lambda*)`` satisfying :math:`\nabla f(x^*) + J_h(x^*)^T</span>
 <span class="sd">    \lambda^* = 0` and :math:`h(x^*) = 0` simultaneously, via</span>
 <span class="sd">    :func:`scipy.optimize.root` on the stacked system -- the standard way</span>
-<span class="sd">    to *locate* a constrained stationary point once you've written down</span>
+<span class="sd">    to *locate* a constrained stationary point once you&#39;ve written down</span>
 <span class="sd">    the first-order (Lagrange) conditions symbolically. See Nocedal &amp;</span>
 <span class="sd">    Wright, *Numerical Optimization*, 2nd ed., Ch. 12.2-12.3.</span>
 
@@ -483,7 +483,7 @@
 <span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; np.allclose(result.multipliers, [-1.0], atol=1e-8)</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">x0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">h</span><span class="p">(</span><span class="n">x0</span><span class="p">))</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -514,7 +514,7 @@
     <span class="n">ineq_multipliers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-6</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">KKTResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Numerically check the KKT conditions at a candidate point.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Numerically check the KKT conditions at a candidate point.</span>
 
 <span class="sd">    Verifies, for equality constraints :math:`h(x)=0` with multipliers</span>
 <span class="sd">    :math:`\lambda` and inequality constraints :math:`g(x) \leq 0` with</span>
@@ -560,7 +560,7 @@
 <span class="sd">    &gt;&gt;&gt; result = verify_kkt(np.array([0.5, 0.5]), grad_f, h=h, grad_h=grad_h, eq_multipliers=np.array([-1.0]))</span>
 <span class="sd">    &gt;&gt;&gt; result.satisfied</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">stationarity</span> <span class="o">=</span> <span class="n">grad_f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">primal_feasible</span> <span class="o">=</span> <span class="kc">True</span>
@@ -596,7 +596,7 @@
 <div class="viewcode-block" id="PenaltyMethod">
 <a class="viewcode-back" href="../../../../api/optimization.html#mathematicskit.optimization.PenaltyMethod">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">PenaltyMethod</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Quadratic penalty method: a sequence of unconstrained minimizations</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Quadratic penalty method: a sequence of unconstrained minimizations</span>
 <span class="sd">    with an increasing penalty weight.</span>
 
 <span class="sd">    Reformulates :math:`\min f(x)` s.t. :math:`h(x)=0`, :math:`g(x)\leq0`</span>
@@ -608,7 +608,7 @@
 <span class="sd">    unconstrained sub-solve uses</span>
 <span class="sd">    :class:`~mathematicskit.optimization.systems.newton_quasi_newton.BFGS` by</span>
 <span class="sd">    default. See Nocedal &amp; Wright, *Numerical Optimization*, 2nd ed.,</span>
-<span class="sd">    Ch. 17.1 ("The Quadratic Penalty Method").</span>
+<span class="sd">    Ch. 17.1 (&quot;The Quadratic Penalty Method&quot;).</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -633,7 +633,7 @@
 <span class="sd">    &gt;&gt;&gt; result = PenaltyMethod(n_outer=8).minimize(f, grad_f, np.array([0.0, 0.0]), h=h, grad_h=grad_h)</span>
 <span class="sd">    &gt;&gt;&gt; np.allclose(result.x, [0.5, 0.5], atol=1e-3)</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mu0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">mu_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">10.0</span><span class="p">,</span> <span class="n">n_outer</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">inner_optimizer</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">UnconstrainedOptimizer</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mu0</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">mu0</span><span class="p">)</span>
@@ -653,7 +653,7 @@
         <span class="n">g</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">grad_g</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OptimizeResult</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Run the sequential penalty minimization.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the sequential penalty minimization.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -669,9 +669,9 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        OptimizeResult</span>
-<span class="sd">            ``extra["mu_history"]`` records the penalty weight used at</span>
+<span class="sd">            ``extra[&quot;mu_history&quot;]`` records the penalty weight used at</span>
 <span class="sd">            each outer iteration.</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="n">mu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu0</span>
         <span class="n">path</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()]</span>
@@ -703,7 +703,7 @@
             <span class="n">mu</span> <span class="o">*=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu_factor</span>
 
         <span class="k">return</span> <span class="n">OptimizeResult</span><span class="p">(</span>
-            <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">fun</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">path</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">path</span><span class="p">),</span> <span class="n">iterations</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">converged</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"penalty"</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="p">{</span><span class="s2">"mu_history"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mu_history</span><span class="p">)}</span>
+            <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">fun</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">path</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">path</span><span class="p">),</span> <span class="n">iterations</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">converged</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;penalty&quot;</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;mu_history&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mu_history</span><span class="p">)}</span>
         <span class="p">)</span></div>
 </div>
 

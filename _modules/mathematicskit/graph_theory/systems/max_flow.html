@@ -410,16 +410,16 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.graph_theory.systems.max_flow</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Maximum flow / minimum cut, via :mod:`scipy.sparse.csgraph`.</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Maximum flow / minimum cut, via :mod:`scipy.sparse.csgraph`.</span>
 
-<span class="sd">``scipy.sparse.csgraph.maximum_flow`` implements Dinic's algorithm (or</span>
+<span class="sd">``scipy.sparse.csgraph.maximum_flow`` implements Dinic&#39;s algorithm (or</span>
 <span class="sd">Edmonds-Karp) directly; mathematicskit does not reimplement augmenting-path</span>
 <span class="sd">search. The corresponding minimum cut is derived from the max-flow</span>
-<span class="sd">result's residual graph -- a standard, simple bookkeeping step (a single</span>
+<span class="sd">result&#39;s residual graph -- a standard, simple bookkeeping step (a single</span>
 <span class="sd">reachability search), not a reimplementation of the flow algorithm</span>
 <span class="sd">itself. See Cormen et al., *Introduction to Algorithms*, 3rd ed.,</span>
 <span class="sd">Ch. 26, and the max-flow min-cut theorem (Ch. 26.2).</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -428,13 +428,13 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.graph_theory.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">MaxFlowResult</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"max_flow_min_cut"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;max_flow_min_cut&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="max_flow_min_cut">
 <a class="viewcode-back" href="../../../../api/graph_theory.html#mathematicskit.graph_theory.max_flow_min_cut">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">max_flow_min_cut</span><span class="p">(</span><span class="n">graph</span><span class="p">:</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">sink</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"dinic"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MaxFlowResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Maximum flow from `source` to `sink`, and the corresponding minimum cut.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">max_flow_min_cut</span><span class="p">(</span><span class="n">graph</span><span class="p">:</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">sink</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;dinic&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MaxFlowResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Maximum flow from `source` to `sink`, and the corresponding minimum cut.</span>
 
 <span class="sd">    Edge weights are used as integer capacities (required by</span>
 <span class="sd">    :func:`scipy.sparse.csgraph.maximum_flow`, which needs integer-valued</span>
@@ -450,7 +450,7 @@
 <span class="sd">    graph : Graph</span>
 <span class="sd">        Directed, with positive integer edge weights (capacities).</span>
 <span class="sd">    source, sink : int</span>
-<span class="sd">    method : {"dinic", "edmonds_karp"}</span>
+<span class="sd">    method : {&quot;dinic&quot;, &quot;edmonds_karp&quot;}</span>
 <span class="sd">        Forwarded to :func:`scipy.sparse.csgraph.maximum_flow`.</span>
 
 <span class="sd">    Returns</span>
@@ -468,7 +468,7 @@
 <span class="sd">    &gt;&gt;&gt; result = max_flow_min_cut(g, source=0, sink=3)</span>
 <span class="sd">    &gt;&gt;&gt; result.flow_value</span>
 <span class="sd">    5.0</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">capacities</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">to_sparse</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
     <span class="n">scipy_result</span> <span class="o">=</span> <span class="n">csgraph</span><span class="o">.</span><span class="n">maximum_flow</span><span class="p">(</span><span class="n">capacities</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">sink</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">)</span>
     <span class="n">flow_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">scipy_result</span><span class="o">.</span><span class="n">flow</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>

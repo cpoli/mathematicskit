@@ -410,13 +410,13 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.fractals_chaos.systems.ifs</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Iterated function systems: Barnsley fern, Sierpinski triangle, Sierpinski carpet.</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Iterated function systems: Barnsley fern, Sierpinski triangle, Sierpinski carpet.</span>
 
-<span class="sd">Each is a small set of contractive affine maps rendered via the "chaos</span>
-<span class="sd">game" (:func:`mathematicskit.fractals_chaos.utils.ifs_utils.chaos_game`). See</span>
-<span class="sd">Barnsley, *Fractals Everywhere*, 2nd ed., Ch. 3, and Barnsley (1988)'s</span>
+<span class="sd">Each is a small set of contractive affine maps rendered via the &quot;chaos</span>
+<span class="sd">game&quot; (:func:`mathematicskit.fractals_chaos.utils.ifs_utils.chaos_game`). See</span>
+<span class="sd">Barnsley, *Fractals Everywhere*, 2nd ed., Ch. 3, and Barnsley (1988)&#39;s</span>
 <span class="sd">original fern construction.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -425,15 +425,15 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.fractals_chaos.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">IteratedFunctionSystem</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.fractals_chaos.utils.ifs_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">chaos_game</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"BarnsleyFern"</span><span class="p">,</span> <span class="s2">"SierpinskiTriangle"</span><span class="p">,</span> <span class="s2">"SierpinskiCarpet"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;BarnsleyFern&quot;</span><span class="p">,</span> <span class="s2">&quot;SierpinskiTriangle&quot;</span><span class="p">,</span> <span class="s2">&quot;SierpinskiCarpet&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="BarnsleyFern">
 <a class="viewcode-back" href="../../../../api/fractals_chaos.html#mathematicskit.fractals_chaos.BarnsleyFern">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">BarnsleyFern</span><span class="p">(</span><span class="n">IteratedFunctionSystem</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Barnsley's fern: four affine maps with Barnsley's classic probabilities.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Barnsley&#39;s fern: four affine maps with Barnsley&#39;s classic probabilities.</span>
 
-<span class="sd">    The four maps (stem, successively smaller leaflets) are Barnsley's</span>
+<span class="sd">    The four maps (stem, successively smaller leaflets) are Barnsley&#39;s</span>
 <span class="sd">    original 1988 coefficients. See Barnsley, *Fractals Everywhere*, 2nd</span>
 <span class="sd">    ed., Ch. 3, Table III.</span>
 
@@ -447,7 +447,7 @@
 <span class="sd">    &gt;&gt;&gt; # The fern fits within its known bounding box.</span>
 <span class="sd">    &gt;&gt;&gt; bool(np.all(points[:, 0] &gt;= -3.0) and np.all(points[:, 0] &lt;= 3.0))</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">transforms</span> <span class="o">=</span> <span class="p">[</span>
@@ -468,7 +468,7 @@
 <div class="viewcode-block" id="SierpinskiTriangle">
 <a class="viewcode-back" href="../../../../api/fractals_chaos.html#mathematicskit.fractals_chaos.SierpinskiTriangle">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">SierpinskiTriangle</span><span class="p">(</span><span class="n">IteratedFunctionSystem</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Sierpinski triangle via the chaos game: three vertex-halving maps.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sierpinski triangle via the chaos game: three vertex-halving maps.</span>
 
 <span class="sd">    Each map is :math:`x \mapsto \tfrac12(x + v_k)` for a triangle vertex</span>
 <span class="sd">    :math:`v_k`, chosen with equal probability :math:`1/3`. The resulting</span>
@@ -487,14 +487,14 @@
 <span class="sd">    &gt;&gt;&gt; points = tri.generate(2000, seed=0)</span>
 <span class="sd">    &gt;&gt;&gt; points.shape</span>
 <span class="sd">    (2000, 2)</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertices</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">vertices</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">vertices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">]])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"vertices must have shape (3, 2)"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;vertices must have shape (3, 2)&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">transforms</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">v</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">]</span>
 
 <div class="viewcode-block" id="SierpinskiTriangle.generate">
@@ -508,7 +508,7 @@
 <div class="viewcode-block" id="SierpinskiCarpet">
 <a class="viewcode-back" href="../../../../api/fractals_chaos.html#mathematicskit.fractals_chaos.SierpinskiCarpet">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">SierpinskiCarpet</span><span class="p">(</span><span class="n">IteratedFunctionSystem</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Sierpinski carpet via the chaos game: eight third-scale maps (no center).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sierpinski carpet via the chaos game: eight third-scale maps (no center).</span>
 
 <span class="sd">    The unit square is divided into a 3x3 grid of sub-squares, and every</span>
 <span class="sd">    map but the center one is kept, each chosen with equal probability</span>
@@ -522,7 +522,7 @@
 <span class="sd">    &gt;&gt;&gt; points = carpet.generate(2000, seed=0)</span>
 <span class="sd">    &gt;&gt;&gt; points.shape</span>
 <span class="sd">    (2000, 2)</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">offsets</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)]</span>

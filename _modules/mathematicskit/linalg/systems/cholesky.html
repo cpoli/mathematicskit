@@ -410,15 +410,15 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.linalg.systems.cholesky</h1><div class="highlight"><pre>
-<span></span><span class="sd">"""Cholesky decomposition for symmetric positive-definite matrices.</span>
+<span></span><span class="sd">&quot;&quot;&quot;Cholesky decomposition for symmetric positive-definite matrices.</span>
 
 <span class="sd">Built directly on :func:`numpy.linalg.cholesky` for the factorization and</span>
 <span class="sd">:func:`scipy.linalg.solve_triangular` for the two triangular solves --</span>
-<span class="sd">LAPACK's ``?potrf``/``?potrs`` are already the correct, well-tested</span>
+<span class="sd">LAPACK&#39;s ``?potrf``/``?potrs`` are already the correct, well-tested</span>
 <span class="sd">implementation of Burden &amp; Faires, *Numerical Analysis*, 10th ed., Ch.</span>
-<span class="sd">6.6 ("Special Types of Matrices"), Theorem 6.25 and Algorithm "Cholesky",</span>
+<span class="sd">6.6 (&quot;Special Types of Matrices&quot;), Theorem 6.25 and Algorithm &quot;Cholesky&quot;,</span>
 <span class="sd">and Golub &amp; Van Loan, *Matrix Computations*, 4th ed., Ch. 4.2.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -427,13 +427,13 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.linalg.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">CholeskyResult</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"cholesky_decompose"</span><span class="p">,</span> <span class="s2">"cholesky_solve"</span><span class="p">,</span> <span class="s2">"is_symmetric_positive_definite"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;cholesky_decompose&quot;</span><span class="p">,</span> <span class="s2">&quot;cholesky_solve&quot;</span><span class="p">,</span> <span class="s2">&quot;is_symmetric_positive_definite&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="cholesky_decompose">
 <a class="viewcode-back" href="../../../../api/linalg.html#mathematicskit.linalg.cholesky_decompose">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">cholesky_decompose</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CholeskyResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Factor a symmetric positive-definite ``A = L L^T`` via :func:`numpy.linalg.cholesky`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Factor a symmetric positive-definite ``A = L L^T`` via :func:`numpy.linalg.cholesky`.</span>
 
 <span class="sd">    Roughly half the cost of a general LU factorization (exploits</span>
 <span class="sd">    symmetry); the underlying LAPACK routine (``?potrf``) raises when a</span>
@@ -458,16 +458,16 @@
 <span class="sd">    &gt;&gt;&gt; result = cholesky_decompose(A)</span>
 <span class="sd">    &gt;&gt;&gt; np.allclose(result.L @ result.L.T, A)</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"a must be square"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;a must be square&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"a must be symmetric"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;a must be symmetric&quot;</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
     <span class="k">except</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">(</span><span class="s2">"a is not positive definite"</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
+        <span class="k">raise</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">(</span><span class="s2">&quot;a is not positive definite&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
     <span class="k">return</span> <span class="n">CholeskyResult</span><span class="p">(</span><span class="n">L</span><span class="o">=</span><span class="n">L</span><span class="p">)</span></div>
 
 
@@ -475,7 +475,7 @@
 <div class="viewcode-block" id="cholesky_solve">
 <a class="viewcode-back" href="../../../../api/linalg.html#mathematicskit.linalg.cholesky_solve">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">cholesky_solve</span><span class="p">(</span><span class="n">result</span><span class="p">:</span> <span class="n">CholeskyResult</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Solve ``A x = b`` given a precomputed :class:`CholeskyResult`.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Solve ``A x = b`` given a precomputed :class:`CholeskyResult`.</span>
 
 <span class="sd">    Forward substitution with ``L``, then back substitution with ``L^T``,</span>
 <span class="sd">    via :func:`scipy.linalg.solve_triangular`.</span>
@@ -497,7 +497,7 @@
 <span class="sd">    &gt;&gt;&gt; x = cholesky_solve(cholesky_decompose(A), b)</span>
 <span class="sd">    &gt;&gt;&gt; np.allclose(A @ x, b)</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">L</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">L</span>
     <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">sla</span><span class="o">.</span><span class="n">solve_triangular</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -509,7 +509,7 @@
 <div class="viewcode-block" id="is_symmetric_positive_definite">
 <a class="viewcode-back" href="../../../../api/linalg.html#mathematicskit.linalg.is_symmetric_positive_definite">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">is_symmetric_positive_definite</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Check symmetric positive-definiteness by attempting a Cholesky factorization.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check symmetric positive-definiteness by attempting a Cholesky factorization.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -526,7 +526,7 @@
 <span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; is_symmetric_positive_definite(np.array([[1.0, 2.0], [2.0, 1.0]]))</span>
 <span class="sd">    False</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">):</span>
         <span class="k">return</span> <span class="kc">False</span>

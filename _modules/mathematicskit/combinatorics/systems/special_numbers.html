@@ -410,29 +410,29 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.combinatorics.systems.special_numbers</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Stirling numbers (first and second kind) and Catalan numbers, with</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Stirling numbers (first and second kind) and Catalan numbers, with</span>
 <span class="sd">their combinatorial interpretations.</span>
 
 <span class="sd">No scipy/numpy equivalent -- each is defined by its own recurrence,</span>
-<span class="sd">which is what's implemented here (kept hand-rolled rather than, e.g.,</span>
-<span class="sd">Catalan numbers' closed form :math:`\binom{2n}{n}/(n+1)`, since the</span>
-<span class="sd">recurrence is itself each number's defining combinatorial recursion; the</span>
-<span class="sd">closed form is used only as a cross-check in this module's tests). See</span>
+<span class="sd">which is what&#39;s implemented here (kept hand-rolled rather than, e.g.,</span>
+<span class="sd">Catalan numbers&#39; closed form :math:`\binom{2n}{n}/(n+1)`, since the</span>
+<span class="sd">recurrence is itself each number&#39;s defining combinatorial recursion; the</span>
+<span class="sd">closed form is used only as a cross-check in this module&#39;s tests). See</span>
 <span class="sd">Graham, Knuth &amp; Patashnik, *Concrete Mathematics*, 2nd ed., Ch. 6.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">cache</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"stirling_first_kind"</span><span class="p">,</span> <span class="s2">"stirling_second_kind"</span><span class="p">,</span> <span class="s2">"catalan_number"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;stirling_first_kind&quot;</span><span class="p">,</span> <span class="s2">&quot;stirling_second_kind&quot;</span><span class="p">,</span> <span class="s2">&quot;catalan_number&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="stirling_first_kind">
 <a class="viewcode-back" href="../../../../api/combinatorics.html#mathematicskit.combinatorics.stirling_first_kind">[docs]</a>
 <span class="nd">@cache</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">stirling_first_kind</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">signed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Stirling numbers of the first kind: permutations of ``n`` elements with exactly ``k`` cycles.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Stirling numbers of the first kind: permutations of ``n`` elements with exactly ``k`` cycles.</span>
 
 <span class="sd">    Unsigned, :math:`\left[{n \atop k}\right]`, via the recurrence</span>
 <span class="sd">    :math:`\left[{n \atop k}\right] = (n-1)\left[{n-1 \atop k}\right] +</span>
@@ -459,7 +459,7 @@
 <span class="sd">    11</span>
 <span class="sd">    &gt;&gt;&gt; sum(stirling_first_kind(4, k) for k in range(5)) == 24  # sum over k = n!</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="n">n</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">0</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -477,7 +477,7 @@
 <a class="viewcode-back" href="../../../../api/combinatorics.html#mathematicskit.combinatorics.stirling_second_kind">[docs]</a>
 <span class="nd">@cache</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">stirling_second_kind</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Stirling numbers of the second kind: ways to partition ``n`` labeled elements into exactly ``k`` non-empty unlabeled blocks.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Stirling numbers of the second kind: ways to partition ``n`` labeled elements into exactly ``k`` non-empty unlabeled blocks.</span>
 
 <span class="sd">    :math:`\left\{{n \atop k}\right\}`, via the recurrence</span>
 <span class="sd">    :math:`\left\{{n \atop k}\right\} = k\left\{{n-1 \atop k}\right\} +</span>
@@ -502,7 +502,7 @@
 <span class="sd">    1</span>
 <span class="sd">    &gt;&gt;&gt; stirling_second_kind(5, 5)  # only one way: every element its own block</span>
 <span class="sd">    1</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="n">n</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">0</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -517,7 +517,7 @@
 <a class="viewcode-back" href="../../../../api/combinatorics.html#mathematicskit.combinatorics.catalan_number">[docs]</a>
 <span class="nd">@cache</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">catalan_number</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""The ``n``-th Catalan number, via its defining recurrence.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The ``n``-th Catalan number, via its defining recurrence.</span>
 
 <span class="sd">    :math:`C_0 = 1`, :math:`C_{n+1} = \sum_{i=0}^{n} C_i C_{n-i}` --</span>
 <span class="sd">    counts, among many equivalent combinatorial objects: balanced</span>
@@ -525,7 +525,7 @@
 <span class="sd">    internal nodes, triangulations of a convex :math:`(n+2)`-gon, and</span>
 <span class="sd">    monotonic lattice paths from :math:`(0,0)` to :math:`(n,n)` that</span>
 <span class="sd">    never cross above the diagonal (Dyck paths). Equals the closed form</span>
-<span class="sd">    :math:`\binom{2n}{n}/(n+1)`, cross-checked in this module's tests.</span>
+<span class="sd">    :math:`\binom{2n}{n}/(n+1)`, cross-checked in this module&#39;s tests.</span>
 <span class="sd">    See Graham, Knuth &amp; Patashnik, *Concrete Mathematics*, 2nd ed.,</span>
 <span class="sd">    Sec. 7.5.</span>
 
@@ -542,9 +542,9 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; [catalan_number(n) for n in range(6)]</span>
 <span class="sd">    [1, 1, 2, 5, 14, 42]</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"n must be &gt;= 0"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;n must be &gt;= 0&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">1</span>
     <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">catalan_number</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="n">catalan_number</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span></div>

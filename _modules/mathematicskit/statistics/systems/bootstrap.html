@@ -410,16 +410,16 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.statistics.systems.bootstrap</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Bootstrap resampling for confidence intervals and standard errors.</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Bootstrap resampling for confidence intervals and standard errors.</span>
 
 <span class="sd">Built directly on :func:`scipy.stats.bootstrap`, which already</span>
-<span class="sd">implements the percentile, "basic", and bias-corrected-and-accelerated</span>
-<span class="sd">(BCa) bootstrap confidence-interval methods correctly (including BCa's</span>
+<span class="sd">implements the percentile, &quot;basic&quot;, and bias-corrected-and-accelerated</span>
+<span class="sd">(BCa) bootstrap confidence-interval methods correctly (including BCa&#39;s</span>
 <span class="sd">jackknife-based acceleration/bias correction, which is fiddly to get</span>
 <span class="sd">right by hand) -- there is no reason to reimplement resampling-with-</span>
 <span class="sd">replacement and interval construction from scratch. See Efron &amp;</span>
 <span class="sd">Tibshirani, *An Introduction to the Bootstrap*, 1993, Ch. 12-14.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -430,7 +430,7 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.statistics.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">BootstrapResult</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"bootstrap_confidence_interval"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;bootstrap_confidence_interval&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="bootstrap_confidence_interval">
@@ -440,10 +440,10 @@
     <span class="n">statistic</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span>
     <span class="n">n_resamples</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">9999</span><span class="p">,</span>
     <span class="n">confidence_level</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.95</span><span class="p">,</span>
-    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"BCa"</span><span class="p">,</span>
+    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;BCa&quot;</span><span class="p">,</span>
     <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BootstrapResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Bootstrap confidence interval and standard error for an arbitrary statistic.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Bootstrap confidence interval and standard error for an arbitrary statistic.</span>
 
 <span class="sd">    Resamples `data` with replacement `n_resamples` times, computes</span>
 <span class="sd">    `statistic` on each resample, and builds a confidence interval from</span>
@@ -463,7 +463,7 @@
 <span class="sd">        :func:`numpy.median`, or :func:`numpy.std`).</span>
 <span class="sd">    n_resamples : int</span>
 <span class="sd">    confidence_level : float</span>
-<span class="sd">    method : {"percentile", "basic", "BCa"}</span>
+<span class="sd">    method : {&quot;percentile&quot;, &quot;basic&quot;, &quot;BCa&quot;}</span>
 <span class="sd">        Bootstrap CI construction method (see ``scipy.stats.bootstrap``).</span>
 <span class="sd">    seed : int</span>
 
@@ -479,7 +479,7 @@
 <span class="sd">    &gt;&gt;&gt; result = bootstrap_confidence_interval(data, statistic=np.mean, seed=0)</span>
 <span class="sd">    &gt;&gt;&gt; result.lower &lt; 5.0 &lt; result.upper</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">bootstrap</span><span class="p">((</span><span class="n">x</span><span class="p">,),</span> <span class="n">statistic</span><span class="p">,</span> <span class="n">n_resamples</span><span class="o">=</span><span class="n">n_resamples</span><span class="p">,</span> <span class="n">confidence_level</span><span class="o">=</span><span class="n">confidence_level</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">BootstrapResult</span><span class="p">(</span>

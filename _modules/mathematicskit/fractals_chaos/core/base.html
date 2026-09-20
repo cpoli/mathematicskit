@@ -410,15 +410,15 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.fractals_chaos.core.base</h1><div class="highlight"><pre>
-<span></span><span class="sd">"""Abstract base classes and result containers for mathematicskit.fractals_chaos.</span>
+<span></span><span class="sd">&quot;&quot;&quot;Abstract base classes and result containers for mathematicskit.fractals_chaos.</span>
 
 <span class="sd">:class:`IteratedFunctionSystem` is the shared interface for the affine</span>
 <span class="sd">random-IFS fractals (Barnsley fern, Sierpinski triangle/carpet) in</span>
 <span class="sd">:mod:`mathematicskit.fractals_chaos.systems.ifs`; :class:`CellularAutomaton`</span>
 <span class="sd">is the shared interface for the 1D/2D cellular automata in</span>
 <span class="sd">:mod:`mathematicskit.fractals_chaos.systems.cellular_automata`. Both mirror</span>
-<span class="sd">physicskit's one-ABC-per-algorithmic-family pattern.</span>
-<span class="sd">"""</span>
+<span class="sd">physicskit&#39;s one-ABC-per-algorithmic-family pattern.</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -427,24 +427,24 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"EscapeTimeResult"</span><span class="p">,</span> <span class="s2">"BoxCountingResult"</span><span class="p">,</span> <span class="s2">"IteratedFunctionSystem"</span><span class="p">,</span> <span class="s2">"CellularAutomaton"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;EscapeTimeResult&quot;</span><span class="p">,</span> <span class="s2">&quot;BoxCountingResult&quot;</span><span class="p">,</span> <span class="s2">&quot;IteratedFunctionSystem&quot;</span><span class="p">,</span> <span class="s2">&quot;CellularAutomaton&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="EscapeTimeResult">
 <a class="viewcode-back" href="../../../../api/fractals_chaos.html#mathematicskit.fractals_chaos.EscapeTimeResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">EscapeTimeResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Container for a Mandelbrot/Julia escape-time grid."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for a Mandelbrot/Julia escape-time grid.&quot;&quot;&quot;</span>
 
     <span class="n">iterations</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray, shape (ny, nx), int: Escape iteration count at each pixel</span>
-<span class="sd">    (equal to ``max_iter`` for points that never escaped)."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (ny, nx), int: Escape iteration count at each pixel</span>
+<span class="sd">    (equal to ``max_iter`` for points that never escaped).&quot;&quot;&quot;</span>
 
     <span class="n">extent</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
-<span class="w">    </span><span class="sd">"""tuple: ``(re_min, re_max, im_min, im_max)`` plotted region."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;tuple: ``(re_min, re_max, im_min, im_max)`` plotted region.&quot;&quot;&quot;</span>
 
     <span class="n">max_iter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="w">    </span><span class="sd">"""int: Iteration cap used."""</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;int: Iteration cap used.&quot;&quot;&quot;</span></div>
 
 
 
@@ -452,32 +452,32 @@
 <a class="viewcode-back" href="../../../../api/fractals_chaos.html#mathematicskit.fractals_chaos.BoxCountingResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">BoxCountingResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Container for a box-counting fractal-dimension estimate."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for a box-counting fractal-dimension estimate.&quot;&quot;&quot;</span>
 
     <span class="n">box_sizes</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray: Box edge lengths used."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray: Box edge lengths used.&quot;&quot;&quot;</span>
 
     <span class="n">box_counts</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray, int: Number of occupied boxes at each size."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, int: Number of occupied boxes at each size.&quot;&quot;&quot;</span>
 
     <span class="n">dimension</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
-<span class="w">    </span><span class="sd">"""float: Estimated box-counting dimension (slope of</span>
-<span class="sd">    ``log(count)`` vs. ``log(1/size)``)."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Estimated box-counting dimension (slope of</span>
+<span class="sd">    ``log(count)`` vs. ``log(1/size)``).&quot;&quot;&quot;</span>
 
     <span class="n">extra</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-<span class="w">    </span><span class="sd">"""dict: Free-form diagnostics slot (e.g. the linear fit's residuals)."""</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;dict: Free-form diagnostics slot (e.g. the linear fit&#39;s residuals).&quot;&quot;&quot;</span></div>
 
 
 
 <div class="viewcode-block" id="IteratedFunctionSystem">
 <a class="viewcode-back" href="../../../../api/fractals_chaos.html#mathematicskit.fractals_chaos.IteratedFunctionSystem">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">IteratedFunctionSystem</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Common base for random (chaos-game) iterated function systems.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Common base for random (chaos-game) iterated function systems.</span>
 
 <span class="sd">    Concrete subclasses set ``self.transforms`` (a list of ``(A, b, p)``</span>
 <span class="sd">    affine-map / probability triples, ``x -&gt; A x + b`` chosen with</span>
 <span class="sd">    probability ``p``) in ``__init__``.</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">transforms</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -485,7 +485,7 @@
 <a class="viewcode-back" href="../../../../api/fractals_chaos.html#mathematicskit.fractals_chaos.IteratedFunctionSystem.generate">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_points</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Run the chaos game for ``n_points`` iterations.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the chaos game for ``n_points`` iterations.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -495,7 +495,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        ndarray, shape (n_points, 2)</span>
-<span class="sd">        """</span></div>
+<span class="sd">        &quot;&quot;&quot;</span></div>
 </div>
 
 
@@ -503,7 +503,7 @@
 <div class="viewcode-block" id="CellularAutomaton">
 <a class="viewcode-back" href="../../../../api/fractals_chaos.html#mathematicskit.fractals_chaos.CellularAutomaton">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">CellularAutomaton</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Common base for cellular automata (1D elementary or 2D Game of Life)."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Common base for cellular automata (1D elementary or 2D Game of Life).&quot;&quot;&quot;</span>
 
     <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
 
@@ -511,13 +511,13 @@
 <a class="viewcode-back" href="../../../../api/fractals_chaos.html#mathematicskit.fractals_chaos.CellularAutomaton.step">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Advance the automaton by one generation and return the new state."""</span></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Advance the automaton by one generation and return the new state.&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="CellularAutomaton.run">
 <a class="viewcode-back" href="../../../../api/fractals_chaos.html#mathematicskit.fractals_chaos.CellularAutomaton.run">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Run for ``n_steps`` generations, recording every state.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run for ``n_steps`` generations, recording every state.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -527,7 +527,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        ndarray, shape (n_steps + 1, ...)</span>
 <span class="sd">            The initial state followed by each generation.</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">history</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">copy</span><span class="p">()]</span>
         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
             <span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="p">()</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>

@@ -410,21 +410,21 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.optimization.systems.newton_quasi_newton</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Newton's method and BFGS, via :func:`scipy.optimize.minimize`.</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Newton&#39;s method and BFGS, via :func:`scipy.optimize.minimize`.</span>
 
 <span class="sd">Both are second-order (or approximately second-order) methods where the</span>
 <span class="sd">line search and Hessian/inverse-Hessian-approximation bookkeeping is</span>
 <span class="sd">substantial, fiddly, and already correctly implemented in</span>
 <span class="sd">``scipy.optimize`` -- mathematicskit does not reimplement it. The value-add</span>
-<span class="sd">here is capturing the per-iterate path (via ``scipy.optimize.minimize``'s</span>
-<span class="sd">``callback`` argument, which the raw scipy call doesn't expose on its</span>
+<span class="sd">here is capturing the per-iterate path (via ``scipy.optimize.minimize``&#39;s</span>
+<span class="sd">``callback`` argument, which the raw scipy call doesn&#39;t expose on its</span>
 <span class="sd">own) into the same :class:`~mathematicskit.optimization.core.base.OptimizeResult`</span>
 <span class="sd">shape used by the hand-rolled methods in</span>
 <span class="sd">:mod:`mathematicskit.optimization.systems.gradient_descent` and</span>
 <span class="sd">:mod:`mathematicskit.optimization.systems.conjugate_gradient`, so all of them</span>
 <span class="sd">can be compared on equal footing. See Nocedal &amp; Wright, *Numerical</span>
 <span class="sd">Optimization*, 2nd ed., Ch. 6 (Newton) and Ch. 6.1 (BFGS).</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -435,17 +435,17 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.optimization.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">OptimizeResult</span><span class="p">,</span> <span class="n">UnconstrainedOptimizer</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"NewtonMethod"</span><span class="p">,</span> <span class="s2">"BFGS"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;NewtonMethod&quot;</span><span class="p">,</span> <span class="s2">&quot;BFGS&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="NewtonMethod">
 <a class="viewcode-back" href="../../../../api/optimization.html#mathematicskit.optimization.NewtonMethod">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">NewtonMethod</span><span class="p">(</span><span class="n">UnconstrainedOptimizer</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Newton's method via ``scipy.optimize.minimize(method="Newton-CG")``.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Newton&#39;s method via ``scipy.optimize.minimize(method=&quot;Newton-CG&quot;)``.</span>
 
 <span class="sd">    Each step solves :math:`\nabla^2 f(x_k) p_k = -\nabla f(x_k)`</span>
 <span class="sd">    (approximately, via a truncated conjugate-gradient sub-solve, which</span>
-<span class="sd">    is what makes "Newton-CG" practical for large problems without</span>
+<span class="sd">    is what makes &quot;Newton-CG&quot; practical for large problems without</span>
 <span class="sd">    forming/factoring the Hessian explicitly) and steps along a</span>
 <span class="sd">    line-searched multiple of :math:`p_k`. Converges quadratically near a</span>
 <span class="sd">    minimizer where the Hessian is positive-definite -- far faster than</span>
@@ -457,9 +457,9 @@
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    tol : float</span>
-<span class="sd">        Forwarded as ``scipy.optimize.minimize``'s ``tol``.</span>
+<span class="sd">        Forwarded as ``scipy.optimize.minimize``&#39;s ``tol``.</span>
 <span class="sd">    max_iter : int</span>
-<span class="sd">        Forwarded as ``options={"maxiter": max_iter}``.</span>
+<span class="sd">        Forwarded as ``options={&quot;maxiter&quot;: max_iter}``.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -468,7 +468,7 @@
 <span class="sd">    &gt;&gt;&gt; result = NewtonMethod().minimize(rosenbrock, rosenbrock_grad, np.array([-1.2, 1.0]), hess=rosenbrock_hess)</span>
 <span class="sd">    &gt;&gt;&gt; np.allclose(result.x, [1.0, 1.0], atol=1e-4)</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="NewtonMethod.minimize">
 <a class="viewcode-back" href="../../../../api/optimization.html#mathematicskit.optimization.NewtonMethod.minimize">[docs]</a>
@@ -479,7 +479,7 @@
         <span class="n">x0</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
         <span class="n">hess</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OptimizeResult</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Minimize ``f`` from ``x0``.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Minimize ``f`` from ``x0``.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -493,22 +493,22 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        OptimizeResult</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="n">path</span> <span class="o">=</span> <span class="p">[</span><span class="n">x0</span><span class="o">.</span><span class="n">copy</span><span class="p">()]</span>
 
         <span class="k">def</span><span class="w"> </span><span class="nf">callback</span><span class="p">(</span><span class="n">xk</span><span class="p">):</span>
             <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">xk</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
 
-        <span class="n">res</span> <span class="o">=</span> <span class="n">sopt</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">jac</span><span class="o">=</span><span class="n">grad</span><span class="p">,</span> <span class="n">hess</span><span class="o">=</span><span class="n">hess</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"Newton-CG"</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tol</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="n">callback</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s2">"maxiter"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_iter</span><span class="p">})</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">sopt</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">jac</span><span class="o">=</span><span class="n">grad</span><span class="p">,</span> <span class="n">hess</span><span class="o">=</span><span class="n">hess</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;Newton-CG&quot;</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tol</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="n">callback</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;maxiter&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_iter</span><span class="p">})</span>
         <span class="k">return</span> <span class="n">OptimizeResult</span><span class="p">(</span>
             <span class="n">x</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">x</span><span class="p">,</span>
             <span class="n">fun</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">fun</span><span class="p">),</span>
             <span class="n">path</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">path</span><span class="p">),</span>
             <span class="n">iterations</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">nit</span><span class="p">),</span>
             <span class="n">converged</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">success</span><span class="p">),</span>
-            <span class="n">method</span><span class="o">=</span><span class="s2">"newton_cg"</span><span class="p">,</span>
-            <span class="n">extra</span><span class="o">=</span><span class="p">{</span><span class="s2">"scipy_message"</span><span class="p">:</span> <span class="n">res</span><span class="o">.</span><span class="n">message</span><span class="p">},</span>
+            <span class="n">method</span><span class="o">=</span><span class="s2">&quot;newton_cg&quot;</span><span class="p">,</span>
+            <span class="n">extra</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;scipy_message&quot;</span><span class="p">:</span> <span class="n">res</span><span class="o">.</span><span class="n">message</span><span class="p">},</span>
         <span class="p">)</span></div>
 </div>
 
@@ -517,21 +517,21 @@
 <div class="viewcode-block" id="BFGS">
 <a class="viewcode-back" href="../../../../api/optimization.html#mathematicskit.optimization.BFGS">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">BFGS</span><span class="p">(</span><span class="n">UnconstrainedOptimizer</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Quasi-Newton BFGS, via ``scipy.optimize.minimize(method="BFGS")``.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Quasi-Newton BFGS, via ``scipy.optimize.minimize(method=&quot;BFGS&quot;)``.</span>
 
 <span class="sd">    Builds up an approximation to the inverse Hessian purely from</span>
 <span class="sd">    successive gradient evaluations (the BFGS update), converging</span>
 <span class="sd">    superlinearly without ever needing an explicit Hessian -- the</span>
-<span class="sd">    standard practical alternative to Newton's method when second</span>
+<span class="sd">    standard practical alternative to Newton&#39;s method when second</span>
 <span class="sd">    derivatives are unavailable or expensive. See Nocedal &amp; Wright,</span>
 <span class="sd">    *Numerical Optimization*, 2nd ed., Ch. 6.1, eq. (6.19).</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    tol : float</span>
-<span class="sd">        Forwarded as ``scipy.optimize.minimize``'s ``tol``.</span>
+<span class="sd">        Forwarded as ``scipy.optimize.minimize``&#39;s ``tol``.</span>
 <span class="sd">    max_iter : int</span>
-<span class="sd">        Forwarded as ``options={"maxiter": max_iter}``.</span>
+<span class="sd">        Forwarded as ``options={&quot;maxiter&quot;: max_iter}``.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -540,7 +540,7 @@
 <span class="sd">    &gt;&gt;&gt; result = BFGS().minimize(rosenbrock, rosenbrock_grad, np.array([-1.2, 1.0]))</span>
 <span class="sd">    &gt;&gt;&gt; np.allclose(result.x, [1.0, 1.0], atol=1e-3)</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="BFGS.minimize">
 <a class="viewcode-back" href="../../../../api/optimization.html#mathematicskit.optimization.BFGS.minimize">[docs]</a>
@@ -551,15 +551,15 @@
         <span class="k">def</span><span class="w"> </span><span class="nf">callback</span><span class="p">(</span><span class="n">xk</span><span class="p">):</span>
             <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">xk</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
 
-        <span class="n">res</span> <span class="o">=</span> <span class="n">sopt</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">jac</span><span class="o">=</span><span class="n">grad</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"BFGS"</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tol</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="n">callback</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s2">"maxiter"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_iter</span><span class="p">})</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">sopt</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">jac</span><span class="o">=</span><span class="n">grad</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;BFGS&quot;</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tol</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="n">callback</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;maxiter&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_iter</span><span class="p">})</span>
         <span class="k">return</span> <span class="n">OptimizeResult</span><span class="p">(</span>
             <span class="n">x</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">x</span><span class="p">,</span>
             <span class="n">fun</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">fun</span><span class="p">),</span>
             <span class="n">path</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">path</span><span class="p">),</span>
             <span class="n">iterations</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">nit</span><span class="p">),</span>
             <span class="n">converged</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">success</span><span class="p">),</span>
-            <span class="n">method</span><span class="o">=</span><span class="s2">"bfgs"</span><span class="p">,</span>
-            <span class="n">extra</span><span class="o">=</span><span class="p">{</span><span class="s2">"scipy_message"</span><span class="p">:</span> <span class="n">res</span><span class="o">.</span><span class="n">message</span><span class="p">},</span>
+            <span class="n">method</span><span class="o">=</span><span class="s2">&quot;bfgs&quot;</span><span class="p">,</span>
+            <span class="n">extra</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;scipy_message&quot;</span><span class="p">:</span> <span class="n">res</span><span class="o">.</span><span class="n">message</span><span class="p">},</span>
         <span class="p">)</span></div>
 </div>
 

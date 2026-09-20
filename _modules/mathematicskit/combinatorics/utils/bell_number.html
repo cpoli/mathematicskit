@@ -410,22 +410,22 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.combinatorics.utils.bell_number</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""The Bell numbers -- a small supporting utility built directly on</span>
-<span class="sd">this domain's Stirling numbers of the second kind, not a model in its</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The Bell numbers -- a small supporting utility built directly on</span>
+<span class="sd">this domain&#39;s Stirling numbers of the second kind, not a model in its</span>
 <span class="sd">own right.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.combinatorics.systems.special_numbers</span><span class="w"> </span><span class="kn">import</span> <span class="n">stirling_second_kind</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"bell_number"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;bell_number&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="bell_number">
 <a class="viewcode-back" href="../../../../api/combinatorics.html#mathematicskit.combinatorics.bell_number">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">bell_number</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""The ``n``-th Bell number: the total number of ways to partition ``n`` labeled elements into any number of non-empty unlabeled blocks.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The ``n``-th Bell number: the total number of ways to partition ``n`` labeled elements into any number of non-empty unlabeled blocks.</span>
 
 <span class="sd">    :math:`B_n = \sum_{k=0}^{n} \left\{{n \atop k}\right\}`, summing</span>
 <span class="sd">    :func:`~mathematicskit.combinatorics.systems.special_numbers.stirling_second_kind`</span>
@@ -445,7 +445,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; [bell_number(n) for n in range(6)]</span>
 <span class="sd">    [1, 1, 2, 5, 15, 52]</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">stirling_second_kind</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span></div>
 
 </pre></div>

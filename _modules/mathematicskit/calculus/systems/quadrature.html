@@ -410,20 +410,20 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.calculus.systems.quadrature</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Numerical quadrature: composite trapezoidal, composite Simpson's,</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Numerical quadrature: composite trapezoidal, composite Simpson&#39;s,</span>
 <span class="sd">Gauss-Legendre, and adaptive quadrature with error estimation.</span>
 
 <span class="sd">Built directly on :mod:`scipy.integrate` -- :func:`scipy.integrate.trapezoid`</span>
 <span class="sd">and :func:`scipy.integrate.simpson` for the fixed-rule methods,</span>
 <span class="sd">:func:`scipy.integrate.fixed_quad` for Gauss-Legendre, and</span>
-<span class="sd">:func:`scipy.integrate.quad` (QUADPACK's adaptive ``QAGS``) for adaptive</span>
+<span class="sd">:func:`scipy.integrate.quad` (QUADPACK&#39;s adaptive ``QAGS``) for adaptive</span>
 <span class="sd">quadrature, rather than reimplementing any of these well-established</span>
-<span class="sd">rules. mathematicskit's value-add is the shared :class:`~mathematicskit.calculus.core.base.Quadrature`</span>
+<span class="sd">rules. mathematicskit&#39;s value-add is the shared :class:`~mathematicskit.calculus.core.base.Quadrature`</span>
 <span class="sd">interface and :class:`~mathematicskit.calculus.core.base.QuadratureResult`</span>
 <span class="sd">dataclass around them. See Burden &amp; Faires, *Numerical Analysis*, 10th</span>
 <span class="sd">ed., Ch. 4.3-4.7, for the underlying rules these library routines</span>
 <span class="sd">implement.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -435,13 +435,13 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.calculus.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Quadrature</span><span class="p">,</span> <span class="n">QuadratureResult</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"TrapezoidalRule"</span><span class="p">,</span> <span class="s2">"SimpsonsRule"</span><span class="p">,</span> <span class="s2">"GaussianQuadrature"</span><span class="p">,</span> <span class="s2">"AdaptiveQuadrature"</span><span class="p">,</span> <span class="s2">"legendre_nodes_and_weights"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;TrapezoidalRule&quot;</span><span class="p">,</span> <span class="s2">&quot;SimpsonsRule&quot;</span><span class="p">,</span> <span class="s2">&quot;GaussianQuadrature&quot;</span><span class="p">,</span> <span class="s2">&quot;AdaptiveQuadrature&quot;</span><span class="p">,</span> <span class="s2">&quot;legendre_nodes_and_weights&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="TrapezoidalRule">
 <a class="viewcode-back" href="../../../../api/calculus.html#mathematicskit.calculus.TrapezoidalRule">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">TrapezoidalRule</span><span class="p">(</span><span class="n">Quadrature</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Composite trapezoidal rule, :math:`O(h^2)` global error.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Composite trapezoidal rule, :math:`O(h^2)` global error.</span>
 
 <span class="sd">    :math:`\int_a^b f\,dx \approx h\left[\tfrac12 f(x_0) + f(x_1) +</span>
 <span class="sd">    \dots + f(x_{n-1}) + \tfrac12 f(x_n)\right]`, :math:`h = (b-a)/n`,</span>
@@ -458,11 +458,11 @@
 <span class="sd">    &gt;&gt;&gt; result = TrapezoidalRule(n=1000).integrate(lambda x: x**2, 0.0, 1.0)</span>
 <span class="sd">    &gt;&gt;&gt; round(result.value, 6)</span>
 <span class="sd">    0.333334</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"n must be &gt;= 1"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;n must be &gt;= 1&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
 <div class="viewcode-block" id="TrapezoidalRule.integrate">
@@ -471,7 +471,7 @@
         <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
         <span class="n">ys</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">])</span>
         <span class="n">value</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">trapezoid</span><span class="p">(</span><span class="n">ys</span><span class="p">,</span> <span class="n">xs</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">QuadratureResult</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">n_evaluations</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"trapezoidal"</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">QuadratureResult</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">n_evaluations</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;trapezoidal&quot;</span><span class="p">)</span></div>
 </div>
 
 
@@ -479,7 +479,7 @@
 <div class="viewcode-block" id="SimpsonsRule">
 <a class="viewcode-back" href="../../../../api/calculus.html#mathematicskit.calculus.SimpsonsRule">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">SimpsonsRule</span><span class="p">(</span><span class="n">Quadrature</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Composite Simpson's rule, :math:`O(h^4)` global error.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Composite Simpson&#39;s rule, :math:`O(h^4)` global error.</span>
 
 <span class="sd">    Fits a parabola through each pair of subintervals, via</span>
 <span class="sd">    :func:`scipy.integrate.simpson` on ``n + 1`` equally spaced samples</span>
@@ -496,11 +496,11 @@
 <span class="sd">    &gt;&gt;&gt; result = SimpsonsRule(n=10).integrate(lambda x: x**3, 0.0, 1.0)</span>
 <span class="sd">    &gt;&gt;&gt; round(result.value, 10)</span>
 <span class="sd">    0.25</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"n must be a positive even integer"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;n must be a positive even integer&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
 <div class="viewcode-block" id="SimpsonsRule.integrate">
@@ -509,7 +509,7 @@
         <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
         <span class="n">ys</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">])</span>
         <span class="n">value</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">simpson</span><span class="p">(</span><span class="n">ys</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">xs</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">QuadratureResult</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">n_evaluations</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"simpson"</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">QuadratureResult</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">n_evaluations</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;simpson&quot;</span><span class="p">)</span></div>
 </div>
 
 
@@ -517,10 +517,10 @@
 <div class="viewcode-block" id="legendre_nodes_and_weights">
 <a class="viewcode-back" href="../../../../api/calculus.html#mathematicskit.calculus.legendre_nodes_and_weights">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">legendre_nodes_and_weights</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Gauss-Legendre nodes and weights on :math:`[-1, 1]`, via :func:`numpy.polynomial.legendre.leggauss`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Gauss-Legendre nodes and weights on :math:`[-1, 1]`, via :func:`numpy.polynomial.legendre.leggauss`.</span>
 
 <span class="sd">    Nodes are the ``n`` roots of the degree-``n`` Legendre polynomial</span>
-<span class="sd">    :math:`P_n`; weights are :math:`w_i = \dfrac{2}{(1-x_i^2)[P_n'(x_i)]^2}`.</span>
+<span class="sd">    :math:`P_n`; weights are :math:`w_i = \dfrac{2}{(1-x_i^2)[P_n&#39;(x_i)]^2}`.</span>
 <span class="sd">    ``leggauss`` computes both from the companion-matrix eigenvalues of</span>
 <span class="sd">    :math:`P_n`, which is more robust than a from-scratch Newton</span>
 <span class="sd">    iteration on the asymptotic initial guess. See Press et al.,</span>
@@ -542,7 +542,7 @@
 <span class="sd">    &gt;&gt;&gt; import numpy as np</span>
 <span class="sd">    &gt;&gt;&gt; round(float(np.sum(weights)), 10)</span>
 <span class="sd">    2.0</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">leggauss</span><span class="p">(</span><span class="n">n</span><span class="p">)</span></div>
 
 
@@ -550,7 +550,7 @@
 <div class="viewcode-block" id="GaussianQuadrature">
 <a class="viewcode-back" href="../../../../api/calculus.html#mathematicskit.calculus.GaussianQuadrature">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">GaussianQuadrature</span><span class="p">(</span><span class="n">Quadrature</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Gauss-Legendre quadrature: exact for polynomials up to degree ``2n - 1``.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Gauss-Legendre quadrature: exact for polynomials up to degree ``2n - 1``.</span>
 
 <span class="sd">    Thin wrapper around :func:`scipy.integrate.fixed_quad`, which maps</span>
 <span class="sd">    :math:`[-1, 1]` Gauss-Legendre nodes/weights onto ``[a, b]``. For</span>
@@ -568,18 +568,18 @@
 <span class="sd">    &gt;&gt;&gt; result = GaussianQuadrature(n=5).integrate(lambda x: x**9, -1.0, 1.0)</span>
 <span class="sd">    &gt;&gt;&gt; abs(round(result.value, 10))</span>
 <span class="sd">    0.0</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"n must be &gt;= 1"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;n must be &gt;= 1&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
 <div class="viewcode-block" id="GaussianQuadrature.integrate">
 <a class="viewcode-back" href="../../../../api/calculus.html#mathematicskit.calculus.GaussianQuadrature.integrate">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">],</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QuadratureResult</span><span class="p">:</span>
         <span class="n">value</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">fixed_quad</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">QuadratureResult</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">n_evaluations</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"gaussian"</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">QuadratureResult</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">n_evaluations</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;gaussian&quot;</span><span class="p">)</span></div>
 </div>
 
 
@@ -587,13 +587,13 @@
 <div class="viewcode-block" id="AdaptiveQuadrature">
 <a class="viewcode-back" href="../../../../api/calculus.html#mathematicskit.calculus.AdaptiveQuadrature">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">AdaptiveQuadrature</span><span class="p">(</span><span class="n">Quadrature</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Adaptive quadrature with error estimation, via :func:`scipy.integrate.quad`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Adaptive quadrature with error estimation, via :func:`scipy.integrate.quad`.</span>
 
-<span class="sd">    ``quad`` wraps QUADPACK's ``QAGS``: adaptive subdivision plus</span>
+<span class="sd">    ``quad`` wraps QUADPACK&#39;s ``QAGS``: adaptive subdivision plus</span>
 <span class="sd">    Gauss-Kronrod extrapolation, refining subintervals where the</span>
 <span class="sd">    integrand is hardest to approximate until the requested absolute</span>
 <span class="sd">    tolerance is met. See Burden &amp; Faires, *Numerical Analysis*, 10th</span>
-<span class="sd">    ed., Ch. 4.6 ("Adaptive Quadrature Methods"), for the algorithm this</span>
+<span class="sd">    ed., Ch. 4.6 (&quot;Adaptive Quadrature Methods&quot;), for the algorithm this</span>
 <span class="sd">    generalizes.</span>
 
 <span class="sd">    Parameters</span>
@@ -608,7 +608,7 @@
 <span class="sd">    &gt;&gt;&gt; result = AdaptiveQuadrature(tol=1e-10).integrate(lambda x: x**2, 0.0, 1.0)</span>
 <span class="sd">    &gt;&gt;&gt; round(result.value, 8)</span>
 <span class="sd">    0.33333333</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-8</span><span class="p">,</span> <span class="n">max_depth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tol</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">tol</span><span class="p">)</span>
@@ -618,7 +618,7 @@
 <a class="viewcode-back" href="../../../../api/calculus.html#mathematicskit.calculus.AdaptiveQuadrature.integrate">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">],</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QuadratureResult</span><span class="p">:</span>
         <span class="n">value</span><span class="p">,</span> <span class="n">abserr</span><span class="p">,</span> <span class="n">infodict</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">epsabs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tol</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_depth</span><span class="p">,</span> <span class="n">full_output</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">QuadratureResult</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">error_estimate</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">abserr</span><span class="p">),</span> <span class="n">n_evaluations</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">infodict</span><span class="p">[</span><span class="s2">"neval"</span><span class="p">]),</span> <span class="n">method</span><span class="o">=</span><span class="s2">"adaptive"</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">QuadratureResult</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">error_estimate</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">abserr</span><span class="p">),</span> <span class="n">n_evaluations</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">infodict</span><span class="p">[</span><span class="s2">&quot;neval&quot;</span><span class="p">]),</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;adaptive&quot;</span><span class="p">)</span></div>
 </div>
 
 </pre></div>

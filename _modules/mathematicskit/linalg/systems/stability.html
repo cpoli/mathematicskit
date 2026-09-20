@@ -410,11 +410,11 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.linalg.systems.stability</h1><div class="highlight"><pre>
-<span></span><span class="sd">"""Condition-number estimation and least-squares stability comparison:</span>
+<span></span><span class="sd">&quot;&quot;&quot;Condition-number estimation and least-squares stability comparison:</span>
 <span class="sd">normal equations vs. QR.</span>
 
 <span class="sd">Condition number is a thin wrapper around :func:`numpy.linalg.cond`; the</span>
-<span class="sd">"normal equations vs. QR" *comparison* is mathematicskit's value-add (scipy has</span>
+<span class="sd">&quot;normal equations vs. QR&quot; *comparison* is mathematicskit&#39;s value-add (scipy has</span>
 <span class="sd">no single function that stages this stability lesson), but each solve</span>
 <span class="sd">itself is built on library primitives -- :func:`numpy.linalg.solve` for</span>
 <span class="sd">the normal equations and :func:`scipy.linalg.qr` +</span>
@@ -422,7 +422,7 @@
 <span class="sd">Bau, *Numerical Linear Algebra*, 1997, Lecture 12 (least squares) and</span>
 <span class="sd">Lecture 19 (backward stability/conditioning), and Golub &amp; Van Loan,</span>
 <span class="sd">*Matrix Computations*, 4th ed., Ch. 5.3.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -431,13 +431,13 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.linalg.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">LeastSquaresResult</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"condition_number_2norm"</span><span class="p">,</span> <span class="s2">"least_squares_normal_equations"</span><span class="p">,</span> <span class="s2">"least_squares_qr"</span><span class="p">,</span> <span class="s2">"least_squares_lstsq"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;condition_number_2norm&quot;</span><span class="p">,</span> <span class="s2">&quot;least_squares_normal_equations&quot;</span><span class="p">,</span> <span class="s2">&quot;least_squares_qr&quot;</span><span class="p">,</span> <span class="s2">&quot;least_squares_lstsq&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="condition_number_2norm">
 <a class="viewcode-back" href="../../../../api/linalg.html#mathematicskit.linalg.condition_number_2norm">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">condition_number_2norm</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""2-norm condition number :math:`\kappa_2(A) = \sigma_{\max}/\sigma_{\min}`, via :func:`numpy.linalg.cond`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;2-norm condition number :math:`\kappa_2(A) = \sigma_{\max}/\sigma_{\min}`, via :func:`numpy.linalg.cond`.</span>
 
 <span class="sd">    A large :math:`\kappa_2` means small relative perturbations in ``A``</span>
 <span class="sd">    or ``b`` can produce large relative changes in the solution of</span>
@@ -458,11 +458,11 @@
 <span class="sd">    &gt;&gt;&gt; import numpy as np</span>
 <span class="sd">    &gt;&gt;&gt; round(condition_number_2norm(np.diag([10.0, 1.0])), 6)</span>
 <span class="sd">    10.0</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">cond</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">cond</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">(</span><span class="s2">"a is singular (or the zero matrix)"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">(</span><span class="s2">&quot;a is singular (or the zero matrix)&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">cond</span><span class="p">)</span></div>
 
 
@@ -470,7 +470,7 @@
 <div class="viewcode-block" id="least_squares_normal_equations">
 <a class="viewcode-back" href="../../../../api/linalg.html#mathematicskit.linalg.least_squares_normal_equations">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">least_squares_normal_equations</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LeastSquaresResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Least squares via the normal equations :math:`A^T A x = A^T b`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Least squares via the normal equations :math:`A^T A x = A^T b`.</span>
 
 <span class="sd">    ``A^T A`` and ``A^T b`` are formed explicitly and solved with</span>
 <span class="sd">    :func:`numpy.linalg.solve`. Simple, but</span>
@@ -497,7 +497,7 @@
 <span class="sd">    &gt;&gt;&gt; result = least_squares_normal_equations(A, b)</span>
 <span class="sd">    &gt;&gt;&gt; np.round(result.coefficients, 4)</span>
 <span class="sd">    array([0.3333, 1.5   ])</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">ata</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">a</span>
@@ -508,18 +508,18 @@
         <span class="n">cond</span> <span class="o">=</span> <span class="n">condition_number_2norm</span><span class="p">(</span><span class="n">ata</span><span class="p">)</span>
     <span class="k">except</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">:</span>
         <span class="n">cond</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="k">return</span> <span class="n">LeastSquaresResult</span><span class="p">(</span><span class="n">coefficients</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">residual_norm</span><span class="o">=</span><span class="n">residual_norm</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"normal_equations"</span><span class="p">,</span> <span class="n">condition_number</span><span class="o">=</span><span class="n">cond</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">LeastSquaresResult</span><span class="p">(</span><span class="n">coefficients</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">residual_norm</span><span class="o">=</span><span class="n">residual_norm</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;normal_equations&quot;</span><span class="p">,</span> <span class="n">condition_number</span><span class="o">=</span><span class="n">cond</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="least_squares_qr">
 <a class="viewcode-back" href="../../../../api/linalg.html#mathematicskit.linalg.least_squares_qr">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">least_squares_qr</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LeastSquaresResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Least squares via ``A = Q R`` (:func:`scipy.linalg.qr`): solve ``R x = Q^T b``.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Least squares via ``A = Q R`` (:func:`scipy.linalg.qr`): solve ``R x = Q^T b``.</span>
 
 <span class="sd">    Avoids ever forming :math:`A^T A`, so the effective conditioning is</span>
 <span class="sd">    :math:`\kappa_2(A)` rather than its square -- the standard remedy for</span>
-<span class="sd">    :func:`least_squares_normal_equations`'s instability. (For very</span>
+<span class="sd">    :func:`least_squares_normal_equations`&#39;s instability. (For very</span>
 <span class="sd">    ill-conditioned or rank-deficient problems, :func:`numpy.linalg.lstsq`</span>
 <span class="sd">    -- SVD-based -- is even more robust; the QR route is used here</span>
 <span class="sd">    specifically to make the comparison with the normal equations</span>
@@ -543,10 +543,10 @@
 <span class="sd">    &gt;&gt;&gt; result = least_squares_qr(A, b)</span>
 <span class="sd">    &gt;&gt;&gt; np.round(result.coefficients, 4)</span>
 <span class="sd">    array([0.3333, 1.5   ])</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-    <span class="n">q</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">sla</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"economic"</span><span class="p">)</span>
+    <span class="n">q</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">sla</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;economic&quot;</span><span class="p">)</span>
     <span class="n">qtb</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">b</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">sla</span><span class="o">.</span><span class="n">solve_triangular</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">qtb</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">residual_norm</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span> <span class="o">@</span> <span class="n">x</span><span class="p">))</span>
@@ -554,14 +554,14 @@
         <span class="n">cond</span> <span class="o">=</span> <span class="n">condition_number_2norm</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
     <span class="k">except</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">:</span>
         <span class="n">cond</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="k">return</span> <span class="n">LeastSquaresResult</span><span class="p">(</span><span class="n">coefficients</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">residual_norm</span><span class="o">=</span><span class="n">residual_norm</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"qr"</span><span class="p">,</span> <span class="n">condition_number</span><span class="o">=</span><span class="n">cond</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">LeastSquaresResult</span><span class="p">(</span><span class="n">coefficients</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">residual_norm</span><span class="o">=</span><span class="n">residual_norm</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;qr&quot;</span><span class="p">,</span> <span class="n">condition_number</span><span class="o">=</span><span class="n">cond</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="least_squares_lstsq">
 <a class="viewcode-back" href="../../../../api/linalg.html#mathematicskit.linalg.least_squares_lstsq">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">least_squares_lstsq</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LeastSquaresResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Least squares via :func:`numpy.linalg.lstsq` (SVD-based, via LAPACK ``?gelsd``).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Least squares via :func:`numpy.linalg.lstsq` (SVD-based, via LAPACK ``?gelsd``).</span>
 
 <span class="sd">    The most robust of the three routes here -- it handles rank-deficient</span>
 <span class="sd">    ``a`` gracefully (returning the minimum-norm solution) where both</span>
@@ -578,7 +578,7 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    LeastSquaresResult</span>
-<span class="sd">        ``method="lstsq"``.</span>
+<span class="sd">        ``method=&quot;lstsq&quot;``.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -588,7 +588,7 @@
 <span class="sd">    &gt;&gt;&gt; result = least_squares_lstsq(A, b)</span>
 <span class="sd">    &gt;&gt;&gt; np.round(result.coefficients, 4)</span>
 <span class="sd">    array([0.3333, 1.5   ])</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">x</span><span class="p">,</span> <span class="n">_residuals</span><span class="p">,</span> <span class="n">_rank</span><span class="p">,</span> <span class="n">_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">rcond</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
@@ -597,7 +597,7 @@
         <span class="n">cond</span> <span class="o">=</span> <span class="n">condition_number_2norm</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
     <span class="k">except</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">:</span>
         <span class="n">cond</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="k">return</span> <span class="n">LeastSquaresResult</span><span class="p">(</span><span class="n">coefficients</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">residual_norm</span><span class="o">=</span><span class="n">residual_norm</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"lstsq"</span><span class="p">,</span> <span class="n">condition_number</span><span class="o">=</span><span class="n">cond</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">LeastSquaresResult</span><span class="p">(</span><span class="n">coefficients</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">residual_norm</span><span class="o">=</span><span class="n">residual_norm</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;lstsq&quot;</span><span class="p">,</span> <span class="n">condition_number</span><span class="o">=</span><span class="n">cond</span><span class="p">)</span></div>
 
 </pre></div>
 

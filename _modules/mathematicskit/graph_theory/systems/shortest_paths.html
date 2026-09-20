@@ -410,13 +410,13 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.graph_theory.systems.shortest_paths</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Shortest-path algorithms, via :mod:`scipy.sparse.csgraph`.</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Shortest-path algorithms, via :mod:`scipy.sparse.csgraph`.</span>
 
 <span class="sd">``scipy.sparse.csgraph`` already implements Dijkstra, Bellman-Ford, and</span>
 <span class="sd">Floyd-Warshall correctly and efficiently (in compiled Cython); mathematicskit</span>
 <span class="sd">does not reimplement them. See Cormen et al., *Introduction to</span>
 <span class="sd">Algorithms*, 3rd ed., Ch. 24 (single-source) and Ch. 25 (all-pairs).</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -424,13 +424,13 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.graph_theory.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">ShortestPathResult</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"dijkstra_shortest_paths"</span><span class="p">,</span> <span class="s2">"bellman_ford_shortest_paths"</span><span class="p">,</span> <span class="s2">"floyd_warshall_shortest_paths"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;dijkstra_shortest_paths&quot;</span><span class="p">,</span> <span class="s2">&quot;bellman_ford_shortest_paths&quot;</span><span class="p">,</span> <span class="s2">&quot;floyd_warshall_shortest_paths&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="dijkstra_shortest_paths">
 <a class="viewcode-back" href="../../../../api/graph_theory.html#mathematicskit.graph_theory.dijkstra_shortest_paths">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">dijkstra_shortest_paths</span><span class="p">(</span><span class="n">graph</span><span class="p">:</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">sources</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ShortestPathResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Single- or multi-source shortest paths via Dijkstra's algorithm.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Single- or multi-source shortest paths via Dijkstra&#39;s algorithm.</span>
 
 <span class="sd">    Requires non-negative edge weights. Via</span>
 <span class="sd">    :func:`scipy.sparse.csgraph.dijkstra`. See Cormen et al.,</span>
@@ -456,16 +456,16 @@
 <span class="sd">    &gt;&gt;&gt; result = dijkstra_shortest_paths(g, sources=0)</span>
 <span class="sd">    &gt;&gt;&gt; result.distances</span>
 <span class="sd">    array([0., 1., 3., 4.])</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">distances</span><span class="p">,</span> <span class="n">predecessors</span> <span class="o">=</span> <span class="n">csgraph</span><span class="o">.</span><span class="n">dijkstra</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">to_sparse</span><span class="p">(),</span> <span class="n">directed</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">directed</span><span class="p">,</span> <span class="n">indices</span><span class="o">=</span><span class="n">sources</span><span class="p">,</span> <span class="n">return_predecessors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">ShortestPathResult</span><span class="p">(</span><span class="n">distances</span><span class="o">=</span><span class="n">distances</span><span class="p">,</span> <span class="n">predecessors</span><span class="o">=</span><span class="n">predecessors</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"dijkstra"</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">ShortestPathResult</span><span class="p">(</span><span class="n">distances</span><span class="o">=</span><span class="n">distances</span><span class="p">,</span> <span class="n">predecessors</span><span class="o">=</span><span class="n">predecessors</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;dijkstra&quot;</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="bellman_ford_shortest_paths">
 <a class="viewcode-back" href="../../../../api/graph_theory.html#mathematicskit.graph_theory.bellman_ford_shortest_paths">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">bellman_ford_shortest_paths</span><span class="p">(</span><span class="n">graph</span><span class="p">:</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">sources</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ShortestPathResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Single- or multi-source shortest paths via Bellman-Ford.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Single- or multi-source shortest paths via Bellman-Ford.</span>
 
 <span class="sd">    Unlike :func:`dijkstra_shortest_paths`, tolerates negative edge</span>
 <span class="sd">    weights (raising if a negative-weight cycle is reachable, since</span>
@@ -491,16 +491,16 @@
 <span class="sd">    &gt;&gt;&gt; result = bellman_ford_shortest_paths(g, sources=0)</span>
 <span class="sd">    &gt;&gt;&gt; result.distances</span>
 <span class="sd">    array([0., 4., 2.])</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">distances</span><span class="p">,</span> <span class="n">predecessors</span> <span class="o">=</span> <span class="n">csgraph</span><span class="o">.</span><span class="n">bellman_ford</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">to_sparse</span><span class="p">(),</span> <span class="n">directed</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">directed</span><span class="p">,</span> <span class="n">indices</span><span class="o">=</span><span class="n">sources</span><span class="p">,</span> <span class="n">return_predecessors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">ShortestPathResult</span><span class="p">(</span><span class="n">distances</span><span class="o">=</span><span class="n">distances</span><span class="p">,</span> <span class="n">predecessors</span><span class="o">=</span><span class="n">predecessors</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"bellman_ford"</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">ShortestPathResult</span><span class="p">(</span><span class="n">distances</span><span class="o">=</span><span class="n">distances</span><span class="p">,</span> <span class="n">predecessors</span><span class="o">=</span><span class="n">predecessors</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;bellman_ford&quot;</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="floyd_warshall_shortest_paths">
 <a class="viewcode-back" href="../../../../api/graph_theory.html#mathematicskit.graph_theory.floyd_warshall_shortest_paths">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">floyd_warshall_shortest_paths</span><span class="p">(</span><span class="n">graph</span><span class="p">:</span> <span class="n">Graph</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ShortestPathResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""All-pairs shortest paths via Floyd-Warshall.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;All-pairs shortest paths via Floyd-Warshall.</span>
 
 <span class="sd">    :math:`O(n^3)` dynamic program over intermediate vertices --</span>
 <span class="sd">    typically preferred over running Dijkstra/Bellman-Ford from every</span>
@@ -527,9 +527,9 @@
 <span class="sd">    array([[0., 1., 3.],</span>
 <span class="sd">           [1., 0., 2.],</span>
 <span class="sd">           [3., 2., 0.]])</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">distances</span><span class="p">,</span> <span class="n">predecessors</span> <span class="o">=</span> <span class="n">csgraph</span><span class="o">.</span><span class="n">floyd_warshall</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">to_sparse</span><span class="p">(),</span> <span class="n">directed</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">directed</span><span class="p">,</span> <span class="n">return_predecessors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">ShortestPathResult</span><span class="p">(</span><span class="n">distances</span><span class="o">=</span><span class="n">distances</span><span class="p">,</span> <span class="n">predecessors</span><span class="o">=</span><span class="n">predecessors</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"floyd_warshall"</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">ShortestPathResult</span><span class="p">(</span><span class="n">distances</span><span class="o">=</span><span class="n">distances</span><span class="p">,</span> <span class="n">predecessors</span><span class="o">=</span><span class="n">predecessors</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;floyd_warshall&quot;</span><span class="p">)</span></div>
 
 </pre></div>
 

@@ -410,12 +410,12 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.linalg.core.base</h1><div class="highlight"><pre>
-<span></span><span class="sd">"""Abstract base classes and result containers for mathematicskit.linalg.</span>
+<span></span><span class="sd">&quot;&quot;&quot;Abstract base classes and result containers for mathematicskit.linalg.</span>
 
 <span class="sd">Every decomposition/solver in this domain returns a small dataclass</span>
-<span class="sd">(mirroring physicskit's ``SimulationResult`` pattern). Most of this</span>
-<span class="sd">domain's algorithms call ``numpy.linalg``/``scipy.linalg``/</span>
-<span class="sd">``scipy.sparse.linalg`` directly (see each ``systems/`` module's</span>
+<span class="sd">(mirroring physicskit&#39;s ``SimulationResult`` pattern). Most of this</span>
+<span class="sd">domain&#39;s algorithms call ``numpy.linalg``/``scipy.linalg``/</span>
+<span class="sd">``scipy.sparse.linalg`` directly (see each ``systems/`` module&#39;s</span>
 <span class="sd">docstring for the specific library routine); the Krylov-subspace linear</span>
 <span class="sd">solvers (:mod:`mathematicskit.linalg.systems.iterative`) share the</span>
 <span class="sd">:class:`IterativeLinearSolver` ABC, the same shape as</span>
@@ -426,7 +426,7 @@
 <span class="sd">the Gram-Schmidt-vs-Householder QR comparison remain hand-rolled in</span>
 <span class="sd">their respective modules because the iteration/comparison itself is the</span>
 <span class="sd">pedagogical content, not something a library call would expose.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -439,14 +439,14 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">DEFAULT_MAX_ITER</span><span class="p">,</span> <span class="n">DEFAULT_RTOL</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">"LUResult"</span><span class="p">,</span>
-    <span class="s2">"QRResult"</span><span class="p">,</span>
-    <span class="s2">"CholeskyResult"</span><span class="p">,</span>
-    <span class="s2">"EigenResult"</span><span class="p">,</span>
-    <span class="s2">"SVDResult"</span><span class="p">,</span>
-    <span class="s2">"IterativeSolveResult"</span><span class="p">,</span>
-    <span class="s2">"LeastSquaresResult"</span><span class="p">,</span>
-    <span class="s2">"IterativeLinearSolver"</span><span class="p">,</span>
+    <span class="s2">&quot;LUResult&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;QRResult&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CholeskyResult&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;EigenResult&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SVDResult&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;IterativeSolveResult&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LeastSquaresResult&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;IterativeLinearSolver&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 
@@ -454,19 +454,19 @@
 <a class="viewcode-back" href="../../../../api/linalg.html#mathematicskit.linalg.LUResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">LUResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Output of an LU decomposition with partial pivoting: ``P A = L U``."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Output of an LU decomposition with partial pivoting: ``P A = L U``.&quot;&quot;&quot;</span>
 
     <span class="n">L</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray, shape (n, n): Unit lower-triangular factor."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (n, n): Unit lower-triangular factor.&quot;&quot;&quot;</span>
 
     <span class="n">U</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray, shape (n, n): Upper-triangular factor."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (n, n): Upper-triangular factor.&quot;&quot;&quot;</span>
 
     <span class="n">P</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray, shape (n, n): Row-permutation matrix, ``P @ A == L @ U``."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (n, n): Row-permutation matrix, ``P @ A == L @ U``.&quot;&quot;&quot;</span>
 
     <span class="n">num_row_swaps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="w">    </span><span class="sd">"""int: Number of row swaps performed (parity gives ``det(P)``)."""</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;int: Number of row swaps performed (parity gives ``det(P)``).&quot;&quot;&quot;</span></div>
 
 
 
@@ -474,16 +474,16 @@
 <a class="viewcode-back" href="../../../../api/linalg.html#mathematicskit.linalg.QRResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">QRResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Output of a QR decomposition: ``A = Q R``."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Output of a QR decomposition: ``A = Q R``.&quot;&quot;&quot;</span>
 
     <span class="n">Q</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray, shape (m, n): Orthonormal-columns factor."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (m, n): Orthonormal-columns factor.&quot;&quot;&quot;</span>
 
     <span class="n">R</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray, shape (n, n): Upper-triangular factor."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (n, n): Upper-triangular factor.&quot;&quot;&quot;</span>
 
-    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
-<span class="w">    </span><span class="sd">"""str: ``"householder"`` or ``"gram_schmidt"``."""</span></div>
+    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;str: ``&quot;householder&quot;`` or ``&quot;gram_schmidt&quot;``.&quot;&quot;&quot;</span></div>
 
 
 
@@ -491,10 +491,10 @@
 <a class="viewcode-back" href="../../../../api/linalg.html#mathematicskit.linalg.CholeskyResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">CholeskyResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Output of a Cholesky decomposition of an SPD matrix: ``A = L L^T``."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Output of a Cholesky decomposition of an SPD matrix: ``A = L L^T``.&quot;&quot;&quot;</span>
 
     <span class="n">L</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray, shape (n, n): Lower-triangular factor."""</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (n, n): Lower-triangular factor.&quot;&quot;&quot;</span></div>
 
 
 
@@ -502,25 +502,25 @@
 <a class="viewcode-back" href="../../../../api/linalg.html#mathematicskit.linalg.EigenResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">EigenResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Output of a symmetric eigenvalue algorithm."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Output of a symmetric eigenvalue algorithm.&quot;&quot;&quot;</span>
 
     <span class="n">eigenvalues</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray, shape (n,) or scalar-like shape (1,): Eigenvalue(s) found."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (n,) or scalar-like shape (1,): Eigenvalue(s) found.&quot;&quot;&quot;</span>
 
     <span class="n">eigenvectors</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray, shape (n, n) or (n,): Corresponding eigenvector(s), as columns."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (n, n) or (n,): Corresponding eigenvector(s), as columns.&quot;&quot;&quot;</span>
 
     <span class="n">iterations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="w">    </span><span class="sd">"""int: Number of iterations/sweeps performed."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;int: Number of iterations/sweeps performed.&quot;&quot;&quot;</span>
 
     <span class="n">converged</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="w">    </span><span class="sd">"""bool: Whether the convergence tolerance was met."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;bool: Whether the convergence tolerance was met.&quot;&quot;&quot;</span>
 
-    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
-<span class="w">    </span><span class="sd">"""str: e.g. ``"jacobi"``, ``"qr_algorithm"``, ``"power_iteration"``, ``"inverse_iteration"``."""</span>
+    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;str: e.g. ``&quot;jacobi&quot;``, ``&quot;qr_algorithm&quot;``, ``&quot;power_iteration&quot;``, ``&quot;inverse_iteration&quot;``.&quot;&quot;&quot;</span>
 
     <span class="n">extra</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-<span class="w">    </span><span class="sd">"""dict: Free-form diagnostics slot (e.g. Jacobi's off-diagonal norm history)."""</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;dict: Free-form diagnostics slot (e.g. Jacobi&#39;s off-diagonal norm history).&quot;&quot;&quot;</span></div>
 
 
 
@@ -528,16 +528,16 @@
 <a class="viewcode-back" href="../../../../api/linalg.html#mathematicskit.linalg.SVDResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">SVDResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Output of a singular value decomposition: ``A = U diag(S) V^T``."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Output of a singular value decomposition: ``A = U diag(S) V^T``.&quot;&quot;&quot;</span>
 
     <span class="n">U</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray, shape (m, k): Left singular vectors."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (m, k): Left singular vectors.&quot;&quot;&quot;</span>
 
     <span class="n">S</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray, shape (k,): Singular values, descending."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (k,): Singular values, descending.&quot;&quot;&quot;</span>
 
     <span class="n">Vt</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray, shape (k, n): Right singular vectors, transposed."""</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (k, n): Right singular vectors, transposed.&quot;&quot;&quot;</span></div>
 
 
 
@@ -545,22 +545,22 @@
 <a class="viewcode-back" href="../../../../api/linalg.html#mathematicskit.linalg.IterativeSolveResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">IterativeSolveResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Output of an iterative linear-system solver (CG, GMRES)."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Output of an iterative linear-system solver (CG, GMRES).&quot;&quot;&quot;</span>
 
     <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray, shape (n,): Approximate solution."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (n,): Approximate solution.&quot;&quot;&quot;</span>
 
     <span class="n">residual_history</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray, shape (iterations + 1,): ``||b - A x_k||`` at each iterate."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (iterations + 1,): ``||b - A x_k||`` at each iterate.&quot;&quot;&quot;</span>
 
     <span class="n">iterations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="w">    </span><span class="sd">"""int: Number of iterations performed."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;int: Number of iterations performed.&quot;&quot;&quot;</span>
 
     <span class="n">converged</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="w">    </span><span class="sd">"""bool: Whether the residual tolerance was met."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;bool: Whether the residual tolerance was met.&quot;&quot;&quot;</span>
 
-    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
-<span class="w">    </span><span class="sd">"""str: ``"conjugate_gradient"`` or ``"gmres"``."""</span></div>
+    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;str: ``&quot;conjugate_gradient&quot;`` or ``&quot;gmres&quot;``.&quot;&quot;&quot;</span></div>
 
 
 
@@ -568,28 +568,28 @@
 <a class="viewcode-back" href="../../../../api/linalg.html#mathematicskit.linalg.LeastSquaresResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">LeastSquaresResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Output of a least-squares solve (normal equations or QR-based)."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Output of a least-squares solve (normal equations or QR-based).&quot;&quot;&quot;</span>
 
     <span class="n">coefficients</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray, shape (n,): Least-squares solution."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (n,): Least-squares solution.&quot;&quot;&quot;</span>
 
     <span class="n">residual_norm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
-<span class="w">    </span><span class="sd">"""float: ``||b - A x||_2`` at the solution."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: ``||b - A x||_2`` at the solution.&quot;&quot;&quot;</span>
 
-    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
-<span class="w">    </span><span class="sd">"""str: ``"normal_equations"`` or ``"qr"``."""</span>
+    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;str: ``&quot;normal_equations&quot;`` or ``&quot;qr&quot;``.&quot;&quot;&quot;</span>
 
     <span class="n">condition_number</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="w">    </span><span class="sd">"""float, optional: 2-norm condition number of ``A`` (``"qr"``) or of</span>
-<span class="sd">    the normal-equations matrix ``A^T A`` (``"normal_equations"``, which</span>
-<span class="sd">    squares it)."""</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float, optional: 2-norm condition number of ``A`` (``&quot;qr&quot;``) or of</span>
+<span class="sd">    the normal-equations matrix ``A^T A`` (``&quot;normal_equations&quot;``, which</span>
+<span class="sd">    squares it).&quot;&quot;&quot;</span></div>
 
 
 
 <div class="viewcode-block" id="IterativeLinearSolver">
 <a class="viewcode-back" href="../../../../api/linalg.html#mathematicskit.linalg.IterativeLinearSolver">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">IterativeLinearSolver</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Common base for Krylov-subspace iterative linear-system solvers.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Common base for Krylov-subspace iterative linear-system solvers.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -597,7 +597,7 @@
 <span class="sd">        Relative residual-norm convergence tolerance.</span>
 <span class="sd">    max_iter : int</span>
 <span class="sd">        Maximum number of iterations.</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_RTOL</span><span class="p">,</span> <span class="n">max_iter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">DEFAULT_MAX_ITER</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tol</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">tol</span><span class="p">)</span>
@@ -607,7 +607,7 @@
 <a class="viewcode-back" href="../../../../api/linalg.html#mathematicskit.linalg.IterativeLinearSolver.solve">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">x0</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IterativeSolveResult</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Solve ``A x = b`` iteratively.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Solve ``A x = b`` iteratively.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -619,7 +619,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        IterativeSolveResult</span>
-<span class="sd">        """</span></div>
+<span class="sd">        &quot;&quot;&quot;</span></div>
 </div>
 
 </pre></div>

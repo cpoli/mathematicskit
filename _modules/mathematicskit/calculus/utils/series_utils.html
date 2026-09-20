@@ -410,10 +410,10 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.calculus.utils.series_utils</h1><div class="highlight"><pre>
-<span></span><span class="sd">"""Small supporting numerics for mathematicskit.calculus.systems.taylor_series:</span>
+<span></span><span class="sd">&quot;&quot;&quot;Small supporting numerics for mathematicskit.calculus.systems.taylor_series:</span>
 <span class="sd">partial-sum sequences and empirical truncation error, used by the</span>
 <span class="sd">visualizers and examples to show a series actually converging (or</span>
-<span class="sd">diverging outside its radius)."""</span>
+<span class="sd">diverging outside its radius).&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -421,13 +421,13 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"partial_sums"</span><span class="p">,</span> <span class="s2">"truncation_error"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;partial_sums&quot;</span><span class="p">,</span> <span class="s2">&quot;truncation_error&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="partial_sums">
 <a class="viewcode-back" href="../../../../api/calculus.html#mathematicskit.calculus.partial_sums">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">partial_sums</span><span class="p">(</span><span class="n">coefficients</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Partial sums :math:`S_k(x) = \sum_{n=0}^{k} a_n x^n` for every ``k``.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Partial sums :math:`S_k(x) = \sum_{n=0}^{k} a_n x^n` for every ``k``.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -445,7 +445,7 @@
 <span class="sd">    &gt;&gt;&gt; sums = partial_sums(np.array([1.0, 1.0, 0.5, 1.0 / 6.0]), 1.0)</span>
 <span class="sd">    &gt;&gt;&gt; np.round(sums, 6)</span>
 <span class="sd">    array([1.      , 2.      , 2.5     , 2.666667])</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">coefficients</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">coefficients</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">terms</span> <span class="o">=</span> <span class="n">coefficients</span> <span class="o">*</span> <span class="n">x</span> <span class="o">**</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">coefficients</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span></div>
@@ -455,7 +455,7 @@
 <div class="viewcode-block" id="truncation_error">
 <a class="viewcode-back" href="../../../../api/calculus.html#mathematicskit.calculus.truncation_error">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">truncation_error</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">],</span> <span class="n">coefficients</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Empirical truncation error ``|f(x) - S_k(x)|`` for every partial sum.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Empirical truncation error ``|f(x) - S_k(x)|`` for every partial sum.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -472,11 +472,11 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; import numpy as np</span>
 <span class="sd">    &gt;&gt;&gt; from mathematicskit.calculus.systems.taylor_series import maclaurin_coefficients</span>
-<span class="sd">    &gt;&gt;&gt; coeffs = maclaurin_coefficients("exp", 15)</span>
+<span class="sd">    &gt;&gt;&gt; coeffs = maclaurin_coefficients(&quot;exp&quot;, 15)</span>
 <span class="sd">    &gt;&gt;&gt; errors = truncation_error(np.exp, coeffs, 1.0)</span>
 <span class="sd">    &gt;&gt;&gt; bool(errors[-1] &lt; errors[0])</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">sums</span> <span class="o">=</span> <span class="n">partial_sums</span><span class="p">(</span><span class="n">coefficients</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">sums</span><span class="p">)</span></div>
 

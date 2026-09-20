@@ -410,26 +410,26 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.combinatorics.systems.inclusion_exclusion</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""The inclusion-exclusion principle, and its classic application to</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The inclusion-exclusion principle, and its classic application to</span>
 <span class="sd">counting derangements.</span>
 
 <span class="sd">No scipy/numpy equivalent. See Graham, Knuth &amp; Patashnik, *Concrete</span>
 <span class="sd">Mathematics*, 2nd ed., Sec. 8.3, and Cormen et al., *Introduction to</span>
 <span class="sd">Algorithms*, 3rd ed., Ch. C.4 (the hat-check/derangement problem).</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequence</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"union_size_inclusion_exclusion"</span><span class="p">,</span> <span class="s2">"derangement_count"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;union_size_inclusion_exclusion&quot;</span><span class="p">,</span> <span class="s2">&quot;derangement_count&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="union_size_inclusion_exclusion">
 <a class="viewcode-back" href="../../../../api/combinatorics.html#mathematicskit.combinatorics.union_size_inclusion_exclusion">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">union_size_inclusion_exclusion</span><span class="p">(</span><span class="n">sets</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">set</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Exact size of the union of several (possibly overlapping) sets.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Exact size of the union of several (possibly overlapping) sets.</span>
 
 <span class="sd">    :math:`\left|\bigcup_i A_i\right| = \sum_i |A_i| - \sum_{i&lt;j}|A_i</span>
 <span class="sd">    \cap A_j| + \sum_{i&lt;j&lt;k}|A_i \cap A_j \cap A_k| - \dots`, summed over</span>
@@ -452,7 +452,7 @@
 <span class="sd">    &gt;&gt;&gt; c = {4, 5, 6, 7}</span>
 <span class="sd">    &gt;&gt;&gt; union_size_inclusion_exclusion([a, b, c]) == len(a | b | c)</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sets</span><span class="p">)</span>
     <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
@@ -469,10 +469,10 @@
 <div class="viewcode-block" id="derangement_count">
 <a class="viewcode-back" href="../../../../api/combinatorics.html#mathematicskit.combinatorics.derangement_count">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">derangement_count</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Number of derangements :math:`D_n`: permutations of ``n`` items with no fixed points.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Number of derangements :math:`D_n`: permutations of ``n`` items with no fixed points.</span>
 
-<span class="sd">    The classic inclusion-exclusion application (the "hat-check</span>
-<span class="sd">    problem"): starting from all :math:`n!` permutations, subtract those</span>
+<span class="sd">    The classic inclusion-exclusion application (the &quot;hat-check</span>
+<span class="sd">    problem&quot;): starting from all :math:`n!` permutations, subtract those</span>
 <span class="sd">    fixing each point, add back those fixing each pair (double-</span>
 <span class="sd">    subtracted), etc., giving :math:`D_n = n!\sum_{k=0}^n</span>
 <span class="sd">    \dfrac{(-1)^k}{k!}`. See Graham, Knuth &amp; Patashnik, *Concrete</span>
@@ -500,9 +500,9 @@
 <span class="sd">    &gt;&gt;&gt; brute_force = sum(1 for p in itertools.permutations(range(4)) if all(p[i] != i for i in range(4)))</span>
 <span class="sd">    &gt;&gt;&gt; derangement_count(4) == brute_force</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"n must be &gt;= 0"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;n must be &gt;= 0&quot;</span><span class="p">)</span>
     <span class="c1"># Equivalent to n! * sum_{k=0}^n (-1)^k/k!, but computed via the</span>
     <span class="c1"># exact-integer recurrence D_n = (n-1)*(D_{n-1} + D_{n-2}) to avoid</span>
     <span class="c1"># any floating-point contamination from the factorial-ratio sum.</span>

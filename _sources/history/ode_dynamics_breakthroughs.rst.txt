@@ -101,6 +101,8 @@ found.
 *References:* E. N. Lorenz, "Deterministic Nonperiodic Flow," Journal of
 the Atmospheric Sciences 20(2) (1963), 130-141.
 
+.. minigallery:: ../../examples/ode_dynamics/stability/plot_01_classification_zoo.py
+
 1885 -- 1937 -- Poincare, Andronov, and Bifurcation Theory
 ----------------------------------------------------------------
 

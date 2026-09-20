@@ -410,16 +410,16 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.graph_theory.core.base</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""A lightweight own graph container, and result dataclasses shared</span>
-<span class="sd">across mathematicskit.graph_theory's systems/ modules.</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A lightweight own graph container, and result dataclasses shared</span>
+<span class="sd">across mathematicskit.graph_theory&#39;s systems/ modules.</span>
 
 <span class="sd">:class:`Graph` is deliberately minimal (adjacency-list storage, no</span>
 <span class="sd">``networkx`` dependency) -- its job is to hold vertices/edges and hand</span>
 <span class="sd">off a :func:`scipy.sparse.csr_matrix` representation to whichever</span>
 <span class="sd">``scipy.sparse.csgraph`` routine a ``systems/`` function needs, per</span>
-<span class="sd">mathematicskit's "call the library directly" rule for anything scipy already</span>
+<span class="sd">mathematicskit&#39;s &quot;call the library directly&quot; rule for anything scipy already</span>
 <span class="sd">implements.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -429,13 +429,13 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">sparse</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Graph"</span><span class="p">,</span> <span class="s2">"ShortestPathResult"</span><span class="p">,</span> <span class="s2">"MSTResult"</span><span class="p">,</span> <span class="s2">"MaxFlowResult"</span><span class="p">,</span> <span class="s2">"ColoringResult"</span><span class="p">,</span> <span class="s2">"SpectralResult"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Graph&quot;</span><span class="p">,</span> <span class="s2">&quot;ShortestPathResult&quot;</span><span class="p">,</span> <span class="s2">&quot;MSTResult&quot;</span><span class="p">,</span> <span class="s2">&quot;MaxFlowResult&quot;</span><span class="p">,</span> <span class="s2">&quot;ColoringResult&quot;</span><span class="p">,</span> <span class="s2">&quot;SpectralResult&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="Graph">
 <a class="viewcode-back" href="../../../../api/graph_theory.html#mathematicskit.graph_theory.Graph">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Graph</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""A lightweight directed or undirected weighted graph.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A lightweight directed or undirected weighted graph.</span>
 
 <span class="sd">    Vertices are the integers ``0, ..., n_vertices - 1``. Stored as an</span>
 <span class="sd">    adjacency dict of dicts (``self._adj[u][v] = weight``); edges with no</span>
@@ -458,7 +458,7 @@
 <span class="sd">    array([[0., 2., 0.],</span>
 <span class="sd">           [2., 0., 3.],</span>
 <span class="sd">           [0., 3., 0.]])</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_vertices</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">directed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_vertices</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_vertices</span><span class="p">)</span>
@@ -468,13 +468,13 @@
 <div class="viewcode-block" id="Graph.add_edge">
 <a class="viewcode-back" href="../../../../api/graph_theory.html#mathematicskit.graph_theory.Graph.add_edge">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">add_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">weight</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Add an edge (or update its weight if it already exists).</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add an edge (or update its weight if it already exists).</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        u, v : int</span>
 <span class="sd">        weight : float</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_adj</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">directed</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_adj</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span></div>
@@ -483,17 +483,17 @@
 <div class="viewcode-block" id="Graph.neighbors">
 <a class="viewcode-back" href="../../../../api/graph_theory.html#mathematicskit.graph_theory.Graph.neighbors">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">neighbors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""dict: ``{neighbor: weight}`` for vertex ``u``."""</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;dict: ``{neighbor: weight}`` for vertex ``u``.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj</span><span class="p">[</span><span class="n">u</span><span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="Graph.edges">
 <a class="viewcode-back" href="../../../../api/graph_theory.html#mathematicskit.graph_theory.Graph.edges">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">edges</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""list of (int, int, float): Every edge as ``(u, v, weight)``.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;list of (int, int, float): Every edge as ``(u, v, weight)``.</span>
 
 <span class="sd">        For an undirected graph, each edge is listed once (``u &lt; v``).</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">neighbors</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -505,12 +505,12 @@
 <div class="viewcode-block" id="Graph.to_sparse">
 <a class="viewcode-back" href="../../../../api/graph_theory.html#mathematicskit.graph_theory.Graph.to_sparse">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_sparse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">"""Build a :class:`scipy.sparse.csr_matrix` adjacency/weight matrix.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build a :class:`scipy.sparse.csr_matrix` adjacency/weight matrix.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        scipy.sparse.csr_matrix, shape (n_vertices, n_vertices)</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">neighbors</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -526,18 +526,18 @@
 <a class="viewcode-back" href="../../../../api/graph_theory.html#mathematicskit.graph_theory.ShortestPathResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">ShortestPathResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Container for a shortest-path computation."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for a shortest-path computation.&quot;&quot;&quot;</span>
 
     <span class="n">distances</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray: Shortest-path distance(s); shape (n,) for a single</span>
-<span class="sd">    source, or (n_sources, n) for multiple sources."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray: Shortest-path distance(s); shape (n,) for a single</span>
+<span class="sd">    source, or (n_sources, n) for multiple sources.&quot;&quot;&quot;</span>
 
     <span class="n">predecessors</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray, int: Predecessor-tree indices (``-9999`` for</span>
-<span class="sd">    unreachable/root, following ``scipy.sparse.csgraph``'s convention)."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, int: Predecessor-tree indices (``-9999`` for</span>
+<span class="sd">    unreachable/root, following ``scipy.sparse.csgraph``&#39;s convention).&quot;&quot;&quot;</span>
 
-    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
-<span class="w">    </span><span class="sd">"""str: e.g. ``"dijkstra"``, ``"bellman_ford"``, ``"floyd_warshall"``."""</span></div>
+    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;str: e.g. ``&quot;dijkstra&quot;``, ``&quot;bellman_ford&quot;``, ``&quot;floyd_warshall&quot;``.&quot;&quot;&quot;</span></div>
 
 
 
@@ -545,14 +545,14 @@
 <a class="viewcode-back" href="../../../../api/graph_theory.html#mathematicskit.graph_theory.MSTResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">MSTResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Container for a minimum-spanning-tree/-forest computation."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for a minimum-spanning-tree/-forest computation.&quot;&quot;&quot;</span>
 
     <span class="n">edges</span><span class="p">:</span> <span class="nb">list</span>
-<span class="w">    </span><span class="sd">"""list of (int, int, float): The MST's edges as ``(u, v, weight)``."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;list of (int, int, float): The MST&#39;s edges as ``(u, v, weight)``.&quot;&quot;&quot;</span>
 
     <span class="n">total_weight</span><span class="p">:</span> <span class="nb">float</span>
-    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
-<span class="w">    </span><span class="sd">"""str: e.g. ``"kruskal"`` (via scipy) or ``"prim"`` (hand-rolled)."""</span></div>
+    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;str: e.g. ``&quot;kruskal&quot;`` (via scipy) or ``&quot;prim&quot;`` (hand-rolled).&quot;&quot;&quot;</span></div>
 
 
 
@@ -560,15 +560,15 @@
 <a class="viewcode-back" href="../../../../api/graph_theory.html#mathematicskit.graph_theory.MaxFlowResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">MaxFlowResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Container for a maximum-flow computation."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for a maximum-flow computation.&quot;&quot;&quot;</span>
 
     <span class="n">flow_value</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">flow_matrix</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray, shape (n, n): Flow assigned to each edge."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (n, n): Flow assigned to each edge.&quot;&quot;&quot;</span>
 
     <span class="n">min_cut</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">tuple</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="w">    </span><span class="sd">"""tuple of (ndarray, ndarray), optional: ``(source_side, sink_side)``</span>
-<span class="sd">    vertex partitions defining the corresponding minimum cut."""</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;tuple of (ndarray, ndarray), optional: ``(source_side, sink_side)``</span>
+<span class="sd">    vertex partitions defining the corresponding minimum cut.&quot;&quot;&quot;</span></div>
 
 
 
@@ -576,14 +576,14 @@
 <a class="viewcode-back" href="../../../../api/graph_theory.html#mathematicskit.graph_theory.ColoringResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">ColoringResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Container for a graph-coloring result."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for a graph-coloring result.&quot;&quot;&quot;</span>
 
     <span class="n">coloring</span><span class="p">:</span> <span class="nb">dict</span>
-<span class="w">    </span><span class="sd">"""dict: ``{vertex: color_index}``."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;dict: ``{vertex: color_index}``.&quot;&quot;&quot;</span>
 
     <span class="n">num_colors</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
-<span class="w">    </span><span class="sd">"""str: ``"greedy"`` or ``"backtracking"``."""</span></div>
+    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;str: ``&quot;greedy&quot;`` or ``&quot;backtracking&quot;``.&quot;&quot;&quot;</span></div>
 
 
 
@@ -591,20 +591,20 @@
 <a class="viewcode-back" href="../../../../api/graph_theory.html#mathematicskit.graph_theory.SpectralResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">SpectralResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Container for a spectral graph-theory computation."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for a spectral graph-theory computation.&quot;&quot;&quot;</span>
 
     <span class="n">laplacian</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
     <span class="n">eigenvalues</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray, shape (n,): Laplacian eigenvalues, ascending."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (n,): Laplacian eigenvalues, ascending.&quot;&quot;&quot;</span>
 
     <span class="n">eigenvectors</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
     <span class="n">algebraic_connectivity</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: The second-smallest Laplacian eigenvalue (Fiedler value);</span>
-<span class="sd">    zero iff the graph is disconnected."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: The second-smallest Laplacian eigenvalue (Fiedler value);</span>
+<span class="sd">    zero iff the graph is disconnected.&quot;&quot;&quot;</span>
 
     <span class="n">bipartition</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([]))</span>
-<span class="w">    </span><span class="sd">"""ndarray, bool: Spectral bipartition from the Fiedler vector's sign</span>
-<span class="sd">    (``True``/``False`` per vertex)."""</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, bool: Spectral bipartition from the Fiedler vector&#39;s sign</span>
+<span class="sd">    (``True``/``False`` per vertex).&quot;&quot;&quot;</span></div>
 
 </pre></div>
 

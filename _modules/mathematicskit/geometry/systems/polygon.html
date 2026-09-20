@@ -410,27 +410,27 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.geometry.systems.polygon</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Polygon area and centroid via the shoelace formula.</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Polygon area and centroid via the shoelace formula.</span>
 
-<span class="sd">Simple enough that hand-writing it is arithmetic, not "reimplementing a</span>
-<span class="sd">library" -- there's no meaningful sense in which</span>
-<span class="sd">``scipy``/``numpy`` "already implements" the shoelace formula the way</span>
+<span class="sd">Simple enough that hand-writing it is arithmetic, not &quot;reimplementing a</span>
+<span class="sd">library&quot; -- there&#39;s no meaningful sense in which</span>
+<span class="sd">``scipy``/``numpy`` &quot;already implements&quot; the shoelace formula the way</span>
 <span class="sd">they implement, say, a convex hull algorithm. See Bourke (1988), *Calculating</span>
 <span class="sd">the area and centroid of a polygon*, and de Berg et al., *Computational</span>
 <span class="sd">Geometry*, 3rd ed., Ch. 2 (polygon fundamentals).</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"polygon_area"</span><span class="p">,</span> <span class="s2">"polygon_centroid"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;polygon_area&quot;</span><span class="p">,</span> <span class="s2">&quot;polygon_centroid&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="polygon_area">
 <a class="viewcode-back" href="../../../../api/geometry.html#mathematicskit.geometry.polygon_area">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">polygon_area</span><span class="p">(</span><span class="n">vertices</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Signed area of a simple polygon via the shoelace formula.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Signed area of a simple polygon via the shoelace formula.</span>
 
 <span class="sd">    :math:`A = \tfrac12 \left|\sum_{i} (x_i y_{i+1} - x_{i+1} y_i)\right|`,</span>
 <span class="sd">    indices modulo ``n`` (the polygon implicitly closes back to its</span>
@@ -450,7 +450,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; polygon_area(np.array([[0.0, 0.0], [4.0, 0.0], [4.0, 3.0], [0.0, 3.0]]))</span>
 <span class="sd">    12.0</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">v</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">v</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
     <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">y</span><span class="p">)))</span></div>
@@ -460,7 +460,7 @@
 <div class="viewcode-block" id="polygon_centroid">
 <a class="viewcode-back" href="../../../../api/geometry.html#mathematicskit.geometry.polygon_centroid">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">polygon_centroid</span><span class="p">(</span><span class="n">vertices</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Centroid (center of mass, assuming uniform density) of a simple polygon.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Centroid (center of mass, assuming uniform density) of a simple polygon.</span>
 
 <span class="sd">    :math:`C_x = \dfrac{1}{6A}\sum_i (x_i+x_{i+1})(x_iy_{i+1}-x_{i+1}y_i)`,</span>
 <span class="sd">    similarly for :math:`C_y` -- the shoelace-formula-weighted average,</span>
@@ -479,7 +479,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; polygon_centroid(np.array([[0.0, 0.0], [4.0, 0.0], [4.0, 3.0], [0.0, 3.0]]))</span>
 <span class="sd">    array([2. , 1.5])</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">v</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">v</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
     <span class="n">x_next</span><span class="p">,</span> <span class="n">y_next</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>

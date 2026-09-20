@@ -410,9 +410,9 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.graph_theory.utils.generators</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Small graph-generator helpers -- supporting numerics for building</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Small graph-generator helpers -- supporting numerics for building</span>
 <span class="sd">test/example graphs, not algorithms in their own right.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -420,13 +420,13 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.graph_theory.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Graph</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"complete_graph"</span><span class="p">,</span> <span class="s2">"cycle_graph"</span><span class="p">,</span> <span class="s2">"path_graph"</span><span class="p">,</span> <span class="s2">"random_graph"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;complete_graph&quot;</span><span class="p">,</span> <span class="s2">&quot;cycle_graph&quot;</span><span class="p">,</span> <span class="s2">&quot;path_graph&quot;</span><span class="p">,</span> <span class="s2">&quot;random_graph&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="complete_graph">
 <a class="viewcode-back" href="../../../../api/graph_theory.html#mathematicskit.graph_theory.complete_graph">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">complete_graph</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Graph</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""The complete graph :math:`K_n`: every pair of vertices connected.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The complete graph :math:`K_n`: every pair of vertices connected.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -441,7 +441,7 @@
 <span class="sd">    &gt;&gt;&gt; g = complete_graph(4)</span>
 <span class="sd">    &gt;&gt;&gt; len(g.edges())</span>
 <span class="sd">    6</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
@@ -453,7 +453,7 @@
 <div class="viewcode-block" id="cycle_graph">
 <a class="viewcode-back" href="../../../../api/graph_theory.html#mathematicskit.graph_theory.cycle_graph">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">cycle_graph</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Graph</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""The cycle graph :math:`C_n`: vertices ``0, ..., n-1`` in a ring.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The cycle graph :math:`C_n`: vertices ``0, ..., n-1`` in a ring.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -468,7 +468,7 @@
 <span class="sd">    &gt;&gt;&gt; g = cycle_graph(5)</span>
 <span class="sd">    &gt;&gt;&gt; len(g.edges())</span>
 <span class="sd">    5</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
         <span class="n">g</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">n</span><span class="p">)</span>
@@ -479,7 +479,7 @@
 <div class="viewcode-block" id="path_graph">
 <a class="viewcode-back" href="../../../../api/graph_theory.html#mathematicskit.graph_theory.path_graph">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">path_graph</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Graph</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""The path graph :math:`P_n`: vertices ``0, ..., n-1`` in a line.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The path graph :math:`P_n`: vertices ``0, ..., n-1`` in a line.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -494,7 +494,7 @@
 <span class="sd">    &gt;&gt;&gt; g = path_graph(5)</span>
 <span class="sd">    &gt;&gt;&gt; len(g.edges())</span>
 <span class="sd">    4</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
         <span class="n">g</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
@@ -505,7 +505,7 @@
 <div class="viewcode-block" id="random_graph">
 <a class="viewcode-back" href="../../../../api/graph_theory.html#mathematicskit.graph_theory.random_graph">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">random_graph</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">directed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Graph</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""An Erdos-Renyi random graph :math:`G(n, p)`: each possible edge present independently with probability ``p``.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;An Erdos-Renyi random graph :math:`G(n, p)`: each possible edge present independently with probability ``p``.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -524,7 +524,7 @@
 <span class="sd">    &gt;&gt;&gt; g = random_graph(10, p=0.3, seed=0)</span>
 <span class="sd">    &gt;&gt;&gt; 0 &lt;= len(g.edges()) &lt;= 45</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">directed</span><span class="o">=</span><span class="n">directed</span><span class="p">)</span>
     <span class="n">pairs</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">if</span> <span class="n">directed</span> <span class="k">else</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">))]</span>

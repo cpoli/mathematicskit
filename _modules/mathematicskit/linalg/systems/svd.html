@@ -410,18 +410,18 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.linalg.systems.svd</h1><div class="highlight"><pre>
-<span></span><span class="sd">"""Singular value decomposition, via :func:`numpy.linalg.svd`.</span>
+<span></span><span class="sd">&quot;&quot;&quot;Singular value decomposition, via :func:`numpy.linalg.svd`.</span>
 
 <span class="sd">Production SVD implementations bidiagonalize ``A`` first (Golub-Kahan)</span>
 <span class="sd">rather than forming :math:`A^T A` and eigendecomposing it -- squaring the</span>
 <span class="sd">matrix squares its condition number, which is exactly the instability</span>
 <span class="sd">:mod:`mathematicskit.linalg.systems.stability` demonstrates for the normal</span>
-<span class="sd">equations. :func:`numpy.linalg.svd` (LAPACK's ``?gesdd``) already uses</span>
+<span class="sd">equations. :func:`numpy.linalg.svd` (LAPACK&#39;s ``?gesdd``) already uses</span>
 <span class="sd">the numerically stable route, so mathematicskit wraps it directly rather than</span>
 <span class="sd">reimplementing the less-stable textbook definition. See Trefethen &amp; Bau,</span>
 <span class="sd">*Numerical Linear Algebra*, 1997, Lecture 4-5, and Golub &amp; Van Loan,</span>
 <span class="sd">*Matrix Computations*, 4th ed., Ch. 8.6.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -429,18 +429,18 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.linalg.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">SVDResult</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"svd_decompose"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;svd_decompose&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="svd_decompose">
 <a class="viewcode-back" href="../../../../api/linalg.html#mathematicskit.linalg.svd_decompose">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">svd_decompose</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SVDResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Compute the (thin) SVD ``A = U diag(S) V^T`` via :func:`numpy.linalg.svd`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute the (thin) SVD ``A = U diag(S) V^T`` via :func:`numpy.linalg.svd`.</span>
 
 <span class="sd">    ``full_matrices=False`` requests the thin/economy factorization</span>
 <span class="sd">    (``U`` shape (m, k), ``Vt`` shape (k, n) with ``k = min(m, n)``),</span>
 <span class="sd">    which is what every :mod:`mathematicskit.linalg` caller needs. Singular</span>
-<span class="sd">    values are returned in descending order (numpy's convention).</span>
+<span class="sd">    values are returned in descending order (numpy&#39;s convention).</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -459,7 +459,7 @@
 <span class="sd">    array([3., 2.])</span>
 <span class="sd">    &gt;&gt;&gt; np.allclose(result.U @ np.diag(result.S) @ result.Vt, A)</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Vt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">SVDResult</span><span class="p">(</span><span class="n">U</span><span class="o">=</span><span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="n">S</span><span class="p">,</span> <span class="n">Vt</span><span class="o">=</span><span class="n">Vt</span><span class="p">)</span></div>

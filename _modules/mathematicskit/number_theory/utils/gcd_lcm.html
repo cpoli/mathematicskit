@@ -410,20 +410,20 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.number_theory.utils.gcd_lcm</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""The (ordinary, non-extended) Euclidean algorithm and least common</span>
-<span class="sd">multiple -- small supporting numerics for this domain's systems/</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The (ordinary, non-extended) Euclidean algorithm and least common</span>
+<span class="sd">multiple -- small supporting numerics for this domain&#39;s systems/</span>
 <span class="sd">modules, not a model in their own right.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"gcd"</span><span class="p">,</span> <span class="s2">"lcm"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;gcd&quot;</span><span class="p">,</span> <span class="s2">&quot;lcm&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="gcd">
 <a class="viewcode-back" href="../../../../api/number_theory.html#mathematicskit.number_theory.gcd">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Greatest common divisor via the Euclidean algorithm.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Greatest common divisor via the Euclidean algorithm.</span>
 
 <span class="sd">    :math:`\gcd(a,b) = \gcd(b, a \bmod b)`, terminating when the second</span>
 <span class="sd">    argument reaches 0. See Niven, Zuckerman &amp; Montgomery, *An</span>
@@ -444,7 +444,7 @@
 <span class="sd">    6</span>
 <span class="sd">    &gt;&gt;&gt; gcd(17, 5)</span>
 <span class="sd">    1</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nb">abs</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
     <span class="k">while</span> <span class="n">b</span><span class="p">:</span>
         <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span>
@@ -455,7 +455,7 @@
 <div class="viewcode-block" id="lcm">
 <a class="viewcode-back" href="../../../../api/number_theory.html#mathematicskit.number_theory.lcm">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">lcm</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Least common multiple: :math:`\mathrm{lcm}(a,b) = |ab|/\gcd(a,b)`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Least common multiple: :math:`\mathrm{lcm}(a,b) = |ab|/\gcd(a,b)`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -471,7 +471,7 @@
 <span class="sd">    12</span>
 <span class="sd">    &gt;&gt;&gt; lcm(21, 6)</span>
 <span class="sd">    42</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">0</span>
     <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span> <span class="o">//</span> <span class="n">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span></div>

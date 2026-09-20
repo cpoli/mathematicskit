@@ -410,13 +410,13 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.numerical_analysis.systems.root_finding</h1><div class="highlight"><pre>
-<span></span><span class="sd">"""Scalar root-finding methods: bisection, Newton-Raphson, secant, and</span>
+<span></span><span class="sd">&quot;&quot;&quot;Scalar root-finding methods: bisection, Newton-Raphson, secant, and</span>
 <span class="sd">fixed-point iteration.</span>
 
 <span class="sd">All four are textbook methods; see Burden &amp; Faires, *Numerical Analysis*,</span>
-<span class="sd">10th ed., Ch. 2 ("Solutions of Equations in One Variable") for the</span>
+<span class="sd">10th ed., Ch. 2 (&quot;Solutions of Equations in One Variable&quot;) for the</span>
 <span class="sd">derivations and convergence-order proofs each docstring below references.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -427,13 +427,13 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">DEFAULT_MAX_ITER</span><span class="p">,</span> <span class="n">DEFAULT_RTOL</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.numerical_analysis.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">IterativeRootFinder</span><span class="p">,</span> <span class="n">RootResult</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Bisection"</span><span class="p">,</span> <span class="s2">"NewtonRaphson"</span><span class="p">,</span> <span class="s2">"Secant"</span><span class="p">,</span> <span class="s2">"FixedPointIteration"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Bisection&quot;</span><span class="p">,</span> <span class="s2">&quot;NewtonRaphson&quot;</span><span class="p">,</span> <span class="s2">&quot;Secant&quot;</span><span class="p">,</span> <span class="s2">&quot;FixedPointIteration&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="Bisection">
 <a class="viewcode-back" href="../../../../api/numerical_analysis.html#mathematicskit.numerical_analysis.Bisection">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Bisection</span><span class="p">(</span><span class="n">IterativeRootFinder</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Bisection method on a bracket ``[a, b]`` with ``f(a) * f(b) &lt; 0``.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bisection method on a bracket ``[a, b]`` with ``f(a) * f(b) &lt; 0``.</span>
 
 <span class="sd">    Halves the bracket each iteration, keeping the half where the sign</span>
 <span class="sd">    change persists; converges linearly (order 1) with error bound</span>
@@ -458,7 +458,7 @@
 <span class="sd">    1.414214</span>
 <span class="sd">    &gt;&gt;&gt; result.converged</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">],</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_RTOL</span><span class="p">,</span> <span class="n">max_iter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">DEFAULT_MAX_ITER</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">tol</span><span class="o">=</span><span class="n">tol</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="n">max_iter</span><span class="p">)</span>
@@ -469,7 +469,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_root_immediate</span> <span class="o">=</span> <span class="n">b</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">fa</span> <span class="o">*</span> <span class="n">fb</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"f(a) and f(b) must have opposite signs"</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;f(a) and f(b) must have opposite signs&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_root_immediate</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">f</span> <span class="o">=</span> <span class="n">f</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
@@ -478,7 +478,7 @@
 <a class="viewcode-back" href="../../../../api/numerical_analysis.html#mathematicskit.numerical_analysis.Bisection.solve">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RootResult</span><span class="p">:</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root_immediate</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">RootResult</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_root_immediate</span><span class="p">,</span> <span class="n">converged</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">history</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">_root_immediate</span><span class="p">]),</span> <span class="n">method</span><span class="o">=</span><span class="s2">"bisection"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">RootResult</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_root_immediate</span><span class="p">,</span> <span class="n">converged</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">history</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">_root_immediate</span><span class="p">]),</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;bisection&quot;</span><span class="p">)</span>
         <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span>
         <span class="n">fa</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
         <span class="n">history</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)]</span>
@@ -496,7 +496,7 @@
                 <span class="n">b</span> <span class="o">=</span> <span class="n">c</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">a</span><span class="p">,</span> <span class="n">fa</span> <span class="o">=</span> <span class="n">c</span><span class="p">,</span> <span class="n">fc</span>
-        <span class="k">return</span> <span class="n">RootResult</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="n">history</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">converged</span><span class="o">=</span><span class="n">converged</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="n">n_iter</span><span class="p">,</span> <span class="n">history</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">history</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s2">"bisection"</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="p">{</span><span class="s2">"bracket"</span><span class="p">:</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)})</span></div>
+        <span class="k">return</span> <span class="n">RootResult</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="n">history</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">converged</span><span class="o">=</span><span class="n">converged</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="n">n_iter</span><span class="p">,</span> <span class="n">history</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">history</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;bisection&quot;</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;bracket&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)})</span></div>
 </div>
 
 
@@ -504,10 +504,10 @@
 <div class="viewcode-block" id="NewtonRaphson">
 <a class="viewcode-back" href="../../../../api/numerical_analysis.html#mathematicskit.numerical_analysis.NewtonRaphson">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">NewtonRaphson</span><span class="p">(</span><span class="n">IterativeRootFinder</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Newton-Raphson method: :math:`x_{n+1} = x_n - f(x_n) / f'(x_n)`.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Newton-Raphson method: :math:`x_{n+1} = x_n - f(x_n) / f&#39;(x_n)`.</span>
 
 <span class="sd">    Converges quadratically (order 2) near a simple root, provided</span>
-<span class="sd">    :math:`f'` doesn't vanish there. See Burden &amp; Faires, *Numerical</span>
+<span class="sd">    :math:`f&#39;` doesn&#39;t vanish there. See Burden &amp; Faires, *Numerical</span>
 <span class="sd">    Analysis*, 10th ed., Ch. 2.3, Theorem 2.9.</span>
 
 <span class="sd">    Parameters</span>
@@ -526,7 +526,7 @@
 <span class="sd">    &gt;&gt;&gt; result = NewtonRaphson(lambda x: x**2 - 2.0, lambda x: 2.0 * x, x0=1.0).solve()</span>
 <span class="sd">    &gt;&gt;&gt; round(result.root, 10)</span>
 <span class="sd">    1.4142135624</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">],</span> <span class="n">fprime</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">],</span> <span class="n">x0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_RTOL</span><span class="p">,</span> <span class="n">max_iter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">DEFAULT_MAX_ITER</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">tol</span><span class="o">=</span><span class="n">tol</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="n">max_iter</span><span class="p">)</span>
@@ -545,7 +545,7 @@
             <span class="n">n_iter</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="n">fpx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fprime</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">fpx</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ZeroDivisionError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"f'(x) vanished at x=</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2"> before convergence"</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ZeroDivisionError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;f&#39;(x) vanished at x=</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2"> before convergence&quot;</span><span class="p">)</span>
             <span class="n">x_new</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="n">fpx</span>
             <span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_new</span><span class="p">)</span>
             <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x_new</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">tol</span><span class="p">:</span>
@@ -553,7 +553,7 @@
                 <span class="n">converged</span> <span class="o">=</span> <span class="kc">True</span>
                 <span class="k">break</span>
             <span class="n">x</span> <span class="o">=</span> <span class="n">x_new</span>
-        <span class="k">return</span> <span class="n">RootResult</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">converged</span><span class="o">=</span><span class="n">converged</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="n">n_iter</span><span class="p">,</span> <span class="n">history</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">history</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s2">"newton_raphson"</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">RootResult</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">converged</span><span class="o">=</span><span class="n">converged</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="n">n_iter</span><span class="p">,</span> <span class="n">history</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">history</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;newton_raphson&quot;</span><span class="p">)</span></div>
 </div>
 
 
@@ -561,7 +561,7 @@
 <div class="viewcode-block" id="Secant">
 <a class="viewcode-back" href="../../../../api/numerical_analysis.html#mathematicskit.numerical_analysis.Secant">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Secant</span><span class="p">(</span><span class="n">IterativeRootFinder</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Secant method: Newton's method with the derivative replaced by a</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Secant method: Newton&#39;s method with the derivative replaced by a</span>
 <span class="sd">    finite-difference slope through the two most recent iterates.</span>
 
 <span class="sd">    :math:`x_{n+1} = x_n - f(x_n) \\dfrac{x_n - x_{n-1}}{f(x_n) - f(x_{n-1})}`.</span>
@@ -586,7 +586,7 @@
 <span class="sd">    &gt;&gt;&gt; result = Secant(lambda x: x**2 - 2.0, x0=1.0, x1=2.0).solve()</span>
 <span class="sd">    &gt;&gt;&gt; round(result.root, 8)</span>
 <span class="sd">    1.41421356</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">],</span> <span class="n">x0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">x1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_RTOL</span><span class="p">,</span> <span class="n">max_iter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">DEFAULT_MAX_ITER</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">tol</span><span class="o">=</span><span class="n">tol</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="n">max_iter</span><span class="p">)</span>
@@ -606,7 +606,7 @@
             <span class="n">f_curr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">x_curr</span><span class="p">)</span>
             <span class="n">denom</span> <span class="o">=</span> <span class="n">f_curr</span> <span class="o">-</span> <span class="n">f_prev</span>
             <span class="k">if</span> <span class="n">denom</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ZeroDivisionError</span><span class="p">(</span><span class="s2">"f(x_n) - f(x_{n-1}) vanished before convergence"</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ZeroDivisionError</span><span class="p">(</span><span class="s2">&quot;f(x_n) - f(x_{n-1}) vanished before convergence&quot;</span><span class="p">)</span>
             <span class="n">x_new</span> <span class="o">=</span> <span class="n">x_curr</span> <span class="o">-</span> <span class="n">f_curr</span> <span class="o">*</span> <span class="p">(</span><span class="n">x_curr</span> <span class="o">-</span> <span class="n">x_prev</span><span class="p">)</span> <span class="o">/</span> <span class="n">denom</span>
             <span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_new</span><span class="p">)</span>
             <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x_new</span> <span class="o">-</span> <span class="n">x_curr</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">tol</span><span class="p">:</span>
@@ -615,7 +615,7 @@
                 <span class="k">break</span>
             <span class="n">x_prev</span><span class="p">,</span> <span class="n">f_prev</span> <span class="o">=</span> <span class="n">x_curr</span><span class="p">,</span> <span class="n">f_curr</span>
             <span class="n">x_curr</span> <span class="o">=</span> <span class="n">x_new</span>
-        <span class="k">return</span> <span class="n">RootResult</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="n">x_curr</span><span class="p">,</span> <span class="n">converged</span><span class="o">=</span><span class="n">converged</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="n">n_iter</span><span class="p">,</span> <span class="n">history</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">history</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s2">"secant"</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">RootResult</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="n">x_curr</span><span class="p">,</span> <span class="n">converged</span><span class="o">=</span><span class="n">converged</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="n">n_iter</span><span class="p">,</span> <span class="n">history</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">history</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;secant&quot;</span><span class="p">)</span></div>
 </div>
 
 
@@ -623,10 +623,10 @@
 <div class="viewcode-block" id="FixedPointIteration">
 <a class="viewcode-back" href="../../../../api/numerical_analysis.html#mathematicskit.numerical_analysis.FixedPointIteration">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FixedPointIteration</span><span class="p">(</span><span class="n">IterativeRootFinder</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Fixed-point iteration: :math:`x_{n+1} = g(x_n)`, converging to a</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fixed-point iteration: :math:`x_{n+1} = g(x_n)`, converging to a</span>
 <span class="sd">    fixed point ``x* = g(x*)`` (equivalently a root of ``f(x) = g(x) - x``).</span>
 
-<span class="sd">    Converges linearly if ``|g'(x*)| &lt; 1`` in a neighborhood of the fixed</span>
+<span class="sd">    Converges linearly if ``|g&#39;(x*)| &lt; 1`` in a neighborhood of the fixed</span>
 <span class="sd">    point (the contraction condition); see Burden &amp; Faires, *Numerical</span>
 <span class="sd">    Analysis*, 10th ed., Ch. 2.2, Theorem 2.4 (Fixed-Point Theorem) and</span>
 <span class="sd">    Corollary 2.5.</span>
@@ -649,7 +649,7 @@
 <span class="sd">    &gt;&gt;&gt; result = FixedPointIteration(np.cos, x0=0.5, tol=1e-10).solve()</span>
 <span class="sd">    &gt;&gt;&gt; bool(abs(result.root - np.cos(result.root)) &lt; 1e-9)</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">g</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">],</span> <span class="n">x0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_RTOL</span><span class="p">,</span> <span class="n">max_iter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">DEFAULT_MAX_ITER</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">tol</span><span class="o">=</span><span class="n">tol</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="n">max_iter</span><span class="p">)</span>
@@ -672,7 +672,7 @@
                 <span class="n">converged</span> <span class="o">=</span> <span class="kc">True</span>
                 <span class="k">break</span>
             <span class="n">x</span> <span class="o">=</span> <span class="n">x_new</span>
-        <span class="k">return</span> <span class="n">RootResult</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">converged</span><span class="o">=</span><span class="n">converged</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="n">n_iter</span><span class="p">,</span> <span class="n">history</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">history</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s2">"fixed_point"</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">RootResult</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">converged</span><span class="o">=</span><span class="n">converged</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="n">n_iter</span><span class="p">,</span> <span class="n">history</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">history</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;fixed_point&quot;</span><span class="p">)</span></div>
 </div>
 
 </pre></div>

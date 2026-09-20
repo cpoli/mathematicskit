@@ -410,10 +410,10 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.numerical_analysis.systems.chebyshev</h1><div class="highlight"><pre>
-<span></span><span class="sd">"""Chebyshev interpolation nodes and the Runge-phenomenon demonstration.</span>
+<span></span><span class="sd">&quot;&quot;&quot;Chebyshev interpolation nodes and the Runge-phenomenon demonstration.</span>
 
 <span class="sd">Interpolating at equally spaced nodes can diverge wildly near the</span>
-<span class="sd">interval's edges as the degree grows (Runge's 1901 example,</span>
+<span class="sd">interval&#39;s edges as the degree grows (Runge&#39;s 1901 example,</span>
 <span class="sd">:math:`f(x) = 1/(1+25x^2)` on :math:`[-1, 1]`); clustering nodes near the</span>
 <span class="sd">endpoints via the Chebyshev points instead keeps the Lebesgue constant</span>
 <span class="sd">(see :func:`mathematicskit.numerical_analysis.utils.error_analysis.lebesgue_constant`)</span>
@@ -421,7 +421,7 @@
 <span class="sd">See Burden &amp; Faires, *Numerical Analysis*, 10th ed., Ch. 8.2, and</span>
 <span class="sd">Trefethen, *Approximation Theory and Approximation Practice*, 2013,</span>
 <span class="sd">Ch. 12-15.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -430,13 +430,13 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.numerical_analysis.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Interpolant</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"chebyshev_nodes"</span><span class="p">,</span> <span class="s2">"ChebyshevInterpolant"</span><span class="p">,</span> <span class="s2">"runge_function"</span><span class="p">,</span> <span class="s2">"runge_phenomenon_errors"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;chebyshev_nodes&quot;</span><span class="p">,</span> <span class="s2">&quot;ChebyshevInterpolant&quot;</span><span class="p">,</span> <span class="s2">&quot;runge_function&quot;</span><span class="p">,</span> <span class="s2">&quot;runge_phenomenon_errors&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="chebyshev_nodes">
 <a class="viewcode-back" href="../../../../api/numerical_analysis.html#mathematicskit.numerical_analysis.chebyshev_nodes">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">chebyshev_nodes</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Return the ``n`` Chebyshev points of the second kind on ``[a, b]``.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return the ``n`` Chebyshev points of the second kind on ``[a, b]``.</span>
 
 <span class="sd">    .. math::</span>
 
@@ -467,9 +467,9 @@
 <span class="sd">    &gt;&gt;&gt; import numpy as np</span>
 <span class="sd">    &gt;&gt;&gt; bool(np.all(np.diff(nodes) &gt; 0))</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"n must be &gt;= 2"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;n must be &gt;= 2&quot;</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">chebpts2</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>  <span class="c1"># already increasing, in [-1, 1]</span>
     <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span></div>
 
@@ -478,7 +478,7 @@
 <div class="viewcode-block" id="ChebyshevInterpolant">
 <a class="viewcode-back" href="../../../../api/numerical_analysis.html#mathematicskit.numerical_analysis.ChebyshevInterpolant">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ChebyshevInterpolant</span><span class="p">(</span><span class="n">Interpolant</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Polynomial interpolant of a function sampled at Chebyshev nodes.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Polynomial interpolant of a function sampled at Chebyshev nodes.</span>
 
 <span class="sd">    Evaluated with the barycentric interpolation formula specialized to</span>
 <span class="sd">    Chebyshev-of-the-second-kind nodes (weights :math:`w_k = (-1)^k</span>
@@ -503,7 +503,7 @@
 <span class="sd">    &gt;&gt;&gt; p = ChebyshevInterpolant(np.sin, n=20, a=-3.0, b=3.0)</span>
 <span class="sd">    &gt;&gt;&gt; bool(abs(p.evaluate(1.0) - np.sin(1.0)) &lt; 1e-10)</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">):</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">chebyshev_nodes</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
@@ -537,7 +537,7 @@
 <div class="viewcode-block" id="runge_function">
 <a class="viewcode-back" href="../../../../api/numerical_analysis.html#mathematicskit.numerical_analysis.runge_function">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">runge_function</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Runge's classic example, :math:`f(x) = 1/(1+25x^2)` on :math:`[-1,1]`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Runge&#39;s classic example, :math:`f(x) = 1/(1+25x^2)` on :math:`[-1,1]`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -546,7 +546,7 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    float or ndarray</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="k">return</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="mf">25.0</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span></div>
 
@@ -555,7 +555,7 @@
 <div class="viewcode-block" id="runge_phenomenon_errors">
 <a class="viewcode-back" href="../../../../api/numerical_analysis.html#mathematicskit.numerical_analysis.runge_phenomenon_errors">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">runge_phenomenon_errors</span><span class="p">(</span><span class="n">degrees</span><span class="p">,</span> <span class="n">n_eval</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Compare equally spaced vs. Chebyshev-node interpolation error for</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compare equally spaced vs. Chebyshev-node interpolation error for</span>
 <span class="sd">    :func:`runge_function`, across a range of polynomial degrees.</span>
 
 <span class="sd">    Demonstrates the Runge phenomenon: max error for equally spaced</span>
@@ -581,7 +581,7 @@
 <span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; bool(cheb_err[-1] &lt; cheb_err[0])</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.numerical_analysis.systems.interpolation</span><span class="w"> </span><span class="kn">import</span> <span class="n">LagrangeInterpolant</span>
 
     <span class="n">x_eval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">n_eval</span><span class="p">)</span>

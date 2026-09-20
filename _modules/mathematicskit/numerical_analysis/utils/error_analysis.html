@@ -410,22 +410,22 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.numerical_analysis.utils.error_analysis</h1><div class="highlight"><pre>
-<span></span><span class="sd">"""Error/stability analysis utilities shared across</span>
-<span class="sd">mathematicskit.numerical_analysis's root-finding, interpolation, and regression</span>
+<span></span><span class="sd">&quot;&quot;&quot;Error/stability analysis utilities shared across</span>
+<span class="sd">mathematicskit.numerical_analysis&#39;s root-finding, interpolation, and regression</span>
 <span class="sd">systems.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"estimate_convergence_order"</span><span class="p">,</span> <span class="s2">"lebesgue_constant"</span><span class="p">,</span> <span class="s2">"condition_number"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;estimate_convergence_order&quot;</span><span class="p">,</span> <span class="s2">&quot;lebesgue_constant&quot;</span><span class="p">,</span> <span class="s2">&quot;condition_number&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="estimate_convergence_order">
 <a class="viewcode-back" href="../../../../api/numerical_analysis.html#mathematicskit.numerical_analysis.estimate_convergence_order">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">estimate_convergence_order</span><span class="p">(</span><span class="n">history</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Estimate an iterative sequence's empirical order of convergence.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Estimate an iterative sequence&#39;s empirical order of convergence.</span>
 
 <span class="sd">    Given the last four iterates :math:`x_{n-2}, x_{n-1}, x_n, x_{n+1}`</span>
 <span class="sd">    and errors :math:`e_k = |x_k - \text{root}|`, the order :math:`p`</span>
@@ -436,8 +436,8 @@
 <span class="sd">        p \approx \frac{\ln(e_{n+1} / e_n)}{\ln(e_n / e_{n-1})}</span>
 
 <span class="sd">    using the two most recent error ratios. See Burden &amp; Faires,</span>
-<span class="sd">    *Numerical Analysis*, 10th ed., Ch. 2.4 ("Error Analysis for</span>
-<span class="sd">    Iterative Methods"), Definition 2.8 and the surrounding discussion.</span>
+<span class="sd">    *Numerical Analysis*, 10th ed., Ch. 2.4 (&quot;Error Analysis for</span>
+<span class="sd">    Iterative Methods&quot;), Definition 2.8 and the surrounding discussion.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -452,8 +452,8 @@
 <span class="sd">    -------</span>
 <span class="sd">    float</span>
 <span class="sd">        The estimated order :math:`p` (``1.0`` for linear convergence,</span>
-<span class="sd">        e.g. bisection/secant's theoretical rate is between 1 and the</span>
-<span class="sd">        golden ratio ~1.618; ``2.0`` for Newton's quadratic convergence</span>
+<span class="sd">        e.g. bisection/secant&#39;s theoretical rate is between 1 and the</span>
+<span class="sd">        golden ratio ~1.618; ``2.0`` for Newton&#39;s quadratic convergence</span>
 <span class="sd">        at a simple root).</span>
 
 <span class="sd">    Examples</span>
@@ -464,24 +464,24 @@
 <span class="sd">    &gt;&gt;&gt; history = np.array([1.0 - e for e in errors])</span>
 <span class="sd">    &gt;&gt;&gt; round(estimate_convergence_order(history, 1.0), 2)</span>
 <span class="sd">    2.0</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">history</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">history</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"need at least 4 iterates to estimate convergence order"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;need at least 4 iterates to estimate convergence order&quot;</span><span class="p">)</span>
     <span class="n">errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">history</span> <span class="o">-</span> <span class="n">root</span><span class="p">)</span>
     <span class="c1"># Fast (quadratic/superlinear) methods can reach float64 roundoff</span>
     <span class="c1"># within a handful of iterations; once the error is at that floor,</span>
     <span class="c1"># consecutive ratios are dominated by rounding noise rather than the</span>
-    <span class="c1"># method's true asymptotic rate, so restrict to errors still well</span>
+    <span class="c1"># method&#39;s true asymptotic rate, so restrict to errors still well</span>
     <span class="c1"># above roundoff (a generous 1e-10 floor) before taking the most</span>
     <span class="c1"># recent three -- the last iterates *reliably* reflecting the</span>
-    <span class="c1"># method's convergence order, not its behavior after it has already</span>
+    <span class="c1"># method&#39;s convergence order, not its behavior after it has already</span>
     <span class="c1"># converged to machine precision.</span>
     <span class="n">reliable</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flatnonzero</span><span class="p">(</span><span class="n">errors</span> <span class="o">&gt;</span> <span class="mf">1e-10</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">reliable</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
         <span class="n">reliable</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flatnonzero</span><span class="p">(</span><span class="n">errors</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">reliable</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"need at least 3 iterates with nonzero error to estimate convergence order"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;need at least 3 iterates with nonzero error to estimate convergence order&quot;</span><span class="p">)</span>
     <span class="n">i_nm1</span><span class="p">,</span> <span class="n">i_n</span><span class="p">,</span> <span class="n">i_np1</span> <span class="o">=</span> <span class="n">reliable</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span>
     <span class="n">e_nm1</span><span class="p">,</span> <span class="n">e_n</span><span class="p">,</span> <span class="n">e_np1</span> <span class="o">=</span> <span class="n">errors</span><span class="p">[</span><span class="n">i_nm1</span><span class="p">],</span> <span class="n">errors</span><span class="p">[</span><span class="n">i_n</span><span class="p">],</span> <span class="n">errors</span><span class="p">[</span><span class="n">i_np1</span><span class="p">]</span>
     <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">e_np1</span> <span class="o">/</span> <span class="n">e_n</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">e_n</span> <span class="o">/</span> <span class="n">e_nm1</span><span class="p">))</span></div>
@@ -491,14 +491,14 @@
 <div class="viewcode-block" id="lebesgue_constant">
 <a class="viewcode-back" href="../../../../api/numerical_analysis.html#mathematicskit.numerical_analysis.lebesgue_constant">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">lebesgue_constant</span><span class="p">(</span><span class="n">nodes</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">n_eval</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2000</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Estimate the Lebesgue constant of a set of interpolation nodes.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Estimate the Lebesgue constant of a set of interpolation nodes.</span>
 
 <span class="sd">    The Lebesgue constant :math:`\Lambda_n = \max_x \sum_i |L_i(x)|`</span>
 <span class="sd">    (where :math:`L_i` are the Lagrange basis polynomials for `nodes`)</span>
 <span class="sd">    bounds how much interpolation error can be amplified relative to the</span>
 <span class="sd">    best possible polynomial approximation,</span>
 <span class="sd">    :math:`\|f - p_n\|_\infty \leq (1 + \Lambda_n) \|f - p_n^*\|_\infty`,</span>
-<span class="sd">    and so serves as the interpolation problem's condition number: large</span>
+<span class="sd">    and so serves as the interpolation problem&#39;s condition number: large</span>
 <span class="sd">    :math:`\Lambda_n` (as for equally spaced nodes, where it grows</span>
 <span class="sd">    exponentially in `n`) signals the Runge-phenomenon-prone regime,</span>
 <span class="sd">    while Chebyshev nodes keep it growing only like :math:`O(\log n)`.</span>
@@ -525,7 +525,7 @@
 <span class="sd">    &gt;&gt;&gt; chebyshev = np.cos(np.pi * (2 * np.arange(15) + 1) / (2 * 15))</span>
 <span class="sd">    &gt;&gt;&gt; lebesgue_constant(equally_spaced) &gt; lebesgue_constant(chebyshev)</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">nodes</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">nodes</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">n_eval</span><span class="p">)</span>
@@ -544,10 +544,10 @@
 <div class="viewcode-block" id="condition_number">
 <a class="viewcode-back" href="../../../../api/numerical_analysis.html#mathematicskit.numerical_analysis.condition_number">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">condition_number</span><span class="p">(</span><span class="n">matrix</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""2-norm condition number :math:`\kappa_2(A) = \sigma_{\max}/\sigma_{\min}`, via :func:`numpy.linalg.cond`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;2-norm condition number :math:`\kappa_2(A) = \sigma_{\max}/\sigma_{\min}`, via :func:`numpy.linalg.cond`.</span>
 
 <span class="sd">    Used to flag numerically unstable fits/interpolation problems, e.g.</span>
-<span class="sd">    :func:`~mathematicskit.numerical_analysis.systems.regression.PolynomialRegression`'s</span>
+<span class="sd">    :func:`~mathematicskit.numerical_analysis.systems.regression.PolynomialRegression`&#39;s</span>
 <span class="sd">    Vandermonde design matrix, whose condition number grows quickly with</span>
 <span class="sd">    polynomial degree. See Burden &amp; Faires, *Numerical Analysis*, 10th</span>
 <span class="sd">    ed., Ch. 7.5, and Trefethen &amp; Bau, *Numerical Linear Algebra*, 1997,</span>
@@ -567,10 +567,10 @@
 <span class="sd">    &gt;&gt;&gt; A = np.diag([1.0, 2.0, 100.0])</span>
 <span class="sd">    &gt;&gt;&gt; round(condition_number(A), 4)</span>
 <span class="sd">    100.0</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">cond</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span> <span class="n">p</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">cond</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">(</span><span class="s2">"matrix is singular (or the zero matrix)"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">(</span><span class="s2">&quot;matrix is singular (or the zero matrix)&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">cond</span><span class="p">)</span></div>
 
 </pre></div>

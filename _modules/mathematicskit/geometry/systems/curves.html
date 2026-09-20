@@ -410,16 +410,16 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.geometry.systems.curves</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Curvature, arc length, and the Frenet-Serret frame for parametric</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Curvature, arc length, and the Frenet-Serret frame for parametric</span>
 <span class="sd">plane/space curves.</span>
 
 <span class="sd">Derivatives are estimated via :func:`numpy.gradient` and arc length via</span>
-<span class="sd">:func:`scipy.integrate.cumulative_trapezoid` -- mathematicskit's own code is</span>
+<span class="sd">:func:`scipy.integrate.cumulative_trapezoid` -- mathematicskit&#39;s own code is</span>
 <span class="sd">assembling the orthonormal frame (tangent/normal/binormal) and the</span>
 <span class="sd">curvature/torsion formulas from those derivatives, which has no</span>
 <span class="sd">numpy/scipy equivalent of its own. See do Carmo, *Differential Geometry</span>
 <span class="sd">of Curves and Surfaces*, 2nd ed., Ch. 1.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -430,22 +430,22 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.geometry.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">CurveFrameResult</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"frenet_serret_frame"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;frenet_serret_frame&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="frenet_serret_frame">
 <a class="viewcode-back" href="../../../../api/geometry.html#mathematicskit.geometry.frenet_serret_frame">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">frenet_serret_frame</span><span class="p">(</span><span class="n">curve</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">t</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CurveFrameResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""The Frenet-Serret frame (tangent, normal, binormal), curvature, and arc length of a parametric curve.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The Frenet-Serret frame (tangent, normal, binormal), curvature, and arc length of a parametric curve.</span>
 
-<span class="sd">    Given :math:`\gamma(t)`, the unit tangent is :math:`T = \gamma'/\|\gamma'\|`,</span>
-<span class="sd">    curvature :math:`\kappa = \|\gamma' \times \gamma''\|/\|\gamma'\|^3`</span>
+<span class="sd">    Given :math:`\gamma(t)`, the unit tangent is :math:`T = \gamma&#39;/\|\gamma&#39;\|`,</span>
+<span class="sd">    curvature :math:`\kappa = \|\gamma&#39; \times \gamma&#39;&#39;\|/\|\gamma&#39;\|^3`</span>
 <span class="sd">    (3D) or the signed 2D analogue, the (principal) normal</span>
-<span class="sd">    :math:`N = T'/\|T'\|`, and (3D only) binormal :math:`B = T \times N`</span>
+<span class="sd">    :math:`N = T&#39;/\|T&#39;\|`, and (3D only) binormal :math:`B = T \times N`</span>
 <span class="sd">    with torsion :math:`\tau` from the rate of change of :math:`B`.</span>
 <span class="sd">    First and second derivatives are estimated via</span>
 <span class="sd">    :func:`numpy.gradient`; arc length via</span>
-<span class="sd">    :func:`scipy.integrate.cumulative_trapezoid` on :math:`\|\gamma'\|`.</span>
+<span class="sd">    :func:`scipy.integrate.cumulative_trapezoid` on :math:`\|\gamma&#39;\|`.</span>
 <span class="sd">    See do Carmo, *Differential Geometry of Curves and Surfaces*, 2nd</span>
 <span class="sd">    ed., Ch. 1.3-1.5.</span>
 
@@ -469,7 +469,7 @@
 <span class="sd">    &gt;&gt;&gt; result = frenet_serret_frame(circle, t)</span>
 <span class="sd">    &gt;&gt;&gt; bool(np.allclose(result.curvature[5:-5], 0.5, atol=1e-2))</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">position</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">curve</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">dim</span> <span class="o">=</span> <span class="n">position</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>

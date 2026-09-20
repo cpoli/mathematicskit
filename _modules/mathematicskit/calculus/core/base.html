@@ -410,21 +410,21 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.calculus.core.base</h1><div class="highlight"><pre>
-<span></span><span class="sd">"""Abstract base classes and result containers for mathematicskit.calculus.</span>
+<span></span><span class="sd">&quot;&quot;&quot;Abstract base classes and result containers for mathematicskit.calculus.</span>
 
 <span class="sd">:class:`Quadrature` is the shared interface for the numerical-integration</span>
 <span class="sd">rules in :mod:`mathematicskit.calculus.systems.quadrature` (mirroring</span>
-<span class="sd">:mod:`mathematicskit.numerical_analysis.core.base.IterativeRootFinder`'s pattern</span>
+<span class="sd">:mod:`mathematicskit.numerical_analysis.core.base.IterativeRootFinder`&#39;s pattern</span>
 <span class="sd">of one ABC per algorithmic family, paired with a stable dataclass</span>
 <span class="sd">result). Differentiation (:mod:`mathematicskit.calculus.systems.finite_differences`)</span>
 <span class="sd">and the two automatic-differentiation engines</span>
 <span class="sd">(:mod:`mathematicskit.calculus.systems.dual_numbers`,</span>
 <span class="sd">:mod:`mathematicskit.calculus.systems.autodiff`) are simple enough (a handful of</span>
 <span class="sd">plain functions/small value classes) that a shared ABC would add</span>
-<span class="sd">ceremony without a real interface to enforce, so they don't get one --</span>
-<span class="sd">following physicskit's own precedent of varying internal shape by what a</span>
+<span class="sd">ceremony without a real interface to enforce, so they don&#39;t get one --</span>
+<span class="sd">following physicskit&#39;s own precedent of varying internal shape by what a</span>
 <span class="sd">family of algorithms actually needs.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -432,42 +432,42 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"QuadratureResult"</span><span class="p">,</span> <span class="s2">"Quadrature"</span><span class="p">,</span> <span class="s2">"DerivativeResult"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;QuadratureResult&quot;</span><span class="p">,</span> <span class="s2">&quot;Quadrature&quot;</span><span class="p">,</span> <span class="s2">&quot;DerivativeResult&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="QuadratureResult">
 <a class="viewcode-back" href="../../../../api/calculus.html#mathematicskit.calculus.QuadratureResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">QuadratureResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Container for the output of a :class:`Quadrature` rule."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for the output of a :class:`Quadrature` rule.&quot;&quot;&quot;</span>
 
     <span class="n">value</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: Estimated integral."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Estimated integral.&quot;&quot;&quot;</span>
 
     <span class="n">error_estimate</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
-<span class="w">    </span><span class="sd">"""float: Estimated absolute error (0 when the rule has no built-in estimate)."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Estimated absolute error (0 when the rule has no built-in estimate).&quot;&quot;&quot;</span>
 
     <span class="n">n_evaluations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="w">    </span><span class="sd">"""int: Number of function evaluations used."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;int: Number of function evaluations used.&quot;&quot;&quot;</span>
 
-    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
-<span class="w">    </span><span class="sd">"""str: e.g. ``"trapezoidal"``, ``"simpson"``, ``"gaussian"``, ``"adaptive"``."""</span>
+    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;str: e.g. ``&quot;trapezoidal&quot;``, ``&quot;simpson&quot;``, ``&quot;gaussian&quot;``, ``&quot;adaptive&quot;``.&quot;&quot;&quot;</span>
 
     <span class="n">extra</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-<span class="w">    </span><span class="sd">"""dict: Free-form diagnostics slot (e.g. adaptive quadrature's subinterval history)."""</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;dict: Free-form diagnostics slot (e.g. adaptive quadrature&#39;s subinterval history).&quot;&quot;&quot;</span></div>
 
 
 
 <div class="viewcode-block" id="Quadrature">
 <a class="viewcode-back" href="../../../../api/calculus.html#mathematicskit.calculus.Quadrature">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Quadrature</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Common base for numerical-integration rules over ``[a, b]``."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Common base for numerical-integration rules over ``[a, b]``.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="Quadrature.integrate">
 <a class="viewcode-back" href="../../../../api/calculus.html#mathematicskit.calculus.Quadrature.integrate">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">],</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QuadratureResult</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Estimate :math:`\\int_a^b f(x)\\,dx`.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Estimate :math:`\\int_a^b f(x)\\,dx`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -479,7 +479,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        QuadratureResult</span>
-<span class="sd">        """</span></div>
+<span class="sd">        &quot;&quot;&quot;</span></div>
 </div>
 
 
@@ -488,19 +488,19 @@
 <a class="viewcode-back" href="../../../../api/calculus.html#mathematicskit.calculus.DerivativeResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">DerivativeResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Container for a finite-difference derivative estimate."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for a finite-difference derivative estimate.&quot;&quot;&quot;</span>
 
     <span class="n">value</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: Estimated derivative."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Estimated derivative.&quot;&quot;&quot;</span>
 
     <span class="n">step</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
-<span class="w">    </span><span class="sd">"""float: Step size ``h`` used (the finest, for Richardson extrapolation)."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Step size ``h`` used (the finest, for Richardson extrapolation).&quot;&quot;&quot;</span>
 
-    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
-<span class="w">    </span><span class="sd">"""str: e.g. ``"forward"``, ``"backward"``, ``"central"``, ``"richardson"``."""</span>
+    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;str: e.g. ``&quot;forward&quot;``, ``&quot;backward&quot;``, ``&quot;central&quot;``, ``&quot;richardson&quot;``.&quot;&quot;&quot;</span>
 
     <span class="n">error_estimate</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
-<span class="w">    </span><span class="sd">"""float: Estimated error, when available (e.g. from Richardson extrapolation's own convergence)."""</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Estimated error, when available (e.g. from Richardson extrapolation&#39;s own convergence).&quot;&quot;&quot;</span></div>
 
 </pre></div>
 

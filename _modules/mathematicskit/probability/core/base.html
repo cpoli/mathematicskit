@@ -410,20 +410,20 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.probability.core.base</h1><div class="highlight"><pre>
-<span></span><span class="sd">"""Abstract base classes and result containers for mathematicskit.probability.</span>
+<span></span><span class="sd">&quot;&quot;&quot;Abstract base classes and result containers for mathematicskit.probability.</span>
 
 <span class="sd">:class:`DiscreteDistribution` and :class:`ContinuousDistribution` are the</span>
 <span class="sd">shared interfaces for the ``scipy.stats``-backed distribution wrappers in</span>
 <span class="sd">:mod:`mathematicskit.probability.systems.discrete` and</span>
 <span class="sd">:mod:`mathematicskit.probability.systems.continuous` -- mirroring</span>
-<span class="sd">:mod:`mathematicskit.numerical_analysis.core.base.Interpolant`'s pattern of a</span>
-<span class="sd">thin ABC around a family that's otherwise "call the library and</span>
-<span class="sd">remember the parameters." Each concrete distribution stores a frozen</span>
+<span class="sd">:mod:`mathematicskit.numerical_analysis.core.base.Interpolant`&#39;s pattern of a</span>
+<span class="sd">thin ABC around a family that&#39;s otherwise &quot;call the library and</span>
+<span class="sd">remember the parameters.&quot; Each concrete distribution stores a frozen</span>
 <span class="sd">``scipy.stats`` distribution instance (``self._frozen``) and adds the</span>
-<span class="sd">one thing ``scipy.stats`` doesn't provide: a closed-form moment</span>
+<span class="sd">one thing ``scipy.stats`` doesn&#39;t provide: a closed-form moment</span>
 <span class="sd">generating function. :class:`MonteCarloResult` is the result type for</span>
 <span class="sd">:mod:`mathematicskit.probability.systems.monte_carlo`.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -431,13 +431,13 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"DiscreteDistribution"</span><span class="p">,</span> <span class="s2">"ContinuousDistribution"</span><span class="p">,</span> <span class="s2">"MonteCarloResult"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;DiscreteDistribution&quot;</span><span class="p">,</span> <span class="s2">&quot;ContinuousDistribution&quot;</span><span class="p">,</span> <span class="s2">&quot;MonteCarloResult&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="DiscreteDistribution">
 <a class="viewcode-back" href="../../../../api/probability.html#mathematicskit.probability.DiscreteDistribution">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">DiscreteDistribution</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Common base for scipy.stats-backed discrete distribution wrappers."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Common base for scipy.stats-backed discrete distribution wrappers.&quot;&quot;&quot;</span>
 
     <span class="n">_frozen</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># set by subclass __init__ to a scipy.stats frozen distribution</span>
 
@@ -445,49 +445,49 @@
 <a class="viewcode-back" href="../../../../api/probability.html#mathematicskit.probability.DiscreteDistribution.pmf">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">pmf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">"""Probability mass function, ``P(X = k)``."""</span></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Probability mass function, ``P(X = k)``.&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="DiscreteDistribution.cdf">
 <a class="viewcode-back" href="../../../../api/probability.html#mathematicskit.probability.DiscreteDistribution.cdf">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">"""Cumulative distribution function, ``P(X &lt;= k)``."""</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Cumulative distribution function, ``P(X &lt;= k)``.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_frozen</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">k</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="DiscreteDistribution.ppf">
 <a class="viewcode-back" href="../../../../api/probability.html#mathematicskit.probability.DiscreteDistribution.ppf">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">ppf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">"""Quantile function (inverse CDF), ``P(X &lt;= ppf(q)) = q``."""</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Quantile function (inverse CDF), ``P(X &lt;= ppf(q)) = q``.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_frozen</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">q</span><span class="p">)</span></div>
 
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""float: ``E[X]``."""</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;float: ``E[X]``.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frozen</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">variance</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""float: ``Var(X)``."""</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;float: ``Var(X)``.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frozen</span><span class="o">.</span><span class="n">var</span><span class="p">())</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">std</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""float: ``sqrt(Var(X))``."""</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;float: ``sqrt(Var(X))``.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frozen</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
 
 <div class="viewcode-block" id="DiscreteDistribution.mgf">
 <a class="viewcode-back" href="../../../../api/probability.html#mathematicskit.probability.DiscreteDistribution.mgf">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">mgf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">"""Moment generating function, ``E[e^{tX}]`` (closed form; not exposed by ``scipy.stats``)."""</span></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Moment generating function, ``E[e^{tX}]`` (closed form; not exposed by ``scipy.stats``).&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="DiscreteDistribution.sample">
 <a class="viewcode-back" href="../../../../api/probability.html#mathematicskit.probability.DiscreteDistribution.sample">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">"""Draw samples via ``scipy.stats``' ``rvs``.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Draw samples via ``scipy.stats``&#39; ``rvs``.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -497,7 +497,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        ndarray</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_frozen</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span></div>
 </div>
 
@@ -506,7 +506,7 @@
 <div class="viewcode-block" id="ContinuousDistribution">
 <a class="viewcode-back" href="../../../../api/probability.html#mathematicskit.probability.ContinuousDistribution">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ContinuousDistribution</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Common base for scipy.stats-backed continuous distribution wrappers."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Common base for scipy.stats-backed continuous distribution wrappers.&quot;&quot;&quot;</span>
 
     <span class="n">_frozen</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># set by subclass __init__ to a scipy.stats frozen distribution</span>
 
@@ -514,49 +514,49 @@
 <a class="viewcode-back" href="../../../../api/probability.html#mathematicskit.probability.ContinuousDistribution.pdf">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">pdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">"""Probability density function."""</span></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Probability density function.&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="ContinuousDistribution.cdf">
 <a class="viewcode-back" href="../../../../api/probability.html#mathematicskit.probability.ContinuousDistribution.cdf">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">"""Cumulative distribution function, ``P(X &lt;= x)``."""</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Cumulative distribution function, ``P(X &lt;= x)``.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_frozen</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ContinuousDistribution.ppf">
 <a class="viewcode-back" href="../../../../api/probability.html#mathematicskit.probability.ContinuousDistribution.ppf">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">ppf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">"""Quantile function (inverse CDF), ``P(X &lt;= ppf(q)) = q``."""</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Quantile function (inverse CDF), ``P(X &lt;= ppf(q)) = q``.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_frozen</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">q</span><span class="p">)</span></div>
 
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""float: ``E[X]``."""</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;float: ``E[X]``.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frozen</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">variance</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""float: ``Var(X)``."""</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;float: ``Var(X)``.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frozen</span><span class="o">.</span><span class="n">var</span><span class="p">())</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">std</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""float: ``sqrt(Var(X))``."""</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;float: ``sqrt(Var(X))``.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frozen</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
 
 <div class="viewcode-block" id="ContinuousDistribution.mgf">
 <a class="viewcode-back" href="../../../../api/probability.html#mathematicskit.probability.ContinuousDistribution.mgf">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">mgf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">"""Moment generating function, ``E[e^{tX}]`` (closed form; not exposed by ``scipy.stats``)."""</span></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Moment generating function, ``E[e^{tX}]`` (closed form; not exposed by ``scipy.stats``).&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="ContinuousDistribution.sample">
 <a class="viewcode-back" href="../../../../api/probability.html#mathematicskit.probability.ContinuousDistribution.sample">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">"""Draw samples via ``scipy.stats``' ``rvs``.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Draw samples via ``scipy.stats``&#39; ``rvs``.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -566,7 +566,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        ndarray</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_frozen</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span></div>
 </div>
 
@@ -576,20 +576,20 @@
 <a class="viewcode-back" href="../../../../api/probability.html#mathematicskit.probability.MonteCarloResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">MonteCarloResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Container for the output of a Monte Carlo integral estimate."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for the output of a Monte Carlo integral estimate.&quot;&quot;&quot;</span>
 
     <span class="n">estimate</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: The estimated integral/expectation."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: The estimated integral/expectation.&quot;&quot;&quot;</span>
 
     <span class="n">std_error</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: Estimated standard error of `estimate` (``std(samples) / sqrt(n)``,</span>
-<span class="sd">    scaled appropriately by the method)."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Estimated standard error of `estimate` (``std(samples) / sqrt(n)``,</span>
+<span class="sd">    scaled appropriately by the method).&quot;&quot;&quot;</span>
 
     <span class="n">n_samples</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="w">    </span><span class="sd">"""int: Number of Monte Carlo samples used."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;int: Number of Monte Carlo samples used.&quot;&quot;&quot;</span>
 
-    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
-<span class="w">    </span><span class="sd">"""str: e.g. ``"plain"``, ``"importance_sampling"``, ``"control_variates"``."""</span></div>
+    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;str: e.g. ``&quot;plain&quot;``, ``&quot;importance_sampling&quot;``, ``&quot;control_variates&quot;``.&quot;&quot;&quot;</span></div>
 
 </pre></div>
 
