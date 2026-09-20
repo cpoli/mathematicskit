@@ -5,18 +5,21 @@ mathematicskit
 
 **mathematicskit** is a unified toolkit for computational mathematics, spanning
 |num_subpackages| domains -- from abstract algebra to statistical
-inference -- under one NumPy-based API. It's built directly on
-`numpy`/`scipy` for anything they already implement (decompositions,
-eigensolvers, quadrature, statistical distributions, optimization
-routines, and more) -- mathematicskit's value-add is its own dataclass-result
-API, docstrings, visualizers, tests, and examples wrapped around those
-calls, not reinventing numerical primitives that are already correct and
-well-tested upstream. Algorithms are hand-rolled from first principles
-only where no `numpy`/`scipy` equivalent exists (e.g. Dijkstra/Kruskal,
-the simplex method, modular arithmetic), or where the algorithm's own
-iterate behavior is itself the pedagogical subject (e.g. Newton's
-method's convergence history, forward/reverse-mode autodiff). No hard
-dependency on `networkx`, `cvxpy`, or SageMath.
+inference -- under one NumPy-based API. It's built for mathematics
+students working through a textbook problem, curious learners exploring
+a topic on their own, and educators building a demonstration. Under the
+hood, it calls `numpy`/`scipy` directly for anything they already
+implement (decompositions, eigensolvers, quadrature, statistical
+distributions, optimization routines, and more) -- mathematicskit's
+value-add is its own dataclass-result API, docstrings, visualizers,
+tests, and examples wrapped around those calls, not reinventing
+numerical primitives that are already correct and well-tested upstream.
+Algorithms are hand-rolled from first principles only where no
+`numpy`/`scipy` equivalent exists (e.g. Dijkstra/Kruskal, the simplex
+method, modular arithmetic), or where the algorithm's own iterate
+behavior is itself the pedagogical subject (e.g. Newton's method's
+convergence history, forward/reverse-mode autodiff). No hard dependency
+on `networkx`, `cvxpy`, or SageMath.
 
 Every subpackage is grounded in the mathematics it implements, not just
 coded against it: public functions carry runnable, CI-checked examples,
