@@ -36,27 +36,6 @@ Examples using ``mathematicskit.optimization.OptimizeResult``
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Minimizes x^2+y^2 subject to x+y=1: the closed-form solution is (0.5, 0.5) with multiplier \lambda=-1. Solved three ways -- directly via the Lagrange stationarity system, verified via the KKT conditions, and approached indirectly via the quadratic penalty method.">
-
-.. only:: html
-
-  .. image:: /api/gallery/optimization/constrained/images/thumb/sphx_glr_plot_01_lagrange_kkt_and_penalty_thumb.png
-    :alt:
-
-  :doc:`/api/gallery/optimization/constrained/plot_01_lagrange_kkt_and_penalty`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">Lagrange multipliers, KKT verification, and the penalty method</div>
-    </div>
-
-
-.. only:: not html
-
- * :doc:`/api/gallery/optimization/constrained/plot_01_lagrange_kkt_and_penalty`
-
-.. raw:: html
-
     <div class="sphx-glr-thumbcontainer" tooltip="Minimizes a convex quadratic over the triangle \{x \geq 0,\ x_1 + x_2 + x_3 = 1\} without ever projecting onto it. Each step solves a linear program, whose solution is a vertex, and moves toward that vertex. The Frank-Wolfe gap certifies how far the objective is from optimal.">
 
 .. only:: html
@@ -75,6 +54,27 @@ Examples using ``mathematicskit.optimization.OptimizeResult``
 .. only:: not html
 
  * :doc:`/api/gallery/optimization/constrained/plot_02_frank_wolfe`
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Fiacco and McCormick&#x27;s sequential unconstrained minimization replaces \min x^2+y^2 subject to x+y=1 with the unconstrained problems \min x^2+y^2+\mu(x+y-1)^2 for growing \mu. Each penalized minimizer violates the constraint slightly, and the violation shrinks like 1/\mu as the minimizers approach the constrained optimum (0.5, 0.5).">
+
+.. only:: html
+
+  .. image:: /api/gallery/optimization/constrained/images/thumb/sphx_glr_plot_03_penalty_method_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/optimization/constrained/plot_03_penalty_method`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The quadratic penalty method: a sequence of unconstrained problems</div>
+    </div>
+
+
+.. only:: not html
+
+ * :doc:`/api/gallery/optimization/constrained/plot_03_penalty_method`
 
 .. raw:: html
 
@@ -162,24 +162,24 @@ Examples using ``mathematicskit.optimization.OptimizeResult``
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Gradient descent, nonlinear conjugate gradient, Newton&#x27;s method, and BFGS all started from the classic (-1.2, 1.0) starting point, compared by convergence rate. Newton&#x27;s method (using the exact Hessian) and BFGS reach the minimum in far fewer iterations than gradient descent&#x27;s slow crawl along the curved valley floor.">
+    <div class="sphx-glr-thumbcontainer" tooltip="On the Rosenbrock function from (-1.2, 1.0), BFGS builds an inverse-Hessian approximation from gradients alone. It needs only a few dozen iterations, as few as Newton&#x27;s method with the exact Hessian at every step, while gradient descent needs thousands. Near the minimum its convergence is superlinear: the ratio of successive errors tends to zero.">
 
 .. only:: html
 
-  .. image:: /api/gallery/optimization/newton_quasi_newton/images/thumb/sphx_glr_plot_01_rosenbrock_comparison_thumb.png
+  .. image:: /api/gallery/optimization/newton_quasi_newton/images/thumb/sphx_glr_plot_01_bfgs_quasi_newton_thumb.png
     :alt:
 
-  :doc:`/api/gallery/optimization/newton_quasi_newton/plot_01_rosenbrock_comparison`
+  :doc:`/api/gallery/optimization/newton_quasi_newton/plot_01_bfgs_quasi_newton`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">All five unconstrained methods on the Rosenbrock function</div>
+      <div class="sphx-glr-thumbnail-title">BFGS: Newton-like convergence without second derivatives</div>
     </div>
 
 
 .. only:: not html
 
- * :doc:`/api/gallery/optimization/newton_quasi_newton/plot_01_rosenbrock_comparison`
+ * :doc:`/api/gallery/optimization/newton_quasi_newton/plot_01_bfgs_quasi_newton`
 
 .. raw:: html
 
@@ -201,6 +201,27 @@ Examples using ``mathematicskit.optimization.OptimizeResult``
 .. only:: not html
 
  * :doc:`/api/gallery/optimization/stochastic/plot_01_robbins_monro`
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="f(x, y) = 100(y-x^2)^2 + (1-x)^2 has its minimum f=0 at (1, 1), at the end of a banana-shaped valley along the parabola y = x^2. The walls are steep, but the floor is almost flat, so a method without curvature information finds the valley quickly and then crawls along it.">
+
+.. only:: html
+
+  .. image:: /api/gallery/optimization/test_functions/images/thumb/sphx_glr_plot_01_rosenbrock_banana_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/optimization/test_functions/plot_01_rosenbrock_banana`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Rosenbrock's banana function: a narrow curved valley</div>
+    </div>
+
+
+.. only:: not html
+
+ * :doc:`/api/gallery/optimization/test_functions/plot_01_rosenbrock_banana`
 
 .. thumbnail-parent-div-close
 

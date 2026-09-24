@@ -36,7 +36,7 @@ Examples using ``mathematicskit.calculus.central_difference``
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Forward and backward differences are O(h), central differences O(h^2); Richardson extrapolation combines central differences at successively halved step sizes to cancel error terms one order at a time, reaching much higher accuracy without ever needing an analytically smaller h (which would eventually be swamped by floating-point cancellation error).">
+    <div class="sphx-glr-thumbcontainer" tooltip="Richardson&#x27;s idea: if an estimate D(h) has error c_1 h^2 + c_2 h^4 + \dots, then combining D(h) and D(h/2) as (4D(h/2) - D(h))/3 cancels the h^2 term. Repeating the combination on successively halved steps removes one error order per level. This example applies richardson_extrapolation to a central difference and shows it reaching near machine precision from a coarse starting step, where no plain difference quotient can.">
 
 .. only:: html
 
@@ -47,7 +47,7 @@ Examples using ``mathematicskit.calculus.central_difference``
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Richardson extrapolation dramatically improves accuracy</div>
+      <div class="sphx-glr-thumbnail-title">Richardson extrapolation: cancelling error terms at a fixed step</div>
     </div>
 
 
@@ -75,6 +75,27 @@ Examples using ``mathematicskit.calculus.central_difference``
 .. only:: not html
 
  * :doc:`/api/gallery/calculus/finite_differences/plot_03_complex_step`
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The calculus of Newton and Leibniz rests on two limits: the derivative dy/dx is the limit of a difference quotient, and the integral \int f\,dx is the limit of a sum of thin strips. This example watches secant slopes (via central_difference) close in on the tangent slope, and trapezoidal sums (via TrapezoidalRule) close in on the area under the curve -- and then checks that the two operations undo each other, as the fundamental theorem of calculus says they must.">
+
+.. only:: html
+
+  .. image:: /api/gallery/calculus/newton_leibniz/images/thumb/sphx_glr_plot_01_derivative_and_integral_as_limits_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/calculus/newton_leibniz/plot_01_derivative_and_integral_as_limits`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Newton and Leibniz: the derivative and the integral as limits</div>
+    </div>
+
+
+.. only:: not html
+
+ * :doc:`/api/gallery/calculus/newton_leibniz/plot_01_derivative_and_integral_as_limits`
 
 .. thumbnail-parent-div-close
 
