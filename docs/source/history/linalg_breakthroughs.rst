@@ -41,6 +41,41 @@ on this elimination idea, now delegated to LAPACK through
 
 .. minigallery:: ../../examples/linalg/lu/plot_01_lu_decomposition.py
 
+1750 -- Cramer's Rule
+---------------------
+
+Gabriel Cramer's 1750 treatise on algebraic curves needed to find the
+curve of a given degree through a given set of points, which meant
+solving a system of linear equations. In an appendix he stated a general
+rule for writing down the solution of :math:`n` equations in :math:`n`
+unknowns: each unknown is a ratio whose denominator is built from the
+coefficients alone and whose numerator is the same expression with that
+unknown's coefficients replaced by the right-hand sides. In modern terms
+these expressions are determinants. Colin Maclaurin had published the
+cases of two and three unknowns in 1748, and Cramer's rule helped
+launch the theory of determinants, which dominated linear algebra for
+the next century. The rule is a formula, not an algorithm: evaluated
+with determinants it costs far more than elimination.
+
+.. math::
+
+   x_i = \frac{\det A_i}{\det A}, \qquad
+   A_i = A \text{ with column } i \text{ replaced by } b
+
+*Implementation:* :func:`mathematicskit.linalg.systems.cramer.cramer_solve`
+evaluates the rule with :func:`numpy.linalg.slogdet`. Each determinant
+is itself an LU factorization, so the rule costs :math:`n+1`
+factorizations. The gallery example times it against
+:func:`~mathematicskit.linalg.systems.lu.lu_solve_system` to show the
+extra factor of :math:`n`.
+
+*References:* G. Cramer, *Introduction à l'analyse des lignes courbes
+algébriques* (Geneva: Frères Cramer et Cl. Philibert, 1750), Appendix
+I; C. Maclaurin, *A Treatise of Algebra* (London: A. Millar and J.
+Nourse, 1748).
+
+.. minigallery:: ../../examples/linalg/classical/plot_01_cramers_rule.py
+
 1809 -- Gauss and LU Decomposition
 ----------------------------------
 
@@ -63,6 +98,65 @@ wraps :func:`scipy.linalg.lu` for this partial-pivoted factorization;
 Perthes et Besser, 1809).
 
 .. minigallery:: ../../examples/linalg/lu/plot_01_lu_decomposition.py
+
+1823-1950 -- Gauss-Seidel and Successive Over-Relaxation
+--------------------------------------------------------
+
+In an 1823 letter to his student Christian Ludwig Gerling, Gauss
+described solving the normal equations of a survey adjustment
+"indirectly": correct one unknown at a time from its own equation,
+using the latest values of the others, and repeat. He remarked that he
+could do it half asleep. Carl Gustav Jacob Jacobi published a variant
+in 1845 that updates every unknown simultaneously from the previous
+iterate, and Philipp Ludwig von Seidel analyzed Gauss's sweep in 1874.
+Writing :math:`A = D + L + U` (diagonal, strictly lower, strictly
+upper), both are fixed-point iterations
+:math:`x_{k+1} = G x_k + c`, and they converge from any starting point
+exactly when the spectral radius :math:`\rho(G)` is below one.
+
+The computer era turned this into a quantitative theory. In 1950
+Stanley Frankel and David Young independently showed that
+over-correcting each update by a factor :math:`\omega` (successive
+over-relaxation, SOR) can speed convergence enormously. For the
+"consistently ordered" matrices of discretized elliptic equations,
+Young proved that :math:`\rho(G_{GS}) = \rho(G_J)^2` and found the best
+relaxation factor exactly:
+
+.. math::
+
+   \omega^* = \frac{2}{1 + \sqrt{1 - \rho(G_J)^2}}, \qquad
+   \rho(G_{SOR}(\omega^*)) = \omega^* - 1.
+
+For the 1-D Poisson matrix of size 40 this cuts roughly 3,100
+Gauss-Seidel sweeps to about 150.
+
+*Implementation:* :class:`mathematicskit.linalg.systems.stationary.JacobiIteration`,
+:class:`~mathematicskit.linalg.systems.stationary.GaussSeidel`, and
+:class:`~mathematicskit.linalg.systems.stationary.SOR` are hand-rolled,
+because scipy has no stationary-iteration solver and the sweep itself is
+the lesson. They share the
+:class:`~mathematicskit.linalg.core.base.IterativeLinearSolver`
+interface and residual history of the Krylov solvers.
+:func:`~mathematicskit.linalg.systems.stationary.jacobi_spectral_radius`
+and :func:`~mathematicskit.linalg.systems.stationary.optimal_sor_omega`
+evaluate Young's theory.
+
+*References:* C. F. Gauss, letter to C. L. Gerling, 26 December 1823,
+in *Werke* 9 (Göttingen, 1903), 278-281; C. G. J. Jacobi, "Ueber eine
+neue Auflösungsart der bei der Methode der kleinsten Quadrate
+vorkommenden lineären Gleichungen," Astronomische Nachrichten 22
+(1845), 297-306; P. L. von Seidel, "Über ein Verfahren, die
+Gleichungen, auf welche die Methode der kleinsten Quadrate führt, sowie
+lineäre Gleichungen überhaupt, durch successive Annäherung aufzulösen,"
+Abhandlungen der Bayerischen Akademie der Wissenschaften,
+Mathematisch-Physikalische Classe 11 (1874), 81-108; S. P. Frankel,
+"Convergence Rates of Iterative Treatments of Partial Differential
+Equations," Mathematical Tables and Other Aids to Computation 4(30)
+(1950), 65-75; D. M. Young, "Iterative Methods for Solving Partial
+Difference Equations of Elliptic Type," Transactions of the American
+Mathematical Society 76(1) (1954), 92-111.
+
+.. minigallery:: ../../examples/linalg/iterative/plot_02_gauss_seidel_and_sor.py
 
 1829 -- Cauchy and the Eigenvalue Problem
 -----------------------------------------
@@ -87,6 +181,43 @@ détermine les inégalités séculaires des mouvements des planètes,"
 Exercices de mathématiques 4 (1829).
 
 .. minigallery:: ../../examples/linalg/eigen/plot_01_eigenvalue_methods_compared.py
+
+1858 -- Cayley and the Cayley-Hamilton Theorem
+----------------------------------------------
+
+Arthur Cayley's 1858 "Memoir on the Theory of Matrices" was the first
+to treat a matrix as a single algebraic object that can be added,
+multiplied, and inverted, rather than as shorthand for a system of
+equations. Its central result is that every square matrix satisfies
+its own characteristic equation. Cayley checked the 2x2 case directly,
+said he had verified the 3x3 case, and saw no need for a general
+proof. William Rowan Hamilton had proved a special case for linear
+maps of quaternions in 1853, and Ferdinand Georg Frobenius gave the
+first general proof in 1878. A useful consequence is that every power
+of :math:`A`, and :math:`A^{-1}` itself, is a polynomial in :math:`A`
+of degree less than :math:`n`. That fact underlies Krylov subspace
+methods and the theory of matrix functions.
+
+.. math::
+
+   p_A(\lambda) = \det(\lambda I - A)
+   \quad\Longrightarrow\quad p_A(A) = 0
+
+*Implementation:* :func:`mathematicskit.linalg.systems.matrix_polynomial.characteristic_polynomial`
+wraps :func:`numpy.poly`, and
+:func:`~mathematicskit.linalg.systems.matrix_polynomial.matrix_polynomial`
+evaluates a polynomial at a matrix by Horner's rule. The tests check
+that :math:`p_A(A)` vanishes to rounding error, and the gallery example
+rebuilds :math:`A^{-1}` from the characteristic polynomial.
+
+*References:* A. Cayley, "A Memoir on the Theory of Matrices,"
+Philosophical Transactions of the Royal Society of London 148 (1858),
+17-37; W. R. Hamilton, *Lectures on Quaternions* (Dublin: Hodges and
+Smith, 1853); F. G. Frobenius, "Über lineare Substitutionen und
+bilineare Formen," Journal für die reine und angewandte Mathematik 84
+(1878), 1-63.
+
+.. minigallery:: ../../examples/linalg/classical/plot_02_cayley_hamilton.py
 
 1883-1958 -- Gram-Schmidt, Householder, and QR
 ----------------------------------------------
@@ -157,6 +288,43 @@ numérique des systèmes d'équations linéaires" (manuscript dated 1910).
 
 .. minigallery:: ../../examples/linalg/cholesky/plot_01_cholesky_solve.py
 
+1920-1955 -- Moore, Penrose, and the Pseudoinverse
+--------------------------------------------------
+
+A rectangular or singular matrix has no inverse, but E. H. Moore showed
+in 1920 that it still has a canonical "general reciprocal". His work was
+written in an idiosyncratic notation and was largely overlooked. Arne
+Bjerhammar rediscovered the idea for geodetic adjustment in 1951, and
+Roger Penrose, then a graduate student, characterized it in 1955 as the
+unique matrix :math:`X = A^+` satisfying four equations:
+
+.. math::
+
+   AXA = A, \qquad XAX = X, \qquad (AX)^T = AX, \qquad (XA)^T = XA.
+
+Penrose also showed that :math:`x = A^+ b` is the least-squares
+solution of :math:`Ax = b` with the smallest norm. That gives every
+linear system, whether over- or underdetermined and whatever its rank,
+a single well-defined "best" answer. Through the SVD,
+:math:`A^+ = V\Sigma^+U^T`, where :math:`\Sigma^+` inverts the nonzero
+singular values and leaves the zeros in place.
+
+*Implementation:* :func:`mathematicskit.linalg.systems.pseudoinverse.pseudoinverse`
+wraps the SVD-based :func:`numpy.linalg.pinv`, and
+:func:`~mathematicskit.linalg.systems.pseudoinverse.penrose_residuals`
+measures how far a candidate matrix is from satisfying each of the four
+equations.
+
+*References:* E. H. Moore, "On the Reciprocal of the General Algebraic
+Matrix," Bulletin of the American Mathematical Society 26 (1920),
+394-395; A. Bjerhammar, "Application of Calculus of Matrices to Method
+of Least Squares; with Special References to Geodetic Calculations,"
+Transactions of the Royal Institute of Technology, Stockholm 49 (1951);
+R. Penrose, "A Generalized Inverse for Matrices," Proceedings of the
+Cambridge Philosophical Society 51(3) (1955), 406-413.
+
+.. minigallery:: ../../examples/linalg/svd/plot_02_moore_penrose_pseudoinverse.py
+
 1929 -- Power Iteration and von Mises
 -------------------------------------
 
@@ -182,6 +350,42 @@ Verfahren der Gleichungsauflösung," Zeitschrift für Angewandte
 Mathematik und Mechanik 9 (1929), 58-77, 152-164.
 
 .. minigallery:: ../../examples/linalg/eigen/plot_01_eigenvalue_methods_compared.py
+
+1931 -- Gershgorin's Circle Theorem
+-----------------------------------
+
+Semyon Aronovich Gershgorin, working in Leningrad, published a
+short paper in 1931 showing that eigenvalues can be located without
+computing them. Every eigenvalue of :math:`A` lies in at least one of
+the discs centered on the diagonal entries, each with radius equal to
+the sum of the absolute values of the other entries in its row:
+
+.. math::
+
+   \lambda \in \bigcup_{k=1}^{n} \Big\{ z \in \mathbb{C} :
+   |z - a_{kk}| \le \sum_{j \ne k} |a_{kj}| \Big\}.
+
+The proof takes one line: look at the largest component of an
+eigenvector. Gershgorin also showed that a connected cluster of
+:math:`m` discs, disjoint from the rest, contains exactly :math:`m`
+eigenvalues. An immediate corollary is that a strictly diagonally
+dominant matrix is nonsingular. That is the same condition that
+guarantees convergence of the Jacobi and Gauss-Seidel iterations, and
+the theorem is still the quickest sanity check on a computed spectrum.
+
+*Implementation:* :func:`mathematicskit.linalg.systems.gershgorin.gershgorin_discs`
+computes the row (or column) discs into a
+:class:`~mathematicskit.linalg.core.base.GershgorinResult`, whose
+:meth:`~mathematicskit.linalg.core.base.GershgorinResult.contains`
+tests membership in their union. It is hand-rolled because the discs
+are a closed-form function of the entries.
+
+*References:* S. Gerschgorin, "Über die Abgrenzung der Eigenwerte einer
+Matrix," Izvestiya Akademii Nauk SSSR, Otdelenie Matematicheskikh i
+Estestvennykh Nauk 6 (1931), 749-754; R. S. Varga, *Geršgorin and His
+Circles* (Berlin: Springer, 2004).
+
+.. minigallery:: ../../examples/linalg/eigen/plot_02_gershgorin_discs.py
 
 1936 -- Eckart, Young, and the Singular Value Decomposition
 -----------------------------------------------------------
@@ -248,6 +452,47 @@ Mathematics 1(1) (1948), 287-308.
 
 .. minigallery:: ../../examples/linalg/stability/plot_01_normal_equations_vs_qr.py
 
+1950 -- Lanczos Iteration
+-------------------------
+
+Cornelius Lanczos, working at the Institute for Numerical Analysis at
+the National Bureau of Standards, proposed in 1950 to reduce a
+symmetric matrix to tridiagonal form using nothing but matrix-vector
+products. Starting from a vector :math:`q_1`, a three-term recurrence
+
+.. math::
+
+   \beta_{j} q_{j+1} = A q_j - \alpha_j q_j - \beta_{j-1} q_{j-1}
+
+builds an orthonormal basis of the Krylov subspace
+:math:`\operatorname{span}\{q_1, Aq_1, \dots, A^{m-1}q_1\}` in which
+:math:`A` is represented by a small tridiagonal matrix :math:`T_m`. In
+floating point the vectors quickly lose orthogonality, and the method
+was set aside as unstable until Christopher Paige's 1971 thesis showed
+that the loss of orthogonality goes hand in hand with convergence. The
+extreme eigenvalues of :math:`T_m` (the Ritz values) approximate those
+of :math:`A` long before :math:`m` reaches :math:`n`. Danny Sorensen's
+1992 implicit restarting made the method robust, and it became the
+ARPACK library, the standard tool for a few eigenpairs of a matrix too
+large to store densely.
+
+*Implementation:* :func:`mathematicskit.linalg.systems.lanczos.lanczos_eigsh`
+wraps :func:`scipy.sparse.linalg.eigsh` (ARPACK's implicitly restarted
+Lanczos), with an optional shift-invert mode for eigenvalues near a
+chosen value. The gallery example recovers closed-form eigenvalues of a
+sparse Laplacian with :math:`n = 100\,000`.
+
+*References:* C. Lanczos, "An Iteration Method for the Solution of the
+Eigenvalue Problem of Linear Differential and Integral Operators,"
+Journal of Research of the National Bureau of Standards 45(4) (1950),
+255-282; C. C. Paige, "The Computation of Eigenvalues and Eigenvectors
+of Very Large Sparse Matrices," Ph.D. thesis, University of London
+(1971); D. C. Sorensen, "Implicit Application of Polynomial Filters in
+a k-Step Arnoldi Method," SIAM Journal on Matrix Analysis and
+Applications 13(1) (1992), 357-385.
+
+.. minigallery:: ../../examples/linalg/eigen/plot_03_lanczos.py
+
 1952 -- Hestenes, Stiefel, and the Conjugate Gradient Method
 ------------------------------------------------------------
 
@@ -276,6 +521,53 @@ Nonsymmetric Linear Systems," SIAM Journal on Scientific and Statistical
 Computing 7(3) (1986), 856-869.
 
 .. minigallery:: ../../examples/linalg/iterative/plot_01_cg_and_gmres_convergence.py
+
+1961 -- Francis, Kublanovskaya, and the QR Algorithm
+----------------------------------------------------
+
+John Francis in England and Vera Kublanovskaya in Leningrad
+independently discovered the algorithm that now computes nearly every
+dense eigenvalue problem. It builds on Heinz Rutishauser's 1958 LR
+algorithm: factor :math:`A_k = Q_kR_k`, then multiply the factors back
+in reverse order.
+
+.. math::
+
+   A_{k+1} = R_k Q_k = Q_k^T A_k Q_k
+
+Every iterate is orthogonally similar to :math:`A`, and the entries
+below the diagonal shrink like :math:`|\lambda_{i+1}/\lambda_i|^k`, so
+the iterates converge to the Schur form :math:`A = ZTZ^T` whose
+existence Issai Schur proved in 1909, with the eigenvalues on the
+diagonal of :math:`T`. Francis made the method practical. He first
+reduced :math:`A` to Hessenberg form so each step costs :math:`O(n^2)`,
+then added shifts that give quadratic or cubic convergence, and
+finally used the implicit double shift to handle complex-conjugate
+pairs in real arithmetic. The QR algorithm was later named one of the
+ten most important algorithms of the 20th century.
+
+*Implementation:* :func:`mathematicskit.linalg.systems.schur.schur_decompose`
+wraps :func:`scipy.linalg.schur` (LAPACK's implicitly shifted Francis QR)
+into a :class:`~mathematicskit.linalg.core.base.SchurResult`, and
+:func:`~mathematicskit.linalg.systems.schur.hessenberg_reduce` wraps
+:func:`scipy.linalg.hessenberg`. The gallery example runs the unshifted
+iteration by hand with
+:func:`~mathematicskit.linalg.systems.qr.householder_qr` and checks the
+predicted subdiagonal decay rates.
+
+*References:* J. G. F. Francis, "The QR Transformation: A Unitary
+Analogue to the LR Transformation -- Part 1," The Computer Journal 4(3)
+(1961), 265-271, and "Part 2," The Computer Journal 4(4) (1962),
+332-345; V. N. Kublanovskaya, "On Some Algorithms for the Solution of
+the Complete Eigenvalue Problem," USSR Computational Mathematics and
+Mathematical Physics 1(3) (1962), 637-657; H. Rutishauser, "Solution of
+Eigenvalue Problems with the LR-Transformation," National Bureau of
+Standards Applied Mathematics Series 49 (1958), 47-81; I. Schur, "Über
+die charakteristischen Wurzeln einer linearen Substitution mit einer
+Anwendung auf die Theorie der Integralgleichungen," Mathematische
+Annalen 66 (1909), 488-510.
+
+.. minigallery:: ../../examples/linalg/eigen/plot_04_francis_qr_algorithm.py
 
 See Also
 --------

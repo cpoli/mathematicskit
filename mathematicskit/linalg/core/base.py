@@ -34,6 +34,8 @@ __all__ = [
     "SVDResult",
     "IterativeSolveResult",
     "LeastSquaresResult",
+    "GershgorinResult",
+    "SchurResult",
     "IterativeLinearSolver",
 ]
 
@@ -155,7 +157,8 @@ class IterativeSolveResult:
     """bool: Whether the residual tolerance was met."""
 
     method: str = ""
-    """str: ``"conjugate_gradient"`` or ``"gmres"``."""
+    """str: ``"conjugate_gradient"``, ``"gmres"``, ``"jacobi"``,
+    ``"gauss_seidel"``, or ``"sor"``."""
 
 
 @dataclass
@@ -175,6 +178,45 @@ class LeastSquaresResult:
     """float, optional: 2-norm condition number of ``A`` (``"qr"``) or of
     the normal-equations matrix ``A^T A`` (``"normal_equations"``, which
     squares it)."""
+
+
+@dataclass
+class GershgorinResult:
+    r"""The Gershgorin discs of a square matrix.
+
+    Disc :math:`k` is centered at :math:`a_{kk}` with radius
+    :math:`R_k = \sum_{j \ne k} |a_{kj}|`; every eigenvalue lies in the
+    union of the discs.
+    """
+
+    centers: np.ndarray
+    """ndarray, shape (n,): Disc centers, the diagonal entries (possibly complex)."""
+
+    radii: np.ndarray
+    """ndarray, shape (n,): Disc radii, the off-diagonal absolute row (or column) sums."""
+
+    def contains(self, z: complex) -> bool:
+        """Whether the complex number `z` lies in the union of the discs (boundary included, up to rounding)."""
+        return bool(np.any(np.abs(z - self.centers) <= self.radii * (1.0 + 1e-12) + 1e-12))
+
+
+@dataclass
+class SchurResult:
+    """Output of a Schur decomposition: ``A = Z T Z^H``."""
+
+    T: np.ndarray
+    """ndarray, shape (n, n): Schur form -- upper triangular (complex
+    output) or quasi-upper-triangular with 2x2 blocks for complex-conjugate
+    eigenvalue pairs (real output). Its diagonal (or block) entries are the
+    eigenvalues of ``A``."""
+
+    Z: np.ndarray
+    """ndarray, shape (n, n): Unitary (orthogonal, for real output) Schur vectors."""
+
+    @property
+    def eigenvalues(self) -> np.ndarray:
+        """ndarray, shape (n,): Eigenvalues read off ``T`` (2x2 diagonal blocks resolved with :func:`numpy.linalg.eigvals`)."""
+        return np.linalg.eigvals(self.T) if np.isrealobj(self.T) else np.diag(self.T).copy()
 
 
 class IterativeLinearSolver(ABC):
