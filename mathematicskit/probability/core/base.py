@@ -19,7 +19,17 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import Optional
 
-__all__ = ["DiscreteDistribution", "ContinuousDistribution", "MonteCarloResult"]
+import numpy as np
+
+__all__ = [
+    "DiscreteDistribution",
+    "ContinuousDistribution",
+    "MonteCarloResult",
+    "BuffonNeedleResult",
+    "TailBoundResult",
+    "BranchingProcessResult",
+    "BrownianMotionResult",
+]
 
 
 class DiscreteDistribution(ABC):
@@ -140,3 +150,56 @@ class MonteCarloResult:
 
     method: str = ""
     """str: e.g. ``"plain"``, ``"importance_sampling"``, ``"control_variates"``."""
+
+
+@dataclass
+class BuffonNeedleResult:
+    """Container for a Buffon's-needle simulation."""
+
+    pi_estimate: float
+    """float: The estimate of pi implied by the observed crossing fraction."""
+
+    crossing_fraction: float
+    """float: Fraction of dropped needles that crossed a line."""
+
+    exact_crossing_probability: float
+    """float: The exact crossing probability ``2 * length / (pi * spacing)`` for a short needle."""
+
+    n_drops: int
+    """int: Number of needles dropped."""
+
+
+@dataclass
+class TailBoundResult:
+    """Container comparing Chebyshev's bound with the exact two-sided tail probability."""
+
+    k: np.ndarray
+    """ndarray: Distances from the mean, in standard deviations."""
+
+    bound: np.ndarray
+    """ndarray: Chebyshev's bound ``min(1, 1 / k**2)``."""
+
+    exact: np.ndarray
+    """ndarray: The exact ``P(|X - mean| >= k * std)`` from the distribution's CDF."""
+
+
+@dataclass
+class BranchingProcessResult:
+    """Container for simulated Galton-Watson generation sizes."""
+
+    generation_sizes: np.ndarray
+    """ndarray, shape (n_runs, n_generations + 1): Population of each run at each generation (column 0 is the founders)."""
+
+    extinct_fraction: float
+    """float: Fraction of runs whose population reached zero within the simulated generations."""
+
+
+@dataclass
+class BrownianMotionResult:
+    """Container for sampled Brownian-motion paths."""
+
+    times: np.ndarray
+    """ndarray, shape (n_steps + 1,): Time grid, starting at 0."""
+
+    paths: np.ndarray
+    """ndarray, shape (n_paths, n_steps + 1): Sampled paths ``W(t)``, each starting at ``W(0) = 0``."""

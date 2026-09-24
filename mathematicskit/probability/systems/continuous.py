@@ -9,11 +9,11 @@ for the distributions and their MGF derivations.
 from __future__ import annotations
 
 import numpy as np
-from scipy import stats
+from scipy import special, stats
 
 from mathematicskit.probability.core.base import ContinuousDistribution
 
-__all__ = ["Uniform", "Exponential", "Normal", "Gamma"]
+__all__ = ["Uniform", "Exponential", "Normal", "Gamma", "Beta"]
 
 
 class Uniform(ContinuousDistribution):
@@ -157,3 +157,39 @@ class Gamma(ContinuousDistribution):
 
     def mgf(self, t):
         return (self.rate / (self.rate - np.asarray(t, dtype=np.float64))) ** self.shape
+
+
+class Beta(ContinuousDistribution):
+    r"""Beta distribution with shape parameters :math:`\alpha` and :math:`\beta` on :math:`[0, 1]`.
+
+    :math:`f(x) = \dfrac{x^{\alpha-1}(1-x)^{\beta-1}}{B(\alpha, \beta)}`,
+    via :class:`scipy.stats.beta`. MGF: :math:`M(t) = {}_1F_1(\alpha;
+    \alpha+\beta; t)`, Kummer's confluent hypergeometric function
+    (:func:`scipy.special.hyp1f1`). It is the conjugate prior of the
+    binomial, which makes it the natural home of Bayes's 1763 problem
+    (see :mod:`mathematicskit.probability.systems.bayes`). See DeGroot &
+    Schervish, *Probability and Statistics*, 4th ed., Sec. 5.8.
+
+    Parameters
+    ----------
+    alpha, beta : float
+        Shape parameters, both ``> 0``.
+
+    Examples
+    --------
+    >>> b = Beta(alpha=2.0, beta=3.0)
+    >>> round(b.mean, 4)
+    0.4
+    >>> round(b.variance, 4)
+    0.04
+    """
+
+    def __init__(self, alpha: float, beta: float):
+        self.alpha, self.beta = float(alpha), float(beta)
+        self._frozen = stats.beta(self.alpha, self.beta)
+
+    def pdf(self, x):
+        return self._frozen.pdf(x)
+
+    def mgf(self, t):
+        return special.hyp1f1(self.alpha, self.alpha + self.beta, np.asarray(t, dtype=np.float64))

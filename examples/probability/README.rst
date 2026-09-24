@@ -4,7 +4,8 @@ Examples
 This gallery walks through every public feature of ``mathematicskit.probability``:
 discrete and continuous distributions, Monte Carlo integration with
 variance reduction, the Law of Large Numbers and Central Limit Theorem,
-and discrete-time Markov chains.
+Markov chains, classical problems, Bayesian updating, branching
+processes, random walks and Brownian motion, and queueing.
 
 See also the narrative tutorials:
 
@@ -23,5 +24,10 @@ Sections
   Monte Carlo integration.
 - **limit_theorems** -- the Law of Large Numbers and Central Limit
   Theorem, simulated.
-- **markov_chain** -- stationary distributions and gambler's-ruin
-  absorption probabilities.
+- **markov_chain** -- stationary distributions, gambler's-ruin
+  absorption probabilities, and continuous-time chains.
+- **classical** -- Buffon's needle and the St. Petersburg paradox.
+- **bayes** -- Bayes's Beta-binomial update and the rule of succession.
+- **branching** -- Galton-Watson extinction probabilities.
+- **stochastic_processes** -- random walks and Brownian motion.
+- **queueing** -- Erlang's loss formula.
