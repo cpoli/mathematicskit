@@ -93,7 +93,7 @@ approximates the limiting Riemann sum.
 *References:* G. W. Leibniz, "Nova Methodus pro Maximis et Minimis,"
 Acta Eruditorum (1684), 467-473.
 
-.. minigallery:: ../../examples/calculus/finite_differences/plot_01_richardson_extrapolation.py
+.. minigallery:: ../../examples/calculus/newton_leibniz/plot_01_derivative_and_integral_as_limits.py
 
 1715 -- Taylor's Theorem
 ------------------------
@@ -194,7 +194,7 @@ Scientiarum Gottingensis Recentiores 3 (1814); C. G. J. Jacobi, "Ueber
 Gauß' neue Methode, die Werthe der Integrale näherungsweise zu finden,"
 Journal für die reine und angewandte Mathematik 1 (1826), 301-308.
 
-.. minigallery:: ../../examples/calculus/quadrature/plot_01_rules_compared.py
+.. minigallery:: ../../examples/calculus/quadrature/plot_01_gauss_legendre.py
 
 1854 -- Riemann's Definition of the Integral
 --------------------------------------------
@@ -408,7 +408,7 @@ routine under the hood.
 D. K. Kahaner, *QUADPACK: A Subroutine Package for Automatic
 Integration* (Berlin: Springer, 1983).
 
-.. minigallery:: ../../examples/calculus/quadrature/plot_01_rules_compared.py
+.. minigallery:: ../../examples/calculus/quadrature/plot_08_adaptive_quadpack.py
 
 See Also
 --------

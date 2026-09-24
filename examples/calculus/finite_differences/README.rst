@@ -1,5 +1,5 @@
 Finite differences
 -------------------
 
-Forward/backward/central differences, and Richardson extrapolation's
-accuracy improvement.
+Richardson extrapolation, Fermat's adequality, and the complex-step
+derivative.

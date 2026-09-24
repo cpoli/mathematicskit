@@ -1,5 +1,5 @@
 Quadrature
 ----------
 
-Trapezoidal, Simpson's, Gauss-Legendre, and adaptive Simpson's rule,
-compared for accuracy vs. cost.
+Riemann sums, Simpson's rule, Gauss-Legendre, Euler-Maclaurin, Romberg,
+Clenshaw-Curtis, tanh-sinh, and QUADPACK-style adaptive quadrature.
