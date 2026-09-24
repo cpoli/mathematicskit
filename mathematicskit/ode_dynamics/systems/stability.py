@@ -6,6 +6,8 @@ spiral/center, and a multivariate Newton solver (built on
 See Strogatz, *Nonlinear Dynamics and Chaos*, 2nd ed., Ch. 5
 ("Linear Systems") and Ch. 6.3 ("Linearization"), and Burden & Faires,
 *Numerical Analysis*, 10th ed., Ch. 10.2 (multivariate Newton's method).
+:func:`lyapunov_quadratic_form` implements Lyapunov's (1892) direct
+method for linear systems via the continuous Lyapunov equation.
 """
 
 from __future__ import annotations
@@ -13,11 +15,12 @@ from __future__ import annotations
 from typing import Callable
 
 import numpy as np
+from scipy.linalg import solve_continuous_lyapunov
 
 from mathematicskit.linalg.systems.lu import lu_solve_system
-from mathematicskit.ode_dynamics.core.base import FixedPointResult
+from mathematicskit.ode_dynamics.core.base import FixedPointResult, LyapunovFunctionResult
 
-__all__ = ["classify_fixed_point_2d", "find_fixed_point_newton", "numerical_jacobian"]
+__all__ = ["classify_fixed_point_2d", "find_fixed_point_newton", "numerical_jacobian", "lyapunov_quadratic_form"]
 
 _BORDERLINE_TOL = 1e-12
 """Tolerance for the borderline cases in :func:`classify_fixed_point_2d`:
@@ -193,3 +196,58 @@ def find_fixed_point_newton(f: Callable[[np.ndarray], np.ndarray], x0: np.ndarra
             break
         x = x_new
     return x, converged
+
+
+def lyapunov_quadratic_form(A, Q=None) -> LyapunovFunctionResult:
+    r"""Quadratic Lyapunov function for the linear system :math:`\dot x = Ax`.
+
+    Lyapunov's direct method (1892) proves stability without solving the
+    ODE: if a function :math:`V(x) > 0` (for :math:`x \neq 0`) strictly
+    decreases along every trajectory, the origin is asymptotically
+    stable. For a linear system, try :math:`V(x) = x^T P x`; then
+    :math:`\dot V = x^T(A^T P + P A)x = -x^T Q x`. Solving the
+    continuous *Lyapunov equation*
+
+    .. math:: A^T P + P A = -Q
+
+    for a chosen :math:`Q \succ 0` gives a positive-definite :math:`P`
+    if and only if every eigenvalue of :math:`A` has negative real part
+    (Lyapunov's theorem). The equation is solved with
+    :func:`scipy.linalg.solve_continuous_lyapunov` (Bartels-Stewart).
+    See Khalil, *Nonlinear Systems*, 3rd ed., Thm. 4.6.
+
+    Parameters
+    ----------
+    A : array-like, shape (n, n)
+        System matrix.
+    Q : array-like, shape (n, n), optional
+        Symmetric positive-definite matrix; defaults to the identity.
+
+    Returns
+    -------
+    LyapunovFunctionResult
+        ``P``, ``Q``, and whether ``P`` is positive definite.
+
+    Examples
+    --------
+    >>> import numpy as np
+    >>> res = lyapunov_quadratic_form([[-1.0, 0.0], [0.0, -2.0]])
+    >>> np.round(res.P, 6)
+    array([[0.5 , 0.  ],
+           [0.  , 0.25]])
+    >>> res.positive_definite
+    True
+    >>> lyapunov_quadratic_form([[1.0, 0.0], [0.0, -1.0]]).positive_definite
+    False
+    """
+    A = np.asarray(A, dtype=np.float64)
+    if A.ndim != 2 or A.shape[0] != A.shape[1]:
+        raise ValueError("A must be a square matrix")
+    Q = np.eye(A.shape[0]) if Q is None else np.asarray(Q, dtype=np.float64)
+    if Q.shape != A.shape:
+        raise ValueError("Q must have the same shape as A")
+    # scipy solves a X + X a^H = q; with a = A^T this is A^T P + P A = -Q.
+    P = solve_continuous_lyapunov(A.T, -Q)
+    P = 0.5 * (P + P.T)
+    positive_definite = bool(np.all(np.linalg.eigvalsh(P) > 0.0))
+    return LyapunovFunctionResult(P=P, Q=Q, positive_definite=positive_definite)

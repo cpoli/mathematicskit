@@ -4,7 +4,8 @@ closed-form cases (Strogatz, Nonlinear Dynamics and Chaos, Ch. 5)."""
 import numpy as np
 import pytest
 
-from mathematicskit.ode_dynamics.systems.stability import classify_fixed_point_2d, find_fixed_point_newton, numerical_jacobian
+from mathematicskit.ode_dynamics.systems.phase_portrait import Linear2D
+from mathematicskit.ode_dynamics.systems.stability import classify_fixed_point_2d, find_fixed_point_newton, lyapunov_quadratic_form, numerical_jacobian
 
 
 def test_stable_node():
@@ -81,3 +82,25 @@ def test_classification_matches_jacobian_at_newton_solved_fixed_point():
 def test_degenerate_node(jac, expected):
     result = classify_fixed_point_2d(jac)
     assert result.classification == expected
+
+
+def test_lyapunov_quadratic_form_solves_lyapunov_equation():
+    A = np.array([[-1.0, 2.0], [-3.0, -0.5]])
+    Q = np.array([[2.0, 0.5], [0.5, 1.0]])
+    res = lyapunov_quadratic_form(A, Q)
+    np.testing.assert_allclose(A.T @ res.P + res.P @ A, -Q, atol=1e-12)
+    assert res.positive_definite
+
+
+def test_lyapunov_function_decreases_along_trajectories():
+    A = [[-0.2, 1.0], [-1.0, -0.2]]
+    P = lyapunov_quadratic_form(A).P
+    traj = Linear2D([1.0, 0.5], A=A).integrate((0.0, 20.0), dt=1e-2, method="rk4")
+    V = np.einsum("ti,ij,tj->t", traj.y, P, traj.y)
+    assert np.all(np.diff(V) < 0.0)
+
+
+def test_lyapunov_quadratic_form_detects_instability():
+    assert not lyapunov_quadratic_form([[0.1, 1.0], [-1.0, 0.1]]).positive_definite
+    with pytest.raises(ValueError):
+        lyapunov_quadratic_form([[1.0, 2.0, 3.0]])

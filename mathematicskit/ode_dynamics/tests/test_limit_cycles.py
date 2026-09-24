@@ -3,7 +3,7 @@
 import numpy as np
 import pytest
 
-from mathematicskit.ode_dynamics.systems.limit_cycles import VanDerPolOscillator, estimate_limit_cycle_amplitude
+from mathematicskit.ode_dynamics.systems.limit_cycles import VanDerPolOscillator, bendixson_criterion, estimate_limit_cycle_amplitude
 from mathematicskit.ode_dynamics.utils.period_estimation import estimate_period
 
 
@@ -36,3 +36,15 @@ def test_period_estimation_matches_known_sine_period():
     t = np.linspace(0.0, 20.0, 20000)
     x = np.sin(2.0 * np.pi * t / 3.0)
     assert estimate_period(t, x) == pytest.approx(3.0, abs=0.02)
+
+
+def test_bendixson_divergence_matches_closed_form():
+    res = bendixson_criterion(lambda x, y: (y, 2.0 * (1.0 - x**2) * y - x), (-2, 2), (-2, 2), n=21)
+    np.testing.assert_allclose(res.divergence, 2.0 * (1.0 - res.X**2), atol=1e-6)
+    assert not res.rules_out_periodic_orbits
+
+
+def test_bendixson_rules_out_cycles_for_dissipative_flows_but_not_a_center():
+    assert bendixson_criterion(lambda x, y: (y - x**3, -x - y**3 - y), (-2, 2), (-2, 2)).rules_out_periodic_orbits
+    assert bendixson_criterion(lambda x, y: (y - x, -x - y), (-2, 2), (-2, 2)).rules_out_periodic_orbits
+    assert not bendixson_criterion(lambda x, y: (y, -x), (-2, 2), (-2, 2)).rules_out_periodic_orbits

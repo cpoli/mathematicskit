@@ -7,7 +7,9 @@ module-level factory closes over the system's numeric parameters and
 returns a dispatcher, never a bound method), and integrates it via
 :mod:`mathematicskit.integrators`. :class:`FixedPointResult` is the stable
 result type for linear-stability analysis
-(:mod:`mathematicskit.ode_dynamics.systems.stability`).
+(:mod:`mathematicskit.ode_dynamics.systems.stability`);
+:class:`LyapunovFunctionResult` and :class:`BendixsonResult` hold the
+outputs of Lyapunov's direct method and Bendixson's negative criterion.
 """
 
 from __future__ import annotations
@@ -19,7 +21,7 @@ import numpy as np
 
 from mathematicskit.integrators import dopri5_integrate, rk4_integrate
 
-__all__ = ["OdeTrajectory", "FlowSystem", "FixedPointResult"]
+__all__ = ["OdeTrajectory", "FlowSystem", "FixedPointResult", "LyapunovFunctionResult", "BendixsonResult"]
 
 
 @dataclass
@@ -120,3 +122,37 @@ class FixedPointResult:
 
     stable: bool = False
     """bool: Whether both eigenvalues have negative real part."""
+
+
+@dataclass
+class LyapunovFunctionResult:
+    """Container for a quadratic Lyapunov function ``V(x) = x^T P x``."""
+
+    P: np.ndarray
+    """ndarray, shape (n, n): Symmetric solution of ``A^T P + P A = -Q``."""
+
+    Q: np.ndarray
+    """ndarray, shape (n, n): Symmetric positive-definite right-hand side used."""
+
+    positive_definite: bool = False
+    """bool: Whether ``P`` is positive definite, i.e. whether ``V`` certifies
+    asymptotic stability of the origin (Lyapunov's theorem)."""
+
+
+@dataclass
+class BendixsonResult:
+    """Container for Bendixson's negative criterion evaluated on a grid."""
+
+    X: np.ndarray
+    """ndarray, shape (n, n): Grid x-coordinates."""
+
+    Y: np.ndarray
+    """ndarray, shape (n, n): Grid y-coordinates."""
+
+    divergence: np.ndarray
+    """ndarray, shape (n, n): Divergence ``df/dx + dg/dy`` of the vector field ``(f, g)``."""
+
+    rules_out_periodic_orbits: bool = False
+    """bool: ``True`` if the divergence is strictly of one sign on the whole
+    grid, so no closed orbit lies entirely inside the (simply connected)
+    rectangle."""
