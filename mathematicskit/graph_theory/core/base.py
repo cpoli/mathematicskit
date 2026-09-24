@@ -17,7 +17,19 @@ from typing import Optional
 import numpy as np
 from scipy import sparse
 
-__all__ = ["Graph", "ShortestPathResult", "MSTResult", "MaxFlowResult", "ColoringResult", "SpectralResult"]
+__all__ = [
+    "Graph",
+    "ShortestPathResult",
+    "MSTResult",
+    "MaxFlowResult",
+    "ColoringResult",
+    "SpectralResult",
+    "BipartiteMatchingResult",
+    "AssignmentResult",
+    "ComponentsResult",
+    "SearchResult",
+    "PageRankResult",
+]
 
 
 class Graph:
@@ -182,3 +194,64 @@ class SpectralResult:
     bipartition: np.ndarray = field(default_factory=lambda: np.array([]))
     """ndarray, bool: Spectral bipartition from the Fiedler vector's sign
     (``True``/``False`` per vertex)."""
+
+
+@dataclass
+class BipartiteMatchingResult:
+    """Container for a maximum matching in a bipartite graph."""
+
+    pairs: dict
+    """dict: ``{left_vertex: right_vertex}`` for every matched left vertex."""
+
+    vertex_cover: list = field(default_factory=list)
+    """list of int: A minimum vertex cover, of the same size as the matching (König's theorem)."""
+
+    @property
+    def size(self) -> int:
+        """int: Number of matched pairs."""
+        return len(self.pairs)
+
+
+@dataclass
+class AssignmentResult:
+    """Container for a solved assignment problem."""
+
+    rows: np.ndarray
+    cols: np.ndarray
+    """ndarray, int: Row ``rows[k]`` is assigned to column ``cols[k]``."""
+
+    total_cost: float
+
+
+@dataclass
+class ComponentsResult:
+    """Container for the connected components of a graph."""
+
+    n_components: int
+    labels: np.ndarray
+    """ndarray, int: Component label of each vertex."""
+
+    sizes: np.ndarray
+    """ndarray, int: Component sizes, largest first."""
+
+
+@dataclass
+class SearchResult:
+    """Container for a single-pair shortest-path search."""
+
+    path: list
+    """list of int: Vertices from source to target (empty if unreachable)."""
+
+    distance: float
+    n_expanded: int
+    """int: Number of vertices removed from the priority queue."""
+
+
+@dataclass
+class PageRankResult:
+    """Container for a PageRank computation."""
+
+    scores: np.ndarray
+    """ndarray: PageRank of each vertex; sums to 1."""
+
+    iterations: int
