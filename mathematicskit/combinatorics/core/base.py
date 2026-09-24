@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
-__all__ = ["YoungDiagram"]
+__all__ = ["YoungDiagram", "HallResult"]
 
 
 @dataclass
@@ -83,3 +83,17 @@ class YoungDiagram:
     def n(self) -> int:
         """int: The partitioned integer, ``sum(parts)``."""
         return sum(self.parts)
+
+
+@dataclass
+class HallResult:
+    """Container for a Hall's-condition check on a bipartite graph."""
+
+    satisfied: bool
+    """bool: Whether every subset ``S`` of the left side has ``|N(S)| >= |S|``."""
+
+    violating_subset: frozenset = frozenset()
+    """frozenset: A left-side subset with too few neighbors, when the condition fails."""
+
+    matching: dict = field(default_factory=dict)
+    """dict: A maximum matching ``{left: right}`` found by augmenting paths."""
