@@ -1,4 +1,5 @@
-Segment intersection and point-in-polygon
+Point-in-polygon
 ------------------------------------------------
 
-Elementary computational-geometry primitives with no scipy equivalent.
+Ray casting and the Jordan curve theorem, with crossings found by
+segment intersection.

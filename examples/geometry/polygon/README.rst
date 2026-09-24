@@ -1,4 +1,5 @@
-Polygon area and centroid
+Polygon area
 ----------------------------
 
-The shoelace formula.
+Euclid's equal areas, Heron's formula, and Pick's theorem, all checked
+against the shoelace formula.

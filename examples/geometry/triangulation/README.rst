@@ -1,4 +1,5 @@
-Delaunay triangulation and Voronoi diagrams
+Voronoi diagrams and Delaunay triangulation
 --------------------------------------------------
 
-Duals of each other, both via scipy's Qhull wrapper.
+Nearest-site partitions and empty-circumcircle triangulations, both via
+scipy's Qhull wrapper.

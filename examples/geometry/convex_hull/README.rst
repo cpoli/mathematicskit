@@ -1,4 +1,4 @@
 Convex hull
 -------------
 
-scipy's Qhull-based convex hull vs. a hand-rolled Graham scan.
+Graham's angular-sweep convex hull, checked against scipy's Qhull.

@@ -44,7 +44,7 @@ compute a polygon's area and centroid with the shoelace formula.
 T. L. Heath, *The Thirteen Books of Euclid's Elements*, 2nd ed.
 (Cambridge: Cambridge University Press, 1926).
 
-.. minigallery:: ../../examples/geometry/polygon/plot_01_shoelace_formula.py
+.. minigallery:: ../../examples/geometry/polygon/plot_01_euclid_equal_areas.py
 
 c. 60 CE -- Heron's Formula
 ---------------------------
@@ -224,7 +224,7 @@ Mathematical Society 6(1) (1905), 83-98; M. Shimrat, "Algorithm 112:
 Position of Point Relative to Polygon," Communications of the ACM 5(8)
 (1962), 434.
 
-.. minigallery:: ../../examples/geometry/intersections/plot_01_segments_and_polygons.py
+.. minigallery:: ../../examples/geometry/intersections/plot_01_jordan_ray_casting.py
 
 1899 -- Pick's Theorem
 ----------------------
@@ -310,7 +310,7 @@ continus à la théorie des formes quadratiques. Deuxième mémoire:
 Recherches sur les parallélloèdres primitifs," Journal für die reine
 und angewandte Mathematik 134 (1908), 198-287.
 
-.. minigallery:: ../../examples/geometry/triangulation/plot_01_delaunay_and_voronoi.py
+.. minigallery:: ../../examples/geometry/triangulation/plot_01_voronoi_diagram.py
 
 1934 -- Delaunay Triangulation
 ------------------------------
@@ -333,7 +333,7 @@ wraps :class:`scipy.spatial.Voronoi` for its dual.
 des Sciences de l'URSS, Classe des Sciences Mathématiques et Naturelles
 6 (1934), 793-800.
 
-.. minigallery:: ../../examples/geometry/triangulation/plot_01_delaunay_and_voronoi.py
+.. minigallery:: ../../examples/geometry/triangulation/plot_02_delaunay_triangulation.py
 
 1959-1962 -- De Casteljau, Bézier, and Curves for Car Bodies
 ------------------------------------------------------------
@@ -382,7 +382,7 @@ which wraps :class:`scipy.spatial.ConvexHull` (the Qhull library).
 Convex Hull of a Finite Planar Set," Information Processing Letters
 1(4) (1972), 132-133.
 
-.. minigallery:: ../../examples/geometry/convex_hull/plot_01_qhull_vs_graham_scan.py
+.. minigallery:: ../../examples/geometry/convex_hull/plot_01_graham_scan.py
 
 1972-1973 -- Ramer, Douglas, Peucker, and Line Simplification
 -------------------------------------------------------------

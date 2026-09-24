@@ -12,10 +12,10 @@ Each script in this gallery is self-contained and can be run directly with
 Sections
 --------
 
-- **convex_hull** -- scipy's Qhull-based convex hull vs. a hand-rolled
-  Graham scan.
-- **triangulation** -- Delaunay triangulation and its dual Voronoi
-  diagram.
-- **intersections** -- segment intersection and point-in-polygon tests.
-- **polygon** -- polygon area and centroid via the shoelace formula.
+- **convex_hull** -- Graham's scan, checked against scipy's Qhull.
+- **triangulation** -- Voronoi diagrams and Delaunay triangulation.
+- **intersections** -- ray-casting point-in-polygon and the Jordan curve
+  theorem.
+- **polygon** -- Euclid's equal areas, Heron's formula, and Pick's
+  theorem.
 - **curves** -- curvature, arc length, and the Frenet-Serret frame.
