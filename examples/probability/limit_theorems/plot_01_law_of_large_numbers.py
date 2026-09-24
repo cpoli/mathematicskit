@@ -37,8 +37,8 @@ ax.set_ylabel("relative frequency of heads")
 ax.set_title(r"Law of large numbers: frequency $\to p = 0.3$ (dashed: $\pm 2$ s.d.)")
 
 # %%
-# Bernoulli's statement: P(|frequency - p| > eps) goes to 0
-# ------------------------------------------------------------------
+# Bernoulli's statement: :math:`P(|\bar{X}_n - p| > \varepsilon) \to 0`
+# ---------------------------------------------------------------------
 
 checkpoints = [10, 100, 1000, 10000, 1000000]
 for n, freq in zip(checkpoints, law_of_large_numbers_trace(coin, checkpoints, seed=0)):
