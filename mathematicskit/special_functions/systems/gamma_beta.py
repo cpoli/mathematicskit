@@ -5,13 +5,19 @@ r"""The gamma and beta functions, via :mod:`scipy.special`.
 approximations); mathematicskit does not reimplement them. See Abramowitz &
 Stegun, *Handbook of Mathematical Functions*, Ch. 6, and NIST *Digital
 Library of Mathematical Functions*, Ch. 5.
+
+The one hand-written routine here is Stirling's asymptotic series for
+:math:`\ln\Gamma(x)`, :func:`stirling_log_gamma`: scipy has no public
+"truncated Stirling series" function, and watching the truncation error
+shrink (then grow again) with the number of terms is the point.
 """
 
 from __future__ import annotations
 
+import numpy as np
 from scipy import special
 
-__all__ = ["gamma_function", "beta_function", "log_gamma_function"]
+__all__ = ["gamma_function", "beta_function", "log_gamma_function", "stirling_factorial", "stirling_log_gamma"]
 
 
 def gamma_function(x):
@@ -85,3 +91,70 @@ def beta_function(a, b):
     True
     """
     return special.beta(a, b)
+
+
+def stirling_factorial(n):
+    r"""Stirling's approximation :math:`n! \approx \sqrt{2\pi n}\,(n/e)^n`.
+
+    The leading term of Stirling's series (J. Stirling, *Methodus
+    Differentialis*, 1730, Prop. 28; A. de Moivre, *Miscellanea
+    Analytica*, 1730). The *relative* error is about :math:`1/(12n)`, so
+    the ratio to :math:`n!` tends to 1 even though the absolute error
+    grows without bound.
+
+    Parameters
+    ----------
+    n : float or array-like of float
+        Non-negative argument.
+
+    Returns
+    -------
+    float or ndarray
+
+    Examples
+    --------
+    >>> import math
+    >>> round(float(stirling_factorial(10.0)) / math.factorial(10), 4)
+    0.9917
+    """
+    n = np.asarray(n, dtype=float)
+    return np.sqrt(2.0 * np.pi * n) * (n / np.e) ** n
+
+
+def stirling_log_gamma(x, terms=3):
+    r"""Stirling's asymptotic series for :math:`\ln\Gamma(x)`, truncated after ``terms`` corrections.
+
+    .. math::
+
+       \ln\Gamma(x) \sim \left(x - \tfrac12\right)\ln x - x + \tfrac12\ln(2\pi)
+       + \sum_{k=1}^{K} \frac{B_{2k}}{2k(2k-1)\,x^{2k-1}},
+
+    where :math:`B_{2k}` are the Bernoulli numbers (from
+    :func:`scipy.special.bernoulli`). The series is *asymptotic*, not
+    convergent: for fixed :math:`x`, adding terms helps only up to
+    roughly :math:`K \approx \pi x`, after which the error grows. See
+    NIST *Digital Library of Mathematical Functions*, Eq. 5.11.1.
+
+    Parameters
+    ----------
+    x : float or array-like of float
+        Positive argument.
+    terms : int, optional
+        Number of Bernoulli correction terms :math:`K \ge 0`.
+
+    Returns
+    -------
+    float or ndarray
+
+    Examples
+    --------
+    >>> abs(float(stirling_log_gamma(10.0, terms=3)) - float(log_gamma_function(10.0))) < 1e-9
+    True
+    """
+    x = np.asarray(x, dtype=float)
+    result = (x - 0.5) * np.log(x) - x + 0.5 * np.log(2.0 * np.pi)
+    if terms > 0:
+        bernoulli = special.bernoulli(2 * terms)
+        for k in range(1, terms + 1):
+            result = result + bernoulli[2 * k] / (2 * k * (2 * k - 1) * x ** (2 * k - 1))
+    return result

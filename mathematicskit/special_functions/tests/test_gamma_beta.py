@@ -40,3 +40,32 @@ def test_beta_is_symmetric():
 
 def test_beta_at_one_one_is_one():
     assert beta_function(1.0, 1.0) == pytest.approx(1.0)
+
+
+def test_stirling_factorial_ratio_tends_to_one_like_one_over_12n():
+    """n!/(sqrt(2 pi n)(n/e)^n) = 1 + 1/(12n) + O(1/n^2)."""
+    from mathematicskit.special_functions.systems.gamma_beta import stirling_factorial
+
+    for n in (10, 50, 100):
+        ratio = math.factorial(n) / stirling_factorial(float(n))
+        assert ratio - 1 == pytest.approx(1 / (12 * n), rel=0.01)
+
+
+def test_stirling_series_error_shrinks_with_terms_at_large_x():
+    from mathematicskit.special_functions.systems.gamma_beta import stirling_log_gamma
+
+    x = 10.0
+    errors = [abs(stirling_log_gamma(x, terms=k) - log_gamma_function(x)) for k in range(5)]
+    assert all(later < earlier for earlier, later in zip(errors, errors[1:]))
+    assert errors[0] == pytest.approx(1 / (12 * x), rel=0.01)
+
+
+def test_stirling_series_is_asymptotic_not_convergent():
+    """At small x the error eventually grows again as terms are added."""
+    from mathematicskit.special_functions.systems.gamma_beta import stirling_log_gamma
+
+    x = 1.0
+    errors = [abs(stirling_log_gamma(x, terms=k) - log_gamma_function(x)) for k in range(15)]
+    best = int(np.argmin(errors))
+    assert 0 < best < 14
+    assert errors[-1] > 10 * errors[best]
