@@ -1,4 +1,4 @@
 Linear programming
 ---------------------
 
-Linear programming via ``scipy.optimize.linprog``.
+Dantzig's simplex method and branch and bound for integer programs.

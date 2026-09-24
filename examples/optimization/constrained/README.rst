@@ -1,4 +1,5 @@
 Constrained optimization
 ---------------------------
 
-Lagrange multipliers, KKT-condition verification, and the penalty method.
+Lagrange multipliers and the KKT conditions, the Frank-Wolfe method, and
+the quadratic penalty method.

@@ -51,7 +51,7 @@ Chicago, 1939); H. W. Kuhn and A. W. Tucker, "Nonlinear Programming,"
 Proceedings of the Second Berkeley Symposium on Mathematical Statistics
 and Probability (1951), 481-492.
 
-.. minigallery:: ../../examples/optimization/constrained/plot_01_lagrange_kkt_and_penalty.py
+.. minigallery:: ../../examples/optimization/constrained/plot_01_lagrange_multipliers_kkt.py
 
 1847 -- Cauchy and Gradient Descent
 -----------------------------------
@@ -174,7 +174,7 @@ Variables Subject to Linear Inequalities," in *Activity Analysis of
 Production and Allocation*, ed. T. C. Koopmans (New York: Wiley, 1951),
 339-347 (describing the method Dantzig developed in 1947).
 
-.. minigallery:: ../../examples/optimization/linear_programming/plot_01_production_planning.py
+.. minigallery:: ../../examples/optimization/linear_programming/plot_01_simplex_method.py
 
 1951 -- Robbins, Monro, and Stochastic Approximation
 ----------------------------------------------------
@@ -327,7 +327,7 @@ gradient descent, conjugate gradient, Newton's method, and BFGS.
 Greatest or Least Value of a Function," The Computer Journal 3(3)
 (1960), 175-184.
 
-.. minigallery:: ../../examples/optimization/newton_quasi_newton/plot_01_rosenbrock_comparison.py
+.. minigallery:: ../../examples/optimization/test_functions/plot_01_rosenbrock_banana.py
 
 1960 -- Land, Doig, and Branch-and-Bound
 ----------------------------------------
@@ -435,7 +435,7 @@ unconstrained subproblem with
 Sequential Unconstrained Minimization Techniques* (New York: Wiley,
 1968).
 
-.. minigallery:: ../../examples/optimization/constrained/plot_01_lagrange_kkt_and_penalty.py
+.. minigallery:: ../../examples/optimization/constrained/plot_03_penalty_method.py
 
 1970 -- BFGS and Quasi-Newton Methods
 -------------------------------------
@@ -467,7 +467,7 @@ Derived by Variational Means," Mathematics of Computation 24(109)
 Function Minimization," Mathematics of Computation 24(111) (1970),
 647-656.
 
-.. minigallery:: ../../examples/optimization/newton_quasi_newton/plot_01_rosenbrock_comparison.py
+.. minigallery:: ../../examples/optimization/newton_quasi_newton/plot_01_bfgs_quasi_newton.py
 
 1983 -- Nesterov's Accelerated Gradient
 ---------------------------------------
