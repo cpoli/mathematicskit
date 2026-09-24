@@ -19,7 +19,7 @@ from mathematicskit.statistics import bootstrap_confidence_interval, jackknife
 
 # %%
 # Bias correction of the plug-in variance
-# -----------------------------------------------------
+# ---------------------------------------
 
 rng = np.random.default_rng(0)
 data = rng.normal(loc=10.0, scale=3.0, size=20)
@@ -30,7 +30,7 @@ print(f"unbiased (ddof=1)   {np.var(data, ddof=1):.4f}")
 
 # %%
 # Standard error of the mean and of a non-smooth statistic
-# -----------------------------------------------------
+# --------------------------------------------------------
 
 
 def midrange(x):

@@ -17,7 +17,7 @@ from mathematicskit.optimization import frank_wolfe
 
 # %%
 # Project a point onto the simplex
-# -----------------------------------------------------
+# --------------------------------
 
 y = np.array([1.0, 0.2, -0.5])
 f = lambda x: float(np.sum((x - y) ** 2))
@@ -27,7 +27,7 @@ print(f"Frank-Wolfe solution: {result.x.round(4)} (exact projection: [0.9, 0.1, 
 
 # %%
 # Iterates in barycentric coordinates, and the duality gap
-# -----------------------------------------------------
+# --------------------------------------------------------
 
 corners = np.array([[0.0, 0.0], [1.0, 0.0], [0.5, np.sqrt(3) / 2]])
 xy = result.path @ corners
