@@ -79,7 +79,7 @@ Punktmannichfaltigkeiten (5)," Mathematische Annalen 21 (1883),
 545-591; G. Cantor, "De la puissance des ensembles parfaits de points,"
 Acta Mathematica 4 (1884), 381-392.
 
-.. minigallery:: ../../examples/fractals_chaos/box_counting/plot_01_sierpinski_dimension.py
+.. minigallery:: ../../examples/fractals_chaos/box_counting/plot_02_cantor_set_dimension.py
 
 1890-1916 -- Peano and Sierpiński's Space-Filling and Gasket Curves
 -------------------------------------------------------------------
@@ -108,9 +108,11 @@ plane," Mathematische Annalen 36 (1890), 157-160; W. Sierpiński, "Sur
 une courbe dont tout point est un point de ramification," Comptes
 Rendus de l'Académie des Sciences Paris 160 (1915), 302-305.
 
-.. minigallery:: ../../examples/fractals_chaos/ifs/plot_01_fern_and_sierpinski.py
+.. minigallery:: ../../examples/fractals_chaos/ifs/plot_01_sierpinski_triangle_and_carpet.py
 
 .. minigallery:: ../../examples/fractals_chaos/box_counting/plot_01_sierpinski_dimension.py
+
+.. minigallery:: ../../examples/fractals_chaos/curves/plot_06_peano_curve.py
 
 1891 -- Hilbert's Space-Filling Curve
 -------------------------------------
@@ -211,7 +213,7 @@ rationnelles," Journal de Mathématiques Pures et Appliquées, 8th series,
 1 (1918), 47-245; P. Fatou, "Sur les équations fonctionnelles," Bulletin
 de la Société Mathématique de France 47 (1919), 161-271.
 
-.. minigallery:: ../../examples/fractals_chaos/mandelbrot_julia/plot_01_mandelbrot_and_julia.py
+.. minigallery:: ../../examples/fractals_chaos/mandelbrot_julia/plot_01_julia_sets.py
 
 1918-1946 -- Hausdorff, Moran, and the Similarity Dimension
 -----------------------------------------------------------
@@ -342,7 +344,7 @@ generates this set by Numba-accelerated escape-time iteration.
 dimension* (Paris: Flammarion, 1975); B. B. Mandelbrot, *The Fractal
 Geometry of Nature* (San Francisco: W. H. Freeman, 1982).
 
-.. minigallery:: ../../examples/fractals_chaos/mandelbrot_julia/plot_01_mandelbrot_and_julia.py
+.. minigallery:: ../../examples/fractals_chaos/mandelbrot_julia/plot_02_mandelbrot_set.py
 
 1976 -- Hénon's Strange Attractor
 ---------------------------------
@@ -410,7 +412,7 @@ implements Barnsley's four-map fern with
 University Mathematics Journal 30(5) (1981), 713-747; M. F. Barnsley,
 *Fractals Everywhere* (Boston: Academic Press, 1988), Ch. 3.
 
-.. minigallery:: ../../examples/fractals_chaos/ifs/plot_01_fern_and_sierpinski.py
+.. minigallery:: ../../examples/fractals_chaos/ifs/plot_02_barnsley_fern.py
 
 See Also
 --------
