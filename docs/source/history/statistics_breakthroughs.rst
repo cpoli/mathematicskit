@@ -67,7 +67,7 @@ model, or on Student's t for small samples.
 *References:* C. F. Gauss, *Theoria Motus Corporum Coelestium* (Hamburg:
 Perthes et Besser, 1809), Book II, Section 3.
 
-.. minigallery:: ../../examples/statistics/confidence_intervals/plot_01_coverage_simulation.py
+.. minigallery:: ../../examples/statistics/descriptive/plot_02_gauss_error_law.py
 
 1888-1896 -- Galton, Pearson, and the Correlation Coefficient
 -------------------------------------------------------------
@@ -184,7 +184,7 @@ cross-checked against
 *References:* Student [W. S. Gosset], "The Probable Error of a Mean,"
 Biometrika 6(1) (1908), 1-25.
 
-.. minigallery:: ../../examples/statistics/hypothesis_tests/plot_01_t_test_and_anova.py
+.. minigallery:: ../../examples/statistics/hypothesis_tests/plot_01_student_t_test.py
 
 1922 -- Fisher's Maximum Likelihood
 -----------------------------------
@@ -243,7 +243,7 @@ is cross-checked against :func:`scipy.stats.f_oneway`.
 *References:* R. A. Fisher, *Statistical Methods for Research Workers*
 (Edinburgh: Oliver and Boyd, 1925), Ch. 7.
 
-.. minigallery:: ../../examples/statistics/hypothesis_tests/plot_01_t_test_and_anova.py
+.. minigallery:: ../../examples/statistics/hypothesis_tests/plot_04_one_way_anova.py
 
 1933-1939 -- Kolmogorov, Smirnov, and Distribution-Free Goodness of Fit
 -----------------------------------------------------------------------

@@ -17,7 +17,8 @@ Each script in this gallery is self-contained and can be run directly with
 Sections
 --------
 
-- **descriptive** -- the five-number summary, skewness, and kurtosis.
+- **descriptive** -- the five-number summary, skewness, and kurtosis,
+  and Gauss's normal law of measurement errors.
 - **hypothesis_tests** -- z-tests, t-tests, chi-square tests, ANOVA, and
   Fisher's exact test.
 - **confidence_intervals** -- intervals for means, proportions, and
