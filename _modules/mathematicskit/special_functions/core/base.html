@@ -410,15 +410,18 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.special_functions.core.base</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Result containers for mathematicskit.special_functions.</span>
+<span></span><span class="sd">"""Result containers for mathematicskit.special_functions.</span>
 
-<span class="sd">:class:`FFTComparisonResult` is the shared result type for this domain&#39;s</span>
+<span class="sd">:class:`FFTComparisonResult` is the shared result type for this domain's</span>
 <span class="sd">one deliberately hand-rolled comparison (naive DFT vs. radix-2 FFT vs.</span>
 <span class="sd">``numpy.fft``); the gamma/beta, Bessel, and orthogonal-polynomial</span>
 <span class="sd">``systems/`` modules are thin, well-documented wrappers around</span>
-<span class="sd">``scipy.special``/``numpy.polynomial`` and don&#39;t need a dataclass beyond</span>
-<span class="sd">the plain arrays/floats those libraries already return.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">``scipy.special``/``numpy.polynomial`` and don't need a dataclass beyond</span>
+<span class="sd">the plain arrays/floats those libraries already return. The exceptions</span>
+<span class="sd">are functions that ``scipy.special`` returns as a *tuple* of related</span>
+<span class="sd">arrays (Jacobi elliptic functions, Airy functions, Fresnel integrals),</span>
+<span class="sd">which get a small named container instead of a bare tuple.</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -426,30 +429,79 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;FFTComparisonResult&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"FFTComparisonResult"</span><span class="p">,</span> <span class="s2">"JacobiEllipticResult"</span><span class="p">,</span> <span class="s2">"AiryResult"</span><span class="p">,</span> <span class="s2">"FresnelResult"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="FFTComparisonResult">
 <a class="viewcode-back" href="../../../../api/special_functions.html#mathematicskit.special_functions.FFTComparisonResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">FFTComparisonResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container comparing naive DFT, hand-rolled radix-2 FFT, and ``numpy.fft``.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Container comparing naive DFT, hand-rolled radix-2 FFT, and ``numpy.fft``."""</span>
 
     <span class="n">naive_result</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
     <span class="n">radix2_result</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
     <span class="n">numpy_result</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
 
     <span class="n">naive_time</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Wall-clock seconds for the naive :math:`O(n^2)` DFT.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""float: Wall-clock seconds for the naive :math:`O(n^2)` DFT."""</span>
 
     <span class="n">radix2_time</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Wall-clock seconds for the hand-rolled radix-2 FFT.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""float: Wall-clock seconds for the hand-rolled radix-2 FFT."""</span>
 
     <span class="n">numpy_time</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Wall-clock seconds for ``numpy.fft.fft``.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""float: Wall-clock seconds for ``numpy.fft.fft``."""</span>
 
     <span class="n">max_error_naive_vs_numpy</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">max_error_radix2_vs_numpy</span><span class="p">:</span> <span class="nb">float</span></div>
+
+
+
+<div class="viewcode-block" id="JacobiEllipticResult">
+<a class="viewcode-back" href="../../../../api/special_functions.html#mathematicskit.special_functions.JacobiEllipticResult">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">JacobiEllipticResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Jacobi elliptic functions :math:`\operatorname{sn}`, :math:`\operatorname{cn}`, :math:`\operatorname{dn}` at ``(u, m)``."""</span>
+
+    <span class="n">sn</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sd">"""ndarray: :math:`\\operatorname{sn}(u\\mid m) = \\sin\\varphi`."""</span>
+
+    <span class="n">cn</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sd">"""ndarray: :math:`\\operatorname{cn}(u\\mid m) = \\cos\\varphi`."""</span>
+
+    <span class="n">dn</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sd">"""ndarray: :math:`\\operatorname{dn}(u\\mid m) = \\sqrt{1 - m\\sin^2\\varphi}`."""</span>
+
+    <span class="n">amplitude</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sd">"""ndarray: The Jacobi amplitude :math:`\\varphi = \\operatorname{am}(u\\mid m)`."""</span></div>
+
+
+
+<div class="viewcode-block" id="AiryResult">
+<a class="viewcode-back" href="../../../../api/special_functions.html#mathematicskit.special_functions.AiryResult">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">AiryResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""The Airy functions ``Ai``, ``Bi`` and their derivatives at the sample points ``x``."""</span>
+
+    <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">ai</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">ai_prime</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">bi</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">bi_prime</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span></div>
+
+
+
+<div class="viewcode-block" id="FresnelResult">
+<a class="viewcode-back" href="../../../../api/special_functions.html#mathematicskit.special_functions.FresnelResult">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">FresnelResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""The Fresnel integrals :math:`S(t)` and :math:`C(t)` at the sample points ``t``."""</span>
+
+    <span class="n">t</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">s</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sd">"""ndarray: :math:`S(t) = \\int_0^t \\sin(\\pi\\tau^2/2)\\,d\\tau`."""</span>
+
+    <span class="n">c</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sd">"""ndarray: :math:`C(t) = \\int_0^t \\cos(\\pi\\tau^2/2)\\,d\\tau`."""</span></div>
 
 </pre></div>
 

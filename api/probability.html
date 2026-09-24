@@ -461,14 +461,60 @@ Large Numbers and Central Limit Theorem simulation; and discrete-time
 Markov chains (stationary distributions, absorption probabilities).</p>
 <p id="module-mathematicskit.probability">mathematicskit.probability: probability theory, built directly on scipy.stats.</p>
 <p>Discrete and continuous distribution classes (binomial, Poisson,
-geometric, uniform, exponential, normal, gamma) wrapping
+geometric, uniform, exponential, normal, gamma, beta) wrapping
 <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code>, with mathematicskit’s own moment generating function added on
 top; law-of-large-numbers and central-limit-theorem simulation via
 <code class="docutils literal notranslate"><span class="pre">numpy.random</span></code> sampling; Monte Carlo integration with variance
 reduction (importance sampling, control variates, hand-rolled – no
 direct scipy equivalent); and discrete-time Markov chains (stationary
 distribution via <code class="docutils literal notranslate"><span class="pre">numpy.linalg.eig</span></code>/power iteration, absorption
-probabilities and expected absorption time via <code class="docutils literal notranslate"><span class="pre">numpy.linalg.solve</span></code>).</p>
+probabilities and expected absorption time via <code class="docutils literal notranslate"><span class="pre">numpy.linalg.solve</span></code>).
+Also: Buffon’s needle, the St. Petersburg game, Beta-binomial Bayesian
+updating, Chebyshev’s inequality, Galton-Watson branching processes,
+random walks and Brownian motion, Erlang’s loss formula, and
+continuous-time Markov chains via <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.expm.html#scipy.linalg.expm" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.linalg.expm()</span></code></a>.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.probability.Beta">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.probability.</span></span><span class="sig-name descname"><span class="pre">Beta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/probability/systems/continuous.html#Beta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.probability.Beta" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mathematicskit.probability.ContinuousDistribution" title="mathematicskit.probability.core.base.ContinuousDistribution"><code class="xref py py-class docutils literal notranslate"><span class="pre">ContinuousDistribution</span></code></a></p>
+<p>Beta distribution with shape parameters <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> on <span class="math notranslate nohighlight">\([0, 1]\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(f(x) = \dfrac{x^{\alpha-1}(1-x)^{\beta-1}}{B(\alpha, \beta)}\)</span>,
+via <code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.stats.beta</span></code>. MGF: <span class="math notranslate nohighlight">\(M(t) = {}_1F_1(\alpha;
+\alpha+\beta; t)\)</span>, Kummer’s confluent hypergeometric function
+(<code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.hyp1f1()</span></code>). It is the conjugate prior of the
+binomial, which makes it the natural home of Bayes’s 1763 problem
+(see <code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.probability.systems.bayes</span></code>). See DeGroot &amp;
+Schervish, <em>Probability and Statistics</em>, 4th ed., Sec. 5.8.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>alpha</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Shape parameters, both <code class="docutils literal notranslate"><span class="pre">&gt;</span> <span class="pre">0</span></code>.</p></li>
+<li><p><strong>beta</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Shape parameters, both <code class="docutils literal notranslate"><span class="pre">&gt;</span> <span class="pre">0</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">Beta</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">3.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">0.4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">variance</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">0.04</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="mathematicskit.probability.Beta.mgf">
+<span class="sig-name descname"><span class="pre">mgf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/probability/systems/continuous.html#Beta.mgf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.probability.Beta.mgf" title="Link to this definition">#</a></dt>
+<dd><p>Moment generating function, <code class="docutils literal notranslate"><span class="pre">E[e^{tX}]</span></code> (closed form; not exposed by <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code>).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mathematicskit.probability.Beta.pdf">
+<span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/probability/systems/continuous.html#Beta.pdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.probability.Beta.pdf" title="Link to this definition">#</a></dt>
+<dd><p>Probability density function.</p>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="mathematicskit.probability.Binomial">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.probability.</span></span><span class="sig-name descname"><span class="pre">Binomial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/probability/systems/discrete.html#Binomial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.probability.Binomial" title="Link to this definition">#</a></dt>
@@ -505,6 +551,141 @@ MGF: <span class="math notranslate nohighlight">\(M(t) = (1-p+pe^t)^n\)</span>. 
 <dt class="sig sig-object py" id="mathematicskit.probability.Binomial.pmf">
 <span class="sig-name descname"><span class="pre">pmf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/probability/systems/discrete.html#Binomial.pmf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.probability.Binomial.pmf" title="Link to this definition">#</a></dt>
 <dd><p>Probability mass function, <code class="docutils literal notranslate"><span class="pre">P(X</span> <span class="pre">=</span> <span class="pre">k)</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.probability.BranchingProcessResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.probability.</span></span><span class="sig-name descname"><span class="pre">BranchingProcessResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">generation_sizes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extinct_fraction</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/probability/core/base.html#BranchingProcessResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.probability.BranchingProcessResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Container for simulated Galton-Watson generation sizes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>generation_sizes</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>extinct_fraction</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.probability.BranchingProcessResult.extinct_fraction">
+<span class="sig-name descname"><span class="pre">extinct_fraction</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.probability.BranchingProcessResult.extinct_fraction" title="Link to this definition">#</a></dt>
+<dd><p>Fraction of runs whose population reached zero within the simulated generations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.probability.BranchingProcessResult.generation_sizes">
+<span class="sig-name descname"><span class="pre">generation_sizes</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.probability.BranchingProcessResult.generation_sizes" title="Link to this definition">#</a></dt>
+<dd><p>Population of each run at each generation (column 0 is the founders).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (n_runs, n_generations + 1)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.probability.BrownianMotionResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.probability.</span></span><span class="sig-name descname"><span class="pre">BrownianMotionResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">times</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paths</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/probability/core/base.html#BrownianMotionResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.probability.BrownianMotionResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Container for sampled Brownian-motion paths.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>times</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>paths</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.probability.BrownianMotionResult.paths">
+<span class="sig-name descname"><span class="pre">paths</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.probability.BrownianMotionResult.paths" title="Link to this definition">#</a></dt>
+<dd><p>Sampled paths <code class="docutils literal notranslate"><span class="pre">W(t)</span></code>, each starting at <code class="docutils literal notranslate"><span class="pre">W(0)</span> <span class="pre">=</span> <span class="pre">0</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (n_paths, n_steps + 1)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.probability.BrownianMotionResult.times">
+<span class="sig-name descname"><span class="pre">times</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.probability.BrownianMotionResult.times" title="Link to this definition">#</a></dt>
+<dd><p>Time grid, starting at 0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (n_steps + 1,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.probability.BuffonNeedleResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.probability.</span></span><span class="sig-name descname"><span class="pre">BuffonNeedleResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pi_estimate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crossing_fraction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exact_crossing_probability</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_drops</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/probability/core/base.html#BuffonNeedleResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.probability.BuffonNeedleResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Container for a Buffon’s-needle simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pi_estimate</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>crossing_fraction</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>exact_crossing_probability</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>n_drops</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.probability.BuffonNeedleResult.crossing_fraction">
+<span class="sig-name descname"><span class="pre">crossing_fraction</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.probability.BuffonNeedleResult.crossing_fraction" title="Link to this definition">#</a></dt>
+<dd><p>Fraction of dropped needles that crossed a line.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.probability.BuffonNeedleResult.exact_crossing_probability">
+<span class="sig-name descname"><span class="pre">exact_crossing_probability</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.probability.BuffonNeedleResult.exact_crossing_probability" title="Link to this definition">#</a></dt>
+<dd><p>The exact crossing probability <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">*</span> <span class="pre">length</span> <span class="pre">/</span> <span class="pre">(pi</span> <span class="pre">*</span> <span class="pre">spacing)</span></code> for a short needle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.probability.BuffonNeedleResult.n_drops">
+<span class="sig-name descname"><span class="pre">n_drops</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#mathematicskit.probability.BuffonNeedleResult.n_drops" title="Link to this definition">#</a></dt>
+<dd><p>Number of needles dropped.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.probability.BuffonNeedleResult.pi_estimate">
+<span class="sig-name descname"><span class="pre">pi_estimate</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.probability.BuffonNeedleResult.pi_estimate" title="Link to this definition">#</a></dt>
+<dd><p>The estimate of pi implied by the observed crossing fraction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -830,7 +1011,7 @@ diagonal).</p></li>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Gambler&#39;s ruin, capital 1..3, absorbing at 0 and 4, fair coin (p=0.5).</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Gambler's ruin, capital 1..3, absorbing at 0 and 4, fair coin (p=0.5).</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
 <span class="gp">... </span>    <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
 <span class="gp">... </span>    <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
@@ -1070,6 +1251,55 @@ MGF: <span class="math notranslate nohighlight">\(M(t) = e^{\mu(e^t - 1)}\)</spa
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.probability.TailBoundResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.probability.</span></span><span class="sig-name descname"><span class="pre">TailBoundResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bound</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exact</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/probability/core/base.html#TailBoundResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.probability.TailBoundResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Container comparing Chebyshev’s bound with the exact two-sided tail probability.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>bound</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>exact</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.probability.TailBoundResult.bound">
+<span class="sig-name descname"><span class="pre">bound</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.probability.TailBoundResult.bound" title="Link to this definition">#</a></dt>
+<dd><p>Chebyshev’s bound <code class="docutils literal notranslate"><span class="pre">min(1,</span> <span class="pre">1</span> <span class="pre">/</span> <span class="pre">k**2)</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.probability.TailBoundResult.exact">
+<span class="sig-name descname"><span class="pre">exact</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.probability.TailBoundResult.exact" title="Link to this definition">#</a></dt>
+<dd><p>The exact <code class="docutils literal notranslate"><span class="pre">P(|X</span> <span class="pre">-</span> <span class="pre">mean|</span> <span class="pre">&gt;=</span> <span class="pre">k</span> <span class="pre">*</span> <span class="pre">std)</span></code> from the distribution’s CDF.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.probability.TailBoundResult.k">
+<span class="sig-name descname"><span class="pre">k</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.probability.TailBoundResult.k" title="Link to this definition">#</a></dt>
+<dd><p>Distances from the mean, in standard deviations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="mathematicskit.probability.Uniform">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.probability.</span></span><span class="sig-name descname"><span class="pre">Uniform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/probability/systems/continuous.html#Uniform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.probability.Uniform" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#mathematicskit.probability.ContinuousDistribution" title="mathematicskit.probability.core.base.ContinuousDistribution"><code class="xref py py-class docutils literal notranslate"><span class="pre">ContinuousDistribution</span></code></a></p>
@@ -1109,6 +1339,113 @@ Statistics</em>, 4th ed., Sec. 5.6.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.probability.beta_binomial_posterior">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.probability.</span></span><span class="sig-name descname"><span class="pre">beta_binomial_posterior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">successes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trials</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prior_alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prior_beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/probability/systems/bayes.html#beta_binomial_posterior"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.probability.beta_binomial_posterior" title="Link to this definition">#</a></dt>
+<dd><p>Posterior of a binomial success probability under a conjugate Beta prior.</p>
+<p>By Bayes’s theorem, <span class="math notranslate nohighlight">\(\pi(p \mid k) \propto p^k (1-p)^{n-k}\,
+\pi(p)\)</span>, and for a <span class="math notranslate nohighlight">\(\mathrm{Beta}(\alpha, \beta)\)</span> prior this is</p>
+<div class="math notranslate nohighlight">
+\[p \mid k \sim \mathrm{Beta}(\alpha + k,\; \beta + n - k).\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>successes</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Observed successes <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p><strong>trials</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of trials <span class="math notranslate nohighlight">\(n \geq k\)</span>.</p></li>
+<li><p><strong>prior_alpha</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Prior shape parameters; the default <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">1)</span></code> is Bayes’s uniform prior.</p></li>
+<li><p><strong>prior_beta</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Prior shape parameters; the default <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">1)</span></code> is Bayes’s uniform prior.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.probability.Beta" title="mathematicskit.probability.systems.continuous.Beta"><code class="xref py py-class docutils literal notranslate"><span class="pre">Beta</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Beta</em> – The posterior distribution.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">post</span> <span class="o">=</span> <span class="n">beta_binomial_posterior</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">post</span><span class="o">.</span><span class="n">alpha</span><span class="p">,</span> <span class="n">post</span><span class="o">.</span><span class="n">beta</span>
+<span class="go">(8.0, 4.0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">post</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">0.6667</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.probability.brownian_motion">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.probability.</span></span><span class="sig-name descname"><span class="pre">brownian_motion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_paths</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/probability/systems/stochastic_processes.html#brownian_motion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.probability.brownian_motion" title="Link to this definition">#</a></dt>
+<dd><p>Sample standard Brownian motion on <span class="math notranslate nohighlight">\([0, t_{\max}]\)</span> on a uniform grid.</p>
+<p>Each increment over a step <span class="math notranslate nohighlight">\(\Delta t\)</span> is an independent
+<span class="math notranslate nohighlight">\(\mathcal N(0, \Delta t)\)</span> draw, so <span class="math notranslate nohighlight">\(W(t) \sim \mathcal N(0, t)\)</span>
+exactly at every grid time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_paths</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>n_steps</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>t_max</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>seed</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.probability.BrownianMotionResult" title="mathematicskit.probability.core.base.BrownianMotionResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">BrownianMotionResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>BrownianMotionResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">brownian_motion</span><span class="p">(</span><span class="n">n_paths</span><span class="o">=</span><span class="mi">20000</span><span class="p">,</span> <span class="n">n_steps</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">t_max</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">paths</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(20000, 101)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">paths</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">var</span><span class="p">()</span> <span class="o">-</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.probability.buffon_needle">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.probability.</span></span><span class="sig-name descname"><span class="pre">buffon_needle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_drops</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spacing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/probability/systems/buffon.html#buffon_needle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.probability.buffon_needle" title="Link to this definition">#</a></dt>
+<dd><p>Drop <code class="docutils literal notranslate"><span class="pre">n_drops</span></code> needles on a ruled floor and estimate <span class="math notranslate nohighlight">\(\pi\)</span> from the crossings.</p>
+<p>Each drop places the needle’s center a uniform distance
+<span class="math notranslate nohighlight">\(y \in [0, d/2]\)</span> from the nearest line and points it in a
+uniformly random direction. The needle crosses that line when
+<span class="math notranslate nohighlight">\(y \leq \tfrac{\ell}{2}\sin\theta\)</span>, which happens with probability</p>
+<div class="math notranslate nohighlight">
+\[P(\text{cross}) = \frac{2\ell}{\pi d}, \qquad \ell \leq d,\]</div>
+<p>so <span class="math notranslate nohighlight">\(\hat\pi = 2\ell n / (d \cdot \#\text{crossings})\)</span>. The random
+direction comes from normalizing a standard 2D Gaussian vector, so the
+simulation never uses <span class="math notranslate nohighlight">\(\pi\)</span> itself. See G.-L. Leclerc de Buffon,
+<em>Essai d’arithmétique morale</em> (1777), Sec. 23.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_drops</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of needles dropped.</p></li>
+<li><p><strong>length</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Needle length <span class="math notranslate nohighlight">\(\ell\)</span>.</p></li>
+<li><p><strong>spacing</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Distance <span class="math notranslate nohighlight">\(d\)</span> between the lines; must satisfy <code class="docutils literal notranslate"><span class="pre">length</span> <span class="pre">&lt;=</span> <span class="pre">spacing</span></code>.</p></li>
+<li><p><strong>seed</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.probability.BuffonNeedleResult" title="mathematicskit.probability.core.base.BuffonNeedleResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">BuffonNeedleResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>BuffonNeedleResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">buffon_needle</span><span class="p">(</span><span class="n">n_drops</span><span class="o">=</span><span class="mi">400000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">pi_estimate</span> <span class="o">-</span> <span class="mf">3.14159</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.03</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">exact_crossing_probability</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">0.6366</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.probability.central_limit_theorem_sample_means">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.probability.</span></span><span class="sig-name descname"><span class="pre">central_limit_theorem_sample_means</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_trials</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/probability/systems/limit_theorems.html#central_limit_theorem_sample_means"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.probability.central_limit_theorem_sample_means" title="Link to this definition">#</a></dt>
 <dd><p>Standardized sample means from repeated trials, illustrating the CLT.</p>
@@ -1143,6 +1480,39 @@ Schervish, <em>Probability and Statistics</em>, 4th ed., Theorem 6.3.2.</p>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">abs</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">z</span><span class="o">.</span><span class="n">std</span><span class="p">())</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.1</span>
 <span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.probability.chebyshev_tail">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.probability.</span></span><span class="sig-name descname"><span class="pre">chebyshev_tail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/probability/systems/inequalities.html#chebyshev_tail"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.probability.chebyshev_tail" title="Link to this definition">#</a></dt>
+<dd><p>Chebyshev’s bound and the exact two-sided tail <span class="math notranslate nohighlight">\(P(|X - \mu| \geq k\sigma)\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[P(|X - \mu| \geq k\sigma) \leq \frac{1}{k^2}.\]</div>
+<p>The bound holds for every distribution with finite variance, which is
+both its strength and why it is loose for any particular one: for the
+normal distribution at <span class="math notranslate nohighlight">\(k = 2\)</span> it gives 0.25 against an exact
+0.0455.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dist</strong> (<a class="reference internal" href="#mathematicskit.probability.DiscreteDistribution" title="mathematicskit.probability.DiscreteDistribution"><em>DiscreteDistribution</em></a><em> or </em><a class="reference internal" href="#mathematicskit.probability.ContinuousDistribution" title="mathematicskit.probability.ContinuousDistribution"><em>ContinuousDistribution</em></a>) – Any <a class="reference internal" href="#module-mathematicskit.probability" title="mathematicskit.probability"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.probability</span></code></a> distribution.</p></li>
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Distances from the mean, in standard deviations (<code class="docutils literal notranslate"><span class="pre">k</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.probability.TailBoundResult" title="mathematicskit.probability.core.base.TailBoundResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">TailBoundResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>TailBoundResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.probability.systems.continuous</span><span class="w"> </span><span class="kn">import</span> <span class="n">Normal</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">chebyshev_tail</span><span class="p">(</span><span class="n">Normal</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">1.0</span><span class="p">),</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">bound</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">exact</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">(0.25, 0.0455)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1188,6 +1558,59 @@ Statistical Methods</em>, 2nd ed., Ch. 4.1.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.probability.ctmc_stationary_distribution">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.probability.</span></span><span class="sig-name descname"><span class="pre">ctmc_stationary_distribution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">generator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/probability/systems/continuous_time_markov.html#ctmc_stationary_distribution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.probability.ctmc_stationary_distribution" title="Link to this definition">#</a></dt>
+<dd><p>Stationary distribution <span class="math notranslate nohighlight">\(\pi\)</span> of an irreducible chain, solving <span class="math notranslate nohighlight">\(\pi Q = 0\)</span>, <span class="math notranslate nohighlight">\(\sum_i \pi_i = 1\)</span>.</p>
+<p>Solved as a least-squares system with the normalization appended to
+<span class="math notranslate nohighlight">\(Q^T\)</span> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.lstsq.html#numpy.linalg.lstsq" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.lstsq()</span></code></a>); the solution is exact for an
+irreducible chain.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>generator</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n"><em>n</em></a><em>, </em><a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n"><em>n</em></a><em>)</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (n,)</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ctmc_stationary_distribution</span><span class="p">([[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.0</span><span class="p">]])</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">array([0.75, 0.25])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.probability.ctmc_transition_matrix">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.probability.</span></span><span class="sig-name descname"><span class="pre">ctmc_transition_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">generator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/probability/systems/continuous_time_markov.html#ctmc_transition_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.probability.ctmc_transition_matrix" title="Link to this definition">#</a></dt>
+<dd><p>Transition matrix <span class="math notranslate nohighlight">\(P(t) = e^{tQ}\)</span> of a continuous-time Markov chain.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>generator</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n"><em>n</em></a><em>, </em><a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n"><em>n</em></a><em>)</em>) – Generator matrix <span class="math notranslate nohighlight">\(Q\)</span>.</p></li>
+<li><p><strong>t</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Elapsed time, <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">&gt;=</span> <span class="pre">0</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (n, n)</em> – <code class="docutils literal notranslate"><span class="pre">P[i,</span> <span class="pre">j]</span></code> is the probability of being in state <code class="docutils literal notranslate"><span class="pre">j</span></code> at time
+<code class="docutils literal notranslate"><span class="pre">t</span></code> having started in state <code class="docutils literal notranslate"><span class="pre">i</span></code>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Two states, rate 1 from 0 to 1 and rate 3 back: P_01(t) = (1 - e^{-4t}) / 4.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">P</span> <span class="o">=</span> <span class="n">ctmc_transition_matrix</span><span class="p">([[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.0</span><span class="p">]],</span> <span class="n">t</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">P</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">2.0</span><span class="p">))</span> <span class="o">/</span> <span class="mi">4</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.probability.effective_sample_size">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.probability.</span></span><span class="sig-name descname"><span class="pre">effective_sample_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">weights</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/probability/utils/diagnostics.html#effective_sample_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.probability.effective_sample_size" title="Link to this definition">#</a></dt>
 <dd><p>Effective sample size of a set of (unnormalized) importance weights.</p>
@@ -1216,6 +1639,97 @@ Ch. 3.3.2.</p>
 <span class="go">100.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">effective_sample_size</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])),</span> <span class="mi">4</span><span class="p">)</span>
 <span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.probability.erlang_b">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.probability.</span></span><span class="sig-name descname"><span class="pre">erlang_b</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offered_load</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">servers</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/probability/systems/queueing.html#erlang_b"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.probability.erlang_b" title="Link to this definition">#</a></dt>
+<dd><p>Erlang B blocking probability for <code class="docutils literal notranslate"><span class="pre">servers</span></code> lines under <code class="docutils literal notranslate"><span class="pre">offered_load</span></code> erlangs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>offered_load</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Offered traffic <span class="math notranslate nohighlight">\(A = \lambda / \mu \geq 0\)</span>, in erlangs.</p></li>
+<li><p><strong>servers</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of lines <span class="math notranslate nohighlight">\(c \geq 0\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em> – The probability that an arriving call is blocked.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">erlang_b</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">0.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">erlang_b</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">0.4</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.probability.galton_watson_extinction_probability">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.probability.</span></span><span class="sig-name descname"><span class="pre">galton_watson_extinction_probability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offspring_pmf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/probability/systems/branching.html#galton_watson_extinction_probability"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.probability.galton_watson_extinction_probability" title="Link to this definition">#</a></dt>
+<dd><p>Probability that a Galton-Watson family started by one individual eventually dies out.</p>
+<p>Iterates <span class="math notranslate nohighlight">\(q_{n+1} = G(q_n)\)</span> from <span class="math notranslate nohighlight">\(q_0 = 0\)</span>; each iterate
+is the probability of extinction by generation <span class="math notranslate nohighlight">\(n\)</span>. In the
+subcritical and critical cases (<span class="math notranslate nohighlight">\(m \leq 1\)</span>) the answer is 1 by
+the Galton-Watson theorem and is returned directly, since the
+critical iteration converges only like <span class="math notranslate nohighlight">\(1/n\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>offspring_pmf</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – <code class="docutils literal notranslate"><span class="pre">offspring_pmf[j]</span></code> is the probability of exactly <code class="docutils literal notranslate"><span class="pre">j</span></code> children.</p></li>
+<li><p><strong>tol</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Stop when successive iterates differ by less than <code class="docutils literal notranslate"><span class="pre">tol</span></code>.</p></li>
+<li><p><strong>max_iter</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em> – The extinction probability <span class="math notranslate nohighlight">\(q\)</span>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># G(s) = 1/4 + s/4 + s^2/2, whose smallest fixed point is 1/2.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">galton_watson_extinction_probability</span><span class="p">([</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]),</span> <span class="mi">8</span><span class="p">)</span>
+<span class="go">0.5</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.probability.galton_watson_simulate">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.probability.</span></span><span class="sig-name descname"><span class="pre">galton_watson_simulate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offspring_pmf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_generations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_runs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">founders</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/probability/systems/branching.html#galton_watson_simulate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.probability.galton_watson_simulate" title="Link to this definition">#</a></dt>
+<dd><p>Simulate independent Galton-Watson processes.</p>
+<p>The children of the <span class="math notranslate nohighlight">\(Z_n\)</span> individuals in generation <span class="math notranslate nohighlight">\(n\)</span>
+are counted with one multinomial draw of size <span class="math notranslate nohighlight">\(Z_n\)</span> over the
+offspring classes, so <span class="math notranslate nohighlight">\(Z_{n+1} = \sum_j j\,N_j\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>offspring_pmf</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>n_generations</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>n_runs</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of independent families.</p></li>
+<li><p><strong>founders</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Population of generation 0.</p></li>
+<li><p><strong>seed</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.probability.BranchingProcessResult" title="mathematicskit.probability.core.base.BranchingProcessResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">BranchingProcessResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>BranchingProcessResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">galton_watson_simulate</span><span class="p">([</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="n">n_generations</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">n_runs</span><span class="o">=</span><span class="mi">4000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">extinct_fraction</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.03</span><span class="p">)</span>
+<span class="go">True</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1331,6 +1845,188 @@ the CLT. See Robert &amp; Casella, <em>Monte Carlo Statistical Methods</em>,
 </div>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.probability.random_walk_return_fraction">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.probability.</span></span><span class="sig-name descname"><span class="pre">random_walk_return_fraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_walks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/probability/systems/stochastic_processes.html#random_walk_return_fraction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.probability.random_walk_return_fraction" title="Link to this definition">#</a></dt>
+<dd><p>Fraction of simple random walks on <span class="math notranslate nohighlight">\(\mathbb{Z}^d\)</span> that revisit the origin within <code class="docutils literal notranslate"><span class="pre">n_steps</span></code> steps.</p>
+<p>Estimates Pólya’s return probability truncated at <code class="docutils literal notranslate"><span class="pre">n_steps</span></code>. The
+walks are advanced one step at a time, so memory stays
+<span class="math notranslate nohighlight">\(O(n_\text{walks}\,d)\)</span> however long they run.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>n_steps</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>n_walks</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>seed</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">frac</span> <span class="o">=</span> <span class="n">random_walk_return_fraction</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_steps</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">n_walks</span><span class="o">=</span><span class="mi">20000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">frac</span> <span class="o">-</span> <span class="n">return_probability_1d</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.probability.return_probability_1d">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.probability.</span></span><span class="sig-name descname"><span class="pre">return_probability_1d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_steps</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/probability/systems/stochastic_processes.html#return_probability_1d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.probability.return_probability_1d" title="Link to this definition">#</a></dt>
+<dd><p>Exact probability that a 1D simple random walk revisits 0 within <code class="docutils literal notranslate"><span class="pre">n_steps</span></code> steps.</p>
+<p>A walk avoids 0 for its first <span class="math notranslate nohighlight">\(2m\)</span> steps with probability
+<span class="math notranslate nohighlight">\(\binom{2m}{m}4^{-m} \sim 1/\sqrt{\pi m}\)</span>, so the return
+probability is</p>
+<div class="math notranslate nohighlight">
+\[P(\text{return by } 2m) = 1 - \binom{2m}{m}4^{-m} \to 1,\]</div>
+<p>Pólya’s recurrence in one dimension (Feller, <em>An Introduction to
+Probability Theory and Its Applications</em>, vol. 1, 3rd ed., Sec. III.3).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n_steps</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of steps; an odd count gives the same answer as <code class="docutils literal notranslate"><span class="pre">n_steps</span> <span class="pre">-</span> <span class="pre">1</span></code>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">return_probability_1d</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">0.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">return_probability_1d</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">0.625</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.probability.rule_of_succession">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.probability.</span></span><span class="sig-name descname"><span class="pre">rule_of_succession</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">successes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trials</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/probability/systems/bayes.html#rule_of_succession"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.probability.rule_of_succession" title="Link to this definition">#</a></dt>
+<dd><p>Laplace’s rule of succession, <span class="math notranslate nohighlight">\(P(\text{next success}) = \dfrac{k+1}{n+2}\)</span>.</p>
+<p>The posterior predictive probability of a success on trial
+<span class="math notranslate nohighlight">\(n + 1\)</span> under Bayes’s uniform prior: the mean of
+<a class="reference internal" href="#mathematicskit.probability.beta_binomial_posterior" title="mathematicskit.probability.beta_binomial_posterior"><code class="xref py py-func docutils literal notranslate"><span class="pre">beta_binomial_posterior()</span></code></a> <code class="docutils literal notranslate"><span class="pre">(k,</span> <span class="pre">n)</span></code>. Laplace (1774) famously
+applied it to the probability that the sun will rise tomorrow.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>successes</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>trials</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rule_of_succession</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="go">0.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">rule_of_succession</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">0.8333</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.probability.simple_random_walk">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.probability.</span></span><span class="sig-name descname"><span class="pre">simple_random_walk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_walks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/probability/systems/stochastic_processes.html#simple_random_walk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.probability.simple_random_walk" title="Link to this definition">#</a></dt>
+<dd><p>Positions of simple random walks on <span class="math notranslate nohighlight">\(\mathbb{Z}^d\)</span> started at the origin.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_walks</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>n_steps</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>dim</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>seed</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray of int, shape (n_walks, n_steps + 1, dim)</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">walks</span> <span class="o">=</span> <span class="n">simple_random_walk</span><span class="p">(</span><span class="n">n_walks</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_steps</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">walks</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(3, 11, 2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">walks</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.probability.st_petersburg_certainty_equivalent">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.probability.</span></span><span class="sig-name descname"><span class="pre">st_petersburg_certainty_equivalent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wealth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_terms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/probability/systems/st_petersburg.html#st_petersburg_certainty_equivalent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.probability.st_petersburg_certainty_equivalent" title="Link to this definition">#</a></dt>
+<dd><p>The sure amount a log-utility player values the St. Petersburg game at.</p>
+<p>With initial wealth <span class="math notranslate nohighlight">\(w\)</span>, Bernoulli’s player is indifferent
+between playing and receiving the sure amount <span class="math notranslate nohighlight">\(c\)</span> solving</p>
+<div class="math notranslate nohighlight">
+\[\ln(w + c) = \sum_{k=1}^{\infty} 2^{-k} \ln(w + 2^k).\]</div>
+<p>For <span class="math notranslate nohighlight">\(w = 0\)</span> the right side is <span class="math notranslate nohighlight">\(2\ln 2\)</span>, so <span class="math notranslate nohighlight">\(c = 4\)</span>:
+a game with infinite expected value is worth just four ducats. The
+series is truncated after <code class="docutils literal notranslate"><span class="pre">n_terms</span></code> terms, far past double
+precision for any reasonable wealth.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>wealth</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – The player’s initial wealth <span class="math notranslate nohighlight">\(w \geq 0\)</span>.</p></li>
+<li><p><strong>n_terms</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of series terms.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em> – The certainty equivalent <span class="math notranslate nohighlight">\(c\)</span>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">st_petersburg_certainty_equivalent</span><span class="p">(</span><span class="mf">0.0</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span>
+<span class="go">4.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.probability.st_petersburg_payoffs">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.probability.</span></span><span class="sig-name descname"><span class="pre">st_petersburg_payoffs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_games</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/probability/systems/st_petersburg.html#st_petersburg_payoffs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.probability.st_petersburg_payoffs" title="Link to this definition">#</a></dt>
+<dd><p>Simulated payoffs <span class="math notranslate nohighlight">\(2^K\)</span> of the St. Petersburg game, with <span class="math notranslate nohighlight">\(K \sim \mathrm{Geometric}(1/2)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_games</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of independent games played.</p></li>
+<li><p><strong>seed</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (n_games,)</em> – The payoff of each game, as floats.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">payoffs</span> <span class="o">=</span> <span class="n">st_petersburg_payoffs</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">payoffs</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mf">2.0</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </section>
 
 
@@ -1380,9 +2076,31 @@ the CLT. See Robert &amp; Casella, <em>Monte Carlo Statistical Methods</em>,
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.Beta"><code class="docutils literal notranslate"><span class="pre">Beta</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.Beta.mgf"><code class="docutils literal notranslate"><span class="pre">Beta.mgf()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.Beta.pdf"><code class="docutils literal notranslate"><span class="pre">Beta.pdf()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.Binomial"><code class="docutils literal notranslate"><span class="pre">Binomial</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.Binomial.mgf"><code class="docutils literal notranslate"><span class="pre">Binomial.mgf()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.Binomial.pmf"><code class="docutils literal notranslate"><span class="pre">Binomial.pmf()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.BranchingProcessResult"><code class="docutils literal notranslate"><span class="pre">BranchingProcessResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.BranchingProcessResult.extinct_fraction"><code class="docutils literal notranslate"><span class="pre">BranchingProcessResult.extinct_fraction</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.BranchingProcessResult.generation_sizes"><code class="docutils literal notranslate"><span class="pre">BranchingProcessResult.generation_sizes</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.BrownianMotionResult"><code class="docutils literal notranslate"><span class="pre">BrownianMotionResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.BrownianMotionResult.paths"><code class="docutils literal notranslate"><span class="pre">BrownianMotionResult.paths</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.BrownianMotionResult.times"><code class="docutils literal notranslate"><span class="pre">BrownianMotionResult.times</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.BuffonNeedleResult"><code class="docutils literal notranslate"><span class="pre">BuffonNeedleResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.BuffonNeedleResult.crossing_fraction"><code class="docutils literal notranslate"><span class="pre">BuffonNeedleResult.crossing_fraction</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.BuffonNeedleResult.exact_crossing_probability"><code class="docutils literal notranslate"><span class="pre">BuffonNeedleResult.exact_crossing_probability</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.BuffonNeedleResult.n_drops"><code class="docutils literal notranslate"><span class="pre">BuffonNeedleResult.n_drops</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.BuffonNeedleResult.pi_estimate"><code class="docutils literal notranslate"><span class="pre">BuffonNeedleResult.pi_estimate</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.ContinuousDistribution"><code class="docutils literal notranslate"><span class="pre">ContinuousDistribution</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
@@ -1446,17 +2164,38 @@ the CLT. See Robert &amp; Casella, <em>Monte Carlo Statistical Methods</em>,
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.Poisson.pmf"><code class="docutils literal notranslate"><span class="pre">Poisson.pmf()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.TailBoundResult"><code class="docutils literal notranslate"><span class="pre">TailBoundResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.TailBoundResult.bound"><code class="docutils literal notranslate"><span class="pre">TailBoundResult.bound</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.TailBoundResult.exact"><code class="docutils literal notranslate"><span class="pre">TailBoundResult.exact</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.TailBoundResult.k"><code class="docutils literal notranslate"><span class="pre">TailBoundResult.k</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.Uniform"><code class="docutils literal notranslate"><span class="pre">Uniform</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.Uniform.mgf"><code class="docutils literal notranslate"><span class="pre">Uniform.mgf()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.Uniform.pdf"><code class="docutils literal notranslate"><span class="pre">Uniform.pdf()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.beta_binomial_posterior"><code class="docutils literal notranslate"><span class="pre">beta_binomial_posterior()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.brownian_motion"><code class="docutils literal notranslate"><span class="pre">brownian_motion()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.buffon_needle"><code class="docutils literal notranslate"><span class="pre">buffon_needle()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.central_limit_theorem_sample_means"><code class="docutils literal notranslate"><span class="pre">central_limit_theorem_sample_means()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.chebyshev_tail"><code class="docutils literal notranslate"><span class="pre">chebyshev_tail()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.control_variates_integrate"><code class="docutils literal notranslate"><span class="pre">control_variates_integrate()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.ctmc_stationary_distribution"><code class="docutils literal notranslate"><span class="pre">ctmc_stationary_distribution()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.ctmc_transition_matrix"><code class="docutils literal notranslate"><span class="pre">ctmc_transition_matrix()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.effective_sample_size"><code class="docutils literal notranslate"><span class="pre">effective_sample_size()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.erlang_b"><code class="docutils literal notranslate"><span class="pre">erlang_b()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.galton_watson_extinction_probability"><code class="docutils literal notranslate"><span class="pre">galton_watson_extinction_probability()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.galton_watson_simulate"><code class="docutils literal notranslate"><span class="pre">galton_watson_simulate()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.importance_sampling_integrate"><code class="docutils literal notranslate"><span class="pre">importance_sampling_integrate()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.law_of_large_numbers_trace"><code class="docutils literal notranslate"><span class="pre">law_of_large_numbers_trace()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.monte_carlo_integrate"><code class="docutils literal notranslate"><span class="pre">monte_carlo_integrate()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.random_walk_return_fraction"><code class="docutils literal notranslate"><span class="pre">random_walk_return_fraction()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.return_probability_1d"><code class="docutils literal notranslate"><span class="pre">return_probability_1d()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.rule_of_succession"><code class="docutils literal notranslate"><span class="pre">rule_of_succession()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.simple_random_walk"><code class="docutils literal notranslate"><span class="pre">simple_random_walk()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.st_petersburg_certainty_equivalent"><code class="docutils literal notranslate"><span class="pre">st_petersburg_certainty_equivalent()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.probability.st_petersburg_payoffs"><code class="docutils literal notranslate"><span class="pre">st_petersburg_payoffs()</span></code></a></li>
 </ul>
   </nav></div>
 

@@ -6,7 +6,8 @@ Examples
 This gallery walks through every public feature of ``mathematicskit.probability``:
 discrete and continuous distributions, Monte Carlo integration with
 variance reduction, the Law of Large Numbers and Central Limit Theorem,
-and discrete-time Markov chains.
+Markov chains, classical problems, Bayesian updating, branching
+processes, random walks and Brownian motion, and queueing.
 
 See also the narrative tutorials:
 
@@ -19,14 +20,22 @@ Each script in this gallery is self-contained and can be run directly with
 Sections
 --------
 
-- **discrete** -- binomial, Poisson, and geometric distributions.
+- **discrete** -- the problem of points, Poisson's law of rare events,
+  and the geometric distribution.
 - **continuous** -- uniform, exponential, normal, and gamma distributions.
 - **monte_carlo** -- plain, importance-sampling, and control-variate
   Monte Carlo integration.
-- **limit_theorems** -- the Law of Large Numbers and Central Limit
-  Theorem, simulated.
-- **markov_chain** -- stationary distributions and gambler's-ruin
-  absorption probabilities.
+- **limit_theorems** -- the Law of Large Numbers, the Central Limit
+  Theorem, and Chebyshev's inequality, simulated.
+- **axioms** -- Kolmogorov's axioms checked on a finite sample space and
+  on the distribution classes.
+- **markov_chain** -- stationary distributions, gambler's-ruin
+  absorption probabilities, and continuous-time chains.
+- **classical** -- Buffon's needle and the St. Petersburg paradox.
+- **bayes** -- Bayes's Beta-binomial update and the rule of succession.
+- **branching** -- Galton-Watson extinction probabilities.
+- **stochastic_processes** -- random walks and Brownian motion.
+- **queueing** -- Erlang's loss formula.
 
 
 .. raw:: html
@@ -39,6 +48,184 @@ Sections
     <div class="sphx-glr-thumbnails">
 
 .. thumbnail-parent-div-open
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Kolmogorov's axioms
+---------------------
+
+Events as sets, probability as a measure: checking the axioms on a
+finite sample space and on this package's distribution classes.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Kolmogorov (1933) defined a probability space (\Omega, \mathcal F, P): a sample space \Omega, a collection \mathcal F of events (subsets of \Omega), and a measure P satisfying">
+
+.. only:: html
+
+  .. image:: /api/gallery/probability/axioms/images/thumb/sphx_glr_plot_01_kolmogorov_axioms_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/probability/axioms/plot_01_kolmogorov_axioms`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Kolmogorov's axioms: events as sets, probability as a measure</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Bayesian inference
+-------------------
+
+Bayes's Beta-binomial update and Laplace's rule of succession.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Starting from Bayes&#x27;s uniform prior, the posterior for an unknown success probability p after k successes in n trials is \mathrm{Beta}(k+1, n-k+1). It narrows around the true value as data accumulate, and its mean is Laplace&#x27;s rule of succession (k+1)/(n+2).">
+
+.. only:: html
+
+  .. image:: /api/gallery/probability/bayes/images/thumb/sphx_glr_plot_01_bayes_rule_of_succession_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/probability/bayes/plot_01_bayes_rule_of_succession`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Bayes's problem: learning a probability from data</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Branching processes
+--------------------
+
+Galton-Watson extinction probabilities and simulated family trees.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Each man has 0, 1, or 2 sons with probabilities 0.2, 0.3, 0.5. The extinction probability is the smallest fixed point of the generating function G(s) = 0.2 + 0.3s + 0.5s^2, namely q = 0.4, even though the population grows by 30% per generation on average.">
+
+.. only:: html
+
+  .. image:: /api/gallery/probability/branching/images/thumb/sphx_glr_plot_01_galton_watson_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/probability/branching/plot_01_galton_watson`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Galton-Watson: the probability a family name dies out</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Classical problems
+-------------------
+
+Buffon's needle and the St. Petersburg paradox.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="A needle as long as the gap between parallel lines crosses a line with probability 2/\pi, so counting crossings estimates \pi. The estimate&#x27;s error shrinks like 1/\sqrt{n}.">
+
+.. only:: html
+
+  .. image:: /api/gallery/probability/classical/images/thumb/sphx_glr_plot_01_buffon_needle_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/probability/classical/plot_01_buffon_needle`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Buffon's needle: estimating pi by dropping needles</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The game pays 2^k if the first head comes on toss k. Its expected payoff is infinite, so the running average of simulated payoffs never settles; it keeps jumping upward whenever a rare long run of tails occurs. Daniel Bernoulli&#x27;s logarithmic utility values the game at a small, finite amount.">
+
+.. only:: html
+
+  .. image:: /api/gallery/probability/classical/images/thumb/sphx_glr_plot_02_st_petersburg_paradox_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/probability/classical/plot_02_st_petersburg_paradox`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The St. Petersburg paradox</div>
+    </div>
+
 
 .. thumbnail-parent-div-close
 
@@ -89,7 +276,8 @@ Uniform, exponential, normal, and gamma distributions.
 Discrete distributions
 ------------------------
 
-Binomial, Poisson, and geometric distributions.
+The problem of points (binomial tails), Poisson's law of rare events,
+and the geometric distribution.
 
 
 .. raw:: html
@@ -105,18 +293,52 @@ Binomial, Poisson, and geometric distributions.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="The Poisson distribution as the n -&gt; infinity, p -&gt; 0 limit of the binomial with np held fixed, plus the geometric distribution&#x27;s memoryless property.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Two players stake equal amounts on a game of fair rounds; the first to win a set number of rounds takes the pot. The game is interrupted when player A still needs a wins and player B needs b. How should the pot be split?">
 
 .. only:: html
 
-  .. image:: /api/gallery/probability/discrete/images/thumb/sphx_glr_plot_01_binomial_poisson_geometric_thumb.png
+  .. image:: /api/gallery/probability/discrete/images/thumb/sphx_glr_plot_01_problem_of_points_thumb.png
     :alt:
 
-  :doc:`/api/gallery/probability/discrete/plot_01_binomial_poisson_geometric`
+  :doc:`/api/gallery/probability/discrete/plot_01_problem_of_points`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Binomial, Poisson, and geometric distributions</div>
+      <div class="sphx-glr-thumbnail-title">Pascal and Fermat's problem of points: dividing the stakes</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Many independent trials, each with a tiny chance of success, produce a number of successes that follows a Poisson distribution. Poisson (1837) obtained it as the limit of \mathrm{Binomial}(n, p) with n \to \infty, p \to 0 and the mean np = \mu held fixed:">
+
+.. only:: html
+
+  .. image:: /api/gallery/probability/discrete/images/thumb/sphx_glr_plot_02_poisson_rare_events_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/probability/discrete/plot_02_poisson_rare_events`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Poisson's law of rare events: the binomial limit</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The number of independent trials up to and including the first success, with success probability p, has mean 1/p and is memoryless: P(X &gt; m + n \mid X &gt; m) = P(X &gt; n).">
+
+.. only:: html
+
+  .. image:: /api/gallery/probability/discrete/images/thumb/sphx_glr_plot_03_geometric_memoryless_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/probability/discrete/plot_03_geometric_memoryless`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The geometric distribution: waiting for the first success</div>
     </div>
 
 
@@ -126,10 +348,11 @@ Binomial, Poisson, and geometric distributions.
 
     </div>
 
-Law of Large Numbers and Central Limit Theorem
--------------------------------------------------
+Limit theorems and inequalities
+---------------------------------
 
-Simulating and verifying both foundational limit theorems.
+Bernoulli's law of large numbers, the De Moivre-Laplace central limit
+theorem, and the Bienaymé-Chebyshev inequality, simulated and verified.
 
 
 .. raw:: html
@@ -145,18 +368,52 @@ Simulating and verifying both foundational limit theorems.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="The sample mean of a Poisson(mu=3) sample converges to its true mean as the sample size grows (LLN); standardized sample means across many trials approach a standard normal distribution regardless of the Poisson&#x27;s own (skewed, discrete) shape (CLT).">
+    <div class="sphx-glr-thumbcontainer" tooltip="Bernoulli&#x27;s &quot;golden theorem&quot; (1713): in n independent trials of an event with probability p, the relative frequency of the event converges to p as n grows. Here a biased coin with p = 0.3 is tossed a million times, and the running fraction of heads homes in on 0.3 while its typical error shrinks like \sqrt{p(1-p)/n}.">
 
 .. only:: html
 
-  .. image:: /api/gallery/probability/limit_theorems/images/thumb/sphx_glr_plot_01_lln_and_clt_thumb.png
+  .. image:: /api/gallery/probability/limit_theorems/images/thumb/sphx_glr_plot_01_law_of_large_numbers_thumb.png
     :alt:
 
-  :doc:`/api/gallery/probability/limit_theorems/plot_01_lln_and_clt`
+  :doc:`/api/gallery/probability/limit_theorems/plot_01_law_of_large_numbers`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Law of Large Numbers and Central Limit Theorem</div>
+      <div class="sphx-glr-thumbnail-title">Jacob Bernoulli's law of large numbers: frequencies settle down</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="De Moivre (1733) showed that the binomial distribution, suitably standardized, approaches the normal curve for large n. Laplace (1810) extended this to sums of many independent variables of almost any distribution: the standardized mean Z = (\bar X_n - \mu)/(\sigma/\sqrt n) tends to \mathcal N(0, 1), whatever the shape of the summands.">
+
+.. only:: html
+
+  .. image:: /api/gallery/probability/limit_theorems/images/thumb/sphx_glr_plot_02_central_limit_theorem_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/probability/limit_theorems/plot_02_central_limit_theorem`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">De Moivre-Laplace and the central limit theorem: the bell curve emerges</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="P(|X-\mu| \geq k\sigma) \leq 1/k^2 holds for any distribution with finite variance. Comparing it with exact tails shows how conservative a universal bound has to be.">
+
+.. only:: html
+
+  .. image:: /api/gallery/probability/limit_theorems/images/thumb/sphx_glr_plot_03_chebyshev_inequality_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/probability/limit_theorems/plot_03_chebyshev_inequality`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Chebyshev's inequality: one bound for every distribution</div>
     </div>
 
 
@@ -185,7 +442,7 @@ Stationary distributions and gambler's-ruin absorption probabilities.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="A gambler with capital i (out of a target N) makes fair even-money bets until reaching 0 (ruin) or N (target). Both the absorption probabilities and the expected number of steps have simple closed forms for a fair game, used here to check the numerical solve.">
+    <div class="sphx-glr-thumbcontainer" tooltip="A Markov chain moves between states with probabilities that depend only on the current state, not on how it got there, so the whole process is described by one transition matrix. In gambler&#x27;s ruin, a gambler with capital i (out of a target N) makes fair even-money bets until reaching 0 (ruin) or N (target); the capital after each bet is a Markov chain on the states 0..N with two absorbing ends. Both the absorption probabilities and the expected number of steps have simple closed forms for a fair game, used here to check the numerical solve.">
 
 .. only:: html
 
@@ -196,7 +453,24 @@ Stationary distributions and gambler's-ruin absorption probabilities.
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Gambler's ruin: absorption probabilities and expected duration</div>
+      <div class="sphx-glr-thumbnail-title">Markov chains: gambler's ruin as an absorbing chain</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="A machine is working (0), degraded (1), or broken (2), jumping between states at the rates in the generator Q. The transition matrix P(t) = e^{tQ} solves Kolmogorov&#x27;s forward and backward equations and relaxes to the stationary distribution \pi, the solution of \pi Q = 0.">
+
+.. only:: html
+
+  .. image:: /api/gallery/probability/markov_chain/images/thumb/sphx_glr_plot_02_continuous_time_chain_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/probability/markov_chain/plot_02_continuous_time_chain`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Kolmogorov's equations: a continuous-time Markov chain</div>
     </div>
 
 
@@ -225,18 +499,115 @@ Plain, importance-sampling, and control-variate Monte Carlo integration.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Estimates \int_0^1 e^x\,dx = e - 1 three ways, comparing each method&#x27;s standard error at the same sample size.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Ulam and von Neumann&#x27;s idea: replace an exact calculation by an average over random samples. For U \sim \mathrm{Uniform}(0, 1),">
 
 .. only:: html
 
-  .. image:: /api/gallery/probability/monte_carlo/images/thumb/sphx_glr_plot_01_variance_reduction_thumb.png
+  .. image:: /api/gallery/probability/monte_carlo/images/thumb/sphx_glr_plot_01_monte_carlo_integration_thumb.png
     :alt:
 
-  :doc:`/api/gallery/probability/monte_carlo/plot_01_variance_reduction`
+  :doc:`/api/gallery/probability/monte_carlo/plot_01_monte_carlo_integration`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Variance reduction: plain vs. control-variate Monte Carlo</div>
+      <div class="sphx-glr-thumbnail-title">The Monte Carlo method: estimating an integral by random sampling</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Queueing theory
+----------------
+
+Erlang's loss formula for telephone traffic.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="For Poisson call arrivals offering A erlangs of traffic to c lines, a call is lost with probability B(c, A). Erlang&#x27;s formula answers the engineer&#x27;s question: how many lines keep losses below 1%?">
+
+.. only:: html
+
+  .. image:: /api/gallery/probability/queueing/images/thumb/sphx_glr_plot_01_erlang_b_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/probability/queueing/plot_01_erlang_b`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Erlang's loss formula: how many telephone lines?</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Random walks and Brownian motion
+---------------------------------
+
+Brownian motion paths and Pólya's recurrence theorem for random walks.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Sample paths of standard Brownian motion spread like \sqrt{t}: at time t, W(t) \sim \mathcal N(0, t), so about 95% of paths lie within \pm 2\sqrt t. The quadratic variation \sum (\Delta W)^2 equals t, the signature of a path that is continuous but nowhere differentiable.">
+
+.. only:: html
+
+  .. image:: /api/gallery/probability/stochastic_processes/images/thumb/sphx_glr_plot_01_brownian_motion_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/probability/stochastic_processes/plot_01_brownian_motion`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Brownian motion</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="A simple random walk returns to its starting point with probability 1 in one and two dimensions but only about 34% of the time in three. The simulated fraction of walks that have returned by step n keeps climbing toward 1 in 1D (slowly, like 1 - 1/\sqrt{\pi n/2}), crawls upward in 2D, and levels off near 0.3405 in 3D.">
+
+.. only:: html
+
+  .. image:: /api/gallery/probability/stochastic_processes/images/thumb/sphx_glr_plot_02_polya_random_walks_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/probability/stochastic_processes/plot_02_polya_random_walks`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Pólya's theorem: a drunk man finds his way home, a drunk bird may not</div>
     </div>
 
 
@@ -252,11 +623,17 @@ Plain, importance-sampling, and control-variate Monte Carlo integration.
    :includehidden:
 
 
+   /api/gallery/probability/axioms/index.rst
+   /api/gallery/probability/bayes/index.rst
+   /api/gallery/probability/branching/index.rst
+   /api/gallery/probability/classical/index.rst
    /api/gallery/probability/continuous/index.rst
    /api/gallery/probability/discrete/index.rst
    /api/gallery/probability/limit_theorems/index.rst
    /api/gallery/probability/markov_chain/index.rst
    /api/gallery/probability/monte_carlo/index.rst
+   /api/gallery/probability/queueing/index.rst
+   /api/gallery/probability/stochastic_processes/index.rst
 
 
 

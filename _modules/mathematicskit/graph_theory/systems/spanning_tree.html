@@ -410,17 +410,17 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.graph_theory.systems.spanning_tree</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Minimum spanning tree: Kruskal&#39;s algorithm (via scipy), and a</span>
-<span class="sd">hand-rolled Prim&#39;s algorithm kept for comparison.</span>
+<span></span><span class="sa">r</span><span class="sd">"""Minimum spanning tree: Kruskal's algorithm (via scipy), and a</span>
+<span class="sd">hand-rolled Prim's algorithm kept for comparison.</span>
 
 <span class="sd">``scipy.sparse.csgraph.minimum_spanning_tree`` (Kruskal-based, using a</span>
 <span class="sd">disjoint-set/union-find internally) is the primary API here; a</span>
-<span class="sd">from-scratch Prim&#39;s implementation is kept alongside it specifically to</span>
-<span class="sd">*compare* the two algorithms&#39; approach (Kruskal grows a forest by</span>
+<span class="sd">from-scratch Prim's implementation is kept alongside it specifically to</span>
+<span class="sd">*compare* the two algorithms' approach (Kruskal grows a forest by</span>
 <span class="sd">globally cheapest edge, Prim grows a single tree by locally cheapest</span>
 <span class="sd">edge) -- not as a competing primary API. See Cormen et al.,</span>
 <span class="sd">*Introduction to Algorithms*, 3rd ed., Ch. 23.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -430,16 +430,16 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.graph_theory.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">MSTResult</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;kruskal_mst&quot;</span><span class="p">,</span> <span class="s2">&quot;prim_mst&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"kruskal_mst"</span><span class="p">,</span> <span class="s2">"prim_mst"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="kruskal_mst">
 <a class="viewcode-back" href="../../../../api/graph_theory.html#mathematicskit.graph_theory.kruskal_mst">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">kruskal_mst</span><span class="p">(</span><span class="n">graph</span><span class="p">:</span> <span class="n">Graph</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MSTResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Minimum spanning tree via Kruskal&#39;s algorithm.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Minimum spanning tree via Kruskal's algorithm.</span>
 
 <span class="sd">    Via :func:`scipy.sparse.csgraph.minimum_spanning_tree`, which sorts</span>
-<span class="sd">    edges by weight and adds each one that doesn&#39;t close a cycle</span>
+<span class="sd">    edges by weight and adds each one that doesn't close a cycle</span>
 <span class="sd">    (tracked internally with a disjoint-set structure) until every</span>
 <span class="sd">    vertex is connected. See Cormen et al., *Introduction to Algorithms*,</span>
 <span class="sd">    3rd ed., Ch. 23.2.</span>
@@ -464,18 +464,18 @@
 <span class="sd">    &gt;&gt;&gt; result = kruskal_mst(g)</span>
 <span class="sd">    &gt;&gt;&gt; result.total_weight</span>
 <span class="sd">    6.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">mst_sparse</span> <span class="o">=</span> <span class="n">csgraph</span><span class="o">.</span><span class="n">minimum_spanning_tree</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">to_sparse</span><span class="p">())</span>
     <span class="n">coo</span> <span class="o">=</span> <span class="n">mst_sparse</span><span class="o">.</span><span class="n">tocoo</span><span class="p">()</span>
     <span class="n">edges</span> <span class="o">=</span> <span class="p">[(</span><span class="nb">int</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">w</span><span class="p">))</span> <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">coo</span><span class="o">.</span><span class="n">row</span><span class="p">,</span> <span class="n">coo</span><span class="o">.</span><span class="n">col</span><span class="p">,</span> <span class="n">coo</span><span class="o">.</span><span class="n">data</span><span class="p">)]</span>
-    <span class="k">return</span> <span class="n">MSTResult</span><span class="p">(</span><span class="n">edges</span><span class="o">=</span><span class="n">edges</span><span class="p">,</span> <span class="n">total_weight</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">coo</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;kruskal&quot;</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">MSTResult</span><span class="p">(</span><span class="n">edges</span><span class="o">=</span><span class="n">edges</span><span class="p">,</span> <span class="n">total_weight</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">coo</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span> <span class="n">method</span><span class="o">=</span><span class="s2">"kruskal"</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="prim_mst">
 <a class="viewcode-back" href="../../../../api/graph_theory.html#mathematicskit.graph_theory.prim_mst">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">prim_mst</span><span class="p">(</span><span class="n">graph</span><span class="p">:</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MSTResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Minimum spanning tree via Prim&#39;s algorithm (hand-rolled).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Minimum spanning tree via Prim's algorithm (hand-rolled).</span>
 
 <span class="sd">    Grows a single tree from `start`, at each step adding the cheapest</span>
 <span class="sd">    edge leaving the current tree to a not-yet-included vertex (via a</span>
@@ -507,7 +507,7 @@
 <span class="sd">    &gt;&gt;&gt; result = prim_mst(g)</span>
 <span class="sd">    &gt;&gt;&gt; result.total_weight</span>
 <span class="sd">    6.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">in_tree</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">]</span> <span class="o">*</span> <span class="n">graph</span><span class="o">.</span><span class="n">n_vertices</span>
     <span class="n">in_tree</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="n">edges</span> <span class="o">=</span> <span class="p">[]</span>
@@ -526,7 +526,7 @@
             <span class="k">if</span> <span class="ow">not</span> <span class="n">in_tree</span><span class="p">[</span><span class="n">next_v</span><span class="p">]:</span>
                 <span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span> <span class="p">(</span><span class="n">next_w</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">next_v</span><span class="p">))</span>
 
-    <span class="k">return</span> <span class="n">MSTResult</span><span class="p">(</span><span class="n">edges</span><span class="o">=</span><span class="n">edges</span><span class="p">,</span> <span class="n">total_weight</span><span class="o">=</span><span class="n">total_weight</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;prim&quot;</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">MSTResult</span><span class="p">(</span><span class="n">edges</span><span class="o">=</span><span class="n">edges</span><span class="p">,</span> <span class="n">total_weight</span><span class="o">=</span><span class="n">total_weight</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"prim"</span><span class="p">)</span></div>
 
 </pre></div>
 

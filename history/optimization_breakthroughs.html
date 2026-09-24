@@ -454,204 +454,501 @@
 <p><a class="reference internal" href="../_generated/subpackages/optimization.html"><span class="doc">mathematicskit.optimization hub</span></a> · <a class="reference internal" href="#"><span class="doc">History</span></a> · <a class="reference internal" href="../api/gallery/optimization/index.html"><span class="doc">Examples</span></a> · <a class="reference internal" href="../api/optimization.html"><span class="doc">API reference</span></a></p>
 </div>
 <blockquote class="epigraph">
-<div><p>“Nothing in the world takes place without optimization, and there is
-no doubt that all aspects of the world that have a rational basis can
-be explained by optimization methods.” – Leonhard Euler, foreword to
-<em>Methodus Inveniendi</em>, 1744</p>
+<div><p>“Nothing at all takes place in the universe in which some rule of
+maximum or minimum does not appear.”
+– Leonhard Euler, <em>Methodus Inveniendi Lineas Curvas</em>, 1744</p>
 </div></blockquote>
 <p>Finding the best of something – the shortest path, the cheapest plan,
 the lowest-energy configuration – is one of the oldest applied problems
-in mathematics, but a systematic <em>theory</em> of optimization, with
-convergence guarantees and complexity bounds rather than case-by-case
-cleverness, is a product of the 20th century. This chronology traces the
-descent methods and constrained-optimization theory behind
-<a class="reference internal" href="../api/optimization.html#module-mathematicskit.optimization" title="mathematicskit.optimization"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.optimization</span></code></a>.</p>
+in mathematics. A systematic <em>theory</em> of optimization, with convergence
+guarantees and complexity bounds instead of case-by-case cleverness, is
+a product of the 20th century. This chronology traces the descent
+methods, constrained and combinatorial optimization, and stochastic
+methods behind <a class="reference internal" href="../api/optimization.html#module-mathematicskit.optimization" title="mathematicskit.optimization"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.optimization</span></code></a>.</p>
 <nav class="contents local" id="timeline">
 <p class="topic-title">Timeline</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#cauchy-and-gradient-descent" id="id1">1847 – Cauchy and Gradient Descent</a></p></li>
-<li><p><a class="reference internal" href="#lagrange-multipliers" id="id2">1687 – 1806 – Lagrange Multipliers</a></p></li>
-<li><p><a class="reference internal" href="#dantzig-s-simplex-method" id="id3">1947 – Dantzig’s Simplex Method</a></p></li>
-<li><p><a class="reference internal" href="#conjugate-gradients-as-nonlinear-optimization" id="id4">1952 – Conjugate Gradients as Nonlinear Optimization</a></p></li>
-<li><p><a class="reference internal" href="#bfgs-and-quasi-newton-methods" id="id5">1970 – BFGS and Quasi-Newton Methods</a></p></li>
-<li><p><a class="reference internal" href="#fiacco-mccormick-and-penalty-barrier-methods" id="id6">1968 – Fiacco, McCormick, and Penalty/Barrier Methods</a></p></li>
-<li><p><a class="reference internal" href="#rosenbrock-s-banana-function" id="id7">1960 – Rosenbrock’s Banana Function</a></p></li>
-<li><p><a class="reference internal" href="#see-also" id="id8">See Also</a></p></li>
+<li><p><a class="reference internal" href="#lagrange-multipliers-and-the-kkt-conditions" id="id1">1788-1951 – Lagrange Multipliers and the KKT Conditions</a></p></li>
+<li><p><a class="reference internal" href="#cauchy-and-gradient-descent" id="id2">1847 – Cauchy and Gradient Descent</a></p></li>
+<li><p><a class="reference internal" href="#von-neumann-s-minimax-theorem" id="id3">1928 – Von Neumann’s Minimax Theorem</a></p></li>
+<li><p><a class="reference internal" href="#levenberg-marquardt-and-nonlinear-least-squares" id="id4">1944-1963 – Levenberg, Marquardt, and Nonlinear Least Squares</a></p></li>
+<li><p><a class="reference internal" href="#dantzig-s-simplex-method" id="id5">1947 – Dantzig’s Simplex Method</a></p></li>
+<li><p><a class="reference internal" href="#robbins-monro-and-stochastic-approximation" id="id6">1951 – Robbins, Monro, and Stochastic Approximation</a></p></li>
+<li><p><a class="reference internal" href="#bellman-and-dynamic-programming" id="id7">1952-1957 – Bellman and Dynamic Programming</a></p></li>
+<li><p><a class="reference internal" href="#kiefer-s-fibonacci-and-golden-section-search" id="id8">1953 – Kiefer’s Fibonacci and Golden-Section Search</a></p></li>
+<li><p><a class="reference internal" href="#the-frank-wolfe-method" id="id9">1956 – The Frank-Wolfe Method</a></p></li>
+<li><p><a class="reference internal" href="#rosenbrock-s-banana-function" id="id10">1960 – Rosenbrock’s Banana Function</a></p></li>
+<li><p><a class="reference internal" href="#land-doig-and-branch-and-bound" id="id11">1960 – Land, Doig, and Branch-and-Bound</a></p></li>
+<li><p><a class="reference internal" href="#conjugate-gradients-as-nonlinear-optimization" id="id12">1964-1969 – Conjugate Gradients as Nonlinear Optimization</a></p></li>
+<li><p><a class="reference internal" href="#nelder-and-mead-s-simplex-search" id="id13">1965 – Nelder and Mead’s Simplex Search</a></p></li>
+<li><p><a class="reference internal" href="#fiacco-mccormick-and-penalty-barrier-methods" id="id14">1968 – Fiacco, McCormick, and Penalty/Barrier Methods</a></p></li>
+<li><p><a class="reference internal" href="#bfgs-and-quasi-newton-methods" id="id15">1970 – BFGS and Quasi-Newton Methods</a></p></li>
+<li><p><a class="reference internal" href="#nesterov-s-accelerated-gradient" id="id16">1983 – Nesterov’s Accelerated Gradient</a></p></li>
+<li><p><a class="reference internal" href="#kingma-ba-and-adam" id="id17">2014 – Kingma, Ba, and Adam</a></p></li>
+<li><p><a class="reference internal" href="#see-also" id="id18">See Also</a></p></li>
 </ul>
 </nav>
+<section id="lagrange-multipliers-and-the-kkt-conditions">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">1788-1951 – Lagrange Multipliers and the KKT Conditions</a><a class="headerlink" href="#lagrange-multipliers-and-the-kkt-conditions" title="Link to this heading">#</a></h2>
+<p>Joseph-Louis Lagrange’s 1788 <em>Mécanique analytique</em> set out a technique
+he had first used in his calculus-of-variations work of the 1760s. To
+minimize <span class="math notranslate nohighlight">\(f(x)\)</span> subject to a constraint <span class="math notranslate nohighlight">\(g(x)=0\)</span>, introduce
+an auxiliary variable (the multiplier <span class="math notranslate nohighlight">\(\lambda\)</span>) and look for a
+stationary point of <span class="math notranslate nohighlight">\(f(x) + \lambda g(x)\)</span>, treated as
+unconstrained in <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(\lambda\)</span> together. A constrained
+problem becomes an ordinary one, at the cost of extra variables. William
+Karush’s 1939 master’s thesis extended the idea to <em>inequality</em>
+constraints, and Harold Kuhn and Albert Tucker rediscovered the result
+independently in 1951. The resulting first-order KKT conditions are
+still used to certify a constrained optimum today.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.optimization.systems.constrained.lagrange_stationary_point()</span></code>
+solves the equality-constrained Lagrange system directly.
+<code class="xref py py-func docutils literal notranslate"><span class="pre">verify_kkt()</span></code>
+checks the full Karush-Kuhn-Tucker conditions (stationarity, primal and
+dual feasibility, complementary slackness) numerically at a candidate
+point.</p>
+<p><em>References:</em> J.-L. Lagrange, <em>Mécanique analytique</em> (Paris: Veuve
+Desaint, 1788); W. Karush, “Minima of Functions of Several Variables
+with Inequalities as Side Conditions” (Master’s thesis, University of
+Chicago, 1939); H. W. Kuhn and A. W. Tucker, “Nonlinear Programming,”
+Proceedings of the Second Berkeley Symposium on Mathematical Statistics
+and Probability (1951), 481-492.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Minimizes x^2+y^2 subject to x+y=1. At the constrained optimum (0.5, 0.5) the objective&#x27;s gradient is parallel to the constraint&#x27;s gradient, \nabla f = -\lambda \nabla h with \lambda=-1, which is Lagrange&#x27;s condition. Rewriting the constraint as the inequality x+y \geq 1 gives a Karush-Kuhn-Tucker problem whose multiplier must also be non-negative."><img alt="" src="../_images/sphx_glr_plot_01_lagrange_multipliers_kkt_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/optimization/constrained/plot_01_lagrange_multipliers_kkt.html"><span class="doc">Lagrange multipliers and the KKT conditions</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Lagrange multipliers and the KKT conditions</div>
+</div></div></section>
 <section id="cauchy-and-gradient-descent">
-<h2><a class="toc-backref" href="#id1" role="doc-backlink">1847 – Cauchy and Gradient Descent</a><a class="headerlink" href="#cauchy-and-gradient-descent" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">1847 – Cauchy and Gradient Descent</a><a class="headerlink" href="#cauchy-and-gradient-descent" title="Link to this heading">#</a></h2>
 <p>Augustin-Louis Cauchy’s 1847 note to the French Academy proposed the
-simplest possible strategy for minimizing a function of several
-variables: repeatedly step in the direction of steepest local descent,
-the negative gradient. It converges from any smooth enough starting
-point, but notoriously zig-zags across narrow, elongated (ill-
-conditioned) valleys – a limitation directly visible by comparing its
-convergence rate against a method that adapts its step size, or against
-the conjugate-direction methods developed over a century later.</p>
+simplest strategy for minimizing a function of several variables:
+repeatedly step in the direction of steepest local descent, the
+negative gradient. With a suitably small step it steadily decreases a
+smooth function, but it notoriously zig-zags across narrow, elongated
+(ill-conditioned) valleys. The weakness is easy to see by comparing its
+convergence with a method that adapts its step size, or with the
+conjugate-direction methods developed more than a century later.</p>
 <div class="math notranslate nohighlight">
 \[x_{k+1} = x_k - \alpha \nabla f(x_k)\]</div>
 <p><em>Implementation:</em> <a class="reference internal" href="../api/optimization.html#mathematicskit.optimization.GradientDescent" title="mathematicskit.optimization.systems.gradient_descent.GradientDescent"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathematicskit.optimization.systems.gradient_descent.GradientDescent</span></code></a>
-implements exactly this fixed-step rule;
+implements this fixed-step rule.
 <a class="reference internal" href="../api/optimization.html#mathematicskit.optimization.GradientDescentLineSearch" title="mathematicskit.optimization.systems.gradient_descent.GradientDescentLineSearch"><code class="xref py py-class docutils literal notranslate"><span class="pre">GradientDescentLineSearch</span></code></a>
-adds Nocedal &amp; Wright’s backtracking line search to choose the step
-size adaptively at each iterate.</p>
-<p><em>References:</em> A.-L. Cauchy, “Methode generale pour la resolution des
-systemes d’equations simultanees,” Comptes Rendus de l’Academie des
+adds a backtracking line search, as presented in Jorge Nocedal and
+Stephen Wright’s textbook, to choose the step size at each iterate.</p>
+<p><em>References:</em> A.-L. Cauchy, “Méthode générale pour la résolution des
+systèmes d’équations simultanées,” Comptes Rendus de l’Académie des
 Sciences 25 (1847), 536-538.</p>
 <div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Gradient descent zig-zags across a narrow, elongated quadratic bowl. Backtracking line search adapts its step length automatically and converges in far fewer iterations than any single fixed step size."><img alt="" src="../_images/sphx_glr_plot_01_fixed_vs_line_search_thumb.png" />
 <p><a class="reference internal" href="../api/gallery/optimization/gradient_descent/plot_01_fixed_vs_line_search.html"><span class="doc">Fixed step vs. backtracking line search on an ill-conditioned bowl</span></a></p>
   <div class="sphx-glr-thumbnail-title">Fixed step vs. backtracking line search on an ill-conditioned bowl</div>
 </div></div></section>
-<section id="lagrange-multipliers">
-<h2><a class="toc-backref" href="#id2" role="doc-backlink">1687 – 1806 – Lagrange Multipliers</a><a class="headerlink" href="#lagrange-multipliers" title="Link to this heading">#</a></h2>
-<p>Joseph-Louis Lagrange’s 1788 <em>Mecanique Analytique</em> generalized a
-technique he had already sketched in an earlier 1760s memoir on the
-calculus of variations: to minimize <span class="math notranslate nohighlight">\(f(x)\)</span> subject to a constraint
-<span class="math notranslate nohighlight">\(g(x)=0\)</span>, introduce an auxiliary variable (the multiplier
-<span class="math notranslate nohighlight">\(\lambda\)</span>) and look for a stationary point of <span class="math notranslate nohighlight">\(f(x) +
-\lambda g(x)\)</span> treated as unconstrained in both <span class="math notranslate nohighlight">\(x\)</span> and
-<span class="math notranslate nohighlight">\(\lambda\)</span> together – turning a constrained problem into an
-ordinary one at the cost of extra variables. William Karush’s 1939
-thesis (independently rediscovered by Harold Kuhn and Albert Tucker in
-1951) extended the idea to <em>inequality</em> constraints, giving the
-first-order KKT conditions still used to certify a constrained optimum
-today.</p>
-<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.optimization.systems.constrained.lagrange_stationary_point()</span></code>
-solves exactly the equality-constrained Lagrange system directly;
-<code class="xref py py-func docutils literal notranslate"><span class="pre">verify_kkt()</span></code> checks the
-full Karush-Kuhn-Tucker conditions (stationarity, primal/dual
-feasibility, complementary slackness) numerically at a candidate point.</p>
-<p><em>References:</em> J.-L. Lagrange, <em>Mecanique Analytique</em> (Paris, 1788); W.
-Karush, “Minima of Functions of Several Variables with Inequalities as
-Side Conditions” (Master’s thesis, University of Chicago, 1939); H. W.
-Kuhn and A. W. Tucker, “Nonlinear Programming,” Proceedings of the
-Second Berkeley Symposium on Mathematical Statistics and Probability
-(1951), 481-492.</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Minimizes x^2+y^2 subject to x+y=1: the closed-form solution is (0.5, 0.5) with multiplier \lambda=-1. Solved three ways -- directly via the Lagrange stationarity system, verified via the KKT conditions, and approached indirectly via the quadratic penalty method."><img alt="" src="../_images/sphx_glr_plot_01_lagrange_kkt_and_penalty_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/optimization/constrained/plot_01_lagrange_kkt_and_penalty.html"><span class="doc">Lagrange multipliers, KKT verification, and the penalty method</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Lagrange multipliers, KKT verification, and the penalty method</div>
+<section id="von-neumann-s-minimax-theorem">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">1928 – Von Neumann’s Minimax Theorem</a><a class="headerlink" href="#von-neumann-s-minimax-theorem" title="Link to this heading">#</a></h2>
+<p>In a two-player zero-sum game, one player’s gain is exactly the other’s
+loss. John von Neumann proved in 1928 that if players may randomize
+over their moves (use <em>mixed strategies</em>), every finite game of this
+kind has a well-defined value <span class="math notranslate nohighlight">\(v\)</span>. The row player has a strategy
+guaranteeing an expected payoff of at least <span class="math notranslate nohighlight">\(v\)</span>, and the column
+player has one conceding no more than <span class="math notranslate nohighlight">\(v\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\max_{p} \min_{q} p^T A q = \min_{q} \max_{p} p^T A q = v.\]</div>
+<p>The theorem founded game theory, which von Neumann and Oskar
+Morgenstern developed in their 1944 book. When linear programming
+arrived two decades later, Dantzig and von Neumann saw that the
+minimax theorem is a form of LP duality: each player’s problem is a
+linear program, and the two programs are duals of each other.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.optimization.systems.game_theory.solve_zero_sum_game()</span></code>
+solves both players’ linear programs with
+<code class="xref py py-func docutils literal notranslate"><span class="pre">linear_program()</span></code>
+and returns both optimal mixed strategies and the value in a
+<a class="reference internal" href="../api/optimization.html#mathematicskit.optimization.GameResult" title="mathematicskit.optimization.core.base.GameResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">GameResult</span></code></a>.</p>
+<p><em>References:</em> J. von Neumann, “Zur Theorie der Gesellschaftsspiele,”
+Mathematische Annalen 100 (1928), 295-320; J. von Neumann and O.
+Morgenstern, <em>Theory of Games and Economic Behavior</em> (Princeton:
+Princeton University Press, 1944).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Solves two zero-sum games as linear programs: rock-paper-scissors, whose optimal strategy is uniform with value zero, and a lopsided variant in which the row player&#x27;s rock beats scissors for double stakes, which tilts the game in the row player&#x27;s favour. In every game, the row player&#x27;s guaranteed payoff equals the column player&#x27;s guaranteed loss."><img alt="" src="../_images/sphx_glr_plot_01_zero_sum_games_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/optimization/game_theory/plot_01_zero_sum_games.html"><span class="doc">Von Neumann’s minimax theorem: optimal mixed strategies</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Von Neumann's minimax theorem: optimal mixed strategies</div>
+</div></div></section>
+<section id="levenberg-marquardt-and-nonlinear-least-squares">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">1944-1963 – Levenberg, Marquardt, and Nonlinear Least Squares</a><a class="headerlink" href="#levenberg-marquardt-and-nonlinear-least-squares" title="Link to this heading">#</a></h2>
+<p>Fitting a model to data by least squares means minimizing
+<span class="math notranslate nohighlight">\(\tfrac12 \sum_i r_i(x)^2\)</span>, where each residual <span class="math notranslate nohighlight">\(r_i\)</span> is the
+gap between a data point and the model’s prediction. When the model is
+nonlinear in its parameters, the Gauss-Newton method linearizes the
+residuals and solves a linear least-squares problem at each step. It
+converges fast near the solution but can diverge from a poor starting
+guess. Kenneth Levenberg (1944) and Donald Marquardt (1963) added a
+damping term:</p>
+<div class="math notranslate nohighlight">
+\[(J^T J + \lambda D)\,\delta = -J^T r.\]</div>
+<p>Here <span class="math notranslate nohighlight">\(J\)</span> is the Jacobian of the residuals and <span class="math notranslate nohighlight">\(D\)</span> is the
+identity (Levenberg) or the diagonal of <span class="math notranslate nohighlight">\(J^T J\)</span> (Marquardt). A
+large <span class="math notranslate nohighlight">\(\lambda\)</span> gives a short, safe step along the negative
+gradient; a small <span class="math notranslate nohighlight">\(\lambda\)</span> recovers Gauss-Newton. Adjusting
+<span class="math notranslate nohighlight">\(\lambda\)</span> from step to step gives a method that is both robust and
+fast. It remains the standard algorithm for nonlinear curve fitting,
+and was one of the first <em>trust-region</em> methods.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.optimization.systems.least_squares.levenberg_marquardt()</span></code>
+wraps <code class="docutils literal notranslate"><span class="pre">scipy.optimize.least_squares(method=&quot;lm&quot;)</span></code> (MINPACK’s
+implementation) and returns a
+<a class="reference internal" href="../api/optimization.html#mathematicskit.optimization.LeastSquaresResult" title="mathematicskit.optimization.core.base.LeastSquaresResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">LeastSquaresResult</span></code></a>.</p>
+<p><em>References:</em> K. Levenberg, “A Method for the Solution of Certain
+Non-Linear Problems in Least Squares,” Quarterly of Applied Mathematics
+2(2) (1944), 164-168; D. W. Marquardt, “An Algorithm for Least-Squares
+Estimation of Nonlinear Parameters,” Journal of the Society for
+Industrial and Applied Mathematics 11(2) (1963), 431-441.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Fits a four-parameter damped cosine to noisy data. The residuals depend nonlinearly on the decay rate and frequency, so the fit needs an iterative method; Levenberg-Marquardt blends gradient descent (far from the solution) with Gauss-Newton (close to it)."><img alt="" src="../_images/sphx_glr_plot_01_levenberg_marquardt_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/optimization/least_squares/plot_01_levenberg_marquardt.html"><span class="doc">Levenberg-Marquardt: fitting a damped oscillation</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Levenberg-Marquardt: fitting a damped oscillation</div>
 </div></div></section>
 <section id="dantzig-s-simplex-method">
-<h2><a class="toc-backref" href="#id3" role="doc-backlink">1947 – Dantzig’s Simplex Method</a><a class="headerlink" href="#dantzig-s-simplex-method" title="Link to this heading">#</a></h2>
-<p>George Dantzig, working on logistics planning problems for the US Air
-Force, formulated the general linear program – minimize a linear
-objective subject to linear inequality constraints – and, in 1947,
-devised the simplex method: walk from vertex to adjacent vertex of the
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">1947 – Dantzig’s Simplex Method</a><a class="headerlink" href="#dantzig-s-simplex-method" title="Link to this heading">#</a></h2>
+<p>George Dantzig, working on logistics planning for the US Air Force,
+formulated the general linear program: minimize a linear objective
+subject to linear inequality constraints. In 1947 he devised the
+simplex method, which walks from vertex to adjacent vertex of the
 constraint polytope, always improving the objective, until no adjacent
-vertex improves further. Despite an exponential worst case discovered
-only decades later, the simplex method is famously efficient in
-practice, and remains, alongside modern interior-point methods, one of
-the two workhorses of large-scale linear programming.</p>
+vertex does better. Victor Klee and George Minty showed in 1972 that
+its worst case is exponential, yet the method is famously efficient in
+practice. Together with interior-point methods, it remains one of the
+two workhorses of large-scale linear programming.</p>
 <p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.optimization.systems.linear_programming.linear_program()</span></code>
-wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linprog.html#scipy.optimize.linprog" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.optimize.linprog()</span></code></a>, which dispatches between a dual
-simplex method and an interior-point method depending on problem
+wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linprog.html#scipy.optimize.linprog" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.optimize.linprog()</span></code></a>, which chooses between a dual
+simplex method and an interior-point method depending on the problem’s
 structure.</p>
 <p><em>References:</em> G. B. Dantzig, “Maximization of a Linear Function of
 Variables Subject to Linear Inequalities,” in <em>Activity Analysis of
 Production and Allocation</em>, ed. T. C. Koopmans (New York: Wiley, 1951),
 339-347 (describing the method Dantzig developed in 1947).</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="A classic LP: maximize profit from two products given shared resource constraints. scipy.optimize.linprog minimizes by convention, so the objective is negated."><img alt="" src="../_images/sphx_glr_plot_01_production_planning_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/optimization/linear_programming/plot_01_production_planning.html"><span class="doc">A small production-planning linear program</span></a></p>
-  <div class="sphx-glr-thumbnail-title">A small production-planning linear program</div>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Maximize the profit 3x + 5y from two products subject to x + 2y \leq 40 labor-hours and 2x + y \leq 30 units of material. The simplex method starts at the vertex (0, 0) of the feasible polygon and pivots along its edges to an adjacent vertex with a higher profit, until no neighbour improves. The tableau pivots are written out below, and the answer is checked against linear_program."><img alt="" src="../_images/sphx_glr_plot_01_simplex_method_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/optimization/linear_programming/plot_01_simplex_method.html"><span class="doc">Dantzig’s simplex method: walking the vertices of a production LP</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Dantzig's simplex method: walking the vertices of a production LP</div>
+</div></div></section>
+<section id="robbins-monro-and-stochastic-approximation">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">1951 – Robbins, Monro, and Stochastic Approximation</a><a class="headerlink" href="#robbins-monro-and-stochastic-approximation" title="Link to this heading">#</a></h2>
+<p>Herbert Robbins and Sutton Monro asked how to find a root of a function
+<span class="math notranslate nohighlight">\(M(x)\)</span> that can only be measured with random error, as in a dose
+level that produces a target response in an experiment. Their answer
+was to step against each noisy measurement with a shrinking step size:</p>
+<div class="math notranslate nohighlight">
+\[x_{k+1} = x_k - a_k Y_k, \qquad \sum_k a_k = \infty, \quad \sum_k a_k^2 &lt; \infty.\]</div>
+<p>The first condition lets the iterates travel any distance; the second
+makes the noise average out. They proved convergence in mean square for
+steps such as <span class="math notranslate nohighlight">\(a_k = a/k\)</span>. Applied to noisy gradients, the
+iteration is <em>stochastic gradient descent</em>. Computing the gradient on
+a random mini-batch of data instead of the full data set is exactly
+such a noisy measurement, which is why the Robbins-Monro framework
+underlies the training of essentially every modern machine-learning
+model.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.optimization.systems.stochastic.robbins_monro()</span></code>
+runs the iteration with steps <span class="math notranslate nohighlight">\(a_0/(k+1)\)</span> on a user-supplied
+noisy gradient, recording the iterate path.</p>
+<p><em>References:</em> H. Robbins and S. Monro, “A Stochastic Approximation
+Method,” The Annals of Mathematical Statistics 22(3) (1951), 400-407.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Minimizes a quadratic using only noisy gradient observations. With Robbins and Monro&#x27;s step sizes a_k = a_0/(k+1), the noise averages out and the error shrinks like 1/\sqrt{k}. A constant step size instead stalls at a noise floor."><img alt="" src="../_images/sphx_glr_plot_01_robbins_monro_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/optimization/stochastic/plot_01_robbins_monro.html"><span class="doc">Robbins-Monro: stochastic gradient descent with decaying steps</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Robbins-Monro: stochastic gradient descent with decaying steps</div>
+</div></div></section>
+<section id="bellman-and-dynamic-programming">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">1952-1957 – Bellman and Dynamic Programming</a><a class="headerlink" href="#bellman-and-dynamic-programming" title="Link to this heading">#</a></h2>
+<p>Richard Bellman, working at the RAND Corporation, studied multistage
+decision processes: sequences of choices in which each decision changes
+the situation facing the next. His <em>principle of optimality</em> says that
+whatever the first decision, the remaining decisions of an optimal
+policy must themselves be optimal for the state that results. A problem
+can therefore be solved by building a table of optimal values for
+successively larger subproblems. For the 0/1 knapsack problem (choose
+items of weights <span class="math notranslate nohighlight">\(w_i\)</span> and values <span class="math notranslate nohighlight">\(v_i\)</span> of greatest total
+value within capacity <span class="math notranslate nohighlight">\(W\)</span>), the Bellman recursion is</p>
+<div class="math notranslate nohighlight">
+\[V(i, c) = \max\bigl(V(i-1, c),\ v_i + V(i-1, c - w_i)\bigr),\]</div>
+<p>which solves in <span class="math notranslate nohighlight">\(O(nW)\)</span> time a problem with <span class="math notranslate nohighlight">\(2^n\)</span> candidate
+selections. The same idea underlies shortest-path algorithms, sequence
+alignment, optimal control, and reinforcement learning.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.optimization.systems.dynamic_programming.knapsack()</span></code>
+fills Bellman’s value table for the 0/1 knapsack problem and traces back
+the chosen items, returning a
+<a class="reference internal" href="../api/optimization.html#mathematicskit.optimization.KnapsackResult" title="mathematicskit.optimization.core.base.KnapsackResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">KnapsackResult</span></code></a> that
+includes the table itself.</p>
+<p><em>References:</em> R. Bellman, “On the Theory of Dynamic Programming,”
+Proceedings of the National Academy of Sciences 38(8) (1952), 716-719;
+R. Bellman, <em>Dynamic Programming</em> (Princeton: Princeton University
+Press, 1957).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Fills a table of optimal values for every prefix of the items and every capacity, then traces back the chosen items. The table is the dynamic-programming &quot;value function&quot;."><img alt="" src="../_images/sphx_glr_plot_01_knapsack_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/optimization/dynamic_programming/plot_01_knapsack.html"><span class="doc">Bellman’s principle of optimality: the 0/1 knapsack</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Bellman's principle of optimality: the 0/1 knapsack</div>
+</div></div></section>
+<section id="kiefer-s-fibonacci-and-golden-section-search">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">1953 – Kiefer’s Fibonacci and Golden-Section Search</a><a class="headerlink" href="#kiefer-s-fibonacci-and-golden-section-search" title="Link to this heading">#</a></h2>
+<p>How few function evaluations suffice to locate the minimum of a
+unimodal function of one variable on an interval? Jack Kiefer proved
+in 1953 that, for a fixed budget of evaluations, the optimal sequential
+strategy places them at ratios of consecutive Fibonacci numbers. As the
+budget grows, those ratios tend to <span class="math notranslate nohighlight">\(1/\varphi\)</span>, where
+<span class="math notranslate nohighlight">\(\varphi = (1+\sqrt5)/2\)</span> is the golden ratio, which gives
+<em>golden-section search</em>. Two interior points divide the bracket in the
+golden ratio, and comparing the function values there discards one end.
+The surviving interior point is exactly where the next bracket needs
+one of its own, so each step costs a single new evaluation and shrinks
+the bracket by the factor <span class="math notranslate nohighlight">\(1/\varphi \approx 0.618\)</span>. Guaranteed
+linear convergence without derivatives made it the standard safeguard
+inside one-dimensional line searches, notably Brent’s method.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.optimization.systems.scalar_search.golden_section_search()</span></code>
+implements the method and records every bracket in a
+<a class="reference internal" href="../api/optimization.html#mathematicskit.optimization.ScalarSearchResult" title="mathematicskit.optimization.core.base.ScalarSearchResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">ScalarSearchResult</span></code></a>.</p>
+<p><em>References:</em> J. Kiefer, “Sequential Minimax Search for a Maximum,”
+Proceedings of the American Mathematical Society 4(3) (1953), 502-506.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Locates the minimum of a unimodal function on an interval. Each iteration costs one new function evaluation and shrinks the bracket by the factor 1/\varphi \approx 0.618."><img alt="" src="../_images/sphx_glr_plot_01_golden_section_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/optimization/scalar_search/plot_01_golden_section.html"><span class="doc">Golden-section search: shrinking the bracket</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Golden-section search: shrinking the bracket</div>
+</div></div></section>
+<section id="the-frank-wolfe-method">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">1956 – The Frank-Wolfe Method</a><a class="headerlink" href="#the-frank-wolfe-method" title="Link to this heading">#</a></h2>
+<p>Marguerite Frank and Philip Wolfe, both at Princeton, proposed an
+algorithm for minimizing a convex quadratic function over a polytope
+that never needs to project back onto the feasible set. At each iterate
+it minimizes the <em>linearization</em> of the objective over the polytope.
+That subproblem is a linear program, solved at a vertex <span class="math notranslate nohighlight">\(s_k\)</span>,
+and the method then moves part of the way toward that vertex:</p>
+<div class="math notranslate nohighlight">
+\[s_k = \arg\min_{s \in P} \nabla f(x_k)^T s, \qquad
+x_{k+1} = x_k + \frac{2}{k+2}(s_k - x_k).\]</div>
+<p>The quantity <span class="math notranslate nohighlight">\(\nabla f(x_k)^T(x_k - s_k)\)</span> bounds the error
+<span class="math notranslate nohighlight">\(f(x_k) - f^*\)</span> from above, so the method certifies its own
+accuracy, and the error decays as <span class="math notranslate nohighlight">\(O(1/k)\)</span>. Largely set aside for
+decades, the method (also called <em>conditional gradient</em>) returned to
+prominence in machine learning, where its iterates are sparse
+combinations of few vertices and a linear subproblem is often much
+cheaper than a projection.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.optimization.systems.frank_wolfe.frank_wolfe()</span></code>
+solves each linear subproblem with
+<code class="xref py py-func docutils literal notranslate"><span class="pre">linear_program()</span></code>
+and records the Frank-Wolfe gap at every iteration.</p>
+<p><em>References:</em> M. Frank and P. Wolfe, “An Algorithm for Quadratic
+Programming,” Naval Research Logistics Quarterly 3(1-2) (1956), 95-110;
+M. Jaggi, “Revisiting Frank-Wolfe: Projection-Free Sparse Convex
+Optimization,” Proceedings of the 30th International Conference on
+Machine Learning, PMLR 28(1) (2013), 427-435.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Minimizes a convex quadratic over the triangle \{x \geq 0,\ x_1 + x_2 + x_3 = 1\} without ever projecting onto it. Each step solves a linear program, whose solution is a vertex, and moves toward that vertex. The Frank-Wolfe gap certifies how far the objective is from optimal."><img alt="" src="../_images/sphx_glr_plot_02_frank_wolfe_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/optimization/constrained/plot_02_frank_wolfe.html"><span class="doc">Frank-Wolfe: optimization over the probability simplex</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Frank-Wolfe: optimization over the probability simplex</div>
+</div></div></section>
+<section id="rosenbrock-s-banana-function">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">1960 – Rosenbrock’s Banana Function</a><a class="headerlink" href="#rosenbrock-s-banana-function" title="Link to this heading">#</a></h2>
+<p>Howard Rosenbrock’s 1960 paper introduced a deliberately awkward test
+function: a narrow, curved, parabolic valley. It stress-tests
+optimization algorithms against the kind of ill-conditioning that
+gradient-descent-style methods handle badly. Finding the valley floor is
+easy, but following it to the true minimum is painfully slow without
+curvature information. More than sixty years later it remains the
+standard benchmark for comparing the convergence of optimization
+methods.</p>
+<div class="math notranslate nohighlight">
+\[f(x, y) = 100(y-x^2)^2 + (1-x)^2\]</div>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.optimization.utils.test_functions.rosenbrock()</span></code>,
+with its gradient and Hessian, is this function. It serves throughout
+this domain’s tests and examples as the shared benchmark for comparing
+gradient descent, conjugate gradient, Newton’s method, and BFGS.</p>
+<p><em>References:</em> H. H. Rosenbrock, “An Automatic Method for Finding the
+Greatest or Least Value of a Function,” The Computer Journal 3(3)
+(1960), 175-184.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="f(x, y) = 100(y-x^2)^2 + (1-x)^2 has its minimum f=0 at (1, 1), at the end of a banana-shaped valley along the parabola y = x^2. The walls are steep, but the floor is almost flat, so a method without curvature information finds the valley quickly and then crawls along it."><img alt="" src="../_images/sphx_glr_plot_01_rosenbrock_banana_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/optimization/test_functions/plot_01_rosenbrock_banana.html"><span class="doc">Rosenbrock’s banana function: a narrow curved valley</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Rosenbrock's banana function: a narrow curved valley</div>
+</div></div></section>
+<section id="land-doig-and-branch-and-bound">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">1960 – Land, Doig, and Branch-and-Bound</a><a class="headerlink" href="#land-doig-and-branch-and-bound" title="Link to this heading">#</a></h2>
+<p>Many planning problems need whole-number answers: a factory cannot open
+half a plant. Rounding the solution of the linear-programming
+<em>relaxation</em> (the same problem with the integrality requirement
+dropped) can give an infeasible or far-from-optimal answer. Ailsa Land
+and Alison Doig, at the London School of Economics, proposed a
+systematic search in 1960. Solve the relaxation; if a variable
+<span class="math notranslate nohighlight">\(x_j = t\)</span> is fractional, <em>branch</em> into two subproblems with
+<span class="math notranslate nohighlight">\(x_j \leq \lfloor t \rfloor\)</span> and <span class="math notranslate nohighlight">\(x_j \geq \lceil t \rceil\)</span>.
+Any subproblem whose relaxation cannot beat the best integer solution
+found so far is discarded (<em>bounded</em>). Combined with Ralph Gomory’s
+cutting planes (1958), branch-and-bound is the basis of every modern
+mixed-integer programming solver.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.optimization.systems.linear_programming.integer_linear_program()</span></code>
+wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.milp.html#scipy.optimize.milp" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.optimize.milp()</span></code></a>, whose HiGHS solver uses
+branch-and-cut, the modern descendant of Land and Doig’s method.</p>
+<p><em>References:</em> A. H. Land and A. G. Doig, “An Automatic Method of
+Solving Discrete Programming Problems,” Econometrica 28(3) (1960),
+497-520; R. E. Gomory, “Outline of an Algorithm for Integer Solutions
+to Linear Programs,” Bulletin of the American Mathematical Society
+64(5) (1958), 275-278.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="The LP relaxation of an integer program can have a fractional optimum that rounding does not repair. Branch and bound (Land and Doig, 1960) finds the true integer optimum; here it is at a different vertex from the relaxation&#x27;s."><img alt="" src="../_images/sphx_glr_plot_02_branch_and_bound_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/optimization/linear_programming/plot_02_branch_and_bound.html"><span class="doc">Branch and bound: integer versus relaxed optimum</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Branch and bound: integer versus relaxed optimum</div>
 </div></div></section>
 <section id="conjugate-gradients-as-nonlinear-optimization">
-<h2><a class="toc-backref" href="#id4" role="doc-backlink">1952 – Conjugate Gradients as Nonlinear Optimization</a><a class="headerlink" href="#conjugate-gradients-as-nonlinear-optimization" title="Link to this heading">#</a></h2>
-<p>Hestenes and Stiefel’s conjugate gradient method for linear systems (see
-the linalg chronology) has a direct nonlinear descendant: Reeves and
-Fletcher’s 1964 generalization replaces the linear residual with the
-gradient of a general nonlinear objective, reusing the previous search
-direction (weighted by a scalar <span class="math notranslate nohighlight">\(\beta_k\)</span>) to avoid steepest
-descent’s characteristic zig-zagging without ever needing second-derivative
-information. Polak and Ribiere’s 1969 alternative choice of
-<span class="math notranslate nohighlight">\(\beta_k\)</span>, with a standard nonnegativity safeguard, tends to
+<h2><a class="toc-backref" href="#id12" role="doc-backlink">1964-1969 – Conjugate Gradients as Nonlinear Optimization</a><a class="headerlink" href="#conjugate-gradients-as-nonlinear-optimization" title="Link to this heading">#</a></h2>
+<p>Magnus Hestenes and Eduard Stiefel’s conjugate gradient method for
+linear systems (see the linear-algebra chronology) has a direct
+nonlinear descendant. Roger Fletcher and Colin Reeves’s 1964
+generalization replaces the linear residual with the gradient of a
+general nonlinear objective. Each new search direction reuses the
+previous one, weighted by a scalar <span class="math notranslate nohighlight">\(\beta_k\)</span>, which avoids the
+zig-zagging of steepest descent without any second-derivative
+information. Elijah Polak and Gerard Ribière’s 1969 choice of
+<span class="math notranslate nohighlight">\(\beta_k\)</span>, with a standard non-negativity safeguard, tends to
 recover faster after an inaccurate line search in practice.</p>
 <p><em>Implementation:</em> <a class="reference internal" href="../api/optimization.html#mathematicskit.optimization.NonlinearConjugateGradient" title="mathematicskit.optimization.systems.conjugate_gradient.NonlinearConjugateGradient"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathematicskit.optimization.systems.conjugate_gradient.NonlinearConjugateGradient</span></code></a>
-implements both the Fletcher-Reeves and Polak-Ribiere variants.</p>
+implements both the Fletcher-Reeves and Polak-Ribière variants.</p>
 <p><em>References:</em> R. Fletcher and C. M. Reeves, “Function Minimization by
 Conjugate Gradients,” The Computer Journal 7(2) (1964), 149-154; E.
-Polak and G. Ribiere, “Note sur la convergence de methodes de directions
-conjuguees,” Revue Francaise d’Informatique et de Recherche
-Operationnelle 3(16) (1969), 35-43.</p>
+Polak and G. Ribière, “Note sur la convergence de méthodes de
+directions conjuguées,” Revue Française d’Informatique et de Recherche
+Opérationnelle 3(16) (1969), 35-43.</p>
 <div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Compares Polak-Ribiere nonlinear CG against plain gradient descent on the same ill-conditioned quadratic bowl -- CG&#x27;s conjugate search directions avoid the zig-zagging that slows gradient descent down."><img alt="" src="../_images/sphx_glr_plot_01_cg_vs_gradient_descent_thumb.png" />
 <p><a class="reference internal" href="../api/gallery/optimization/conjugate_gradient/plot_01_cg_vs_gradient_descent.html"><span class="doc">Nonlinear conjugate gradient vs. gradient descent</span></a></p>
   <div class="sphx-glr-thumbnail-title">Nonlinear conjugate gradient vs. gradient descent</div>
 </div></div></section>
-<section id="bfgs-and-quasi-newton-methods">
-<h2><a class="toc-backref" href="#id5" role="doc-backlink">1970 – BFGS and Quasi-Newton Methods</a><a class="headerlink" href="#bfgs-and-quasi-newton-methods" title="Link to this heading">#</a></h2>
-<p>Newton’s method for optimization converges quadratically near a minimum
-by using the exact Hessian to correct the steepest-descent direction,
-but computing (let alone inverting) that Hessian at every step is
-expensive. Charles Broyden, Roger Fletcher, Donald Goldfarb, and David
-Shanno independently arrived, all in 1970, at the same update formula for
-building up an approximation to the inverse Hessian purely from
-successive gradient evaluations – superlinear convergence without ever
-forming a single second derivative, still the default general-purpose
-optimizer in most numerical software four decades later.</p>
-<p><em>Implementation:</em> <a class="reference internal" href="../api/optimization.html#mathematicskit.optimization.BFGS" title="mathematicskit.optimization.systems.newton_quasi_newton.BFGS"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathematicskit.optimization.systems.newton_quasi_newton.BFGS</span></code></a>
-wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html#scipy.optimize.minimize" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.optimize.minimize()</span></code></a>’s <code class="docutils literal notranslate"><span class="pre">&quot;BFGS&quot;</span></code> method, recording the
-iterate path via its callback;
-<a class="reference internal" href="../api/optimization.html#mathematicskit.optimization.NewtonMethod" title="mathematicskit.optimization.systems.newton_quasi_newton.NewtonMethod"><code class="xref py py-class docutils literal notranslate"><span class="pre">NewtonMethod</span></code></a>
-wraps the <code class="docutils literal notranslate"><span class="pre">&quot;Newton-CG&quot;</span></code> method for the case where an exact Hessian (or
-Hessian-vector product) is available.</p>
-<p><em>References:</em> C. G. Broyden, “The Convergence of a Class of
-Double-rank Minimization Algorithms,” Journal of the Institute of
-Mathematics and Its Applications 6(1) (1970), 76-90; D. Goldfarb, “A
-Family of Variable-Metric Methods Derived by Variational Means,”
-Mathematics of Computation 24(109) (1970), 23-26.</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Gradient descent, nonlinear conjugate gradient, Newton&#x27;s method, and BFGS all started from the classic (-1.2, 1.0) starting point, compared by convergence rate. Newton&#x27;s method (using the exact Hessian) and BFGS reach the minimum in far fewer iterations than gradient descent&#x27;s slow crawl along the curved valley floor."><img alt="" src="../_images/sphx_glr_plot_01_rosenbrock_comparison_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/optimization/newton_quasi_newton/plot_01_rosenbrock_comparison.html"><span class="doc">All five unconstrained methods on the Rosenbrock function</span></a></p>
-  <div class="sphx-glr-thumbnail-title">All five unconstrained methods on the Rosenbrock function</div>
+<section id="nelder-and-mead-s-simplex-search">
+<h2><a class="toc-backref" href="#id13" role="doc-backlink">1965 – Nelder and Mead’s Simplex Search</a><a class="headerlink" href="#nelder-and-mead-s-simplex-search" title="Link to this heading">#</a></h2>
+<p>John Nelder and Roger Mead, statisticians at the National Vegetable
+Research Station in England, needed to minimize functions whose
+derivatives were unavailable or whose values were noisy. Building on a
+1962 method of Spendley, Hext, and Himsworth, they moved a simplex of
+<span class="math notranslate nohighlight">\(n+1\)</span> points through the parameter space. At each step the worst
+vertex is <em>reflected</em> through the centroid of the others, and the
+simplex <em>expands</em> along promising directions, <em>contracts</em> when a step
+fails, or <em>shrinks</em> toward the best point. The simplex adapts its shape
+to the local contours using function values alone. Its theory is weak
+(Ken McKinnon constructed smooth convex functions on which it converges
+to a non-stationary point), yet it became one of the most widely used
+optimization methods in science and engineering. It is unrelated to
+Dantzig’s simplex method for linear programming.</p>
+<p><em>Implementation:</em> <a class="reference internal" href="../api/optimization.html#mathematicskit.optimization.NelderMead" title="mathematicskit.optimization.systems.direct_search.NelderMead"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathematicskit.optimization.systems.direct_search.NelderMead</span></code></a>
+wraps the <code class="docutils literal notranslate"><span class="pre">&quot;Nelder-Mead&quot;</span></code> method of <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html#scipy.optimize.minimize" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.optimize.minimize()</span></code></a>,
+recording the iterate path so it can be compared with the gradient-based
+methods.</p>
+<p><em>References:</em> J. A. Nelder and R. Mead, “A Simplex Method for Function
+Minimization,” The Computer Journal 7(4) (1965), 308-313; K. I. M.
+McKinnon, “Convergence of the Nelder-Mead Simplex Method to a
+Nonstationary Point,” SIAM Journal on Optimization 9(1) (1998),
+148-158.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="The Nelder-Mead simplex method uses function values only. On the Rosenbrock function it needs more function evaluations than BFGS, which uses gradients, but it also works on objectives that have no gradient at all."><img alt="" src="../_images/sphx_glr_plot_01_nelder_mead_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/optimization/direct_search/plot_01_nelder_mead.html"><span class="doc">Nelder-Mead: minimizing without derivatives</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Nelder-Mead: minimizing without derivatives</div>
 </div></div></section>
 <section id="fiacco-mccormick-and-penalty-barrier-methods">
-<h2><a class="toc-backref" href="#id6" role="doc-backlink">1968 – Fiacco, McCormick, and Penalty/Barrier Methods</a><a class="headerlink" href="#fiacco-mccormick-and-penalty-barrier-methods" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id14" role="doc-backlink">1968 – Fiacco, McCormick, and Penalty/Barrier Methods</a><a class="headerlink" href="#fiacco-mccormick-and-penalty-barrier-methods" title="Link to this heading">#</a></h2>
 <p>Anthony Fiacco and Garth McCormick’s 1968 monograph <em>Nonlinear
-Programming: Sequential Unconstrained Minimization Techniques</em> gave a
-unified treatment of an idea with older, scattered roots (Richard
-Courant had proposed a quadratic penalty as early as 1943): reformulate
-a constrained problem as a <em>sequence</em> of unconstrained ones, adding a
-penalty term that grows without bound as a constraint is violated (or a
-barrier that blows up as a solution approaches the constraint boundary
-from the feasible side), and let that penalty weight increase toward
-infinity across the sequence. The limit of the resulting unconstrained
-minimizers converges to the constrained optimum.</p>
+Programming: Sequential Unconstrained Minimization Techniques</em> unified
+an idea with older, scattered roots; Richard Courant had proposed a
+quadratic penalty as early as 1943. The idea is to replace a
+constrained problem with a <em>sequence</em> of unconstrained ones. Each adds
+a penalty term that grows as a constraint is violated, or a barrier
+term that blows up as the solution approaches the constraint boundary
+from inside. As the penalty weight increases toward infinity across the
+sequence, the unconstrained minimizers converge to the constrained
+optimum.</p>
 <p><em>Implementation:</em> <a class="reference internal" href="../api/optimization.html#mathematicskit.optimization.PenaltyMethod" title="mathematicskit.optimization.systems.constrained.PenaltyMethod"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathematicskit.optimization.systems.constrained.PenaltyMethod</span></code></a>
-implements exactly this sequential quadratic-penalty scheme, solving
-each unconstrained sub-problem with
+implements this sequential quadratic-penalty scheme, solving each
+unconstrained subproblem with
 <a class="reference internal" href="../api/optimization.html#mathematicskit.optimization.BFGS" title="mathematicskit.optimization.systems.newton_quasi_newton.BFGS"><code class="xref py py-class docutils literal notranslate"><span class="pre">BFGS</span></code></a>.</p>
 <p><em>References:</em> A. V. Fiacco and G. P. McCormick, <em>Nonlinear Programming:
 Sequential Unconstrained Minimization Techniques</em> (New York: Wiley,
 1968).</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Minimizes x^2+y^2 subject to x+y=1: the closed-form solution is (0.5, 0.5) with multiplier \lambda=-1. Solved three ways -- directly via the Lagrange stationarity system, verified via the KKT conditions, and approached indirectly via the quadratic penalty method."><img alt="" src="../_images/sphx_glr_plot_01_lagrange_kkt_and_penalty_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/optimization/constrained/plot_01_lagrange_kkt_and_penalty.html"><span class="doc">Lagrange multipliers, KKT verification, and the penalty method</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Lagrange multipliers, KKT verification, and the penalty method</div>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Fiacco and McCormick&#x27;s sequential unconstrained minimization replaces \min x^2+y^2 subject to x+y=1 with the unconstrained problems \min x^2+y^2+\mu(x+y-1)^2 for growing \mu. Each penalized minimizer violates the constraint slightly, and the violation shrinks like 1/\mu as the minimizers approach the constrained optimum (0.5, 0.5)."><img alt="" src="../_images/sphx_glr_plot_03_penalty_method_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/optimization/constrained/plot_03_penalty_method.html"><span class="doc">The quadratic penalty method: a sequence of unconstrained problems</span></a></p>
+  <div class="sphx-glr-thumbnail-title">The quadratic penalty method: a sequence of unconstrained problems</div>
 </div></div></section>
-<section id="rosenbrock-s-banana-function">
-<h2><a class="toc-backref" href="#id7" role="doc-backlink">1960 – Rosenbrock’s Banana Function</a><a class="headerlink" href="#rosenbrock-s-banana-function" title="Link to this heading">#</a></h2>
-<p>Howard Rosenbrock’s 1960 paper introduced a deliberately awkward test
-function – a narrow, curved parabolic valley – specifically to stress-
-test optimization algorithms against exactly the kind of ill-conditioning
-that a naive gradient-descent-style method handles badly: the valley
-floor is trivial to find but excruciatingly slow to follow to the true
-minimum without using curvature information. It remains, over sixty
-years later, the standard benchmark for comparing optimization methods’
-convergence rates against each other.</p>
+<section id="bfgs-and-quasi-newton-methods">
+<h2><a class="toc-backref" href="#id15" role="doc-backlink">1970 – BFGS and Quasi-Newton Methods</a><a class="headerlink" href="#bfgs-and-quasi-newton-methods" title="Link to this heading">#</a></h2>
+<p>Newton’s method for optimization converges quadratically near a
+minimum by using the exact Hessian to correct the steepest-descent
+direction, but computing and inverting the Hessian at every step is
+expensive. In 1970 Charles Broyden, Roger Fletcher, Donald Goldfarb, and
+David Shanno independently arrived at the same update formula. It
+builds an approximation to the inverse Hessian from successive gradient
+evaluations alone, giving superlinear convergence without ever forming
+a second derivative. More than five decades later it is still the
+default general-purpose optimizer in most numerical software.</p>
+<p><em>Implementation:</em> <a class="reference internal" href="../api/optimization.html#mathematicskit.optimization.BFGS" title="mathematicskit.optimization.systems.newton_quasi_newton.BFGS"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathematicskit.optimization.systems.newton_quasi_newton.BFGS</span></code></a>
+wraps the <code class="docutils literal notranslate"><span class="pre">&quot;BFGS&quot;</span></code> method of <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html#scipy.optimize.minimize" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.optimize.minimize()</span></code></a>, recording
+the iterate path through its callback.
+<a class="reference internal" href="../api/optimization.html#mathematicskit.optimization.NewtonMethod" title="mathematicskit.optimization.systems.newton_quasi_newton.NewtonMethod"><code class="xref py py-class docutils literal notranslate"><span class="pre">NewtonMethod</span></code></a>
+wraps the <code class="docutils literal notranslate"><span class="pre">&quot;Newton-CG&quot;</span></code> method for cases where an exact Hessian, or a
+Hessian-vector product, is available.</p>
+<p><em>References:</em> C. G. Broyden, “The Convergence of a Class of
+Double-rank Minimization Algorithms,” Journal of the Institute of
+Mathematics and Its Applications 6(1) (1970), 76-90; R. Fletcher, “A
+New Approach to Variable Metric Algorithms,” The Computer Journal 13(3)
+(1970), 317-322; D. Goldfarb, “A Family of Variable-Metric Methods
+Derived by Variational Means,” Mathematics of Computation 24(109)
+(1970), 23-26; D. F. Shanno, “Conditioning of Quasi-Newton Methods for
+Function Minimization,” Mathematics of Computation 24(111) (1970),
+647-656.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="On the Rosenbrock function from (-1.2, 1.0), BFGS builds an inverse-Hessian approximation from gradients alone. It needs only a few dozen iterations, as few as Newton&#x27;s method with the exact Hessian at every step, while gradient descent needs thousands. Near the minimum its convergence is superlinear: the ratio of successive errors tends to zero."><img alt="" src="../_images/sphx_glr_plot_01_bfgs_quasi_newton_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/optimization/newton_quasi_newton/plot_01_bfgs_quasi_newton.html"><span class="doc">BFGS: Newton-like convergence without second derivatives</span></a></p>
+  <div class="sphx-glr-thumbnail-title">BFGS: Newton-like convergence without second derivatives</div>
+</div></div></section>
+<section id="nesterov-s-accelerated-gradient">
+<h2><a class="toc-backref" href="#id16" role="doc-backlink">1983 – Nesterov’s Accelerated Gradient</a><a class="headerlink" href="#nesterov-s-accelerated-gradient" title="Link to this heading">#</a></h2>
+<p>For convex functions with Lipschitz-continuous gradients, gradient
+descent reduces the error <span class="math notranslate nohighlight">\(f(x_k) - f^*\)</span> like <span class="math notranslate nohighlight">\(O(1/k)\)</span>.
+Arkadi Nemirovski and David Yudin had shown that no method using only
+gradients can beat <span class="math notranslate nohighlight">\(O(1/k^2)\)</span> in general. Yurii Nesterov, then a
+graduate student in Moscow, found a method that achieves that bound. It
+takes each gradient step from an <em>extrapolated</em> point, carrying
+momentum from the previous step:</p>
 <div class="math notranslate nohighlight">
-\[f(x, y) = 100(y-x^2)^2 + (1-x)^2\]</div>
-<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.optimization.utils.test_functions.rosenbrock()</span></code>
-(with its gradient and Hessian) is exactly this function, used
-throughout this domain’s tests and examples as the shared benchmark
-comparing gradient descent, conjugate gradient, Newton’s method, and
-BFGS against each other.</p>
-<p><em>References:</em> H. H. Rosenbrock, “An Automatic Method for Finding the
-Greatest or Least Value of a Function,” The Computer Journal 3(3)
-(1960), 175-184.</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Gradient descent, nonlinear conjugate gradient, Newton&#x27;s method, and BFGS all started from the classic (-1.2, 1.0) starting point, compared by convergence rate. Newton&#x27;s method (using the exact Hessian) and BFGS reach the minimum in far fewer iterations than gradient descent&#x27;s slow crawl along the curved valley floor."><img alt="" src="../_images/sphx_glr_plot_01_rosenbrock_comparison_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/optimization/newton_quasi_newton/plot_01_rosenbrock_comparison.html"><span class="doc">All five unconstrained methods on the Rosenbrock function</span></a></p>
-  <div class="sphx-glr-thumbnail-title">All five unconstrained methods on the Rosenbrock function</div>
+\[y_k = x_k + \frac{k-1}{k+2}(x_k - x_{k-1}), \qquad
+x_{k+1} = y_k - \frac1L \nabla f(y_k),\]</div>
+<p>with <span class="math notranslate nohighlight">\(f(x_k) - f^* \leq 2L\|x_0 - x^*\|^2/(k+1)^2\)</span>. The cost per
+step is the same as gradient descent. Accelerated methods, including
+FISTA for problems with non-smooth regularizers, became central to
+large-scale convex optimization and signal processing.</p>
+<p><em>Implementation:</em> <a class="reference internal" href="../api/optimization.html#mathematicskit.optimization.NesterovAcceleratedGradient" title="mathematicskit.optimization.systems.momentum.NesterovAcceleratedGradient"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathematicskit.optimization.systems.momentum.NesterovAcceleratedGradient</span></code></a>
+implements this constant-step scheme with the iterate path recorded, for
+direct comparison with
+<a class="reference internal" href="../api/optimization.html#mathematicskit.optimization.GradientDescent" title="mathematicskit.optimization.systems.gradient_descent.GradientDescent"><code class="xref py py-class docutils literal notranslate"><span class="pre">GradientDescent</span></code></a>.</p>
+<p><em>References:</em> Y. E. Nesterov, “A Method of Solving a Convex Programming
+Problem with Convergence Rate <span class="math notranslate nohighlight">\(O(1/k^2)\)</span>,” Soviet Mathematics
+Doklady 27(2) (1983), 372-376; A. Beck and M. Teboulle, “A Fast
+Iterative Shrinkage-Thresholding Algorithm for Linear Inverse
+Problems,” SIAM Journal on Imaging Sciences 2(1) (2009), 183-202.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="On an ill-conditioned convex quadratic, plain gradient descent reduces the objective gap like O(1/k) until the strongly convex regime kicks in; Nesterov&#x27;s accelerated gradient, with the same step size, achieves the optimal first-order rate O(1/k^2)."><img alt="" src="../_images/sphx_glr_plot_01_nesterov_acceleration_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/optimization/momentum/plot_01_nesterov_acceleration.html"><span class="doc">Nesterov acceleration: O(1/k^2) versus O(1/k)</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Nesterov acceleration: O(1/k^2) versus O(1/k)</div>
+</div></div></section>
+<section id="kingma-ba-and-adam">
+<h2><a class="toc-backref" href="#id17" role="doc-backlink">2014 – Kingma, Ba, and Adam</a><a class="headerlink" href="#kingma-ba-and-adam" title="Link to this heading">#</a></h2>
+<p>Training a neural network means minimizing a loss over millions of
+parameters from noisy mini-batch gradients whose scales can differ
+enormously between coordinates. Diederik Kingma and Jimmy Ba’s <em>Adam</em>
+(adaptive moment estimation) combines momentum with the per-coordinate
+scaling of John Duchi, Elad Hazan, and Yoram Singer’s AdaGrad (2011)
+and Geoffrey Hinton’s RMSProp. It keeps exponential moving averages of
+the gradient <span class="math notranslate nohighlight">\(m_k\)</span> and of its elementwise square <span class="math notranslate nohighlight">\(v_k\)</span>,
+corrects both for their initialization at zero, and steps</p>
+<div class="math notranslate nohighlight">
+\[x_{k+1} = x_k - \alpha\, \frac{\hat m_k}{\sqrt{\hat v_k} + \varepsilon}.\]</div>
+<p>Each coordinate therefore moves by roughly <span class="math notranslate nohighlight">\(\alpha\)</span> per step,
+whatever the scale of its gradient. Its robustness with little tuning
+made Adam the default optimizer of deep learning. Its convergence
+theory is subtle: Sashank Reddi, Satyen Kale, and Sanjiv Kumar (2018)
+showed that the original method can fail to converge on simple convex
+problems.</p>
+<p><em>Implementation:</em> <a class="reference internal" href="../api/optimization.html#mathematicskit.optimization.Adam" title="mathematicskit.optimization.systems.momentum.Adam"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathematicskit.optimization.systems.momentum.Adam</span></code></a>
+implements the bias-corrected update of Kingma and Ba’s Algorithm 1.</p>
+<p><em>References:</em> D. P. Kingma and J. Ba, “Adam: A Method for Stochastic
+Optimization,” 3rd International Conference on Learning Representations
+(ICLR 2015), arXiv:1412.6980; J. Duchi, E. Hazan, and Y. Singer,
+“Adaptive Subgradient Methods for Online Learning and Stochastic
+Optimization,” Journal of Machine Learning Research 12 (2011),
+2121-2159; S. J. Reddi, S. Kale, and S. Kumar, “On the Convergence of
+Adam and Beyond,” 6th International Conference on Learning
+Representations (ICLR 2018).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="A quadratic whose two coordinates differ in curvature by a factor of 1000. Fixed-step gradient descent must use a step small enough for the stiff coordinate, so it crawls along the flat one. Adam rescales each coordinate by its root-mean-square gradient and moves both at a similar speed."><img alt="" src="../_images/sphx_glr_plot_02_adam_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/optimization/momentum/plot_02_adam.html"><span class="doc">Adam on a badly scaled problem</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Adam on a badly scaled problem</div>
 </div></div></section>
 <section id="see-also">
-<h2><a class="toc-backref" href="#id8" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id18" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="../api/optimization.html"><span class="doc">mathematicskit.optimization</span></a></p></li>
 <li><p><a class="reference internal" href="linalg_breakthroughs.html"><span class="doc">Breakthroughs in Numerical Linear Algebra</span></a></p></li>
@@ -707,13 +1004,23 @@ Greatest or Least Value of a Function,” The Computer Journal 3(3)
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lagrange-multipliers-and-the-kkt-conditions">1788-1951 – Lagrange Multipliers and the KKT Conditions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cauchy-and-gradient-descent">1847 – Cauchy and Gradient Descent</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lagrange-multipliers">1687 – 1806 – Lagrange Multipliers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#von-neumann-s-minimax-theorem">1928 – Von Neumann’s Minimax Theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#levenberg-marquardt-and-nonlinear-least-squares">1944-1963 – Levenberg, Marquardt, and Nonlinear Least Squares</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dantzig-s-simplex-method">1947 – Dantzig’s Simplex Method</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conjugate-gradients-as-nonlinear-optimization">1952 – Conjugate Gradients as Nonlinear Optimization</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bfgs-and-quasi-newton-methods">1970 – BFGS and Quasi-Newton Methods</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fiacco-mccormick-and-penalty-barrier-methods">1968 – Fiacco, McCormick, and Penalty/Barrier Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robbins-monro-and-stochastic-approximation">1951 – Robbins, Monro, and Stochastic Approximation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bellman-and-dynamic-programming">1952-1957 – Bellman and Dynamic Programming</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kiefer-s-fibonacci-and-golden-section-search">1953 – Kiefer’s Fibonacci and Golden-Section Search</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-frank-wolfe-method">1956 – The Frank-Wolfe Method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rosenbrock-s-banana-function">1960 – Rosenbrock’s Banana Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#land-doig-and-branch-and-bound">1960 – Land, Doig, and Branch-and-Bound</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conjugate-gradients-as-nonlinear-optimization">1964-1969 – Conjugate Gradients as Nonlinear Optimization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nelder-and-mead-s-simplex-search">1965 – Nelder and Mead’s Simplex Search</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fiacco-mccormick-and-penalty-barrier-methods">1968 – Fiacco, McCormick, and Penalty/Barrier Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bfgs-and-quasi-newton-methods">1970 – BFGS and Quasi-Newton Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nesterov-s-accelerated-gradient">1983 – Nesterov’s Accelerated Gradient</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kingma-ba-and-adam">2014 – Kingma, Ba, and Adam</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#see-also">See Also</a></li>
 </ul>
   </nav></div>

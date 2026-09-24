@@ -472,7 +472,97 @@ comparison); maximum flow / minimum cut
 heuristic and exact backtracking, hand-rolled – NP-complete in
 general, no scipy equivalent); and spectral graph theory (graph
 Laplacian via <code class="docutils literal notranslate"><span class="pre">scipy.sparse.csgraph.laplacian</span></code>, algebraic connectivity
-and spectral bipartition via <code class="docutils literal notranslate"><span class="pre">numpy.linalg.eigh</span></code>).</p>
+and spectral bipartition via <code class="docutils literal notranslate"><span class="pre">numpy.linalg.eigh</span></code>); Kirchhoff’s
+spanning-tree count; Hamiltonian cycles by backtracking; bipartite
+matching (Hopcroft-Karp via scipy) with König vertex covers; Turán
+graphs and clique numbers; the assignment problem
+(<code class="docutils literal notranslate"><span class="pre">scipy.optimize.linear_sum_assignment</span></code>); connected components and
+the Erdős-Rényi giant component; A* search; and PageRank.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.AssignmentResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.graph_theory.</span></span><span class="sig-name descname"><span class="pre">AssignmentResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total_cost</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/graph_theory/core/base.html#AssignmentResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.graph_theory.AssignmentResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Container for a solved assignment problem.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rows</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>cols</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>total_cost</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.AssignmentResult.cols">
+<span class="sig-name descname"><span class="pre">cols</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.graph_theory.AssignmentResult.cols" title="Link to this definition">#</a></dt>
+<dd><p>Row <code class="docutils literal notranslate"><span class="pre">rows[k]</span></code> is assigned to column <code class="docutils literal notranslate"><span class="pre">cols[k]</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.AssignmentResult.rows">
+<span class="sig-name descname"><span class="pre">rows</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.graph_theory.AssignmentResult.rows" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.AssignmentResult.total_cost">
+<span class="sig-name descname"><span class="pre">total_cost</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.graph_theory.AssignmentResult.total_cost" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.BipartiteMatchingResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.graph_theory.</span></span><span class="sig-name descname"><span class="pre">BipartiteMatchingResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pairs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertex_cover</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/graph_theory/core/base.html#BipartiteMatchingResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.graph_theory.BipartiteMatchingResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Container for a maximum matching in a bipartite graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pairs</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a>)</p></li>
+<li><p><strong>vertex_cover</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.BipartiteMatchingResult.pairs">
+<span class="sig-name descname"><span class="pre">pairs</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a></span><a class="headerlink" href="#mathematicskit.graph_theory.BipartiteMatchingResult.pairs" title="Link to this definition">#</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">{left_vertex:</span> <span class="pre">right_vertex}</span></code> for every matched left vertex.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.BipartiteMatchingResult.size">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">size</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#mathematicskit.graph_theory.BipartiteMatchingResult.size" title="Link to this definition">#</a></dt>
+<dd><p>Number of matched pairs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.BipartiteMatchingResult.vertex_cover">
+<span class="sig-name descname"><span class="pre">vertex_cover</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a></span><a class="headerlink" href="#mathematicskit.graph_theory.BipartiteMatchingResult.vertex_cover" title="Link to this definition">#</a></dt>
+<dd><p>A minimum vertex cover, of the same size as the matching (König’s theorem).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)">list</a> of <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="mathematicskit.graph_theory.ColoringResult">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.graph_theory.</span></span><span class="sig-name descname"><span class="pre">ColoringResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coloring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_colors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/graph_theory/core/base.html#ColoringResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.graph_theory.ColoringResult" title="Link to this definition">#</a></dt>
@@ -490,7 +580,7 @@ and spectral bipartition via <code class="docutils literal notranslate"><span cl
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.graph_theory.ColoringResult.coloring">
 <span class="sig-name descname"><span class="pre">coloring</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a></span><a class="headerlink" href="#mathematicskit.graph_theory.ColoringResult.coloring" title="Link to this definition">#</a></dt>
-<dd><p><code class="docutils literal notranslate"><span class="pre">{vertex:</span> <span class="pre">color_index}</span></code>.</p>
+<dd><p><code class="docutils literal notranslate"><span class="pre">{vertex:</span> <span class="pre">color_index}</span></code>, with colors numbered from 0.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)">dict</a></p>
@@ -512,7 +602,58 @@ and spectral bipartition via <code class="docutils literal notranslate"><span cl
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.graph_theory.ColoringResult.num_colors">
 <span class="sig-name descname"><span class="pre">num_colors</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#mathematicskit.graph_theory.ColoringResult.num_colors" title="Link to this definition">#</a></dt>
+<dd><p>Number of distinct colors used. This is the graph’s chromatic
+number for <code class="docutils literal notranslate"><span class="pre">method=&quot;backtracking&quot;</span></code>, but only an upper bound on it
+for the <code class="docutils literal notranslate"><span class="pre">&quot;greedy&quot;</span></code> heuristic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.ComponentsResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.graph_theory.</span></span><span class="sig-name descname"><span class="pre">ComponentsResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_components</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sizes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/graph_theory/core/base.html#ComponentsResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.graph_theory.ComponentsResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Container for the connected components of a graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_components</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>)</p></li>
+<li><p><strong>labels</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>sizes</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.ComponentsResult.labels">
+<span class="sig-name descname"><span class="pre">labels</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.graph_theory.ComponentsResult.labels" title="Link to this definition">#</a></dt>
+<dd><p>Component label of each vertex.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.ComponentsResult.n_components">
+<span class="sig-name descname"><span class="pre">n_components</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#mathematicskit.graph_theory.ComponentsResult.n_components" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.ComponentsResult.sizes">
+<span class="sig-name descname"><span class="pre">sizes</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.graph_theory.ComponentsResult.sizes" title="Link to this definition">#</a></dt>
+<dd><p>Component sizes, largest first.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -641,7 +782,15 @@ own beyond construction/conversion – every algorithm lives in
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.graph_theory.MSTResult.total_weight">
 <span class="sig-name descname"><span class="pre">total_weight</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.graph_theory.MSTResult.total_weight" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>Sum of the tree’s edge weights – the quantity an MST
+minimizes, and therefore identical across any correct MST algorithm,
+even when the trees themselves differ (as they can when weights tie).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -673,7 +822,14 @@ own beyond construction/conversion – every algorithm lives in
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.graph_theory.MaxFlowResult.flow_value">
 <span class="sig-name descname"><span class="pre">flow_value</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.graph_theory.MaxFlowResult.flow_value" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>The maximum flow from source to sink – equal, by the
+max-flow min-cut theorem, to the total capacity crossing <cite>min_cut</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.graph_theory.MaxFlowResult.min_cut">
@@ -683,6 +839,80 @@ vertex partitions defining the corresponding minimum cut.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)">tuple</a> of (ndarray, ndarray), optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.PageRankResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.graph_theory.</span></span><span class="sig-name descname"><span class="pre">PageRankResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scores</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterations</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/graph_theory/core/base.html#PageRankResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.graph_theory.PageRankResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Container for a PageRank computation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scores</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>iterations</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.PageRankResult.iterations">
+<span class="sig-name descname"><span class="pre">iterations</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#mathematicskit.graph_theory.PageRankResult.iterations" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.PageRankResult.scores">
+<span class="sig-name descname"><span class="pre">scores</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.graph_theory.PageRankResult.scores" title="Link to this definition">#</a></dt>
+<dd><p>PageRank of each vertex; sums to 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.SearchResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.graph_theory.</span></span><span class="sig-name descname"><span class="pre">SearchResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_expanded</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/graph_theory/core/base.html#SearchResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.graph_theory.SearchResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Container for a single-pair shortest-path search.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a>)</p></li>
+<li><p><strong>distance</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>n_expanded</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.SearchResult.distance">
+<span class="sig-name descname"><span class="pre">distance</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.graph_theory.SearchResult.distance" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.SearchResult.n_expanded">
+<span class="sig-name descname"><span class="pre">n_expanded</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#mathematicskit.graph_theory.SearchResult.n_expanded" title="Link to this definition">#</a></dt>
+<dd><p>Number of vertices removed from the priority queue.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.SearchResult.path">
+<span class="sig-name descname"><span class="pre">path</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a></span><a class="headerlink" href="#mathematicskit.graph_theory.SearchResult.path" title="Link to this definition">#</a></dt>
+<dd><p>Vertices from source to target (empty if unreachable).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)">list</a> of <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -783,7 +1013,8 @@ zero iff the graph is disconnected.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.graph_theory.SpectralResult.eigenvalues">
 <span class="sig-name descname"><span class="pre">eigenvalues</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.graph_theory.SpectralResult.eigenvalues" title="Link to this definition">#</a></dt>
-<dd><p>Laplacian eigenvalues, ascending.</p>
+<dd><p>Laplacian eigenvalues, ascending. The smallest
+is always 0 (the all-ones eigenvector).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>ndarray, shape (<a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>,)</p>
@@ -794,13 +1025,64 @@ zero iff the graph is disconnected.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.graph_theory.SpectralResult.eigenvectors">
 <span class="sig-name descname"><span class="pre">eigenvectors</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.graph_theory.SpectralResult.eigenvectors" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>Orthonormal eigenvectors as <em>columns</em>, in the
+same order as <cite>eigenvalues</cite>; column 1 is the Fiedler vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (<a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>, <a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>)</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.graph_theory.SpectralResult.laplacian">
 <span class="sig-name descname"><span class="pre">laplacian</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.graph_theory.SpectralResult.laplacian" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>The combinatorial Laplacian <span class="math notranslate nohighlight">\(L = D - A\)</span>,
+degree matrix minus adjacency.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (<a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>, <a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>)</p>
+</dd>
+</dl>
+</dd></dl>
 
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.astar_shortest_path">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.graph_theory.</span></span><span class="sig-name descname"><span class="pre">astar_shortest_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heuristic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/graph_theory/systems/search.html#astar_shortest_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.graph_theory.astar_shortest_path" title="Link to this definition">#</a></dt>
+<dd><p>Shortest path from <code class="docutils literal notranslate"><span class="pre">source</span></code> to <code class="docutils literal notranslate"><span class="pre">target</span></code>, expanding vertices in order of <span class="math notranslate nohighlight">\(g(v) + h(v)\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(g\)</span> is the best known distance from the source and <span class="math notranslate nohighlight">\(h\)</span>
+an estimate of the remaining distance. If <span class="math notranslate nohighlight">\(h\)</span> never
+overestimates (it is <em>admissible</em>) and is consistent, the first time
+the target is expanded its distance is optimal. With <span class="math notranslate nohighlight">\(h = 0\)</span>
+the search is Dijkstra’s algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.graph_theory.Graph" title="mathematicskit.graph_theory.core.base.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a></span>) – Non-negative edge weights.</p></li>
+<li><p><strong>source</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>target</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>heuristic</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>], <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>] | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – <code class="docutils literal notranslate"><span class="pre">heuristic(v)</span></code> estimates the distance from <code class="docutils literal notranslate"><span class="pre">v</span></code> to <code class="docutils literal notranslate"><span class="pre">target</span></code>;
+defaults to 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.graph_theory.SearchResult" title="mathematicskit.graph_theory.core.base.SearchResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">SearchResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>SearchResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.graph_theory.utils.generators</span><span class="w"> </span><span class="kn">import</span> <span class="n">grid_graph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">grid_graph</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">manhattan</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="nb">abs</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">-</span> <span class="n">pos</span><span class="p">[</span><span class="mi">24</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">astar_shortest_path</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="n">manhattan</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">distance</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+<span class="go">(8.0, 9)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -880,6 +1162,85 @@ shortest paths are then undefined). Via
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.bipartite_matching">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.graph_theory.</span></span><span class="sig-name descname"><span class="pre">bipartite_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">left</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/graph_theory/systems/matching.html#bipartite_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.graph_theory.bipartite_matching" title="Link to this definition">#</a></dt>
+<dd><p>A maximum matching of a bipartite graph, and a minimum vertex cover of the same size.</p>
+<p>König’s construction: from every unmatched left vertex, follow
+alternating paths (non-matching edges left to right, matching edges
+right to left). With <span class="math notranslate nohighlight">\(Z\)</span> the vertices reached, the cover is
+(left not in <span class="math notranslate nohighlight">\(Z\)</span>) plus (right in <span class="math notranslate nohighlight">\(Z\)</span>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.graph_theory.Graph" title="mathematicskit.graph_theory.core.base.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a></span>) – Undirected and bipartite.</p></li>
+<li><p><strong>left</strong> (<em>iterable</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – The vertices on one side; every edge must join <code class="docutils literal notranslate"><span class="pre">left</span></code> to the rest.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.graph_theory.BipartiteMatchingResult" title="mathematicskit.graph_theory.core.base.BipartiteMatchingResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">BipartiteMatchingResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>BipartiteMatchingResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.graph_theory.utils.generators</span><span class="w"> </span><span class="kn">import</span> <span class="n">complete_bipartite_graph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">bipartite_matching</span><span class="p">(</span><span class="n">complete_bipartite_graph</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">left</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">vertex_cover</span><span class="p">)</span>
+<span class="go">(2, 2)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.clique_number">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.graph_theory.</span></span><span class="sig-name descname"><span class="pre">clique_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/graph_theory/systems/extremal.html#clique_number"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.graph_theory.clique_number" title="Link to this definition">#</a></dt>
+<dd><p>The size of the largest clique, by Bron-Kerbosch search with pivoting.</p>
+<p>Exponential in the worst case; intended for small graphs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>graph</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.graph_theory.Graph" title="mathematicskit.graph_theory.core.base.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a></span>) – Undirected.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>int</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clique_number</span><span class="p">(</span><span class="n">turan_graph</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.complete_bipartite_graph">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.graph_theory.</span></span><span class="sig-name descname"><span class="pre">complete_bipartite_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/graph_theory/utils/generators.html#complete_bipartite_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.graph_theory.complete_bipartite_graph" title="Link to this definition">#</a></dt>
+<dd><p>The complete bipartite graph <span class="math notranslate nohighlight">\(K_{m,n}\)</span>: vertices <code class="docutils literal notranslate"><span class="pre">0..m-1</span></code> joined to every vertex <code class="docutils literal notranslate"><span class="pre">m..m+n-1</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>m</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.graph_theory.Graph" title="mathematicskit.graph_theory.core.base.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Graph</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">complete_bipartite_graph</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span>
+<span class="go">12</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.graph_theory.complete_graph">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.graph_theory.</span></span><span class="sig-name descname"><span class="pre">complete_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/graph_theory/utils/generators.html#complete_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.graph_theory.complete_graph" title="Link to this definition">#</a></dt>
 <dd><p>The complete graph <span class="math notranslate nohighlight">\(K_n\)</span>: every pair of vertices connected.</p>
@@ -898,6 +1259,56 @@ shortest paths are then undefined). Via
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">complete_graph</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span>
 <span class="go">6</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.connected_components">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.graph_theory.</span></span><span class="sig-name descname"><span class="pre">connected_components</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/graph_theory/systems/components.html#connected_components"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.graph_theory.connected_components" title="Link to this definition">#</a></dt>
+<dd><p>The connected components of an undirected graph (weak components if directed).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>graph</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.graph_theory.Graph" title="mathematicskit.graph_theory.core.base.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.graph_theory.ComponentsResult" title="mathematicskit.graph_theory.core.base.ComponentsResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">ComponentsResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ComponentsResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.graph_theory.utils.generators</span><span class="w"> </span><span class="kn">import</span> <span class="n">path_graph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">connected_components</span><span class="p">(</span><span class="n">path_graph</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span><span class="o">.</span><span class="n">n_components</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.count_spanning_trees">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.graph_theory.</span></span><span class="sig-name descname"><span class="pre">count_spanning_trees</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/graph_theory/systems/enumeration.html#count_spanning_trees"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.graph_theory.count_spanning_trees" title="Link to this definition">#</a></dt>
+<dd><p>The number of spanning trees of an undirected graph, <span class="math notranslate nohighlight">\(\det L_{(0)}\)</span>.</p>
+<p>Deleting any one row and the matching column of the Laplacian
+<span class="math notranslate nohighlight">\(L = D - A\)</span> leaves a matrix whose determinant counts spanning
+trees (weighted by the product of edge weights, when edges are
+weighted). Exact for integer counts up to about <span class="math notranslate nohighlight">\(10^{15}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>graph</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.graph_theory.Graph" title="mathematicskit.graph_theory.core.base.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a></span>) – Undirected; multigraph-free.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>int</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.graph_theory.utils.generators</span><span class="w"> </span><span class="kn">import</span> <span class="n">complete_graph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">count_spanning_trees</span><span class="p">(</span><span class="n">complete_graph</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>  <span class="c1"># Cayley: 5^3</span>
+<span class="go">125</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -960,6 +1371,28 @@ shortest paths are then undefined). Via
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.dodecahedron_graph">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.graph_theory.</span></span><span class="sig-name descname"><span class="pre">dodecahedron_graph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/graph_theory/utils/generators.html#dodecahedron_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.graph_theory.dodecahedron_graph" title="Link to this definition">#</a></dt>
+<dd><p>The 20-vertex, 30-edge graph of the regular dodecahedron, the board of Hamilton’s icosian game.</p>
+<p>Vertices 0-4 form the outer pentagon, 5-9 and 10-14 the two middle
+rings, and 15-19 the inner pentagon.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.graph_theory.Graph" title="mathematicskit.graph_theory.core.base.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Graph</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">dodecahedron_graph</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">n_vertices</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span>
+<span class="go">(20, 30)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.graph_theory.floyd_warshall_shortest_paths">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.graph_theory.</span></span><span class="sig-name descname"><span class="pre">floyd_warshall_shortest_paths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/graph_theory/systems/shortest_paths.html#floyd_warshall_shortest_paths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.graph_theory.floyd_warshall_shortest_paths" title="Link to this definition">#</a></dt>
 <dd><p>All-pairs shortest paths via Floyd-Warshall.</p>
@@ -988,6 +1421,32 @@ source when the graph is dense. Via
 <span class="go">array([[0., 1., 3.],</span>
 <span class="go">       [1., 0., 2.],</span>
 <span class="go">       [3., 2., 0.]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.giant_component_fraction">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.graph_theory.</span></span><span class="sig-name descname"><span class="pre">giant_component_fraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/graph_theory/systems/components.html#giant_component_fraction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.graph_theory.giant_component_fraction" title="Link to this definition">#</a></dt>
+<dd><p>Fraction of the vertices in the largest connected component.</p>
+<p>In the Erdős-Rényi graph <span class="math notranslate nohighlight">\(G(n, c/n)\)</span> this fraction tends to 0
+for <span class="math notranslate nohighlight">\(c &lt; 1\)</span> and to the positive root <span class="math notranslate nohighlight">\(s\)</span> of
+<span class="math notranslate nohighlight">\(s = 1 - e^{-cs}\)</span> for <span class="math notranslate nohighlight">\(c &gt; 1\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>graph</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.graph_theory.Graph" title="mathematicskit.graph_theory.core.base.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.graph_theory.utils.generators</span><span class="w"> </span><span class="kn">import</span> <span class="n">complete_graph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">giant_component_fraction</span><span class="p">(</span><span class="n">complete_graph</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="go">1.0</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1026,6 +1485,69 @@ ed., Sec. 5.1.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">greedy_coloring</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>  <span class="c1"># a 4-cycle is bipartite: 2 colors suffice</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">num_colors</span>
 <span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">greedy_coloring</span><span class="p">(</span><span class="n">Graph</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">num_colors</span>  <span class="c1"># the empty graph needs no colors</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.grid_graph">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.graph_theory.</span></span><span class="sig-name descname"><span class="pre">grid_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blocked</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/graph_theory/utils/generators.html#grid_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.graph_theory.grid_graph" title="Link to this definition">#</a></dt>
+<dd><p>A 4-connected grid graph with unit edge weights, and the planar position of each vertex.</p>
+<p>Vertex <code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">*</span> <span class="pre">cols</span> <span class="pre">+</span> <span class="pre">c</span></code> sits at position <code class="docutils literal notranslate"><span class="pre">(c,</span> <span class="pre">r)</span></code>. Cells listed in
+<code class="docutils literal notranslate"><span class="pre">blocked</span></code> (as <code class="docutils literal notranslate"><span class="pre">(row,</span> <span class="pre">col)</span></code> pairs) get no edges.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rows</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>cols</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>blocked</strong> (<em>iterable</em><em> of </em><em>(</em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>)</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>tuple of (Graph, ndarray)</em> – The graph and an array of shape <code class="docutils literal notranslate"><span class="pre">(rows</span> <span class="pre">*</span> <span class="pre">cols,</span> <span class="pre">2)</span></code> of positions.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">grid_graph</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">edges</span><span class="p">()),</span> <span class="n">pos</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="go">(7, [1.0, 1.0])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.hamiltonian_cycle">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.graph_theory.</span></span><span class="sig-name descname"><span class="pre">hamiltonian_cycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/graph_theory/systems/hamiltonian.html#hamiltonian_cycle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.graph_theory.hamiltonian_cycle" title="Link to this definition">#</a></dt>
+<dd><p>A cycle through every vertex exactly once, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if there is none.</p>
+<p>Extends a path one vertex at a time, trying unvisited neighbours in
+order of fewest remaining unvisited neighbours (Warnsdorff’s
+heuristic), and backtracks at dead ends.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.graph_theory.Graph" title="mathematicskit.graph_theory.core.base.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a></span>) – Undirected.</p></li>
+<li><p><strong>start</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>list of int or None</em> – The cycle’s vertices, beginning at <code class="docutils literal notranslate"><span class="pre">start</span></code>; the closing edge back
+to <code class="docutils literal notranslate"><span class="pre">start</span></code> is implied.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.graph_theory.utils.generators</span><span class="w"> </span><span class="kn">import</span> <span class="n">dodecahedron_graph</span><span class="p">,</span> <span class="n">complete_bipartite_graph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">hamiltonian_cycle</span><span class="p">(</span><span class="n">dodecahedron_graph</span><span class="p">()))</span>  <span class="c1"># Hamilton's icosian game</span>
+<span class="go">20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hamiltonian_cycle</span><span class="p">(</span><span class="n">complete_bipartite_graph</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> <span class="ow">is</span> <span class="kc">None</span>  <span class="c1"># unbalanced bipartite</span>
+<span class="go">True</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1102,6 +1624,51 @@ Algorithms</em>, 3rd ed., Ch. 26.2, Theorem 26.6.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">max_flow_min_cut</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sink</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">flow_value</span>
 <span class="go">5.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Fractional capacities are rejected rather than silently truncated.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">frac</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">directed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">frac</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">2.7</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">max_flow_min_cut</span><span class="p">(</span><span class="n">frac</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sink</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="w">    </span><span class="o">...</span>
+<span class="gr">ValueError</span>: <span class="n">edge capacities must be integers, but edge (0, 1) has weight 2.7</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.pagerank">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.graph_theory.</span></span><span class="sig-name descname"><span class="pre">pagerank</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">damping</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.85</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/graph_theory/systems/ranking.html#pagerank"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.graph_theory.pagerank" title="Link to this definition">#</a></dt>
+<dd><p>The PageRank vector: the stationary distribution of a random surfer.</p>
+<p>With probability <code class="docutils literal notranslate"><span class="pre">damping</span></code> the surfer follows a random out-link
+(edge weights act as relative link strengths); otherwise, or from a
+page with no out-links, it jumps to a uniformly random page. The
+scores solve</p>
+<div class="math notranslate nohighlight">
+\[\pi = d\, \pi P + \frac{1-d}{n}\mathbf{1},\]</div>
+<p>and power iteration converges at rate <code class="docutils literal notranslate"><span class="pre">damping</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.graph_theory.Graph" title="mathematicskit.graph_theory.core.base.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a></span>) – Directed (an undirected edge counts as links both ways).</p></li>
+<li><p><strong>damping</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>tol</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Stop when the L1 change between iterates falls below <code class="docutils literal notranslate"><span class="pre">tol</span></code>.</p></li>
+<li><p><strong>max_iter</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.graph_theory.PageRankResult" title="mathematicskit.graph_theory.core.base.PageRankResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">PageRankResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>PageRankResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.graph_theory.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Graph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">directed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]:</span>
+<span class="gp">... </span>    <span class="n">g</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">pagerank</span><span class="p">(</span><span class="n">g</span><span class="p">)</span><span class="o">.</span><span class="n">scores</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="go">[0.3878, 0.2148, 0.3974]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1171,7 +1738,7 @@ primary MST API. See Cormen et al., <em>Introduction to Algorithms</em>,
 <dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.graph_theory.random_graph">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.graph_theory.</span></span><span class="sig-name descname"><span class="pre">random_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/graph_theory/utils/generators.html#random_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.graph_theory.random_graph" title="Link to this definition">#</a></dt>
-<dd><p>An Erdos-Renyi random graph <span class="math notranslate nohighlight">\(G(n, p)\)</span>: each possible edge present independently with probability <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p>
+<dd><p>An Erdős-Rényi random graph <span class="math notranslate nohighlight">\(G(n, p)\)</span>: each possible edge present independently with probability <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -1192,6 +1759,36 @@ primary MST API. See Cormen et al., <em>Introduction to Algorithms</em>,
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">random_graph</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span> <span class="o">&lt;=</span> <span class="mi">45</span>
 <span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.solve_assignment">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.graph_theory.</span></span><span class="sig-name descname"><span class="pre">solve_assignment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cost</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/graph_theory/systems/assignment.html#solve_assignment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.graph_theory.solve_assignment" title="Link to this definition">#</a></dt>
+<dd><p>Assign each row to a distinct column so that the total cost is minimal (or maximal).</p>
+<p>Equivalently, a minimum-weight perfect matching in a complete
+bipartite graph. For an <span class="math notranslate nohighlight">\(n \times n\)</span> matrix there are
+<span class="math notranslate nohighlight">\(n!\)</span> assignments; Kuhn’s method finds the best in
+polynomial time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cost</strong> (<em>array_like</em><em>, </em><em>shape</em><em> (</em><em>m</em><em>, </em><a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n"><em>n</em></a><em>)</em>)</p></li>
+<li><p><strong>maximize</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.graph_theory.AssignmentResult" title="mathematicskit.graph_theory.core.base.AssignmentResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">AssignmentResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>AssignmentResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">solve_assignment</span><span class="p">([[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">cols</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">result</span><span class="o">.</span><span class="n">total_cost</span>
+<span class="go">([1, 0, 2], 5.0)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1232,6 +1829,56 @@ Theory</em>, 1997, Ch. 1, and Fiedler (1973), Czechoslovak Math. J. 23.</p>
 <span class="go">array([-0.,  2.,  2.,  4.])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">algebraic_connectivity</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 <span class="go">2.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.turan_graph">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.graph_theory.</span></span><span class="sig-name descname"><span class="pre">turan_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/graph_theory/systems/extremal.html#turan_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.graph_theory.turan_graph" title="Link to this definition">#</a></dt>
+<dd><p>The Turán graph <span class="math notranslate nohighlight">\(T(n, r)\)</span>: <code class="docutils literal notranslate"><span class="pre">n</span></code> vertices split into <code class="docutils literal notranslate"><span class="pre">r</span></code> near-equal parts, joined across parts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>r</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of parts, <code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">&gt;=</span> <span class="pre">1</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.graph_theory.Graph" title="mathematicskit.graph_theory.core.base.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Graph</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">turan_graph</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span>  <span class="c1"># K_{3,3}</span>
+<span class="go">9</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.graph_theory.turan_number">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.graph_theory.</span></span><span class="sig-name descname"><span class="pre">turan_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/graph_theory/systems/extremal.html#turan_number"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.graph_theory.turan_number" title="Link to this definition">#</a></dt>
+<dd><p>The number of edges of <span class="math notranslate nohighlight">\(T(n, r)\)</span>, the maximum for an <code class="docutils literal notranslate"><span class="pre">n</span></code>-vertex graph with no <span class="math notranslate nohighlight">\(K_{r+1}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>r</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>int</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">turan_number</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># Mantel (1907): floor(n^2 / 4) edges without a triangle</span>
+<span class="go">25</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1285,10 +1932,28 @@ Theory</em>, 1997, Ch. 1, and Fiedler (1973), Czechoslovak Math. J. 23.</p>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.AssignmentResult"><code class="docutils literal notranslate"><span class="pre">AssignmentResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.AssignmentResult.cols"><code class="docutils literal notranslate"><span class="pre">AssignmentResult.cols</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.AssignmentResult.rows"><code class="docutils literal notranslate"><span class="pre">AssignmentResult.rows</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.AssignmentResult.total_cost"><code class="docutils literal notranslate"><span class="pre">AssignmentResult.total_cost</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.BipartiteMatchingResult"><code class="docutils literal notranslate"><span class="pre">BipartiteMatchingResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.BipartiteMatchingResult.pairs"><code class="docutils literal notranslate"><span class="pre">BipartiteMatchingResult.pairs</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.BipartiteMatchingResult.size"><code class="docutils literal notranslate"><span class="pre">BipartiteMatchingResult.size</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.BipartiteMatchingResult.vertex_cover"><code class="docutils literal notranslate"><span class="pre">BipartiteMatchingResult.vertex_cover</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.ColoringResult"><code class="docutils literal notranslate"><span class="pre">ColoringResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.ColoringResult.coloring"><code class="docutils literal notranslate"><span class="pre">ColoringResult.coloring</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.ColoringResult.method"><code class="docutils literal notranslate"><span class="pre">ColoringResult.method</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.ColoringResult.num_colors"><code class="docutils literal notranslate"><span class="pre">ColoringResult.num_colors</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.ComponentsResult"><code class="docutils literal notranslate"><span class="pre">ComponentsResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.ComponentsResult.labels"><code class="docutils literal notranslate"><span class="pre">ComponentsResult.labels</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.ComponentsResult.n_components"><code class="docutils literal notranslate"><span class="pre">ComponentsResult.n_components</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.ComponentsResult.sizes"><code class="docutils literal notranslate"><span class="pre">ComponentsResult.sizes</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.Graph"><code class="docutils literal notranslate"><span class="pre">Graph</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
@@ -1310,6 +1975,17 @@ Theory</em>, 1997, Ch. 1, and Fiedler (1973), Czechoslovak Math. J. 23.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.MaxFlowResult.min_cut"><code class="docutils literal notranslate"><span class="pre">MaxFlowResult.min_cut</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.PageRankResult"><code class="docutils literal notranslate"><span class="pre">PageRankResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.PageRankResult.iterations"><code class="docutils literal notranslate"><span class="pre">PageRankResult.iterations</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.PageRankResult.scores"><code class="docutils literal notranslate"><span class="pre">PageRankResult.scores</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.SearchResult"><code class="docutils literal notranslate"><span class="pre">SearchResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.SearchResult.distance"><code class="docutils literal notranslate"><span class="pre">SearchResult.distance</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.SearchResult.n_expanded"><code class="docutils literal notranslate"><span class="pre">SearchResult.n_expanded</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.SearchResult.path"><code class="docutils literal notranslate"><span class="pre">SearchResult.path</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.ShortestPathResult"><code class="docutils literal notranslate"><span class="pre">ShortestPathResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.ShortestPathResult.distances"><code class="docutils literal notranslate"><span class="pre">ShortestPathResult.distances</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.ShortestPathResult.method"><code class="docutils literal notranslate"><span class="pre">ShortestPathResult.method</span></code></a></li>
@@ -1324,19 +2000,33 @@ Theory</em>, 1997, Ch. 1, and Fiedler (1973), Czechoslovak Math. J. 23.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.SpectralResult.laplacian"><code class="docutils literal notranslate"><span class="pre">SpectralResult.laplacian</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.astar_shortest_path"><code class="docutils literal notranslate"><span class="pre">astar_shortest_path()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.backtracking_coloring"><code class="docutils literal notranslate"><span class="pre">backtracking_coloring()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.bellman_ford_shortest_paths"><code class="docutils literal notranslate"><span class="pre">bellman_ford_shortest_paths()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.bipartite_matching"><code class="docutils literal notranslate"><span class="pre">bipartite_matching()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.clique_number"><code class="docutils literal notranslate"><span class="pre">clique_number()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.complete_bipartite_graph"><code class="docutils literal notranslate"><span class="pre">complete_bipartite_graph()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.complete_graph"><code class="docutils literal notranslate"><span class="pre">complete_graph()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.connected_components"><code class="docutils literal notranslate"><span class="pre">connected_components()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.count_spanning_trees"><code class="docutils literal notranslate"><span class="pre">count_spanning_trees()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.cycle_graph"><code class="docutils literal notranslate"><span class="pre">cycle_graph()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.dijkstra_shortest_paths"><code class="docutils literal notranslate"><span class="pre">dijkstra_shortest_paths()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.dodecahedron_graph"><code class="docutils literal notranslate"><span class="pre">dodecahedron_graph()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.floyd_warshall_shortest_paths"><code class="docutils literal notranslate"><span class="pre">floyd_warshall_shortest_paths()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.giant_component_fraction"><code class="docutils literal notranslate"><span class="pre">giant_component_fraction()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.greedy_coloring"><code class="docutils literal notranslate"><span class="pre">greedy_coloring()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.grid_graph"><code class="docutils literal notranslate"><span class="pre">grid_graph()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.hamiltonian_cycle"><code class="docutils literal notranslate"><span class="pre">hamiltonian_cycle()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.kruskal_mst"><code class="docutils literal notranslate"><span class="pre">kruskal_mst()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.max_flow_min_cut"><code class="docutils literal notranslate"><span class="pre">max_flow_min_cut()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.pagerank"><code class="docutils literal notranslate"><span class="pre">pagerank()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.path_graph"><code class="docutils literal notranslate"><span class="pre">path_graph()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.prim_mst"><code class="docutils literal notranslate"><span class="pre">prim_mst()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.random_graph"><code class="docutils literal notranslate"><span class="pre">random_graph()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.solve_assignment"><code class="docutils literal notranslate"><span class="pre">solve_assignment()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.spectral_analysis"><code class="docutils literal notranslate"><span class="pre">spectral_analysis()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.turan_graph"><code class="docutils literal notranslate"><span class="pre">turan_graph()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.graph_theory.turan_number"><code class="docutils literal notranslate"><span class="pre">turan_number()</span></code></a></li>
 </ul>
   </nav></div>
 

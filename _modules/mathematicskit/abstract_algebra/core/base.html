@@ -410,15 +410,15 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.abstract_algebra.core.base</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Abstract base class for finite groups, and a coefficient-generic</span>
-<span class="sd">polynomial class, shared across mathematicskit.abstract_algebra&#39;s systems/</span>
+<span></span><span class="sa">r</span><span class="sd">"""Abstract base class for finite groups, and a coefficient-generic</span>
+<span class="sd">polynomial class, shared across mathematicskit.abstract_algebra's systems/</span>
 <span class="sd">modules.</span>
 
 <span class="sd">Every algorithm in this domain is hand-rolled from its textbook</span>
 <span class="sd">definition -- group/ring/field theory over finite structures has no</span>
 <span class="sd">``numpy``/``scipy`` equivalent at all. See Dummit &amp; Foote, *Abstract</span>
 <span class="sd">Algebra*, 3rd ed., throughout.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -429,13 +429,13 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;FiniteGroup&quot;</span><span class="p">,</span> <span class="s2">&quot;GroupPropertiesResult&quot;</span><span class="p">,</span> <span class="s2">&quot;Polynomial&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"FiniteGroup"</span><span class="p">,</span> <span class="s2">"GroupPropertiesResult"</span><span class="p">,</span> <span class="s2">"SylowResult"</span><span class="p">,</span> <span class="s2">"CompositionSeriesResult"</span><span class="p">,</span> <span class="s2">"HomomorphismResult"</span><span class="p">,</span> <span class="s2">"Polynomial"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="FiniteGroup">
 <a class="viewcode-back" href="../../../../api/abstract_algebra.html#mathematicskit.abstract_algebra.FiniteGroup">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FiniteGroup</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Common interface for a finite group :math:`(G, \cdot)`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Common interface for a finite group :math:`(G, \cdot)`.</span>
 
 <span class="sd">    Concrete subclasses (:class:`~mathematicskit.abstract_algebra.systems.groups.CyclicGroup`,</span>
 <span class="sd">    :class:`~mathematicskit.abstract_algebra.systems.groups.PermutationGroup`)</span>
@@ -451,43 +451,43 @@
 <span class="sd">    4</span>
 <span class="sd">    &gt;&gt;&gt; g.is_abelian()</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="nd">@property</span>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">elements</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;list: Every group element, in a fixed (implementation-defined) order.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""list: Every group element, in a fixed (implementation-defined) order."""</span>
 
 <div class="viewcode-block" id="FiniteGroup.identity">
 <a class="viewcode-back" href="../../../../api/abstract_algebra.html#mathematicskit.abstract_algebra.FiniteGroup.identity">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">identity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;The group&#39;s identity element.&quot;&quot;&quot;</span></div>
+<span class="w">        </span><span class="sd">"""The group's identity element."""</span></div>
 
 
 <div class="viewcode-block" id="FiniteGroup.operate">
 <a class="viewcode-back" href="../../../../api/abstract_algebra.html#mathematicskit.abstract_algebra.FiniteGroup.operate">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">operate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;The group operation, :math:`a \\cdot b`.&quot;&quot;&quot;</span></div>
+<span class="w">        </span><span class="sd">"""The group operation, :math:`a \\cdot b`."""</span></div>
 
 
 <div class="viewcode-block" id="FiniteGroup.inverse">
 <a class="viewcode-back" href="../../../../api/abstract_algebra.html#mathematicskit.abstract_algebra.FiniteGroup.inverse">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;The inverse of ``a``.&quot;&quot;&quot;</span></div>
+<span class="w">        </span><span class="sd">"""The inverse of ``a``."""</span></div>
 
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">order</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;int: :math:`|G|`, the number of elements.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""int: :math:`|G|`, the number of elements."""</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">)</span>
 
 <div class="viewcode-block" id="FiniteGroup.cayley_table">
 <a class="viewcode-back" href="../../../../api/abstract_algebra.html#mathematicskit.abstract_algebra.FiniteGroup.cayley_table">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">cayley_table</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The Cayley (multiplication) table, as element indices.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""The Cayley (multiplication) table, as element indices.</span>
 
 <span class="sd">        Row ``i``, column ``j`` holds the index (into :attr:`elements`)</span>
 <span class="sd">        of ``elements[i] . elements[j]``. See Dummit &amp; Foote, *Abstract</span>
@@ -496,7 +496,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        ndarray, shape (n, n), int</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">els</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span>
         <span class="n">index</span> <span class="o">=</span> <span class="p">{</span><span class="n">e</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">els</span><span class="p">)}</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">els</span><span class="p">)</span>
@@ -510,12 +510,12 @@
 <div class="viewcode-block" id="FiniteGroup.is_abelian">
 <a class="viewcode-back" href="../../../../api/abstract_algebra.html#mathematicskit.abstract_algebra.FiniteGroup.is_abelian">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">is_abelian</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Whether the group operation is commutative for every pair of elements.</span>
+<span class="w">        </span><span class="sd">"""Whether the group operation is commutative for every pair of elements.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        bool</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">els</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span>
         <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">operate</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">operate</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">els</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">els</span><span class="p">)</span></div>
 
@@ -523,7 +523,7 @@
 <div class="viewcode-block" id="FiniteGroup.element_order">
 <a class="viewcode-back" href="../../../../api/abstract_algebra.html#mathematicskit.abstract_algebra.FiniteGroup.element_order">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">element_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The order of element ``a``: the smallest :math:`k&gt;0` with :math:`a^k = e`.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""The order of element ``a``: the smallest :math:`k&gt;0` with :math:`a^k = e`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -532,7 +532,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        int</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">e</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">identity</span><span class="p">()</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">a</span>
         <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span>
@@ -540,7 +540,7 @@
             <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">operate</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
             <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">if</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;element does not appear to have finite order within |G| steps&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">"element does not appear to have finite order within |G| steps"</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">k</span></div>
 </div>
 
@@ -550,20 +550,64 @@
 <a class="viewcode-back" href="../../../../api/abstract_algebra.html#mathematicskit.abstract_algebra.GroupPropertiesResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">GroupPropertiesResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for a finite group&#39;s summary properties.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Container for a finite group's summary properties."""</span>
 
     <span class="n">order</span><span class="p">:</span> <span class="nb">int</span>
     <span class="n">is_abelian</span><span class="p">:</span> <span class="nb">bool</span>
     <span class="n">identity</span><span class="p">:</span> <span class="nb">object</span>
     <span class="n">element_orders</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;dict: ``{element: order}`` for every element.&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sd">"""dict: ``{element: order}`` for every element."""</span></div>
+
+
+
+<div class="viewcode-block" id="SylowResult">
+<a class="viewcode-back" href="../../../../api/abstract_algebra.html#mathematicskit.abstract_algebra.SylowResult">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SylowResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Container for the Sylow :math:`p`-subgroups of a finite group."""</span>
+
+    <span class="n">p</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">sylow_order</span><span class="p">:</span> <span class="nb">int</span>
+<span class="w">    </span><span class="sd">"""int: :math:`p^k`, the largest power of ``p`` dividing :math:`|G|`."""</span>
+    <span class="n">subgroups</span><span class="p">:</span> <span class="nb">list</span>
+<span class="w">    </span><span class="sd">"""list of list: Every Sylow :math:`p`-subgroup, each as a list of elements."""</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">count</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""int: :math:`n_p`, the number of Sylow :math:`p`-subgroups."""</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">subgroups</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="CompositionSeriesResult">
+<a class="viewcode-back" href="../../../../api/abstract_algebra.html#mathematicskit.abstract_algebra.CompositionSeriesResult">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CompositionSeriesResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Container for a composition series :math:`G = G_0 &gt; G_1 &gt; \\dots &gt; G_m = \\{e\\}`."""</span>
+
+    <span class="n">series</span><span class="p">:</span> <span class="nb">list</span>
+<span class="w">    </span><span class="sd">"""list of list: The subgroups :math:`G_0, \\dots, G_m`, largest first."""</span>
+    <span class="n">factor_orders</span><span class="p">:</span> <span class="nb">list</span>
+<span class="w">    </span><span class="sd">"""list of int: The orders :math:`|G_i / G_{i+1}|` of the composition factors."""</span></div>
+
+
+
+<div class="viewcode-block" id="HomomorphismResult">
+<a class="viewcode-back" href="../../../../api/abstract_algebra.html#mathematicskit.abstract_algebra.HomomorphismResult">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">HomomorphismResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Container for a group homomorphism's kernel and image."""</span>
+
+    <span class="n">kernel</span><span class="p">:</span> <span class="nb">list</span>
+    <span class="n">image</span><span class="p">:</span> <span class="nb">list</span>
+    <span class="n">is_homomorphism</span><span class="p">:</span> <span class="nb">bool</span></div>
 
 
 
 <div class="viewcode-block" id="Polynomial">
 <a class="viewcode-back" href="../../../../api/abstract_algebra.html#mathematicskit.abstract_algebra.Polynomial">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Polynomial</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A polynomial with coefficients over :math:`\mathbb{Q}` (``modulus=None``,</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""A polynomial with coefficients over :math:`\mathbb{Q}` (``modulus=None``,</span>
 <span class="sd">    stored as exact :class:`fractions.Fraction`) or :math:`\mathrm{GF}(p)`</span>
 <span class="sd">    (``modulus=p``, coefficients reduced mod ``p``).</span>
 
@@ -572,7 +616,7 @@
 <span class="sd">    coefficients are both represented exactly as ``Fraction`` (``Z`` is</span>
 <span class="sd">    simply the sub-case where every coefficient happens to have</span>
 <span class="sd">    denominator 1); this is what makes polynomial *division* with</span>
-<span class="sd">    remainder always well-defined (needs the divisor&#39;s leading</span>
+<span class="sd">    remainder always well-defined (needs the divisor's leading</span>
 <span class="sd">    coefficient to be invertible, which holds automatically in a field</span>
 <span class="sd">    but not in :math:`\mathbb{Z}` itself). See Dummit &amp; Foote, *Abstract</span>
 <span class="sd">    Algebra*, 3rd ed., Ch. 9.</span>
@@ -592,7 +636,7 @@
 <span class="sd">    &gt;&gt;&gt; quotient, remainder = divmod(p, q)</span>
 <span class="sd">    &gt;&gt;&gt; quotient.coeffs, remainder.coeffs</span>
 <span class="sd">    ([Fraction(1, 1), Fraction(1, 1)], [Fraction(0, 1)])</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coeffs</span><span class="p">,</span> <span class="n">modulus</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">modulus</span> <span class="o">=</span> <span class="n">modulus</span>
@@ -622,24 +666,34 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">degree</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;int: The polynomial&#39;s degree (``-1`` for the zero polynomial, by convention).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""int: The polynomial's degree (``-1`` for the zero polynomial, by convention)."""</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coeffs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">coeffs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="n">Fraction</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">modulus</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="mi">0</span><span class="p">):</span>
             <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coeffs</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_same_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Polynomial</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Reject arithmetic between polynomials over different coefficient fields."""</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Polynomial</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"expected a Polynomial, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">modulus</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">modulus</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"cannot combine polynomials over different fields (modulus </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">modulus</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="n">other</span><span class="o">.</span><span class="n">modulus</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_pad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
         <span class="n">zero</span> <span class="o">=</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">modulus</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="mi">0</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">coeffs</span> <span class="o">+</span> <span class="p">[</span><span class="n">zero</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coeffs</span><span class="p">))</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Polynomial</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Polynomial</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_same_field</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coeffs</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">coeffs</span><span class="p">))</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wrap</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">_reduce</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pad</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">other</span><span class="o">.</span><span class="n">_pad</span><span class="p">(</span><span class="n">n</span><span class="p">))])</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Polynomial</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Polynomial</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_same_field</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coeffs</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">coeffs</span><span class="p">))</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wrap</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">_reduce</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pad</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">other</span><span class="o">.</span><span class="n">_pad</span><span class="p">(</span><span class="n">n</span><span class="p">))])</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Polynomial</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Polynomial</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_same_field</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">Fraction</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">modulus</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coeffs</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">coeffs</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coeffs</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">coeffs</span><span class="p">):</span>
@@ -653,9 +707,10 @@
         <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">modulus</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coeffs</span><span class="p">)))</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__divmod__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Polynomial</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Polynomial long division: ``self = quotient * other + remainder``, ``deg(remainder) &lt; deg(other)``.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Polynomial long division: ``self = quotient * other + remainder``, ``deg(remainder) &lt; deg(other)``."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_same_field</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">other</span><span class="o">.</span><span class="n">degree</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ZeroDivisionError</span><span class="p">(</span><span class="s2">&quot;division by the zero polynomial&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ZeroDivisionError</span><span class="p">(</span><span class="s2">"division by the zero polynomial"</span><span class="p">)</span>
         <span class="n">remainder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wrap</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coeffs</span><span class="p">))</span>
         <span class="n">quotient_degree</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">degree</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">degree</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">zero</span> <span class="o">=</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">modulus</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="mi">0</span>
@@ -673,7 +728,7 @@
 <div class="viewcode-block" id="Polynomial.evaluate">
 <a class="viewcode-back" href="../../../../api/abstract_algebra.html#mathematicskit.abstract_algebra.Polynomial.evaluate">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the polynomial at ``x``, via Horner&#39;s method.</span>
+<span class="w">        </span><span class="sd">"""Evaluate the polynomial at ``x``, via Horner's method.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -681,8 +736,8 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        The same type as the polynomial&#39;s coefficients.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        The same type as the polynomial's coefficients.</span>
+<span class="sd">        """</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">modulus</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coeffs</span><span class="p">):</span>
             <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reduce</span><span class="p">(</span><span class="n">result</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">c</span><span class="p">)</span>
@@ -690,8 +745,8 @@
 
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="n">terms</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">*x^</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coeffs</span><span class="p">)</span> <span class="k">if</span> <span class="n">c</span> <span class="o">!=</span> <span class="p">(</span><span class="n">Fraction</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">modulus</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)]</span>
-        <span class="k">return</span> <span class="s2">&quot; + &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span> <span class="k">if</span> <span class="n">terms</span> <span class="k">else</span> <span class="s2">&quot;0&quot;</span></div>
+        <span class="n">terms</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">*x^</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coeffs</span><span class="p">)</span> <span class="k">if</span> <span class="n">c</span> <span class="o">!=</span> <span class="p">(</span><span class="n">Fraction</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">modulus</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="s2">" + "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span> <span class="k">if</span> <span class="n">terms</span> <span class="k">else</span> <span class="s2">"0"</span></div>
 
 </pre></div>
 

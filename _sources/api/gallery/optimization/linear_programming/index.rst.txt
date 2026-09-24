@@ -5,7 +5,7 @@
 Linear programming
 ---------------------
 
-Linear programming via ``scipy.optimize.linprog``.
+Dantzig's simplex method and branch and bound for integer programs.
 
 
 .. raw:: html
@@ -21,18 +21,35 @@ Linear programming via ``scipy.optimize.linprog``.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="A classic LP: maximize profit from two products given shared resource constraints. scipy.optimize.linprog minimizes by convention, so the objective is negated.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Maximize the profit 3x + 5y from two products subject to x + 2y \leq 40 labor-hours and 2x + y \leq 30 units of material. The simplex method starts at the vertex (0, 0) of the feasible polygon and pivots along its edges to an adjacent vertex with a higher profit, until no neighbour improves. The tableau pivots are written out below, and the answer is checked against linear_program.">
 
 .. only:: html
 
-  .. image:: /api/gallery/optimization/linear_programming/images/thumb/sphx_glr_plot_01_production_planning_thumb.png
+  .. image:: /api/gallery/optimization/linear_programming/images/thumb/sphx_glr_plot_01_simplex_method_thumb.png
     :alt:
 
-  :doc:`/api/gallery/optimization/linear_programming/plot_01_production_planning`
+  :doc:`/api/gallery/optimization/linear_programming/plot_01_simplex_method`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">A small production-planning linear program</div>
+      <div class="sphx-glr-thumbnail-title">Dantzig's simplex method: walking the vertices of a production LP</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The LP relaxation of an integer program can have a fractional optimum that rounding does not repair. Branch and bound (Land and Doig, 1960) finds the true integer optimum; here it is at a different vertex from the relaxation&#x27;s.">
+
+.. only:: html
+
+  .. image:: /api/gallery/optimization/linear_programming/images/thumb/sphx_glr_plot_02_branch_and_bound_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/optimization/linear_programming/plot_02_branch_and_bound`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Branch and bound: integer versus relaxed optimum</div>
     </div>
 
 
@@ -46,5 +63,6 @@ Linear programming via ``scipy.optimize.linprog``.
 .. toctree::
    :hidden:
 
-   /api/gallery/optimization/linear_programming/plot_01_production_planning
+   /api/gallery/optimization/linear_programming/plot_01_simplex_method
+   /api/gallery/optimization/linear_programming/plot_02_branch_and_bound
 

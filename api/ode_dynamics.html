@@ -463,7 +463,132 @@ classification (node/saddle/spiral/center); phase portraits for 2D
 systems; bifurcation diagrams for 1D maps (logistic map, Feigenbaum route
 to chaos) and canonical parametrized-ODE normal forms (saddle-node,
 pitchfork, Hopf); limit cycles (Van der Pol oscillator) and Poincare
-sections for higher-dimensional (periodically driven) flows.</p>
+sections for higher-dimensional (periodically driven) flows; Lyapunov’s
+direct method and Bendixson’s criterion; population (Verhulst logistic,
+Lotka-Volterra), epidemic (SIR), neuron (FitzHugh-Nagumo), and chemical
+(Brusselator) models; Kuramoto synchronization; and the Lorenz and
+Rossler chaotic flows.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.BendixsonResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.ode_dynamics.</span></span><span class="sig-name descname"><span class="pre">BendixsonResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">divergence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rules_out_periodic_orbits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/core/base.html#BendixsonResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.BendixsonResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Container for Bendixson’s negative criterion evaluated on a grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>Y</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>divergence</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>rules_out_periodic_orbits</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.BendixsonResult.X">
+<span class="sig-name descname"><span class="pre">X</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.ode_dynamics.BendixsonResult.X" title="Link to this definition">#</a></dt>
+<dd><p>Grid x-coordinates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (<a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>, <a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.BendixsonResult.Y">
+<span class="sig-name descname"><span class="pre">Y</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.ode_dynamics.BendixsonResult.Y" title="Link to this definition">#</a></dt>
+<dd><p>Grid y-coordinates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (<a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>, <a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.BendixsonResult.divergence">
+<span class="sig-name descname"><span class="pre">divergence</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.ode_dynamics.BendixsonResult.divergence" title="Link to this definition">#</a></dt>
+<dd><p>Divergence <code class="docutils literal notranslate"><span class="pre">df/dx</span> <span class="pre">+</span> <span class="pre">dg/dy</span></code> of the vector field <code class="docutils literal notranslate"><span class="pre">(f,</span> <span class="pre">g)</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (<a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>, <a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.BendixsonResult.rules_out_periodic_orbits">
+<span class="sig-name descname"><span class="pre">rules_out_periodic_orbits</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></span><a class="headerlink" href="#mathematicskit.ode_dynamics.BendixsonResult.rules_out_periodic_orbits" title="Link to this definition">#</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the divergence is strictly of one sign on the whole
+grid, so no closed orbit lies entirely inside the (simply connected)
+rectangle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.Brusselator">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.ode_dynamics.</span></span><span class="sig-name descname"><span class="pre">Brusselator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/chemical_oscillators.html#Brusselator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.Brusselator" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mathematicskit.ode_dynamics.FlowSystem" title="mathematicskit.ode_dynamics.core.base.FlowSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">FlowSystem</span></code></a></p>
+<p>The Brusselator reaction scheme.</p>
+<p><span class="math notranslate nohighlight">\(\dot x = a - (b+1)x + x^2y\)</span>, <span class="math notranslate nohighlight">\(\dot y = bx - x^2y\)</span>, the
+rate equations of the hypothetical reactions <span class="math notranslate nohighlight">\(A \to X\)</span>,
+<span class="math notranslate nohighlight">\(B + X \to Y + D\)</span>, <span class="math notranslate nohighlight">\(2X + Y \to 3X\)</span>, <span class="math notranslate nohighlight">\(X \to E\)</span> with
+the concentrations of <span class="math notranslate nohighlight">\(A, B\)</span> held fixed. The unique fixed point
+<span class="math notranslate nohighlight">\((a,\ b/a)\)</span> loses stability in a Hopf bifurcation at <span class="math notranslate nohighlight">\(b
+= 1 + a^2\)</span> (<a class="reference internal" href="#mathematicskit.ode_dynamics.brusselator_hopf_threshold" title="mathematicskit.ode_dynamics.brusselator_hopf_threshold"><code class="xref py py-func docutils literal notranslate"><span class="pre">brusselator_hopf_threshold()</span></code></a>), beyond which the
+concentrations oscillate on a stable limit cycle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state0</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>2</em><em>,</em><em>)</em>) – Initial concentrations <code class="docutils literal notranslate"><span class="pre">(x,</span> <span class="pre">y)</span></code>.</p></li>
+<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Positive feed concentrations.</p></li>
+<li><p><strong>b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Positive feed concentrations.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">system</span> <span class="o">=</span> <span class="n">Brusselator</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="n">a</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>  <span class="c1"># b &lt; 1 + a^2 = 2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"rk4"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">array([1. , 1.5])</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.Brusselator.fixed_point">
+<span class="sig-name descname"><span class="pre">fixed_point</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/chemical_oscillators.html#Brusselator.fixed_point"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.Brusselator.fixed_point" title="Link to this definition">#</a></dt>
+<dd><p>The unique fixed point <code class="docutils literal notranslate"><span class="pre">(a,</span> <span class="pre">b/a)</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.Brusselator.rhs">
+<span class="sig-name descname"><span class="pre">rhs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/chemical_oscillators.html#Brusselator.rhs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.Brusselator.rhs" title="Link to this definition">#</a></dt>
+<dd><p>Plain-Python evaluation of <code class="docutils literal notranslate"><span class="pre">dy/dt</span></code> (thin wrapper around <code class="docutils literal notranslate"><span class="pre">self._rhs_njit</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>state</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="mathematicskit.ode_dynamics.DuffingOscillator">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.ode_dynamics.</span></span><span class="sig-name descname"><span class="pre">DuffingOscillator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/poincare.html#DuffingOscillator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.DuffingOscillator" title="Link to this definition">#</a></dt>
@@ -493,7 +618,7 @@ double-well potential).</p></li>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">system</span> <span class="o">=</span> <span class="n">DuffingOscillator</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="n">delta</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;rk4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"rk4"</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="go">2</span>
 </pre></div>
@@ -501,6 +626,57 @@ double-well potential).</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="mathematicskit.ode_dynamics.DuffingOscillator.rhs">
 <span class="sig-name descname"><span class="pre">rhs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/poincare.html#DuffingOscillator.rhs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.DuffingOscillator.rhs" title="Link to this definition">#</a></dt>
+<dd><p>Plain-Python evaluation of <code class="docutils literal notranslate"><span class="pre">dy/dt</span></code> (thin wrapper around <code class="docutils literal notranslate"><span class="pre">self._rhs_njit</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>state</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.FitzHughNagumo">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.ode_dynamics.</span></span><span class="sig-name descname"><span class="pre">FitzHughNagumo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.08</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/excitable.html#FitzHughNagumo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.FitzHughNagumo" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mathematicskit.ode_dynamics.FlowSystem" title="mathematicskit.ode_dynamics.core.base.FlowSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">FlowSystem</span></code></a></p>
+<p>FitzHugh-Nagumo neuron model.</p>
+<p><span class="math notranslate nohighlight">\(\dot v = v - v^3/3 - w + I\)</span>, <span class="math notranslate nohighlight">\(\dot w = \varepsilon(v +
+a - bw)\)</span>: a fast “membrane voltage” <span class="math notranslate nohighlight">\(v\)</span> with a cubic nullcline
+and a slow recovery variable <span class="math notranslate nohighlight">\(w\)</span>. For small injected current
+<span class="math notranslate nohighlight">\(I\)</span> the rest state is stable but <em>excitable</em> – a large enough
+kick fires a single large spike before returning to rest; for
+<span class="math notranslate nohighlight">\(I\)</span> between the two values from
+<a class="reference internal" href="#mathematicskit.ode_dynamics.fitzhugh_nagumo_hopf_currents" title="mathematicskit.ode_dynamics.fitzhugh_nagumo_hopf_currents"><code class="xref py py-func docutils literal notranslate"><span class="pre">fitzhugh_nagumo_hopf_currents()</span></code></a>, the rest state is unstable and
+the neuron fires periodically (a relaxation limit cycle).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state0</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>2</em><em>,</em><em>)</em>) – Initial <code class="docutils literal notranslate"><span class="pre">(v,</span> <span class="pre">w)</span></code>.</p></li>
+<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Model parameters (FitzHugh’s classic values <code class="docutils literal notranslate"><span class="pre">0.7,</span> <span class="pre">0.8,</span> <span class="pre">0.08</span></code>).</p></li>
+<li><p><strong>b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Model parameters (FitzHugh’s classic values <code class="docutils literal notranslate"><span class="pre">0.7,</span> <span class="pre">0.8,</span> <span class="pre">0.08</span></code>).</p></li>
+<li><p><strong>eps</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Model parameters (FitzHugh’s classic values <code class="docutils literal notranslate"><span class="pre">0.7,</span> <span class="pre">0.8,</span> <span class="pre">0.08</span></code>).</p></li>
+<li><p><strong>current</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Injected current <span class="math notranslate nohighlight">\(I\)</span>.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">system</span> <span class="o">=</span> <span class="n">FitzHughNagumo</span><span class="p">([</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.6</span><span class="p">],</span> <span class="n">current</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">200.0</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"rk4"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v_star</span><span class="p">,</span> <span class="n">w_star</span> <span class="o">=</span> <span class="n">fitzhugh_nagumo_fixed_point</span><span class="p">(</span><span class="n">current</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">v_star</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-3</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.FitzHughNagumo.rhs">
+<span class="sig-name descname"><span class="pre">rhs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/excitable.html#FitzHughNagumo.rhs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.FitzHughNagumo.rhs" title="Link to this definition">#</a></dt>
 <dd><p>Plain-Python evaluation of <code class="docutils literal notranslate"><span class="pre">dy/dt</span></code> (thin wrapper around <code class="docutils literal notranslate"><span class="pre">self._rhs_njit</span></code>).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -660,6 +836,53 @@ attempt for <code class="docutils literal notranslate"><span class="pre">method=
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.KuramotoModel">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.ode_dynamics.</span></span><span class="sig-name descname"><span class="pre">KuramotoModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">theta0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omegas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/synchronization.html#KuramotoModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.KuramotoModel" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mathematicskit.ode_dynamics.FlowSystem" title="mathematicskit.ode_dynamics.core.base.FlowSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">FlowSystem</span></code></a></p>
+<p>Kuramoto model of <span class="math notranslate nohighlight">\(N\)</span> all-to-all coupled phase oscillators.</p>
+<div class="math notranslate nohighlight">
+\[\dot\theta_i = \omega_i + \frac{K}{N}\sum_{j=1}^N \sin(\theta_j - \theta_i)
+= \omega_i + K r \sin(\psi - \theta_i),\]</div>
+<p>where <span class="math notranslate nohighlight">\(r e^{i\psi} = N^{-1}\sum_j e^{i\theta_j}\)</span> is the complex
+order parameter (<a class="reference internal" href="#mathematicskit.ode_dynamics.kuramoto_order_parameter" title="mathematicskit.ode_dynamics.kuramoto_order_parameter"><code class="xref py py-func docutils literal notranslate"><span class="pre">kuramoto_order_parameter()</span></code></a>). The mean-field
+form makes each step <span class="math notranslate nohighlight">\(O(N)\)</span> rather than <span class="math notranslate nohighlight">\(O(N^2)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>theta0</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>N</em><em>,</em><em>)</em>) – Initial phases.</p></li>
+<li><p><strong>omegas</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>N</em><em>,</em><em>)</em>) – Natural frequencies (passed to the integrator as <code class="docutils literal notranslate"><span class="pre">params</span></code>).</p></li>
+<li><p><strong>K</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Coupling strength.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">system</span> <span class="o">=</span> <span class="n">KuramotoModel</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span> <span class="n">omegas</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="n">K</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"rk4"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">kuramoto_order_parameter</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">6</span><span class="p">)</span>  <span class="c1"># identical oscillators lock</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.KuramotoModel.rhs">
+<span class="sig-name descname"><span class="pre">rhs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/synchronization.html#KuramotoModel.rhs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.KuramotoModel.rhs" title="Link to this definition">#</a></dt>
+<dd><p>Plain-Python evaluation of <code class="docutils literal notranslate"><span class="pre">dy/dt</span></code> (thin wrapper around <code class="docutils literal notranslate"><span class="pre">self._rhs_njit</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>state</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="mathematicskit.ode_dynamics.Linear2D">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.ode_dynamics.</span></span><span class="sig-name descname"><span class="pre">Linear2D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/phase_portrait.html#Linear2D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.Linear2D" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#mathematicskit.ode_dynamics.FlowSystem" title="mathematicskit.ode_dynamics.core.base.FlowSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">FlowSystem</span></code></a></p>
@@ -680,7 +903,7 @@ and Chaos</em>, 2nd ed., Ch. 5.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">system</span> <span class="o">=</span> <span class="n">Linear2D</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="n">A</span><span class="o">=</span><span class="p">[[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;rk4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"rk4"</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mf">1e-2</span><span class="p">)</span>
 <span class="go">True</span>
 </pre></div>
@@ -688,6 +911,50 @@ and Chaos</em>, 2nd ed., Ch. 5.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="mathematicskit.ode_dynamics.Linear2D.rhs">
 <span class="sig-name descname"><span class="pre">rhs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/phase_portrait.html#Linear2D.rhs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.Linear2D.rhs" title="Link to this definition">#</a></dt>
+<dd><p>Plain-Python evaluation of <code class="docutils literal notranslate"><span class="pre">dy/dt</span></code> (thin wrapper around <code class="docutils literal notranslate"><span class="pre">self._rhs_njit</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>state</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.LogisticGrowth">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.ode_dynamics.</span></span><span class="sig-name descname"><span class="pre">LogisticGrowth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/population.html#LogisticGrowth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.LogisticGrowth" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mathematicskit.ode_dynamics.FlowSystem" title="mathematicskit.ode_dynamics.core.base.FlowSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">FlowSystem</span></code></a></p>
+<p>Verhulst’s logistic equation <span class="math notranslate nohighlight">\(\dot N = rN(1 - N/K)\)</span>.</p>
+<p>Growth is exponential while <span class="math notranslate nohighlight">\(N \ll K\)</span> and saturates at the
+carrying capacity <span class="math notranslate nohighlight">\(K\)</span>, a stable fixed point; <span class="math notranslate nohighlight">\(N=0\)</span> is
+unstable. See Strogatz, <em>Nonlinear Dynamics and Chaos</em>, 2nd ed.,
+Ch. 2.3.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state0</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>1</em><em>,</em><em>)</em>) – Initial population <code class="docutils literal notranslate"><span class="pre">[N0]</span></code>.</p></li>
+<li><p><strong>r</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Intrinsic growth rate.</p></li>
+<li><p><strong>K</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Carrying capacity.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">system</span> <span class="o">=</span> <span class="n">LogisticGrowth</span><span class="p">([</span><span class="mf">10.0</span><span class="p">],</span> <span class="n">r</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mf">100.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"rk4"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">100.0</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.LogisticGrowth.rhs">
+<span class="sig-name descname"><span class="pre">rhs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/population.html#LogisticGrowth.rhs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.LogisticGrowth.rhs" title="Link to this definition">#</a></dt>
 <dd><p>Plain-Python evaluation of <code class="docutils literal notranslate"><span class="pre">dy/dt</span></code> (thin wrapper around <code class="docutils literal notranslate"><span class="pre">self._rhs_njit</span></code>).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -769,6 +1036,169 @@ See Strogatz, <em>Nonlinear Dynamics and Chaos</em>, 2nd ed., Ch. 10.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.LorenzSystem">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.ode_dynamics.</span></span><span class="sig-name descname"><span class="pre">LorenzSystem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">28.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.6666666666666665</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/chaotic_flows.html#LorenzSystem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.LorenzSystem" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mathematicskit.ode_dynamics.FlowSystem" title="mathematicskit.ode_dynamics.core.base.FlowSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">FlowSystem</span></code></a></p>
+<p>Lorenz’s convection model (Lorenz, 1963).</p>
+<p><span class="math notranslate nohighlight">\(\dot x = \sigma(y - x)\)</span>, <span class="math notranslate nohighlight">\(\dot y = x(\rho - z) - y\)</span>,
+<span class="math notranslate nohighlight">\(\dot z = xy - \beta z\)</span>. For Lorenz’s classic values
+<span class="math notranslate nohighlight">\(\sigma = 10\)</span>, <span class="math notranslate nohighlight">\(\rho = 28\)</span>, <span class="math notranslate nohighlight">\(\beta = 8/3\)</span> every
+fixed point is unstable and trajectories settle onto the butterfly-
+shaped strange attractor, where nearby orbits separate exponentially
+(sensitive dependence on initial conditions).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state0</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>3</em><em>,</em><em>)</em>)</p></li>
+<li><p><strong>sigma</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>rho</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>beta</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">system</span> <span class="o">=</span> <span class="n">LorenzSystem</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"rk4"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(1001, 3)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.LorenzSystem.rhs">
+<span class="sig-name descname"><span class="pre">rhs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/chaotic_flows.html#LorenzSystem.rhs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.LorenzSystem.rhs" title="Link to this definition">#</a></dt>
+<dd><p>Plain-Python evaluation of <code class="docutils literal notranslate"><span class="pre">dy/dt</span></code> (thin wrapper around <code class="docutils literal notranslate"><span class="pre">self._rhs_njit</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>state</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.LotkaVolterra">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.ode_dynamics.</span></span><span class="sig-name descname"><span class="pre">LotkaVolterra</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/population.html#LotkaVolterra"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.LotkaVolterra" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mathematicskit.ode_dynamics.FlowSystem" title="mathematicskit.ode_dynamics.core.base.FlowSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">FlowSystem</span></code></a></p>
+<p>Lotka-Volterra predator-prey system.</p>
+<p><span class="math notranslate nohighlight">\(\dot x = \alpha x - \beta xy\)</span> (prey), <span class="math notranslate nohighlight">\(\dot y = \delta
+xy - \gamma y\)</span> (predators). The coexistence fixed point
+<span class="math notranslate nohighlight">\((\gamma/\delta,\ \alpha/\beta)\)</span> is a nonlinear center: every
+orbit around it is closed, because the quantity returned by
+<a class="reference internal" href="#mathematicskit.ode_dynamics.lotka_volterra_invariant" title="mathematicskit.ode_dynamics.lotka_volterra_invariant"><code class="xref py py-func docutils literal notranslate"><span class="pre">lotka_volterra_invariant()</span></code></a> is conserved. Small oscillations
+have period <span class="math notranslate nohighlight">\(2\pi/\sqrt{\alpha\gamma}\)</span>. See Strogatz,
+<em>Nonlinear Dynamics and Chaos</em>, 2nd ed., Ch. 6.4-6.5.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state0</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>2</em><em>,</em><em>)</em>) – Initial <code class="docutils literal notranslate"><span class="pre">(prey,</span> <span class="pre">predators)</span></code>.</p></li>
+<li><p><strong>alpha</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Prey growth, predation, predator conversion, and predator death
+rates.</p></li>
+<li><p><strong>beta</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Prey growth, predation, predator conversion, and predator death
+rates.</p></li>
+<li><p><strong>delta</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Prey growth, predation, predator conversion, and predator death
+rates.</p></li>
+<li><p><strong>gamma</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Prey growth, predation, predator conversion, and predator death
+rates.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">system</span> <span class="o">=</span> <span class="n">LotkaVolterra</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"rk4"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">system</span><span class="o">.</span><span class="n">fixed_point</span><span class="p">()</span>
+<span class="go">array([1., 1.])</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.LotkaVolterra.fixed_point">
+<span class="sig-name descname"><span class="pre">fixed_point</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/population.html#LotkaVolterra.fixed_point"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.LotkaVolterra.fixed_point" title="Link to this definition">#</a></dt>
+<dd><p>Coexistence fixed point <code class="docutils literal notranslate"><span class="pre">(gamma/delta,</span> <span class="pre">alpha/beta)</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.LotkaVolterra.rhs">
+<span class="sig-name descname"><span class="pre">rhs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/population.html#LotkaVolterra.rhs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.LotkaVolterra.rhs" title="Link to this definition">#</a></dt>
+<dd><p>Plain-Python evaluation of <code class="docutils literal notranslate"><span class="pre">dy/dt</span></code> (thin wrapper around <code class="docutils literal notranslate"><span class="pre">self._rhs_njit</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>state</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.LyapunovFunctionResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.ode_dynamics.</span></span><span class="sig-name descname"><span class="pre">LyapunovFunctionResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">P</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">positive_definite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/core/base.html#LyapunovFunctionResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.LyapunovFunctionResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Container for a quadratic Lyapunov function <code class="docutils literal notranslate"><span class="pre">V(x)</span> <span class="pre">=</span> <span class="pre">x^T</span> <span class="pre">P</span> <span class="pre">x</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>P</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>Q</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>positive_definite</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.LyapunovFunctionResult.P">
+<span class="sig-name descname"><span class="pre">P</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.ode_dynamics.LyapunovFunctionResult.P" title="Link to this definition">#</a></dt>
+<dd><p>Symmetric solution of <code class="docutils literal notranslate"><span class="pre">A^T</span> <span class="pre">P</span> <span class="pre">+</span> <span class="pre">P</span> <span class="pre">A</span> <span class="pre">=</span> <span class="pre">-Q</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (<a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>, <a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.LyapunovFunctionResult.Q">
+<span class="sig-name descname"><span class="pre">Q</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.ode_dynamics.LyapunovFunctionResult.Q" title="Link to this definition">#</a></dt>
+<dd><p>Symmetric positive-definite right-hand side used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (<a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>, <a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.LyapunovFunctionResult.positive_definite">
+<span class="sig-name descname"><span class="pre">positive_definite</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></span><a class="headerlink" href="#mathematicskit.ode_dynamics.LyapunovFunctionResult.positive_definite" title="Link to this definition">#</a></dt>
+<dd><p>Whether <code class="docutils literal notranslate"><span class="pre">P</span></code> is positive definite, i.e. whether <code class="docutils literal notranslate"><span class="pre">V</span></code> certifies
+asymptotic stability of the origin (Lyapunov’s theorem).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="mathematicskit.ode_dynamics.Nonlinear2D">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.ode_dynamics.</span></span><span class="sig-name descname"><span class="pre">Nonlinear2D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/phase_portrait.html#Nonlinear2D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.Nonlinear2D" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#mathematicskit.ode_dynamics.FlowSystem" title="mathematicskit.ode_dynamics.core.base.FlowSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">FlowSystem</span></code></a></p>
@@ -788,7 +1218,7 @@ numba-compatible pure function works).</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vdp</span> <span class="o">=</span> <span class="n">Nonlinear2D</span><span class="p">([</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="n">f</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="n">x</span> <span class="o">+</span> <span class="mf">0.0</span> <span class="o">*</span> <span class="n">y</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">vdp</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;rk4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">vdp</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"rk4"</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="go">2</span>
 </pre></div>
@@ -874,6 +1304,103 @@ numba-compatible pure function works).</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.RosslerSystem">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.ode_dynamics.</span></span><span class="sig-name descname"><span class="pre">RosslerSystem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5.7</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/chaotic_flows.html#RosslerSystem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.RosslerSystem" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mathematicskit.ode_dynamics.FlowSystem" title="mathematicskit.ode_dynamics.core.base.FlowSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">FlowSystem</span></code></a></p>
+<p>Rossler’s chaotic flow.</p>
+<p><span class="math notranslate nohighlight">\(\dot x = -y - z\)</span>, <span class="math notranslate nohighlight">\(\dot y = x + ay\)</span>, <span class="math notranslate nohighlight">\(\dot z = b +
+z(x - c)\)</span>. Only one term (<span class="math notranslate nohighlight">\(zx\)</span>) is nonlinear. Trajectories
+spiral outward in the <span class="math notranslate nohighlight">\((x, y)\)</span> plane until <span class="math notranslate nohighlight">\(x\)</span> exceeds
+<span class="math notranslate nohighlight">\(c\)</span>, when <span class="math notranslate nohighlight">\(z\)</span> spikes and folds them back toward the
+center – a stretch-and-fold mechanism producing a chaotic attractor
+for the classic values <span class="math notranslate nohighlight">\(a = b = 0.2\)</span>, <span class="math notranslate nohighlight">\(c = 5.7\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state0</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>3</em><em>,</em><em>)</em>)</p></li>
+<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>c</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">system</span> <span class="o">=</span> <span class="n">RosslerSystem</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"rk4"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(10001, 3)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.RosslerSystem.rhs">
+<span class="sig-name descname"><span class="pre">rhs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/chaotic_flows.html#RosslerSystem.rhs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.RosslerSystem.rhs" title="Link to this definition">#</a></dt>
+<dd><p>Plain-Python evaluation of <code class="docutils literal notranslate"><span class="pre">dy/dt</span></code> (thin wrapper around <code class="docutils literal notranslate"><span class="pre">self._rhs_njit</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>state</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.SIRModel">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.ode_dynamics.</span></span><span class="sig-name descname"><span class="pre">SIRModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/epidemics.html#SIRModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.SIRModel" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mathematicskit.ode_dynamics.FlowSystem" title="mathematicskit.ode_dynamics.core.base.FlowSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">FlowSystem</span></code></a></p>
+<p>Kermack-McKendrick SIR model (population fractions).</p>
+<p><span class="math notranslate nohighlight">\(\dot S = -\beta SI\)</span>, <span class="math notranslate nohighlight">\(\dot I = \beta SI - \gamma I\)</span>,
+<span class="math notranslate nohighlight">\(\dot R = \gamma I\)</span>. The basic reproduction number
+<span class="math notranslate nohighlight">\(R_0 = \beta/\gamma\)</span> sets the epidemic threshold: infections
+initially grow only if <span class="math notranslate nohighlight">\(R_0 S_0 &gt; 1\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state0</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>3</em><em>,</em><em>)</em>) – Initial fractions <code class="docutils literal notranslate"><span class="pre">(S0,</span> <span class="pre">I0,</span> <span class="pre">R0)</span></code>.</p></li>
+<li><p><strong>beta</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Transmission rate.</p></li>
+<li><p><strong>gamma</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Recovery rate.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">system</span> <span class="o">=</span> <span class="n">SIRModel</span><span class="p">([</span><span class="mf">0.99</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="n">beta</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"rk4"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span> <span class="mi">12</span><span class="p">)</span>  <span class="c1"># S + I + R is conserved</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<dl class="py property">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.SIRModel.r0">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">r0</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.ode_dynamics.SIRModel.r0" title="Link to this definition">#</a></dt>
+<dd><p>Basic reproduction number <code class="docutils literal notranslate"><span class="pre">beta</span> <span class="pre">/</span> <span class="pre">gamma</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.SIRModel.rhs">
+<span class="sig-name descname"><span class="pre">rhs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/epidemics.html#SIRModel.rhs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.SIRModel.rhs" title="Link to this definition">#</a></dt>
+<dd><p>Plain-Python evaluation of <code class="docutils literal notranslate"><span class="pre">dy/dt</span></code> (thin wrapper around <code class="docutils literal notranslate"><span class="pre">self._rhs_njit</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>state</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="mathematicskit.ode_dynamics.VanDerPolOscillator">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.ode_dynamics.</span></span><span class="sig-name descname"><span class="pre">VanDerPolOscillator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/limit_cycles.html#VanDerPolOscillator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.VanDerPolOscillator" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#mathematicskit.ode_dynamics.FlowSystem" title="mathematicskit.ode_dynamics.core.base.FlowSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">FlowSystem</span></code></a></p>
@@ -897,7 +1424,7 @@ oscillator, a center with no limit cycle).</p></li>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">system</span> <span class="o">=</span> <span class="n">VanDerPolOscillator</span><span class="p">([</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="n">mu</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;rk4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"rk4"</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="go">2</span>
 </pre></div>
@@ -919,6 +1446,49 @@ oscillator, a center with no limit cycle).</p></li>
 </dl>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.bendixson_criterion">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.ode_dynamics.</span></span><span class="sig-name descname"><span class="pre">bendixson_criterion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_range</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_range</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">101</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/limit_cycles.html#bendixson_criterion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.bendixson_criterion" title="Link to this definition">#</a></dt>
+<dd><p>Bendixson’s negative criterion on a rectangle.</p>
+<p>For a planar system <span class="math notranslate nohighlight">\(\dot x = f(x, y)\)</span>, <span class="math notranslate nohighlight">\(\dot y = g(x,
+y)\)</span>, if the divergence <span class="math notranslate nohighlight">\(\partial f/\partial x + \partial
+g/\partial y\)</span> is not identically zero and does not change sign on a
+simply connected region <span class="math notranslate nohighlight">\(D\)</span>, then no periodic orbit lies
+entirely in <span class="math notranslate nohighlight">\(D\)</span> (Bendixson, 1901). Proof sketch: by Green’s
+theorem, the divergence integrated over the region enclosed by a
+closed orbit equals the flux of the field across the orbit, which is
+zero because the field is tangent to it. This function samples the
+divergence (by central differences) on an <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">x</span> <span class="pre">n</span></code> grid and reports
+whether it is strictly of one sign there – a numerical check, not a
+proof.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>], <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>]</span>) – <code class="docutils literal notranslate"><span class="pre">f(x,</span> <span class="pre">y)</span> <span class="pre">-&gt;</span> <span class="pre">(dx,</span> <span class="pre">dy)</span></code>, accepting NumPy arrays elementwise.</p></li>
+<li><p><strong>x_range</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – <code class="docutils literal notranslate"><span class="pre">(min,</span> <span class="pre">max)</span></code> of the rectangle.</p></li>
+<li><p><strong>y_range</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – <code class="docutils literal notranslate"><span class="pre">(min,</span> <span class="pre">max)</span></code> of the rectangle.</p></li>
+<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Grid resolution per axis.</p></li>
+<li><p><strong>h</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Central-difference step.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.ode_dynamics.BendixsonResult" title="mathematicskit.ode_dynamics.core.base.BendixsonResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">BendixsonResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>BendixsonResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">damped</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="n">x</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span>  <span class="c1"># divergence = -0.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bendixson_criterion</span><span class="p">(</span><span class="n">damped</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">rules_out_periodic_orbits</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vdp</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">y</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span>  <span class="c1"># divergence = 1 - x^2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bendixson_criterion</span><span class="p">(</span><span class="n">vdp</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">rules_out_periodic_orbits</span>
+<span class="go">False</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -948,6 +1518,33 @@ points per <code class="docutils literal notranslate"><span class="pre">r</span>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.brusselator_hopf_threshold">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.ode_dynamics.</span></span><span class="sig-name descname"><span class="pre">brusselator_hopf_threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/chemical_oscillators.html#brusselator_hopf_threshold"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.brusselator_hopf_threshold" title="Link to this definition">#</a></dt>
+<dd><p>Critical <span class="math notranslate nohighlight">\(b\)</span> for the Brusselator’s Hopf bifurcation.</p>
+<p>At <span class="math notranslate nohighlight">\((a, b/a)\)</span> the Jacobian is <span class="math notranslate nohighlight">\(\begin{pmatrix} b - 1 &amp;
+a^2 \\ -b &amp; -a^2\end{pmatrix}\)</span>, with determinant <span class="math notranslate nohighlight">\(a^2 &gt; 0\)</span> and
+trace <span class="math notranslate nohighlight">\(b - 1 - a^2\)</span>. The fixed point is therefore a stable
+focus/node for <span class="math notranslate nohighlight">\(b &lt; 1 + a^2\)</span> and unstable beyond it, where a
+limit cycle appears.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em> – <span class="math notranslate nohighlight">\(b_c = 1 + a^2\)</span>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">brusselator_hopf_threshold</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="go">2.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.ode_dynamics.classify_fixed_point_2d">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.ode_dynamics.</span></span><span class="sig-name descname"><span class="pre">classify_fixed_point_2d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jacobian</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">location</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/stability.html#classify_fixed_point_2d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.classify_fixed_point_2d" title="Link to this definition">#</a></dt>
 <dd><p>Classify a 2D linear system’s fixed point from its Jacobian.</p>
@@ -964,6 +1561,12 @@ eigenvalues, real part sign = sign of <span class="math notranslate nohighlight"
 <li><p><span class="math notranslate nohighlight">\(\Delta &gt; 0\)</span>, <span class="math notranslate nohighlight">\(\tau = 0\)</span>: center (purely imaginary).</p></li>
 <li><p><span class="math notranslate nohighlight">\(\tau^2 = 4\Delta \neq 0\)</span>: degenerate node (repeated real eigenvalue).</p></li>
 </ul>
+<p>The last two are exact-equality conditions, tested here against a small
+tolerance rather than against zero. A <em>near</em>-borderline system is
+genuinely ambiguous rather than merely hard to classify numerically:
+linearization is inconclusive for centers and degenerate nodes, since an
+arbitrarily small nonlinear term can push the trajectory either way
+(Strogatz, Sec. 6.3).</p>
 <p>See Strogatz, <em>Nonlinear Dynamics and Chaos</em>, 2nd ed., Ch. 5.2
 (the classification diagram in the <span class="math notranslate nohighlight">\((\tau, \Delta)\)</span> plane).</p>
 <dl class="field-list simple">
@@ -985,10 +1588,10 @@ the origin.</p></li>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">classify_fixed_point_2d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">]]))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">classification</span>
-<span class="go">&#39;stable node&#39;</span>
+<span class="go">'stable node'</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result2</span> <span class="o">=</span> <span class="n">classify_fixed_point_2d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]]))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result2</span><span class="o">.</span><span class="n">classification</span>
-<span class="go">&#39;center&#39;</span>
+<span class="go">'center'</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1123,6 +1726,71 @@ Analysis</em>, 10th ed., Ch. 10.2.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.fitzhugh_nagumo_fixed_point">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.ode_dynamics.</span></span><span class="sig-name descname"><span class="pre">fitzhugh_nagumo_fixed_point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">current</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.8</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/excitable.html#fitzhugh_nagumo_fixed_point"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.fitzhugh_nagumo_fixed_point" title="Link to this definition">#</a></dt>
+<dd><p>The (unique, for <span class="math notranslate nohighlight">\(0 &lt; b &lt; 1\)</span>) fixed point of FitzHugh-Nagumo.</p>
+<p>Intersecting the nullclines <span class="math notranslate nohighlight">\(w = v - v^3/3 + I\)</span> and <span class="math notranslate nohighlight">\(w =
+(v + a)/b\)</span> gives the cubic <span class="math notranslate nohighlight">\(-v^3/3 + (1 - 1/b)v + I - a/b = 0\)</span>,
+which is strictly decreasing (so has one real root) when <span class="math notranslate nohighlight">\(b &lt;
+1\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>current</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (2,)</em> – <code class="docutils literal notranslate"><span class="pre">(v*,</span> <span class="pre">w*)</span></code>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">fitzhugh_nagumo_fixed_point</span><span class="p">(</span><span class="mf">0.0</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">array([-1.1994, -0.6243])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.fitzhugh_nagumo_hopf_currents">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.ode_dynamics.</span></span><span class="sig-name descname"><span class="pre">fitzhugh_nagumo_hopf_currents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.08</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/excitable.html#fitzhugh_nagumo_hopf_currents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.fitzhugh_nagumo_hopf_currents" title="Link to this definition">#</a></dt>
+<dd><p>Injected currents at which the rest state loses/regains stability.</p>
+<p>The Jacobian at the fixed point is <span class="math notranslate nohighlight">\(\begin{pmatrix} 1 - v^2 &amp;
+-1 \\ \varepsilon &amp; -\varepsilon b\end{pmatrix}\)</span>, whose determinant
+<span class="math notranslate nohighlight">\(\varepsilon(1 - b + bv^2)\)</span> is positive for <span class="math notranslate nohighlight">\(b&lt;1\)</span>, so
+stability changes exactly when the trace <span class="math notranslate nohighlight">\(1 - v^2 - \varepsilon
+b\)</span> vanishes: <span class="math notranslate nohighlight">\(v_H = \pm\sqrt{1 - \varepsilon b}\)</span>. Substituting
+into the nullcline relation gives the Hopf currents</p>
+<div class="math notranslate nohighlight">
+\[I_H = \frac{v_H + a}{b} - v_H + \frac{v_H^3}{3}.\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>eps</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (2,)</em> – <code class="docutils literal notranslate"><span class="pre">[I_low,</span> <span class="pre">I_high]</span></code>; the rest state is unstable for <code class="docutils literal notranslate"><span class="pre">I_low</span> <span class="pre">&lt;</span> <span class="pre">I</span> <span class="pre">&lt;</span>
+<span class="pre">I_high</span></code>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">fitzhugh_nagumo_hopf_currents</span><span class="p">(),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">array([0.3313, 1.4187])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.ode_dynamics.hopf_limit_cycle_radius">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.ode_dynamics.</span></span><span class="sig-name descname"><span class="pre">hopf_limit_cycle_radius</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'supercritical'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/bifurcations.html#hopf_limit_cycle_radius"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.hopf_limit_cycle_radius" title="Link to this definition">#</a></dt>
 <dd><p>Limit-cycle radius of the Hopf normal form (polar-coordinate ODE).</p>
@@ -1151,6 +1819,213 @@ ed., Ch. 8.2.</p>
 <span class="go">2.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">hopf_limit_cycle_radius</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">)</span>
 <span class="go">0.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.kuramoto_lorentzian_order_parameter">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.ode_dynamics.</span></span><span class="sig-name descname"><span class="pre">kuramoto_lorentzian_order_parameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">K</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/synchronization.html#kuramoto_lorentzian_order_parameter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.kuramoto_lorentzian_order_parameter" title="Link to this definition">#</a></dt>
+<dd><p>Steady-state coherence for Lorentzian natural frequencies (<span class="math notranslate nohighlight">\(N \to \infty\)</span>).</p>
+<p>For <span class="math notranslate nohighlight">\(g(\omega) = \gamma / [\pi(\gamma^2 + \omega^2)]\)</span>,
+Kuramoto’s self-consistency equation can be solved exactly:
+incoherence (<span class="math notranslate nohighlight">\(r = 0\)</span>) is the only state below the critical
+coupling <span class="math notranslate nohighlight">\(K_c = 2/(\pi g(0)) = 2\gamma\)</span>, and above it</p>
+<div class="math notranslate nohighlight">
+\[r = \sqrt{1 - K_c / K}.\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>K</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em>) – Coupling strength.</p></li>
+<li><p><strong>gamma</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Half-width of the Lorentzian frequency distribution.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>ndarray or float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">kuramoto_lorentzian_order_parameter</span><span class="p">(</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># K_c = 2</span>
+<span class="go">0.7071067811865476</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kuramoto_lorentzian_order_parameter</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.kuramoto_order_parameter">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.ode_dynamics.</span></span><span class="sig-name descname"><span class="pre">kuramoto_order_parameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">theta</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/synchronization.html#kuramoto_order_parameter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.kuramoto_order_parameter" title="Link to this definition">#</a></dt>
+<dd><p>Kuramoto order parameter <span class="math notranslate nohighlight">\(r e^{i\psi} = N^{-1}\sum_j e^{i\theta_j}\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(r = 0\)</span> for phases spread uniformly around the circle and
+<span class="math notranslate nohighlight">\(r = 1\)</span> for perfect phase locking.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>theta</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>...</em><em>, </em><em>N</em><em>)</em>) – Phases; leading axes (e.g. time) are preserved.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>r, psi</strong> (<em>ndarray, shape (…)</em>) – Coherence and mean phase.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">,</span> <span class="n">psi</span> <span class="o">=</span> <span class="n">kuramoto_order_parameter</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">kuramoto_order_parameter</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">r</span> <span class="o">&lt;</span> <span class="mf">1e-12</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.logistic_growth_solution">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.ode_dynamics.</span></span><span class="sig-name descname"><span class="pre">logistic_growth_solution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/population.html#logistic_growth_solution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.logistic_growth_solution" title="Link to this definition">#</a></dt>
+<dd><p>Closed-form solution of the logistic equation.</p>
+<div class="math notranslate nohighlight">
+\[N(t) = \frac{K}{1 + \left(\frac{K - N_0}{N_0}\right) e^{-rt}}\]</div>
+<p>(Verhulst, 1838), the sigmoid “logistic curve”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em>) – Time(s).</p></li>
+<li><p><strong>n0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial population (<code class="docutils literal notranslate"><span class="pre">&gt;</span> <span class="pre">0</span></code>).</p></li>
+<li><p><strong>r</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Growth rate and carrying capacity.</p></li>
+<li><p><strong>K</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Growth rate and carrying capacity.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray</em> – <span class="math notranslate nohighlight">\(N(t)\)</span>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="n">logistic_growth_solution</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">n0</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mf">100.0</span><span class="p">))</span>
+<span class="go">10.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">logistic_growth_solution</span><span class="p">(</span><span class="mf">50.0</span><span class="p">,</span> <span class="n">n0</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mf">100.0</span><span class="p">)),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">100.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.lorenz_fixed_points">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.ode_dynamics.</span></span><span class="sig-name descname"><span class="pre">lorenz_fixed_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sigma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">28.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.6666666666666665</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/chaotic_flows.html#lorenz_fixed_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.lorenz_fixed_points" title="Link to this definition">#</a></dt>
+<dd><p>Closed-form fixed points of the Lorenz system.</p>
+<p>The origin is always a fixed point; for <span class="math notranslate nohighlight">\(\rho &gt; 1\)</span> the two
+convection-roll states</p>
+<div class="math notranslate nohighlight">
+\[C_\pm = \left(\pm\sqrt{\beta(\rho - 1)},\
+\pm\sqrt{\beta(\rho - 1)},\ \rho - 1\right)\]</div>
+<p>also exist (Lorenz, 1963; Strogatz, Sec. 9.2). <code class="docutils literal notranslate"><span class="pre">sigma</span></code> does not
+affect their location, only their stability.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sigma</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>rho</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>beta</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (1, 3) or (3, 3)</em> – The origin first, then <span class="math notranslate nohighlight">\(C_+\)</span> and <span class="math notranslate nohighlight">\(C_-\)</span> when
+<span class="math notranslate nohighlight">\(\rho &gt; 1\)</span>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fps</span> <span class="o">=</span> <span class="n">lorenz_fixed_points</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fps</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(3, 3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">fps</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+<span class="go">[8.4853, 8.4853, 27.0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lorenz_fixed_points</span><span class="p">(</span><span class="n">rho</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(1, 3)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.lotka_volterra_invariant">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.ode_dynamics.</span></span><span class="sig-name descname"><span class="pre">lotka_volterra_invariant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/population.html#lotka_volterra_invariant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.lotka_volterra_invariant" title="Link to this definition">#</a></dt>
+<dd><p>Conserved quantity of the Lotka-Volterra system.</p>
+<div class="math notranslate nohighlight">
+\[V(x, y) = \delta x - \gamma \ln x + \beta y - \alpha \ln y\]</div>
+<p>Differentiating along a trajectory gives <span class="math notranslate nohighlight">\(\dot V = (\delta -
+\gamma/x)\dot x + (\beta - \alpha/y)\dot y = 0\)</span>, so orbits are level
+sets of <span class="math notranslate nohighlight">\(V\)</span> – closed curves around the minimum at the
+coexistence fixed point (Volterra, 1926).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em>) – Prey and predator populations (<code class="docutils literal notranslate"><span class="pre">&gt;</span> <span class="pre">0</span></code>).</p></li>
+<li><p><strong>y</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em>) – Prey and predator populations (<code class="docutils literal notranslate"><span class="pre">&gt;</span> <span class="pre">0</span></code>).</p></li>
+<li><p><strong>alpha</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>beta</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>delta</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>gamma</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray</em> – <span class="math notranslate nohighlight">\(V(x, y)\)</span>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="n">lotka_volterra_invariant</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>  <span class="c1"># minimum, at the fixed point</span>
+<span class="go">2.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.lyapunov_quadratic_form">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.ode_dynamics.</span></span><span class="sig-name descname"><span class="pre">lyapunov_quadratic_form</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Q</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/stability.html#lyapunov_quadratic_form"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.lyapunov_quadratic_form" title="Link to this definition">#</a></dt>
+<dd><p>Quadratic Lyapunov function for the linear system <span class="math notranslate nohighlight">\(\dot x = Ax\)</span>.</p>
+<p>Lyapunov’s direct method (1892) proves stability without solving the
+ODE: if a function <span class="math notranslate nohighlight">\(V(x) &gt; 0\)</span> (for <span class="math notranslate nohighlight">\(x \neq 0\)</span>) strictly
+decreases along every trajectory, the origin is asymptotically
+stable. For a linear system, try <span class="math notranslate nohighlight">\(V(x) = x^T P x\)</span>; then
+<span class="math notranslate nohighlight">\(\dot V = x^T(A^T P + P A)x = -x^T Q x\)</span>. Solving the
+continuous <em>Lyapunov equation</em></p>
+<div class="math notranslate nohighlight">
+\[A^T P + P A = -Q\]</div>
+<p>for a chosen <span class="math notranslate nohighlight">\(Q \succ 0\)</span> gives a positive-definite <span class="math notranslate nohighlight">\(P\)</span>
+if and only if every eigenvalue of <span class="math notranslate nohighlight">\(A\)</span> has negative real part
+(Lyapunov’s theorem). The equation is solved with
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.solve_continuous_lyapunov.html#scipy.linalg.solve_continuous_lyapunov" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.linalg.solve_continuous_lyapunov()</span></code></a> (Bartels-Stewart).
+See Khalil, <em>Nonlinear Systems</em>, 3rd ed., Thm. 4.6.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n"><em>n</em></a><em>, </em><a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n"><em>n</em></a><em>)</em>) – System matrix.</p></li>
+<li><p><strong>Q</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n"><em>n</em></a><em>, </em><a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n"><em>n</em></a><em>)</em><em>, </em><em>optional</em>) – Symmetric positive-definite matrix; defaults to the identity.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.ode_dynamics.LyapunovFunctionResult" title="mathematicskit.ode_dynamics.core.base.LyapunovFunctionResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">LyapunovFunctionResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>LyapunovFunctionResult</em> – <code class="docutils literal notranslate"><span class="pre">P</span></code>, <code class="docutils literal notranslate"><span class="pre">Q</span></code>, and whether <code class="docutils literal notranslate"><span class="pre">P</span></code> is positive definite.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">=</span> <span class="n">lyapunov_quadratic_form</span><span class="p">([[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">P</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">array([[0.5 , 0.  ],</span>
+<span class="go">       [0.  , 0.25]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span><span class="o">.</span><span class="n">positive_definite</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lyapunov_quadratic_form</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">]])</span><span class="o">.</span><span class="n">positive_definite</span>
+<span class="go">False</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1210,10 +2085,45 @@ See Strogatz, <em>Nonlinear Dynamics and Chaos</em>, 2nd ed., Ch. 3.4-3.6.</p>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pitchfork_fixed_points</span><span class="p">(</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;supercritical&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pitchfork_fixed_points</span><span class="p">(</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"supercritical"</span><span class="p">)</span>
 <span class="go">array([ 0., -2.,  2.])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">pitchfork_fixed_points</span><span class="p">(</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;supercritical&quot;</span><span class="p">))))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">pitchfork_fixed_points</span><span class="p">(</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"supercritical"</span><span class="p">))))</span>
 <span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.rossler_fixed_points">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.ode_dynamics.</span></span><span class="sig-name descname"><span class="pre">rossler_fixed_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5.7</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/chaotic_flows.html#rossler_fixed_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.rossler_fixed_points" title="Link to this definition">#</a></dt>
+<dd><p>Closed-form fixed points of the Rossler system.</p>
+<p>Setting the right-hand side to zero gives <span class="math notranslate nohighlight">\(z = -y\)</span>, <span class="math notranslate nohighlight">\(x =
+-ay\)</span>, and then <span class="math notranslate nohighlight">\(ay^2 + cy + b = 0\)</span>, so</p>
+<div class="math notranslate nohighlight">
+\[y_\pm = \frac{-c \pm \sqrt{c^2 - 4ab}}{2a}, \qquad
+(x, y, z) = (-a y_\pm,\ y_\pm,\ -y_\pm),\]</div>
+<p>which are real when <span class="math notranslate nohighlight">\(c^2 \ge 4ab\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>c</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (2, 3)</em> – One fixed point per row (the one near the origin first).</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fps</span> <span class="o">=</span> <span class="n">rossler_fixed_points</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">fps</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="go">[0.007, -0.0351, 0.0351]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">fps</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+<span class="go">[5.693, -28.4649, 28.4649]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1246,6 +2156,74 @@ fixed points).</p>
 <span class="go">array([-2.,  2.])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">saddle_node_fixed_points</span><span class="p">(</span><span class="mf">1.0</span><span class="p">))))</span>
 <span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.sir_final_size">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.ode_dynamics.</span></span><span class="sig-name descname"><span class="pre">sir_final_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/epidemics.html#sir_final_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.sir_final_size" title="Link to this definition">#</a></dt>
+<dd><p>Fraction of the population still susceptible after the epidemic.</p>
+<p>Dividing <span class="math notranslate nohighlight">\(\dot S\)</span> by <span class="math notranslate nohighlight">\(\dot R\)</span> and integrating gives
+<span class="math notranslate nohighlight">\(S = S_0 e^{-R_0 (R - R_{\text{init}})}\)</span>. Since <span class="math notranslate nohighlight">\(I \to 0\)</span>,
+the limit <span class="math notranslate nohighlight">\(S_\infty\)</span> solves the Kermack-McKendrick final-size
+equation (with <span class="math notranslate nohighlight">\(R_{\text{init}} = 1 - S_0 - I_0\)</span>)</p>
+<div class="math notranslate nohighlight">
+\[\ln\frac{S_0}{S_\infty} = R_0\,(S_0 + I_0 - S_\infty),\]</div>
+<p>solved here with <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.brentq.html#scipy.optimize.brentq" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.optimize.brentq()</span></code></a> on <span class="math notranslate nohighlight">\((0, S_0)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>r0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Basic reproduction number <code class="docutils literal notranslate"><span class="pre">beta</span> <span class="pre">/</span> <span class="pre">gamma</span></code>.</p></li>
+<li><p><strong>s0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial susceptible and infected fractions.</p></li>
+<li><p><strong>i0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial susceptible and infected fractions.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em> – <span class="math notranslate nohighlight">\(S_\infty\)</span>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s_inf</span> <span class="o">=</span> <span class="n">sir_final_size</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>  <span class="c1"># a fully susceptible population</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">s_inf</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">0.2032</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">s_inf</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>  <span class="c1"># fraction ever infected</span>
+<span class="go">0.7968</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.ode_dynamics.sir_peak_infected">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.ode_dynamics.</span></span><span class="sig-name descname"><span class="pre">sir_peak_infected</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/epidemics.html#sir_peak_infected"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.sir_peak_infected" title="Link to this definition">#</a></dt>
+<dd><p>Peak infected fraction of the SIR model.</p>
+<p><span class="math notranslate nohighlight">\(I + S - \ln(S)/R_0\)</span> is conserved, and <span class="math notranslate nohighlight">\(I\)</span> peaks when
+<span class="math notranslate nohighlight">\(S = 1/R_0\)</span>, giving</p>
+<div class="math notranslate nohighlight">
+\[I_{\max} = I_0 + S_0 - \frac{1}{R_0}\left(1 + \ln(R_0 S_0)\right)\]</div>
+<p>when <span class="math notranslate nohighlight">\(R_0 S_0 &gt; 1\)</span> (otherwise <span class="math notranslate nohighlight">\(I\)</span> only decreases and
+<span class="math notranslate nohighlight">\(I_{\max} = I_0\)</span>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>r0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>s0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial susceptible and infected fractions.</p></li>
+<li><p><strong>i0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial susceptible and infected fractions.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">sir_peak_infected</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">0.3038</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1353,8 +2331,24 @@ numba-compatible, unlike <a class="reference internal" href="#mathematicskit.ode
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.BendixsonResult"><code class="docutils literal notranslate"><span class="pre">BendixsonResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.BendixsonResult.X"><code class="docutils literal notranslate"><span class="pre">BendixsonResult.X</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.BendixsonResult.Y"><code class="docutils literal notranslate"><span class="pre">BendixsonResult.Y</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.BendixsonResult.divergence"><code class="docutils literal notranslate"><span class="pre">BendixsonResult.divergence</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.BendixsonResult.rules_out_periodic_orbits"><code class="docutils literal notranslate"><span class="pre">BendixsonResult.rules_out_periodic_orbits</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.Brusselator"><code class="docutils literal notranslate"><span class="pre">Brusselator</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.Brusselator.fixed_point"><code class="docutils literal notranslate"><span class="pre">Brusselator.fixed_point()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.Brusselator.rhs"><code class="docutils literal notranslate"><span class="pre">Brusselator.rhs()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.DuffingOscillator"><code class="docutils literal notranslate"><span class="pre">DuffingOscillator</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.DuffingOscillator.rhs"><code class="docutils literal notranslate"><span class="pre">DuffingOscillator.rhs()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.FitzHughNagumo"><code class="docutils literal notranslate"><span class="pre">FitzHughNagumo</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.FitzHughNagumo.rhs"><code class="docutils literal notranslate"><span class="pre">FitzHughNagumo.rhs()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.FixedPointResult"><code class="docutils literal notranslate"><span class="pre">FixedPointResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
@@ -1372,13 +2366,36 @@ numba-compatible, unlike <a class="reference internal" href="#mathematicskit.ode
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.FlowSystem.rhs"><code class="docutils literal notranslate"><span class="pre">FlowSystem.rhs()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.KuramotoModel"><code class="docutils literal notranslate"><span class="pre">KuramotoModel</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.KuramotoModel.rhs"><code class="docutils literal notranslate"><span class="pre">KuramotoModel.rhs()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.Linear2D"><code class="docutils literal notranslate"><span class="pre">Linear2D</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.Linear2D.rhs"><code class="docutils literal notranslate"><span class="pre">Linear2D.rhs()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.LogisticGrowth"><code class="docutils literal notranslate"><span class="pre">LogisticGrowth</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.LogisticGrowth.rhs"><code class="docutils literal notranslate"><span class="pre">LogisticGrowth.rhs()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.LogisticMap"><code class="docutils literal notranslate"><span class="pre">LogisticMap</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.LogisticMap.fixed_points"><code class="docutils literal notranslate"><span class="pre">LogisticMap.fixed_points()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.LogisticMap.iterate"><code class="docutils literal notranslate"><span class="pre">LogisticMap.iterate()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.LorenzSystem"><code class="docutils literal notranslate"><span class="pre">LorenzSystem</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.LorenzSystem.rhs"><code class="docutils literal notranslate"><span class="pre">LorenzSystem.rhs()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.LotkaVolterra"><code class="docutils literal notranslate"><span class="pre">LotkaVolterra</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.LotkaVolterra.fixed_point"><code class="docutils literal notranslate"><span class="pre">LotkaVolterra.fixed_point()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.LotkaVolterra.rhs"><code class="docutils literal notranslate"><span class="pre">LotkaVolterra.rhs()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.LyapunovFunctionResult"><code class="docutils literal notranslate"><span class="pre">LyapunovFunctionResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.LyapunovFunctionResult.P"><code class="docutils literal notranslate"><span class="pre">LyapunovFunctionResult.P</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.LyapunovFunctionResult.Q"><code class="docutils literal notranslate"><span class="pre">LyapunovFunctionResult.Q</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.LyapunovFunctionResult.positive_definite"><code class="docutils literal notranslate"><span class="pre">LyapunovFunctionResult.positive_definite</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.Nonlinear2D"><code class="docutils literal notranslate"><span class="pre">Nonlinear2D</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
@@ -1392,20 +2409,42 @@ numba-compatible, unlike <a class="reference internal" href="#mathematicskit.ode
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.OdeTrajectory.y"><code class="docutils literal notranslate"><span class="pre">OdeTrajectory.y</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.RosslerSystem"><code class="docutils literal notranslate"><span class="pre">RosslerSystem</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.RosslerSystem.rhs"><code class="docutils literal notranslate"><span class="pre">RosslerSystem.rhs()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.SIRModel"><code class="docutils literal notranslate"><span class="pre">SIRModel</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.SIRModel.r0"><code class="docutils literal notranslate"><span class="pre">SIRModel.r0</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.SIRModel.rhs"><code class="docutils literal notranslate"><span class="pre">SIRModel.rhs()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.VanDerPolOscillator"><code class="docutils literal notranslate"><span class="pre">VanDerPolOscillator</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.VanDerPolOscillator.rhs"><code class="docutils literal notranslate"><span class="pre">VanDerPolOscillator.rhs()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.bendixson_criterion"><code class="docutils literal notranslate"><span class="pre">bendixson_criterion()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.bifurcation_diagram"><code class="docutils literal notranslate"><span class="pre">bifurcation_diagram()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.brusselator_hopf_threshold"><code class="docutils literal notranslate"><span class="pre">brusselator_hopf_threshold()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.classify_fixed_point_2d"><code class="docutils literal notranslate"><span class="pre">classify_fixed_point_2d()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.estimate_feigenbaum_delta"><code class="docutils literal notranslate"><span class="pre">estimate_feigenbaum_delta()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.estimate_limit_cycle_amplitude"><code class="docutils literal notranslate"><span class="pre">estimate_limit_cycle_amplitude()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.estimate_period"><code class="docutils literal notranslate"><span class="pre">estimate_period()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.find_fixed_point_newton"><code class="docutils literal notranslate"><span class="pre">find_fixed_point_newton()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.fitzhugh_nagumo_fixed_point"><code class="docutils literal notranslate"><span class="pre">fitzhugh_nagumo_fixed_point()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.fitzhugh_nagumo_hopf_currents"><code class="docutils literal notranslate"><span class="pre">fitzhugh_nagumo_hopf_currents()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.hopf_limit_cycle_radius"><code class="docutils literal notranslate"><span class="pre">hopf_limit_cycle_radius()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.kuramoto_lorentzian_order_parameter"><code class="docutils literal notranslate"><span class="pre">kuramoto_lorentzian_order_parameter()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.kuramoto_order_parameter"><code class="docutils literal notranslate"><span class="pre">kuramoto_order_parameter()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.logistic_growth_solution"><code class="docutils literal notranslate"><span class="pre">logistic_growth_solution()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.lorenz_fixed_points"><code class="docutils literal notranslate"><span class="pre">lorenz_fixed_points()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.lotka_volterra_invariant"><code class="docutils literal notranslate"><span class="pre">lotka_volterra_invariant()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.lyapunov_quadratic_form"><code class="docutils literal notranslate"><span class="pre">lyapunov_quadratic_form()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.numerical_jacobian"><code class="docutils literal notranslate"><span class="pre">numerical_jacobian()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.pitchfork_fixed_points"><code class="docutils literal notranslate"><span class="pre">pitchfork_fixed_points()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.rossler_fixed_points"><code class="docutils literal notranslate"><span class="pre">rossler_fixed_points()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.saddle_node_fixed_points"><code class="docutils literal notranslate"><span class="pre">saddle_node_fixed_points()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.sir_final_size"><code class="docutils literal notranslate"><span class="pre">sir_final_size()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.sir_peak_infected"><code class="docutils literal notranslate"><span class="pre">sir_peak_infected()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.stroboscopic_poincare_section"><code class="docutils literal notranslate"><span class="pre">stroboscopic_poincare_section()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.ode_dynamics.vector_field_grid"><code class="docutils literal notranslate"><span class="pre">vector_field_grid()</span></code></a></li>
 </ul>

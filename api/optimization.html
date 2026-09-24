@@ -468,8 +468,73 @@ method and BFGS via <code class="docutils literal notranslate"><span class="pre"
 recorded via its callback; Lagrange-multiplier stationary points and KKT-
 condition verification for constrained problems; linear programming via
 <code class="docutils literal notranslate"><span class="pre">scipy.optimize.linprog</span></code>; a quadratic-penalty method for constrained
-nonlinear problems; and convergence-rate comparison utilities across
+nonlinear problems; integer programming (branch and bound via
+<code class="docutils literal notranslate"><span class="pre">scipy.optimize.milp</span></code>), zero-sum matrix games, Levenberg-Marquardt
+least squares, Robbins-Monro stochastic approximation, golden-section
+search, the Frank-Wolfe method, knapsack dynamic programming, Nelder-Mead
+simplex search, Nesterov acceleration, and Adam; and convergence-rate comparison utilities across
 methods on a shared set of test functions (Rosenbrock, a quadratic bowl).</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.optimization.Adam">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.optimization.</span></span><span class="sig-name descname"><span class="pre">Adam</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.999</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-08</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-08</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/optimization/systems/momentum.html#Adam"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.optimization.Adam" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mathematicskit.optimization.UnconstrainedOptimizer" title="mathematicskit.optimization.core.base.UnconstrainedOptimizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">UnconstrainedOptimizer</span></code></a></p>
+<p>Adam: adaptive moment estimation (Kingma and Ba, 2014).</p>
+<p>Keeps exponential moving averages of the gradient and of its
+elementwise square, corrects their bias toward zero, and scales each
+coordinate’s step by the root-mean-square gradient:</p>
+<div class="math notranslate nohighlight">
+\[m_k = \beta_1 m_{k-1} + (1-\beta_1) g_k, \qquad
+v_k = \beta_2 v_{k-1} + (1-\beta_2) g_k^2,\]</div>
+<div class="math notranslate nohighlight">
+\[x_{k+1} = x_k - \alpha \frac{m_k / (1-\beta_1^k)}{\sqrt{v_k/(1-\beta_2^k)} + \varepsilon}.\]</div>
+<p>Each coordinate moves by roughly <code class="docutils literal notranslate"><span class="pre">alpha</span></code> per step regardless of
+the gradient’s scale, which makes Adam robust to badly scaled and
+noisy (stochastic) gradients. With a constant <code class="docutils literal notranslate"><span class="pre">alpha</span></code> it settles
+within about <code class="docutils literal notranslate"><span class="pre">alpha</span></code> of a minimizer rather than converging exactly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>alpha</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Step size.</p></li>
+<li><p><strong>beta1</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Decay rates of the first- and second-moment estimates.</p></li>
+<li><p><strong>beta2</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Decay rates of the first- and second-moment estimates.</p></li>
+<li><p><strong>eps</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Denominator safeguard.</p></li>
+<li><p><strong>tol</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Convergence tolerance on <code class="docutils literal notranslate"><span class="pre">||grad(x)||</span></code>.</p></li>
+<li><p><strong>max_iter</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mf">1000.0</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">grad</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.0</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">),</span> <span class="mf">2000.0</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">2.0</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">Adam</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">3000</span><span class="p">)</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">grad</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">],</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="mathematicskit.optimization.Adam.minimize">
+<span class="sig-name descname"><span class="pre">minimize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/optimization/systems/momentum.html#Adam.minimize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.optimization.Adam.minimize" title="Link to this definition">#</a></dt>
+<dd><p>Minimize <code class="docutils literal notranslate"><span class="pre">f</span></code> starting from <code class="docutils literal notranslate"><span class="pre">x0</span></code>, using its gradient <code class="docutils literal notranslate"><span class="pre">grad</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>], <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]</span>) – Objective <code class="docutils literal notranslate"><span class="pre">f(x)</span> <span class="pre">-&gt;</span> <span class="pre">float</span></code>.</p></li>
+<li><p><strong>grad</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>], <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>]</span>) – Gradient <code class="docutils literal notranslate"><span class="pre">grad(x)</span> <span class="pre">-&gt;</span> <span class="pre">ndarray</span></code>, same shape as <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p></li>
+<li><p><strong>x0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.optimization.OptimizeResult" title="mathematicskit.optimization.core.base.OptimizeResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">OptimizeResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>OptimizeResult</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="mathematicskit.optimization.BFGS">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.optimization.</span></span><span class="sig-name descname"><span class="pre">BFGS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-08</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/optimization/systems/newton_quasi_newton.html#BFGS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.optimization.BFGS" title="Link to this definition">#</a></dt>
@@ -514,6 +579,56 @@ derivatives are unavailable or expensive. See Nocedal &amp; Wright,
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><em>OptimizeResult</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.optimization.GameResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.optimization.</span></span><span class="sig-name descname"><span class="pre">GameResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row_strategy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_strategy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/optimization/core/base.html#GameResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.optimization.GameResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Container for the solution of a two-player zero-sum matrix game.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>row_strategy</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>col_strategy</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.optimization.GameResult.col_strategy">
+<span class="sig-name descname"><span class="pre">col_strategy</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.optimization.GameResult.col_strategy" title="Link to this definition">#</a></dt>
+<dd><p>The column player’s optimal mixed strategy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (<a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.optimization.GameResult.row_strategy">
+<span class="sig-name descname"><span class="pre">row_strategy</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.optimization.GameResult.row_strategy" title="Link to this definition">#</a></dt>
+<dd><p>The row player’s optimal mixed strategy (a probability vector).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (m,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.optimization.GameResult.value">
+<span class="sig-name descname"><span class="pre">value</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.optimization.GameResult.value" title="Link to this definition">#</a></dt>
+<dd><p>The value of the game – the expected payoff to the row
+player when both play optimally.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -719,6 +834,69 @@ Lagrangian gradient.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.optimization.KnapsackResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.optimization.</span></span><span class="sig-name descname"><span class="pre">KnapsackResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">items</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/optimization/core/base.html#KnapsackResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.optimization.KnapsackResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Container for the solution of a 0/1 knapsack problem.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>items</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>weight</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>)</p></li>
+<li><p><strong>table</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.optimization.KnapsackResult.items">
+<span class="sig-name descname"><span class="pre">items</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.optimization.KnapsackResult.items" title="Link to this definition">#</a></dt>
+<dd><p>Indices of the chosen items, in increasing order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray of <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.optimization.KnapsackResult.table">
+<span class="sig-name descname"><span class="pre">table</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.optimization.KnapsackResult.table" title="Link to this definition">#</a></dt>
+<dd><p>Bellman’s value table,
+<code class="docutils literal notranslate"><span class="pre">table[i,</span> <span class="pre">w]</span></code> being the best value using the first <code class="docutils literal notranslate"><span class="pre">i</span></code> items
+with capacity <code class="docutils literal notranslate"><span class="pre">w</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (n + 1, capacity + 1)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.optimization.KnapsackResult.value">
+<span class="sig-name descname"><span class="pre">value</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.optimization.KnapsackResult.value" title="Link to this definition">#</a></dt>
+<dd><p>The maximum total value achievable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.optimization.KnapsackResult.weight">
+<span class="sig-name descname"><span class="pre">weight</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#mathematicskit.optimization.KnapsackResult.weight" title="Link to this definition">#</a></dt>
+<dd><p>Total weight of the chosen items.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="mathematicskit.optimization.LagrangeResult">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.optimization.</span></span><span class="sig-name descname"><span class="pre">LagrangeResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multipliers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">converged</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kkt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/optimization/core/base.html#LagrangeResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.optimization.LagrangeResult" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
@@ -771,6 +949,91 @@ the Lagrange-multiplier system.</p>
 <dt class="sig sig-object py" id="mathematicskit.optimization.LagrangeResult.x">
 <span class="sig-name descname"><span class="pre">x</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.optimization.LagrangeResult.x" title="Link to this definition">#</a></dt>
 <dd><p>The stationary point found.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (<a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.optimization.LeastSquaresResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.optimization.</span></span><span class="sig-name descname"><span class="pre">LeastSquaresResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cost</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residuals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">success</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfev</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/optimization/core/base.html#LeastSquaresResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.optimization.LeastSquaresResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Container for the output of a nonlinear least-squares fit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>cost</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>residuals</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>success</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>)</p></li>
+<li><p><strong>nfev</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>)</p></li>
+<li><p><strong>message</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.optimization.LeastSquaresResult.cost">
+<span class="sig-name descname"><span class="pre">cost</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.optimization.LeastSquaresResult.cost" title="Link to this definition">#</a></dt>
+<dd><p><span class="math notranslate nohighlight">\(\tfrac12 \sum_i r_i(x)^2\)</span> at the solution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.optimization.LeastSquaresResult.message">
+<span class="sig-name descname"><span class="pre">message</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></span><a class="headerlink" href="#mathematicskit.optimization.LeastSquaresResult.message" title="Link to this definition">#</a></dt>
+<dd><p>The underlying solver’s status message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.optimization.LeastSquaresResult.nfev">
+<span class="sig-name descname"><span class="pre">nfev</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></span><a class="headerlink" href="#mathematicskit.optimization.LeastSquaresResult.nfev" title="Link to this definition">#</a></dt>
+<dd><p>Number of residual-function evaluations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.optimization.LeastSquaresResult.residuals">
+<span class="sig-name descname"><span class="pre">residuals</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.optimization.LeastSquaresResult.residuals" title="Link to this definition">#</a></dt>
+<dd><p>The residual vector <span class="math notranslate nohighlight">\(r(x)\)</span> at the solution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (m,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.optimization.LeastSquaresResult.success">
+<span class="sig-name descname"><span class="pre">success</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></span><a class="headerlink" href="#mathematicskit.optimization.LeastSquaresResult.success" title="Link to this definition">#</a></dt>
+<dd><p>Whether the solver reported convergence.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.optimization.LeastSquaresResult.x">
+<span class="sig-name descname"><span class="pre">x</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.optimization.LeastSquaresResult.x" title="Link to this definition">#</a></dt>
+<dd><p>The fitted parameters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>ndarray, shape (<a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>,)</p>
@@ -835,6 +1098,107 @@ the Lagrange-multiplier system.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>ndarray, shape (<a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.optimization.NelderMead">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.optimization.</span></span><span class="sig-name descname"><span class="pre">NelderMead</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-08</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/optimization/systems/direct_search.html#NelderMead"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.optimization.NelderMead" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mathematicskit.optimization.UnconstrainedOptimizer" title="mathematicskit.optimization.core.base.UnconstrainedOptimizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">UnconstrainedOptimizer</span></code></a></p>
+<p>Derivative-free Nelder-Mead simplex search.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tol</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Forwarded as both <code class="docutils literal notranslate"><span class="pre">xatol</span></code> and <code class="docutils literal notranslate"><span class="pre">fatol</span></code>.</p></li>
+<li><p><strong>max_iter</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Forwarded as <code class="docutils literal notranslate"><span class="pre">options={&quot;maxiter&quot;:</span> <span class="pre">max_iter}</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.optimization.utils.test_functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">rosenbrock</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">NelderMead</span><span class="p">(</span><span class="n">tol</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">)</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">rosenbrock</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="mathematicskit.optimization.NelderMead.minimize">
+<span class="sig-name descname"><span class="pre">minimize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/optimization/systems/direct_search.html#NelderMead.minimize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.optimization.NelderMead.minimize" title="Link to this definition">#</a></dt>
+<dd><p>Minimize <code class="docutils literal notranslate"><span class="pre">f</span></code> from <code class="docutils literal notranslate"><span class="pre">x0</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>], <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]</span>)</p></li>
+<li><p><strong>grad</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>], <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>] | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Ignored – Nelder-Mead uses function values only. Accepted so
+the method fits the shared
+<a class="reference internal" href="#mathematicskit.optimization.UnconstrainedOptimizer" title="mathematicskit.optimization.core.base.UnconstrainedOptimizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">UnconstrainedOptimizer</span></code></a>
+interface (e.g. <code class="xref py py-func docutils literal notranslate"><span class="pre">compare_optimizers()</span></code>).</p></li>
+<li><p><strong>x0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.optimization.OptimizeResult" title="mathematicskit.optimization.core.base.OptimizeResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">OptimizeResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>OptimizeResult</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.optimization.NesterovAcceleratedGradient">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.optimization.</span></span><span class="sig-name descname"><span class="pre">NesterovAcceleratedGradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-08</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/optimization/systems/momentum.html#NesterovAcceleratedGradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.optimization.NesterovAcceleratedGradient" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mathematicskit.optimization.UnconstrainedOptimizer" title="mathematicskit.optimization.core.base.UnconstrainedOptimizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">UnconstrainedOptimizer</span></code></a></p>
+<p>Nesterov’s accelerated gradient method (1983).</p>
+<p>Takes the gradient step from an extrapolated point:</p>
+<div class="math notranslate nohighlight">
+\[y_k = x_k + \frac{k-1}{k+2}(x_k - x_{k-1}), \qquad
+x_{k+1} = y_k - \alpha \nabla f(y_k).\]</div>
+<p>For convex <code class="docutils literal notranslate"><span class="pre">f</span></code> with <code class="docutils literal notranslate"><span class="pre">L</span></code>-Lipschitz gradient and
+<span class="math notranslate nohighlight">\(\alpha = 1/L\)</span>, <span class="math notranslate nohighlight">\(f(x_k) - f^* = O(1/k^2)\)</span>, against
+<span class="math notranslate nohighlight">\(O(1/k)\)</span> for plain gradient descent – the optimal rate for
+any first-order method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>alpha</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Step size (<code class="docutils literal notranslate"><span class="pre">1/L</span></code> is the classical choice).</p></li>
+<li><p><strong>tol</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Convergence tolerance on <code class="docutils literal notranslate"><span class="pre">||grad(x)||</span></code>.</p></li>
+<li><p><strong>max_iter</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mf">100.0</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">grad</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mf">100.0</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">NesterovAcceleratedGradient</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">grad</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="mathematicskit.optimization.NesterovAcceleratedGradient.minimize">
+<span class="sig-name descname"><span class="pre">minimize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/optimization/systems/momentum.html#NesterovAcceleratedGradient.minimize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.optimization.NesterovAcceleratedGradient.minimize" title="Link to this definition">#</a></dt>
+<dd><p>Minimize <code class="docutils literal notranslate"><span class="pre">f</span></code> starting from <code class="docutils literal notranslate"><span class="pre">x0</span></code>, using its gradient <code class="docutils literal notranslate"><span class="pre">grad</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>], <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]</span>) – Objective <code class="docutils literal notranslate"><span class="pre">f(x)</span> <span class="pre">-&gt;</span> <span class="pre">float</span></code>.</p></li>
+<li><p><strong>grad</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>], <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>]</span>) – Gradient <code class="docutils literal notranslate"><span class="pre">grad(x)</span> <span class="pre">-&gt;</span> <span class="pre">ndarray</span></code>, same shape as <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p></li>
+<li><p><strong>x0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.optimization.OptimizeResult" title="mathematicskit.optimization.core.base.OptimizeResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">OptimizeResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>OptimizeResult</em></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1133,6 +1497,92 @@ each outer iteration.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.optimization.ScalarSearchResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.optimization.</span></span><span class="sig-name descname"><span class="pre">ScalarSearchResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fun</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">brackets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfev</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">converged</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/optimization/core/base.html#ScalarSearchResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.optimization.ScalarSearchResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Container for a one-dimensional bracketing minimization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>fun</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>brackets</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>iterations</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>)</p></li>
+<li><p><strong>nfev</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>)</p></li>
+<li><p><strong>converged</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.optimization.ScalarSearchResult.brackets">
+<span class="sig-name descname"><span class="pre">brackets</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.optimization.ScalarSearchResult.brackets" title="Link to this definition">#</a></dt>
+<dd><p>Every bracket <code class="docutils literal notranslate"><span class="pre">[a,</span> <span class="pre">b]</span></code>,
+starting from the initial interval.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (iterations + 1, 2)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.optimization.ScalarSearchResult.converged">
+<span class="sig-name descname"><span class="pre">converged</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></span><a class="headerlink" href="#mathematicskit.optimization.ScalarSearchResult.converged" title="Link to this definition">#</a></dt>
+<dd><p>Whether the bracket shrank below the tolerance before <cite>max_iter</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.optimization.ScalarSearchResult.fun">
+<span class="sig-name descname"><span class="pre">fun</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.optimization.ScalarSearchResult.fun" title="Link to this definition">#</a></dt>
+<dd><p>Objective value at <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.optimization.ScalarSearchResult.iterations">
+<span class="sig-name descname"><span class="pre">iterations</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></span><a class="headerlink" href="#mathematicskit.optimization.ScalarSearchResult.iterations" title="Link to this definition">#</a></dt>
+<dd><p>Number of bracket reductions performed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.optimization.ScalarSearchResult.nfev">
+<span class="sig-name descname"><span class="pre">nfev</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></span><a class="headerlink" href="#mathematicskit.optimization.ScalarSearchResult.nfev" title="Link to this definition">#</a></dt>
+<dd><p>Number of objective evaluations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.optimization.ScalarSearchResult.x">
+<span class="sig-name descname"><span class="pre">x</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.optimization.ScalarSearchResult.x" title="Link to this definition">#</a></dt>
+<dd><p>The estimated minimizer (midpoint of the final bracket).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="mathematicskit.optimization.UnconstrainedOptimizer">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.optimization.</span></span><span class="sig-name descname"><span class="pre">UnconstrainedOptimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-08</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/optimization/core/base.html#UnconstrainedOptimizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.optimization.UnconstrainedOptimizer" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
@@ -1194,9 +1644,52 @@ scipy-backed methods, forwarded as their own tolerance).</p></li>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.optimization.systems.gradient_descent</span><span class="w"> </span><span class="kn">import</span> <span class="n">GradientDescent</span><span class="p">,</span> <span class="n">GradientDescentLineSearch</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">grad</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">compare_optimizers</span><span class="p">({</span><span class="s2">&quot;fixed&quot;</span><span class="p">:</span> <span class="n">GradientDescent</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span> <span class="s2">&quot;line_search&quot;</span><span class="p">:</span> <span class="n">GradientDescentLineSearch</span><span class="p">()},</span> <span class="n">f</span><span class="p">,</span> <span class="n">grad</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">compare_optimizers</span><span class="p">({</span><span class="s2">"fixed"</span><span class="p">:</span> <span class="n">GradientDescent</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span> <span class="s2">"line_search"</span><span class="p">:</span> <span class="n">GradientDescentLineSearch</span><span class="p">()},</span> <span class="n">f</span><span class="p">,</span> <span class="n">grad</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">]))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-<span class="go">[&#39;fixed&#39;, &#39;line_search&#39;]</span>
+<span class="go">['fixed', 'line_search']</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.optimization.frank_wolfe">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.optimization.</span></span><span class="sig-name descname"><span class="pre">frank_wolfe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a_ub</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b_ub</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a_eq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b_eq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/optimization/systems/frank_wolfe.html#frank_wolfe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.optimization.frank_wolfe" title="Link to this definition">#</a></dt>
+<dd><p>Minimize a smooth convex <code class="docutils literal notranslate"><span class="pre">f</span></code> over a bounded polytope by the Frank-Wolfe method.</p>
+<p>The feasible set <span class="math notranslate nohighlight">\(P = \{x : A_{ub}x \leq b_{ub},\ A_{eq}x = b_{eq},\ \text{bounds}\}\)</span>
+is described exactly as for
+<code class="xref py py-func docutils literal notranslate"><span class="pre">linear_program()</span></code>
+(default bounds <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">None)</span></code>) and must be bounded.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>], <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]</span>) – Objective and its gradient.</p></li>
+<li><p><strong>grad</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>], <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>]</span>) – Objective and its gradient.</p></li>
+<li><p><strong>x0</strong> (<em>array_like</em>) – A feasible starting point.</p></li>
+<li><p><strong>a_ub</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Polytope description.</p></li>
+<li><p><strong>b_ub</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Polytope description.</p></li>
+<li><p><strong>a_eq</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Polytope description.</p></li>
+<li><p><strong>b_eq</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Polytope description.</p></li>
+<li><p><strong>bounds</strong> – Polytope description.</p></li>
+<li><p><strong>tol</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Stop once the Frank-Wolfe gap falls below <code class="docutils literal notranslate"><span class="pre">tol</span></code>.</p></li>
+<li><p><strong>max_iter</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.optimization.OptimizeResult" title="mathematicskit.optimization.core.base.OptimizeResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">OptimizeResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>OptimizeResult</em> – <code class="docutils literal notranslate"><span class="pre">extra[&quot;gaps&quot;]</span></code> holds the Frank-Wolfe gap at every iteration,
+an upper bound on <span class="math notranslate nohighlight">\(f(x_k) - f^*\)</span>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>  <span class="c1"># already on the probability simplex</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">grad</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">frank_wolfe</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">grad</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="n">a_eq</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span> <span class="n">b_eq</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">]),</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">)</span>
+<span class="go">True</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1232,6 +1725,109 @@ sharply-curving-down line, respectively).</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gap</span> <span class="o">=</span> <span class="n">function_value_gap</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">f_star</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">gap</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mf">1e-12</span><span class="p">))</span>
 <span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.optimization.golden_section_search">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.optimization.</span></span><span class="sig-name descname"><span class="pre">golden_section_search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-08</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/optimization/systems/scalar_search.html#golden_section_search"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.optimization.golden_section_search" title="Link to this definition">#</a></dt>
+<dd><p>Minimize a unimodal <code class="docutils literal notranslate"><span class="pre">f</span></code> on <code class="docutils literal notranslate"><span class="pre">[a,</span> <span class="pre">b]</span></code> by golden-section search.</p>
+<p>Two interior points <span class="math notranslate nohighlight">\(c = b - (b-a)/\varphi\)</span> and
+<span class="math notranslate nohighlight">\(d = a + (b-a)/\varphi\)</span> split the bracket in the golden ratio.
+Comparing <span class="math notranslate nohighlight">\(f(c)\)</span> with <span class="math notranslate nohighlight">\(f(d)\)</span> discards one end, and the
+surviving interior point is reused in the next bracket, so each
+iteration costs a single new evaluation and shrinks the bracket by
+the factor <span class="math notranslate nohighlight">\(1/\varphi\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>], <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]</span>) – <code class="docutils literal notranslate"><span class="pre">f(x)</span> <span class="pre">-&gt;</span> <span class="pre">float</span></code>, unimodal on <code class="docutils literal notranslate"><span class="pre">[a,</span> <span class="pre">b]</span></code>.</p></li>
+<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial bracket.</p></li>
+<li><p><strong>b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial bracket.</p></li>
+<li><p><strong>tol</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Stop once the bracket width is below <code class="docutils literal notranslate"><span class="pre">tol</span></code>.</p></li>
+<li><p><strong>max_iter</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.optimization.ScalarSearchResult" title="mathematicskit.optimization.core.base.ScalarSearchResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">ScalarSearchResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ScalarSearchResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">golden_section_search</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">2.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.optimization.integer_linear_program">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.optimization.</span></span><span class="sig-name descname"><span class="pre">integer_linear_program</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a_ub</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b_ub</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a_eq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b_eq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integrality</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/optimization/systems/linear_programming.html#integer_linear_program"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.optimization.integer_linear_program" title="Link to this definition">#</a></dt>
+<dd><p>Solve a (mixed-)integer linear program by branch and bound.</p>
+<p>Same problem as <a class="reference internal" href="#mathematicskit.optimization.linear_program" title="mathematicskit.optimization.linear_program"><code class="xref py py-func docutils literal notranslate"><span class="pre">linear_program()</span></code></a> with some or all variables
+restricted to integers. Land and Doig’s branch-and-bound solves the
+LP relaxation, then splits on a fractional variable
+<span class="math notranslate nohighlight">\(x_j = t\)</span> into the subproblems <span class="math notranslate nohighlight">\(x_j \leq \lfloor t \rfloor\)</span>
+and <span class="math notranslate nohighlight">\(x_j \geq \lceil t \rceil\)</span>, pruning any branch whose
+relaxation cannot beat the best integer solution found so far. This
+wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.milp.html#scipy.optimize.milp" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.optimize.milp()</span></code></a> (HiGHS branch-and-cut).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>c</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>) – As for <a class="reference internal" href="#mathematicskit.optimization.linear_program" title="mathematicskit.optimization.linear_program"><code class="xref py py-func docutils literal notranslate"><span class="pre">linear_program()</span></code></a> (default bounds <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">None)</span></code>).</p></li>
+<li><p><strong>a_ub</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – As for <a class="reference internal" href="#mathematicskit.optimization.linear_program" title="mathematicskit.optimization.linear_program"><code class="xref py py-func docutils literal notranslate"><span class="pre">linear_program()</span></code></a> (default bounds <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">None)</span></code>).</p></li>
+<li><p><strong>b_ub</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – As for <a class="reference internal" href="#mathematicskit.optimization.linear_program" title="mathematicskit.optimization.linear_program"><code class="xref py py-func docutils literal notranslate"><span class="pre">linear_program()</span></code></a> (default bounds <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">None)</span></code>).</p></li>
+<li><p><strong>a_eq</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – As for <a class="reference internal" href="#mathematicskit.optimization.linear_program" title="mathematicskit.optimization.linear_program"><code class="xref py py-func docutils literal notranslate"><span class="pre">linear_program()</span></code></a> (default bounds <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">None)</span></code>).</p></li>
+<li><p><strong>b_eq</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – As for <a class="reference internal" href="#mathematicskit.optimization.linear_program" title="mathematicskit.optimization.linear_program"><code class="xref py py-func docutils literal notranslate"><span class="pre">linear_program()</span></code></a> (default bounds <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">None)</span></code>).</p></li>
+<li><p><strong>bounds</strong> – As for <a class="reference internal" href="#mathematicskit.optimization.linear_program" title="mathematicskit.optimization.linear_program"><code class="xref py py-func docutils literal notranslate"><span class="pre">linear_program()</span></code></a> (default bounds <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">None)</span></code>).</p></li>
+<li><p><strong>integrality</strong> (<em>array_like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n"><em>n</em></a><em>,</em><em>)</em><em>, </em><em>optional</em>) – <code class="docutils literal notranslate"><span class="pre">1</span></code> for an integer variable, <code class="docutils literal notranslate"><span class="pre">0</span></code> for a continuous one;
+defaults to all integer.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.optimization.LinearProgramResult" title="mathematicskit.optimization.core.base.LinearProgramResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearProgramResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>LinearProgramResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># maximize 5x + 4y s.t. 6x + 4y &lt;= 24, x + 2y &lt;= 6, x, y &gt;= 0 integer.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">integer_linear_program</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">5.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.0</span><span class="p">]),</span> <span class="n">a_ub</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">6.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]]),</span> <span class="n">b_ub</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">24.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">round</span><span class="p">()</span> <span class="o">+</span> <span class="mf">0.0</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="nb">round</span><span class="p">(</span><span class="o">-</span><span class="n">result</span><span class="o">.</span><span class="n">fun</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">([4.0, 0.0], 20.0)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.optimization.knapsack">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.optimization.</span></span><span class="sig-name descname"><span class="pre">knapsack</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">capacity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/optimization/systems/dynamic_programming.html#knapsack"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.optimization.knapsack" title="Link to this definition">#</a></dt>
+<dd><p>Solve the 0/1 knapsack problem by dynamic programming.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>values</strong> (<em>array_like</em><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n"><em>n</em></a><em>,</em><em>)</em>) – Item values.</p></li>
+<li><p><strong>weights</strong> (<em>array_like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n"><em>n</em></a><em>,</em><em>)</em>) – Non-negative integer item weights.</p></li>
+<li><p><strong>capacity</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Non-negative integer capacity.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.optimization.KnapsackResult" title="mathematicskit.optimization.core.base.KnapsackResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">KnapsackResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>KnapsackResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">knapsack</span><span class="p">([</span><span class="mi">60</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">120</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="mi">50</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">result</span><span class="o">.</span><span class="n">weight</span>
+<span class="go">(220.0, [1, 2], 50)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1273,6 +1869,42 @@ Wright, <em>Numerical Optimization</em>, 2nd ed., Ch. 12.2-12.3.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">)</span>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">multipliers</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">],</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.optimization.levenberg_marquardt">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.optimization.</span></span><span class="sig-name descname"><span class="pre">levenberg_marquardt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">residual</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jac</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_nfev</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/optimization/systems/least_squares.html#levenberg_marquardt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.optimization.levenberg_marquardt" title="Link to this definition">#</a></dt>
+<dd><p>Minimize <span class="math notranslate nohighlight">\(\tfrac12 \sum_i r_i(x)^2\)</span> with the Levenberg-Marquardt method.</p>
+<p>Thin wrapper around <code class="docutils literal notranslate"><span class="pre">scipy.optimize.least_squares(method=&quot;lm&quot;)</span></code>
+(MINPACK’s <code class="docutils literal notranslate"><span class="pre">lmder</span></code>/<code class="docutils literal notranslate"><span class="pre">lmdif</span></code>). Requires at least as many residuals
+as parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>residual</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>], <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>]</span>) – <code class="docutils literal notranslate"><span class="pre">residual(x)</span> <span class="pre">-&gt;</span> <span class="pre">ndarray</span></code> of shape <code class="docutils literal notranslate"><span class="pre">(m,)</span></code>.</p></li>
+<li><p><strong>x0</strong> (<em>array_like</em><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n"><em>n</em></a><em>,</em><em>)</em>) – Initial parameter guess.</p></li>
+<li><p><strong>jac</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>], <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>] | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – <code class="docutils literal notranslate"><span class="pre">jac(x)</span> <span class="pre">-&gt;</span> <span class="pre">ndarray</span></code> of shape <code class="docutils literal notranslate"><span class="pre">(m,</span> <span class="pre">n)</span></code>; estimated by finite
+differences if omitted.</p></li>
+<li><p><strong>tol</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Forwarded as <code class="docutils literal notranslate"><span class="pre">ftol</span></code>, <code class="docutils literal notranslate"><span class="pre">xtol</span></code> and <code class="docutils literal notranslate"><span class="pre">gtol</span></code>.</p></li>
+<li><p><strong>max_nfev</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Maximum number of residual evaluations.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.optimization.LeastSquaresResult" title="mathematicskit.optimization.core.base.LeastSquaresResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">LeastSquaresResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>LeastSquaresResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">levenberg_marquardt</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="n">y</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>
 <span class="go">True</span>
 </pre></div>
 </div>
@@ -1395,6 +2027,45 @@ alongside <a class="reference internal" href="#mathematicskit.optimization.quadr
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.optimization.robbins_monro">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.optimization.</span></span><span class="sig-name descname"><span class="pre">robbins_monro</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">noisy_grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/optimization/systems/stochastic.html#robbins_monro"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.optimization.robbins_monro" title="Link to this definition">#</a></dt>
+<dd><p>Stochastic gradient descent with Robbins-Monro steps <span class="math notranslate nohighlight">\(a_k = a_0/(k+1)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>noisy_grad</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generator</span></code></a>], <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>]</span>) – <code class="docutils literal notranslate"><span class="pre">noisy_grad(x,</span> <span class="pre">rng)</span> <span class="pre">-&gt;</span> <span class="pre">ndarray</span></code>: an unbiased, noisy observation
+of <span class="math notranslate nohighlight">\(\nabla f(x)\)</span> (or, more generally, of the function whose
+root is sought), drawing its randomness from <code class="docutils literal notranslate"><span class="pre">rng</span></code>.</p></li>
+<li><p><strong>x0</strong> (<em>array_like</em>) – Starting point.</p></li>
+<li><p><strong>a0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Step-size scale; the step at iteration <code class="docutils literal notranslate"><span class="pre">k</span></code> (from 0) is <code class="docutils literal notranslate"><span class="pre">a0</span> <span class="pre">/</span> <span class="pre">(k</span> <span class="pre">+</span> <span class="pre">1)</span></code>.</p></li>
+<li><p><strong>n_iter</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of iterations (there is no reliable stopping test on noisy data).</p></li>
+<li><p><strong>seed</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Seed for the <a class="reference external" href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.random.Generator</span></code></a> passed to <code class="docutils literal notranslate"><span class="pre">noisy_grad</span></code>.</p></li>
+<li><p><strong>f</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>], <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>] | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – The (noise-free) objective, used only to report <code class="docutils literal notranslate"><span class="pre">fun</span></code>; <code class="docutils literal notranslate"><span class="pre">nan</span></code> if omitted.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.optimization.OptimizeResult" title="mathematicskit.optimization.core.base.OptimizeResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">OptimizeResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>OptimizeResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>For <span class="math notranslate nohighlight">\(f(x) = \tfrac12\|x - \mu\|^2\)</span> and <code class="docutils literal notranslate"><span class="pre">a0</span> <span class="pre">=</span> <span class="pre">1</span></code> the iterate
+after <code class="docutils literal notranslate"><span class="pre">n</span></code> steps is exactly the sample mean of the <code class="docutils literal notranslate"><span class="pre">n</span></code> noisy
+observations of <span class="math notranslate nohighlight">\(\mu\)</span> – the running average is the simplest
+stochastic-approximation scheme.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">noisy</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">rng</span><span class="p">:</span> <span class="n">x</span> <span class="o">-</span> <span class="mf">3.0</span> <span class="o">+</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">robbins_monro</span><span class="p">(</span><span class="n">noisy</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">],</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">20000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mf">3.0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.optimization.rosenbrock">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.optimization.</span></span><span class="sig-name descname"><span class="pre">rosenbrock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/optimization/utils/test_functions.html#rosenbrock"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.optimization.rosenbrock" title="Link to this definition">#</a></dt>
 <dd><p>The (generalized, n-dimensional) Rosenbrock “banana” function.</p>
@@ -1476,6 +2147,39 @@ of why second-order information matters. See Nocedal &amp; Wright,
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">H</span> <span class="o">=</span> <span class="n">rosenbrock_hess</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">H</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(2, 2)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.optimization.solve_zero_sum_game">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.optimization.</span></span><span class="sig-name descname"><span class="pre">solve_zero_sum_game</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payoff</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/optimization/systems/game_theory.html#solve_zero_sum_game"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.optimization.solve_zero_sum_game" title="Link to this definition">#</a></dt>
+<dd><p>Optimal mixed strategies and value of a zero-sum matrix game.</p>
+<p><code class="docutils literal notranslate"><span class="pre">payoff[i,</span> <span class="pre">j]</span></code> is what the column player pays the row player when
+row <code class="docutils literal notranslate"><span class="pre">i</span></code> meets column <code class="docutils literal notranslate"><span class="pre">j</span></code>. The row player solves</p>
+<div class="math notranslate nohighlight">
+\[\max_{p, v} v \quad \text{s.t.} \quad A^T p \geq v \mathbf{1},
+\quad \mathbf{1}^T p = 1, \quad p \geq 0,\]</div>
+<p>and the column player solves the mirror-image minimization; LP
+duality makes the two optimal values equal, which is von Neumann’s
+minimax theorem.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>payoff</strong> (<em>array_like</em><em>, </em><em>shape</em><em> (</em><em>m</em><em>, </em><a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n"><em>n</em></a><em>)</em>) – Payoff matrix to the row (maximizing) player.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.optimization.GameResult" title="mathematicskit.optimization.core.base.GameResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">GameResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>GameResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>  <span class="c1"># rock-paper-scissors</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">solve_zero_sum_game</span><span class="p">(</span><span class="n">rps</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">row_strategy</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">3</span><span class="p">),</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="go">(True, 0.0)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1581,8 +2285,18 @@ Theorem 12.1.</p>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.Adam"><code class="docutils literal notranslate"><span class="pre">Adam</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.Adam.minimize"><code class="docutils literal notranslate"><span class="pre">Adam.minimize()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.BFGS"><code class="docutils literal notranslate"><span class="pre">BFGS</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.BFGS.minimize"><code class="docutils literal notranslate"><span class="pre">BFGS.minimize()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.GameResult"><code class="docutils literal notranslate"><span class="pre">GameResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.GameResult.col_strategy"><code class="docutils literal notranslate"><span class="pre">GameResult.col_strategy</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.GameResult.row_strategy"><code class="docutils literal notranslate"><span class="pre">GameResult.row_strategy</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.GameResult.value"><code class="docutils literal notranslate"><span class="pre">GameResult.value</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.GradientDescent"><code class="docutils literal notranslate"><span class="pre">GradientDescent</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
@@ -1602,6 +2316,13 @@ Theorem 12.1.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.KKTResult.x"><code class="docutils literal notranslate"><span class="pre">KKTResult.x</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.KnapsackResult"><code class="docutils literal notranslate"><span class="pre">KnapsackResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.KnapsackResult.items"><code class="docutils literal notranslate"><span class="pre">KnapsackResult.items</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.KnapsackResult.table"><code class="docutils literal notranslate"><span class="pre">KnapsackResult.table</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.KnapsackResult.value"><code class="docutils literal notranslate"><span class="pre">KnapsackResult.value</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.KnapsackResult.weight"><code class="docutils literal notranslate"><span class="pre">KnapsackResult.weight</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.LagrangeResult"><code class="docutils literal notranslate"><span class="pre">LagrangeResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.LagrangeResult.converged"><code class="docutils literal notranslate"><span class="pre">LagrangeResult.converged</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.LagrangeResult.kkt"><code class="docutils literal notranslate"><span class="pre">LagrangeResult.kkt</span></code></a></li>
@@ -1609,11 +2330,28 @@ Theorem 12.1.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.LagrangeResult.x"><code class="docutils literal notranslate"><span class="pre">LagrangeResult.x</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.LeastSquaresResult"><code class="docutils literal notranslate"><span class="pre">LeastSquaresResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.LeastSquaresResult.cost"><code class="docutils literal notranslate"><span class="pre">LeastSquaresResult.cost</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.LeastSquaresResult.message"><code class="docutils literal notranslate"><span class="pre">LeastSquaresResult.message</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.LeastSquaresResult.nfev"><code class="docutils literal notranslate"><span class="pre">LeastSquaresResult.nfev</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.LeastSquaresResult.residuals"><code class="docutils literal notranslate"><span class="pre">LeastSquaresResult.residuals</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.LeastSquaresResult.success"><code class="docutils literal notranslate"><span class="pre">LeastSquaresResult.success</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.LeastSquaresResult.x"><code class="docutils literal notranslate"><span class="pre">LeastSquaresResult.x</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.LinearProgramResult"><code class="docutils literal notranslate"><span class="pre">LinearProgramResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.LinearProgramResult.fun"><code class="docutils literal notranslate"><span class="pre">LinearProgramResult.fun</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.LinearProgramResult.message"><code class="docutils literal notranslate"><span class="pre">LinearProgramResult.message</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.LinearProgramResult.success"><code class="docutils literal notranslate"><span class="pre">LinearProgramResult.success</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.LinearProgramResult.x"><code class="docutils literal notranslate"><span class="pre">LinearProgramResult.x</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.NelderMead"><code class="docutils literal notranslate"><span class="pre">NelderMead</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.NelderMead.minimize"><code class="docutils literal notranslate"><span class="pre">NelderMead.minimize()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.NesterovAcceleratedGradient"><code class="docutils literal notranslate"><span class="pre">NesterovAcceleratedGradient</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.NesterovAcceleratedGradient.minimize"><code class="docutils literal notranslate"><span class="pre">NesterovAcceleratedGradient.minimize()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.NewtonMethod"><code class="docutils literal notranslate"><span class="pre">NewtonMethod</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
@@ -1638,20 +2376,36 @@ Theorem 12.1.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.PenaltyMethod.minimize"><code class="docutils literal notranslate"><span class="pre">PenaltyMethod.minimize()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.ScalarSearchResult"><code class="docutils literal notranslate"><span class="pre">ScalarSearchResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.ScalarSearchResult.brackets"><code class="docutils literal notranslate"><span class="pre">ScalarSearchResult.brackets</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.ScalarSearchResult.converged"><code class="docutils literal notranslate"><span class="pre">ScalarSearchResult.converged</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.ScalarSearchResult.fun"><code class="docutils literal notranslate"><span class="pre">ScalarSearchResult.fun</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.ScalarSearchResult.iterations"><code class="docutils literal notranslate"><span class="pre">ScalarSearchResult.iterations</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.ScalarSearchResult.nfev"><code class="docutils literal notranslate"><span class="pre">ScalarSearchResult.nfev</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.ScalarSearchResult.x"><code class="docutils literal notranslate"><span class="pre">ScalarSearchResult.x</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.UnconstrainedOptimizer"><code class="docutils literal notranslate"><span class="pre">UnconstrainedOptimizer</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.UnconstrainedOptimizer.minimize"><code class="docutils literal notranslate"><span class="pre">UnconstrainedOptimizer.minimize()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.compare_optimizers"><code class="docutils literal notranslate"><span class="pre">compare_optimizers()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.frank_wolfe"><code class="docutils literal notranslate"><span class="pre">frank_wolfe()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.function_value_gap"><code class="docutils literal notranslate"><span class="pre">function_value_gap()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.golden_section_search"><code class="docutils literal notranslate"><span class="pre">golden_section_search()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.integer_linear_program"><code class="docutils literal notranslate"><span class="pre">integer_linear_program()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.knapsack"><code class="docutils literal notranslate"><span class="pre">knapsack()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.lagrange_stationary_point"><code class="docutils literal notranslate"><span class="pre">lagrange_stationary_point()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.levenberg_marquardt"><code class="docutils literal notranslate"><span class="pre">levenberg_marquardt()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.linear_program"><code class="docutils literal notranslate"><span class="pre">linear_program()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.quadratic_bowl"><code class="docutils literal notranslate"><span class="pre">quadratic_bowl()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.quadratic_bowl_grad"><code class="docutils literal notranslate"><span class="pre">quadratic_bowl_grad()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.quadratic_bowl_hess"><code class="docutils literal notranslate"><span class="pre">quadratic_bowl_hess()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.robbins_monro"><code class="docutils literal notranslate"><span class="pre">robbins_monro()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.rosenbrock"><code class="docutils literal notranslate"><span class="pre">rosenbrock()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.rosenbrock_grad"><code class="docutils literal notranslate"><span class="pre">rosenbrock_grad()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.rosenbrock_hess"><code class="docutils literal notranslate"><span class="pre">rosenbrock_hess()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.solve_zero_sum_game"><code class="docutils literal notranslate"><span class="pre">solve_zero_sum_game()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.optimization.verify_kkt"><code class="docutils literal notranslate"><span class="pre">verify_kkt()</span></code></a></li>
 </ul>
   </nav></div>

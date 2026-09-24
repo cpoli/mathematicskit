@@ -454,146 +454,133 @@
 <p><a class="reference internal" href="../_generated/subpackages/combinatorics.html"><span class="doc">mathematicskit.combinatorics hub</span></a> · <a class="reference internal" href="#"><span class="doc">History</span></a> · <a class="reference internal" href="../api/gallery/combinatorics/index.html"><span class="doc">Examples</span></a> · <a class="reference internal" href="../api/combinatorics.html"><span class="doc">API reference</span></a></p>
 </div>
 <blockquote class="epigraph">
-<div><p>“Combinatorics is the slums of topology.” – a wry (and much disputed)
-remark long attributed, probably apocryphally, to Gian-Carlo Rota</p>
+<div><p>“Combinatorics is the pegboard of mathematics.”
+– Gian-Carlo Rota</p>
 </div></blockquote>
 <p>Counting things exactly – not approximately, not asymptotically, but
 exactly – turns out to be a surprisingly deep subject, full of hidden
-bijections between problems that look nothing alike on the surface. This
-chronology traces the ideas behind <a class="reference internal" href="../api/combinatorics.html#module-mathematicskit.combinatorics" title="mathematicskit.combinatorics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.combinatorics</span></code></a>, from
-Pascal’s triangle to the partition function whose exact evaluation
-Ramanujan and Hardy needed an entirely new method of complex analysis to
-reach.</p>
+bijections between problems that look nothing alike. This chronology
+traces the ideas behind <a class="reference internal" href="../api/combinatorics.html#module-mathematicskit.combinatorics" title="mathematicskit.combinatorics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.combinatorics</span></code></a>, from
+Fibonacci’s rabbits and Pascal’s triangle to Ramsey theory, Pólya’s
+enumeration theorem, and the partition function, whose growth Srinivasa
+Ramanujan and Godfrey Harold Hardy could only capture by inventing a
+new method of complex analysis.</p>
 <nav class="contents local" id="timeline">
 <p class="topic-title">Timeline</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#pascal-s-triangle-and-its-much-older-ancestors" id="id1">1665 – Pascal’s Triangle (and Its Much Older Ancestors)</a></p></li>
-<li><p><a class="reference internal" href="#bernoulli-montmort-and-the-derangement-problem" id="id2">1713 – Bernoulli, Montmort, and the Derangement Problem</a></p></li>
-<li><p><a class="reference internal" href="#euler-and-the-catalan-numbers" id="id3">1751 – Euler and the Catalan Numbers</a></p></li>
-<li><p><a class="reference internal" href="#stirling-s-numbers" id="id4">1730 – Stirling’s Numbers</a></p></li>
-<li><p><a class="reference internal" href="#young-diagrams-and-integer-partitions" id="id5">1674 – 1918 – Young Diagrams and Integer Partitions</a></p></li>
-<li><p><a class="reference internal" href="#see-also" id="id6">See Also</a></p></li>
+<li><p><a class="reference internal" href="#fibonacci-s-rabbits" id="id1">1202 – Fibonacci’s Rabbits</a></p></li>
+<li><p><a class="reference internal" href="#gersonides-counting-formulas" id="id2">1321 – Gersonides’ Counting Formulas</a></p></li>
+<li><p><a class="reference internal" href="#pascal-s-triangle-and-its-much-older-ancestors" id="id3">1654-1665 – Pascal’s Triangle (and Its Much Older Ancestors)</a></p></li>
+<li><p><a class="reference internal" href="#young-diagrams-and-integer-partitions" id="id4">1674-1918 – Young Diagrams and Integer Partitions</a></p></li>
+<li><p><a class="reference internal" href="#bernoulli-montmort-and-the-derangement-problem" id="id5">1708-1713 – Bernoulli, Montmort, and the Derangement Problem</a></p></li>
+<li><p><a class="reference internal" href="#bernoulli-numbers-and-sums-of-powers" id="id6">1713 – Bernoulli Numbers and Sums of Powers</a></p></li>
+<li><p><a class="reference internal" href="#stirling-s-numbers" id="id7">1730 – Stirling’s Numbers</a></p></li>
+<li><p><a class="reference internal" href="#euler-catalan-and-the-catalan-numbers" id="id8">1751-1838 – Euler, Catalan, and the Catalan Numbers</a></p></li>
+<li><p><a class="reference internal" href="#euler-s-officers-and-latin-squares" id="id9">1782 – Euler’s Officers and Latin Squares</a></p></li>
+<li><p><a class="reference internal" href="#cayley-s-formula-and-prufer-codes" id="id10">1889-1918 – Cayley’s Formula and Prüfer Codes</a></p></li>
+<li><p><a class="reference internal" href="#ramsey-s-theorem" id="id11">1930 – Ramsey’s Theorem</a></p></li>
+<li><p><a class="reference internal" href="#hall-s-marriage-theorem" id="id12">1935 – Hall’s Marriage Theorem</a></p></li>
+<li><p><a class="reference internal" href="#the-erdos-szekeres-theorem" id="id13">1935 – The Erdős-Szekeres Theorem</a></p></li>
+<li><p><a class="reference internal" href="#polya-s-enumeration-theorem" id="id14">1937 – Pólya’s Enumeration Theorem</a></p></li>
+<li><p><a class="reference internal" href="#gray-codes" id="id15">1953 – Gray Codes</a></p></li>
+<li><p><a class="reference internal" href="#see-also" id="id16">See Also</a></p></li>
 </ul>
 </nav>
+<section id="fibonacci-s-rabbits">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">1202 – Fibonacci’s Rabbits</a><a class="headerlink" href="#fibonacci-s-rabbits" title="Link to this heading">#</a></h2>
+<p>Leonardo of Pisa, known as Fibonacci, posed a puzzle in his 1202 <em>Liber
+Abaci</em>: starting from one pair of rabbits, where every mature pair
+produces a new pair each month, how many pairs are there after a year?
+The monthly counts <span class="math notranslate nohighlight">\(1, 2, 3, 5, 8, \dots\)</span> follow the rule
+<span class="math notranslate nohighlight">\(F_n = F_{n-1} + F_{n-2}\)</span> and reach 377. The same numbers had
+already appeared in Indian prosody, where Virahanka and Hemachandra
+counted the rhythms made of short and long syllables. In modern terms
+they count the ways to tile a <span class="math notranslate nohighlight">\(2 \times n\)</span> strip with dominoes,
+and the ratio of successive terms tends to the golden ratio
+<span class="math notranslate nohighlight">\(\varphi = (1+\sqrt5)/2\)</span>.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.combinatorics.systems.sequences.fibonacci()</span></code>
+computes <span class="math notranslate nohighlight">\(F_n\)</span> exactly, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">domino_tilings()</span></code>
+gives the tiling count <span class="math notranslate nohighlight">\(F_{n+1}\)</span>. The tests check Cassini’s
+identity and Binet’s closed form.</p>
+<p><em>References:</em> L. E. Sigler, <em>Fibonacci’s Liber Abaci: A Translation
+into Modern English of Leonardo Pisano’s Book of Calculation</em> (New
+York: Springer, 2002).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Reproduces the rabbit problem from Fibonacci&#x27;s 1202 Liber Abaci, checks that the same numbers count domino tilings of a 2-by-n strip, and shows the ratio of successive terms approaching the golden ratio."><img alt="" src="../_images/sphx_glr_plot_01_fibonacci_rabbits_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/combinatorics/sequences/plot_01_fibonacci_rabbits.html"><span class="doc">Fibonacci’s rabbits and domino tilings</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Fibonacci's rabbits and domino tilings</div>
+</div></div></section>
+<section id="gersonides-counting-formulas">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">1321 – Gersonides’ Counting Formulas</a><a class="headerlink" href="#gersonides-counting-formulas" title="Link to this heading">#</a></h2>
+<p>Levi ben Gershon, known as Gersonides, proved the basic counting
+formulas in his 1321 <em>Maaseh Hoshev</em> (“The Art of Calculation”), using
+an early form of mathematical induction. He showed that <span class="math notranslate nohighlight">\(n\)</span>
+objects can be arranged in <span class="math notranslate nohighlight">\(n!\)</span> orders, that <span class="math notranslate nohighlight">\(k\)</span> of them
+can be arranged in <span class="math notranslate nohighlight">\(n!/(n-k)!\)</span> ordered ways, and that <span class="math notranslate nohighlight">\(k\)</span>
+can be chosen in <span class="math notranslate nohighlight">\(n!/\bigl(k!(n-k)!\bigr)\)</span> ways. These are the
+permutation and combination counts behind every later result in this
+chronology.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.combinatorics.systems.counting.permutations_count()</span></code>
+and <code class="xref py py-func docutils literal notranslate"><span class="pre">combinations_count()</span></code>
+compute these counts with <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.perm.html#scipy.special.perm" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.perm()</span></code></a> and
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.comb.html#scipy.special.comb" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.comb()</span></code></a>, and the example checks them against
+enumeration with
+<code class="xref py py-func docutils literal notranslate"><span class="pre">generate_permutations()</span></code>
+and <code class="xref py py-func docutils literal notranslate"><span class="pre">generate_combinations()</span></code>.</p>
+<p><em>References:</em> N. L. Rabinovitch, “Rabbi Levi ben Gershon and the
+Origins of Mathematical Induction,” Archive for History of Exact
+Sciences 6(3) (1970), 237-248.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Levi ben Gershon&#x27;s 1321 Maaseh Hoshev proved by induction that n objects can be arranged in n! orders, that k of them can be arranged in n!/(n-k)! ways, and that k can be chosen in n!/(k!(n-k)!) ways. This example checks each formula against brute-force enumeration."><img alt="" src="../_images/sphx_glr_plot_02_gersonides_formulas_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/combinatorics/counting/plot_02_gersonides_formulas.html"><span class="doc">Gersonides’ counting formulas</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Gersonides' counting formulas</div>
+</div></div></section>
 <section id="pascal-s-triangle-and-its-much-older-ancestors">
-<h2><a class="toc-backref" href="#id1" role="doc-backlink">1665 – Pascal’s Triangle (and Its Much Older Ancestors)</a><a class="headerlink" href="#pascal-s-triangle-and-its-much-older-ancestors" title="Link to this heading">#</a></h2>
-<p>Blaise Pascal’s 1654 treatise <em>Traite du triangle arithmetique</em>
-(published 1665) gave the triangular array of binomial coefficients its
-Western name and a thorough combinatorial treatment, but the triangle
-itself had already been independently discovered centuries earlier: in
-10th-century India (Halayudha’s commentary on Pingala), 11th-century
-Persia (Al-Karaji and Omar Khayyam), and 13th-century China (Jia Xian,
-popularized by Yang Hui, whose name the triangle carries in Chinese
-mathematics today). Every version rests on the same recurrence: each
-entry is the sum of the two entries above it.</p>
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">1654-1665 – Pascal’s Triangle (and Its Much Older Ancestors)</a><a class="headerlink" href="#pascal-s-triangle-and-its-much-older-ancestors" title="Link to this heading">#</a></h2>
+<p>Blaise Pascal wrote his <em>Traité du triangle arithmétique</em> in 1654, and
+it was published posthumously in 1665. It gave the triangular array of
+binomial coefficients its Western name and a thorough combinatorial
+treatment. The triangle itself had been discovered independently
+centuries earlier: in 10th-century India (Halayudha’s commentary on
+Pingala), in Persia around 1000 (Al-Karaji, and later Omar Khayyam),
+and in 11th-century China (Jia Xian). Yang Hui popularized it in China
+in 1261, and it carries his name in Chinese mathematics today. Every
+version rests on the same recurrence: each entry is the sum of the two
+entries above it.</p>
 <div class="math notranslate nohighlight">
 \[\binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k}\]</div>
 <p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.combinatorics.systems.pascals_triangle.pascals_triangle()</span></code>
-builds exactly this triangle via the recurrence, kept hand-rolled purely
-as a pedagogical illustration alongside the primary API,
+builds the triangle from this recurrence. It is hand-rolled purely as a
+teaching illustration; the primary API is
 <code class="xref py py-func docutils literal notranslate"><span class="pre">combinations_count()</span></code>,
 which wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.comb.html#scipy.special.comb" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.comb()</span></code></a>.</p>
-<p><em>References:</em> B. Pascal, <em>Traite du triangle arithmetique</em> (Paris:
-Desprez, 1665).</p>
+<p><em>References:</em> B. Pascal, <em>Traité du triangle arithmétique</em> (Paris:
+Guillaume Desprez, 1665).</p>
 <div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Builds Pascal&#x27;s triangle by hand via the addition recurrence and confirms every entry matches scipy.special.comb."><img alt="" src="../_images/sphx_glr_plot_01_triangle_and_binomials_thumb.png" />
 <p><a class="reference internal" href="../api/gallery/combinatorics/pascals_triangle/plot_01_triangle_and_binomials.html"><span class="doc">Pascal’s triangle vs. scipy-computed binomial coefficients</span></a></p>
   <div class="sphx-glr-thumbnail-title">Pascal's triangle vs. scipy-computed binomial coefficients</div>
 </div></div></section>
-<section id="bernoulli-montmort-and-the-derangement-problem">
-<h2><a class="toc-backref" href="#id2" role="doc-backlink">1713 – Bernoulli, Montmort, and the Derangement Problem</a><a class="headerlink" href="#bernoulli-montmort-and-the-derangement-problem" title="Link to this heading">#</a></h2>
-<p>Pierre Remond de Montmort’s 1708 <em>Essai d’analyse sur les jeux de
-hasard</em> posed the “probleme des rencontres”: shuffle a deck and ask how
-likely no card lands in its original position – a permutation with no
-fixed point, later named a “derangement.” Montmort and Nicolaus
-Bernoulli, corresponding between 1710 and 1713, worked out the exact
-count via what is now recognized as an early, concrete instance of the
-inclusion-exclusion principle – alternately over- and under-counting
-permutations that fix at least one, at least two, at least three points,
-and so on.</p>
-<div class="math notranslate nohighlight">
-\[D_n = n! \sum_{k=0}^{n} \frac{(-1)^k}{k!}\]</div>
-<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.combinatorics.systems.inclusion_exclusion.derangement_count()</span></code>
-implements exactly this count via the equivalent integer recurrence
-<span class="math notranslate nohighlight">\(D_n = (n-1)(D_{n-1}+D_{n-2})\)</span>, and
-<code class="xref py py-func docutils literal notranslate"><span class="pre">union_size_inclusion_exclusion()</span></code>
-implements the general inclusion-exclusion principle the derangement
-count is a specific application of.</p>
-<p><em>References:</em> P. R. de Montmort, <em>Essai d’analyse sur les jeux de
-hasard</em>, 2nd ed. (Paris: Quillau, 1713).</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="n people check their hats and receive one back at random; what&#x27;s the probability nobody gets their own hat back? The answer converges to 1/e remarkably quickly."><img alt="" src="../_images/sphx_glr_plot_01_hat_check_problem_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/combinatorics/inclusion_exclusion/plot_01_hat_check_problem.html"><span class="doc">The hat-check problem: derangements via inclusion-exclusion</span></a></p>
-  <div class="sphx-glr-thumbnail-title">The hat-check problem: derangements via inclusion-exclusion</div>
-</div></div></section>
-<section id="euler-and-the-catalan-numbers">
-<h2><a class="toc-backref" href="#id3" role="doc-backlink">1751 – Euler and the Catalan Numbers</a><a class="headerlink" href="#euler-and-the-catalan-numbers" title="Link to this heading">#</a></h2>
-<p>Leonhard Euler’s 1751 correspondence with Christian Goldbach posed and
-solved the problem of counting the ways to dissect a convex polygon into
-triangles using non-crossing diagonals – the first appearance of the
-sequence <span class="math notranslate nohighlight">\(1, 1, 2, 5, 14, 42, \dots\)</span> now named for Eugene Charles
-Catalan, whose own 1838 paper on a closely related bracketing problem
-gave the sequence its modern name and recurrence. The same numbers count
-an enormous variety of unrelated-looking combinatorial objects: balanced
-parenthesizations, binary trees, and non-crossing lattice paths among
-them, one of the most striking examples in mathematics of a single
-integer sequence with many independent combinatorial meanings.</p>
-<div class="math notranslate nohighlight">
-\[C_0 = 1, \qquad C_{n+1} = \sum_{i=0}^{n} C_i C_{n-i}\]</div>
-<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.combinatorics.systems.special_numbers.catalan_number()</span></code>
-implements exactly Catalan’s own recurrence (rather than the equivalent
-closed form <span class="math notranslate nohighlight">\(\binom{2n}{n}/(n+1)\)</span>, kept as a cross-check in this
-domain’s tests), and is verified directly against brute-force
-enumeration of balanced-parenthesis strings.</p>
-<p><em>References:</em> E. Catalan, “Note sur une equation aux differences
-finies,” Journal de Mathematiques Pures et Appliquees 3 (1838), 508-516.</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Confirms that the Catalan recurrence matches its closed form, and that it correctly counts balanced-parenthesis strings by brute force."><img alt="" src="../_images/sphx_glr_plot_01_catalan_and_stirling_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/combinatorics/special_numbers/plot_01_catalan_and_stirling.html"><span class="doc">Catalan numbers and their combinatorial interpretations</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Catalan numbers and their combinatorial interpretations</div>
-</div></div></section>
-<section id="stirling-s-numbers">
-<h2><a class="toc-backref" href="#id4" role="doc-backlink">1730 – Stirling’s Numbers</a><a class="headerlink" href="#stirling-s-numbers" title="Link to this heading">#</a></h2>
-<p>James Stirling’s 1730 treatise <em>Methodus Differentialis</em> introduced two
-families of numbers converting between ordinary powers and falling
-factorials – the Stirling numbers of the first kind (counting
-permutations by their number of cycles) and second kind (counting the
-ways to partition a labeled set into a fixed number of non-empty,
-unlabeled blocks), the combinatorial machinery underlying the Bell
-numbers (the <em>total</em> number of ways to partition a set into any number
-of blocks at all), named for Eric Temple Bell’s 1934 paper studying
-their generating function.</p>
-<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.combinatorics.systems.special_numbers.stirling_first_kind()</span></code>
-and <code class="xref py py-func docutils literal notranslate"><span class="pre">stirling_second_kind()</span></code>
-implement both families via their defining recurrences;
-<code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.combinatorics.utils.bell_number.bell_number()</span></code> sums the
-second kind over every possible number of blocks.</p>
-<p><em>References:</em> J. Stirling, <em>Methodus Differentialis</em> (London: Bowyer,
-1730).</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Confirms that the Catalan recurrence matches its closed form, and that it correctly counts balanced-parenthesis strings by brute force."><img alt="" src="../_images/sphx_glr_plot_01_catalan_and_stirling_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/combinatorics/special_numbers/plot_01_catalan_and_stirling.html"><span class="doc">Catalan numbers and their combinatorial interpretations</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Catalan numbers and their combinatorial interpretations</div>
-</div></div></section>
 <section id="young-diagrams-and-integer-partitions">
-<h2><a class="toc-backref" href="#id5" role="doc-backlink">1674 – 1918 – Young Diagrams and Integer Partitions</a><a class="headerlink" href="#young-diagrams-and-integer-partitions" title="Link to this heading">#</a></h2>
-<p>The partition function <span class="math notranslate nohighlight">\(p(n)\)</span>, counting the ways to write
-<span class="math notranslate nohighlight">\(n\)</span> as a sum of positive integers regardless of order, was studied
-combinatorially at least as far back as Leibniz’s 1674 correspondence,
-and Euler developed its generating function
-<span class="math notranslate nohighlight">\(\prod_{k\geq1}(1-x^k)^{-1}\)</span> in the mid-18th century. Alfred
-Young’s 1900-1902 diagrams – left-justified rows of boxes, one row per
-part, in non-increasing length – gave partitions their standard visual
-representation, whose <em>conjugate</em> (reflecting the diagram across its
-main diagonal, swapping rows and columns) reveals a beautiful hidden
-symmetry of the partition function. Srinivasa Ramanujan and G. H.
-Hardy’s 1918 circle method finally gave <span class="math notranslate nohighlight">\(p(n)\)</span> a genuine
-asymptotic formula, after nearly two and a half centuries of the
-function resisting any closed form at all.</p>
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">1674-1918 – Young Diagrams and Integer Partitions</a><a class="headerlink" href="#young-diagrams-and-integer-partitions" title="Link to this heading">#</a></h2>
+<p>The partition function <span class="math notranslate nohighlight">\(p(n)\)</span> counts the ways to write <span class="math notranslate nohighlight">\(n\)</span>
+as a sum of positive integers, ignoring order. Gottfried Wilhelm Leibniz
+studied it in unpublished notes from 1674, and Leonhard Euler found its
+generating function <span class="math notranslate nohighlight">\(\prod_{k\geq1}(1-x^k)^{-1}\)</span> in the 1740s.
+Alfred Young’s diagrams, introduced in 1900, draw a partition as
+left-justified rows of boxes, one row per part, in non-increasing
+length. Reflecting a diagram across its main diagonal gives the
+<em>conjugate</em> partition, which reveals hidden symmetries: for example,
+the number of partitions of <span class="math notranslate nohighlight">\(n\)</span> into <span class="math notranslate nohighlight">\(k\)</span> parts equals the
+number whose largest part is <span class="math notranslate nohighlight">\(k\)</span>. No closed form for <span class="math notranslate nohighlight">\(p(n)\)</span>
+was ever found, but in 1918 Godfrey Harold Hardy and Srinivasa Ramanujan used
+their new circle method to give it a precise asymptotic formula.</p>
 <p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.combinatorics.systems.partitions.partition_function()</span></code>
-computes <span class="math notranslate nohighlight">\(p(n)\)</span> exactly via Euler’s own pentagonal-number-theorem
-recurrence (rather than Hardy and Ramanujan’s asymptotic circle-method
-formula, which this domain does not implement);
+computes <span class="math notranslate nohighlight">\(p(n)\)</span> exactly with Euler’s pentagonal-number-theorem
+recurrence. This domain does not implement the Hardy-Ramanujan
+asymptotic formula.
 <code class="xref py py-func docutils literal notranslate"><span class="pre">integer_partitions()</span></code>
-enumerates every partition explicitly, and
-<a class="reference internal" href="../api/combinatorics.html#mathematicskit.combinatorics.YoungDiagram" title="mathematicskit.combinatorics.core.base.YoungDiagram"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathematicskit.combinatorics.core.base.YoungDiagram</span></code></a> implements exactly
-Young’s diagram and its conjugation.</p>
+lists every partition explicitly, and
+<a class="reference internal" href="../api/combinatorics.html#mathematicskit.combinatorics.YoungDiagram" title="mathematicskit.combinatorics.core.base.YoungDiagram"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathematicskit.combinatorics.core.base.YoungDiagram</span></code></a> implements
+Young’s diagram and its conjugate.</p>
 <p><em>References:</em> A. Young, “On Quantitative Substitutional Analysis,”
 Proceedings of the London Mathematical Society 33(1) (1900), 97-146; G.
 H. Hardy and S. Ramanujan, “Asymptotic Formulae in Combinatory
@@ -603,8 +590,275 @@ Analysis,” Proceedings of the London Mathematical Society 17(1) (1918),
 <p><a class="reference internal" href="../api/gallery/combinatorics/partitions/plot_01_partitions_and_young_diagrams.html"><span class="doc">Integer partitions, the partition function, and Young diagrams</span></a></p>
   <div class="sphx-glr-thumbnail-title">Integer partitions, the partition function, and Young diagrams</div>
 </div></div></section>
+<section id="bernoulli-montmort-and-the-derangement-problem">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">1708-1713 – Bernoulli, Montmort, and the Derangement Problem</a><a class="headerlink" href="#bernoulli-montmort-and-the-derangement-problem" title="Link to this heading">#</a></h2>
+<p>Pierre Rémond de Montmort’s 1708 <em>Essay d’analyse sur les jeux de
+hazard</em> posed the <em>problème des rencontres</em>: shuffle a deck, and ask
+how likely it is that no card ends up in its original position. Such a
+permutation, with no fixed point, is now called a “derangement.”
+Montmort and Nicolaus Bernoulli, corresponding between 1710 and 1713,
+worked out the exact count. Their method is an early instance of the
+inclusion-exclusion principle: alternately subtract and add the
+permutations that fix at least one, at least two, at least three
+points, and so on.</p>
+<div class="math notranslate nohighlight">
+\[D_n = n! \sum_{k=0}^{n} \frac{(-1)^k}{k!}\]</div>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.combinatorics.systems.inclusion_exclusion.derangement_count()</span></code>
+computes this count with the equivalent integer recurrence
+<span class="math notranslate nohighlight">\(D_n = (n-1)(D_{n-1}+D_{n-2})\)</span>.
+<code class="xref py py-func docutils literal notranslate"><span class="pre">union_size_inclusion_exclusion()</span></code>
+implements the general inclusion-exclusion principle, of which the
+derangement count is one application.</p>
+<p><em>References:</em> P. R. de Montmort, <em>Essay d’analyse sur les jeux de
+hazard</em>, 2nd ed. (Paris: Jacque Quillau, 1713).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="n people check their hats and receive one back at random; what&#x27;s the probability nobody gets their own hat back? The answer converges to 1/e remarkably quickly."><img alt="" src="../_images/sphx_glr_plot_01_hat_check_problem_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/combinatorics/inclusion_exclusion/plot_01_hat_check_problem.html"><span class="doc">The hat-check problem: derangements via inclusion-exclusion</span></a></p>
+  <div class="sphx-glr-thumbnail-title">The hat-check problem: derangements via inclusion-exclusion</div>
+</div></div></section>
+<section id="bernoulli-numbers-and-sums-of-powers">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">1713 – Bernoulli Numbers and Sums of Powers</a><a class="headerlink" href="#bernoulli-numbers-and-sums-of-powers" title="Link to this heading">#</a></h2>
+<p>Jacob Bernoulli’s <em>Ars Conjectandi</em>, published in 1713, gave a general
+formula for the sum of the <span class="math notranslate nohighlight">\(p\)</span>-th powers of the first <span class="math notranslate nohighlight">\(n\)</span>
+integers:</p>
+<div class="math notranslate nohighlight">
+\[\sum_{k=1}^{n} k^p = \frac{1}{p+1} \sum_{j=0}^{p} \binom{p+1}{j} B_j\, n^{p+1-j}.\]</div>
+<p>The coefficients <span class="math notranslate nohighlight">\(B_j\)</span>, now called Bernoulli numbers, were found
+independently by Seki Takakazu in Japan and published in 1712, and
+Johann Faulhaber had tabulated many of the power-sum polynomials in
+1631. Bernoulli boasted that with his formula he had summed the tenth
+powers of the first thousand integers “in half of a quarter of an
+hour.” The same numbers reappear in the Euler-Maclaurin formula and in
+the values of the Riemann zeta function at even integers.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.combinatorics.systems.sequences.bernoulli_numbers()</span></code>
+computes the numbers as exact fractions, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">sum_of_powers()</span></code>
+applies Bernoulli’s formula. The tests check it against direct
+summation, and the example repeats his thousand-term computation.</p>
+<p><em>References:</em> J. Bernoulli, <em>Ars Conjectandi</em> (Basel: Thurneysen,
+1713), Part II, Ch. 3.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Computes the Bernoulli numbers exactly, uses them to evaluate sums of p-th powers in closed form, and repeats Bernoulli&#x27;s own boast: the sum of the tenth powers of the first 1000 integers."><img alt="" src="../_images/sphx_glr_plot_02_bernoulli_power_sums_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/combinatorics/sequences/plot_02_bernoulli_power_sums.html"><span class="doc">Jacob Bernoulli’s numbers and sums of powers</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Jacob Bernoulli's numbers and sums of powers</div>
+</div></div></section>
+<section id="stirling-s-numbers">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">1730 – Stirling’s Numbers</a><a class="headerlink" href="#stirling-s-numbers" title="Link to this heading">#</a></h2>
+<p>James Stirling’s 1730 treatise <em>Methodus Differentialis</em> introduced two
+families of numbers that convert between ordinary powers and falling
+factorials. In modern terms, Stirling numbers of the first kind count
+permutations by their number of cycles. Stirling numbers of the second
+kind count the ways to partition a labeled set into a fixed number of
+non-empty, unlabeled blocks. Summing the second kind over every
+possible number of blocks gives the Bell numbers, the <em>total</em> number of
+ways to partition a set. They are named for Eric Temple Bell, whose
+1934 papers studied them.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.combinatorics.systems.special_numbers.stirling_first_kind()</span></code>
+and <code class="xref py py-func docutils literal notranslate"><span class="pre">stirling_second_kind()</span></code>
+implement both families with their defining recurrences;
+<code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.combinatorics.utils.bell_number.bell_number()</span></code> sums the
+second kind over every possible number of blocks.</p>
+<p><em>References:</em> J. Stirling, <em>Methodus Differentialis</em> (London: Bowyer,
+1730).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Checks by brute force that Stirling numbers of the first kind count permutations by their number of cycles and that Stirling numbers of the second kind count partitions of a labeled set into k blocks. It then recovers Stirling&#x27;s own use of them, converting ordinary powers into falling factorials, and sums the second kind to get the Bell numbers."><img alt="" src="../_images/sphx_glr_plot_01_stirling_numbers_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/combinatorics/special_numbers/plot_01_stirling_numbers.html"><span class="doc">Stirling’s numbers: cycles, set partitions, and Bell numbers</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Stirling's numbers: cycles, set partitions, and Bell numbers</div>
+</div></div></section>
+<section id="euler-catalan-and-the-catalan-numbers">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">1751-1838 – Euler, Catalan, and the Catalan Numbers</a><a class="headerlink" href="#euler-catalan-and-the-catalan-numbers" title="Link to this heading">#</a></h2>
+<p>In a 1751 letter to Christian Goldbach, Leonhard Euler posed and solved
+the problem of counting the ways to cut a convex polygon into triangles
+with non-crossing diagonals. This was the first appearance of the
+sequence <span class="math notranslate nohighlight">\(1, 1, 2, 5, 14, 42, \dots\)</span>. Eugène Charles Catalan’s
+1838 paper connected the same numbers to the problem of bracketing a
+product, and the sequence was later named after him. The same numbers
+count a remarkable variety of unrelated-looking objects, among them
+balanced parenthesizations, binary trees, and non-crossing lattice
+paths. Few integer sequences have as many independent combinatorial
+meanings.</p>
+<div class="math notranslate nohighlight">
+\[C_0 = 1, \qquad C_{n+1} = \sum_{i=0}^{n} C_i C_{n-i}\]</div>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.combinatorics.systems.special_numbers.catalan_number()</span></code>
+implements this recurrence, and is checked against brute-force
+enumeration of balanced-parenthesis strings. This domain’s tests keep
+the equivalent closed form <span class="math notranslate nohighlight">\(\binom{2n}{n}/(n+1)\)</span> as a
+cross-check.</p>
+<p><em>References:</em> E. Catalan, “Note sur une équation aux différences
+finies,” Journal de Mathématiques Pures et Appliquées 3 (1838), 508-516.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Draws all 14 triangulations of a convex hexagon, the problem Euler posed to Goldbach in 1751, and checks that the same Catalan numbers count balanced parenthesizations, Catalan&#x27;s bracketing problem of 1838."><img alt="" src="../_images/sphx_glr_plot_02_catalan_numbers_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/combinatorics/special_numbers/plot_02_catalan_numbers.html"><span class="doc">Catalan numbers: Euler’s polygon triangulations and Catalan’s brackets</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Catalan numbers: Euler's polygon triangulations and Catalan's brackets</div>
+</div></div></section>
+<section id="euler-s-officers-and-latin-squares">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">1782 – Euler’s Officers and Latin Squares</a><a class="headerlink" href="#euler-s-officers-and-latin-squares" title="Link to this heading">#</a></h2>
+<p>Leonhard Euler asked in 1782 whether 36 officers, of six ranks and from
+six regiments, can stand in a <span class="math notranslate nohighlight">\(6 \times 6\)</span> square so that each
+row and each column holds one officer of every rank and every regiment.
+The question asks for two <em>orthogonal</em> Latin squares: when superimposed,
+every pair of symbols appears exactly once. Euler found pairs for every
+odd order and conjectured that none exist when <span class="math notranslate nohighlight">\(n \equiv 2 \pmod
+4\)</span>. Gaston Tarry confirmed the case <span class="math notranslate nohighlight">\(n = 6\)</span> in 1900 by exhaustive
+search, but Raj Chandra Bose, Sharadchandra Shankar Shrikhande, and
+Ernest Tilden Parker showed in
+1959-1960 that pairs exist for every other such <span class="math notranslate nohighlight">\(n &gt; 6\)</span>. Latin
+squares went on to organize agricultural and clinical experiments.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.combinatorics.systems.designs.orthogonal_latin_square_pair()</span></code>
+builds an orthogonal pair for any odd order from
+<code class="xref py py-func docutils literal notranslate"><span class="pre">cyclic_latin_square()</span></code>,
+and <code class="xref py py-func docutils literal notranslate"><span class="pre">are_orthogonal()</span></code>
+checks the defining property. The tests confirm that no orthogonal
+pair exists for <span class="math notranslate nohighlight">\(n = 2\)</span>.</p>
+<p><em>References:</em> L. Euler, “Recherches sur une nouvelle espèce de quarrés
+magiques,” Verhandelingen uitgegeven door het zeeuwsch Genootschap der
+Wetenschappen te Vlissingen 9 (1782), 85-239; R. C. Bose, S. S.
+Shrikhande, and E. T. Parker, “Further Results on the Construction of
+Mutually Orthogonal Latin Squares and the Falsity of Euler’s
+Conjecture,” Canadian Journal of Mathematics 12 (1960), 189-203.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Builds a pair of orthogonal Latin squares of order 5 and superimposes them so that every (rank, regiment) pair appears exactly once, the arrangement Euler&#x27;s 36-officers problem asks for. It then checks by brute force that no such pair exists for order 2."><img alt="" src="../_images/sphx_glr_plot_01_latin_squares_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/combinatorics/designs/plot_01_latin_squares.html"><span class="doc">Euler’s officers: orthogonal Latin squares</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Euler's officers: orthogonal Latin squares</div>
+</div></div></section>
+<section id="cayley-s-formula-and-prufer-codes">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">1889-1918 – Cayley’s Formula and Prüfer Codes</a><a class="headerlink" href="#cayley-s-formula-and-prufer-codes" title="Link to this heading">#</a></h2>
+<p>Arthur Cayley’s 1889 note stated that there are <span class="math notranslate nohighlight">\(n^{n-2}\)</span> trees
+on <span class="math notranslate nohighlight">\(n\)</span> labeled vertices, a count Carl Wilhelm Borchardt had
+derived in 1860 by a determinant argument. Heinz Prüfer’s 1918 proof
+was a bijection. Repeatedly deleting the smallest-labeled leaf and
+writing down its neighbour turns each tree into a sequence of length
+<span class="math notranslate nohighlight">\(n-2\)</span> over <span class="math notranslate nohighlight">\(n\)</span> labels, and every such sequence decodes to
+exactly one tree. Since there are <span class="math notranslate nohighlight">\(n^{n-2}\)</span> sequences, there are
+<span class="math notranslate nohighlight">\(n^{n-2}\)</span> trees. The proof is a standard example of counting by
+constructing an explicit one-to-one correspondence.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.combinatorics.systems.trees.prufer_encode()</span></code>
+and <code class="xref py py-func docutils literal notranslate"><span class="pre">prufer_decode()</span></code>
+implement Prüfer’s bijection, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">count_labeled_trees()</span></code>
+gives Cayley’s count. The tests decode every sequence for
+<span class="math notranslate nohighlight">\(n \le 6\)</span> and confirm that the result is one-to-one.</p>
+<p><em>References:</em> A. Cayley, “A Theorem on Trees,” Quarterly Journal of
+Pure and Applied Mathematics 23 (1889), 376-378; H. Prüfer, “Neuer
+Beweis eines Satzes über Permutationen,” Archiv der Mathematik und
+Physik 27 (1918), 142-144.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Encodes labeled trees as Prüfer sequences and decodes every sequence of length n-2 back to a tree. The correspondence is one-to-one, so there are n^(n-2) labeled trees on n vertices."><img alt="" src="../_images/sphx_glr_plot_01_prufer_codes_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/combinatorics/trees/plot_01_prufer_codes.html"><span class="doc">Cayley’s formula via Prüfer codes</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Cayley's formula via Prüfer codes</div>
+</div></div></section>
+<section id="ramsey-s-theorem">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">1930 – Ramsey’s Theorem</a><a class="headerlink" href="#ramsey-s-theorem" title="Link to this heading">#</a></h2>
+<p>Frank Ramsey’s 1930 paper, written to settle a question in logic,
+proved that complete disorder is impossible: color the edges of a large
+enough complete graph with two colors, and a one-colored complete
+subgraph of any prescribed size must appear. The smallest case is the
+party problem. Among any six people, three are mutual acquaintances or
+three are mutual strangers, but five people are not enough, so
+<span class="math notranslate nohighlight">\(R(3,3) = 6\)</span>. Robert Greenwood and Andrew Gleason computed this
+and other small Ramsey numbers in 1955. Exact values remain famously
+hard: <span class="math notranslate nohighlight">\(R(5,5)\)</span> is still unknown.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.combinatorics.systems.extremal.count_triangle_free_colorings()</span></code>
+searches every 2-coloring of <span class="math notranslate nohighlight">\(K_n\)</span>, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">has_monochromatic_triangle()</span></code>
+tests one coloring. The tests find triangle-free colorings of
+<span class="math notranslate nohighlight">\(K_5\)</span> and none of <span class="math notranslate nohighlight">\(K_6\)</span>.</p>
+<p><em>References:</em> F. P. Ramsey, “On a Problem of Formal Logic,” Proceedings
+of the London Mathematical Society s2-30(1) (1930), 264-286; R. E.
+Greenwood and A. M. Gleason, “Combinatorial Relations and Chromatic
+Graphs,” Canadian Journal of Mathematics 7 (1955), 1-7.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Searches every red/blue coloring of the edges of K_5 and K_6. K_5 has colorings with no single-colored triangle, such as the pentagon and pentagram, but every one of the 32768 colorings of K_6 contains one."><img alt="" src="../_images/sphx_glr_plot_01_ramsey_r33_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/combinatorics/extremal/plot_01_ramsey_r33.html"><span class="doc">Ramsey’s theorem: R(3,3) = 6</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Ramsey's theorem: R(3,3) = 6</div>
+</div></div></section>
+<section id="hall-s-marriage-theorem">
+<h2><a class="toc-backref" href="#id12" role="doc-backlink">1935 – Hall’s Marriage Theorem</a><a class="headerlink" href="#hall-s-marriage-theorem" title="Link to this heading">#</a></h2>
+<p>Philip Hall’s 1935 paper answered a question about choosing distinct
+representatives from a family of sets. In matching language: when can
+every person on one side of a bipartite graph be paired with a distinct
+partner on the other? An obvious necessary condition is that every group
+of <span class="math notranslate nohighlight">\(k\)</span> people must know at least <span class="math notranslate nohighlight">\(k\)</span> possible partners
+between them. Hall proved that this condition is also sufficient. The
+theorem is equivalent to Dénes Kőnig’s 1931 theorem on bipartite
+graphs and to the max-flow min-cut theorem, and it underlies many
+existence proofs in combinatorics.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.combinatorics.systems.matching.hall_condition()</span></code>
+checks the condition on every subset and reports a violating subset
+when one exists, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">maximum_matching()</span></code>
+finds a largest matching by augmenting paths. The tests confirm on
+random graphs that the condition holds exactly when a perfect matching
+exists.</p>
+<p><em>References:</em> P. Hall, “On Representatives of Subsets,” Journal of the
+London Mathematical Society s1-10(1) (1935), 26-30.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Checks Hall&#x27;s condition on random bipartite graphs and confirms that it holds exactly when a matching covers every left vertex. When it fails, the example prints the subset whose neighbourhood is too small."><img alt="" src="../_images/sphx_glr_plot_01_hall_marriage_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/combinatorics/matching/plot_01_hall_marriage.html"><span class="doc">Hall’s marriage theorem</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Hall's marriage theorem</div>
+</div></div></section>
+<section id="the-erdos-szekeres-theorem">
+<h2><a class="toc-backref" href="#id13" role="doc-backlink">1935 – The Erdős-Szekeres Theorem</a><a class="headerlink" href="#the-erdos-szekeres-theorem" title="Link to this heading">#</a></h2>
+<p>Paul Erdős and George Szekeres proved in 1935 that any sequence of
+<span class="math notranslate nohighlight">\((r-1)(s-1)+1\)</span> distinct numbers contains an increasing
+subsequence of length <span class="math notranslate nohighlight">\(r\)</span> or a decreasing one of length
+<span class="math notranslate nohighlight">\(s\)</span>, and that one fewer term is not enough. The result was a step
+in their work on convex polygons in point sets (the “happy ending
+problem”) and an early theorem of Ramsey type. For a random permutation
+of <span class="math notranslate nohighlight">\(n\)</span> numbers, Anatoly Vershik and Sergei Kerov, and
+independently Benjamin Logan and Larry Shepp, showed in 1977 that the
+longest increasing subsequence has length close to <span class="math notranslate nohighlight">\(2\sqrt n\)</span>.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.combinatorics.systems.extremal.longest_increasing_subsequence()</span></code>
+finds a longest increasing subsequence in <span class="math notranslate nohighlight">\(O(n\log n)\)</span> time by
+patience sorting, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">longest_decreasing_subsequence()</span></code>
+does the same for decreasing ones. The tests check the bound and a
+sequence that meets it exactly.</p>
+<p><em>References:</em> P. Erdős and G. Szekeres, “A Combinatorial Problem in
+Geometry,” Compositio Mathematica 2 (1935), 463-470.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Any sequence of (r-1)(s-1)+1 distinct numbers contains an increasing subsequence of length r or a decreasing one of length s. This example finds the longest monotone subsequences of random permutations and shows that their length grows like 2 sqrt(n)."><img alt="" src="../_images/sphx_glr_plot_02_erdos_szekeres_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/combinatorics/extremal/plot_02_erdos_szekeres.html"><span class="doc">The Erdős-Szekeres theorem: monotone subsequences</span></a></p>
+  <div class="sphx-glr-thumbnail-title">The Erdős-Szekeres theorem: monotone subsequences</div>
+</div></div></section>
+<section id="polya-s-enumeration-theorem">
+<h2><a class="toc-backref" href="#id14" role="doc-backlink">1937 – Pólya’s Enumeration Theorem</a><a class="headerlink" href="#polya-s-enumeration-theorem" title="Link to this heading">#</a></h2>
+<p>George Pólya’s 1937 paper, motivated by counting chemical isomers,
+turned counting up to symmetry into a routine calculation. The cycle
+structure of each symmetry determines how many colorings it leaves
+unchanged. For necklaces of <span class="math notranslate nohighlight">\(n\)</span> beads in <span class="math notranslate nohighlight">\(k\)</span> colors under
+rotation, a rotation by <span class="math notranslate nohighlight">\(i\)</span> positions has <span class="math notranslate nohighlight">\(\gcd(i, n)\)</span>
+cycles, which gives</p>
+<div class="math notranslate nohighlight">
+\[N(n, k) = \frac{1}{n} \sum_{i=0}^{n-1} k^{\gcd(i, n)}.\]</div>
+<p>John Howard Redfield had published the same idea in 1927, but it went
+unnoticed until the 1960s.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.combinatorics.systems.necklaces.count_necklaces()</span></code>
+and <code class="xref py py-func docutils literal notranslate"><span class="pre">count_bracelets()</span></code>
+evaluate Pólya’s formulas for rotations and for rotations with
+reflections. The tests check both against brute-force enumeration.</p>
+<p><em>References:</em> G. Pólya, “Kombinatorische Anzahlbestimmungen für
+Gruppen, Graphen und chemische Verbindungen,” Acta Mathematica 68
+(1937), 145-254.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Counts necklaces (up to rotation) and bracelets (up to rotation and reflection) with Pólya&#x27;s formula, and draws the 8 distinct two-colored necklaces of 5 beads."><img alt="" src="../_images/sphx_glr_plot_01_polya_necklaces_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/combinatorics/necklaces/plot_01_polya_necklaces.html"><span class="doc">Pólya’s enumeration theorem: necklaces and bracelets</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Pólya's enumeration theorem: necklaces and bracelets</div>
+</div></div></section>
+<section id="gray-codes">
+<h2><a class="toc-backref" href="#id15" role="doc-backlink">1953 – Gray Codes</a><a class="headerlink" href="#gray-codes" title="Link to this heading">#</a></h2>
+<p>Frank Gray’s patent, filed in 1947 and granted in 1953, described a way
+to list all <span class="math notranslate nohighlight">\(n\)</span>-bit binary words so that neighbouring words
+differ in exactly one bit. The reflected binary code, <span class="math notranslate nohighlight">\(g_k = k
+\oplus \lfloor k/2 \rfloor\)</span>, lists the <span class="math notranslate nohighlight">\((n-1)\)</span>-bit code, then the
+same list in reverse with a leading 1. Gray used it in
+analog-to-digital converters, where changing several bits at once could
+produce large errors. The code also solves the Chinese rings puzzle,
+analyzed by Louis Gros in 1872, and it is the simplest example of a
+combinatorial Gray code, a listing of objects in which each step makes
+a minimal change.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.combinatorics.systems.sequences.gray_code()</span></code>
+generates the reflected binary Gray code, and the tests confirm that
+consecutive codes, including the last and the first, differ in one
+bit.</p>
+<p><em>References:</em> F. Gray, “Pulse Code Communication,” U.S. Patent
+2,632,058 (1953).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Lists the reflected binary Gray code, checks that neighbouring codes differ in exactly one bit, and compares the number of bit flips needed to count through all n-bit words with ordinary binary counting."><img alt="" src="../_images/sphx_glr_plot_03_gray_code_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/combinatorics/sequences/plot_03_gray_code.html"><span class="doc">Gray codes: counting one bit at a time</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Gray codes: counting one bit at a time</div>
+</div></div></section>
 <section id="see-also">
-<h2><a class="toc-backref" href="#id6" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id16" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="../api/combinatorics.html"><span class="doc">mathematicskit.combinatorics</span></a></p></li>
 <li><p><a class="reference internal" href="number_theory_breakthroughs.html"><span class="doc">Breakthroughs in Number Theory</span></a></p></li>
@@ -660,11 +914,21 @@ Analysis,” Proceedings of the London Mathematical Society 17(1) (1918),
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pascal-s-triangle-and-its-much-older-ancestors">1665 – Pascal’s Triangle (and Its Much Older Ancestors)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bernoulli-montmort-and-the-derangement-problem">1713 – Bernoulli, Montmort, and the Derangement Problem</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-and-the-catalan-numbers">1751 – Euler and the Catalan Numbers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fibonacci-s-rabbits">1202 – Fibonacci’s Rabbits</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gersonides-counting-formulas">1321 – Gersonides’ Counting Formulas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pascal-s-triangle-and-its-much-older-ancestors">1654-1665 – Pascal’s Triangle (and Its Much Older Ancestors)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#young-diagrams-and-integer-partitions">1674-1918 – Young Diagrams and Integer Partitions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bernoulli-montmort-and-the-derangement-problem">1708-1713 – Bernoulli, Montmort, and the Derangement Problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bernoulli-numbers-and-sums-of-powers">1713 – Bernoulli Numbers and Sums of Powers</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stirling-s-numbers">1730 – Stirling’s Numbers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#young-diagrams-and-integer-partitions">1674 – 1918 – Young Diagrams and Integer Partitions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-catalan-and-the-catalan-numbers">1751-1838 – Euler, Catalan, and the Catalan Numbers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-s-officers-and-latin-squares">1782 – Euler’s Officers and Latin Squares</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cayley-s-formula-and-prufer-codes">1889-1918 – Cayley’s Formula and Prüfer Codes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ramsey-s-theorem">1930 – Ramsey’s Theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hall-s-marriage-theorem">1935 – Hall’s Marriage Theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-erdos-szekeres-theorem">1935 – The Erdős-Szekeres Theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polya-s-enumeration-theorem">1937 – Pólya’s Enumeration Theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gray-codes">1953 – Gray Codes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#see-also">See Also</a></li>
 </ul>
   </nav></div>

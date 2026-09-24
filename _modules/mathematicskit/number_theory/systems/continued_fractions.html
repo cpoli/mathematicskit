@@ -410,12 +410,12 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.number_theory.systems.continued_fractions</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Continued-fraction expansion and best rational approximations.</span>
+<span></span><span class="sa">r</span><span class="sd">"""Continued-fraction expansion and best rational approximations.</span>
 
 <span class="sd">No numpy/scipy equivalent for the expansion algorithm itself. See</span>
 <span class="sd">Niven, Zuckerman &amp; Montgomery, *An Introduction to the Theory of</span>
 <span class="sd">Numbers*, 5th ed., Ch. 7.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -423,13 +423,13 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.number_theory.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">ContinuedFractionResult</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;continued_fraction_expansion&quot;</span><span class="p">,</span> <span class="s2">&quot;best_rational_approximation&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"continued_fraction_expansion"</span><span class="p">,</span> <span class="s2">"best_rational_approximation"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="continued_fraction_expansion">
 <a class="viewcode-back" href="../../../../api/number_theory.html#mathematicskit.number_theory.continued_fraction_expansion">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">continued_fraction_expansion</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">max_terms</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-10</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ContinuedFractionResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Expand ``x`` as a (simple) continued fraction :math:`[a_0; a_1, a_2, \dots]`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Expand ``x`` as a (simple) continued fraction :math:`[a_0; a_1, a_2, \dots]`.</span>
 
 <span class="sd">    :math:`a_0 = \lfloor x\rfloor`, then repeatedly takes the reciprocal</span>
 <span class="sd">    of the remaining fractional part and floors it again, stopping early</span>
@@ -461,11 +461,11 @@
 <span class="sd">    &gt;&gt;&gt; p, q = result.convergents[-1]</span>
 <span class="sd">    &gt;&gt;&gt; abs(p / q - 3.245) &lt; 1e-9</span>
 <span class="sd">    True</span>
-<span class="sd">    &gt;&gt;&gt; # The golden ratio&#39;s continued fraction is famously all 1s.</span>
+<span class="sd">    &gt;&gt;&gt; # The golden ratio's continued fraction is famously all 1s.</span>
 <span class="sd">    &gt;&gt;&gt; phi = (1 + 5**0.5) / 2</span>
 <span class="sd">    &gt;&gt;&gt; continued_fraction_expansion(phi, max_terms=8).terms</span>
 <span class="sd">    [1, 1, 1, 1, 1, 1, 1, 1]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">terms</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">convergents</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">p_prev2</span><span class="p">,</span> <span class="n">p_prev1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
@@ -490,18 +490,29 @@
 <div class="viewcode-block" id="best_rational_approximation">
 <a class="viewcode-back" href="../../../../api/number_theory.html#mathematicskit.number_theory.best_rational_approximation">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">best_rational_approximation</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">max_denominator</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Best rational approximation to ``x`` with denominator :math:`\leq` `max_denominator`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Best rational approximation to ``x`` with denominator :math:`\leq` `max_denominator`.</span>
 
-<span class="sd">    Expands ``x``&#39;s continued fraction and returns the last convergent</span>
-<span class="sd">    whose denominator doesn&#39;t exceed `max_denominator` -- convergents</span>
-<span class="sd">    are provably the best rational approximations achievable at or below</span>
-<span class="sd">    their own denominator. See Niven, Zuckerman &amp; Montgomery, *An</span>
-<span class="sd">    Introduction to the Theory of Numbers*, 5th ed., Theorem 7.13.</span>
+<span class="sd">    Expands ``x``'s continued fraction and takes the last convergent</span>
+<span class="sd">    :math:`p_k/q_k` with :math:`q_k \leq` `max_denominator`, then compares</span>
+<span class="sd">    it against the best *semiconvergent* (or "intermediate fraction")</span>
+<span class="sd">    :math:`\dfrac{p_{k-1} + t\,p_k}{q_{k-1} + t\,q_k}` that still fits</span>
+<span class="sd">    under the denominator bound, returning whichever is closer to ``x``.</span>
+
+<span class="sd">    Both candidates are needed: a convergent is only guaranteed to be the</span>
+<span class="sd">    best approximation among fractions with denominator at most *its own*</span>
+<span class="sd">    :math:`q_k`, and the next convergent's denominator can jump far past</span>
+<span class="sd">    `max_denominator`, leaving room for a semiconvergent in between. For</span>
+<span class="sd">    :math:`x=\pi` with ``max_denominator=57``, for instance, the last</span>
+<span class="sd">    convergent is :math:`22/7` but the semiconvergent :math:`179/57`</span>
+<span class="sd">    (between :math:`22/7` and :math:`333/106`) is genuinely closer. See</span>
+<span class="sd">    Niven, Zuckerman &amp; Montgomery, *An Introduction to the Theory of</span>
+<span class="sd">    Numbers*, 5th ed., Theorem 7.13 and Sec. 7.4.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    x : float</span>
 <span class="sd">    max_denominator : int</span>
+<span class="sd">        ``&gt;= 1``.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -513,15 +524,35 @@
 <span class="sd">    &gt;&gt;&gt; # The classic approximation pi ~ 355/113 (denominator &lt;= 200).</span>
 <span class="sd">    &gt;&gt;&gt; best_rational_approximation(3.14159265358979, max_denominator=200)</span>
 <span class="sd">    (355, 113)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &gt;&gt;&gt; # Under 57, the best fraction is the semiconvergent 179/57, not 22/7.</span>
+<span class="sd">    &gt;&gt;&gt; best_rational_approximation(3.14159265358979, max_denominator=57)</span>
+<span class="sd">    (179, 57)</span>
+<span class="sd">    &gt;&gt;&gt; abs(179 / 57 - 3.14159265358979) &lt; abs(22 / 7 - 3.14159265358979)</span>
+<span class="sd">    True</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">max_denominator</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"max_denominator must be &gt;= 1"</span><span class="p">)</span>
+
     <span class="n">result</span> <span class="o">=</span> <span class="n">continued_fraction_expansion</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">max_terms</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
-    <span class="n">best</span> <span class="o">=</span> <span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">convergents</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">q</span> <span class="o">&lt;=</span> <span class="n">max_denominator</span> <span class="ow">and</span> <span class="n">q</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">best</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">q</span> <span class="o">&gt;</span> <span class="n">max_denominator</span><span class="p">:</span>
+    <span class="n">convergents</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">convergents</span>
+
+    <span class="c1"># (p_prev, q_prev) is the convergent one step behind (p_best, q_best);</span>
+    <span class="c1"># p_{-1}/q_{-1} = 1/0 seeds the recurrence, per the standard convention.</span>
+    <span class="n">p_prev</span><span class="p">,</span> <span class="n">q_prev</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="n">p_best</span><span class="p">,</span> <span class="n">q_best</span> <span class="o">=</span> <span class="n">convergents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">convergents</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="k">if</span> <span class="n">q</span> <span class="o">&gt;</span> <span class="n">max_denominator</span><span class="p">:</span>
+            <span class="c1"># The next convergent overshoots the bound, so the best remaining</span>
+            <span class="c1"># candidate is the furthest semiconvergent that still fits.</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="n">max_denominator</span> <span class="o">-</span> <span class="n">q_prev</span><span class="p">)</span> <span class="o">//</span> <span class="n">q_best</span>
+            <span class="k">if</span> <span class="n">t</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">p_semi</span><span class="p">,</span> <span class="n">q_semi</span> <span class="o">=</span> <span class="n">p_prev</span> <span class="o">+</span> <span class="n">t</span> <span class="o">*</span> <span class="n">p_best</span><span class="p">,</span> <span class="n">q_prev</span> <span class="o">+</span> <span class="n">t</span> <span class="o">*</span> <span class="n">q_best</span>
+                <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">p_semi</span> <span class="o">/</span> <span class="n">q_semi</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">p_best</span> <span class="o">/</span> <span class="n">q_best</span> <span class="o">-</span> <span class="n">x</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="p">(</span><span class="n">p_semi</span><span class="p">,</span> <span class="n">q_semi</span><span class="p">)</span>
             <span class="k">break</span>
-    <span class="k">return</span> <span class="n">best</span></div>
+        <span class="n">p_prev</span><span class="p">,</span> <span class="n">q_prev</span> <span class="o">=</span> <span class="n">p_best</span><span class="p">,</span> <span class="n">q_best</span>
+        <span class="n">p_best</span><span class="p">,</span> <span class="n">q_best</span> <span class="o">=</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">p_best</span><span class="p">,</span> <span class="n">q_best</span><span class="p">)</span></div>
 
 </pre></div>
 

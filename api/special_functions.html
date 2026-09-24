@@ -460,14 +460,61 @@ via <code class="docutils literal notranslate"><span class="pre">numpy.polynomia
 <code class="docutils literal notranslate"><span class="pre">numpy.fft</span></code>, plus a from-scratch radix-2 FFT kept as a pedagogical
 comparison against a naive DFT and <code class="docutils literal notranslate"><span class="pre">numpy.fft</span></code>.</p>
 <p id="module-mathematicskit.special_functions">mathematicskit.special_functions: special functions and transforms.</p>
-<p>The gamma and beta functions (<code class="docutils literal notranslate"><span class="pre">scipy.special.gamma</span></code>/<code class="docutils literal notranslate"><span class="pre">beta</span></code>); Bessel
-functions of the first/second kind (<code class="docutils literal notranslate"><span class="pre">scipy.special.jv</span></code>/<code class="docutils literal notranslate"><span class="pre">yv</span></code>);
-orthogonal polynomial families (Legendre, Chebyshev, Hermite, Laguerre)
-via <code class="docutils literal notranslate"><span class="pre">numpy.polynomial</span></code>, with orthogonality verified numerically in
-tests; and the discrete Fourier transform via <code class="docutils literal notranslate"><span class="pre">numpy.fft</span></code>, plus a
-from-scratch radix-2 FFT kept specifically as a pedagogical comparison
-against a naive <span class="math notranslate nohighlight">\(O(n^2)\)</span> DFT and <code class="docutils literal notranslate"><span class="pre">numpy.fft</span></code> – the one
-sub-module in this domain where hand-rolling is the point.</p>
+<p>The gamma and beta functions (<code class="docutils literal notranslate"><span class="pre">scipy.special.gamma</span></code>/<code class="docutils literal notranslate"><span class="pre">beta</span></code>) with
+Stirling’s asymptotic series; Bessel, Airy, and Mathieu functions;
+elliptic integrals, the arithmetic-geometric mean, and Jacobi elliptic
+functions; Gauss’s and Kummer’s hypergeometric functions; the error
+function and Fresnel integrals; the Riemann zeta function and Euler’s
+prime product; the Lambert W function; orthogonal polynomial families
+(Legendre, Chebyshev, Hermite, Laguerre) via <code class="docutils literal notranslate"><span class="pre">numpy.polynomial</span></code>, with
+orthogonality verified numerically in tests; and the discrete Fourier
+transform via <code class="docutils literal notranslate"><span class="pre">numpy.fft</span></code>, plus a from-scratch radix-2 FFT kept
+specifically as a pedagogical comparison against a naive <span class="math notranslate nohighlight">\(O(n^2)\)</span>
+DFT and <code class="docutils literal notranslate"><span class="pre">numpy.fft</span></code> – the one sub-module in this domain where
+hand-rolling is the point.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.AiryResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.special_functions.</span></span><span class="sig-name descname"><span class="pre">AiryResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ai</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ai_prime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bi_prime</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/special_functions/core/base.html#AiryResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.special_functions.AiryResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>The Airy functions <code class="docutils literal notranslate"><span class="pre">Ai</span></code>, <code class="docutils literal notranslate"><span class="pre">Bi</span></code> and their derivatives at the sample points <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>ai</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>ai_prime</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>bi</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>bi_prime</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.AiryResult.ai">
+<span class="sig-name descname"><span class="pre">ai</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.special_functions.AiryResult.ai" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.AiryResult.ai_prime">
+<span class="sig-name descname"><span class="pre">ai_prime</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.special_functions.AiryResult.ai_prime" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.AiryResult.bi">
+<span class="sig-name descname"><span class="pre">bi</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.special_functions.AiryResult.bi" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.AiryResult.bi_prime">
+<span class="sig-name descname"><span class="pre">bi_prime</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.special_functions.AiryResult.bi_prime" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.AiryResult.x">
+<span class="sig-name descname"><span class="pre">x</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.special_functions.AiryResult.x" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="mathematicskit.special_functions.FFTComparisonResult">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.special_functions.</span></span><span class="sig-name descname"><span class="pre">FFTComparisonResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">naive_result</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radix2_result</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numpy_result</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">naive_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radix2_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numpy_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_error_naive_vs_numpy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_error_radix2_vs_numpy</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/special_functions/core/base.html#FFTComparisonResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.special_functions.FFTComparisonResult" title="Link to this definition">#</a></dt>
@@ -545,6 +592,162 @@ sub-module in this domain where hand-rolling is the point.</p>
 </dl>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.FresnelResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.special_functions.</span></span><span class="sig-name descname"><span class="pre">FresnelResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/special_functions/core/base.html#FresnelResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.special_functions.FresnelResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>The Fresnel integrals <span class="math notranslate nohighlight">\(S(t)\)</span> and <span class="math notranslate nohighlight">\(C(t)\)</span> at the sample points <code class="docutils literal notranslate"><span class="pre">t</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>s</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>c</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.FresnelResult.c">
+<span class="sig-name descname"><span class="pre">c</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.special_functions.FresnelResult.c" title="Link to this definition">#</a></dt>
+<dd><p><span class="math notranslate nohighlight">\(C(t) = \int_0^t \cos(\pi\tau^2/2)\,d\tau\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.FresnelResult.s">
+<span class="sig-name descname"><span class="pre">s</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.special_functions.FresnelResult.s" title="Link to this definition">#</a></dt>
+<dd><p><span class="math notranslate nohighlight">\(S(t) = \int_0^t \sin(\pi\tau^2/2)\,d\tau\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.FresnelResult.t">
+<span class="sig-name descname"><span class="pre">t</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.special_functions.FresnelResult.t" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.JacobiEllipticResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.special_functions.</span></span><span class="sig-name descname"><span class="pre">JacobiEllipticResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amplitude</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/special_functions/core/base.html#JacobiEllipticResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.special_functions.JacobiEllipticResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Jacobi elliptic functions <span class="math notranslate nohighlight">\(\operatorname{sn}\)</span>, <span class="math notranslate nohighlight">\(\operatorname{cn}\)</span>, <span class="math notranslate nohighlight">\(\operatorname{dn}\)</span> at <code class="docutils literal notranslate"><span class="pre">(u,</span> <span class="pre">m)</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sn</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>cn</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>dn</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>amplitude</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.JacobiEllipticResult.amplitude">
+<span class="sig-name descname"><span class="pre">amplitude</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.special_functions.JacobiEllipticResult.amplitude" title="Link to this definition">#</a></dt>
+<dd><p>The Jacobi amplitude <span class="math notranslate nohighlight">\(\varphi = \operatorname{am}(u\mid m)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.JacobiEllipticResult.cn">
+<span class="sig-name descname"><span class="pre">cn</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.special_functions.JacobiEllipticResult.cn" title="Link to this definition">#</a></dt>
+<dd><p><span class="math notranslate nohighlight">\(\operatorname{cn}(u\mid m) = \cos\varphi\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.JacobiEllipticResult.dn">
+<span class="sig-name descname"><span class="pre">dn</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.special_functions.JacobiEllipticResult.dn" title="Link to this definition">#</a></dt>
+<dd><p><span class="math notranslate nohighlight">\(\operatorname{dn}(u\mid m) = \sqrt{1 - m\sin^2\varphi}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.JacobiEllipticResult.sn">
+<span class="sig-name descname"><span class="pre">sn</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.special_functions.JacobiEllipticResult.sn" title="Link to this definition">#</a></dt>
+<dd><p><span class="math notranslate nohighlight">\(\operatorname{sn}(u\mid m) = \sin\varphi\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.airy_functions">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.special_functions.</span></span><span class="sig-name descname"><span class="pre">airy_functions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/special_functions/systems/airy.html#airy_functions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.special_functions.airy_functions" title="Link to this definition">#</a></dt>
+<dd><p>The Airy functions <span class="math notranslate nohighlight">\(\operatorname{Ai}, \operatorname{Ai}', \operatorname{Bi}, \operatorname{Bi}'\)</span> at <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p>
+<p><span class="math notranslate nohighlight">\(\operatorname{Ai}(x) = \frac1\pi\int_0^\infty \cos(t^3/3 + xt)\,dt\)</span>
+decays as <span class="math notranslate nohighlight">\(x\to+\infty\)</span>; <span class="math notranslate nohighlight">\(\operatorname{Bi}\)</span> grows. Both
+satisfy <span class="math notranslate nohighlight">\(y'' = xy\)</span>. Via <code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.airy()</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>AiryResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.special</span><span class="w"> </span><span class="kn">import</span> <span class="n">gamma</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">airy_functions</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">ai</span><span class="p">),</span> <span class="mi">12</span><span class="p">)</span> <span class="o">==</span> <span class="nb">round</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">3</span> <span class="o">**</span> <span class="p">(</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">gamma</span><span class="p">(</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">3</span><span class="p">))),</span> <span class="mi">12</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.arithmetic_geometric_mean">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.special_functions.</span></span><span class="sig-name descname"><span class="pre">arithmetic_geometric_mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/special_functions/systems/elliptic.html#arithmetic_geometric_mean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.special_functions.arithmetic_geometric_mean" title="Link to this definition">#</a></dt>
+<dd><p>Gauss’s arithmetic-geometric mean <span class="math notranslate nohighlight">\(\mathrm{AGM}(a, b)\)</span>.</p>
+<p>Iterate <span class="math notranslate nohighlight">\(a_{n+1} = (a_n + b_n)/2\)</span>, <span class="math notranslate nohighlight">\(b_{n+1} =
+\sqrt{a_n b_n}\)</span>; both sequences converge quadratically to a common
+limit. Via <code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.agm()</span></code>. See C. F. Gauss, <em>Werke</em>,
+vol. 3 (1866), 361-403.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Non-negative arguments.</p></li>
+<li><p><strong>b</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Non-negative arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Gauss's constant 1/AGM(1, sqrt 2) = 0.8346268...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">arithmetic_geometric_mean</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span><span class="p">))),</span> <span class="mi">7</span><span class="p">)</span>
+<span class="go">0.8346268</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -686,6 +889,104 @@ dramatically faster for even moderately large <cite>n</cite>.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.complementary_error_function">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.special_functions.</span></span><span class="sig-name descname"><span class="pre">complementary_error_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/special_functions/systems/error_functions.html#complementary_error_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.special_functions.complementary_error_function" title="Link to this definition">#</a></dt>
+<dd><p>The complementary error function <span class="math notranslate nohighlight">\(\operatorname{erfc}(x) = 1 - \operatorname{erf}(x)\)</span>.</p>
+<p>Via <code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.erfc()</span></code>, which stays accurate in the far tail
+where computing <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">-</span> <span class="pre">erf(x)</span></code> directly would cancel to zero.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="n">complementary_error_function</span><span class="p">(</span><span class="mf">10.0</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mf">0.0</span>  <span class="c1"># 1 - erf(10) is exactly 0.0 in float64</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.complete_elliptic_integral_first_kind">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.special_functions.</span></span><span class="sig-name descname"><span class="pre">complete_elliptic_integral_first_kind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/special_functions/systems/elliptic.html#complete_elliptic_integral_first_kind"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.special_functions.complete_elliptic_integral_first_kind" title="Link to this definition">#</a></dt>
+<dd><p>The complete elliptic integral of the first kind, <span class="math notranslate nohighlight">\(K(m) = \int_0^{\pi/2} \frac{d\theta}{\sqrt{1 - m\sin^2\theta}}\)</span>.</p>
+<p>Via <code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.ellipk()</span></code> (parameter <span class="math notranslate nohighlight">\(m = k^2\)</span>). See
+Abramowitz &amp; Stegun, Sec. 17.3.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>m</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Parameter, <span class="math notranslate nohighlight">\(m &lt; 1\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">abs</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">complete_elliptic_integral_first_kind</span><span class="p">(</span><span class="mf">0.0</span><span class="p">))</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-15</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.complete_elliptic_integral_second_kind">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.special_functions.</span></span><span class="sig-name descname"><span class="pre">complete_elliptic_integral_second_kind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/special_functions/systems/elliptic.html#complete_elliptic_integral_second_kind"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.special_functions.complete_elliptic_integral_second_kind" title="Link to this definition">#</a></dt>
+<dd><p>The complete elliptic integral of the second kind, <span class="math notranslate nohighlight">\(E(m) = \int_0^{\pi/2} \sqrt{1 - m\sin^2\theta}\,d\theta\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(4aE(e^2)\)</span> is the perimeter of an ellipse with semi-major axis
+<span class="math notranslate nohighlight">\(a\)</span> and eccentricity <span class="math notranslate nohighlight">\(e\)</span>, the problem that gave elliptic
+integrals their name. Via <code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.ellipe()</span></code>. See
+Abramowitz &amp; Stegun, Sec. 17.3.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>m</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Parameter, <span class="math notranslate nohighlight">\(m \le 1\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="n">complete_elliptic_integral_second_kind</span><span class="p">(</span><span class="mf">1.0</span><span class="p">))</span>  <span class="c1"># degenerate ellipse: a segment</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.confluent_hypergeometric_1f1">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.special_functions.</span></span><span class="sig-name descname"><span class="pre">confluent_hypergeometric_1f1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/special_functions/systems/hypergeometric.html#confluent_hypergeometric_1f1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.special_functions.confluent_hypergeometric_1f1" title="Link to this definition">#</a></dt>
+<dd><p>Kummer’s confluent hypergeometric function <span class="math notranslate nohighlight">\(M(a, b, z) = {}_1F_1(a; b; z) = \sum_{n=0}^\infty \frac{(a)_n}{(b)_n}\frac{z^n}{n!}\)</span>.</p>
+<p>It solves Kummer’s equation <span class="math notranslate nohighlight">\(zw'' + (b - z)w' - aw = 0\)</span> and
+arises as the confluent limit
+<span class="math notranslate nohighlight">\({}_1F_1(a; b; z) = \lim_{c\to\infty} {}_2F_1(a, c; b; z/c)\)</span>.
+Kummer’s transformation reads
+<span class="math notranslate nohighlight">\(M(a, b, z) = e^z M(b - a, b, -z)\)</span>. Via
+<code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.hyp1f1()</span></code>. See E. E. Kummer, “De integralibus
+quibusdam definitis et seriebus infinitis,” Journal für die reine
+und angewandte Mathematik 17 (1837), 228-242.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>b</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>z</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">confluent_hypergeometric_1f1</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)),</span> <span class="mi">12</span><span class="p">)</span> <span class="o">==</span> <span class="nb">round</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">e</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>  <span class="c1"># 1F1(a; a; z) = e^z</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.special_functions.dft_naive">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.special_functions.</span></span><span class="sig-name descname"><span class="pre">dft_naive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/special_functions/systems/fourier_transform.html#dft_naive"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.special_functions.dft_naive" title="Link to this definition">#</a></dt>
 <dd><p>The discrete Fourier transform, by direct evaluation of its defining sum.</p>
@@ -710,6 +1011,57 @@ Ch. 30.1.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">dft_naive</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 <span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.error_function">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.special_functions.</span></span><span class="sig-name descname"><span class="pre">error_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/special_functions/systems/error_functions.html#error_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.special_functions.error_function" title="Link to this definition">#</a></dt>
+<dd><p>The error function <span class="math notranslate nohighlight">\(\operatorname{erf}(x) = \frac{2}{\sqrt\pi}\int_0^x e^{-t^2}\,dt\)</span>.</p>
+<p>The probability that a normal variable lies within <span class="math notranslate nohighlight">\(x\sqrt2\)</span>
+standard deviations of its mean. Named by J. W. L. Glaisher, “On a
+class of definite integrals,” Philosophical Magazine 42 (1871),
+294-302. Via <code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.erf()</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">error_function</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))),</span> <span class="mi">4</span><span class="p">)</span>  <span class="c1"># the "68%" of the 68-95-99.7 rule</span>
+<span class="go">0.6827</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.euler_product">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.special_functions.</span></span><span class="sig-name descname"><span class="pre">euler_product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prime_bound</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/special_functions/systems/zeta.html#euler_product"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.special_functions.euler_product" title="Link to this definition">#</a></dt>
+<dd><p>Euler’s product <span class="math notranslate nohighlight">\(\prod_{p \le P} (1 - p^{-s})^{-1}\)</span> over primes up to <code class="docutils literal notranslate"><span class="pre">prime_bound</span></code>.</p>
+<p>Euler (1737) showed that for <span class="math notranslate nohighlight">\(s &gt; 1\)</span> this product converges to
+<span class="math notranslate nohighlight">\(\zeta(s)\)</span> as <span class="math notranslate nohighlight">\(P\to\infty\)</span>, by unique prime
+factorization. See L. Euler, “Variae observationes circa series
+infinitas,” Commentarii Academiae Scientiarum Petropolitanae 9
+(1744), 160-188 (presented 1737).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Real argument, <span class="math notranslate nohighlight">\(s &gt; 1\)</span>.</p></li>
+<li><p><strong>prime_bound</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – Include all primes <span class="math notranslate nohighlight">\(p \le\)</span> <code class="docutils literal notranslate"><span class="pre">prime_bound</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">euler_product</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>  <span class="c1"># primes 2, 3, 5, 7</span>
+<span class="go">1.595052</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -772,6 +1124,32 @@ of 2. See Cooley &amp; Tukey (1965), Math. Comp. 19, and Cormen et al.,
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.fresnel_integrals">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.special_functions.</span></span><span class="sig-name descname"><span class="pre">fresnel_integrals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/special_functions/systems/error_functions.html#fresnel_integrals"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.special_functions.fresnel_integrals" title="Link to this definition">#</a></dt>
+<dd><p>The Fresnel integrals <span class="math notranslate nohighlight">\(S(t) = \int_0^t \sin(\pi\tau^2/2)\,d\tau\)</span> and <span class="math notranslate nohighlight">\(C(t) = \int_0^t \cos(\pi\tau^2/2)\,d\tau\)</span>.</p>
+<p>The parametric curve <span class="math notranslate nohighlight">\((C(t), S(t))\)</span> is the Euler (Cornu)
+spiral, which winds into the points <span class="math notranslate nohighlight">\(\pm(\tfrac12, \tfrac12)\)</span>
+as <span class="math notranslate nohighlight">\(t\to\pm\infty\)</span>. Via <code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.fresnel()</span></code>. See
+A. Fresnel, “Mémoire sur la diffraction de la lumière,” Mémoires de
+l’Académie Royale des Sciences de l’Institut de France 5 (1826),
+339-475.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>FresnelResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">fresnel_integrals</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">c</span><span class="p">),</span> <span class="mi">6</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">s</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">(0.779893, 0.438259)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.special_functions.gamma_function">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.special_functions.</span></span><span class="sig-name descname"><span class="pre">gamma_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/special_functions/systems/gamma_beta.html#gamma_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.special_functions.gamma_function" title="Link to this definition">#</a></dt>
 <dd><p>The gamma function <span class="math notranslate nohighlight">\(\Gamma(x) = \int_0^\infty t^{x-1}e^{-t}\,dt\)</span>.</p>
@@ -826,6 +1204,41 @@ eigenfunctions of the quantum harmonic oscillator. See Arfken, Weber
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.hypergeometric_2f1">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.special_functions.</span></span><span class="sig-name descname"><span class="pre">hypergeometric_2f1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/special_functions/systems/hypergeometric.html#hypergeometric_2f1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.special_functions.hypergeometric_2f1" title="Link to this definition">#</a></dt>
+<dd><p>Gauss’s hypergeometric function <span class="math notranslate nohighlight">\({}_2F_1(a, b; c; z) = \sum_{n=0}^\infty \frac{(a)_n (b)_n}{(c)_n}\frac{z^n}{n!}\)</span>.</p>
+<p><span class="math notranslate nohighlight">\((q)_n = q(q+1)\cdots(q+n-1)\)</span> is the rising factorial. The
+series converges for <span class="math notranslate nohighlight">\(|z| &lt; 1\)</span>; <code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.hyp2f1()</span></code>
+uses analytic continuation elsewhere. Gauss’s summation theorem
+(1812) evaluates it at <span class="math notranslate nohighlight">\(z = 1\)</span> for <span class="math notranslate nohighlight">\(\operatorname{Re}(c - a - b) &gt; 0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[{}_2F_1(a, b; c; 1) = \frac{\Gamma(c)\Gamma(c-a-b)}{\Gamma(c-a)\Gamma(c-b)}.\]</div>
+<p>See C. F. Gauss, “Disquisitiones generales circa seriem infinitam,”
+Commentationes Societatis Regiae Scientiarum Gottingensis Recentiores
+2 (1813).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>b</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>c</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>z</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># ln(1 + z) = z * 2F1(1, 1; 2; -z)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">hypergeometric_2f1</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">)),</span> <span class="mi">12</span><span class="p">)</span> <span class="o">==</span> <span class="nb">round</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1.5</span><span class="p">),</span> <span class="mi">12</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.special_functions.inner_product">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.special_functions.</span></span><span class="sig-name descname"><span class="pre">inner_product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/special_functions/utils/orthogonality.html#inner_product"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.special_functions.inner_product" title="Link to this definition">#</a></dt>
 <dd><p>The weighted inner product <span class="math notranslate nohighlight">\(\langle f, g\rangle = \int_a^b f(x)g(x)w(x)\,dx\)</span>, via <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.quad.html#scipy.integrate.quad" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.integrate.quad()</span></code></a>.</p>
@@ -865,6 +1278,38 @@ for Hermite).</p></li>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.jacobi_elliptic_functions">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.special_functions.</span></span><span class="sig-name descname"><span class="pre">jacobi_elliptic_functions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/special_functions/systems/elliptic.html#jacobi_elliptic_functions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.special_functions.jacobi_elliptic_functions" title="Link to this definition">#</a></dt>
+<dd><p>The Jacobi elliptic functions <span class="math notranslate nohighlight">\(\operatorname{sn}\)</span>, <span class="math notranslate nohighlight">\(\operatorname{cn}\)</span>, <span class="math notranslate nohighlight">\(\operatorname{dn}\)</span>.</p>
+<p>Defined by inverting the incomplete elliptic integral of the first
+kind: if <span class="math notranslate nohighlight">\(u = \int_0^\varphi d\theta/\sqrt{1 - m\sin^2\theta}\)</span>
+then <span class="math notranslate nohighlight">\(\operatorname{sn} u = \sin\varphi\)</span>,
+<span class="math notranslate nohighlight">\(\operatorname{cn} u = \cos\varphi\)</span>,
+<span class="math notranslate nohighlight">\(\operatorname{dn} u = \sqrt{1 - m\sin^2\varphi}\)</span>. They are
+doubly periodic; on the real axis, <span class="math notranslate nohighlight">\(\operatorname{sn}\)</span> and
+<span class="math notranslate nohighlight">\(\operatorname{cn}\)</span> have period <span class="math notranslate nohighlight">\(4K(m)\)</span>. Via
+<code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.ellipj()</span></code>. See C. G. J. Jacobi, <em>Fundamenta nova
+theoriae functionum ellipticarum</em> (1829).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>u</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>m</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Parameter, <span class="math notranslate nohighlight">\(0 \le m \le 1\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>JacobiEllipticResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">jacobi_elliptic_functions</span><span class="p">(</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">sn</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">r</span><span class="o">.</span><span class="n">cn</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="mi">12</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.special_functions.laguerre_polynomial">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.special_functions.</span></span><span class="sig-name descname"><span class="pre">laguerre_polynomial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/special_functions/systems/orthogonal_polynomials.html#laguerre_polynomial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.special_functions.laguerre_polynomial" title="Link to this definition">#</a></dt>
 <dd><p>The (simple) Laguerre polynomial <span class="math notranslate nohighlight">\(L_n(x)\)</span>, orthogonal on <span class="math notranslate nohighlight">\([0,\infty)\)</span> with weight <span class="math notranslate nohighlight">\(e^{-x}\)</span>.</p>
@@ -887,6 +1332,39 @@ Harris, <em>Mathematical Methods for Physicists</em>, 7th ed., Ch. 18.5.</p>
 <span class="go">1.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">laguerre_polynomial</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)),</span> <span class="mi">6</span><span class="p">)</span>  <span class="c1"># L_1(x) = 1 - x</span>
 <span class="go">0.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.lambert_w">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.special_functions.</span></span><span class="sig-name descname"><span class="pre">lambert_w</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">branch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/special_functions/systems/lambert_w.html#lambert_w"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.special_functions.lambert_w" title="Link to this definition">#</a></dt>
+<dd><p>The Lambert W function: the solution <span class="math notranslate nohighlight">\(w\)</span> of <span class="math notranslate nohighlight">\(we^w = z\)</span>.</p>
+<p>Via <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.lambertw.html#scipy.special.lambertw" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.lambertw()</span></code></a>. For real
+<span class="math notranslate nohighlight">\(z \ge -1/e\)</span> the principal branch (<code class="docutils literal notranslate"><span class="pre">branch=0</span></code>) is real, and
+for <span class="math notranslate nohighlight">\(-1/e \le z &lt; 0\)</span> the lower branch <code class="docutils literal notranslate"><span class="pre">branch=-1</span></code> is a second
+real solution; in those cases the imaginary part (identically zero)
+is dropped and a real result is returned. See Corless et al. (1996).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>z</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#complex" title="(in Python v3.14)"><em>complex</em></a><em>, or </em><em>array-like</em>)</p></li>
+<li><p><strong>branch</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>optional</em>) – Branch index <code class="docutils literal notranslate"><span class="pre">k</span></code>; 0 is the principal branch.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float, complex, or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">lambert_w</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">e</span><span class="p">)),</span> <span class="mi">12</span><span class="p">)</span>  <span class="c1"># 1 * e^1 = e</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># both real branches at z = -ln(2)/2: W_0 = -ln 2, W_{-1} = -ln 4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">lambert_w</span><span class="p">(</span><span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)),</span> <span class="mi">12</span><span class="p">)</span> <span class="o">==</span> <span class="nb">round</span><span class="p">(</span><span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="mi">12</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">lambert_w</span><span class="p">(</span><span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">branch</span><span class="o">=-</span><span class="mi">1</span><span class="p">)),</span> <span class="mi">12</span><span class="p">)</span> <span class="o">==</span> <span class="nb">round</span><span class="p">(</span><span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="mi">12</span><span class="p">)</span>
+<span class="go">True</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -944,6 +1422,189 @@ Functions</em>, Sec. 5.4.</p>
 </div>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.mathieu_characteristic_a">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.special_functions.</span></span><span class="sig-name descname"><span class="pre">mathieu_characteristic_a</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/special_functions/systems/mathieu.html#mathieu_characteristic_a"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.special_functions.mathieu_characteristic_a" title="Link to this definition">#</a></dt>
+<dd><p>Characteristic value <span class="math notranslate nohighlight">\(a_m(q)\)</span> for the even Mathieu function <span class="math notranslate nohighlight">\(\operatorname{ce}_m\)</span>.</p>
+<p>At <span class="math notranslate nohighlight">\(q = 0\)</span> the equation is <span class="math notranslate nohighlight">\(y'' + ay = 0\)</span> and
+<span class="math notranslate nohighlight">\(a_m(0) = m^2\)</span>. Via <code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.mathieu_a()</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>m</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – Order, <span class="math notranslate nohighlight">\(m \ge 0\)</span>.</p></li>
+<li><p><strong>q</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="n">mathieu_characteristic_a</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+<span class="go">9.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.mathieu_characteristic_b">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.special_functions.</span></span><span class="sig-name descname"><span class="pre">mathieu_characteristic_b</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/special_functions/systems/mathieu.html#mathieu_characteristic_b"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.special_functions.mathieu_characteristic_b" title="Link to this definition">#</a></dt>
+<dd><p>Characteristic value <span class="math notranslate nohighlight">\(b_m(q)\)</span> for the odd Mathieu function <span class="math notranslate nohighlight">\(\operatorname{se}_m\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(b_m(0) = m^2\)</span>. Via <code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.mathieu_b()</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>m</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – Order, <span class="math notranslate nohighlight">\(m \ge 1\)</span>.</p></li>
+<li><p><strong>q</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="n">mathieu_characteristic_b</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+<span class="go">4.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.mathieu_even">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.special_functions.</span></span><span class="sig-name descname"><span class="pre">mathieu_even</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/special_functions/systems/mathieu.html#mathieu_even"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.special_functions.mathieu_even" title="Link to this definition">#</a></dt>
+<dd><p>The even Mathieu function <span class="math notranslate nohighlight">\(\operatorname{ce}_m(x, q)\)</span>, with <code class="docutils literal notranslate"><span class="pre">x</span></code> in radians.</p>
+<p>Normalized so that <span class="math notranslate nohighlight">\(\operatorname{ce}_m(x, 0) = \cos mx\)</span> for
+<span class="math notranslate nohighlight">\(m \ge 1\)</span> (and <span class="math notranslate nohighlight">\(1/\sqrt2\)</span> for <span class="math notranslate nohighlight">\(m = 0\)</span>). Via
+<code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.mathieu_cem()</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>m</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>)</p></li>
+<li><p><strong>q</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Angle in radians.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">mathieu_even</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)),</span> <span class="mi">12</span><span class="p">)</span> <span class="o">==</span> <span class="nb">round</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mf">0.6</span><span class="p">),</span> <span class="mi">12</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.mathieu_odd">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.special_functions.</span></span><span class="sig-name descname"><span class="pre">mathieu_odd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/special_functions/systems/mathieu.html#mathieu_odd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.special_functions.mathieu_odd" title="Link to this definition">#</a></dt>
+<dd><p>The odd Mathieu function <span class="math notranslate nohighlight">\(\operatorname{se}_m(x, q)\)</span>, with <code class="docutils literal notranslate"><span class="pre">x</span></code> in radians.</p>
+<p>Normalized so that <span class="math notranslate nohighlight">\(\operatorname{se}_m(x, 0) = \sin mx\)</span>. Via
+<code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.mathieu_sem()</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>m</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – Order, <span class="math notranslate nohighlight">\(m \ge 1\)</span>.</p></li>
+<li><p><strong>q</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Angle in radians.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">mathieu_odd</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)),</span> <span class="mi">12</span><span class="p">)</span> <span class="o">==</span> <span class="nb">round</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mf">0.3</span><span class="p">),</span> <span class="mi">12</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.riemann_zeta">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.special_functions.</span></span><span class="sig-name descname"><span class="pre">riemann_zeta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/special_functions/systems/zeta.html#riemann_zeta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.special_functions.riemann_zeta" title="Link to this definition">#</a></dt>
+<dd><p>The Riemann zeta function <span class="math notranslate nohighlight">\(\zeta(s) = \sum_{n=1}^\infty n^{-s}\)</span> (for <span class="math notranslate nohighlight">\(s &gt; 1\)</span>), analytically continued.</p>
+<p>Via <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.zeta.html#scipy.special.zeta" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.zeta()</span></code></a>, real arguments only. Euler’s 1735
+solution of the Basel problem gives <span class="math notranslate nohighlight">\(\zeta(2) = \pi^2/6\)</span>; the
+continuation gives values such as <span class="math notranslate nohighlight">\(\zeta(0) = -1/2\)</span> and
+<span class="math notranslate nohighlight">\(\zeta(-1) = -1/12\)</span>, and the “trivial zeros”
+<span class="math notranslate nohighlight">\(\zeta(-2n) = 0\)</span>. See NIST <em>Digital Library of Mathematical
+Functions</em>, Ch. 25.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>s</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Real argument, <span class="math notranslate nohighlight">\(s \ne 1\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">riemann_zeta</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)),</span> <span class="mi">12</span><span class="p">)</span> <span class="o">==</span> <span class="nb">round</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">riemann_zeta</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">)),</span> <span class="mi">12</span><span class="p">)</span>
+<span class="go">-0.083333333333</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.stirling_factorial">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.special_functions.</span></span><span class="sig-name descname"><span class="pre">stirling_factorial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/special_functions/systems/gamma_beta.html#stirling_factorial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.special_functions.stirling_factorial" title="Link to this definition">#</a></dt>
+<dd><p>Stirling’s approximation <span class="math notranslate nohighlight">\(n! \approx \sqrt{2\pi n}\,(n/e)^n\)</span>.</p>
+<p>The leading term of Stirling’s series (J. Stirling, <em>Methodus
+Differentialis</em>, 1730, Prop. 28; A. de Moivre, <em>Miscellanea
+Analytica</em>, 1730). The <em>relative</em> error is about <span class="math notranslate nohighlight">\(1/(12n)\)</span>, so
+the ratio to <span class="math notranslate nohighlight">\(n!\)</span> tends to 1 even though the absolute error
+grows without bound.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Non-negative argument.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">stirling_factorial</span><span class="p">(</span><span class="mf">10.0</span><span class="p">))</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">0.9917</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.special_functions.stirling_log_gamma">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.special_functions.</span></span><span class="sig-name descname"><span class="pre">stirling_log_gamma</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">terms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/special_functions/systems/gamma_beta.html#stirling_log_gamma"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.special_functions.stirling_log_gamma" title="Link to this definition">#</a></dt>
+<dd><p>Stirling’s asymptotic series for <span class="math notranslate nohighlight">\(\ln\Gamma(x)\)</span>, truncated after <code class="docutils literal notranslate"><span class="pre">terms</span></code> corrections.</p>
+<div class="math notranslate nohighlight">
+\[\ln\Gamma(x) \sim \left(x - \tfrac12\right)\ln x - x + \tfrac12\ln(2\pi)
++ \sum_{k=1}^{K} \frac{B_{2k}}{2k(2k-1)\,x^{2k-1}},\]</div>
+<p>where <span class="math notranslate nohighlight">\(B_{2k}\)</span> are the Bernoulli numbers (from
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.bernoulli.html#scipy.special.bernoulli" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.bernoulli()</span></code></a>). The series is <em>asymptotic</em>, not
+convergent: for fixed <span class="math notranslate nohighlight">\(x\)</span>, adding terms helps only up to
+roughly <span class="math notranslate nohighlight">\(K \approx \pi x\)</span>, after which the error grows. See
+NIST <em>Digital Library of Mathematical Functions</em>, Eq. 5.11.1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Positive argument.</p></li>
+<li><p><strong>terms</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>optional</em>) – Number of Bernoulli correction terms <span class="math notranslate nohighlight">\(K \ge 0\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">abs</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">stirling_log_gamma</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">terms</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span> <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">log_gamma_function</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)))</span> <span class="o">&lt;</span> <span class="mf">1e-9</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </section>
 
 
@@ -993,6 +1654,14 @@ Functions</em>, Sec. 5.4.</p>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.AiryResult"><code class="docutils literal notranslate"><span class="pre">AiryResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.AiryResult.ai"><code class="docutils literal notranslate"><span class="pre">AiryResult.ai</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.AiryResult.ai_prime"><code class="docutils literal notranslate"><span class="pre">AiryResult.ai_prime</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.AiryResult.bi"><code class="docutils literal notranslate"><span class="pre">AiryResult.bi</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.AiryResult.bi_prime"><code class="docutils literal notranslate"><span class="pre">AiryResult.bi_prime</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.AiryResult.x"><code class="docutils literal notranslate"><span class="pre">AiryResult.x</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.FFTComparisonResult"><code class="docutils literal notranslate"><span class="pre">FFTComparisonResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.FFTComparisonResult.max_error_naive_vs_numpy"><code class="docutils literal notranslate"><span class="pre">FFTComparisonResult.max_error_naive_vs_numpy</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.FFTComparisonResult.max_error_radix2_vs_numpy"><code class="docutils literal notranslate"><span class="pre">FFTComparisonResult.max_error_radix2_vs_numpy</span></code></a></li>
@@ -1004,20 +1673,52 @@ Functions</em>, Sec. 5.4.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.FFTComparisonResult.radix2_time"><code class="docutils literal notranslate"><span class="pre">FFTComparisonResult.radix2_time</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.FresnelResult"><code class="docutils literal notranslate"><span class="pre">FresnelResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.FresnelResult.c"><code class="docutils literal notranslate"><span class="pre">FresnelResult.c</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.FresnelResult.s"><code class="docutils literal notranslate"><span class="pre">FresnelResult.s</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.FresnelResult.t"><code class="docutils literal notranslate"><span class="pre">FresnelResult.t</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.JacobiEllipticResult"><code class="docutils literal notranslate"><span class="pre">JacobiEllipticResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.JacobiEllipticResult.amplitude"><code class="docutils literal notranslate"><span class="pre">JacobiEllipticResult.amplitude</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.JacobiEllipticResult.cn"><code class="docutils literal notranslate"><span class="pre">JacobiEllipticResult.cn</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.JacobiEllipticResult.dn"><code class="docutils literal notranslate"><span class="pre">JacobiEllipticResult.dn</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.JacobiEllipticResult.sn"><code class="docutils literal notranslate"><span class="pre">JacobiEllipticResult.sn</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.airy_functions"><code class="docutils literal notranslate"><span class="pre">airy_functions()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.arithmetic_geometric_mean"><code class="docutils literal notranslate"><span class="pre">arithmetic_geometric_mean()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.bessel_first_kind"><code class="docutils literal notranslate"><span class="pre">bessel_first_kind()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.bessel_second_kind"><code class="docutils literal notranslate"><span class="pre">bessel_second_kind()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.beta_function"><code class="docutils literal notranslate"><span class="pre">beta_function()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.chebyshev_polynomial"><code class="docutils literal notranslate"><span class="pre">chebyshev_polynomial()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.compare_fft_methods"><code class="docutils literal notranslate"><span class="pre">compare_fft_methods()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.complementary_error_function"><code class="docutils literal notranslate"><span class="pre">complementary_error_function()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.complete_elliptic_integral_first_kind"><code class="docutils literal notranslate"><span class="pre">complete_elliptic_integral_first_kind()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.complete_elliptic_integral_second_kind"><code class="docutils literal notranslate"><span class="pre">complete_elliptic_integral_second_kind()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.confluent_hypergeometric_1f1"><code class="docutils literal notranslate"><span class="pre">confluent_hypergeometric_1f1()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.dft_naive"><code class="docutils literal notranslate"><span class="pre">dft_naive()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.error_function"><code class="docutils literal notranslate"><span class="pre">error_function()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.euler_product"><code class="docutils literal notranslate"><span class="pre">euler_product()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.fft_numpy"><code class="docutils literal notranslate"><span class="pre">fft_numpy()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.fft_radix2"><code class="docutils literal notranslate"><span class="pre">fft_radix2()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.fresnel_integrals"><code class="docutils literal notranslate"><span class="pre">fresnel_integrals()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.gamma_function"><code class="docutils literal notranslate"><span class="pre">gamma_function()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.hermite_polynomial"><code class="docutils literal notranslate"><span class="pre">hermite_polynomial()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.hypergeometric_2f1"><code class="docutils literal notranslate"><span class="pre">hypergeometric_2f1()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.inner_product"><code class="docutils literal notranslate"><span class="pre">inner_product()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.jacobi_elliptic_functions"><code class="docutils literal notranslate"><span class="pre">jacobi_elliptic_functions()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.laguerre_polynomial"><code class="docutils literal notranslate"><span class="pre">laguerre_polynomial()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.lambert_w"><code class="docutils literal notranslate"><span class="pre">lambert_w()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.legendre_polynomial"><code class="docutils literal notranslate"><span class="pre">legendre_polynomial()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.log_gamma_function"><code class="docutils literal notranslate"><span class="pre">log_gamma_function()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.mathieu_characteristic_a"><code class="docutils literal notranslate"><span class="pre">mathieu_characteristic_a()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.mathieu_characteristic_b"><code class="docutils literal notranslate"><span class="pre">mathieu_characteristic_b()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.mathieu_even"><code class="docutils literal notranslate"><span class="pre">mathieu_even()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.mathieu_odd"><code class="docutils literal notranslate"><span class="pre">mathieu_odd()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.riemann_zeta"><code class="docutils literal notranslate"><span class="pre">riemann_zeta()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.stirling_factorial"><code class="docutils literal notranslate"><span class="pre">stirling_factorial()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.special_functions.stirling_log_gamma"><code class="docutils literal notranslate"><span class="pre">stirling_log_gamma()</span></code></a></li>
 </ul>
   </nav></div>
 

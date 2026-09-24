@@ -1,6 +1,6 @@
 r"""
-Spectral bipartition of a "barbell" graph
-================================================
+Fiedler's spectral bipartition of a "barbell" graph
+=========================================================
 
 Two dense clusters joined by a single bridge edge -- a case where the
 Fiedler vector's sign cleanly recovers the two clusters, and the small

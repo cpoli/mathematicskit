@@ -1,9 +1,13 @@
 r"""
-Gambler's ruin: absorption probabilities and expected duration
+Markov chains: gambler's ruin as an absorbing chain
 ======================================================================
 
-A gambler with capital ``i`` (out of a target ``N``) makes fair
-even-money bets until reaching 0 (ruin) or ``N`` (target). Both the
+A Markov chain moves between states with probabilities that depend only
+on the current state, not on how it got there, so the whole process is
+described by one transition matrix. In gambler's ruin, a gambler with
+capital ``i`` (out of a target ``N``) makes fair even-money bets until
+reaching 0 (ruin) or ``N`` (target); the capital after each bet is a
+Markov chain on the states 0..N with two absorbing ends. Both the
 absorption probabilities and the expected number of steps have simple
 closed forms for a fair game, used here to check the numerical solve.
 """

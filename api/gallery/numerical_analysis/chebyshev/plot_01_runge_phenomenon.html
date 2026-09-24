@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>The Runge phenomenon: why node placement matters &#8212; mathematicskit 0.2.0 documentation</title>
+    <title>Runge’s phenomenon: equally spaced interpolation diverges &#8212; mathematicskit 0.2.0 documentation</title>
   
   
   
@@ -53,8 +53,8 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="Interpolation" href="../interpolation/index.html" />
-    <link rel="prev" title="Chebyshev nodes and the Runge phenomenon" href="index.html" />
+    <link rel="next" title="Chebyshev nodes: the cure for Runge’s phenomenon" href="plot_02_chebyshev_nodes.html" />
+    <link rel="prev" title="Runge’s phenomenon and Chebyshev nodes" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -375,47 +375,78 @@
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../abstract_algebra/index.html">mathematicskit.abstract_algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../abstract_algebra/actions/index.html">Group actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../abstract_algebra/codes/index.html">Error-correcting codes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../abstract_algebra/finite_fields/index.html">Finite fields</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../abstract_algebra/groups/index.html">Groups</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../abstract_algebra/homomorphisms/index.html">Homomorphisms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../abstract_algebra/polynomial_ring/index.html">Polynomial ring arithmetic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../abstract_algebra/structure/index.html">Group structure</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../abstract_algebra/subgroups/index.html">Subgroups and cosets</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../calculus/index.html">mathematicskit.calculus</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../calculus/autodiff/index.html">Reverse-mode autodiff</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../calculus/dual_numbers/index.html">Dual numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../calculus/exhaustion/index.html">Method of exhaustion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../calculus/finite_differences/index.html">Finite differences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../calculus/newton_leibniz/index.html">Newton and Leibniz</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../calculus/quadrature/index.html">Quadrature</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../calculus/taylor_series/index.html">Taylor series</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../combinatorics/index.html">mathematicskit.combinatorics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../combinatorics/counting/index.html">Counting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../combinatorics/designs/index.html">Combinatorial designs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../combinatorics/extremal/index.html">Extremal combinatorics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../combinatorics/inclusion_exclusion/index.html">Inclusion-exclusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../combinatorics/matching/index.html">Matchings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../combinatorics/necklaces/index.html">Necklaces</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../combinatorics/partitions/index.html">Integer partitions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../combinatorics/pascals_triangle/index.html">Pascal’s triangle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../combinatorics/sequences/index.html">Integer sequences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../combinatorics/special_numbers/index.html">Special numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../combinatorics/trees/index.html">Labeled trees</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../fractals_chaos/index.html">mathematicskit.fractals_chaos</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../fractals_chaos/box_counting/index.html">Box-counting dimension</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../fractals_chaos/cellular_automata/index.html">Cellular automata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fractals_chaos/curves/index.html">Fractal curves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fractals_chaos/dla/index.html">Aggregation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../fractals_chaos/ifs/index.html">Iterated function systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fractals_chaos/lsystems/index.html">Lindenmayer systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../fractals_chaos/lyapunov/index.html">Lyapunov exponents</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../fractals_chaos/mandelbrot_julia/index.html">Mandelbrot and Julia sets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fractals_chaos/maps/index.html">Discrete maps</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../geometry/index.html">mathematicskit.geometry</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../geometry/bezier/index.html">Bézier curves</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../geometry/convex_hull/index.html">Convex hull</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../geometry/curves/index.html">Curves and the Frenet-Serret frame</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../geometry/intersections/index.html">Segment intersection and point-in-polygon</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../geometry/polygon/index.html">Polygon area and centroid</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../geometry/triangulation/index.html">Delaunay triangulation and Voronoi diagrams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../geometry/distances/index.html">Distances between shapes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../geometry/enclosing/index.html">Enclosing circles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../geometry/intersections/index.html">Point-in-polygon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../geometry/polygon/index.html">Polygon area</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../geometry/polyhedra/index.html">Polyhedra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../geometry/proximity/index.html">Proximity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../geometry/simplification/index.html">Line simplification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../geometry/surfaces/index.html">Surfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../geometry/triangulation/index.html">Voronoi diagrams and Delaunay triangulation</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../graph_theory/index.html">mathematicskit.graph_theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../graph_theory/assignment/index.html">Assignment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../graph_theory/coloring/index.html">Graph coloring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../graph_theory/components/index.html">Connected components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../graph_theory/eulerian/index.html">Eulerian paths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../graph_theory/extremal/index.html">Extremal graph theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../graph_theory/hamiltonian/index.html">Hamiltonian cycles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../graph_theory/matching/index.html">Bipartite matching</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../graph_theory/max_flow/index.html">Maximum flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../graph_theory/ranking/index.html">Ranking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../graph_theory/search/index.html">Heuristic search</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../graph_theory/shortest_paths/index.html">Shortest paths</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../graph_theory/spanning_tree/index.html">Minimum spanning tree</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../graph_theory/spectral/index.html">Spectral graph theory</a></li>
@@ -423,6 +454,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../linalg/index.html">mathematicskit.linalg</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../linalg/cholesky/index.html">Cholesky decomposition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linalg/classical/index.html">Classical matrix theory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../linalg/eigen/index.html">Eigenvalue algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../linalg/iterative/index.html">Iterative solvers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../linalg/lu/index.html">LU decomposition</a></li>
@@ -435,14 +467,22 @@
 <li class="toctree-l2"><a class="reference internal" href="../../number_theory/continued_fractions/index.html">Continued fractions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../number_theory/crt/index.html">Chinese Remainder Theorem</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../number_theory/diophantine/index.html">Diophantine equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../number_theory/factorization/index.html">Integer factorization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../number_theory/modular_arithmetic/index.html">Modular arithmetic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../number_theory/primality/index.html">Primality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../number_theory/prime_distribution/index.html">Distribution of primes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../number_theory/quadratic_residues/index.html">Quadratic residues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../number_theory/sums_of_squares/index.html">Sums of squares</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../number_theory/totient/index.html">Multiplicative functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../number_theory/zeta/index.html">The zeta function</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">mathematicskit.numerical_analysis</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="reference internal" href="index.html">Chebyshev nodes and the Runge phenomenon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../approximation/index.html">Function approximation</a></li>
+<li class="toctree-l2 current active"><a class="reference internal" href="index.html">Runge’s phenomenon and Chebyshev nodes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../floating_point/index.html">Floating-point arithmetic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../interpolation/index.html">Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../polynomials/index.html">Polynomials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../regression/index.html">Least-squares regression</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../root_finding/index.html">Root finding</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../splines/index.html">Cubic splines</a></li>
@@ -450,42 +490,73 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../ode_dynamics/index.html">mathematicskit.ode_dynamics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/bifurcations/index.html">Bifurcation normal forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/chaotic_flows/index.html">Chaotic flows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/epidemics/index.html">Epidemic models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/excitable/index.html">Excitable systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/limit_cycles/index.html">Limit cycles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/logistic_map/index.html">The logistic map</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/phase_portrait/index.html">Phase portraits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/poincare/index.html">Poincare sections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/population/index.html">Population models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/stability/index.html">Fixed-point stability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/synchronization/index.html">Synchronization</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../optimization/index.html">mathematicskit.optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../optimization/conjugate_gradient/index.html">Nonlinear conjugate gradient</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../optimization/constrained/index.html">Constrained optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../optimization/direct_search/index.html">Direct search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../optimization/dynamic_programming/index.html">Dynamic programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../optimization/game_theory/index.html">Game theory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../optimization/gradient_descent/index.html">Gradient descent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../optimization/least_squares/index.html">Nonlinear least squares</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../optimization/linear_programming/index.html">Linear programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../optimization/momentum/index.html">Momentum methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../optimization/newton_quasi_newton/index.html">Newton’s method and BFGS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../optimization/scalar_search/index.html">One-dimensional search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../optimization/stochastic/index.html">Stochastic approximation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../optimization/test_functions/index.html">Benchmark functions</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../probability/index.html">mathematicskit.probability</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../probability/axioms/index.html">Kolmogorov’s axioms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../probability/bayes/index.html">Bayesian inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../probability/branching/index.html">Branching processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../probability/classical/index.html">Classical problems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../probability/continuous/index.html">Continuous distributions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../probability/discrete/index.html">Discrete distributions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../probability/limit_theorems/index.html">Law of Large Numbers and Central Limit Theorem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../probability/limit_theorems/index.html">Limit theorems and inequalities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../probability/markov_chain/index.html">Markov chains</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../probability/monte_carlo/index.html">Monte Carlo integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../probability/queueing/index.html">Queueing theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../probability/stochastic_processes/index.html">Random walks and Brownian motion</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../special_functions/index.html">mathematicskit.special_functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../special_functions/airy/index.html">Airy functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../special_functions/bessel/index.html">Bessel functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../special_functions/elliptic/index.html">Elliptic functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../special_functions/error_functions/index.html">Error function and Fresnel integrals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../special_functions/fourier_transform/index.html">Discrete Fourier transform</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../special_functions/gamma_beta/index.html">Gamma and beta functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../special_functions/hypergeometric/index.html">Hypergeometric functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../special_functions/lambert_w/index.html">Lambert W function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../special_functions/mathieu/index.html">Mathieu functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../special_functions/orthogonal_polynomials/index.html">Orthogonal polynomials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../special_functions/zeta/index.html">Riemann zeta function</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/index.html">mathematicskit.statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/bootstrap/index.html">Bootstrap resampling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/confidence_intervals/index.html">Confidence intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/correlation/index.html">Correlation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/descriptive/index.html">Descriptive statistics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/hypothesis_tests/index.html">Hypothesis tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/likelihood/index.html">Likelihood</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/multiple_testing/index.html">Multiple testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/nonparametric/index.html">Nonparametric tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/regression/index.html">Linear regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/shrinkage/index.html">Shrinkage estimation</a></li>
 </ul>
 </details></li>
 </ul>
@@ -535,9 +606,9 @@
     <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Examples</a></li>
     
     
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Chebyshev nodes and the Runge phenomenon</a></li>
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Runge’s phenomenon and Chebyshev nodes</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">The Runge phenomenon: why node placement matters</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Runge’s phenomenon: equally spaced interpolation diverges</span></li>
   </ul>
 </nav>
 </div>
@@ -559,89 +630,79 @@
 <p><a class="reference internal" href="#sphx-glr-download-api-gallery-numerical-analysis-chebyshev-plot-01-runge-phenomenon-py"><span class="std std-ref">Go to the end</span></a>
 to download the full example code.</p>
 </div>
-<section class="sphx-glr-example-title" id="the-runge-phenomenon-why-node-placement-matters">
-<span id="sphx-glr-api-gallery-numerical-analysis-chebyshev-plot-01-runge-phenomenon-py"></span><h1>The Runge phenomenon: why node placement matters<a class="headerlink" href="#the-runge-phenomenon-why-node-placement-matters" title="Link to this heading">#</a></h1>
-<p>Interpolating Runge’s classic example, <span class="math notranslate nohighlight">\(f(x) = 1/(1+25x^2)\)</span>, at
-equally spaced nodes on <span class="math notranslate nohighlight">\([-1, 1]\)</span> makes the interpolation error
-<em>diverge</em> near the endpoints as the polynomial degree grows – a famous
-1901 counterexample to the intuition that more nodes always means a
-better fit. Clustering nodes near the endpoints instead, at the Chebyshev
-points, eliminates the divergence entirely.</p>
+<section class="sphx-glr-example-title" id="runge-s-phenomenon-equally-spaced-interpolation-diverges">
+<span id="sphx-glr-api-gallery-numerical-analysis-chebyshev-plot-01-runge-phenomenon-py"></span><h1>Runge’s phenomenon: equally spaced interpolation diverges<a class="headerlink" href="#runge-s-phenomenon-equally-spaced-interpolation-diverges" title="Link to this heading">#</a></h1>
+<p>Carl Runge’s 1901 example <span class="math notranslate nohighlight">\(f(x) = 1/(1+25x^2)\)</span> is smooth on
+<span class="math notranslate nohighlight">\([-1, 1]\)</span>, yet interpolating it at <em>more</em> equally spaced nodes
+makes the fit <em>worse</em>: oscillations near the endpoints grow without
+bound as the degree increases. This script shows the overshoot for
+growing degree, the maximum error blowing up, and the exponentially
+growing Lebesgue constant of equally spaced nodes that causes it.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.numerical_analysis</span><span class="w"> </span><span class="kn">import</span> <a href="https://docs.python.org/3/library/abc.html#abc.ABC" title="abc.ABC" class="sphx-glr-backref-module-abc sphx-glr-backref-type-py-class"><span class="n">ChebyshevInterpolant</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/abc.html#abc.ABC" title="abc.ABC" class="sphx-glr-backref-module-abc sphx-glr-backref-type-py-class"><span class="n">LagrangeInterpolant</span></a><span class="p">,</span> <span class="n">chebyshev_nodes</span><span class="p">,</span> <span class="n">runge_function</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.numerical_analysis</span><span class="w"> </span><span class="kn">import</span> <a href="https://docs.python.org/3/library/abc.html#abc.ABC" title="abc.ABC" class="sphx-glr-backref-module-abc sphx-glr-backref-type-py-class"><span class="n">LagrangeInterpolant</span></a><span class="p">,</span> <span class="n">runge_function</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.numerical_analysis.systems.chebyshev</span><span class="w"> </span><span class="kn">import</span> <span class="n">runge_phenomenon_errors</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.numerical_analysis.utils.error_analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">lebesgue_constant</span>
 </pre></div>
 </div>
-<section id="degree-20-interpolant-equally-spaced-vs-chebyshev-nodes">
-<h2>Degree-20 interpolant: equally spaced vs. Chebyshev nodes<a class="headerlink" href="#degree-20-interpolant-equally-spaced-vs-chebyshev-nodes" title="Link to this heading">#</a></h2>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a> <span class="o">=</span> <span class="mi">21</span>
-<a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x_equal</span></a> <span class="o">=</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.linspace.html#numpy.linspace" title="numpy.linspace" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a><span class="p">)</span>
-<span class="n">p_equal</span> <span class="o">=</span> <a href="https://docs.python.org/3/library/abc.html#abc.ABC" title="abc.ABC" class="sphx-glr-backref-module-abc sphx-glr-backref-type-py-class"><span class="n">LagrangeInterpolant</span></a><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x_equal</span></a><span class="p">,</span> <span class="n">runge_function</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x_equal</span></a><span class="p">))</span>
-<span class="n">p_cheb</span> <span class="o">=</span> <a href="https://docs.python.org/3/library/abc.html#abc.ABC" title="abc.ABC" class="sphx-glr-backref-module-abc sphx-glr-backref-type-py-class"><span class="n">ChebyshevInterpolant</span></a><span class="p">(</span><span class="n">runge_function</span><span class="p">,</span> <a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a><span class="o">=</span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a><span class="p">)</span>
-
-<a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x_fine</span></a> <span class="o">=</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.linspace.html#numpy.linspace" title="numpy.linspace" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
-
-<span class="n">fig1</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">6.5</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x_fine</span></a><span class="p">,</span> <span class="n">runge_function</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x_fine</span></a><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;f(x) = 1/(1+25x^2)&quot;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x_fine</span></a><span class="p">,</span> <span class="n">p_equal</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x_fine</span></a><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;firebrick&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;equally spaced (n=21)&quot;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x_fine</span></a><span class="p">,</span> <span class="n">p_cheb</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x_fine</span></a><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;steelblue&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Chebyshev (n=21)&quot;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Equally spaced nodes overshoot wildly near the edges&quot;</span><span class="p">)</span>
+<section id="more-equally-spaced-nodes-bigger-wiggles">
+<h2>More equally spaced nodes, bigger wiggles<a class="headerlink" href="#more-equally-spaced-nodes-bigger-wiggles" title="Link to this heading">#</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x_fine</span></a> <span class="o">=</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.linspace.html#numpy.linspace" title="numpy.linspace" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
+<span class="n">fig1</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x_fine</span></a><span class="p">,</span> <span class="n">runge_function</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x_fine</span></a><span class="p">),</span> <a href="https://docs.python.org/3/builtins/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">color</span></a><span class="o">=</span><span class="s2">"black"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">"$f(x) = 1/(1+25x^2)$"</span><span class="p">)</span>
+<span class="k">for</span> <a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a><span class="p">,</span> <a href="https://docs.python.org/3/builtins/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">color</span></a> <span class="ow">in</span> <span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="s2">"goldenrod"</span><span class="p">),</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="s2">"darkorange"</span><span class="p">),</span> <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="s2">"firebrick"</span><span class="p">)):</span>
+    <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nodes</span></a> <span class="o">=</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.linspace.html#numpy.linspace" title="numpy.linspace" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a><span class="p">)</span>
+    <span class="n">p</span> <span class="o">=</span> <a href="https://docs.python.org/3/library/abc.html#abc.ABC" title="abc.ABC" class="sphx-glr-backref-module-abc sphx-glr-backref-type-py-class"><span class="n">LagrangeInterpolant</span></a><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nodes</span></a><span class="p">,</span> <span class="n">runge_function</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nodes</span></a><span class="p">))</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x_fine</span></a><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x_fine</span></a><span class="p">),</span> <a href="https://docs.python.org/3/builtins/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">color</span></a><span class="o">=</span><a href="https://docs.python.org/3/builtins/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">color</span></a><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">"degree </span><span class="si">{</span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">, equally spaced"</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nodes</span></a><span class="p">,</span> <span class="n">runge_function</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nodes</span></a><span class="p">),</span> <span class="s2">"o"</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <a href="https://docs.python.org/3/builtins/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">color</span></a><span class="o">=</span><a href="https://docs.python.org/3/builtins/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">color</span></a><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"$x$"</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Runge's phenomenon: oscillations grow near the endpoints"</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
 <span class="n">fig1</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../../../_images/sphx_glr_plot_01_runge_phenomenon_001.png" srcset="../../../../_images/sphx_glr_plot_01_runge_phenomenon_001.png" alt="Equally spaced nodes overshoot wildly near the edges" class = "sphx-glr-single-img"/></section>
-<section id="error-vs-degree-divergence-vs-convergence">
-<h2>Error vs. degree: divergence vs. convergence<a class="headerlink" href="#error-vs-degree-divergence-vs-convergence" title="Link to this heading">#</a></h2>
+<img src="../../../../_images/sphx_glr_plot_01_runge_phenomenon_001.png" srcset="../../../../_images/sphx_glr_plot_01_runge_phenomenon_001.png" alt="Runge's phenomenon: oscillations grow near the endpoints" class = "sphx-glr-single-img"/></section>
+<section id="the-maximum-error-diverges-with-degree">
+<h2>The maximum error diverges with degree<a class="headerlink" href="#the-maximum-error-diverges-with-degree" title="Link to this heading">#</a></h2>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">degrees</span></a> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
-<a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">equal_errors</span></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">chebyshev_errors</span></a> <span class="o">=</span> <span class="n">runge_phenomenon_errors</span><span class="p">(</span><a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">degrees</span></a><span class="p">)</span>
-<span class="k">for</span> <a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">d</span></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">ee</span></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">ce</span></a> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">degrees</span></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">equal_errors</span></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">chebyshev_errors</span></a><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;degree=</span><span class="si">{</span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">d</span></a><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2">  equally-spaced max err=</span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">ee</span></a><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">  Chebyshev max err=</span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">ce</span></a><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">equal_errors</span></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_</span></a> <span class="o">=</span> <span class="n">runge_phenomenon_errors</span><span class="p">(</span><a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">degrees</span></a><span class="p">)</span>
+<span class="k">for</span> <a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">d</span></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">e</span></a> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">degrees</span></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">equal_errors</span></a><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"degree=</span><span class="si">{</span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">d</span></a><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2">  equally spaced max |error| = </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">e</span></a><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="n">fig2</span><span class="p">,</span> <span class="n">ax2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">degrees</span></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">equal_errors</span></a><span class="p">,</span> <span class="s2">&quot;o-&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;firebrick&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;equally spaced&quot;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">degrees</span></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">chebyshev_errors</span></a><span class="p">,</span> <span class="s2">&quot;o-&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;steelblue&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Chebyshev&quot;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;polynomial degree&quot;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;max |error|&quot;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Equally spaced error diverges; Chebyshev error shrinks&quot;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">degrees</span></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">equal_errors</span></a><span class="p">,</span> <span class="s2">"o-"</span><span class="p">,</span> <a href="https://docs.python.org/3/builtins/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">color</span></a><span class="o">=</span><span class="s2">"firebrick"</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"polynomial degree"</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\max |f - p_n|$"</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Equally spaced interpolation error grows without bound"</span><span class="p">)</span>
 <span class="n">fig2</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../../../_images/sphx_glr_plot_01_runge_phenomenon_002.png" srcset="../../../../_images/sphx_glr_plot_01_runge_phenomenon_002.png" alt="Equally spaced error diverges; Chebyshev error shrinks" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>degree= 5  equally-spaced max err=0.4327  Chebyshev max err=0.638617
-degree=10  equally-spaced max err=1.9156  Chebyshev max err=0.132195
-degree=15  equally-spaced max err=2.1069  Chebyshev max err=0.099308
-degree=20  equally-spaced max err=59.7684  Chebyshev max err=0.017738
-degree=25  equally-spaced max err=75.7639  Chebyshev max err=0.013649
-degree=30  equally-spaced max err=2384.7286  Chebyshev max err=0.002425
+<img src="../../../../_images/sphx_glr_plot_01_runge_phenomenon_002.png" srcset="../../../../_images/sphx_glr_plot_01_runge_phenomenon_002.png" alt="Equally spaced interpolation error grows without bound" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>degree= 5  equally spaced max |error| = 4.327e-01
+degree=10  equally spaced max |error| = 1.916e+00
+degree=15  equally spaced max |error| = 2.107e+00
+degree=20  equally spaced max |error| = 5.977e+01
+degree=25  equally spaced max |error| = 7.576e+01
+degree=30  equally spaced max |error| = 2.385e+03
 </pre></div>
 </div>
 </section>
-<section id="the-mechanism-the-lebesgue-constant">
-<h2>The mechanism: the Lebesgue constant<a class="headerlink" href="#the-mechanism-the-lebesgue-constant" title="Link to this heading">#</a></h2>
-<p>The Lebesgue constant bounds interpolation error relative to the best
-possible polynomial approximation; it grows exponentially for equally
-spaced nodes but only logarithmically for Chebyshev nodes.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n_vals</span></a> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">]</span>
-<span class="k">for</span> <a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nv</span></a> <span class="ow">in</span> <a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n_vals</span></a><span class="p">:</span>
-    <a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">lam_equal</span></a> <span class="o">=</span> <span class="n">lebesgue_constant</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.linspace.html#numpy.linspace" title="numpy.linspace" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nv</span></a><span class="p">))</span>
-    <a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">lam_cheb</span></a> <span class="o">=</span> <span class="n">lebesgue_constant</span><span class="p">(</span><span class="n">chebyshev_nodes</span><span class="p">(</span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nv</span></a><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;n=</span><span class="si">{</span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nv</span></a><span class="si">:</span><span class="s2">3d</span><span class="si">}</span><span class="s2">  Lebesgue(equal)=</span><span class="si">{</span><a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">lam_equal</span></a><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">  Lebesgue(Chebyshev)=</span><span class="si">{</span><a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">lam_cheb</span></a><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<section id="the-cause-an-exponentially-growing-lebesgue-constant">
+<h2>The cause: an exponentially growing Lebesgue constant<a class="headerlink" href="#the-cause-an-exponentially-growing-lebesgue-constant" title="Link to this heading">#</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a> <span class="ow">in</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"n=</span><span class="si">{</span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2"> nodes  Lebesgue constant = </span><span class="si">{</span><span class="n">lebesgue_constant</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.linspace.html#numpy.linspace" title="numpy.linspace" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a><span class="p">))</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>n=  5  Lebesgue(equal)=2.21e+00  Lebesgue(Chebyshev)=1.799
-n= 10  Lebesgue(equal)=1.78e+01  Lebesgue(Chebyshev)=2.362
-n= 20  Lebesgue(equal)=5.89e+03  Lebesgue(Chebyshev)=2.837
-n= 40  Lebesgue(equal)=2.42e+09  Lebesgue(Chebyshev)=3.294
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>n= 5 nodes  Lebesgue constant = 2.21e+00
+n=10 nodes  Lebesgue constant = 1.78e+01
+n=20 nodes  Lebesgue constant = 5.89e+03
+n=30 nodes  Lebesgue constant = 3.45e+06
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.167 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.147 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-api-gallery-numerical-analysis-chebyshev-plot-01-runge-phenomenon-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../../../_downloads/e242fb333ead43d320b18d2445b32dbc/plot_01_runge_phenomenon.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_01_runge_phenomenon.ipynb</span></code></a></p>
@@ -673,15 +734,15 @@ n= 40  Lebesgue(equal)=2.42e+09  Lebesgue(Chebyshev)=3.294
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Chebyshev nodes and the Runge phenomenon</p>
+        <p class="prev-next-title">Runge’s phenomenon and Chebyshev nodes</p>
       </div>
     </a>
     <a class="right-next"
-       href="../interpolation/index.html"
+       href="plot_02_chebyshev_nodes.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Interpolation</p>
+        <p class="prev-next-title">Chebyshev nodes: the cure for Runge’s phenomenon</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -704,9 +765,9 @@ n= 40  Lebesgue(equal)=2.42e+09  Lebesgue(Chebyshev)=3.294
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#degree-20-interpolant-equally-spaced-vs-chebyshev-nodes">Degree-20 interpolant: equally spaced vs. Chebyshev nodes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-vs-degree-divergence-vs-convergence">Error vs. degree: divergence vs. convergence</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-mechanism-the-lebesgue-constant">The mechanism: the Lebesgue constant</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-equally-spaced-nodes-bigger-wiggles">More equally spaced nodes, bigger wiggles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-maximum-error-diverges-with-degree">The maximum error diverges with degree</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-cause-an-exponentially-growing-lebesgue-constant">The cause: an exponentially growing Lebesgue constant</a></li>
 </ul>
   </nav></div>
 

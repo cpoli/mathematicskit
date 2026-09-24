@@ -410,30 +410,30 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.ode_dynamics.systems.bifurcations</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Canonical bifurcation normal forms: saddle-node, pitchfork, and Hopf.</span>
+<span></span><span class="sa">r</span><span class="sd">"""Canonical bifurcation normal forms: saddle-node, pitchfork, and Hopf.</span>
 
 <span class="sd">See Strogatz, *Nonlinear Dynamics and Chaos*, 2nd ed., Ch. 3 (1D</span>
 <span class="sd">bifurcations: saddle-node, pitchfork) and Ch. 8.2 (Hopf bifurcation).</span>
 <span class="sd">Each function returns the fixed point(s)/limit-cycle radius as a</span>
 <span class="sd">function of the bifurcation parameter ``r``, in closed form, so</span>
 <span class="sd">numerical integration can be checked against the known answer.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;saddle_node_fixed_points&quot;</span><span class="p">,</span> <span class="s2">&quot;pitchfork_fixed_points&quot;</span><span class="p">,</span> <span class="s2">&quot;hopf_limit_cycle_radius&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"saddle_node_fixed_points"</span><span class="p">,</span> <span class="s2">"pitchfork_fixed_points"</span><span class="p">,</span> <span class="s2">"hopf_limit_cycle_radius"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="saddle_node_fixed_points">
 <a class="viewcode-back" href="../../../../api/ode_dynamics.html#mathematicskit.ode_dynamics.saddle_node_fixed_points">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">saddle_node_fixed_points</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Fixed points of the saddle-node normal form :math:`\dot x = r + x^2`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Fixed points of the saddle-node normal form :math:`\dot x = r + x^2`.</span>
 
 <span class="sd">    Two real fixed points :math:`x = \pm\sqrt{-r}` exist for :math:`r &lt;</span>
 <span class="sd">    0` (one stable, one unstable), merge at :math:`r=0`, and disappear</span>
-<span class="sd">    for :math:`r&gt;0` -- the defining &quot;collision and annihilation&quot;</span>
+<span class="sd">    for :math:`r&gt;0` -- the defining "collision and annihilation"</span>
 <span class="sd">    signature of a saddle-node bifurcation. See Strogatz, *Nonlinear</span>
 <span class="sd">    Dynamics and Chaos*, 2nd ed., Ch. 3.2.</span>
 
@@ -455,9 +455,9 @@
 <span class="sd">    array([-2.,  2.])</span>
 <span class="sd">    &gt;&gt;&gt; bool(np.all(np.isnan(saddle_node_fixed_points(1.0))))</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-    <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">invalid</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">):</span>
         <span class="n">sq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">r</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">r</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="o">-</span><span class="n">sq</span><span class="p">,</span> <span class="n">sq</span><span class="p">],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span></div>
 
@@ -465,8 +465,8 @@
 
 <div class="viewcode-block" id="pitchfork_fixed_points">
 <a class="viewcode-back" href="../../../../api/ode_dynamics.html#mathematicskit.ode_dynamics.pitchfork_fixed_points">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">pitchfork_fixed_points</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">kind</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;supercritical&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Fixed points of the pitchfork normal form.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">pitchfork_fixed_points</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">kind</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"supercritical"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Fixed points of the pitchfork normal form.</span>
 
 <span class="sd">    Supercritical: :math:`\dot x = rx - x^3`, fixed points :math:`x=0`</span>
 <span class="sd">    (stable for :math:`r&lt;0`, unstable for :math:`r&gt;0`) and, for</span>
@@ -478,7 +478,7 @@
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    r : float or array-like of float</span>
-<span class="sd">    kind : {&quot;supercritical&quot;, &quot;subcritical&quot;}</span>
+<span class="sd">    kind : {"supercritical", "subcritical"}</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -488,20 +488,20 @@
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; import numpy as np</span>
-<span class="sd">    &gt;&gt;&gt; pitchfork_fixed_points(4.0, kind=&quot;supercritical&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; pitchfork_fixed_points(4.0, kind="supercritical")</span>
 <span class="sd">    array([ 0., -2.,  2.])</span>
-<span class="sd">    &gt;&gt;&gt; bool(np.any(np.isnan(pitchfork_fixed_points(4.0, kind=&quot;supercritical&quot;))))</span>
+<span class="sd">    &gt;&gt;&gt; bool(np.any(np.isnan(pitchfork_fixed_points(4.0, kind="supercritical"))))</span>
 <span class="sd">    False</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">&quot;supercritical&quot;</span><span class="p">:</span>
-        <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">"supercritical"</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">invalid</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">):</span>
             <span class="n">sq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">r</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">))</span>
-    <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">&quot;subcritical&quot;</span><span class="p">:</span>
-        <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+    <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">"subcritical"</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">invalid</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">):</span>
             <span class="n">sq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">r</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">r</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;kind must be &#39;supercritical&#39; or &#39;subcritical&#39;, got </span><span class="si">{</span><span class="n">kind</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"kind must be 'supercritical' or 'subcritical', got </span><span class="si">{</span><span class="n">kind</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
     <span class="n">zeros</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">zeros</span><span class="p">,</span> <span class="o">-</span><span class="n">sq</span><span class="p">,</span> <span class="n">sq</span><span class="p">],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span></div>
 
@@ -509,8 +509,8 @@
 
 <div class="viewcode-block" id="hopf_limit_cycle_radius">
 <a class="viewcode-back" href="../../../../api/ode_dynamics.html#mathematicskit.ode_dynamics.hopf_limit_cycle_radius">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">hopf_limit_cycle_radius</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">kind</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;supercritical&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Limit-cycle radius of the Hopf normal form (polar-coordinate ODE).</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">hopf_limit_cycle_radius</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">kind</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"supercritical"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Limit-cycle radius of the Hopf normal form (polar-coordinate ODE).</span>
 
 <span class="sd">    Supercritical Hopf: :math:`\dot \rho = r\rho - \rho^3`,</span>
 <span class="sd">    :math:`\dot\theta = \omega`; the origin is a stable spiral for</span>
@@ -522,7 +522,7 @@
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    r : float or array-like of float</span>
-<span class="sd">    kind : {&quot;supercritical&quot;}</span>
+<span class="sd">    kind : {"supercritical"}</span>
 <span class="sd">        Only the supercritical case is implemented.</span>
 
 <span class="sd">    Returns</span>
@@ -536,9 +536,9 @@
 <span class="sd">    2.0</span>
 <span class="sd">    &gt;&gt;&gt; hopf_limit_cycle_radius(-1.0)</span>
 <span class="sd">    0.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">kind</span> <span class="o">!=</span> <span class="s2">&quot;supercritical&quot;</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;only kind=&#39;supercritical&#39; is implemented&quot;</span><span class="p">)</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">kind</span> <span class="o">!=</span> <span class="s2">"supercritical"</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"only kind='supercritical' is implemented"</span><span class="p">)</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">r</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)),</span> <span class="mf">0.0</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">result</span></div>

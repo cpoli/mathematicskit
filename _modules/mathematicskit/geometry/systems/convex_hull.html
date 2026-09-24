@@ -410,17 +410,17 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.geometry.systems.convex_hull</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Convex hull: via :class:`scipy.spatial.ConvexHull` (Qhull), plus a</span>
+<span></span><span class="sa">r</span><span class="sd">"""Convex hull: via :class:`scipy.spatial.ConvexHull` (Qhull), plus a</span>
 <span class="sd">hand-rolled Graham scan kept only for pedagogical comparison in 2D.</span>
 
 <span class="sd">``scipy.spatial.ConvexHull`` wraps Qhull, a robust, well-tested</span>
 <span class="sd">computational-geometry library that handles degenerate/collinear input</span>
 <span class="sd">correctly in any dimension; mathematicskit does not reimplement it as the</span>
 <span class="sd">primary API. See de Berg et al., *Computational Geometry: Algorithms and</span>
-<span class="sd">Applications*, 3rd ed., Ch. 1 (for Graham scan) and O&#39;Rourke,</span>
+<span class="sd">Applications*, 3rd ed., Ch. 1 (for Graham scan) and O'Rourke,</span>
 <span class="sd">*Computational Geometry in C*, 2nd ed., Ch. 4 (for the general</span>
 <span class="sd">:math:`d`-dimensional problem Qhull solves).</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -429,16 +429,16 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.geometry.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConvexHullResult</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;convex_hull&quot;</span><span class="p">,</span> <span class="s2">&quot;graham_scan&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"convex_hull"</span><span class="p">,</span> <span class="s2">"graham_scan"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="convex_hull">
 <a class="viewcode-back" href="../../../../api/geometry.html#mathematicskit.geometry.convex_hull">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">convex_hull</span><span class="p">(</span><span class="n">points</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ConvexHullResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Convex hull of a point set, via :class:`scipy.spatial.ConvexHull` (Qhull).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Convex hull of a point set, via :class:`scipy.spatial.ConvexHull` (Qhull).</span>
 
 <span class="sd">    Works in any dimension; the 2D case returns hull vertices in</span>
-<span class="sd">    counterclockwise order. See O&#39;Rourke, *Computational Geometry in</span>
+<span class="sd">    counterclockwise order. See O'Rourke, *Computational Geometry in</span>
 <span class="sd">    C*, 2nd ed., Ch. 4.</span>
 
 <span class="sd">    Parameters</span>
@@ -458,10 +458,10 @@
 <span class="sd">    [0, 1, 2, 3]</span>
 <span class="sd">    &gt;&gt;&gt; round(result.volume, 6)  # area of the unit square</span>
 <span class="sd">    1.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">hull</span> <span class="o">=</span> <span class="n">_ScipyConvexHull</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">ConvexHullResult</span><span class="p">(</span>
-        <span class="n">points</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">points</span><span class="p">),</span> <span class="n">vertices</span><span class="o">=</span><span class="n">hull</span><span class="o">.</span><span class="n">vertices</span><span class="p">,</span> <span class="n">simplices</span><span class="o">=</span><span class="n">hull</span><span class="o">.</span><span class="n">simplices</span><span class="p">,</span> <span class="n">volume</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">hull</span><span class="o">.</span><span class="n">volume</span><span class="p">),</span> <span class="n">area</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">hull</span><span class="o">.</span><span class="n">area</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;qhull&quot;</span>
+        <span class="n">points</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">points</span><span class="p">),</span> <span class="n">vertices</span><span class="o">=</span><span class="n">hull</span><span class="o">.</span><span class="n">vertices</span><span class="p">,</span> <span class="n">simplices</span><span class="o">=</span><span class="n">hull</span><span class="o">.</span><span class="n">simplices</span><span class="p">,</span> <span class="n">volume</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">hull</span><span class="o">.</span><span class="n">volume</span><span class="p">),</span> <span class="n">area</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">hull</span><span class="o">.</span><span class="n">area</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s2">"qhull"</span>
     <span class="p">)</span></div>
 
 
@@ -469,12 +469,12 @@
 <div class="viewcode-block" id="graham_scan">
 <a class="viewcode-back" href="../../../../api/geometry.html#mathematicskit.geometry.graham_scan">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">graham_scan</span><span class="p">(</span><span class="n">points</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ConvexHullResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Convex hull of a *planar* point set via the Graham scan.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Convex hull of a *planar* point set via the Graham scan.</span>
 
 <span class="sd">    Sorts points by angle around the lowest (then leftmost) point, and</span>
 <span class="sd">    sweeps them, popping the hull-in-progress whenever the last three</span>
 <span class="sd">    points make a clockwise (non-left) turn -- kept hand-rolled</span>
-<span class="sd">    specifically to compare against :func:`convex_hull`&#39;s Qhull-based</span>
+<span class="sd">    specifically to compare against :func:`convex_hull`'s Qhull-based</span>
 <span class="sd">    result, not as the primary 2D convex-hull API. See de Berg et al.,</span>
 <span class="sd">    *Computational Geometry*, 3rd ed., Ch. 1.1.</span>
 
@@ -485,9 +485,14 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    ConvexHullResult</span>
-<span class="sd">        ``simplices`` is left empty (Graham scan only produces the</span>
-<span class="sd">        ordered hull vertices); ``volume`` is the enclosed area via the</span>
-<span class="sd">        shoelace formula on those vertices.</span>
+<span class="sd">        ``vertices`` holds the hull's point indices in counterclockwise</span>
+<span class="sd">        order. ``simplices`` is left empty, since the Graham scan produces</span>
+<span class="sd">        only the ordered vertex cycle, not a facet list. ``volume`` is the</span>
+<span class="sd">        enclosed area via the shoelace formula on those vertices --</span>
+<span class="sd">        matching :func:`convex_hull`, where Qhull likewise reports the</span>
+<span class="sd">        enclosed area as ``volume`` in 2D. ``area`` is left at ``0.0``:</span>
+<span class="sd">        Qhull uses it for the hull's perimeter, which this scan does not</span>
+<span class="sd">        compute.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -498,11 +503,11 @@
 <span class="sd">    [0, 1, 2, 3]</span>
 <span class="sd">    &gt;&gt;&gt; round(result.volume, 6)</span>
 <span class="sd">    1.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">points</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;need at least 3 points&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"need at least 3 points"</span><span class="p">)</span>
 
     <span class="n">start_idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">lexsort</span><span class="p">((</span><span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]))[</span><span class="mi">0</span><span class="p">])</span>
     <span class="n">start</span> <span class="o">=</span> <span class="n">points</span><span class="p">[</span><span class="n">start_idx</span><span class="p">]</span>
@@ -529,7 +534,7 @@
 
     <span class="n">hull_points</span> <span class="o">=</span> <span class="n">points</span><span class="p">[</span><span class="n">stack</span><span class="p">]</span>
     <span class="n">area</span> <span class="o">=</span> <span class="n">polygon_area</span><span class="p">(</span><span class="n">hull_points</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">3</span> <span class="k">else</span> <span class="mf">0.0</span>
-    <span class="k">return</span> <span class="n">ConvexHullResult</span><span class="p">(</span><span class="n">points</span><span class="o">=</span><span class="n">points</span><span class="p">,</span> <span class="n">vertices</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">stack</span><span class="p">),</span> <span class="n">simplices</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">),</span> <span class="n">volume</span><span class="o">=</span><span class="n">area</span><span class="p">,</span> <span class="n">area</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;graham_scan&quot;</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">ConvexHullResult</span><span class="p">(</span><span class="n">points</span><span class="o">=</span><span class="n">points</span><span class="p">,</span> <span class="n">vertices</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">stack</span><span class="p">),</span> <span class="n">simplices</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">),</span> <span class="n">volume</span><span class="o">=</span><span class="n">area</span><span class="p">,</span> <span class="n">area</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"graham_scan"</span><span class="p">)</span></div>
 
 </pre></div>
 

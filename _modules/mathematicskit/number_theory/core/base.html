@@ -410,40 +410,42 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.number_theory.core.base</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Result containers for mathematicskit.number_theory.</span>
+<span></span><span class="sd">"""Result containers for mathematicskit.number_theory.</span>
 
 <span class="sd">Every algorithm in this domain is hand-rolled from its textbook</span>
 <span class="sd">definition -- number theory here is exact-integer arithmetic with no</span>
 <span class="sd">``numpy``/``scipy`` equivalent at all (unlike most other mathematicskit</span>
 <span class="sd">domains, whose new dependency rule prefers a library call whenever one</span>
-<span class="sd">exists). There is no natural shared ABC across this domain&#39;s algorithm</span>
+<span class="sd">exists). There is no natural shared ABC across this domain's algorithm</span>
 <span class="sd">families (extended Euclid, primality, CRT, continued fractions,</span>
 <span class="sd">Diophantine solvers are each their own self-contained function), so --</span>
-<span class="sd">following physicskit&#39;s own precedent of varying internal shape by what a</span>
+<span class="sd">following physicskit's own precedent of varying internal shape by what a</span>
 <span class="sd">family of algorithms actually needs -- this module holds only the small</span>
 <span class="sd">dataclass results those functions return.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;BezoutResult&quot;</span><span class="p">,</span> <span class="s2">&quot;ContinuedFractionResult&quot;</span><span class="p">,</span> <span class="s2">&quot;LinearDiophantineResult&quot;</span><span class="p">,</span> <span class="s2">&quot;PellResult&quot;</span><span class="p">,</span> <span class="s2">&quot;CRTResult&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"BezoutResult"</span><span class="p">,</span> <span class="s2">"ContinuedFractionResult"</span><span class="p">,</span> <span class="s2">"LinearDiophantineResult"</span><span class="p">,</span> <span class="s2">"PellResult"</span><span class="p">,</span> <span class="s2">"CRTResult"</span><span class="p">,</span> <span class="s2">"PollardRhoResult"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="BezoutResult">
 <a class="viewcode-back" href="../../../../api/number_theory.html#mathematicskit.number_theory.BezoutResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">BezoutResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for the extended Euclidean algorithm&#39;s output: Bezout&#39;s identity.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Container for the extended Euclidean algorithm's output: Bezout's identity."""</span>
 
     <span class="n">gcd</span><span class="p">:</span> <span class="nb">int</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;int: :math:`\\gcd(a, b)`.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""int: :math:`\\gcd(a, b)`, always non-negative."""</span>
 
     <span class="n">x</span><span class="p">:</span> <span class="nb">int</span>
+<span class="w">    </span><span class="sd">"""int: The Bezout coefficient of ``a`` in :math:`ax + by = \\gcd(a,b)`."""</span>
+
     <span class="n">y</span><span class="p">:</span> <span class="nb">int</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;int: Bezout coefficients with :math:`ax + by = \\gcd(a,b)`.&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sd">"""int: The Bezout coefficient of ``b`` in :math:`ax + by = \\gcd(a,b)`."""</span></div>
 
 
 
@@ -451,14 +453,14 @@
 <a class="viewcode-back" href="../../../../api/number_theory.html#mathematicskit.number_theory.ContinuedFractionResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">ContinuedFractionResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for a continued-fraction expansion and its convergents.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Container for a continued-fraction expansion and its convergents."""</span>
 
     <span class="n">terms</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;list of int: :math:`[a_0; a_1, a_2, \\dots]`.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""list of int: :math:`[a_0; a_1, a_2, \\dots]`."""</span>
 
     <span class="n">convergents</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;list of (int, int): Successive :math:`(p_k, q_k)` best rational</span>
-<span class="sd">    approximations :math:`p_k/q_k`, in the same order as `terms`.&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sd">"""list of (int, int): Successive :math:`(p_k, q_k)` best rational</span>
+<span class="sd">    approximations :math:`p_k/q_k`, in the same order as `terms`."""</span></div>
 
 
 
@@ -466,23 +468,31 @@
 <a class="viewcode-back" href="../../../../api/number_theory.html#mathematicskit.number_theory.LinearDiophantineResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">LinearDiophantineResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for a linear Diophantine equation&#39;s solution family.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Container for a linear Diophantine equation's solution family."""</span>
 
     <span class="n">has_solution</span><span class="p">:</span> <span class="nb">bool</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;bool: Whether :math:`ax + by = c` has an integer solution</span>
-<span class="sd">    (equivalently, whether :math:`\\gcd(a,b)` divides ``c``).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""bool: Whether :math:`ax + by = c` has an integer solution</span>
+<span class="sd">    (equivalently, whether :math:`\\gcd(a,b)` divides ``c``)."""</span>
 
     <span class="n">x0</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">    </span><span class="sd">"""int, optional: The ``x`` of one particular solution, or ``None``</span>
+<span class="sd">    when `has_solution` is ``False``."""</span>
+
     <span class="n">y0</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;int, optional: A particular solution, if one exists.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""int, optional: The ``y`` of that same particular solution."""</span>
 
     <span class="n">gcd</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;int: :math:`\\gcd(a, b)`.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""int: :math:`\\gcd(a, b)`, or ``0`` in the degenerate</span>
+<span class="sd">    ``a == b == 0`` case, where there is no gcd to speak of."""</span>
 
     <span class="n">x_step</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="w">    </span><span class="sd">"""int: :math:`b/\\gcd(a,b)`, the amount ``x`` advances per step along</span>
+<span class="sd">    the solution family."""</span>
+
     <span class="n">y_step</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;int: The general solution is ``(x0 + k*x_step, y0 - k*y_step)``</span>
-<span class="sd">    for any integer ``k``.&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sd">"""int: :math:`a/\\gcd(a,b)`. Together with `x_step`, the general</span>
+<span class="sd">    solution is ``(x0 + k*x_step, y0 - k*y_step)`` for any integer ``k``;</span>
+<span class="sd">    note the *minus* sign on the ``y`` component."""</span></div>
 
 
 
@@ -490,14 +500,19 @@
 <a class="viewcode-back" href="../../../../api/number_theory.html#mathematicskit.number_theory.PellResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">PellResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for the fundamental solution of Pell&#39;s equation :math:`x^2 - Dy^2 = 1`.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Container for the fundamental solution of Pell's equation :math:`x^2 - Dy^2 = 1`."""</span>
 
     <span class="n">x</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="n">y</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="n">d</span><span class="p">:</span> <span class="nb">int</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;int: The ``D`` in :math:`x^2 - Dy^2 = 1`.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""int: The ``x`` of the fundamental (smallest positive) solution."""</span>
 
-    <span class="n">extra</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span></div>
+    <span class="n">y</span><span class="p">:</span> <span class="nb">int</span>
+<span class="w">    </span><span class="sd">"""int: The ``y`` of the fundamental solution."""</span>
+
+    <span class="n">d</span><span class="p">:</span> <span class="nb">int</span>
+<span class="w">    </span><span class="sd">"""int: The ``D`` in :math:`x^2 - Dy^2 = 1`."""</span>
+
+    <span class="n">extra</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">"""dict: Free-form diagnostics slot, unused by the current solver."""</span></div>
 
 
 
@@ -505,14 +520,34 @@
 <a class="viewcode-back" href="../../../../api/number_theory.html#mathematicskit.number_theory.CRTResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">CRTResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for the Chinese Remainder Theorem&#39;s combined solution.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Container for the Chinese Remainder Theorem's combined solution."""</span>
 
     <span class="n">residue</span><span class="p">:</span> <span class="nb">int</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;int: The unique solution modulo `modulus`.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""int: The unique solution modulo `modulus`."""</span>
 
     <span class="n">modulus</span><span class="p">:</span> <span class="nb">int</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;int: The combined modulus (the product of the pairwise-coprime</span>
-<span class="sd">    input moduli).&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sd">"""int: The combined modulus (the product of the pairwise-coprime</span>
+<span class="sd">    input moduli)."""</span></div>
+
+
+
+<div class="viewcode-block" id="PollardRhoResult">
+<a class="viewcode-back" href="../../../../api/number_theory.html#mathematicskit.number_theory.PollardRhoResult">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">PollardRhoResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Container for a factor found by Pollard's rho method."""</span>
+
+    <span class="n">factor</span><span class="p">:</span> <span class="nb">int</span>
+<span class="w">    </span><span class="sd">"""int: A nontrivial factor of ``n`` (not necessarily prime)."""</span>
+
+    <span class="n">cofactor</span><span class="p">:</span> <span class="nb">int</span>
+<span class="w">    </span><span class="sd">"""int: ``n // factor``."""</span>
+
+    <span class="n">iterations</span><span class="p">:</span> <span class="nb">int</span>
+<span class="w">    </span><span class="sd">"""int: Total tortoise-and-hare steps taken, across all restarts."""</span>
+
+    <span class="n">c</span><span class="p">:</span> <span class="nb">int</span>
+<span class="w">    </span><span class="sd">"""int: The additive constant of :math:`x \\mapsto x^2 + c` that succeeded."""</span></div>
 
 </pre></div>
 

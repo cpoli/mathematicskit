@@ -410,28 +410,30 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.numerical_analysis.systems.interpolation</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Lagrange and Newton divided-difference polynomial interpolation.</span>
+<span></span><span class="sd">"""Lagrange and Newton divided-difference polynomial interpolation, and</span>
+<span class="sd">Hermite (osculating) interpolation of values and first derivatives.</span>
 
 <span class="sd">Both construct *the* (unique) degree-``n`` polynomial through ``n + 1``</span>
 <span class="sd">nodes, so they must agree exactly (up to floating-point roundoff) at any</span>
 <span class="sd">evaluation point; they differ only in representation and evaluation cost.</span>
 <span class="sd">See Burden &amp; Faires, *Numerical Analysis*, 10th ed., Ch. 3.1 (Lagrange)</span>
-<span class="sd">and Ch. 3.3 (Newton&#39;s divided differences).</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">and Ch. 3.3 (Newton's divided differences).</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.interpolate</span><span class="w"> </span><span class="kn">import</span> <span class="n">KroghInterpolator</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.numerical_analysis.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Interpolant</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;LagrangeInterpolant&quot;</span><span class="p">,</span> <span class="s2">&quot;NewtonDividedDifference&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"LagrangeInterpolant"</span><span class="p">,</span> <span class="s2">"NewtonDividedDifference"</span><span class="p">,</span> <span class="s2">"HermiteInterpolant"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="LagrangeInterpolant">
 <a class="viewcode-back" href="../../../../api/numerical_analysis.html#mathematicskit.numerical_analysis.LagrangeInterpolant">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">LagrangeInterpolant</span><span class="p">(</span><span class="n">Interpolant</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Lagrange-form interpolating polynomial through ``(x_i, y_i)``.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Lagrange-form interpolating polynomial through ``(x_i, y_i)``.</span>
 
 <span class="sd">    .. math::</span>
 
@@ -458,12 +460,12 @@
 <span class="sd">    1.375</span>
 <span class="sd">    &gt;&gt;&gt; round(1.5**3 - 2.0 * 1.5 + 1.0, 10)</span>
 <span class="sd">    1.375</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">tolist</span><span class="p">()))</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;interpolation nodes must be distinct&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"interpolation nodes must be distinct"</span><span class="p">)</span>
 
 <div class="viewcode-block" id="LagrangeInterpolant.evaluate">
 <a class="viewcode-back" href="../../../../api/numerical_analysis.html#mathematicskit.numerical_analysis.LagrangeInterpolant.evaluate">[docs]</a>
@@ -488,7 +490,7 @@
 <div class="viewcode-block" id="NewtonDividedDifference">
 <a class="viewcode-back" href="../../../../api/numerical_analysis.html#mathematicskit.numerical_analysis.NewtonDividedDifference">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">NewtonDividedDifference</span><span class="p">(</span><span class="n">Interpolant</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Newton divided-difference form of the interpolating polynomial.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Newton divided-difference form of the interpolating polynomial.</span>
 
 <span class="sd">    .. math::</span>
 
@@ -514,12 +516,12 @@
 <span class="sd">    &gt;&gt;&gt; p = NewtonDividedDifference(x, y)</span>
 <span class="sd">    &gt;&gt;&gt; round(float(p.evaluate(1.5)), 10)</span>
 <span class="sd">    1.375</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">tolist</span><span class="p">()))</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;interpolation nodes must be distinct&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"interpolation nodes must be distinct"</span><span class="p">)</span>
         <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">table</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
         <span class="n">table</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span>
@@ -531,7 +533,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">divided_difference_table</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;ndarray, shape (n, n): full divided-difference table (upper triangle populated).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""ndarray, shape (n, n): full divided-difference table (upper triangle populated)."""</span>
         <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">table</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
         <span class="n">table</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span>
@@ -551,6 +553,78 @@
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
             <span class="n">result</span> <span class="o">=</span> <span class="n">result</span> <span class="o">*</span> <span class="p">(</span><span class="n">x_new</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">coefficients</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="n">scalar_input</span> <span class="k">else</span> <span class="n">result</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="HermiteInterpolant">
+<a class="viewcode-back" href="../../../../api/numerical_analysis.html#mathematicskit.numerical_analysis.HermiteInterpolant">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">HermiteInterpolant</span><span class="p">(</span><span class="n">Interpolant</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Hermite interpolating polynomial matching values *and* slopes.</span>
+
+<span class="sd">    The unique polynomial :math:`H` of degree :math:`\le 2n + 1` with</span>
+<span class="sd">    :math:`H(x_i) = y_i` and :math:`H'(x_i) = y'_i` at :math:`n + 1`</span>
+<span class="sd">    distinct nodes. In Newton form it is the divided-difference</span>
+<span class="sd">    interpolant on the doubled node list</span>
+<span class="sd">    :math:`x_0, x_0, x_1, x_1, \ldots`, with each repeated first</span>
+<span class="sd">    difference :math:`f[x_i, x_i]` replaced by :math:`y'_i`. The error is</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        f(x) - H(x) = \frac{f^{(2n+2)}(\xi)}{(2n+2)!} \prod_{i=0}^{n} (x - x_i)^2 .</span>
+
+<span class="sd">    See C. Hermite, "Sur la formule d'interpolation de Lagrange," Journal</span>
+<span class="sd">    für die reine und angewandte Mathematik 84 (1878), 70-79; Burden &amp;</span>
+<span class="sd">    Faires, *Numerical Analysis*, 10th ed., Ch. 3.4. Built on</span>
+<span class="sd">    :class:`scipy.interpolate.KroghInterpolator`, which accepts repeated</span>
+<span class="sd">    nodes as derivative conditions (F. T. Krogh, Mathematics of</span>
+<span class="sd">    Computation 24 (1970), 185-190).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x, y : array-like, shape (n + 1,)</span>
+<span class="sd">        Distinct interpolation nodes and values.</span>
+<span class="sd">    dydx : array-like, shape (n + 1,)</span>
+<span class="sd">        First derivatives at the nodes.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; # Two nodes with slopes determine a cubic: recover x^3 exactly.</span>
+<span class="sd">    &gt;&gt;&gt; H = HermiteInterpolant([0.0, 1.0], [0.0, 1.0], dydx=[0.0, 3.0])</span>
+<span class="sd">    &gt;&gt;&gt; round(H(0.5), 12)</span>
+<span class="sd">    0.125</span>
+<span class="sd">    &gt;&gt;&gt; round(float(H.derivative(1.0)), 12)</span>
+<span class="sd">    3.0</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dydx</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">dydx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">dydx</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dydx</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"dydx must have shape </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="n">dydx</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"nodes must be distinct"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dydx</span> <span class="o">=</span> <span class="n">dydx</span>
+        <span class="n">order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">xi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="n">order</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">yi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="n">order</span><span class="p">],</span> <span class="n">dydx</span><span class="p">[</span><span class="n">order</span><span class="p">]])</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_krogh</span> <span class="o">=</span> <span class="n">KroghInterpolator</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span> <span class="n">yi</span><span class="p">)</span>
+
+<div class="viewcode-block" id="HermiteInterpolant.evaluate">
+<a class="viewcode-back" href="../../../../api/numerical_analysis.html#mathematicskit.numerical_analysis.HermiteInterpolant.evaluate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_new</span><span class="p">):</span>
+        <span class="n">x_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x_new</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_krogh</span><span class="p">(</span><span class="n">x_new</span><span class="p">))</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="k">if</span> <span class="n">x_new</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">out</span></div>
+
+
+<div class="viewcode-block" id="HermiteInterpolant.derivative">
+<a class="viewcode-back" href="../../../../api/numerical_analysis.html#mathematicskit.numerical_analysis.HermiteInterpolant.derivative">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">derivative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_new</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Evaluate :math:`H'` at ``x_new``."""</span>
+        <span class="n">x_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x_new</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_krogh</span><span class="o">.</span><span class="n">derivative</span><span class="p">(</span><span class="n">x_new</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="k">if</span> <span class="n">x_new</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">out</span></div>
 </div>
 
 </pre></div>

@@ -455,185 +455,474 @@
 </div>
 <blockquote class="epigraph">
 <div><p>“The theory of probabilities is at bottom nothing but common sense
-reduced to calculus.” – Pierre-Simon Laplace, <em>Theorie Analytique
-des Probabilites</em>, 1812</p>
+reduced to calculus.”
+– Pierre-Simon Laplace, <em>Essai philosophique sur les probabilités</em>,
+1814</p>
 </div></blockquote>
-<p>Probability theory began as a gambler’s question – how should stakes be
-divided in an interrupted game of chance – and only slowly grew into the
-rigorous, measure-theoretic subject it is today. This chronology traces
-the ideas behind <a class="reference internal" href="../api/probability.html#module-mathematicskit.probability" title="mathematicskit.probability"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.probability</span></code></a>: the discrete and continuous
-distributions, the limit theorems that explain why the normal
-distribution shows up everywhere, and the Markov chains that model
-memoryless random processes.</p>
+<p>Probability theory began as a gambler’s question – how should the
+stakes of an interrupted game be divided? – and only slowly grew into
+the rigorous, measure-theoretic subject it is today. This chronology
+traces the ideas behind <a class="reference internal" href="../api/probability.html#module-mathematicskit.probability" title="mathematicskit.probability"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.probability</span></code></a>: the discrete
+and continuous distributions, the limit theorems that explain why the
+normal distribution shows up everywhere, Bayesian inference, and the
+random processes (Markov chains, branching processes, random walks,
+Brownian motion, and queues) that model how chance unfolds over time.</p>
 <nav class="contents local" id="timeline">
 <p class="topic-title">Timeline</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#pascal-fermat-and-the-problem-of-points" id="id1">1654 – Pascal, Fermat, and the Problem of Points</a></p></li>
 <li><p><a class="reference internal" href="#jacob-bernoulli-s-law-of-large-numbers" id="id2">1713 – Jacob Bernoulli’s Law of Large Numbers</a></p></li>
-<li><p><a class="reference internal" href="#de-moivre-laplace-and-the-central-limit-theorem" id="id3">1733 – 1810 – De Moivre, Laplace, and the Central Limit Theorem</a></p></li>
-<li><p><a class="reference internal" href="#poisson-s-rare-event-distribution" id="id4">1837 – Poisson’s Rare-Event Distribution</a></p></li>
-<li><p><a class="reference internal" href="#kolmogorov-s-axioms" id="id5">1933 – Kolmogorov’s Axioms</a></p></li>
-<li><p><a class="reference internal" href="#markov-chains" id="id6">1906 – Markov Chains</a></p></li>
-<li><p><a class="reference internal" href="#monte-carlo-methods" id="id7">1949 – 1953 – Monte Carlo Methods</a></p></li>
-<li><p><a class="reference internal" href="#see-also" id="id8">See Also</a></p></li>
+<li><p><a class="reference internal" href="#de-moivre-laplace-and-the-central-limit-theorem" id="id3">1733-1810 – De Moivre, Laplace, and the Central Limit Theorem</a></p></li>
+<li><p><a class="reference internal" href="#daniel-bernoulli-and-the-st-petersburg-paradox" id="id4">1738 – Daniel Bernoulli and the St. Petersburg Paradox</a></p></li>
+<li><p><a class="reference internal" href="#bayes-s-theorem-and-inverse-probability" id="id5">1763 – Bayes’s Theorem and Inverse Probability</a></p></li>
+<li><p><a class="reference internal" href="#buffon-s-needle" id="id6">1777 – Buffon’s Needle</a></p></li>
+<li><p><a class="reference internal" href="#poisson-s-rare-event-distribution" id="id7">1837 – Poisson’s Rare-Event Distribution</a></p></li>
+<li><p><a class="reference internal" href="#the-bienayme-chebyshev-inequality" id="id8">1853-1867 – The Bienaymé-Chebyshev Inequality</a></p></li>
+<li><p><a class="reference internal" href="#galton-watson-branching-processes" id="id9">1873-1875 – Galton-Watson Branching Processes</a></p></li>
+<li><p><a class="reference internal" href="#brownian-motion" id="id10">1900-1923 – Brownian Motion</a></p></li>
+<li><p><a class="reference internal" href="#markov-chains" id="id11">1906 – Markov Chains</a></p></li>
+<li><p><a class="reference internal" href="#erlang-and-the-birth-of-queueing-theory" id="id12">1909-1917 – Erlang and the Birth of Queueing Theory</a></p></li>
+<li><p><a class="reference internal" href="#polya-s-random-walk-theorem" id="id13">1921 – Pólya’s Random Walk Theorem</a></p></li>
+<li><p><a class="reference internal" href="#kolmogorov-s-equations-for-continuous-time-markov-processes" id="id14">1931 – Kolmogorov’s Equations for Continuous-Time Markov Processes</a></p></li>
+<li><p><a class="reference internal" href="#kolmogorov-s-axioms" id="id15">1933 – Kolmogorov’s Axioms</a></p></li>
+<li><p><a class="reference internal" href="#monte-carlo-methods" id="id16">1946-1953 – Monte Carlo Methods</a></p></li>
+<li><p><a class="reference internal" href="#see-also" id="id17">See Also</a></p></li>
 </ul>
 </nav>
 <section id="pascal-fermat-and-the-problem-of-points">
 <h2><a class="toc-backref" href="#id1" role="doc-backlink">1654 – Pascal, Fermat, and the Problem of Points</a><a class="headerlink" href="#pascal-fermat-and-the-problem-of-points" title="Link to this heading">#</a></h2>
-<p>A gambler’s question relayed to Blaise Pascal by the Chevalier de Mere –
-how should the stakes of an interrupted game be divided fairly between
-two players, given the score so far – sparked a correspondence between
-Pascal and Pierre de Fermat in the summer of 1654 that is now generally
-credited as the founding exchange of mathematical probability theory.
-Their solution amounts to correctly enumerating and weighting the ways
-the remaining games could have played out – the same combinatorial
-counting that gives the binomial distribution its name and its
-<span class="math notranslate nohighlight">\(\binom{n}{k}\)</span> weights.</p>
+<p>The Chevalier de Méré put a gambler’s question to Blaise Pascal: how
+should the stakes of an interrupted game be divided fairly between two
+players, given the score so far? The question started a correspondence
+between Pascal and Pierre de Fermat in the summer of 1654 that is now
+generally regarded as the founding exchange of mathematical probability.
+Their solution counts and weights the ways the remaining games could
+have played out. It is the same counting that gives the binomial
+distribution its <span class="math notranslate nohighlight">\(\binom{n}{k}\)</span> weights.</p>
 <p><em>Implementation:</em> <a class="reference internal" href="../api/probability.html#mathematicskit.probability.Binomial" title="mathematicskit.probability.systems.discrete.Binomial"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathematicskit.probability.systems.discrete.Binomial</span></code></a>
-implements exactly the distribution this counting problem generalizes
-to, via <code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.stats.binom</span></code>.</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="The Poisson distribution as the n -&gt; infinity, p -&gt; 0 limit of the binomial with np held fixed, plus the geometric distribution&#x27;s memoryless property."><img alt="" src="../_images/sphx_glr_plot_01_binomial_poisson_geometric_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/probability/discrete/plot_01_binomial_poisson_geometric.html"><span class="doc">Binomial, Poisson, and geometric distributions</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Binomial, Poisson, and geometric distributions</div>
+implements the distribution that this counting problem generalizes to,
+through <code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.stats.binom</span></code>.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Two players stake equal amounts on a game of fair rounds; the first to win a set number of rounds takes the pot. The game is interrupted when player A still needs a wins and player B needs b. How should the pot be split?"><img alt="" src="../_images/sphx_glr_plot_01_problem_of_points_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/probability/discrete/plot_01_problem_of_points.html"><span class="doc">Pascal and Fermat’s problem of points: dividing the stakes</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Pascal and Fermat's problem of points: dividing the stakes</div>
 </div></div></section>
 <section id="jacob-bernoulli-s-law-of-large-numbers">
 <h2><a class="toc-backref" href="#id2" role="doc-backlink">1713 – Jacob Bernoulli’s Law of Large Numbers</a><a class="headerlink" href="#jacob-bernoulli-s-law-of-large-numbers" title="Link to this heading">#</a></h2>
 <p>Jacob Bernoulli’s <em>Ars Conjectandi</em>, published posthumously in 1713,
-proved what he called his “Golden Theorem”: as the number of independent
-trials grows, the observed relative frequency of an event converges to
-its true probability – the first rigorous law of large numbers, and the
-theoretical justification for the entire enterprise of estimating
-probabilities from observed frequency.</p>
+proved what he called his “golden theorem.” As the number of independent
+trials grows, the observed relative frequency of an event becomes, with
+probability approaching one, arbitrarily close to its true probability.
+It was the first rigorous law of large numbers, and it justifies the
+whole enterprise of estimating probabilities from observed frequencies.</p>
 <p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.probability.systems.limit_theorems.law_of_large_numbers_trace()</span></code>
-demonstrates exactly this convergence directly, tracking the running
-sample mean as it settles toward the true mean with increasing sample
-size.</p>
-<p><em>References:</em> J. Bernoulli, <em>Ars Conjectandi</em> (Basel: Thurnisius, 1713),
+demonstrates this convergence by tracking the running sample mean as it
+settles toward the true mean with increasing sample size.</p>
+<p><em>References:</em> J. Bernoulli, <em>Ars Conjectandi</em> (Basel: Thurneysen, 1713),
 Part IV.</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="The sample mean of a Poisson(mu=3) sample converges to its true mean as the sample size grows (LLN); standardized sample means across many trials approach a standard normal distribution regardless of the Poisson&#x27;s own (skewed, discrete) shape (CLT)."><img alt="" src="../_images/sphx_glr_plot_01_lln_and_clt_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/probability/limit_theorems/plot_01_lln_and_clt.html"><span class="doc">Law of Large Numbers and Central Limit Theorem</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Law of Large Numbers and Central Limit Theorem</div>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Bernoulli&#x27;s &quot;golden theorem&quot; (1713): in n independent trials of an event with probability p, the relative frequency of the event converges to p as n grows. Here a biased coin with p = 0.3 is tossed a million times, and the running fraction of heads homes in on 0.3 while its typical error shrinks like \sqrt{p(1-p)/n}."><img alt="" src="../_images/sphx_glr_plot_01_law_of_large_numbers_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/probability/limit_theorems/plot_01_law_of_large_numbers.html"><span class="doc">Jacob Bernoulli’s law of large numbers: frequencies settle down</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Jacob Bernoulli's law of large numbers: frequencies settle down</div>
 </div></div></section>
 <section id="de-moivre-laplace-and-the-central-limit-theorem">
-<h2><a class="toc-backref" href="#id3" role="doc-backlink">1733 – 1810 – De Moivre, Laplace, and the Central Limit Theorem</a><a class="headerlink" href="#de-moivre-laplace-and-the-central-limit-theorem" title="Link to this heading">#</a></h2>
-<p>Abraham de Moivre’s 1733 supplement to his own <em>Doctrine of Chances</em>
-derived the normal distribution as the limiting shape of the binomial
-distribution for large <span class="math notranslate nohighlight">\(n\)</span> – the first, special case of the
-central limit theorem. Pierre-Simon Laplace’s 1810 memoir generalized
-the result dramatically: the sum of a large number of independent random
-variables, essentially regardless of their individual distributions,
-converges to a normal distribution – explaining, more than any other
-single result, why the bell curve appears so pervasively across
-completely unrelated measurement problems.</p>
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">1733-1810 – De Moivre, Laplace, and the Central Limit Theorem</a><a class="headerlink" href="#de-moivre-laplace-and-the-central-limit-theorem" title="Link to this heading">#</a></h2>
+<p>In a 1733 paper, later added to his <em>Doctrine of Chances</em>, Abraham de
+Moivre derived the normal distribution as the limiting shape of the
+binomial distribution for large <span class="math notranslate nohighlight">\(n\)</span>. This was the first special
+case of the central limit theorem. Pierre-Simon Laplace’s 1810 memoir
+generalized the result dramatically: the sum of many independent random
+variables tends to a normal distribution, largely regardless of their
+individual distributions. Aleksandr Lyapunov gave the first fully
+rigorous proof of a general version in 1901. More than any other single
+result, the theorem explains why the bell curve appears in so many
+unrelated measurement problems.</p>
 <p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.probability.systems.limit_theorems.central_limit_theorem_sample_means()</span></code>
-demonstrates exactly this convergence for repeated sample means of a
-non-normal (e.g. Poisson) distribution, cross-checked against
-<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kstest.html#scipy.stats.kstest" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.stats.kstest()</span></code></a> in the test suite;
-<a class="reference internal" href="../api/probability.html#mathematicskit.probability.Normal" title="mathematicskit.probability.systems.continuous.Normal"><code class="xref py py-class docutils literal notranslate"><span class="pre">Normal</span></code></a> is the limiting
-distribution itself.</p>
+demonstrates this convergence for repeated sample means of a non-normal
+(for example, Poisson) distribution, and the test suite cross-checks it
+with <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kstest.html#scipy.stats.kstest" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.stats.kstest()</span></code></a>.
+<a class="reference internal" href="../api/probability.html#mathematicskit.probability.Normal" title="mathematicskit.probability.systems.continuous.Normal"><code class="xref py py-class docutils literal notranslate"><span class="pre">Normal</span></code></a> is the
+limiting distribution itself.</p>
 <p><em>References:</em> A. de Moivre, <em>The Doctrine of Chances</em>, 2nd ed. (London:
-Woodfall, 1738), a supplement first circulated privately in 1733; P.-S.
-Laplace, “Memoire sur les approximations des formules qui sont fonctions
-de tres grands nombres,” Memoires de l’Academie Royale des Sciences de
-Paris (1810).</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="The sample mean of a Poisson(mu=3) sample converges to its true mean as the sample size grows (LLN); standardized sample means across many trials approach a standard normal distribution regardless of the Poisson&#x27;s own (skewed, discrete) shape (CLT)."><img alt="" src="../_images/sphx_glr_plot_01_lln_and_clt_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/probability/limit_theorems/plot_01_lln_and_clt.html"><span class="doc">Law of Large Numbers and Central Limit Theorem</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Law of Large Numbers and Central Limit Theorem</div>
+Woodfall, 1738), which includes the 1733 paper first circulated
+privately; P.-S. Laplace, “Mémoire sur les approximations des formules
+qui sont fonctions de très grands nombres et sur leur application aux
+probabilités,” Mémoires de la Classe des Sciences Mathématiques et
+Physiques de l’Institut de France (1810).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="De Moivre (1733) showed that the binomial distribution, suitably standardized, approaches the normal curve for large n. Laplace (1810) extended this to sums of many independent variables of almost any distribution: the standardized mean Z = (\bar X_n - \mu)/(\sigma/\sqrt n) tends to \mathcal N(0, 1), whatever the shape of the summands."><img alt="" src="../_images/sphx_glr_plot_02_central_limit_theorem_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/probability/limit_theorems/plot_02_central_limit_theorem.html"><span class="doc">De Moivre-Laplace and the central limit theorem: the bell curve emerges</span></a></p>
+  <div class="sphx-glr-thumbnail-title">De Moivre-Laplace and the central limit theorem: the bell curve emerges</div>
+</div></div></section>
+<section id="daniel-bernoulli-and-the-st-petersburg-paradox">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">1738 – Daniel Bernoulli and the St. Petersburg Paradox</a><a class="headerlink" href="#daniel-bernoulli-and-the-st-petersburg-paradox" title="Link to this heading">#</a></h2>
+<p>A fair coin is tossed until it first lands heads, and if that happens on
+toss <span class="math notranslate nohighlight">\(k\)</span> the player wins <span class="math notranslate nohighlight">\(2^k\)</span> ducats. Nicolaus Bernoulli
+posed the puzzle in 1713: the expected payoff</p>
+<div class="math notranslate nohighlight">
+\[\sum_{k=1}^{\infty} 2^{-k}\,2^k = 1 + 1 + 1 + \cdots\]</div>
+<p>is infinite, yet no sensible person would pay more than a few ducats to
+play. His cousin Daniel Bernoulli’s answer, published in 1738 in the
+journal of the St. Petersburg Academy, was that people value money by
+its usefulness, not its amount: an extra ducat matters less to a rich
+player than to a poor one. Measuring that usefulness by
+<span class="math notranslate nohighlight">\(\ln(\text{wealth})\)</span> makes the game worth a small, finite amount,
+exactly 4 ducats to a player with nothing else. This is the origin of
+expected utility theory and of the idea of diminishing marginal
+utility in economics.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.probability.systems.st_petersburg.st_petersburg_payoffs()</span></code>
+simulates the game, whose running average payoff never settles down.
+<code class="xref py py-func docutils literal notranslate"><span class="pre">st_petersburg_certainty_equivalent()</span></code>
+computes Bernoulli’s log-utility value for any starting wealth. The
+tests check the closed-form value of 4 ducats at zero wealth.</p>
+<p><em>References:</em> D. Bernoulli, “Specimen theoriae novae de mensura
+sortis,” Commentarii Academiae Scientiarum Imperialis Petropolitanae 5
+(1738), 175-192; English translation by L. Sommer, “Exposition of a New
+Theory on the Measurement of Risk,” Econometrica 22(1) (1954), 23-36.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="The game pays 2^k if the first head comes on toss k. Its expected payoff is infinite, so the running average of simulated payoffs never settles; it keeps jumping upward whenever a rare long run of tails occurs. Daniel Bernoulli&#x27;s logarithmic utility values the game at a small, finite amount."><img alt="" src="../_images/sphx_glr_plot_02_st_petersburg_paradox_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/probability/classical/plot_02_st_petersburg_paradox.html"><span class="doc">The St. Petersburg paradox</span></a></p>
+  <div class="sphx-glr-thumbnail-title">The St. Petersburg paradox</div>
+</div></div></section>
+<section id="bayes-s-theorem-and-inverse-probability">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">1763 – Bayes’s Theorem and Inverse Probability</a><a class="headerlink" href="#bayes-s-theorem-and-inverse-probability" title="Link to this heading">#</a></h2>
+<p>Earlier work computed the chance of an outcome from a known
+probability. Thomas Bayes asked the reverse question: given that an
+event has happened <span class="math notranslate nohighlight">\(k\)</span> times in <span class="math notranslate nohighlight">\(n\)</span> trials, what can be
+said about its unknown probability <span class="math notranslate nohighlight">\(p\)</span>? His essay, published by
+Richard Price two years after Bayes’s death, answered it by treating
+<span class="math notranslate nohighlight">\(p\)</span> itself as uncertain, with a uniform prior. In modern terms the
+posterior is</p>
+<div class="math notranslate nohighlight">
+\[\pi(p \mid k) \propto p^k (1-p)^{n-k}\,\pi(p),
+\qquad p \mid k \sim \mathrm{Beta}(k+1,\; n-k+1).\]</div>
+<p>Laplace rediscovered and generalized the idea in 1774. His <em>rule of
+succession</em>, <span class="math notranslate nohighlight">\(P(\text{next success}) = (k+1)/(n+2)\)</span>, is the mean
+of this posterior. The approach, now called Bayesian inference, is the
+basis of much of modern statistics and machine learning.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.probability.systems.bayes.beta_binomial_posterior()</span></code>
+returns the posterior as a <a class="reference internal" href="../api/probability.html#mathematicskit.probability.Beta" title="mathematicskit.probability.systems.continuous.Beta"><code class="xref py py-class docutils literal notranslate"><span class="pre">Beta</span></code></a>
+distribution, built on <code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.stats.beta</span></code>.
+<code class="xref py py-func docutils literal notranslate"><span class="pre">rule_of_succession()</span></code>
+gives Laplace’s predictive probability. The tests compare the posterior
+density with the normalized likelihood-times-prior computed by
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.quad.html#scipy.integrate.quad" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.integrate.quad()</span></code></a>.</p>
+<p><em>References:</em> T. Bayes, “An Essay towards Solving a Problem in the
+Doctrine of Chances,” Philosophical Transactions of the Royal Society
+of London 53 (1763), 370-418; P.-S. Laplace, “Mémoire sur la
+probabilité des causes par les événements,” Mémoires de mathématique et
+de physique présentés à l’Académie royale des sciences par divers
+savants 6 (1774), 621-656.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Starting from Bayes&#x27;s uniform prior, the posterior for an unknown success probability p after k successes in n trials is \mathrm{Beta}(k+1, n-k+1). It narrows around the true value as data accumulate, and its mean is Laplace&#x27;s rule of succession (k+1)/(n+2)."><img alt="" src="../_images/sphx_glr_plot_01_bayes_rule_of_succession_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/probability/bayes/plot_01_bayes_rule_of_succession.html"><span class="doc">Bayes’s problem: learning a probability from data</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Bayes's problem: learning a probability from data</div>
+</div></div></section>
+<section id="buffon-s-needle">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">1777 – Buffon’s Needle</a><a class="headerlink" href="#buffon-s-needle" title="Link to this heading">#</a></h2>
+<p>Georges-Louis Leclerc, Comte de Buffon, asked in a 1733 memoir to the
+Paris Academy what the chance is that a needle dropped at random on a
+floor of parallel boards lands across a crack. He published the answer
+in 1777. For a needle of length <span class="math notranslate nohighlight">\(\ell\)</span> and boards of width
+<span class="math notranslate nohighlight">\(d \geq \ell\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[P(\text{cross}) = \frac{2\ell}{\pi d}.\]</div>
+<p>It was the first problem in <em>geometric probability</em>, where the random
+outcome is a position or an angle rather than a count. Because
+<span class="math notranslate nohighlight">\(\pi\)</span> appears in the answer, dropping many needles gives an
+experimental estimate of <span class="math notranslate nohighlight">\(\pi\)</span>. Laplace pointed this out in 1812,
+and it is often cited as the earliest example of a Monte Carlo method.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.probability.systems.buffon.buffon_needle()</span></code>
+drops needles in random directions, drawn without using <span class="math notranslate nohighlight">\(\pi\)</span>
+itself, and returns the crossing fraction and the implied estimate of
+<span class="math notranslate nohighlight">\(\pi\)</span>. The tests check the crossing fraction against
+<span class="math notranslate nohighlight">\(2\ell/(\pi d)\)</span> for several needle lengths.</p>
+<p><em>References:</em> G.-L. Leclerc, Comte de Buffon, “Essai d’arithmétique
+morale,” in <em>Histoire naturelle, générale et particulière, Supplément</em>,
+vol. 4 (Paris: Imprimerie Royale, 1777), 46-123; P.-S. Laplace,
+<em>Théorie analytique des probabilités</em> (Paris: Courcier, 1812), Book II,
+Ch. V.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="A needle as long as the gap between parallel lines crosses a line with probability 2/\pi, so counting crossings estimates \pi. The estimate&#x27;s error shrinks like 1/\sqrt{n}."><img alt="" src="../_images/sphx_glr_plot_01_buffon_needle_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/probability/classical/plot_01_buffon_needle.html"><span class="doc">Buffon’s needle: estimating pi by dropping needles</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Buffon's needle: estimating pi by dropping needles</div>
 </div></div></section>
 <section id="poisson-s-rare-event-distribution">
-<h2><a class="toc-backref" href="#id4" role="doc-backlink">1837 – Poisson’s Rare-Event Distribution</a><a class="headerlink" href="#poisson-s-rare-event-distribution" title="Link to this heading">#</a></h2>
-<p>Simeon Denis Poisson derived, as a limiting case of the binomial
-distribution when <span class="math notranslate nohighlight">\(n\to\infty\)</span> and <span class="math notranslate nohighlight">\(p\to0\)</span> with <span class="math notranslate nohighlight">\(np\)</span>
-held fixed, the distribution now named for him: the number of events
-occurring in a fixed interval, when those events happen independently at
-a constant average rate. First presented as a mathematical footnote in
-his 1837 treatise on legal and criminal probability, it is now the
-default model for rare, independent counting processes across
-essentially every applied field, from radioactive decay to call-center
-arrivals.</p>
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">1837 – Poisson’s Rare-Event Distribution</a><a class="headerlink" href="#poisson-s-rare-event-distribution" title="Link to this heading">#</a></h2>
+<p>Siméon Denis Poisson derived the distribution now named for him as a
+limit of the binomial distribution, with <span class="math notranslate nohighlight">\(n\to\infty\)</span> and
+<span class="math notranslate nohighlight">\(p\to0\)</span> while <span class="math notranslate nohighlight">\(np\)</span> stays fixed. It gives the number of
+events in a fixed interval when the events occur independently at a
+constant average rate. Poisson presented it in a brief passage of his
+1837 treatise on the probability of legal judgments. It is now the
+default model for counts of rare, independent events in almost every
+applied field, from radioactive decay to call-center arrivals.</p>
 <p><em>Implementation:</em> <a class="reference internal" href="../api/probability.html#mathematicskit.probability.Poisson" title="mathematicskit.probability.systems.discrete.Poisson"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathematicskit.probability.systems.discrete.Poisson</span></code></a>
-implements exactly this limiting distribution, and its convergence from
-the binomial for large <span class="math notranslate nohighlight">\(n\)</span>, small <span class="math notranslate nohighlight">\(p\)</span> is checked directly in
-this domain’s own examples.</p>
-<p><em>References:</em> S. D. Poisson, <em>Recherches sur la probabilite des
-jugements en matiere criminelle et en matiere civile</em> (Paris: Bachelier,
+implements this limiting distribution, and this domain’s examples
+check its convergence from the binomial for large <span class="math notranslate nohighlight">\(n\)</span> and small
+<span class="math notranslate nohighlight">\(p\)</span>.</p>
+<p><em>References:</em> S. D. Poisson, <em>Recherches sur la probabilité des
+jugements en matière criminelle et en matière civile</em> (Paris: Bachelier,
 1837).</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="The Poisson distribution as the n -&gt; infinity, p -&gt; 0 limit of the binomial with np held fixed, plus the geometric distribution&#x27;s memoryless property."><img alt="" src="../_images/sphx_glr_plot_01_binomial_poisson_geometric_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/probability/discrete/plot_01_binomial_poisson_geometric.html"><span class="doc">Binomial, Poisson, and geometric distributions</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Binomial, Poisson, and geometric distributions</div>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Many independent trials, each with a tiny chance of success, produce a number of successes that follows a Poisson distribution. Poisson (1837) obtained it as the limit of \mathrm{Binomial}(n, p) with n \to \infty, p \to 0 and the mean np = \mu held fixed:"><img alt="" src="../_images/sphx_glr_plot_02_poisson_rare_events_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/probability/discrete/plot_02_poisson_rare_events.html"><span class="doc">Poisson’s law of rare events: the binomial limit</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Poisson's law of rare events: the binomial limit</div>
 </div></div></section>
-<section id="kolmogorov-s-axioms">
-<h2><a class="toc-backref" href="#id5" role="doc-backlink">1933 – Kolmogorov’s Axioms</a><a class="headerlink" href="#kolmogorov-s-axioms" title="Link to this heading">#</a></h2>
-<p>Andrey Kolmogorov’s 1933 monograph <em>Grundbegriffe der
-Wahrscheinlichkeitsrechnung</em> gave probability theory, for the first time,
-a fully rigorous axiomatic foundation built on measure theory – events
-as sets, probability as a measure, independence and conditional
-probability as precisely defined derived notions. It settled, at a
-stroke, two centuries of informal (and occasionally contradictory)
-reasoning about what a “probability” actually is, and every distribution
-class in this package rests, ultimately, on Kolmogorov’s axioms holding.</p>
-<p><em>Connection:</em> <a class="reference internal" href="../api/probability.html#mathematicskit.probability.DiscreteDistribution" title="mathematicskit.probability.core.base.DiscreteDistribution"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathematicskit.probability.core.base.DiscreteDistribution</span></code></a>
-and <a class="reference internal" href="../api/probability.html#mathematicskit.probability.ContinuousDistribution" title="mathematicskit.probability.core.base.ContinuousDistribution"><code class="xref py py-class docutils literal notranslate"><span class="pre">ContinuousDistribution</span></code></a>, the
-shared interfaces underlying every concrete distribution in this domain,
-are exactly Kolmogorov’s measure-theoretic picture made concrete: a
-<code class="docutils literal notranslate"><span class="pre">pmf</span></code>/<code class="docutils literal notranslate"><span class="pre">pdf</span></code> that is non-negative and integrates or sums to one, and
-a <code class="docutils literal notranslate"><span class="pre">cdf</span></code> built from it as the corresponding probability measure.</p>
-<p><em>References:</em> A. N. Kolmogorov, <em>Grundbegriffe der
-Wahrscheinlichkeitsrechnung</em> (Berlin: Springer, 1933).</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="A Gamma(shape=1, rate) distribution is exactly an Exponential(rate); increasing the shape parameter builds up a sum of exponentials."><img alt="" src="../_images/sphx_glr_plot_01_gamma_generalizes_exponential_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/probability/continuous/plot_01_gamma_generalizes_exponential.html"><span class="doc">The gamma distribution generalizes the exponential</span></a></p>
-  <div class="sphx-glr-thumbnail-title">The gamma distribution generalizes the exponential</div>
+<section id="the-bienayme-chebyshev-inequality">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">1853-1867 – The Bienaymé-Chebyshev Inequality</a><a class="headerlink" href="#the-bienayme-chebyshev-inequality" title="Link to this heading">#</a></h2>
+<p>Irénée-Jules Bienaymé proved in 1853, and Pafnuty Chebyshev
+independently in 1867, that no random variable with finite variance
+can stray far from its mean very often:</p>
+<div class="math notranslate nohighlight">
+\[P(|X - \mu| \geq k\sigma) \leq \frac{1}{k^2}.\]</div>
+<p>The bound needs nothing but the mean and the variance, so it holds for
+every such distribution at once. That generality makes it loose for any
+particular one (for the normal distribution at <span class="math notranslate nohighlight">\(k = 2\)</span> it gives
+0.25 against a true 0.046), but it was exactly what Chebyshev needed. It
+yields a short proof of the law of large numbers for independent
+variables with bounded variances, far more general than Bernoulli’s
+coin tosses. It began the Russian school of probability that went on to
+produce Markov, Lyapunov, and Kolmogorov.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.probability.systems.inequalities.chebyshev_tail()</span></code>
+returns the bound alongside the exact two-sided tail probability from
+any distribution’s CDF. The tests check that the bound holds for
+normal, exponential, uniform, and Poisson distributions and that the
+exact tails match their closed forms.</p>
+<p><em>References:</em> I.-J. Bienaymé, “Considérations à l’appui de la
+découverte de Laplace sur la loi de probabilité dans la méthode des
+moindres carrés,” Comptes rendus hebdomadaires des séances de
+l’Académie des sciences 37 (1853), 309-324; P. L. Chebyshev, “Des
+valeurs moyennes,” Journal de mathématiques pures et appliquées (2) 12
+(1867), 177-184.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="P(|X-\mu| \geq k\sigma) \leq 1/k^2 holds for any distribution with finite variance. Comparing it with exact tails shows how conservative a universal bound has to be."><img alt="" src="../_images/sphx_glr_plot_03_chebyshev_inequality_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/probability/limit_theorems/plot_03_chebyshev_inequality.html"><span class="doc">Chebyshev’s inequality: one bound for every distribution</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Chebyshev's inequality: one bound for every distribution</div>
+</div></div></section>
+<section id="galton-watson-branching-processes">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">1873-1875 – Galton-Watson Branching Processes</a><a class="headerlink" href="#galton-watson-branching-processes" title="Link to this heading">#</a></h2>
+<p>Francis Galton, worried that aristocratic surnames were dying out,
+posed a problem in the <em>Educational Times</em> in 1873: if each man has
+<span class="math notranslate nohighlight">\(j\)</span> sons with probability <span class="math notranslate nohighlight">\(p_j\)</span>, what is the chance that his
+surname eventually disappears? The Reverend Henry William Watson
+answered it in a joint paper with Galton in 1875 using the generating
+function <span class="math notranslate nohighlight">\(G(s) = \sum_j p_j s^j\)</span>. The probability of extinction
+within <span class="math notranslate nohighlight">\(n\)</span> generations is <span class="math notranslate nohighlight">\(G\)</span> applied <span class="math notranslate nohighlight">\(n\)</span> times to 0,
+and the extinction probability is the smallest root of</p>
+<div class="math notranslate nohighlight">
+\[G(q) = q, \qquad 0 \leq q \leq 1.\]</div>
+<p>Watson wrongly concluded that every family eventually dies out. In
+fact extinction is certain only when the mean number of sons is at
+most 1 (ruling out the case where every man has exactly one son); a
+growing family survives forever with positive probability. Bienaymé
+had stated the correct result in 1845, but his note was forgotten. The
+model is now used for nuclear chain reactions, epidemics, and the
+spread of mutations.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.probability.systems.branching.galton_watson_extinction_probability()</span></code>
+iterates <span class="math notranslate nohighlight">\(q_{n+1} = G(q_n)\)</span> to the extinction probability, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">galton_watson_simulate()</span></code>
+simulates whole family trees. The tests check the closed-form roots of
+quadratic and geometric generating functions.</p>
+<p><em>References:</em> H. W. Watson and F. Galton, “On the Probability of the
+Extinction of Families,” Journal of the Anthropological Institute of
+Great Britain and Ireland 4 (1875), 138-144; D. G. Kendall, “Branching
+Processes since 1873,” Journal of the London Mathematical Society 41
+(1966), 385-406.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Each man has 0, 1, or 2 sons with probabilities 0.2, 0.3, 0.5. The extinction probability is the smallest fixed point of the generating function G(s) = 0.2 + 0.3s + 0.5s^2, namely q = 0.4, even though the population grows by 30% per generation on average."><img alt="" src="../_images/sphx_glr_plot_01_galton_watson_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/probability/branching/plot_01_galton_watson.html"><span class="doc">Galton-Watson: the probability a family name dies out</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Galton-Watson: the probability a family name dies out</div>
+</div></div></section>
+<section id="brownian-motion">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">1900-1923 – Brownian Motion</a><a class="headerlink" href="#brownian-motion" title="Link to this heading">#</a></h2>
+<p>In his 1900 thesis on the Paris stock exchange, Louis Bachelier modeled
+prices as a continuous random process whose changes over disjoint time
+intervals are independent and normally distributed, with variance
+proportional to elapsed time. Five years later Albert Einstein reached
+the same process from physics, explaining the jittering of pollen
+grains that the botanist Robert Brown had observed in 1827. His
+prediction of how fast the grains spread let Jean Perrin measure
+Avogadro’s number and helped confirm that atoms exist. Norbert Wiener
+put the process on rigorous footing in 1923 by constructing a
+probability measure on the space of continuous paths: <span class="math notranslate nohighlight">\(W(0) = 0\)</span>,
+with independent increments <span class="math notranslate nohighlight">\(W(t) - W(s) \sim \mathcal N(0, t-s)\)</span>.
+The paths are continuous yet nowhere differentiable, and their
+quadratic variation <span class="math notranslate nohighlight">\(\sum (\Delta W)^2\)</span> over <span class="math notranslate nohighlight">\([0, t]\)</span> equals
+<span class="math notranslate nohighlight">\(t\)</span>. Brownian motion is the foundation of stochastic calculus and
+of modern mathematical finance.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.probability.systems.stochastic_processes.brownian_motion()</span></code>
+samples paths by summing independent Gaussian increments. The tests
+check <span class="math notranslate nohighlight">\(\operatorname{Var} W(t) = t\)</span>,
+<span class="math notranslate nohighlight">\(\operatorname{Cov}(W(s), W(t)) = \min(s, t)\)</span>, and the quadratic
+variation.</p>
+<p><em>References:</em> L. Bachelier, “Théorie de la spéculation,” Annales
+scientifiques de l’École Normale Supérieure (3) 17 (1900), 21-86; A.
+Einstein, “Über die von der molekularkinetischen Theorie der Wärme
+geforderte Bewegung von in ruhenden Flüssigkeiten suspendierten
+Teilchen,” Annalen der Physik 322(8) (1905), 549-560; N. Wiener,
+“Differential-Space,” Journal of Mathematics and Physics 2 (1923),
+131-174.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Sample paths of standard Brownian motion spread like \sqrt{t}: at time t, W(t) \sim \mathcal N(0, t), so about 95% of paths lie within \pm 2\sqrt t. The quadratic variation \sum (\Delta W)^2 equals t, the signature of a path that is continuous but nowhere differentiable."><img alt="" src="../_images/sphx_glr_plot_01_brownian_motion_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/probability/stochastic_processes/plot_01_brownian_motion.html"><span class="doc">Brownian motion</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Brownian motion</div>
 </div></div></section>
 <section id="markov-chains">
-<h2><a class="toc-backref" href="#id6" role="doc-backlink">1906 – Markov Chains</a><a class="headerlink" href="#markov-chains" title="Link to this heading">#</a></h2>
-<p>Andrey Markov introduced, in a 1906 paper motivated by a dispute over
-whether the law of large numbers requires independent trials, the notion
-of a chain of dependent trials in which each outcome depends on the
-previous one but on nothing earlier – the memoryless property that now
-bears his name. Markov’s own first application, famously, was a
-letter-by-letter statistical analysis of vowel/consonant sequences in
-Pushkin’s poem <em>Eugene Onegin</em>.</p>
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">1906 – Markov Chains</a><a class="headerlink" href="#markov-chains" title="Link to this heading">#</a></h2>
+<p>In a 1906 paper, Andrey Markov introduced chains of dependent trials in
+which each outcome depends on the previous one but on nothing earlier.
+This memoryless property now bears his name. He was motivated by a
+dispute over whether the law of large numbers requires independent
+trials, and his chains showed that it does not. His best-known
+application came in 1913: a statistical analysis of the sequence of
+vowels and consonants in Alexander Pushkin’s verse novel <em>Eugene
+Onegin</em>.</p>
 <p><em>Implementation:</em> <a class="reference internal" href="../api/probability.html#mathematicskit.probability.MarkovChain" title="mathematicskit.probability.systems.markov_chain.MarkovChain"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathematicskit.probability.systems.markov_chain.MarkovChain</span></code></a>
-implements exactly this framework – transition matrices, stationary
-distributions via <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.eig.html#numpy.linalg.eig" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.eig()</span></code></a>/power iteration, and
+implements this framework: transition matrices, stationary
+distributions via <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.eig.html#numpy.linalg.eig" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.eig()</span></code></a> or power iteration, and
 absorption probabilities via <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.solve.html#numpy.linalg.solve" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.solve()</span></code></a>.</p>
 <p><em>References:</em> A. A. Markov, “Rasprostranenie zakona bol’shikh chisel na
 velichiny, zavisyashchie drug ot druga,” Izvestiya Fiziko-matematicheskogo
 obshchestva pri Kazanskom universitete 15 (1906), 135-156.</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="A gambler with capital i (out of a target N) makes fair even-money bets until reaching 0 (ruin) or N (target). Both the absorption probabilities and the expected number of steps have simple closed forms for a fair game, used here to check the numerical solve."><img alt="" src="../_images/sphx_glr_plot_01_gamblers_ruin_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/probability/markov_chain/plot_01_gamblers_ruin.html"><span class="doc">Gambler’s ruin: absorption probabilities and expected duration</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Gambler's ruin: absorption probabilities and expected duration</div>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="A Markov chain moves between states with probabilities that depend only on the current state, not on how it got there, so the whole process is described by one transition matrix. In gambler&#x27;s ruin, a gambler with capital i (out of a target N) makes fair even-money bets until reaching 0 (ruin) or N (target); the capital after each bet is a Markov chain on the states 0..N with two absorbing ends. Both the absorption probabilities and the expected number of steps have simple closed forms for a fair game, used here to check the numerical solve."><img alt="" src="../_images/sphx_glr_plot_01_gamblers_ruin_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/probability/markov_chain/plot_01_gamblers_ruin.html"><span class="doc">Markov chains: gambler’s ruin as an absorbing chain</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Markov chains: gambler's ruin as an absorbing chain</div>
+</div></div></section>
+<section id="erlang-and-the-birth-of-queueing-theory">
+<h2><a class="toc-backref" href="#id12" role="doc-backlink">1909-1917 – Erlang and the Birth of Queueing Theory</a><a class="headerlink" href="#erlang-and-the-birth-of-queueing-theory" title="Link to this heading">#</a></h2>
+<p>Agner Krarup Erlang, an engineer at the Copenhagen Telephone Company,
+set out to determine how many lines an exchange needs. In 1909 he showed
+that incoming calls form a Poisson process. In 1917 he derived the
+probability that a call finds all <span class="math notranslate nohighlight">\(c\)</span> lines busy and is lost,
+when the offered traffic is <span class="math notranslate nohighlight">\(A\)</span> erlangs (the arrival rate times
+the mean call length):</p>
+<div class="math notranslate nohighlight">
+\[B(c, A) = \frac{A^c / c!}{\sum_{i=0}^{c} A^i / i!}.\]</div>
+<p>The formula comes from the stationary distribution of a birth-death
+Markov chain counting busy lines. It does not depend on how call
+lengths are distributed, only on their mean, as later proved in
+general. Erlang’s papers founded queueing theory, which now underlies
+the design of call centers, computer networks, and hospital capacity
+planning. The unit of traffic intensity is named after him.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.probability.systems.queueing.erlang_b()</span></code>
+evaluates the formula with a numerically stable recursion that never
+forms the factorials, so it works for systems with thousands of lines.
+The tests compare it with the factorial formula directly.</p>
+<p><em>References:</em> A. K. Erlang, “The Theory of Probabilities and Telephone
+Conversations,” Nyt Tidsskrift for Matematik B 20 (1909), 33-39; A. K.
+Erlang, “Løsning af nogle Problemer fra Sandsynlighedsregningen af
+Betydning for de automatiske Telefoncentraler,” Elektroteknikeren 13
+(1917), 5-13, translated in E. Brockmeyer, H. L. Halstrøm, and A.
+Jensen, <em>The Life and Works of A. K. Erlang</em> (Copenhagen: Danish Academy
+of Technical Sciences, 1948).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="For Poisson call arrivals offering A erlangs of traffic to c lines, a call is lost with probability B(c, A). Erlang&#x27;s formula answers the engineer&#x27;s question: how many lines keep losses below 1%?"><img alt="" src="../_images/sphx_glr_plot_01_erlang_b_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/probability/queueing/plot_01_erlang_b.html"><span class="doc">Erlang’s loss formula: how many telephone lines?</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Erlang's loss formula: how many telephone lines?</div>
+</div></div></section>
+<section id="polya-s-random-walk-theorem">
+<h2><a class="toc-backref" href="#id13" role="doc-backlink">1921 – Pólya’s Random Walk Theorem</a><a class="headerlink" href="#polya-s-random-walk-theorem" title="Link to this heading">#</a></h2>
+<p>George Pólya, walking in a park in Zurich, kept running into the same
+young couple and wondered how likely such meetings are by chance. His
+1921 paper studied the simple random walk on the integer lattice
+<span class="math notranslate nohighlight">\(\mathbb{Z}^d\)</span>, which steps to one of its <span class="math notranslate nohighlight">\(2d\)</span> neighbours
+uniformly at random. He proved that in one and two dimensions the walk
+returns to its starting point with probability 1, and in three or more
+dimensions it does not. In one dimension the exact chance of a return
+within <span class="math notranslate nohighlight">\(2m\)</span> steps is</p>
+<div class="math notranslate nohighlight">
+\[1 - \binom{2m}{m} 4^{-m} \approx 1 - \frac{1}{\sqrt{\pi m}} \to 1,\]</div>
+<p>while in three dimensions the return probability is only about 0.3405,
+a value computed by G. N. Watson in 1939. Shizuo Kakutani summarized it
+as “a drunk man will find his way home, but a drunk bird may get lost
+forever.” The distinction between <em>recurrent</em> and <em>transient</em> walks
+became central to the theory of Markov chains and electrical networks.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.probability.systems.stochastic_processes.simple_random_walk()</span></code>
+simulates walks in any dimension, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">random_walk_return_fraction()</span></code>
+estimates the return probability within a given number of steps.
+<code class="xref py py-func docutils literal notranslate"><span class="pre">return_probability_1d()</span></code>
+gives the exact one-dimensional value, which the tests compare with the
+simulation.</p>
+<p><em>References:</em> G. Pólya, “Über eine Aufgabe der
+Wahrscheinlichkeitsrechnung betreffend die Irrfahrt im Straßennetz,”
+Mathematische Annalen 84 (1921), 149-160; G. N. Watson, “Three Triple
+Integrals,” Quarterly Journal of Mathematics 10 (1939), 266-276.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="A simple random walk returns to its starting point with probability 1 in one and two dimensions but only about 34% of the time in three. The simulated fraction of walks that have returned by step n keeps climbing toward 1 in 1D (slowly, like 1 - 1/\sqrt{\pi n/2}), crawls upward in 2D, and levels off near 0.3405 in 3D."><img alt="" src="../_images/sphx_glr_plot_02_polya_random_walks_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/probability/stochastic_processes/plot_02_polya_random_walks.html"><span class="doc">Pólya’s theorem: a drunk man finds his way home, a drunk bird may not</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Pólya's theorem: a drunk man finds his way home, a drunk bird may not</div>
+</div></div></section>
+<section id="kolmogorov-s-equations-for-continuous-time-markov-processes">
+<h2><a class="toc-backref" href="#id14" role="doc-backlink">1931 – Kolmogorov’s Equations for Continuous-Time Markov Processes</a><a class="headerlink" href="#kolmogorov-s-equations-for-continuous-time-markov-processes" title="Link to this heading">#</a></h2>
+<p>Markov’s chains move in discrete steps. In a 1931 paper, Andrey
+Kolmogorov developed the theory for processes that can jump at any
+moment. For a chain on finitely many states, the rates of jumping
+between states form a generator matrix <span class="math notranslate nohighlight">\(Q\)</span> whose rows sum to
+zero, and the transition probabilities <span class="math notranslate nohighlight">\(P(t)\)</span> satisfy his
+<em>forward</em> and <em>backward</em> differential equations,</p>
+<div class="math notranslate nohighlight">
+\[P'(t) = P(t)\,Q = Q\,P(t), \qquad P(0) = I,
+\qquad\text{so}\qquad P(t) = e^{tQ}.\]</div>
+<p>The same paper derived the partial differential equations, now called
+the Fokker-Planck and Kolmogorov backward equations, for processes with
+continuous paths such as Brownian motion. Continuous-time chains model
+radioactive decay chains, chemical reactions, population dynamics,
+queues, and the reliability of machines.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.probability.systems.continuous_time_markov.ctmc_transition_matrix()</span></code>
+computes <span class="math notranslate nohighlight">\(P(t) = e^{tQ}\)</span> with <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.expm.html#scipy.linalg.expm" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.linalg.expm()</span></code></a>, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">ctmc_stationary_distribution()</span></code>
+solves <span class="math notranslate nohighlight">\(\pi Q = 0\)</span>. The tests check the two-state closed form,
+the Chapman-Kolmogorov identity <span class="math notranslate nohighlight">\(P(s)P(t) = P(s+t)\)</span>, and
+convergence to <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
+<p><em>References:</em> A. Kolmogoroff, “Über die analytischen Methoden in der
+Wahrscheinlichkeitsrechnung,” Mathematische Annalen 104 (1931),
+415-458.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="A machine is working (0), degraded (1), or broken (2), jumping between states at the rates in the generator Q. The transition matrix P(t) = e^{tQ} solves Kolmogorov&#x27;s forward and backward equations and relaxes to the stationary distribution \pi, the solution of \pi Q = 0."><img alt="" src="../_images/sphx_glr_plot_02_continuous_time_chain_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/probability/markov_chain/plot_02_continuous_time_chain.html"><span class="doc">Kolmogorov’s equations: a continuous-time Markov chain</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Kolmogorov's equations: a continuous-time Markov chain</div>
+</div></div></section>
+<section id="kolmogorov-s-axioms">
+<h2><a class="toc-backref" href="#id15" role="doc-backlink">1933 – Kolmogorov’s Axioms</a><a class="headerlink" href="#kolmogorov-s-axioms" title="Link to this heading">#</a></h2>
+<p>Andrey Kolmogorov’s 1933 monograph <em>Grundbegriffe der
+Wahrscheinlichkeitsrechnung</em> gave probability theory its first fully
+rigorous axiomatic foundation, built on measure theory. Events are
+sets, probability is a measure, and independence and conditional
+probability become precisely defined derived notions. It gave nearly
+three centuries of informal, and occasionally contradictory, reasoning
+about probability a common foundation, and every distribution class in
+this package ultimately rests on Kolmogorov’s axioms.</p>
+<p><em>Connection:</em> <a class="reference internal" href="../api/probability.html#mathematicskit.probability.DiscreteDistribution" title="mathematicskit.probability.core.base.DiscreteDistribution"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathematicskit.probability.core.base.DiscreteDistribution</span></code></a>
+and <a class="reference internal" href="../api/probability.html#mathematicskit.probability.ContinuousDistribution" title="mathematicskit.probability.core.base.ContinuousDistribution"><code class="xref py py-class docutils literal notranslate"><span class="pre">ContinuousDistribution</span></code></a>,
+the shared interfaces behind every concrete distribution in this
+domain, put Kolmogorov’s measure-theoretic picture into code: a
+non-negative <code class="docutils literal notranslate"><span class="pre">pmf</span></code>/<code class="docutils literal notranslate"><span class="pre">pdf</span></code> that sums or integrates to one, and a
+<code class="docutils literal notranslate"><span class="pre">cdf</span></code> built from it as the corresponding probability measure.</p>
+<p><em>References:</em> A. N. Kolmogorov, <em>Grundbegriffe der
+Wahrscheinlichkeitsrechnung</em> (Berlin: Springer, 1933).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Kolmogorov (1933) defined a probability space (\Omega, \mathcal F, P): a sample space \Omega, a collection \mathcal F of events (subsets of \Omega), and a measure P satisfying"><img alt="" src="../_images/sphx_glr_plot_01_kolmogorov_axioms_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/probability/axioms/plot_01_kolmogorov_axioms.html"><span class="doc">Kolmogorov’s axioms: events as sets, probability as a measure</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Kolmogorov's axioms: events as sets, probability as a measure</div>
 </div></div></section>
 <section id="monte-carlo-methods">
-<h2><a class="toc-backref" href="#id7" role="doc-backlink">1949 – 1953 – Monte Carlo Methods</a><a class="headerlink" href="#monte-carlo-methods" title="Link to this heading">#</a></h2>
-<p>Stanislaw Ulam, recovering from an illness and playing endless games of
-solitaire, wondered whether the odds of a successful outcome would be
+<h2><a class="toc-backref" href="#id16" role="doc-backlink">1946-1953 – Monte Carlo Methods</a><a class="headerlink" href="#monte-carlo-methods" title="Link to this heading">#</a></h2>
+<p>In 1946 Stanislaw Ulam, recovering from an illness and playing endless
+games of solitaire, wondered whether the chance of winning would be
 easier to estimate by simulating many random deals than by working out
-the combinatorics exactly – and realized the same trick applied to the
-neutron-diffusion calculations he and John von Neumann were working on
-at Los Alamos. Nicholas Metropolis, Ulam’s colleague, gave the method its
-enduring name (after the Monte Carlo casino) in a 1949 paper with Ulam;
-Metropolis and coauthors’ 1953 algorithm for sampling from a target
-distribution via a biased random walk became the foundation of Markov
-chain Monte Carlo, one of the most consequential computational
-techniques of the twentieth century.</p>
+the combinatorics exactly. He realized the same trick could be applied
+to the neutron-diffusion calculations he and John von Neumann were
+working on at Los Alamos. Nicholas Metropolis, Ulam’s colleague,
+suggested the name, after the Monte Carlo casino, and the two published
+the method in 1949. The 1953 algorithm of Metropolis and his coauthors
+samples from a target distribution with a random walk whose acceptance
+rule makes that distribution its stationary distribution. It became the
+foundation of Markov chain Monte Carlo, one of the most consequential
+computational techniques of the 20th century.</p>
 <p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.probability.systems.monte_carlo.monte_carlo_integrate()</span></code>
-implements the basic method directly;
+implements the basic method.
 <code class="xref py py-func docutils literal notranslate"><span class="pre">importance_sampling_integrate()</span></code>
 and <code class="xref py py-func docutils literal notranslate"><span class="pre">control_variates_integrate()</span></code>
-implement two of the classic variance-reduction techniques built on top
-of it.</p>
+implement two classic variance-reduction techniques built on top of it.</p>
 <p><em>References:</em> N. Metropolis and S. Ulam, “The Monte Carlo Method,”
 Journal of the American Statistical Association 44(247) (1949), 335-341;
 N. Metropolis, A. W. Rosenbluth, M. N. Rosenbluth, A. H. Teller, and E.
 Teller, “Equation of State Calculations by Fast Computing Machines,”
 Journal of Chemical Physics 21(6) (1953), 1087-1092.</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Estimates \int_0^1 e^x\,dx = e - 1 three ways, comparing each method&#x27;s standard error at the same sample size."><img alt="" src="../_images/sphx_glr_plot_01_variance_reduction_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/probability/monte_carlo/plot_01_variance_reduction.html"><span class="doc">Variance reduction: plain vs. control-variate Monte Carlo</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Variance reduction: plain vs. control-variate Monte Carlo</div>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Ulam and von Neumann&#x27;s idea: replace an exact calculation by an average over random samples. For U \sim \mathrm{Uniform}(0, 1),"><img alt="" src="../_images/sphx_glr_plot_01_monte_carlo_integration_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/probability/monte_carlo/plot_01_monte_carlo_integration.html"><span class="doc">The Monte Carlo method: estimating an integral by random sampling</span></a></p>
+  <div class="sphx-glr-thumbnail-title">The Monte Carlo method: estimating an integral by random sampling</div>
 </div></div></section>
 <section id="see-also">
-<h2><a class="toc-backref" href="#id8" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id17" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="../api/probability.html"><span class="doc">mathematicskit.probability</span></a></p></li>
 <li><p><a class="reference internal" href="statistics_breakthroughs.html"><span class="doc">Breakthroughs in Statistical Inference</span></a></p></li>
@@ -691,11 +980,20 @@ Journal of Chemical Physics 21(6) (1953), 1087-1092.</p>
     <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pascal-fermat-and-the-problem-of-points">1654 – Pascal, Fermat, and the Problem of Points</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jacob-bernoulli-s-law-of-large-numbers">1713 – Jacob Bernoulli’s Law of Large Numbers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#de-moivre-laplace-and-the-central-limit-theorem">1733 – 1810 – De Moivre, Laplace, and the Central Limit Theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#de-moivre-laplace-and-the-central-limit-theorem">1733-1810 – De Moivre, Laplace, and the Central Limit Theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#daniel-bernoulli-and-the-st-petersburg-paradox">1738 – Daniel Bernoulli and the St. Petersburg Paradox</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-s-theorem-and-inverse-probability">1763 – Bayes’s Theorem and Inverse Probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#buffon-s-needle">1777 – Buffon’s Needle</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#poisson-s-rare-event-distribution">1837 – Poisson’s Rare-Event Distribution</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kolmogorov-s-axioms">1933 – Kolmogorov’s Axioms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bienayme-chebyshev-inequality">1853-1867 – The Bienaymé-Chebyshev Inequality</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#galton-watson-branching-processes">1873-1875 – Galton-Watson Branching Processes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brownian-motion">1900-1923 – Brownian Motion</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#markov-chains">1906 – Markov Chains</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monte-carlo-methods">1949 – 1953 – Monte Carlo Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#erlang-and-the-birth-of-queueing-theory">1909-1917 – Erlang and the Birth of Queueing Theory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polya-s-random-walk-theorem">1921 – Pólya’s Random Walk Theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kolmogorov-s-equations-for-continuous-time-markov-processes">1931 – Kolmogorov’s Equations for Continuous-Time Markov Processes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kolmogorov-s-axioms">1933 – Kolmogorov’s Axioms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monte-carlo-methods">1946-1953 – Monte Carlo Methods</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#see-also">See Also</a></li>
 </ul>
   </nav></div>

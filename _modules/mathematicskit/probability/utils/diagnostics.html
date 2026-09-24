@@ -410,28 +410,28 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.probability.utils.diagnostics</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Diagnostic utilities for Monte Carlo estimates -- supporting numerics</span>
+<span></span><span class="sa">r</span><span class="sd">"""Diagnostic utilities for Monte Carlo estimates -- supporting numerics</span>
 <span class="sd">for :mod:`mathematicskit.probability.systems.monte_carlo`, not a model in their</span>
 <span class="sd">own right.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;effective_sample_size&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"effective_sample_size"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="effective_sample_size">
 <a class="viewcode-back" href="../../../../api/probability.html#mathematicskit.probability.effective_sample_size">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">effective_sample_size</span><span class="p">(</span><span class="n">weights</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Effective sample size of a set of (unnormalized) importance weights.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Effective sample size of a set of (unnormalized) importance weights.</span>
 
 <span class="sd">    :math:`\mathrm{ESS} = \dfrac{\left(\sum_i w_i\right)^2}{\sum_i</span>
 <span class="sd">    w_i^2}`, ranging from 1 (all weight on one sample -- the proposal is</span>
 <span class="sd">    a poor match for the target) to ``n`` (uniform weights -- as good as</span>
 <span class="sd">    plain Monte Carlo). A standard diagnostic for whether an importance</span>
-<span class="sd">    sampler&#39;s proposal distribution is well-matched to the integrand.</span>
+<span class="sd">    sampler's proposal distribution is well-matched to the integrand.</span>
 <span class="sd">    See Robert &amp; Casella, *Monte Carlo Statistical Methods*, 2nd ed.,</span>
 <span class="sd">    Ch. 3.3.2.</span>
 
@@ -452,7 +452,7 @@
 <span class="sd">    100.0</span>
 <span class="sd">    &gt;&gt;&gt; round(effective_sample_size(np.array([1.0, 0.0, 0.0, 0.0])), 4)</span>
 <span class="sd">    1.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">w</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span></div>
 

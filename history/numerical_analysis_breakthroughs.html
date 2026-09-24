@@ -456,179 +456,157 @@
 <blockquote class="epigraph">
 <div><p>“The theory of numerical methods is much older than the electronic
 computer, but the computer has given the subject a new lease of
-life.” – L. Fox, quoted widely in the numerical-analysis literature</p>
+life.”
+– attributed to Leslie Fox</p>
 </div></blockquote>
 <p>Long before there was anything to compute <em>with</em>, there was already a
-mature theory of how to compute – bisecting a bracket, iterating a
+mature theory of how to compute: bisecting a bracket, iterating a
 promising guess, fitting a curve through scattered points. This
-chronology traces the ideas behind <a class="reference internal" href="../api/numerical_analysis.html#module-mathematicskit.numerical_analysis" title="mathematicskit.numerical_analysis"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis</span></code></a>,
-from the first rigorous convergence proofs for root-finding to the
-discovery that the <em>placement</em> of interpolation nodes matters as much
-as their number.</p>
+chronology traces the ideas behind
+<a class="reference internal" href="../api/numerical_analysis.html#module-mathematicskit.numerical_analysis" title="mathematicskit.numerical_analysis"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis</span></code></a>, from ancient square-root
+iterations and faster root-finders, through interpolation and the
+theory of best approximation, to the discovery that floating-point
+rounding can make a harmless-looking problem impossible to solve
+accurately.</p>
 <nav class="contents local" id="timeline">
 <p class="topic-title">Timeline</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#antiquity-the-babylonian-method-and-bisection" id="id1">Antiquity – The Babylonian Method and Bisection</a></p></li>
-<li><p><a class="reference internal" href="#newton-and-raphson-s-method" id="id2">1685 – 1690 – Newton and Raphson’s Method</a></p></li>
-<li><p><a class="reference internal" href="#lagrange-gauss-and-polynomial-interpolation" id="id3">1795 – 1805 – Lagrange, Gauss, and Polynomial Interpolation</a></p></li>
-<li><p><a class="reference internal" href="#runge-s-phenomenon" id="id4">1901 – Runge’s Phenomenon</a></p></li>
-<li><p><a class="reference internal" href="#chebyshev-and-the-cure-for-runge-s-phenomenon" id="id5">1853 – Chebyshev and the Cure for Runge’s Phenomenon</a></p></li>
-<li><p><a class="reference internal" href="#runge-kutta-and-spline-interpolation" id="id6">1946 – Runge, Kutta, and Spline Interpolation</a></p></li>
-<li><p><a class="reference internal" href="#legendre-gauss-and-least-squares" id="id7">1805 – 1809 – Legendre, Gauss, and Least Squares</a></p></li>
-<li><p><a class="reference internal" href="#see-also" id="id8">See Also</a></p></li>
+<li><p><a class="reference internal" href="#c-1800-bce-the-babylonian-method-and-bisection" id="id1">c. 1800 BCE – The Babylonian Method and Bisection</a></p></li>
+<li><p><a class="reference internal" href="#newton-and-raphson-s-method" id="id2">1669-1690 – Newton and Raphson’s Method</a></p></li>
+<li><p><a class="reference internal" href="#newton-lagrange-and-polynomial-interpolation" id="id3">1687-1795 – Newton, Lagrange, and Polynomial Interpolation</a></p></li>
+<li><p><a class="reference internal" href="#halley-s-method" id="id4">1694 – Halley’s Method</a></p></li>
+<li><p><a class="reference internal" href="#legendre-gauss-and-least-squares" id="id5">1805-1809 – Legendre, Gauss, and Least Squares</a></p></li>
+<li><p><a class="reference internal" href="#horner-s-method" id="id6">1819 – Horner’s Method</a></p></li>
+<li><p><a class="reference internal" href="#chebyshev-and-the-cure-for-runge-s-phenomenon" id="id7">1854 – Chebyshev and the Cure for Runge’s Phenomenon</a></p></li>
+<li><p><a class="reference internal" href="#hermite-interpolation" id="id8">1878 – Hermite Interpolation</a></p></li>
+<li><p><a class="reference internal" href="#weierstrass-bernstein-and-uniform-approximation" id="id9">1885-1912 – Weierstrass, Bernstein, and Uniform Approximation</a></p></li>
+<li><p><a class="reference internal" href="#pade-approximants" id="id10">1892 – Padé Approximants</a></p></li>
+<li><p><a class="reference internal" href="#runge-s-phenomenon" id="id11">1901 – Runge’s Phenomenon</a></p></li>
+<li><p><a class="reference internal" href="#aitken-steffensen-and-accelerating-convergence" id="id12">1926-1933 – Aitken, Steffensen, and Accelerating Convergence</a></p></li>
+<li><p><a class="reference internal" href="#remez-and-best-uniform-approximation" id="id13">1934 – Remez and Best Uniform Approximation</a></p></li>
+<li><p><a class="reference internal" href="#schoenberg-and-spline-interpolation" id="id14">1946 – Schoenberg and Spline Interpolation</a></p></li>
+<li><p><a class="reference internal" href="#wilkinson-s-perfidious-polynomial" id="id15">1959-1963 – Wilkinson’s Perfidious Polynomial</a></p></li>
+<li><p><a class="reference internal" href="#kahan-s-compensated-summation" id="id16">1965 – Kahan’s Compensated Summation</a></p></li>
+<li><p><a class="reference internal" href="#see-also" id="id17">See Also</a></p></li>
 </ul>
 </nav>
-<section id="antiquity-the-babylonian-method-and-bisection">
-<h2><a class="toc-backref" href="#id1" role="doc-backlink">Antiquity – The Babylonian Method and Bisection</a><a class="headerlink" href="#antiquity-the-babylonian-method-and-bisection" title="Link to this heading">#</a></h2>
-<p>Long before any formal theory of convergence, Babylonian tablets already
-record an iterative rule for extracting square roots – average a guess
-with the number divided by the guess – that is exactly Newton’s method
-applied to <span class="math notranslate nohighlight">\(f(x) = x^2 - a\)</span>, two millennia before Newton. Bisection
-itself, halving a bracket known to contain a root, is comparatively
-recent as a <em>named, analyzed</em> method, but it is the most elementary
-possible root-finder: it needs nothing but the intermediate value
-theorem, and it never diverges.</p>
+<section id="c-1800-bce-the-babylonian-method-and-bisection">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">c. 1800 BCE – The Babylonian Method and Bisection</a><a class="headerlink" href="#c-1800-bce-the-babylonian-method-and-bisection" title="Link to this heading">#</a></h2>
+<p>Old Babylonian tablets from around 1800-1600 BCE record the square root
+of 2 to about six decimal places. The iterative rule behind such values,
+spelled out by Heron of Alexandria in the 1st century CE, averages a
+guess with the number divided by the guess. It is exactly Newton’s
+method applied to <span class="math notranslate nohighlight">\(f(x) = x^2 - a\)</span>, more than three millennia
+before Newton. Bisection, which repeatedly halves a bracket known to
+contain a root, is far more recent as a named and analyzed method. It is
+also the most elementary root-finder possible: it needs nothing but the
+intermediate value theorem, and it never diverges.</p>
 <p><em>Implementation:</em> <a class="reference internal" href="../api/numerical_analysis.html#mathematicskit.numerical_analysis.Bisection" title="mathematicskit.numerical_analysis.systems.root_finding.Bisection"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis.systems.root_finding.Bisection</span></code></a>
-exposes its full per-iterate history for exactly the convergence-order
-analysis below; the classic “Babylonian” square-root iteration is
+exposes its full per-iterate history for the convergence-order analysis
+below. The classic “Babylonian” square-root iteration is
 <a class="reference internal" href="../api/numerical_analysis.html#mathematicskit.numerical_analysis.FixedPointIteration" title="mathematicskit.numerical_analysis.systems.root_finding.FixedPointIteration"><code class="xref py py-class docutils literal notranslate"><span class="pre">FixedPointIteration</span></code></a>
 applied to <span class="math notranslate nohighlight">\(g(x) = \tfrac12(x + a/x)\)</span>.</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Bisection, Newton-Raphson, secant, and fixed-point iteration all solve f(x) = x^2 - 2 = 0, i.e. find \sqrt{2}, but converge at very different rates: bisection and (generic) fixed-point iteration are linear (order 1), secant is superlinear (order \approx 1.618, the golden ratio), and Newton-Raphson is quadratic (order 2). This script runs all four and verifies each empirical order against its theoretical one via mathematicskit.numerical_analysis.utils.error_analysis.estimate_convergence_order."><img alt="" src="../_images/sphx_glr_plot_01_methods_compared_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/numerical_analysis/root_finding/plot_01_methods_compared.html"><span class="doc">Root-finding methods and their convergence orders</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Root-finding methods and their convergence orders</div>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Old Babylonian tablets give \sqrt{2} to about six decimal places. The rule Heron of Alexandria later wrote down averages a guess with a divided by the guess, x_{n+1} = \tfrac12(x_n + a/x_n). Bisection needs even less: it halves a bracket [a, b] on which f changes sign, relying only on the intermediate value theorem. This script computes \sqrt{2} both ways and shows the bracket shrinking by exactly half per step, against the Babylonian rule&#x27;s doubling of correct digits."><img alt="" src="../_images/sphx_glr_plot_01_babylonian_bisection_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/numerical_analysis/root_finding/plot_01_babylonian_bisection.html"><span class="doc">The Babylonian square root and bisection</span></a></p>
+  <div class="sphx-glr-thumbnail-title">The Babylonian square root and bisection</div>
 </div></div></section>
 <section id="newton-and-raphson-s-method">
-<h2><a class="toc-backref" href="#id2" role="doc-backlink">1685 – 1690 – Newton and Raphson’s Method</a><a class="headerlink" href="#newton-and-raphson-s-method" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">1669-1690 – Newton and Raphson’s Method</a><a class="headerlink" href="#newton-and-raphson-s-method" title="Link to this heading">#</a></h2>
 <p>Isaac Newton’s 1669 manuscript <em>De analysi</em> sketched an iterative
-approximation for polynomial roots, and Joseph Raphson’s 1690
-<em>Analysis Aequationum Universalis</em> gave the first clean, general
-statement of what is now called Newton-Raphson iteration: linearize
-<span class="math notranslate nohighlight">\(f\)</span> at the current guess and step to where that tangent line
-crosses zero. Its defining property – doubling the number of correct
-digits at (almost) every step near a simple root – is what makes it
-the workhorse of numerical root-finding to this day, at the cost of
-needing a derivative and a good enough starting guess.</p>
+method for approximating the roots of a polynomial. Joseph Raphson’s
+1690 <em>Analysis Aequationum Universalis</em> gave a simpler, more direct
+version of the same iteration, and Thomas Simpson stated it in 1740 in
+its modern calculus form for general functions: linearize <span class="math notranslate nohighlight">\(f\)</span> at
+the current guess and step to where the tangent line crosses zero. Near
+a simple root the method roughly doubles the number of correct digits
+at every step. That property makes it the workhorse of numerical
+root-finding to this day, at the cost of needing a derivative and a
+good enough starting guess.</p>
 <div class="math notranslate nohighlight">
 \[x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}\]</div>
 <p><em>Implementation:</em> <a class="reference internal" href="../api/numerical_analysis.html#mathematicskit.numerical_analysis.NewtonRaphson" title="mathematicskit.numerical_analysis.systems.root_finding.NewtonRaphson"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis.systems.root_finding.NewtonRaphson</span></code></a>
-implements exactly this iteration, and
+implements this iteration, and
 <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis.utils.error_analysis.estimate_convergence_order()</span></code>
-measures its quadratic convergence order directly from the iterate
-history, cross-checked against <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.newton.html#scipy.optimize.newton" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.optimize.newton()</span></code></a> in the
-test suite.</p>
+measures its quadratic convergence order from the iterate history. The
+test suite cross-checks it against <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.newton.html#scipy.optimize.newton" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.optimize.newton()</span></code></a>.</p>
 <p><em>References:</em> J. Raphson, <em>Analysis Aequationum Universalis</em> (London,
-1690).</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Bisection, Newton-Raphson, secant, and fixed-point iteration all solve f(x) = x^2 - 2 = 0, i.e. find \sqrt{2}, but converge at very different rates: bisection and (generic) fixed-point iteration are linear (order 1), secant is superlinear (order \approx 1.618, the golden ratio), and Newton-Raphson is quadratic (order 2). This script runs all four and verifies each empirical order against its theoretical one via mathematicskit.numerical_analysis.utils.error_analysis.estimate_convergence_order."><img alt="" src="../_images/sphx_glr_plot_01_methods_compared_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/numerical_analysis/root_finding/plot_01_methods_compared.html"><span class="doc">Root-finding methods and their convergence orders</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Root-finding methods and their convergence orders</div>
+1690); T. Simpson, <em>Essays on Several Curious and Useful Subjects in
+Speculative and Mix’d Mathematicks</em> (London, 1740).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Newton and Raphson&#x27;s iteration replaces f by its tangent line at the current guess and steps to where that line crosses zero, x_{n+1} = x_n - f(x_n)/f&#x27;(x_n). This script draws the first tangent steps for f(x) = x^3 - 2x - 5 (the cubic Newton himself used as his example) and shows the number of correct digits roughly doubling at every step, i.e. convergence of order 2."><img alt="" src="../_images/sphx_glr_plot_02_newton_raphson_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/numerical_analysis/root_finding/plot_02_newton_raphson.html"><span class="doc">Newton-Raphson’s method: tangent lines and quadratic convergence</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Newton-Raphson's method: tangent lines and quadratic convergence</div>
 </div></div></section>
-<section id="lagrange-gauss-and-polynomial-interpolation">
-<h2><a class="toc-backref" href="#id3" role="doc-backlink">1795 – 1805 – Lagrange, Gauss, and Polynomial Interpolation</a><a class="headerlink" href="#lagrange-gauss-and-polynomial-interpolation" title="Link to this heading">#</a></h2>
-<p>Joseph-Louis Lagrange’s 1795 lectures gave the interpolating polynomial
-through <span class="math notranslate nohighlight">\(n+1\)</span> points its now-standard closed form, a weighted sum
-of basis polynomials each equal to 1 at one node and 0 at the rest.
-Isaac Newton had already worked out an equivalent, more incrementally
-extensible form via divided differences a century earlier (published
-in his 1687 <em>Principia</em> and the posthumous 1711 <em>Methodus
-Differentialis</em>), and both forms represent exactly the same unique
-degree-<span class="math notranslate nohighlight">\(n\)</span> polynomial – a fact used directly below to
-cross-check one construction against the other.</p>
+<section id="newton-lagrange-and-polynomial-interpolation">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">1687-1795 – Newton, Lagrange, and Polynomial Interpolation</a><a class="headerlink" href="#newton-lagrange-and-polynomial-interpolation" title="Link to this heading">#</a></h2>
+<p>Isaac Newton worked out polynomial interpolation through divided
+differences, publishing it in the 1687 <em>Principia</em> and in the
+posthumous 1711 <em>Methodus Differentialis</em>. His form is easy to extend
+one point at a time. Joseph-Louis Lagrange’s 1795 lectures popularized
+the now-standard closed form, which Edward Waring had published in 1779:
+a weighted sum of basis polynomials, each equal to 1 at one node and 0
+at all the others. Both forms represent the same unique
+degree-<span class="math notranslate nohighlight">\(n\)</span> polynomial through <span class="math notranslate nohighlight">\(n+1\)</span> points, which lets one
+construction be checked against the other.</p>
 <p><em>Implementation:</em> <a class="reference internal" href="../api/numerical_analysis.html#mathematicskit.numerical_analysis.LagrangeInterpolant" title="mathematicskit.numerical_analysis.systems.interpolation.LagrangeInterpolant"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis.systems.interpolation.LagrangeInterpolant</span></code></a>
 and <a class="reference internal" href="../api/numerical_analysis.html#mathematicskit.numerical_analysis.NewtonDividedDifference" title="mathematicskit.numerical_analysis.systems.interpolation.NewtonDividedDifference"><code class="xref py py-class docutils literal notranslate"><span class="pre">NewtonDividedDifference</span></code></a>
-implement both forms and are tested against each other for exact
-agreement on the same data, and against <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.BarycentricInterpolator.html#scipy.interpolate.BarycentricInterpolator" title="(in SciPy v1.18.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.interpolate.BarycentricInterpolator</span></code></a>
-as an external check.</p>
-<p><em>References:</em> I. Newton, <em>Methodus Differentialis</em> (London, 1711); J.-L.
-Lagrange, “Leçons élémentaires sur les mathématiques,” Séances des
-Écoles Normales (Paris, 1795).</p>
+implement both forms. They are tested against each other for exact
+agreement on the same data, and against
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.BarycentricInterpolator.html#scipy.interpolate.BarycentricInterpolator" title="(in SciPy v1.18.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.interpolate.BarycentricInterpolator</span></code></a> as an external
+check.</p>
+<p><em>References:</em> I. Newton, <em>Methodus Differentialis</em> (London, 1711); E.
+Waring, “Problems Concerning Interpolations,” Philosophical
+Transactions of the Royal Society 69 (1779), 59-67; J.-L. Lagrange,
+“Leçons élémentaires sur les mathématiques,” Séances des Écoles
+Normales (Paris, 1795).</p>
 <div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="There is exactly one polynomial of degree \leq n through n+1 distinct points, so LagrangeInterpolant and NewtonDividedDifference -- built from completely different representations (a sum of basis polynomials vs. nested divided differences) -- must produce identical curves. Both are also exact for any polynomial up to the interpolation degree, which this script verifies directly."><img alt="" src="../_images/sphx_glr_plot_01_lagrange_newton_thumb.png" />
 <p><a class="reference internal" href="../api/gallery/numerical_analysis/interpolation/plot_01_lagrange_newton.html"><span class="doc">Lagrange vs. Newton divided-difference interpolation</span></a></p>
   <div class="sphx-glr-thumbnail-title">Lagrange vs. Newton divided-difference interpolation</div>
 </div></div></section>
-<section id="runge-s-phenomenon">
-<h2><a class="toc-backref" href="#id4" role="doc-backlink">1901 – Runge’s Phenomenon</a><a class="headerlink" href="#runge-s-phenomenon" title="Link to this heading">#</a></h2>
-<p>Carl Runge discovered something unsettling about polynomial
-interpolation: for the innocuous-looking function
-<span class="math notranslate nohighlight">\(f(x) = 1/(1+25x^2)\)</span> on <span class="math notranslate nohighlight">\([-1,1]\)</span>, interpolating at <em>more</em>
-equally spaced points makes the fit <em>worse</em> near the endpoints, with
-wild oscillations that grow without bound as the degree increases. The
-culprit is not the function but the nodes – equally spaced points force
-the interpolating polynomial’s error bound (governed by the Lebesgue
-constant) to grow exponentially with degree, no matter how smooth
-<span class="math notranslate nohighlight">\(f\)</span> is.</p>
-<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis.systems.chebyshev.runge_function()</span></code>
-and <code class="xref py py-func docutils literal notranslate"><span class="pre">runge_phenomenon_errors()</span></code>
-reproduce exactly this divergence for equally spaced nodes, and its
-cure below, side by side.</p>
-<p><em>References:</em> C. Runge, “Über empirische Funktionen und die
-Interpolation zwischen äquidistanten Ordinaten,” Zeitschrift für
-Mathematik und Physik 46 (1901), 224-243.</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Interpolating Runge&#x27;s classic example, f(x) = 1/(1+25x^2), at equally spaced nodes on [-1, 1] makes the interpolation error diverge near the endpoints as the polynomial degree grows -- a famous 1901 counterexample to the intuition that more nodes always means a better fit. Clustering nodes near the endpoints instead, at the Chebyshev points, eliminates the divergence entirely."><img alt="" src="../_images/sphx_glr_plot_01_runge_phenomenon_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/numerical_analysis/chebyshev/plot_01_runge_phenomenon.html"><span class="doc">The Runge phenomenon: why node placement matters</span></a></p>
-  <div class="sphx-glr-thumbnail-title">The Runge phenomenon: why node placement matters</div>
-</div></div></section>
-<section id="chebyshev-and-the-cure-for-runge-s-phenomenon">
-<h2><a class="toc-backref" href="#id5" role="doc-backlink">1853 – Chebyshev and the Cure for Runge’s Phenomenon</a><a class="headerlink" href="#chebyshev-and-the-cure-for-runge-s-phenomenon" title="Link to this heading">#</a></h2>
-<p>Pafnuty Chebyshev’s study of polynomials of least maximal deviation
-from zero on <span class="math notranslate nohighlight">\([-1,1]\)</span> – decades before Runge’s example made the
-need for them vivid – identified the node placement that tames the
-instability: cluster nodes near the endpoints, at the extrema of
-<span class="math notranslate nohighlight">\(\cos(n\arccos x)\)</span>, rather than spacing them evenly. Interpolating
-at these Chebyshev nodes keeps the Lebesgue constant growing only
-logarithmically in the degree, eliminating Runge’s divergence for the
-same smooth functions that defeated equally spaced nodes.</p>
-<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis.systems.chebyshev.chebyshev_nodes()</span></code>
-and <a class="reference internal" href="../api/numerical_analysis.html#mathematicskit.numerical_analysis.ChebyshevInterpolant" title="mathematicskit.numerical_analysis.systems.chebyshev.ChebyshevInterpolant"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChebyshevInterpolant</span></code></a>
-implement exactly this remedy, evaluated via the numerically stable
-barycentric formula; <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis.utils.error_analysis.lebesgue_constant()</span></code>
-makes the growth-rate difference between the two node choices directly
-measurable.</p>
-<p><em>References:</em> P. L. Chebyshev, “Théorie des mécanismes connus sous le
-nom de parallélogrammes,” Mémoires des Savants étrangers présentés à
-l’Académie de Saint-Pétersbourg 7 (1854), 539-586 (the least-deviation
-polynomials underlying Chebyshev nodes were developed in this and
-related 1850s memoirs).</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Interpolating Runge&#x27;s classic example, f(x) = 1/(1+25x^2), at equally spaced nodes on [-1, 1] makes the interpolation error diverge near the endpoints as the polynomial degree grows -- a famous 1901 counterexample to the intuition that more nodes always means a better fit. Clustering nodes near the endpoints instead, at the Chebyshev points, eliminates the divergence entirely."><img alt="" src="../_images/sphx_glr_plot_01_runge_phenomenon_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/numerical_analysis/chebyshev/plot_01_runge_phenomenon.html"><span class="doc">The Runge phenomenon: why node placement matters</span></a></p>
-  <div class="sphx-glr-thumbnail-title">The Runge phenomenon: why node placement matters</div>
-</div></div></section>
-<section id="runge-kutta-and-spline-interpolation">
-<h2><a class="toc-backref" href="#id6" role="doc-backlink">1946 – Runge, Kutta, and Spline Interpolation</a><a class="headerlink" href="#runge-kutta-and-spline-interpolation" title="Link to this heading">#</a></h2>
-<p>The cubic spline – a piecewise-cubic curve matching value, first, and
-second derivative at every shared node – traces back to the physical
-“drafting spline,” a thin flexible strip of wood or metal bent through
-fixed pins, whose equilibrium shape (minimizing bending energy) is
-exactly a natural cubic spline. Isaac Jacob Schoenberg’s 1946 papers
-gave the construction its rigorous mathematical footing and its name,
-turning a draftsman’s tool into a numerical-analysis method for
-producing a smooth curve through data without Runge’s-phenomenon-style
-oscillation, even at equally spaced nodes.</p>
-<p><em>Implementation:</em> <a class="reference internal" href="../api/numerical_analysis.html#mathematicskit.numerical_analysis.CubicSpline" title="mathematicskit.numerical_analysis.systems.splines.CubicSpline"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis.systems.splines.CubicSpline</span></code></a>
-implements both the natural and clamped boundary conditions, built on
-<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.CubicSpline.html#scipy.interpolate.CubicSpline" title="(in SciPy v1.18.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.interpolate.CubicSpline</span></code></a>’s banded-system solve.</p>
-<p><em>References:</em> I. J. Schoenberg, “Contributions to the Problem of
-Approximation of Equidistant Data by Analytic Functions,” Quarterly of
-Applied Mathematics 4 (1946), 45-99, 112-141.</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="A cubic spline is a piecewise cubic through the data with continuous value, first, and second derivatives across nodes. A natural spline sets the curvature to zero at both ends; a clamped spline instead matches prescribed end-slopes. This script fits both to the same data and compares them against a single high-degree interpolating polynomial, which oscillates far more between nodes -- the practical motivation for splines over one global polynomial."><img alt="" src="../_images/sphx_glr_plot_01_cubic_spline_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/numerical_analysis/splines/plot_01_cubic_spline.html"><span class="doc">Natural and clamped cubic splines</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Natural and clamped cubic splines</div>
+<section id="halley-s-method">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">1694 – Halley’s Method</a><a class="headerlink" href="#halley-s-method" title="Link to this heading">#</a></h2>
+<p>Edmond Halley, better known for his comet, published in 1694 a root
+iteration that uses the second derivative as well as the first. Where
+Newton’s method follows the tangent line to zero, Halley’s method
+follows a hyperbola that matches the function’s value, slope, and
+curvature:</p>
+<div class="math notranslate nohighlight">
+\[x_{n+1} = x_n - \frac{2 f(x_n) f'(x_n)}{2 f'(x_n)^2 - f(x_n) f''(x_n)}.\]</div>
+<p>Near a simple root the error is roughly cubed at every step, so the
+number of correct digits triples rather than doubles. Each step costs
+one extra derivative evaluation, which pays off when <span class="math notranslate nohighlight">\(f''\)</span> is
+cheap, as it is for polynomials.</p>
+<p><em>Implementation:</em> <a class="reference internal" href="../api/numerical_analysis.html#mathematicskit.numerical_analysis.Halley" title="mathematicskit.numerical_analysis.systems.root_finding.Halley"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis.systems.root_finding.Halley</span></code></a>
+records every iterate, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">estimate_convergence_order()</span></code>
+measures its cubic rate. The tests check it against
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.newton.html#scipy.optimize.newton" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.optimize.newton()</span></code></a> called with <code class="docutils literal notranslate"><span class="pre">fprime2</span></code>, which runs the
+same iteration.</p>
+<p><em>References:</em> E. Halley, “Methodus nova accurata &amp; facilis inveniendi
+radices aequationum quarumcumque generaliter, sine praevia reductione,”
+Philosophical Transactions of the Royal Society 18 (1694), 136-148; T.
+R. Scavo and J. B. Thoo, “On the Geometry of Halley’s Method,” American
+Mathematical Monthly 102 (1995), 417-426.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Edmond Halley&#x27;s 1694 iteration uses the second derivative as well as the first, stepping to the root of an osculating hyperbola instead of a tangent line. Near a simple root it triples the number of correct digits per step, against Newton&#x27;s doubling. This script solves x^3 = 2 with both methods from the same starting guess and compares their error histories and empirical convergence orders."><img alt="" src="../_images/sphx_glr_plot_03_halley_method_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/numerical_analysis/root_finding/plot_03_halley_method.html"><span class="doc">Halley’s method: cubic convergence</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Halley's method: cubic convergence</div>
 </div></div></section>
 <section id="legendre-gauss-and-least-squares">
-<h2><a class="toc-backref" href="#id7" role="doc-backlink">1805 – 1809 – Legendre, Gauss, and Least Squares</a><a class="headerlink" href="#legendre-gauss-and-least-squares" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">1805-1809 – Legendre, Gauss, and Least Squares</a><a class="headerlink" href="#legendre-gauss-and-least-squares" title="Link to this heading">#</a></h2>
 <p>Adrien-Marie Legendre published the method of least squares in 1805 as
-a practical rule for combining more measurements than unknowns; Carl
-Friedrich Gauss, who had used the same idea privately since 1795 to
-predict the recovered orbit of the asteroid Ceres, published his own
-probabilistic justification in 1809 – touching off a still-unresolved
-priority dispute, though both are now credited jointly. Fitting a
-polynomial of degree <span class="math notranslate nohighlight">\(d\)</span> to noisy data by least squares reduces
-to solving a linear system for the coefficients that minimize the sum
-of squared residuals, the same fitting principle behind nearly every
-regression method in <a class="reference internal" href="../api/statistics.html#module-mathematicskit.statistics" title="mathematicskit.statistics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.statistics</span></code></a>.</p>
+a practical rule for combining more measurements than there are
+unknowns. Carl Friedrich Gauss said he had used the idea privately
+since 1795, including in 1801 to predict where the newly discovered
+dwarf planet Ceres would reappear. He published his own probabilistic
+justification in 1809. The priority dispute was never settled, and both
+men are now credited. Fitting a degree-<span class="math notranslate nohighlight">\(d\)</span> polynomial to noisy
+data by least squares reduces to solving a linear system for the
+coefficients that minimize the sum of squared residuals. The same
+principle underlies nearly every regression method in
+<a class="reference internal" href="../api/statistics.html#module-mathematicskit.statistics" title="mathematicskit.statistics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.statistics</span></code></a>.</p>
 <p><em>Implementation:</em> <a class="reference internal" href="../api/numerical_analysis.html#mathematicskit.numerical_analysis.PolynomialRegression" title="mathematicskit.numerical_analysis.systems.regression.PolynomialRegression"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis.systems.regression.PolynomialRegression</span></code></a>
-solves exactly this problem via <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.lstsq.html#numpy.linalg.lstsq" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.lstsq()</span></code></a>, with
+solves this problem with <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.lstsq.html#numpy.linalg.lstsq" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.lstsq()</span></code></a>, and
 <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis.utils.error_analysis.condition_number()</span></code>
-flagging the numerical instability that creeps in as the fitted degree
+flags the numerical instability that creeps in as the fitted degree
 grows.</p>
 <p><em>References:</em> A.-M. Legendre, <em>Nouvelles méthodes pour la détermination
 des orbites des comètes</em> (Paris: Courcier, 1805), Appendix; C. F. Gauss,
@@ -637,8 +615,329 @@ des orbites des comètes</em> (Paris: Courcier, 1805), Appendix; C. F. Gauss,
 <p><a class="reference internal" href="../api/gallery/numerical_analysis/regression/plot_01_polynomial_regression.html"><span class="doc">Least-squares polynomial regression and its conditioning</span></a></p>
   <div class="sphx-glr-thumbnail-title">Least-squares polynomial regression and its conditioning</div>
 </div></div></section>
+<section id="horner-s-method">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">1819 – Horner’s Method</a><a class="headerlink" href="#horner-s-method" title="Link to this heading">#</a></h2>
+<p>William George Horner’s 1819 paper on solving numerical equations
+popularized a way to evaluate a polynomial by nested multiplication:</p>
+<div class="math notranslate nohighlight">
+\[a_n x^n + \dots + a_1 x + a_0
+= \bigl(\cdots\bigl((a_n x + a_{n-1})x + a_{n-2}\bigr)\cdots\bigr)x + a_0 .\]</div>
+<p>The scheme needs only <span class="math notranslate nohighlight">\(n\)</span> multiplications and <span class="math notranslate nohighlight">\(n\)</span>
+additions. Alexander Ostrowski conjectured in 1954 that no general
+method can use fewer, and Victor Pan proved it in 1966. The same
+arithmetic had appeared earlier, in Paolo Ruffini’s 1804 memoir and in
+Qin Jiushao’s 1247 <em>Mathematical Treatise in Nine Sections</em>. The
+intermediate values are the coefficients of the quotient
+<span class="math notranslate nohighlight">\(p(x)/(x - x_0)\)</span>. That gives <span class="math notranslate nohighlight">\(p'(x_0)\)</span> almost for free, and
+it lets a root, once found, be divided out of the polynomial
+(“deflation”) before searching for the next one.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis.systems.polynomials.horner()</span></code>
+returns the value, the derivative, and the deflated quotient in a
+<a class="reference internal" href="../api/numerical_analysis.html#mathematicskit.numerical_analysis.HornerResult" title="mathematicskit.numerical_analysis.core.base.HornerResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">HornerResult</span></code></a>. The
+tests compare it with <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.polyval.html#numpy.polyval" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.polyval()</span></code></a> (which uses the same
+scheme internally), <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.polyder.html#numpy.polyder" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.polyder()</span></code></a>, and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.polydiv.html#numpy.polydiv" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.polydiv()</span></code></a>.</p>
+<p><em>References:</em> W. G. Horner, “A new method of solving numerical
+equations of all orders, by continuous approximation,” Philosophical
+Transactions of the Royal Society of London 109 (1819), 308-335; A. M.
+Ostrowski, “On two problems in abstract algebra connected with
+Horner’s rule,” in <em>Studies in Mathematics and Mechanics Presented to
+Richard von Mises</em> (New York: Academic Press, 1954), 40-48; V. Ya.
+Pan, “Methods of computing values of polynomials,” Russian
+Mathematical Surveys 21 (1966), 105-136.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Horner&#x27;s 1819 scheme rewrites a_n x^n + \dots + a_0 as nested multiplications, using n multiplications instead of the 2n - 1 of the term-by-term form. Its intermediate values are the coefficients of the quotient p(x) / (x - x_0), which gives the derivative for Newton&#x27;s method and lets a found root be divided out (&quot;deflation&quot;). This script finds all roots of a quartic that way and compares operation counts."><img alt="" src="../_images/sphx_glr_plot_01_horner_method_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/numerical_analysis/polynomials/plot_01_horner_method.html"><span class="doc">Horner’s method: evaluation, derivative, and deflation</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Horner's method: evaluation, derivative, and deflation</div>
+</div></div></section>
+<section id="chebyshev-and-the-cure-for-runge-s-phenomenon">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">1854 – Chebyshev and the Cure for Runge’s Phenomenon</a><a class="headerlink" href="#chebyshev-and-the-cure-for-runge-s-phenomenon" title="Link to this heading">#</a></h2>
+<p>Pafnuty Chebyshev studied the polynomials that deviate least from zero
+on <span class="math notranslate nohighlight">\([-1,1]\)</span>, nearly half a century before Carl Runge’s example
+(below) showed why they matter. They point to the node placement that
+tames interpolation’s instability: cluster the nodes near the endpoints,
+at the extrema of <span class="math notranslate nohighlight">\(\cos(n\arccos x)\)</span>, instead of spacing them
+evenly. At these Chebyshev nodes the Lebesgue constant grows only
+logarithmically with the degree, which removes Runge’s divergence for
+the same smooth functions that defeat equally spaced nodes.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis.systems.chebyshev.chebyshev_nodes()</span></code>
+and <a class="reference internal" href="../api/numerical_analysis.html#mathematicskit.numerical_analysis.ChebyshevInterpolant" title="mathematicskit.numerical_analysis.systems.chebyshev.ChebyshevInterpolant"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChebyshevInterpolant</span></code></a>
+implement this remedy, evaluated with the numerically stable
+barycentric formula.
+<code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis.utils.error_analysis.lebesgue_constant()</span></code>
+makes the difference in growth rate between the two node choices
+directly measurable.</p>
+<p><em>References:</em> P. L. Chebyshev, “Théorie des mécanismes connus sous le
+nom de parallélogrammes,” Mémoires des Savants étrangers présentés à
+l’Académie de Saint-Pétersbourg 7 (1854), 539-586. The least-deviation
+polynomials behind Chebyshev nodes were developed in this and related
+memoirs of the 1850s.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Chebyshev&#x27;s least-deviation polynomials suggest placing interpolation nodes at the extrema of T_n(x) = \cos(n \arccos x), which cluster toward the ends of [-1, 1]. At these nodes the Lebesgue constant grows only logarithmically, so the interpolant of Runge&#x27;s function 1/(1+25x^2) converges as the degree rises. This script shows the node clustering, the degree-20 Chebyshev interpolant, and its error shrinking geometrically."><img alt="" src="../_images/sphx_glr_plot_02_chebyshev_nodes_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/numerical_analysis/chebyshev/plot_02_chebyshev_nodes.html"><span class="doc">Chebyshev nodes: the cure for Runge’s phenomenon</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Chebyshev nodes: the cure for Runge's phenomenon</div>
+</div></div></section>
+<section id="hermite-interpolation">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">1878 – Hermite Interpolation</a><a class="headerlink" href="#hermite-interpolation" title="Link to this heading">#</a></h2>
+<p>Charles Hermite asked for a polynomial that matches not only a
+function’s values at the nodes but also its derivatives there. With
+values and slopes at <span class="math notranslate nohighlight">\(n+1\)</span> distinct nodes there are
+<span class="math notranslate nohighlight">\(2n+2\)</span> conditions, so a unique polynomial <span class="math notranslate nohighlight">\(H\)</span> of degree at
+most <span class="math notranslate nohighlight">\(2n+1\)</span> satisfies them all. Its error has the same shape as
+Lagrange’s, with each node factor squared:</p>
+<div class="math notranslate nohighlight">
+\[f(x) - H(x) = \frac{f^{(2n+2)}(\xi)}{(2n+2)!}\prod_{i=0}^{n}(x - x_i)^2 .\]</div>
+<p>In Newton’s divided-difference form, <span class="math notranslate nohighlight">\(H\)</span> is simply the
+interpolant on the doubled node list <span class="math notranslate nohighlight">\(x_0, x_0, x_1, x_1, \ldots\)</span>,
+with each “difference” between a node and its copy replaced by the
+derivative. Cubic Hermite pieces through pairs of nodes are the basis
+of many spline and curve-drawing methods.</p>
+<p><em>Implementation:</em> <a class="reference internal" href="../api/numerical_analysis.html#mathematicskit.numerical_analysis.HermiteInterpolant" title="mathematicskit.numerical_analysis.systems.interpolation.HermiteInterpolant"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis.systems.interpolation.HermiteInterpolant</span></code></a>
+wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.KroghInterpolator.html#scipy.interpolate.KroghInterpolator" title="(in SciPy v1.18.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.interpolate.KroghInterpolator</span></code></a>, which treats
+repeated nodes as derivative conditions. The tests check exact
+reproduction of a quintic from three nodes and the closed-form error
+<span class="math notranslate nohighlight">\(x^2(x-1)^2\)</span> for <span class="math notranslate nohighlight">\(x^4\)</span>.</p>
+<p><em>References:</em> C. Hermite, “Sur la formule d’interpolation de
+Lagrange,” Journal für die reine und angewandte Mathematik 84 (1878),
+70-79; F. T. Krogh, “Efficient algorithms for polynomial interpolation
+and numerical differentiation,” Mathematics of Computation 24 (1970),
+185-190.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Charles Hermite&#x27;s 1878 interpolant matches both f(x_i) and f&#x27;(x_i), so n + 1 nodes fix a polynomial of degree 2n + 1. On the same few nodes it follows \sin far more closely than the Lagrange interpolant, which knows only the values."><img alt="" src="../_images/sphx_glr_plot_02_hermite_interpolation_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/numerical_analysis/interpolation/plot_02_hermite_interpolation.html"><span class="doc">Hermite interpolation: matching slopes as well as values</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Hermite interpolation: matching slopes as well as values</div>
+</div></div></section>
+<section id="weierstrass-bernstein-and-uniform-approximation">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">1885-1912 – Weierstrass, Bernstein, and Uniform Approximation</a><a class="headerlink" href="#weierstrass-bernstein-and-uniform-approximation" title="Link to this heading">#</a></h2>
+<p>In 1885 Karl Weierstrass proved that every continuous
+function on a closed interval can be approximated <em>uniformly</em>, to any
+accuracy, by a polynomial. The theorem justifies polynomial
+approximation as a whole, even for functions with corners. His proof
+was not constructive. In 1912 Sergei Bernstein gave a short proof that
+builds the polynomials explicitly from probability:</p>
+<div class="math notranslate nohighlight">
+\[(B_n f)(x) = \sum_{k=0}^{n} f\!\left(\tfrac{k}{n}\right)\binom{n}{k} x^k (1-x)^{n-k}.\]</div>
+<p>The weights are the binomial probabilities for <span class="math notranslate nohighlight">\(n\)</span> coin flips
+with success probability <span class="math notranslate nohighlight">\(x\)</span>, so <span class="math notranslate nohighlight">\(B_n f(x)\)</span> is the
+expected value of <span class="math notranslate nohighlight">\(f\)</span> at the observed success fraction. The law
+of large numbers then forces <span class="math notranslate nohighlight">\(B_n f \to f\)</span>. Convergence is slow,
+since <span class="math notranslate nohighlight">\(B_n(x^2) = x^2 + x(1-x)/n\)</span>, but Bernstein polynomials
+never oscillate. That property later made them the basis of Bézier
+curves.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis.systems.approximation.bernstein_polynomial()</span></code>
+evaluates <span class="math notranslate nohighlight">\(B_n f\)</span> with binomial weights from
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.binom.html#scipy.stats.binom" title="(in SciPy v1.18.0)"><code class="xref py py-data docutils literal notranslate"><span class="pre">scipy.stats.binom</span></code></a>. The tests check exact reproduction of
+linear functions and the closed form for <span class="math notranslate nohighlight">\(x^2\)</span>.</p>
+<p><em>References:</em> K. Weierstrass, “Über die analytische Darstellbarkeit
+sogenannter willkürlicher Functionen einer reellen Veränderlichen,”
+Sitzungsberichte der Königlich Preußischen Akademie der Wissenschaften
+zu Berlin (1885), 633-639 and 789-805; S. Bernstein, “Démonstration du
+théorème de Weierstrass fondée sur le calcul des probabilités,”
+Communications de la Société Mathématique de Kharkov (2) 13 (1912),
+1-2.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Weierstrass proved in 1885 that every continuous function on a closed interval is a uniform limit of polynomials. Sergei Bernstein&#x27;s 1912 proof builds the polynomials explicitly: average f(k/n) with binomial weights. This script approximates a function with a kink, |x - 1/2|, and shows the uniform error shrinking, slowly, as the degree grows."><img alt="" src="../_images/sphx_glr_plot_01_bernstein_polynomials_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/numerical_analysis/approximation/plot_01_bernstein_polynomials.html"><span class="doc">Bernstein polynomials and the Weierstrass theorem</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Bernstein polynomials and the Weierstrass theorem</div>
+</div></div></section>
+<section id="pade-approximants">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">1892 – Padé Approximants</a><a class="headerlink" href="#pade-approximants" title="Link to this heading">#</a></h2>
+<p>A Taylor polynomial is useless beyond its radius of convergence, and
+it cannot mimic a pole. Henri Padé’s 1892 thesis, building on earlier
+work by Jacobi and Frobenius, organized the rational alternatives. The
+<span class="math notranslate nohighlight">\([m/n]\)</span> Padé approximant is the ratio <span class="math notranslate nohighlight">\(p(x)/q(x)\)</span> of
+polynomials of degrees <span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(n\)</span> whose Taylor series
+agrees with that of <span class="math notranslate nohighlight">\(f\)</span> through <span class="math notranslate nohighlight">\(x^{m+n}\)</span>. Finding
+<span class="math notranslate nohighlight">\(q\)</span> means solving a small linear system in the Taylor
+coefficients. Built from the <em>same</em> coefficients as a Taylor
+polynomial, a Padé approximant often keeps converging far outside the
+series’ disk of convergence. The <span class="math notranslate nohighlight">\([1/1]\)</span> approximant of
+<span class="math notranslate nohighlight">\(e^x\)</span>, <span class="math notranslate nohighlight">\((1 + x/2)/(1 - x/2)\)</span>, is the trapezoidal rule’s
+amplification factor for <span class="math notranslate nohighlight">\(y' = y\)</span>. Higher diagonal approximants
+are the stability functions of implicit Runge-Kutta methods and the
+core of the standard matrix-exponential algorithm.</p>
+<p><em>Implementation:</em> <a class="reference internal" href="../api/numerical_analysis.html#mathematicskit.numerical_analysis.PadeApproximant" title="mathematicskit.numerical_analysis.systems.approximation.PadeApproximant"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis.systems.approximation.PadeApproximant</span></code></a>
+solves the linear system with <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.solve.html#numpy.linalg.solve" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.solve()</span></code></a>.
+<code class="docutils literal notranslate"><span class="pre">scipy.interpolate.pade</span></code> does the same but is deprecated. The tests
+check the closed-form <span class="math notranslate nohighlight">\([2/2]\)</span> approximant of <span class="math notranslate nohighlight">\(e^x\)</span> and
+convergence of the <span class="math notranslate nohighlight">\([4/4]\)</span> approximant of <span class="math notranslate nohighlight">\(\log(1+x)\)</span> at
+<span class="math notranslate nohighlight">\(x = 3\)</span>, where the Taylor series diverges.</p>
+<p><em>References:</em> H. Padé, “Sur la représentation approchée d’une fonction
+par des fractions rationnelles,” Annales scientifiques de l’École
+Normale Supérieure (3) 9 (1892), supplement, 3-93; G. A. Baker and P.
+Graves-Morris, <em>Padé Approximants</em>, 2nd ed. (Cambridge University
+Press, 1996).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Henri Padé&#x27;s 1892 thesis organized rational approximations p(x)/q(x) that match a function&#x27;s Taylor series as far as possible. The Taylor series of \log(1 + x) diverges for x &gt; 1, but the Padé approximants built from the same coefficients keep converging well beyond it."><img alt="" src="../_images/sphx_glr_plot_02_pade_approximants_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/numerical_analysis/approximation/plot_02_pade_approximants.html"><span class="doc">Padé approximants beyond the radius of convergence</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Padé approximants beyond the radius of convergence</div>
+</div></div></section>
+<section id="runge-s-phenomenon">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">1901 – Runge’s Phenomenon</a><a class="headerlink" href="#runge-s-phenomenon" title="Link to this heading">#</a></h2>
+<p>Carl Runge found something unsettling about polynomial interpolation.
+For the innocent-looking function <span class="math notranslate nohighlight">\(f(x) = 1/(1+25x^2)\)</span> on
+<span class="math notranslate nohighlight">\([-1,1]\)</span>, interpolating at <em>more</em> equally spaced points makes the
+fit <em>worse</em> near the endpoints, with oscillations that grow without
+bound as the degree increases. The culprit is the nodes, not the
+function. With equally spaced nodes the Lebesgue constant, which
+governs the interpolation error, grows exponentially with the degree,
+so even an analytic function like Runge’s can defeat the method.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis.systems.chebyshev.runge_function()</span></code>
+and <code class="xref py py-func docutils literal notranslate"><span class="pre">runge_phenomenon_errors()</span></code>
+reproduce this divergence for equally spaced nodes, side by side with
+the Chebyshev cure (above).</p>
+<p><em>References:</em> C. Runge, “Über empirische Funktionen und die
+Interpolation zwischen äquidistanten Ordinaten,” Zeitschrift für
+Mathematik und Physik 46 (1901), 224-243.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Carl Runge&#x27;s 1901 example f(x) = 1/(1+25x^2) is smooth on [-1, 1], yet interpolating it at more equally spaced nodes makes the fit worse: oscillations near the endpoints grow without bound as the degree increases. This script shows the overshoot for growing degree, the maximum error blowing up, and the exponentially growing Lebesgue constant of equally spaced nodes that causes it."><img alt="" src="../_images/sphx_glr_plot_01_runge_phenomenon_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/numerical_analysis/chebyshev/plot_01_runge_phenomenon.html"><span class="doc">Runge’s phenomenon: equally spaced interpolation diverges</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Runge's phenomenon: equally spaced interpolation diverges</div>
+</div></div></section>
+<section id="aitken-steffensen-and-accelerating-convergence">
+<h2><a class="toc-backref" href="#id12" role="doc-backlink">1926-1933 – Aitken, Steffensen, and Accelerating Convergence</a><a class="headerlink" href="#aitken-steffensen-and-accelerating-convergence" title="Link to this heading">#</a></h2>
+<p>Many sequences converge linearly: the error shrinks by a roughly
+constant factor at each step. Alexander Aitken observed in 1926 that
+three consecutive terms are then enough to estimate the limit:</p>
+<div class="math notranslate nohighlight">
+\[\hat a_n = a_n - \frac{(a_{n+1} - a_n)^2}{a_{n+2} - 2a_{n+1} + a_n}.\]</div>
+<p>This <span class="math notranslate nohighlight">\(\Delta^2\)</span> process is exact when the error is purely
+geometric, <span class="math notranslate nohighlight">\(a_n = L + c\,r^n\)</span>, and it speeds up the slowly
+converging Leibniz series for <span class="math notranslate nohighlight">\(\pi\)</span> by many orders of magnitude.
+An equivalent rule may already have been used by Seki Takakazu in
+17th-century Japan to speed up polygon approximations of <span class="math notranslate nohighlight">\(\pi\)</span>.
+In 1933 Johan Steffensen applied the extrapolation <em>inside</em> fixed-point
+iteration: from <span class="math notranslate nohighlight">\(x_n\)</span>, compute <span class="math notranslate nohighlight">\(g(x_n)\)</span> and
+<span class="math notranslate nohighlight">\(g(g(x_n))\)</span>, then jump to their Aitken extrapolate. The result
+converges quadratically, like Newton’s method, without any derivative.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis.systems.acceleration.aitken_delta_squared()</span></code>
+transforms a whole sequence, and
+<a class="reference internal" href="../api/numerical_analysis.html#mathematicskit.numerical_analysis.Steffensen" title="mathematicskit.numerical_analysis.systems.root_finding.Steffensen"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis.systems.root_finding.Steffensen</span></code></a>
+records its iterates. The tests check it against
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.fixed_point.html#scipy.optimize.fixed_point" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.optimize.fixed_point()</span></code></a> with <code class="docutils literal notranslate"><span class="pre">method=&quot;del2&quot;</span></code> and verify
+its quadratic order.</p>
+<p><em>References:</em> A. C. Aitken, “On Bernoulli’s numerical solution of
+algebraic equations,” Proceedings of the Royal Society of Edinburgh 46
+(1926), 289-305; J. F. Steffensen, “Remarks on iteration,”
+Skandinavisk Aktuarietidskrift 16 (1933), 64-72.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Aitken&#x27;s \Delta^2 process (1926) extrapolates a linearly convergent sequence from three consecutive terms. Applied to the slowly converging Leibniz series for \pi, one pass gains several digits. Steffensen&#x27;s method (1933) applies the same extrapolation inside a fixed-point iteration, turning the linear convergence of x_{n+1} = \cos x_n into quadratic convergence without any derivative."><img alt="" src="../_images/sphx_glr_plot_04_aitken_steffensen_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/numerical_analysis/root_finding/plot_04_aitken_steffensen.html"><span class="doc">Aitken’s delta-squared process and Steffensen’s method</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Aitken's delta-squared process and Steffensen's method</div>
+</div></div></section>
+<section id="remez-and-best-uniform-approximation">
+<h2><a class="toc-backref" href="#id13" role="doc-backlink">1934 – Remez and Best Uniform Approximation</a><a class="headerlink" href="#remez-and-best-uniform-approximation" title="Link to this heading">#</a></h2>
+<p>Weierstrass guarantees that good polynomial approximations exist, and
+Chebyshev had characterized the <em>best</em> one in the maximum norm. A
+polynomial <span class="math notranslate nohighlight">\(p^*\)</span> of degree <span class="math notranslate nohighlight">\(n\)</span> minimizes
+<span class="math notranslate nohighlight">\(\max|f - p|\)</span> exactly when the error reaches its largest
+magnitude at <span class="math notranslate nohighlight">\(n+2\)</span> points with alternating signs. This is the
+equioscillation theorem. In 1934 Evgeny Remez turned the
+characterization into an algorithm. Pick <span class="math notranslate nohighlight">\(n+2\)</span> reference points
+and solve the linear system</p>
+<div class="math notranslate nohighlight">
+\[p(x_i) + (-1)^i E = f(x_i), \qquad i = 0, \ldots, n+1,\]</div>
+<p>for the polynomial and a levelled error <span class="math notranslate nohighlight">\(E\)</span>. Then move the
+reference to the extrema of the new error curve, and repeat until the
+error equioscillates. The Remez exchange algorithm is still how the
+polynomial and rational approximations inside math libraries’
+<code class="docutils literal notranslate"><span class="pre">exp</span></code>, <code class="docutils literal notranslate"><span class="pre">sin</span></code>, and <code class="docutils literal notranslate"><span class="pre">log</span></code> routines are designed.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis.systems.approximation.remez_minimax()</span></code>
+runs the exchange loop in the Chebyshev basis and returns a
+<a class="reference internal" href="../api/numerical_analysis.html#mathematicskit.numerical_analysis.MinimaxResult" title="mathematicskit.numerical_analysis.core.base.MinimaxResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">MinimaxResult</span></code></a>.
+The tests check Chebyshev’s closed form (the best degree-<span class="math notranslate nohighlight">\(n\)</span>
+approximation to <span class="math notranslate nohighlight">\(x^{n+1}\)</span> on <span class="math notranslate nohighlight">\([-1,1]\)</span> has error
+<span class="math notranslate nohighlight">\(2^{-n}\)</span>), the best line to <span class="math notranslate nohighlight">\(\sqrt{x}\)</span>, and
+equioscillation for <span class="math notranslate nohighlight">\(e^x\)</span>.</p>
+<p><em>References:</em> E. Ya. Remez, “Sur la détermination des polynômes
+d’approximation de degré donnée,” Communications de la Société
+Mathématique de Kharkov (4) 10 (1934), 41-63; E. Ya. Remez, “Sur un
+procédé convergent d’approximations successives pour déterminer les
+polynômes d’approximation,” Comptes Rendus de l’Académie des Sciences
+198 (1934), 2063-2065; L. N. Trefethen, <em>Approximation Theory and
+Approximation Practice</em> (Philadelphia: SIAM, 2013), Ch. 10.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Chebyshev showed that the polynomial of degree n closest to f in the maximum norm is characterized by an error curve that reaches its peak magnitude n + 2 times with alternating sign. Evgeny Remez&#x27;s 1934 exchange algorithm finds it by repeatedly levelling the error on a set of reference points. This script computes the best degree-6 approximation to e^x \sin(3x) on [-1, 1] and compares its error with Chebyshev interpolation of the same degree."><img alt="" src="../_images/sphx_glr_plot_03_remez_minimax_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/numerical_analysis/approximation/plot_03_remez_minimax.html"><span class="doc">Remez’s algorithm and best uniform approximation</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Remez's algorithm and best uniform approximation</div>
+</div></div></section>
+<section id="schoenberg-and-spline-interpolation">
+<h2><a class="toc-backref" href="#id14" role="doc-backlink">1946 – Schoenberg and Spline Interpolation</a><a class="headerlink" href="#schoenberg-and-spline-interpolation" title="Link to this heading">#</a></h2>
+<p>A cubic spline is a piecewise-cubic curve whose value, first
+derivative, and second derivative all match at every shared node. It
+takes its name from the draftsman’s spline, a thin flexible strip of
+wood or metal bent through fixed pins. The strip’s equilibrium shape
+minimizes bending energy and, for small deflections, is a natural cubic
+spline. Isaac Jacob Schoenberg’s 1946 papers gave the construction its
+rigorous mathematical footing and its mathematical name. They turned a
+draftsman’s tool into a numerical method for drawing a smooth curve
+through data without Runge-style oscillation, even at equally spaced
+nodes.</p>
+<p><em>Implementation:</em> <a class="reference internal" href="../api/numerical_analysis.html#mathematicskit.numerical_analysis.CubicSpline" title="mathematicskit.numerical_analysis.systems.splines.CubicSpline"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis.systems.splines.CubicSpline</span></code></a>
+implements both natural and clamped boundary conditions, built on the
+banded-system solve in <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.CubicSpline.html#scipy.interpolate.CubicSpline" title="(in SciPy v1.18.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.interpolate.CubicSpline</span></code></a>.</p>
+<p><em>References:</em> I. J. Schoenberg, “Contributions to the Problem of
+Approximation of Equidistant Data by Analytic Functions,” Quarterly of
+Applied Mathematics 4 (1946), 45-99, 112-141.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="A cubic spline is a piecewise cubic through the data with continuous value, first, and second derivatives across nodes. A natural spline sets the curvature to zero at both ends; a clamped spline instead matches prescribed end-slopes. This script fits both to the same data and compares them against a single high-degree interpolating polynomial, which oscillates far more between nodes -- the practical motivation for splines over one global polynomial."><img alt="" src="../_images/sphx_glr_plot_01_cubic_spline_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/numerical_analysis/splines/plot_01_cubic_spline.html"><span class="doc">Natural and clamped cubic splines</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Natural and clamped cubic splines</div>
+</div></div></section>
+<section id="wilkinson-s-perfidious-polynomial">
+<h2><a class="toc-backref" href="#id15" role="doc-backlink">1959-1963 – Wilkinson’s Perfidious Polynomial</a><a class="headerlink" href="#wilkinson-s-perfidious-polynomial" title="Link to this heading">#</a></h2>
+<p>While testing root-finding programs on the Pilot ACE computer, James
+Wilkinson tried the polynomial with roots <span class="math notranslate nohighlight">\(1, 2, \ldots, 20\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[w(x) = (x-1)(x-2)\cdots(x-20) = x^{20} - 210x^{19} + \cdots + 20!,\]</div>
+<p>and found that its roots could not be computed accurately from its
+coefficients. Changing the coefficient <span class="math notranslate nohighlight">\(-210\)</span> by just
+<span class="math notranslate nohighlight">\(2^{-23}\)</span>, about one part in <span class="math notranslate nohighlight">\(10^{9}\)</span>, moves ten of the
+roots into complex pairs, such as <span class="math notranslate nohighlight">\(16.73 \pm 2.81i\)</span>. The roots
+are well separated, so nothing about the polynomial looks dangerous.
+The cause is extreme sensitivity to the coefficients: a relative
+change in <span class="math notranslate nohighlight">\(a_{19}\)</span> is amplified by about <span class="math notranslate nohighlight">\(3\times 10^{10}\)</span>
+in the root near 16. Wilkinson later called this “the most traumatic
+experience in my career as a numerical analyst.” The episode helped
+establish backward error analysis and the rule that a polynomial’s
+roots should be computed from a well-conditioned representation, not
+from its expanded coefficients.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis.systems.polynomials.wilkinson_polynomial()</span></code>
+builds the coefficients, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">root_condition_numbers()</span></code>
+computes each root’s relative condition number
+<span class="math notranslate nohighlight">\(|a_k|\,|r|^{k-1}/|p'(r)|\)</span>. The tests reproduce Wilkinson’s
+perturbed roots with <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.roots.html#numpy.roots" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.roots()</span></code></a> and check the condition
+numbers against the closed form <span class="math notranslate nohighlight">\(|w'(r)| = (r-1)!\,(20-r)!\)</span>.</p>
+<p><em>References:</em> J. H. Wilkinson, “The evaluation of the zeros of
+ill-conditioned polynomials. Part I,” Numerische Mathematik 1 (1959),
+150-166; J. H. Wilkinson, <em>Rounding Errors in Algebraic Processes</em>
+(Englewood Cliffs, NJ: Prentice-Hall, 1963); J. H. Wilkinson, “The
+perfidious polynomial,” in <em>Studies in Numerical Analysis</em>, ed. G. H.
+Golub (Mathematical Association of America, 1984), 1-28.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="w(x) = (x - 1)(x - 2) \cdots (x - 20) has well separated integer roots, yet James Wilkinson found that subtracting 2^{-23} from its x^{19} coefficient, -210, sends ten of the roots far into the complex plane. The root condition numbers explain why: the roots near 16 amplify a relative change in that coefficient by a factor of about 3 \times 10^{10}."><img alt="" src="../_images/sphx_glr_plot_02_wilkinson_polynomial_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/numerical_analysis/polynomials/plot_02_wilkinson_polynomial.html"><span class="doc">Wilkinson’s perfidious polynomial</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Wilkinson's perfidious polynomial</div>
+</div></div></section>
+<section id="kahan-s-compensated-summation">
+<h2><a class="toc-backref" href="#id16" role="doc-backlink">1965 – Kahan’s Compensated Summation</a><a class="headerlink" href="#kahan-s-compensated-summation" title="Link to this heading">#</a></h2>
+<p>Adding <span class="math notranslate nohighlight">\(n\)</span> floating-point numbers left to right can lose
+accuracy in proportion to <span class="math notranslate nohighlight">\(n\)</span>. Each addition rounds away the
+low-order bits of the smaller operand, and the losses pile up. William
+Kahan’s 1965 note in <em>Communications of the ACM</em> recovers those bits.
+After each addition it computes exactly what was lost,
+<span class="math notranslate nohighlight">\(c = (t - s) - y\)</span>, and subtracts it from the next term. The
+error bound drops from about <span class="math notranslate nohighlight">\(n u \sum|x_i|\)</span> to
+<span class="math notranslate nohighlight">\(2u\sum|x_i|\)</span> (with <span class="math notranslate nohighlight">\(u\)</span> the unit roundoff), independent of
+<span class="math notranslate nohighlight">\(n\)</span> to first order, at the cost of three extra additions per
+term. Kahan went on to lead the design of the IEEE 754 floating-point
+standard. Compensated summation, and its relatives such as Neumaier’s
+variant (now inside Python’s built-in <code class="docutils literal notranslate"><span class="pre">sum</span></code>), are standard wherever
+long sums must be accurate.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis.systems.summation.kahan_sum()</span></code>
+runs the algorithm as written. The tests compare it with the exactly
+rounded <a class="reference external" href="https://docs.python.org/3/library/math.html#math.fsum" title="(in Python v3.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">math.fsum()</span></code></a>, including a million copies of 0.1, where the
+naive loop’s error is thousands of times larger.</p>
+<p><em>References:</em> W. Kahan, “Pracniques: Further remarks on reducing
+truncation errors,” Communications of the ACM 8(1) (1965), 40; N. J.
+Higham, “The accuracy of floating point summation,” SIAM Journal on
+Scientific Computing 14 (1993), 783-799.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Adding n floating-point numbers one at a time can accumulate error proportional to n. William Kahan&#x27;s 1965 algorithm carries the rounding error of each addition forward in a correction term, so the error stays at a few units in the last place however many terms are added. This script sums 0.1 repeatedly and compares the naive loop, Kahan&#x27;s algorithm, and NumPy&#x27;s pairwise summation against the exactly rounded result from math.fsum."><img alt="" src="../_images/sphx_glr_plot_01_kahan_summation_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/numerical_analysis/floating_point/plot_01_kahan_summation.html"><span class="doc">Kahan’s compensated summation</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Kahan's compensated summation</div>
+</div></div></section>
 <section id="see-also">
-<h2><a class="toc-backref" href="#id8" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id17" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="../api/numerical_analysis.html"><span class="doc">mathematicskit.numerical_analysis</span></a></p></li>
 <li><p><a class="reference internal" href="linalg_breakthroughs.html"><span class="doc">Breakthroughs in Numerical Linear Algebra</span></a></p></li>
@@ -694,13 +993,22 @@ des orbites des comètes</em> (Paris: Courcier, 1805), Appendix; C. F. Gauss,
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#antiquity-the-babylonian-method-and-bisection">Antiquity – The Babylonian Method and Bisection</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#newton-and-raphson-s-method">1685 – 1690 – Newton and Raphson’s Method</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lagrange-gauss-and-polynomial-interpolation">1795 – 1805 – Lagrange, Gauss, and Polynomial Interpolation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-1800-bce-the-babylonian-method-and-bisection">c. 1800 BCE – The Babylonian Method and Bisection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#newton-and-raphson-s-method">1669-1690 – Newton and Raphson’s Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#newton-lagrange-and-polynomial-interpolation">1687-1795 – Newton, Lagrange, and Polynomial Interpolation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#halley-s-method">1694 – Halley’s Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#legendre-gauss-and-least-squares">1805-1809 – Legendre, Gauss, and Least Squares</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#horner-s-method">1819 – Horner’s Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chebyshev-and-the-cure-for-runge-s-phenomenon">1854 – Chebyshev and the Cure for Runge’s Phenomenon</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hermite-interpolation">1878 – Hermite Interpolation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weierstrass-bernstein-and-uniform-approximation">1885-1912 – Weierstrass, Bernstein, and Uniform Approximation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pade-approximants">1892 – Padé Approximants</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#runge-s-phenomenon">1901 – Runge’s Phenomenon</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chebyshev-and-the-cure-for-runge-s-phenomenon">1853 – Chebyshev and the Cure for Runge’s Phenomenon</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#runge-kutta-and-spline-interpolation">1946 – Runge, Kutta, and Spline Interpolation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#legendre-gauss-and-least-squares">1805 – 1809 – Legendre, Gauss, and Least Squares</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aitken-steffensen-and-accelerating-convergence">1926-1933 – Aitken, Steffensen, and Accelerating Convergence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remez-and-best-uniform-approximation">1934 – Remez and Best Uniform Approximation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schoenberg-and-spline-interpolation">1946 – Schoenberg and Spline Interpolation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wilkinson-s-perfidious-polynomial">1959-1963 – Wilkinson’s Perfidious Polynomial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kahan-s-compensated-summation">1965 – Kahan’s Compensated Summation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#see-also">See Also</a></li>
 </ul>
   </nav></div>

@@ -454,91 +454,250 @@
 <p><a class="reference internal" href="../_generated/subpackages/graph_theory.html"><span class="doc">mathematicskit.graph_theory hub</span></a> · <a class="reference internal" href="#"><span class="doc">History</span></a> · <a class="reference internal" href="../api/gallery/graph_theory/index.html"><span class="doc">Examples</span></a> · <a class="reference internal" href="../api/graph_theory.html"><span class="doc">API reference</span></a></p>
 </div>
 <blockquote class="epigraph">
-<div><p>“A graph is a mathematical structure used to model pairwise relations
-between objects” – and, as this chronology traces, one that keeps
-turning out to model an implausibly wide range of them.</p>
+<div><p>“This question is so banal, but seemed to me worthy of attention in
+that neither geometry, nor algebra, nor even the art of counting was
+sufficient to solve it.”
+– Leonhard Euler, letter to Giovanni Marinoni, 1736</p>
 </div></blockquote>
-<p>Graph theory’s founding problem was a recreational puzzle about a
-Prussian city’s bridges; two and a half centuries later its algorithms
-route internet traffic, plan delivery networks, and cluster social
-networks. This chronology traces the ideas behind
-<a class="reference internal" href="../api/graph_theory.html#module-mathematicskit.graph_theory" title="mathematicskit.graph_theory"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.graph_theory</span></code></a>, from Euler’s original impossibility proof
-to the spectral methods that read a graph’s structure directly out of a
-matrix’s eigenvalues.</p>
+<p>Graph theory began as a recreational puzzle about a Prussian city’s
+bridges; nearly three centuries later its algorithms route internet
+traffic, plan delivery networks, and cluster social networks. This
+chronology traces the ideas behind <a class="reference internal" href="../api/graph_theory.html#module-mathematicskit.graph_theory" title="mathematicskit.graph_theory"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.graph_theory</span></code></a>,
+from Leonhard Euler’s original impossibility proof to the spectral
+methods and the PageRank algorithm that read a graph’s structure
+directly from a matrix.</p>
 <nav class="contents local" id="timeline">
 <p class="topic-title">Timeline</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#euler-and-the-seven-bridges-of-konigsberg" id="id1">1736 – Euler and the Seven Bridges of Konigsberg</a></p></li>
-<li><p><a class="reference internal" href="#dijkstra-s-shortest-path-algorithm" id="id2">1959 – Dijkstra’s Shortest-Path Algorithm</a></p></li>
-<li><p><a class="reference internal" href="#kruskal-prim-and-the-minimum-spanning-tree" id="id3">1956 – 1957 – Kruskal, Prim, and the Minimum Spanning Tree</a></p></li>
-<li><p><a class="reference internal" href="#menger-ford-fulkerson-and-max-flow-min-cut" id="id4">1927 – 1956 – Menger, Ford, Fulkerson, and Max-Flow Min-Cut</a></p></li>
-<li><p><a class="reference internal" href="#the-four-color-problem" id="id5">1852 – 1976 – The Four Color Problem</a></p></li>
-<li><p><a class="reference internal" href="#fiedler-and-spectral-graph-theory" id="id6">1973 – Fiedler and Spectral Graph Theory</a></p></li>
-<li><p><a class="reference internal" href="#see-also" id="id7">See Also</a></p></li>
+<li><p><a class="reference internal" href="#euler-and-the-seven-bridges-of-konigsberg" id="id1">1736 – Euler and the Seven Bridges of Königsberg</a></p></li>
+<li><p><a class="reference internal" href="#kirchhoff-s-matrix-tree-theorem" id="id2">1847 – Kirchhoff’s Matrix-Tree Theorem</a></p></li>
+<li><p><a class="reference internal" href="#the-four-color-problem" id="id3">1852-1976 – The Four Color Problem</a></p></li>
+<li><p><a class="reference internal" href="#hamilton-s-icosian-game" id="id4">1857 – Hamilton’s Icosian Game</a></p></li>
+<li><p><a class="reference internal" href="#menger-ford-fulkerson-and-max-flow-min-cut" id="id5">1927-1956 – Menger, Ford, Fulkerson, and Max-Flow Min-Cut</a></p></li>
+<li><p><a class="reference internal" href="#konig-hopcroft-karp-and-bipartite-matching" id="id6">1931-1973 – König, Hopcroft, Karp, and Bipartite Matching</a></p></li>
+<li><p><a class="reference internal" href="#turan-s-theorem" id="id7">1941 – Turán’s Theorem</a></p></li>
+<li><p><a class="reference internal" href="#kuhn-s-hungarian-method" id="id8">1955 – Kuhn’s Hungarian Method</a></p></li>
+<li><p><a class="reference internal" href="#kruskal-prim-and-the-minimum-spanning-tree" id="id9">1956-1957 – Kruskal, Prim, and the Minimum Spanning Tree</a></p></li>
+<li><p><a class="reference internal" href="#dijkstra-s-shortest-path-algorithm" id="id10">1959 – Dijkstra’s Shortest-Path Algorithm</a></p></li>
+<li><p><a class="reference internal" href="#erdos-renyi-and-random-graphs" id="id11">1959-1960 – Erdős, Rényi, and Random Graphs</a></p></li>
+<li><p><a class="reference internal" href="#floyd-warshall-and-all-pairs-shortest-paths" id="id12">1962 – Floyd, Warshall, and All-Pairs Shortest Paths</a></p></li>
+<li><p><a class="reference internal" href="#hart-nilsson-raphael-and-a-search" id="id13">1968 – Hart, Nilsson, Raphael, and A* Search</a></p></li>
+<li><p><a class="reference internal" href="#fiedler-and-spectral-graph-theory" id="id14">1973 – Fiedler and Spectral Graph Theory</a></p></li>
+<li><p><a class="reference internal" href="#brin-page-and-pagerank" id="id15">1998 – Brin, Page, and PageRank</a></p></li>
+<li><p><a class="reference internal" href="#see-also" id="id16">See Also</a></p></li>
 </ul>
 </nav>
 <section id="euler-and-the-seven-bridges-of-konigsberg">
-<h2><a class="toc-backref" href="#id1" role="doc-backlink">1736 – Euler and the Seven Bridges of Konigsberg</a><a class="headerlink" href="#euler-and-the-seven-bridges-of-konigsberg" title="Link to this heading">#</a></h2>
-<p>Leonhard Euler’s 1736 paper answered a standing local puzzle in
-Konigsberg (now Kaliningrad): could a walker cross all seven of the
-city’s bridges exactly once each and return to their starting point?
-Euler proved it impossible by abstracting the city to what would now be
-called a graph – landmasses as vertices, bridges as edges – and showing
-that such a closed walk (now called an Eulerian circuit) exists if and
-only if every vertex has even degree, which Konigsberg’s bridge layout
-did not satisfy. It is universally credited as the founding paper of
-graph theory, even though Euler’s own paper never draws anything that
-looks like a modern graph diagram.</p>
-<p><em>Connection:</em> every algorithm in <a class="reference internal" href="../api/graph_theory.html#module-mathematicskit.graph_theory" title="mathematicskit.graph_theory"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.graph_theory</span></code></a> operates on
-<a class="reference internal" href="../api/graph_theory.html#mathematicskit.graph_theory.Graph" title="mathematicskit.graph_theory.core.base.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathematicskit.graph_theory.core.base.Graph</span></code></a>, the same
-vertices-and-edges abstraction Euler introduced to solve this problem.</p>
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">1736 – Euler and the Seven Bridges of Königsberg</a><a class="headerlink" href="#euler-and-the-seven-bridges-of-konigsberg" title="Link to this heading">#</a></h2>
+<p>Leonhard Euler’s 1736 paper settled a local puzzle in Königsberg (now
+Kaliningrad): could a walker cross each of the city’s seven bridges
+exactly once? Euler proved it impossible by reducing the city to what
+would now be called a graph, with land masses as vertices and bridges as
+edges. Such a walk requires that at most two land masses touch an odd
+number of bridges, and all four of Königsberg’s did. Carl Hierholzer
+proved in 1873 that the condition is also sufficient for a connected
+graph. Euler’s paper is universally credited as the founding paper of
+graph theory, even though it never draws anything resembling a modern
+graph diagram.</p>
+<p><em>Connection:</em> every algorithm in <a class="reference internal" href="../api/graph_theory.html#module-mathematicskit.graph_theory" title="mathematicskit.graph_theory"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.graph_theory</span></code></a>
+operates on <a class="reference internal" href="../api/graph_theory.html#mathematicskit.graph_theory.Graph" title="mathematicskit.graph_theory.core.base.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathematicskit.graph_theory.core.base.Graph</span></code></a>, the
+same vertices-and-edges abstraction Euler introduced to solve this
+problem.</p>
 <p><em>References:</em> L. Euler, “Solutio problematis ad geometriam situs
 pertinentis,” Commentarii Academiae Scientiarum Petropolitanae 8 (1741),
-128-140 (presented to the St. Petersburg Academy in 1735, published
-1741).</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Compares the three shortest-path algorithms on the same weighted graph, including a negative-weight edge that only Bellman-Ford can handle correctly."><img alt="" src="../_images/sphx_glr_plot_01_dijkstra_vs_bellman_ford_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/graph_theory/shortest_paths/plot_01_dijkstra_vs_bellman_ford.html"><span class="doc">Dijkstra vs. Bellman-Ford, and all-pairs Floyd-Warshall</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Dijkstra vs. Bellman-Ford, and all-pairs Floyd-Warshall</div>
+128-140 (presented to the St. Petersburg Academy in 1735; the volume is
+dated 1736 but was printed in 1741).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Reduces Königsberg to four land masses joined by seven bridges and counts the bridges at each land mass. All four counts are odd, so by Euler&#x27;s argument no walk can cross every bridge exactly once, and an exhaustive search agrees. Removing a single bridge leaves exactly two odd land masses, and a walk over every remaining bridge appears."><img alt="" src="../_images/sphx_glr_plot_01_konigsberg_bridges_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/graph_theory/eulerian/plot_01_konigsberg_bridges.html"><span class="doc">Euler and the Seven Bridges of Königsberg</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Euler and the Seven Bridges of Königsberg</div>
 </div></div></section>
-<section id="dijkstra-s-shortest-path-algorithm">
-<h2><a class="toc-backref" href="#id2" role="doc-backlink">1959 – Dijkstra’s Shortest-Path Algorithm</a><a class="headerlink" href="#dijkstra-s-shortest-path-algorithm" title="Link to this heading">#</a></h2>
-<p>Edsger Dijkstra devised his shortest-path algorithm in 1956, by his own
-later account in about twenty minutes without pen or paper, while
-thinking through how to demonstrate a new computer’s capabilities with a
-simple, useful problem: find the shortest route between two Dutch
-cities. Published in 1959, the algorithm greedily extends the
-shortest-known-distance frontier one vertex at a time, and remains the
-standard algorithm for single-source shortest paths whenever edge
-weights are non-negative.</p>
-<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.graph_theory.systems.shortest_paths.dijkstra_shortest_paths()</span></code>
-wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csgraph.dijkstra.html#scipy.sparse.csgraph.dijkstra" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.sparse.csgraph.dijkstra()</span></code></a>; for graphs with negative
-edge weights (where Dijkstra’s greedy assumption breaks down),
-<code class="xref py py-func docutils literal notranslate"><span class="pre">bellman_ford_shortest_paths()</span></code>
-wraps the Bellman-Ford algorithm (Richard Bellman, 1958; Lester Ford
-Jr., 1956) instead.</p>
-<p><em>References:</em> E. W. Dijkstra, “A Note on Two Problems in Connexion with
-Graphs,” Numerische Mathematik 1 (1959), 269-271.</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Compares the three shortest-path algorithms on the same weighted graph, including a negative-weight edge that only Bellman-Ford can handle correctly."><img alt="" src="../_images/sphx_glr_plot_01_dijkstra_vs_bellman_ford_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/graph_theory/shortest_paths/plot_01_dijkstra_vs_bellman_ford.html"><span class="doc">Dijkstra vs. Bellman-Ford, and all-pairs Floyd-Warshall</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Dijkstra vs. Bellman-Ford, and all-pairs Floyd-Warshall</div>
+<section id="kirchhoff-s-matrix-tree-theorem">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">1847 – Kirchhoff’s Matrix-Tree Theorem</a><a class="headerlink" href="#kirchhoff-s-matrix-tree-theorem" title="Link to this heading">#</a></h2>
+<p>Gustav Kirchhoff’s 1847 paper on electrical networks needed the number
+of independent current loops in a circuit, and along the way showed how
+to count its spanning trees. Form the Laplacian matrix <span class="math notranslate nohighlight">\(L = D -
+A\)</span>, delete any one row and the matching column, and take the
+determinant: the result is the number of spanning trees. A
+combinatorial count that seems to require listing exponentially many
+subgraphs thus reduces to linear algebra. For the complete graph
+<span class="math notranslate nohighlight">\(K_n\)</span> the determinant is <span class="math notranslate nohighlight">\(n^{n-2}\)</span>, Cayley’s formula. The
+same Laplacian later became the central object of spectral graph
+theory.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.graph_theory.systems.enumeration.count_spanning_trees()</span></code>
+evaluates the reduced Laplacian’s determinant with
+<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.slogdet.html#numpy.linalg.slogdet" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.slogdet()</span></code></a>. The tests reproduce Cayley’s formula and
+the counts for cycles and complete bipartite graphs, and the example
+checks a small graph against brute-force enumeration.</p>
+<p><em>References:</em> G. Kirchhoff, “Ueber die Auflösung der Gleichungen, auf
+welche man bei der Untersuchung der linearen Vertheilung galvanischer
+Ströme geführt wird,” Annalen der Physik und Chemie 72(12) (1847),
+497-508.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Counts spanning trees with a single determinant of the reduced Laplacian, and checks the count by brute-force enumeration of edge subsets on a small graph."><img alt="" src="../_images/sphx_glr_plot_02_matrix_tree_theorem_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/graph_theory/spanning_tree/plot_02_matrix_tree_theorem.html"><span class="doc">Kirchhoff’s matrix-tree theorem</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Kirchhoff's matrix-tree theorem</div>
+</div></div></section>
+<section id="the-four-color-problem">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">1852-1976 – The Four Color Problem</a><a class="headerlink" href="#the-four-color-problem" title="Link to this heading">#</a></h2>
+<p>In 1852 Francis Guthrie, while coloring a map of England’s counties,
+conjectured that four colors always suffice to color any planar map so
+that no two adjacent regions share a color. Despite its simple
+statement, the conjecture resisted proof for a century and a quarter.
+Kenneth Appel and Wolfgang Haken’s 1976 proof reduced the problem to a
+large but finite set of configurations and checked each one by
+computer. It was the first major theorem whose proof no person could
+feasibly verify by hand, a landmark in how mathematics is done. Coloring
+an arbitrary graph (not necessarily planar) with as few colors as
+possible is NP-complete, and no efficient exact algorithm is known for
+large graphs.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.graph_theory.systems.coloring.greedy_coloring()</span></code>
+implements the fast, but not always optimal, greedy heuristic.
+<code class="xref py py-func docutils literal notranslate"><span class="pre">backtracking_coloring()</span></code>
+implements exact exhaustive search. It is feasible only for small
+graphs, which is the exponential cost that NP-completeness predicts.</p>
+<p><em>References:</em> K. Appel and W. Haken, “Every Planar Map is Four
+Colorable,” Illinois Journal of Mathematics 21(3) (1977), 429-490
+(the published form of the proof announced in 1976).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Draws a map of 20 countries, turns it into a planar graph (one vertex per country, an edge for each shared border), and colors it. Exact backtracking search needs exactly four colors, as Guthrie conjectured and Appel and Haken proved, while the fast greedy heuristic can waste a fifth color on the same map."><img alt="" src="../_images/sphx_glr_plot_01_four_color_map_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/graph_theory/coloring/plot_01_four_color_map.html"><span class="doc">The four color theorem: coloring a planar map</span></a></p>
+  <div class="sphx-glr-thumbnail-title">The four color theorem: coloring a planar map</div>
+</div></div></section>
+<section id="hamilton-s-icosian-game">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">1857 – Hamilton’s Icosian Game</a><a class="headerlink" href="#hamilton-s-icosian-game" title="Link to this heading">#</a></h2>
+<p>In 1857 William Rowan Hamilton invented a puzzle, later sold as the
+“Icosian Game”: travel along the edges of a dodecahedron so as to visit
+each of its 20 vertices exactly once and return to the start. Thomas
+Kirkman had studied the same question for general polyhedra two years
+earlier. A cycle through every vertex of a graph is now called
+Hamiltonian. Unlike Euler’s bridge problem, which a simple degree count
+settles, deciding whether a Hamiltonian cycle exists is hard in
+general: Richard Karp showed in 1972 that it is NP-complete, and the
+travelling salesman problem is its weighted version.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.graph_theory.systems.hamiltonian.hamiltonian_cycle()</span></code>
+searches by backtracking, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">dodecahedron_graph()</span></code>
+builds Hamilton’s game board. The tests solve the icosian game and
+confirm that the Petersen graph has no Hamiltonian cycle.</p>
+<p><em>References:</em> N. L. Biggs, E. K. Lloyd, and R. J. Wilson, <em>Graph
+Theory 1736-1936</em> (Oxford: Clarendon Press, 1976), Ch. 2.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Solves Hamilton&#x27;s 1857 puzzle: travel along the edges of a dodecahedron through all 20 vertices exactly once and return to the start. The same search shows that the Petersen graph has no such cycle."><img alt="" src="../_images/sphx_glr_plot_01_icosian_game_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/graph_theory/hamiltonian/plot_01_icosian_game.html"><span class="doc">Hamilton’s icosian game</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Hamilton's icosian game</div>
+</div></div></section>
+<section id="menger-ford-fulkerson-and-max-flow-min-cut">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">1927-1956 – Menger, Ford, Fulkerson, and Max-Flow Min-Cut</a><a class="headerlink" href="#menger-ford-fulkerson-and-max-flow-min-cut" title="Link to this heading">#</a></h2>
+<p>Karl Menger’s 1927 theorem on the number of vertex-disjoint paths
+between two vertices anticipated, in a purely combinatorial setting,
+the duality at the heart of Lester Ford Jr. and Delbert Fulkerson’s
+1956 max-flow min-cut theorem. The maximum flow that can be pushed from
+a source to a sink through a network with edge capacities equals the
+minimum total capacity of any set of edges whose removal disconnects
+the source from the sink. Ford and Fulkerson’s augmenting-path algorithm
+remains the conceptual backbone of modern max-flow solvers. Yefim
+Dinitz (published as “Dinic”) gave it an efficient blocking-flow form in
+1970, and Jack Edmonds and Richard Karp proved a polynomial time bound
+for a shortest-augmenting-path version in 1972.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.graph_theory.systems.max_flow.max_flow_min_cut()</span></code>
+wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csgraph.maximum_flow.html#scipy.sparse.csgraph.maximum_flow" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.sparse.csgraph.maximum_flow()</span></code></a> (Dinitz’s algorithm by
+default). It derives the corresponding minimum cut from the residual
+graph of the resulting flow, which is the certificate the max-flow
+min-cut theorem guarantees.</p>
+<p><em>References:</em> K. Menger, “Zur allgemeinen Kurventheorie,” Fundamenta
+Mathematicae 10 (1927), 96-115; L. R. Ford Jr. and D. R. Fulkerson,
+“Maximal Flow Through a Network,” Canadian Journal of Mathematics 8
+(1956), 399-404.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="The classic CLRS flow network: finds the maximum flow from source to sink, and confirms the max-flow min-cut theorem -- the minimum cut&#x27;s capacity exactly equals the maximum flow value."><img alt="" src="../_images/sphx_glr_plot_01_max_flow_min_cut_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/graph_theory/max_flow/plot_01_max_flow_min_cut.html"><span class="doc">Maximum flow and the max-flow min-cut theorem</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Maximum flow and the max-flow min-cut theorem</div>
+</div></div></section>
+<section id="konig-hopcroft-karp-and-bipartite-matching">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">1931-1973 – König, Hopcroft, Karp, and Bipartite Matching</a><a class="headerlink" href="#konig-hopcroft-karp-and-bipartite-matching" title="Link to this heading">#</a></h2>
+<p>Dénes Kőnig proved in 1931 that in a bipartite graph the largest number
+of edges with no shared endpoint (a maximum matching) equals the
+smallest number of vertices that touch every edge (a minimum vertex
+cover). Jenő Egerváry extended the result to weighted graphs the same
+year. Matchings model assigning workers to jobs or students to schools.
+John Hopcroft and Richard Karp’s 1973 algorithm finds a maximum matching
+in <span class="math notranslate nohighlight">\(O(E\sqrt V)\)</span> time by augmenting along many shortest
+alternating paths at once, and it remains the standard method.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.graph_theory.systems.matching.bipartite_matching()</span></code>
+calls <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csgraph.maximum_bipartite_matching.html#scipy.sparse.csgraph.maximum_bipartite_matching" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.sparse.csgraph.maximum_bipartite_matching()</span></code></a> (the
+Hopcroft-Karp algorithm) and then builds a minimum vertex cover by
+König’s construction. The tests check on random bipartite graphs that
+the cover covers every edge and has the same size as the matching.</p>
+<p><em>References:</em> D. Kőnig, “Gráfok és mátrixok,” Matematikai és Fizikai
+Lapok 38 (1931), 116-119; J. E. Hopcroft and R. M. Karp, “An
+<span class="math notranslate nohighlight">\(n^{5/2}\)</span> Algorithm for Maximum Matchings in Bipartite Graphs,”
+SIAM Journal on Computing 2(4) (1973), 225-231.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Finds a maximum matching in a random bipartite graph with the Hopcroft-Karp algorithm and builds a vertex cover of exactly the same size, as König&#x27;s theorem guarantees."><img alt="" src="../_images/sphx_glr_plot_01_konig_hopcroft_karp_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/graph_theory/matching/plot_01_konig_hopcroft_karp.html"><span class="doc">König’s theorem and Hopcroft-Karp matching</span></a></p>
+  <div class="sphx-glr-thumbnail-title">König's theorem and Hopcroft-Karp matching</div>
+</div></div></section>
+<section id="turan-s-theorem">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">1941 – Turán’s Theorem</a><a class="headerlink" href="#turan-s-theorem" title="Link to this heading">#</a></h2>
+<p>How many edges can a graph on <span class="math notranslate nohighlight">\(n\)</span> vertices have without
+containing a complete subgraph <span class="math notranslate nohighlight">\(K_{r+1}\)</span>? Willem Mantel answered
+the triangle case in 1907: at most <span class="math notranslate nohighlight">\(\lfloor n^2/4 \rfloor\)</span>.
+Pál Turán, working in a labour camp in 1941, solved the general case.
+The maximum is reached only by the Turán graph <span class="math notranslate nohighlight">\(T(n, r)\)</span>, which
+splits the vertices into <span class="math notranslate nohighlight">\(r\)</span> nearly equal parts and joins every
+pair of vertices in different parts. Adding any single edge creates a
+<span class="math notranslate nohighlight">\(K_{r+1}\)</span>. The theorem founded extremal graph theory, which asks
+how large a structure can be while avoiding a given pattern.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.graph_theory.systems.extremal.turan_graph()</span></code>
+and <code class="xref py py-func docutils literal notranslate"><span class="pre">turan_number()</span></code>
+build the extremal graph and its edge count, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">clique_number()</span></code>
+finds the largest clique by Bron-Kerbosch search. The tests confirm
+that adding any edge to a Turán graph creates a larger clique.</p>
+<p><em>References:</em> P. Turán, “Egy gráfelméleti szélsőértékfeladatról,”
+Matematikai és Fizikai Lapok 48 (1941), 436-452; W. Mantel, “Problem
+28,” Wiskundige Opgaven 10 (1907), 60-61.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Builds the Turán graph T(n, r), checks that it has no clique of size r + 1, and shows that adding any missing edge creates one. For r = 2 this is Mantel&#x27;s theorem: a triangle-free graph on n vertices has at most n^2/4 edges."><img alt="" src="../_images/sphx_glr_plot_01_turan_theorem_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/graph_theory/extremal/plot_01_turan_theorem.html"><span class="doc">Turán’s theorem: the densest clique-free graphs</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Turán's theorem: the densest clique-free graphs</div>
+</div></div></section>
+<section id="kuhn-s-hungarian-method">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">1955 – Kuhn’s Hungarian Method</a><a class="headerlink" href="#kuhn-s-hungarian-method" title="Link to this heading">#</a></h2>
+<p>The assignment problem asks how to assign <span class="math notranslate nohighlight">\(n\)</span> workers to
+<span class="math notranslate nohighlight">\(n\)</span> jobs, one each, at minimum total cost. Checking all
+<span class="math notranslate nohighlight">\(n!\)</span> assignments is hopeless even for modest <span class="math notranslate nohighlight">\(n\)</span>. Harold
+Kuhn’s 1955 algorithm, which he named the Hungarian method in honour of
+the work of Dénes Kőnig and Jenő Egerváry on which it rests, solves the
+problem in polynomial time by adjusting row and column prices until a
+perfect matching appears among the zero-cost entries. James Munkres
+showed in 1957 that it runs in <span class="math notranslate nohighlight">\(O(n^3)\)</span> time. It was later found
+that Carl Gustav Jacob Jacobi had described an equivalent method in
+work published posthumously in 1890.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.graph_theory.systems.assignment.solve_assignment()</span></code>
+wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linear_sum_assignment.html#scipy.optimize.linear_sum_assignment" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.optimize.linear_sum_assignment()</span></code></a>. The tests compare
+it with brute force over all <span class="math notranslate nohighlight">\(6!\)</span> assignments, for both
+minimization and maximization.</p>
+<p><em>References:</em> H. W. Kuhn, “The Hungarian Method for the Assignment
+Problem,” Naval Research Logistics Quarterly 2(1-2) (1955), 83-97;
+J. Munkres, “Algorithms for the Assignment and Transportation
+Problems,” Journal of the Society for Industrial and Applied
+Mathematics 5(1) (1957), 32-38.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Assigns workers to jobs at minimum total cost. Brute force would check n! assignments; the Hungarian method solves the problem in polynomial time, and matches brute force on a small instance."><img alt="" src="../_images/sphx_glr_plot_01_hungarian_method_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/graph_theory/assignment/plot_01_hungarian_method.html"><span class="doc">Kuhn’s Hungarian method: the assignment problem</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Kuhn's Hungarian method: the assignment problem</div>
 </div></div></section>
 <section id="kruskal-prim-and-the-minimum-spanning-tree">
-<h2><a class="toc-backref" href="#id3" role="doc-backlink">1956 – 1957 – Kruskal, Prim, and the Minimum Spanning Tree</a><a class="headerlink" href="#kruskal-prim-and-the-minimum-spanning-tree" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">1956-1957 – Kruskal, Prim, and the Minimum Spanning Tree</a><a class="headerlink" href="#kruskal-prim-and-the-minimum-spanning-tree" title="Link to this heading">#</a></h2>
 <p>Joseph Kruskal’s 1956 algorithm builds a minimum spanning tree by adding
 edges in increasing order of weight, skipping any edge that would close
-a cycle among the edges already chosen; Robert Prim’s 1957 algorithm
-(rediscovering a method Vojtech Jarnik had already published in 1930,
-in Czech and largely unnoticed outside Central Europe until decades
-later) instead grows a single tree outward, always adding the cheapest
-edge leaving the tree so far. Both are provably optimal and run in
-similar time, but via genuinely different strategies – forest-building
-versus tree-growing – a difference visible directly by running them side
-by side on the same graph.</p>
+a cycle. Robert Prim’s 1957 algorithm instead grows a single tree
+outward, always adding the cheapest edge that leaves the tree so far.
+Prim had rediscovered a method that Vojtěch Jarník published in Czech in
+1930, which went largely unnoticed outside Central Europe for decades.
+Both algorithms are provably optimal and run in similar time, but their
+strategies differ – building a forest versus growing a single tree –
+and the difference is easy to see when they run side by side on the
+same graph.</p>
 <p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.graph_theory.systems.spanning_tree.kruskal_mst()</span></code>
-wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csgraph.minimum_spanning_tree.html#scipy.sparse.csgraph.minimum_spanning_tree" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.sparse.csgraph.minimum_spanning_tree()</span></code></a> (Kruskal-based);
+wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csgraph.minimum_spanning_tree.html#scipy.sparse.csgraph.minimum_spanning_tree" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.sparse.csgraph.minimum_spanning_tree()</span></code></a> (Kruskal-based).
 <code class="xref py py-func docutils literal notranslate"><span class="pre">prim_mst()</span></code> keeps
-Prim’s algorithm hand-rolled specifically for this side-by-side
-comparison, not as a competing primary API.</p>
+Prim’s algorithm hand-rolled for this side-by-side comparison, not as a
+competing primary API.</p>
 <p><em>References:</em> J. B. Kruskal, “On the Shortest Spanning Subtree of a
 Graph and the Traveling Salesman Problem,” Proceedings of the American
 Mathematical Society 7(1) (1956), 48-50; R. C. Prim, “Shortest
@@ -548,78 +707,148 @@ Journal 36(6) (1957), 1389-1401.</p>
 <p><a class="reference internal" href="../api/gallery/graph_theory/spanning_tree/plot_01_kruskal_vs_prim.html"><span class="doc">Kruskal’s vs. Prim’s minimum spanning tree</span></a></p>
   <div class="sphx-glr-thumbnail-title">Kruskal's vs. Prim's minimum spanning tree</div>
 </div></div></section>
-<section id="menger-ford-fulkerson-and-max-flow-min-cut">
-<h2><a class="toc-backref" href="#id4" role="doc-backlink">1927 – 1956 – Menger, Ford, Fulkerson, and Max-Flow Min-Cut</a><a class="headerlink" href="#menger-ford-fulkerson-and-max-flow-min-cut" title="Link to this heading">#</a></h2>
-<p>Karl Menger’s 1927 theorem on the number of vertex-disjoint paths
-between two points in a graph anticipated, in a purely combinatorial
-setting, the duality that Lester Ford Jr. and Delbert Fulkerson’s 1956
-max-flow min-cut theorem made central to network flow theory: the
-maximum amount of flow that can be pushed from a source to a sink
-through a capacitated network exactly equals the minimum total capacity
-of any set of edges whose removal disconnects the source from the sink.
-Ford and Fulkerson’s own augmenting-path algorithm, refined for
-guaranteed polynomial time by Jack Edmonds and Richard Karp in 1972 and
-given its efficient blocking-flow implementation by Yefim Dinic in 1970,
-remains the conceptual backbone of every modern max-flow solver.</p>
-<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.graph_theory.systems.max_flow.max_flow_min_cut()</span></code>
-wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csgraph.maximum_flow.html#scipy.sparse.csgraph.maximum_flow" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.sparse.csgraph.maximum_flow()</span></code></a> (Dinic’s algorithm by
-default), and derives the corresponding minimum cut directly from the
-resulting flow’s residual graph, exactly the certificate the max-flow
-min-cut theorem guarantees exists.</p>
-<p><em>References:</em> L. R. Ford Jr. and D. R. Fulkerson, “Maximal Flow Through
-a Network,” Canadian Journal of Mathematics 8 (1956), 399-404.</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="The classic CLRS flow network: finds the maximum flow from source to sink, and confirms the max-flow min-cut theorem -- the minimum cut&#x27;s capacity exactly equals the maximum flow value."><img alt="" src="../_images/sphx_glr_plot_01_max_flow_min_cut_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/graph_theory/max_flow/plot_01_max_flow_min_cut.html"><span class="doc">Maximum flow and the max-flow min-cut theorem</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Maximum flow and the max-flow min-cut theorem</div>
+<section id="dijkstra-s-shortest-path-algorithm">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">1959 – Dijkstra’s Shortest-Path Algorithm</a><a class="headerlink" href="#dijkstra-s-shortest-path-algorithm" title="Link to this heading">#</a></h2>
+<p>Edsger Dijkstra devised his shortest-path algorithm in 1956 while
+looking for a simple, useful problem to demonstrate a new computer:
+finding the shortest route between two Dutch cities. By his own later
+account, he designed it in about twenty minutes without pen or paper.
+Published in 1959, the algorithm greedily extends the set of vertices
+whose shortest distance is known, one vertex at a time. It remains the
+standard algorithm for single-source shortest paths whenever edge
+weights are non-negative.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.graph_theory.systems.shortest_paths.dijkstra_shortest_paths()</span></code>
+wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csgraph.dijkstra.html#scipy.sparse.csgraph.dijkstra" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.sparse.csgraph.dijkstra()</span></code></a>. For graphs with negative
+edge weights, where Dijkstra’s greedy assumption breaks down,
+<code class="xref py py-func docutils literal notranslate"><span class="pre">bellman_ford_shortest_paths()</span></code>
+wraps the Bellman-Ford algorithm (Lester Ford Jr., 1956; Richard
+Bellman, 1958) instead.</p>
+<p><em>References:</em> E. W. Dijkstra, “A Note on Two Problems in Connexion with
+Graphs,” Numerische Mathematik 1 (1959), 269-271.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Runs Dijkstra&#x27;s algorithm from one source on a small weighted graph and draws the resulting shortest-path tree. Bellman-Ford gives the same distances there, and takes over on a graph with a negative edge, where Dijkstra&#x27;s greedy assumption breaks down."><img alt="" src="../_images/sphx_glr_plot_01_dijkstra_vs_bellman_ford_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/graph_theory/shortest_paths/plot_01_dijkstra_vs_bellman_ford.html"><span class="doc">Dijkstra’s shortest-path algorithm (and when Bellman-Ford is needed)</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Dijkstra's shortest-path algorithm (and when Bellman-Ford is needed)</div>
 </div></div></section>
-<section id="the-four-color-problem">
-<h2><a class="toc-backref" href="#id5" role="doc-backlink">1852 – 1976 – The Four Color Problem</a><a class="headerlink" href="#the-four-color-problem" title="Link to this heading">#</a></h2>
-<p>Francis Guthrie, coloring a map of England’s counties, conjectured in
-1852 that four colors always suffice to color any planar map so that no
-two adjacent regions share a color – a statement of stubborn,
-century-and-a-quarter-long difficulty despite its simple appearance.
-Kenneth Appel and Wolfgang Haken’s 1976 proof, reducing the general
-problem to a large but finite set of unavoidable configurations checked
-exhaustively by computer, was the first major theorem in mathematics
-whose proof no human being could feasibly verify by hand – itself a
-landmark event in how mathematics is done, independent of the specific
-result. The general graph-coloring problem (using as few colors as
-possible for an arbitrary, not necessarily planar, graph) is NP-complete,
-with no known efficient exact algorithm for large graphs.</p>
-<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.graph_theory.systems.coloring.greedy_coloring()</span></code>
-implements the fast (but not always optimal) greedy heuristic;
-<code class="xref py py-func docutils literal notranslate"><span class="pre">backtracking_coloring()</span></code>
-implements exact exhaustive search, feasible only for small graphs,
-exactly the exponential cost the problem’s NP-completeness predicts.</p>
-<p><em>References:</em> K. Appel and W. Haken, “Every Planar Map is Four
-Colorable,” Illinois Journal of Mathematics 21(3) (1977), 429-490
-(announcing the 1976 proof).</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="On an odd cycle, the greedy heuristic (with an unlucky vertex order) can use more colors than the graph&#x27;s true chromatic number, found by exact backtracking search."><img alt="" src="../_images/sphx_glr_plot_01_greedy_vs_optimal_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/graph_theory/coloring/plot_01_greedy_vs_optimal.html"><span class="doc">Greedy vs. optimal graph coloring</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Greedy vs. optimal graph coloring</div>
+<section id="erdos-renyi-and-random-graphs">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">1959-1960 – Erdős, Rényi, and Random Graphs</a><a class="headerlink" href="#erdos-renyi-and-random-graphs" title="Link to this heading">#</a></h2>
+<p>Paul Erdős and Alfréd Rényi’s papers of 1959 and 1960, together with
+Edgar Gilbert’s 1959 paper, studied graphs whose edges are chosen at
+random. In <span class="math notranslate nohighlight">\(G(n, p)\)</span> each of the possible edges is present
+independently with probability <span class="math notranslate nohighlight">\(p\)</span>. With average degree
+<span class="math notranslate nohighlight">\(c = np\)</span>, the graphs change abruptly at <span class="math notranslate nohighlight">\(c = 1\)</span>. Below it
+every component is tiny; above it a single giant component suddenly
+holds a fixed fraction <span class="math notranslate nohighlight">\(s\)</span> of all vertices, the positive root of
+<span class="math notranslate nohighlight">\(s = 1 - e^{-cs}\)</span>. This phase transition made random graphs a
+subject of their own, and they became the baseline for studying real
+networks.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.graph_theory.utils.generators.random_graph()</span></code>
+samples <span class="math notranslate nohighlight">\(G(n, p)\)</span>, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.graph_theory.systems.components.giant_component_fraction()</span></code>
+measures the largest component using
+<code class="xref py py-func docutils literal notranslate"><span class="pre">connected_components()</span></code>,
+which wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csgraph.connected_components.html#scipy.sparse.csgraph.connected_components" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.sparse.csgraph.connected_components()</span></code></a>. The
+example compares simulations with the theoretical curve.</p>
+<p><em>References:</em> P. Erdős and A. Rényi, “On Random Graphs I,”
+Publicationes Mathematicae Debrecen 6 (1959), 290-297; P. Erdős and A.
+Rényi, “On the Evolution of Random Graphs,” Publications of the
+Mathematical Institute of the Hungarian Academy of Sciences 5 (1960),
+17-61.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Samples random graphs G(n, c/n) and measures the largest connected component. Below the threshold c = 1 all components are tiny; above it a single giant component holds a fixed fraction s of the vertices, the root of s = 1 - exp(-c s)."><img alt="" src="../_images/sphx_glr_plot_01_erdos_renyi_giant_component_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/graph_theory/components/plot_01_erdos_renyi_giant_component.html"><span class="doc">Erdős and Rényi: the birth of the giant component</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Erdős and Rényi: the birth of the giant component</div>
+</div></div></section>
+<section id="floyd-warshall-and-all-pairs-shortest-paths">
+<h2><a class="toc-backref" href="#id12" role="doc-backlink">1962 – Floyd, Warshall, and All-Pairs Shortest Paths</a><a class="headerlink" href="#floyd-warshall-and-all-pairs-shortest-paths" title="Link to this heading">#</a></h2>
+<p>Stephen Warshall’s 1962 theorem computed which vertices of a directed
+graph can reach which others, and Robert Floyd’s algorithm of the same
+year turned the idea into shortest paths between every pair of
+vertices. Bernard Roy had published the method in 1959. Allowing the
+vertices <span class="math notranslate nohighlight">\(1, \dots, k\)</span> in turn as intermediate stops, the
+distances are updated by</p>
+<div class="math notranslate nohighlight">
+\[d_{ij} \leftarrow \min(d_{ij},\, d_{ik} + d_{kj}),\]</div>
+<p>three nested loops that give all <span class="math notranslate nohighlight">\(n^2\)</span> distances in
+<span class="math notranslate nohighlight">\(O(n^3)\)</span> time. Negative edge weights are allowed, as long as
+there are no negative cycles.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.graph_theory.systems.shortest_paths.floyd_warshall_shortest_paths()</span></code>
+wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csgraph.floyd_warshall.html#scipy.sparse.csgraph.floyd_warshall" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.sparse.csgraph.floyd_warshall()</span></code></a>. The tests and
+example confirm that it agrees with running Dijkstra’s algorithm from
+every vertex.</p>
+<p><em>References:</em> R. W. Floyd, “Algorithm 97: Shortest Path,”
+Communications of the ACM 5(6) (1962), 345; S. Warshall, “A Theorem on
+Boolean Matrices,” Journal of the ACM 9(1) (1962), 11-12.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Computes every shortest-path distance in a weighted graph at once with the Floyd-Warshall algorithm, and checks that it agrees with running Dijkstra&#x27;s algorithm from every vertex."><img alt="" src="../_images/sphx_glr_plot_02_floyd_warshall_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/graph_theory/shortest_paths/plot_02_floyd_warshall.html"><span class="doc">Floyd-Warshall: all-pairs shortest paths</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Floyd-Warshall: all-pairs shortest paths</div>
+</div></div></section>
+<section id="hart-nilsson-raphael-and-a-search">
+<h2><a class="toc-backref" href="#id13" role="doc-backlink">1968 – Hart, Nilsson, Raphael, and A* Search</a><a class="headerlink" href="#hart-nilsson-raphael-and-a-search" title="Link to this heading">#</a></h2>
+<p>Peter Hart, Nils Nilsson, and Bertram Raphael developed A* in 1968 to
+plan paths for Shakey, an early mobile robot. Dijkstra’s algorithm
+expands vertices in order of their distance from the start, exploring
+in every direction. A* adds an estimate <span class="math notranslate nohighlight">\(h(v)\)</span> of the remaining
+distance to the goal and expands vertices in order of <span class="math notranslate nohighlight">\(g(v) +
+h(v)\)</span>. If the estimate never overstates the true distance, A* still
+finds a shortest path, and the better the estimate, the fewer vertices
+it examines. A* remains the standard path-finding method in robotics,
+games, and route planning.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.graph_theory.systems.search.astar_shortest_path()</span></code>
+implements A* with a binary heap, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">grid_graph()</span></code> builds
+grid maps with obstacles. The tests confirm that A* with the Manhattan
+heuristic matches Dijkstra’s distance while expanding fewer vertices.</p>
+<p><em>References:</em> P. E. Hart, N. J. Nilsson, and B. Raphael, “A Formal
+Basis for the Heuristic Determination of Minimum Cost Paths,” IEEE
+Transactions on Systems Science and Cybernetics 4(2) (1968), 100-107.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Finds a shortest path across a grid with a wall. With the Manhattan distance as its heuristic, A* reaches the same distance as Dijkstra&#x27;s algorithm while expanding far fewer vertices."><img alt="" src="../_images/sphx_glr_plot_01_astar_search_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/graph_theory/search/plot_01_astar_search.html"><span class="doc">A* search on a grid with obstacles</span></a></p>
+  <div class="sphx-glr-thumbnail-title">A* search on a grid with obstacles</div>
 </div></div></section>
 <section id="fiedler-and-spectral-graph-theory">
-<h2><a class="toc-backref" href="#id6" role="doc-backlink">1973 – Fiedler and Spectral Graph Theory</a><a class="headerlink" href="#fiedler-and-spectral-graph-theory" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id14" role="doc-backlink">1973 – Fiedler and Spectral Graph Theory</a><a class="headerlink" href="#fiedler-and-spectral-graph-theory" title="Link to this heading">#</a></h2>
 <p>Miroslav Fiedler’s 1973 paper studied the eigenvalues of a graph’s
-Laplacian matrix (<span class="math notranslate nohighlight">\(L = D - A\)</span>, degree matrix minus adjacency
-matrix) and found that its second-smallest eigenvalue – now called the
-“algebraic connectivity” or the Fiedler value in his honor – is exactly
-zero if and only if the graph is disconnected, and otherwise quantifies
-how well-connected it is; the corresponding eigenvector’s sign pattern
-gives a natural way to split a graph’s vertices into two well-separated
-communities, the simplest form of spectral clustering.</p>
+Laplacian matrix, <span class="math notranslate nohighlight">\(L = D - A\)</span> (degree matrix minus adjacency
+matrix). Its second-smallest eigenvalue, now called the “algebraic
+connectivity” or Fiedler value, is zero exactly when the graph is
+disconnected, and otherwise measures how well connected the graph is.
+The sign pattern of the corresponding eigenvector splits the vertices
+into two well-separated communities, the simplest form of spectral
+clustering.</p>
 <p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.graph_theory.systems.spectral.spectral_analysis()</span></code>
-computes exactly this Laplacian (via
-<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csgraph.laplacian.html#scipy.sparse.csgraph.laplacian" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.sparse.csgraph.laplacian()</span></code></a>), its full spectrum (via
-<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.eigh.html#numpy.linalg.eigh" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.eigh()</span></code></a>), and the Fiedler-vector bipartition.</p>
+computes this Laplacian (with <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csgraph.laplacian.html#scipy.sparse.csgraph.laplacian" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.sparse.csgraph.laplacian()</span></code></a>),
+its full spectrum (with <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.eigh.html#numpy.linalg.eigh" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.eigh()</span></code></a>), and the
+Fiedler-vector bipartition.</p>
 <p><em>References:</em> M. Fiedler, “Algebraic Connectivity of Graphs,”
 Czechoslovak Mathematical Journal 23(2) (1973), 298-305.</p>
 <div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Two dense clusters joined by a single bridge edge -- a case where the Fiedler vector&#x27;s sign cleanly recovers the two clusters, and the small algebraic connectivity reflects how easily the graph is disconnected (by removing just the bridge)."><img alt="" src="../_images/sphx_glr_plot_01_barbell_bipartition_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/graph_theory/spectral/plot_01_barbell_bipartition.html"><span class="doc">Spectral bipartition of a “barbell” graph</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Spectral bipartition of a "barbell" graph</div>
+<p><a class="reference internal" href="../api/gallery/graph_theory/spectral/plot_01_barbell_bipartition.html"><span class="doc">Fiedler’s spectral bipartition of a “barbell” graph</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Fiedler's spectral bipartition of a "barbell" graph</div>
+</div></div></section>
+<section id="brin-page-and-pagerank">
+<h2><a class="toc-backref" href="#id15" role="doc-backlink">1998 – Brin, Page, and PageRank</a><a class="headerlink" href="#brin-page-and-pagerank" title="Link to this heading">#</a></h2>
+<p>Sergey Brin and Larry Page’s 1998 paper ranked web pages by imagining a
+random surfer who follows a random link with probability <span class="math notranslate nohighlight">\(d\)</span>
+(typically 0.85) and otherwise jumps to a random page. A page’s rank is
+the long-run fraction of time the surfer spends there, the stationary
+distribution of this Markov chain. Pages linked from important pages
+become important themselves. The rank vector is the dominant
+eigenvector of the “Google matrix”, and power iteration finds it with
+an error that shrinks by the factor <span class="math notranslate nohighlight">\(d\)</span> per step. PageRank
+powered the early Google search engine and is now used well beyond the
+web.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.graph_theory.systems.ranking.pagerank()</span></code>
+runs power iteration on the sparse link matrix and handles pages with no
+out-links. The tests check the result against the dominant eigenvector
+computed with <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.eig.html#numpy.linalg.eig" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.eig()</span></code></a>.</p>
+<p><em>References:</em> S. Brin and L. Page, “The Anatomy of a Large-Scale
+Hypertextual Web Search Engine,” Computer Networks and ISDN Systems
+30(1-7) (1998), 107-117.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Ranks the vertices of a small web of links by the stationary distribution of a random surfer who follows links with probability 0.85 and otherwise jumps to a random page, and shows the convergence of the power iteration."><img alt="" src="../_images/sphx_glr_plot_01_pagerank_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/graph_theory/ranking/plot_01_pagerank.html"><span class="doc">PageRank: ranking pages by a random surfer</span></a></p>
+  <div class="sphx-glr-thumbnail-title">PageRank: ranking pages by a random surfer</div>
 </div></div></section>
 <section id="see-also">
-<h2><a class="toc-backref" href="#id7" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id16" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="../api/graph_theory.html"><span class="doc">mathematicskit.graph_theory</span></a></p></li>
 <li><p><a class="reference internal" href="linalg_breakthroughs.html"><span class="doc">Breakthroughs in Numerical Linear Algebra</span></a></p></li>
@@ -675,12 +904,21 @@ Czechoslovak Mathematical Journal 23(2) (1973), 298-305.</p>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-and-the-seven-bridges-of-konigsberg">1736 – Euler and the Seven Bridges of Konigsberg</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-and-the-seven-bridges-of-konigsberg">1736 – Euler and the Seven Bridges of Königsberg</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kirchhoff-s-matrix-tree-theorem">1847 – Kirchhoff’s Matrix-Tree Theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-four-color-problem">1852-1976 – The Four Color Problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hamilton-s-icosian-game">1857 – Hamilton’s Icosian Game</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menger-ford-fulkerson-and-max-flow-min-cut">1927-1956 – Menger, Ford, Fulkerson, and Max-Flow Min-Cut</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konig-hopcroft-karp-and-bipartite-matching">1931-1973 – König, Hopcroft, Karp, and Bipartite Matching</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#turan-s-theorem">1941 – Turán’s Theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kuhn-s-hungarian-method">1955 – Kuhn’s Hungarian Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kruskal-prim-and-the-minimum-spanning-tree">1956-1957 – Kruskal, Prim, and the Minimum Spanning Tree</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dijkstra-s-shortest-path-algorithm">1959 – Dijkstra’s Shortest-Path Algorithm</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kruskal-prim-and-the-minimum-spanning-tree">1956 – 1957 – Kruskal, Prim, and the Minimum Spanning Tree</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menger-ford-fulkerson-and-max-flow-min-cut">1927 – 1956 – Menger, Ford, Fulkerson, and Max-Flow Min-Cut</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-four-color-problem">1852 – 1976 – The Four Color Problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#erdos-renyi-and-random-graphs">1959-1960 – Erdős, Rényi, and Random Graphs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#floyd-warshall-and-all-pairs-shortest-paths">1962 – Floyd, Warshall, and All-Pairs Shortest Paths</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hart-nilsson-raphael-and-a-search">1968 – Hart, Nilsson, Raphael, and A* Search</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fiedler-and-spectral-graph-theory">1973 – Fiedler and Spectral Graph Theory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brin-page-and-pagerank">1998 – Brin, Page, and PageRank</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#see-also">See Also</a></li>
 </ul>
   </nav></div>

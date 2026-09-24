@@ -410,16 +410,16 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.calculus.systems.taylor_series</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Taylor/Maclaurin series expansion and convergence-radius estimation</span>
+<span></span><span class="sa">r</span><span class="sd">"""Taylor/Maclaurin series expansion and convergence-radius estimation</span>
 <span class="sd">for standard functions.</span>
 
-<span class="sd">See Burden &amp; Faires, *Numerical Analysis*, 10th ed., Ch. 1.1 (Taylor&#39;s</span>
+<span class="sd">See Burden &amp; Faires, *Numerical Analysis*, 10th ed., Ch. 1.1 (Taylor's</span>
 <span class="sd">Theorem) and any standard calculus text (e.g. Stewart, *Calculus*, 8th</span>
 <span class="sd">ed., Ch. 11.10) for the specific Maclaurin series below; the</span>
 <span class="sd">ratio-test convergence radius is the standard result that a power series</span>
 <span class="sd">:math:`\sum a_n x^n` converges for :math:`|x| &lt; R`,</span>
 <span class="sd">:math:`R = \lim_{n\to\infty} |a_n / a_{n+1}|` (when the limit exists).</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -427,22 +427,22 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;maclaurin_coefficients&quot;</span><span class="p">,</span> <span class="s2">&quot;evaluate_series&quot;</span><span class="p">,</span> <span class="s2">&quot;estimate_radius_of_convergence&quot;</span><span class="p">,</span> <span class="s2">&quot;taylor_remainder_bound&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"maclaurin_coefficients"</span><span class="p">,</span> <span class="s2">"evaluate_series"</span><span class="p">,</span> <span class="s2">"estimate_radius_of_convergence"</span><span class="p">,</span> <span class="s2">"taylor_remainder_bound"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="maclaurin_coefficients">
 <a class="viewcode-back" href="../../../../api/calculus.html#mathematicskit.calculus.maclaurin_coefficients">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">maclaurin_coefficients</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">order</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Maclaurin-series coefficients :math:`a_0, \dots, a_{\text{order}}` for a standard function.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Maclaurin-series coefficients :math:`a_0, \dots, a_{\text{order}}` for a standard function.</span>
 
 <span class="sd">    Supported ``name`` values and their series:</span>
 
-<span class="sd">    - ``&quot;exp&quot;``: :math:`e^x = \sum_{n\geq0} x^n/n!`, :math:`R=\infty`.</span>
-<span class="sd">    - ``&quot;sin&quot;``: :math:`\sin x = \sum_{n\geq0} (-1)^n x^{2n+1}/(2n+1)!`, :math:`R=\infty`.</span>
-<span class="sd">    - ``&quot;cos&quot;``: :math:`\cos x = \sum_{n\geq0} (-1)^n x^{2n}/(2n)!`, :math:`R=\infty`.</span>
-<span class="sd">    - ``&quot;log1p&quot;``: :math:`\ln(1+x) = \sum_{n\geq1} (-1)^{n+1} x^n/n`, :math:`R=1`.</span>
-<span class="sd">    - ``&quot;geometric&quot;``: :math:`1/(1-x) = \sum_{n\geq0} x^n`, :math:`R=1`.</span>
-<span class="sd">    - ``&quot;arctan&quot;``: :math:`\arctan x = \sum_{n\geq0} (-1)^n x^{2n+1}/(2n+1)`, :math:`R=1`.</span>
+<span class="sd">    - ``"exp"``: :math:`e^x = \sum_{n\geq0} x^n/n!`, :math:`R=\infty`.</span>
+<span class="sd">    - ``"sin"``: :math:`\sin x = \sum_{n\geq0} (-1)^n x^{2n+1}/(2n+1)!`, :math:`R=\infty`.</span>
+<span class="sd">    - ``"cos"``: :math:`\cos x = \sum_{n\geq0} (-1)^n x^{2n}/(2n)!`, :math:`R=\infty`.</span>
+<span class="sd">    - ``"log1p"``: :math:`\ln(1+x) = \sum_{n\geq1} (-1)^{n+1} x^n/n`, :math:`R=1`.</span>
+<span class="sd">    - ``"geometric"``: :math:`1/(1-x) = \sum_{n\geq0} x^n`, :math:`R=1`.</span>
+<span class="sd">    - ``"arctan"``: :math:`\arctan x = \sum_{n\geq0} (-1)^n x^{2n+1}/(2n+1)`, :math:`R=1`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -459,47 +459,47 @@
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; import numpy as np</span>
-<span class="sd">    &gt;&gt;&gt; coeffs = maclaurin_coefficients(&quot;exp&quot;, 4)</span>
+<span class="sd">    &gt;&gt;&gt; coeffs = maclaurin_coefficients("exp", 4)</span>
 <span class="sd">    &gt;&gt;&gt; np.allclose(coeffs, [1.0, 1.0, 0.5, 1.0 / 6.0, 1.0 / 24.0])</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">order</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;exp&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">"exp"</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">n</span><span class="p">])</span>
-    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;sin&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">"sin"</span><span class="p">:</span>
         <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">order</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">n</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">k</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="n">a</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">**</span> <span class="p">((</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">a</span>
-    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;cos&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">"cos"</span><span class="p">:</span>
         <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">order</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">n</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">k</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">a</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">k</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">a</span>
-    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;log1p&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">"log1p"</span><span class="p">:</span>
         <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">order</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">n</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">k</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="n">a</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">k</span>
         <span class="k">return</span> <span class="n">a</span>
-    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;geometric&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">"geometric"</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">order</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;arctan&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">"arctan"</span><span class="p">:</span>
         <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">order</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">n</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">k</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="n">a</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">**</span> <span class="p">((</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">k</span>
         <span class="k">return</span> <span class="n">a</span>
-    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;unknown series name </span><span class="si">{</span><span class="n">name</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"unknown series name </span><span class="si">{</span><span class="n">name</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="evaluate_series">
 <a class="viewcode-back" href="../../../../api/calculus.html#mathematicskit.calculus.evaluate_series">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">evaluate_series</span><span class="p">(</span><span class="n">coefficients</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Evaluate a truncated power series :math:`\sum_n a_n x^n` (Horner&#39;s method).</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">evaluate_series</span><span class="p">(</span><span class="n">coefficients</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Evaluate a truncated power series :math:`\sum_n a_n x^n` (Horner's method).</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -515,10 +515,10 @@
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; import numpy as np</span>
-<span class="sd">    &gt;&gt;&gt; coeffs = maclaurin_coefficients(&quot;exp&quot;, 15)</span>
+<span class="sd">    &gt;&gt;&gt; coeffs = maclaurin_coefficients("exp", 15)</span>
 <span class="sd">    &gt;&gt;&gt; round(float(evaluate_series(coeffs, 1.0)), 10) == round(np.e, 10)</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">coefficients</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">coefficients</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
@@ -529,56 +529,84 @@
 
 <div class="viewcode-block" id="estimate_radius_of_convergence">
 <a class="viewcode-back" href="../../../../api/calculus.html#mathematicskit.calculus.estimate_radius_of_convergence">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">estimate_radius_of_convergence</span><span class="p">(</span><span class="n">coefficients</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Estimate a power series&#39; radius of convergence via the ratio test.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">estimate_radius_of_convergence</span><span class="p">(</span><span class="n">coefficients</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">growth_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Estimate a power series' radius of convergence via the ratio test.</span>
 
-<span class="sd">    :math:`R \approx \lim_{n\to\infty} |a_n / a_{n+1}|`, estimated here</span>
-<span class="sd">    from the last two nonzero coefficients (appropriate for series like</span>
-<span class="sd">    ``&quot;sin&quot;``/``&quot;cos&quot;`` whose odd or even coefficients are exactly zero).</span>
-<span class="sd">    See any standard calculus text&#39;s treatment of the ratio test for</span>
-<span class="sd">    power series (e.g. Stewart, *Calculus*, 8th ed., Ch. 11.8).</span>
+<span class="sd">    :math:`R = \lim_{n\to\infty}|a_n/a_{n+1}|`, estimated from the</span>
+<span class="sd">    spacing-adjusted ratio :math:`|a_i/a_j|^{1/(j-i)}` over consecutive</span>
+<span class="sd">    nonzero coefficients (the :math:`1/(j-i)` exponent is what makes series</span>
+<span class="sd">    like ``"sin"``/``"cos"``, whose even or odd coefficients vanish</span>
+<span class="sd">    identically, come out on the same footing as dense ones).</span>
+
+<span class="sd">    A truncated series can only ever *sample* that limit, so a series with</span>
+<span class="sd">    infinite radius -- ``"exp"``, ``"sin"``, ``"cos"`` -- shows up not as a</span>
+<span class="sd">    large number but as a ratio that keeps climbing with every term added.</span>
+<span class="sd">    This function detects exactly that: if the estimate from the series'</span>
+<span class="sd">    *last* two nonzero coefficients exceeds the estimate from its *first*</span>
+<span class="sd">    two by more than `growth_factor`, the ratio has not settled and ``inf``</span>
+<span class="sd">    is returned, rather than a number that is really just an artifact of</span>
+<span class="sd">    where the series happened to be cut off (a degree-20 ``"exp"`` would</span>
+<span class="sd">    otherwise report ``R = 20``, and a degree-30 one ``R = 30``). See any</span>
+<span class="sd">    standard calculus text's treatment of the ratio test for power series</span>
+<span class="sd">    (e.g. Stewart, *Calculus*, 8th ed., Ch. 11.8).</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    coefficients : ndarray, shape (order + 1,)</span>
+<span class="sd">        ``a[n]`` is the coefficient of :math:`x^n` (as from</span>
+<span class="sd">        :func:`maclaurin_coefficients`).</span>
+<span class="sd">    growth_factor : float</span>
+<span class="sd">        How much larger the last ratio estimate must be than the first</span>
+<span class="sd">        before the radius is judged unbounded. ``&gt; 1``.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    float</span>
-<span class="sd">        ``inf`` if the series appears to have unbounded radius (fewer</span>
-<span class="sd">        than 2 nonzero coefficients to compare, or a genuinely growing</span>
-<span class="sd">        ratio).</span>
+<span class="sd">        The estimated radius, or ``inf`` when fewer than two nonzero</span>
+<span class="sd">        coefficients are available to compare, or when the ratio is still</span>
+<span class="sd">        growing (an unbounded radius of convergence).</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; coeffs = maclaurin_coefficients(&quot;geometric&quot;, 30)</span>
+<span class="sd">    &gt;&gt;&gt; coeffs = maclaurin_coefficients("geometric", 30)</span>
 <span class="sd">    &gt;&gt;&gt; round(estimate_radius_of_convergence(coeffs), 6)</span>
 <span class="sd">    1.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &gt;&gt;&gt; round(estimate_radius_of_convergence(maclaurin_coefficients("log1p", 30)), 2)</span>
+<span class="sd">    1.03</span>
+<span class="sd">    &gt;&gt;&gt; # exp and sin converge everywhere: their ratio never settles.</span>
+<span class="sd">    &gt;&gt;&gt; estimate_radius_of_convergence(maclaurin_coefficients("exp", 20))</span>
+<span class="sd">    inf</span>
+<span class="sd">    &gt;&gt;&gt; estimate_radius_of_convergence(maclaurin_coefficients("sin", 20))</span>
+<span class="sd">    inf</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">growth_factor</span> <span class="o">&lt;=</span> <span class="mf">1.0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"growth_factor must be &gt; 1"</span><span class="p">)</span>
+
     <span class="n">nonzero_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flatnonzero</span><span class="p">(</span><span class="n">coefficients</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">nonzero_idx</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)</span>
-    <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">nonzero_idx</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="n">nonzero_idx</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">a_i</span><span class="p">,</span> <span class="n">a_j</span> <span class="o">=</span> <span class="n">coefficients</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">coefficients</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">a_j</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)</span>
-    <span class="c1"># Ratio test between consecutive *nonzero* terms, adjusted for the</span>
-    <span class="c1"># power gap (j - i) between them (relevant for sin/cos, whose</span>
-    <span class="c1"># nonzero terms are every other coefficient).</span>
-    <span class="n">ratio</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a_i</span> <span class="o">/</span> <span class="n">a_j</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="n">i</span><span class="p">))</span>
-    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">ratio</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"inf"</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_ratio</span><span class="p">(</span><span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">coefficients</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">coefficients</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">**</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="n">i</span><span class="p">)))</span>
+
+    <span class="n">latest</span> <span class="o">=</span> <span class="n">_ratio</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">nonzero_idx</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">nonzero_idx</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="k">if</span> <span class="n">nonzero_idx</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">earliest</span> <span class="o">=</span> <span class="n">_ratio</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">nonzero_idx</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">nonzero_idx</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="n">latest</span> <span class="o">&gt;</span> <span class="n">growth_factor</span> <span class="o">*</span> <span class="n">earliest</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"inf"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">latest</span></div>
 
 
 
 <div class="viewcode-block" id="taylor_remainder_bound">
 <a class="viewcode-back" href="../../../../api/calculus.html#mathematicskit.calculus.taylor_remainder_bound">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">taylor_remainder_bound</span><span class="p">(</span><span class="n">max_derivative_bound</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">order</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">x0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Lagrange remainder bound for a degree-``order`` Taylor polynomial.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Lagrange remainder bound for a degree-``order`` Taylor polynomial.</span>
 
 <span class="sd">    :math:`|R_n(x)| \leq \dfrac{M}{(n+1)!}|x-x_0|^{n+1}`, where ``M``</span>
 <span class="sd">    bounds :math:`|f^{(n+1)}|` on the interval between ``x0`` and ``x``.</span>
 <span class="sd">    See Burden &amp; Faires, *Numerical Analysis*, 10th ed., Ch. 1.1,</span>
-<span class="sd">    Theorem 1.14 (Taylor&#39;s Theorem).</span>
+<span class="sd">    Theorem 1.14 (Taylor's Theorem).</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -599,7 +627,7 @@
 <span class="sd">    &gt;&gt;&gt; # Maclaurin remainder at x=0.5.</span>
 <span class="sd">    &gt;&gt;&gt; round(taylor_remainder_bound(1.0, 5, 0.5), 8)</span>
 <span class="sd">    2.17e-05</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">max_derivative_bound</span><span class="p">)</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">order</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">x0</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">order</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span></div>
 
 </pre></div>

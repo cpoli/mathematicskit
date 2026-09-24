@@ -17,10 +17,12 @@ Each script in this gallery is self-contained and can be run directly with
 Sections
 --------
 
+- **eulerian** -- Euler's Seven Bridges of Königsberg and the odd-degree criterion.
 - **shortest_paths** -- Dijkstra, Bellman-Ford, and Floyd-Warshall.
 - **spanning_tree** -- Kruskal's (scipy) vs. Prim's (hand-rolled) MST.
 - **max_flow** -- maximum flow and the corresponding minimum cut.
-- **coloring** -- greedy vs. exact backtracking graph coloring.
+- **coloring** -- the four color theorem on a planar map, greedy vs. exact
+  backtracking coloring.
 - **spectral** -- the graph Laplacian, algebraic connectivity, and
   spectral bipartition.
 
@@ -42,10 +44,10 @@ Sections
 
     </div>
 
-Graph coloring
-----------------
+Assignment
+----------
 
-Greedy vs. exact backtracking graph coloring.
+Kuhn's Hungarian method for optimal one-to-one assignments.
 
 
 .. raw:: html
@@ -61,18 +63,259 @@ Greedy vs. exact backtracking graph coloring.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="On an odd cycle, the greedy heuristic (with an unlucky vertex order) can use more colors than the graph&#x27;s true chromatic number, found by exact backtracking search.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Assigns workers to jobs at minimum total cost. Brute force would check n! assignments; the Hungarian method solves the problem in polynomial time, and matches brute force on a small instance.">
 
 .. only:: html
 
-  .. image:: /api/gallery/graph_theory/coloring/images/thumb/sphx_glr_plot_01_greedy_vs_optimal_thumb.png
+  .. image:: /api/gallery/graph_theory/assignment/images/thumb/sphx_glr_plot_01_hungarian_method_thumb.png
     :alt:
 
-  :doc:`/api/gallery/graph_theory/coloring/plot_01_greedy_vs_optimal`
+  :doc:`/api/gallery/graph_theory/assignment/plot_01_hungarian_method`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Greedy vs. optimal graph coloring</div>
+      <div class="sphx-glr-thumbnail-title">Kuhn's Hungarian method: the assignment problem</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Graph coloring
+----------------
+
+The four color theorem on a planar map: exact backtracking vs. greedy coloring.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Draws a map of 20 countries, turns it into a planar graph (one vertex per country, an edge for each shared border), and colors it. Exact backtracking search needs exactly four colors, as Guthrie conjectured and Appel and Haken proved, while the fast greedy heuristic can waste a fifth color on the same map.">
+
+.. only:: html
+
+  .. image:: /api/gallery/graph_theory/coloring/images/thumb/sphx_glr_plot_01_four_color_map_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/graph_theory/coloring/plot_01_four_color_map`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The four color theorem: coloring a planar map</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Connected components
+--------------------
+
+Components of graphs, and the giant component of random graphs.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Samples random graphs G(n, c/n) and measures the largest connected component. Below the threshold c = 1 all components are tiny; above it a single giant component holds a fixed fraction s of the vertices, the root of s = 1 - exp(-c s).">
+
+.. only:: html
+
+  .. image:: /api/gallery/graph_theory/components/images/thumb/sphx_glr_plot_01_erdos_renyi_giant_component_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/graph_theory/components/plot_01_erdos_renyi_giant_component`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Erdős and Rényi: the birth of the giant component</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Eulerian paths
+----------------
+
+Euler's Seven Bridges of Königsberg and the odd-degree criterion.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Reduces Königsberg to four land masses joined by seven bridges and counts the bridges at each land mass. All four counts are odd, so by Euler&#x27;s argument no walk can cross every bridge exactly once, and an exhaustive search agrees. Removing a single bridge leaves exactly two odd land masses, and a walk over every remaining bridge appears.">
+
+.. only:: html
+
+  .. image:: /api/gallery/graph_theory/eulerian/images/thumb/sphx_glr_plot_01_konigsberg_bridges_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/graph_theory/eulerian/plot_01_konigsberg_bridges`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Euler and the Seven Bridges of Königsberg</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Extremal graph theory
+---------------------
+
+Turán's theorem: the most edges a graph can have without a large
+clique.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Builds the Turán graph T(n, r), checks that it has no clique of size r + 1, and shows that adding any missing edge creates one. For r = 2 this is Mantel&#x27;s theorem: a triangle-free graph on n vertices has at most n^2/4 edges.">
+
+.. only:: html
+
+  .. image:: /api/gallery/graph_theory/extremal/images/thumb/sphx_glr_plot_01_turan_theorem_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/graph_theory/extremal/plot_01_turan_theorem`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Turán's theorem: the densest clique-free graphs</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Hamiltonian cycles
+------------------
+
+Cycles that visit every vertex exactly once.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Solves Hamilton&#x27;s 1857 puzzle: travel along the edges of a dodecahedron through all 20 vertices exactly once and return to the start. The same search shows that the Petersen graph has no such cycle.">
+
+.. only:: html
+
+  .. image:: /api/gallery/graph_theory/hamiltonian/images/thumb/sphx_glr_plot_01_icosian_game_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/graph_theory/hamiltonian/plot_01_icosian_game`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Hamilton's icosian game</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Bipartite matching
+------------------
+
+Maximum matchings and König's minimum vertex covers.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Finds a maximum matching in a random bipartite graph with the Hopcroft-Karp algorithm and builds a vertex cover of exactly the same size, as König&#x27;s theorem guarantees.">
+
+.. only:: html
+
+  .. image:: /api/gallery/graph_theory/matching/images/thumb/sphx_glr_plot_01_konig_hopcroft_karp_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/graph_theory/matching/plot_01_konig_hopcroft_karp`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">König's theorem and Hopcroft-Karp matching</div>
     </div>
 
 
@@ -122,6 +365,87 @@ Maximum flow and the corresponding minimum cut.
 
     </div>
 
+Ranking
+-------
+
+PageRank: ranking the vertices of a directed graph by a random walk.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Ranks the vertices of a small web of links by the stationary distribution of a random surfer who follows links with probability 0.85 and otherwise jumps to a random page, and shows the convergence of the power iteration.">
+
+.. only:: html
+
+  .. image:: /api/gallery/graph_theory/ranking/images/thumb/sphx_glr_plot_01_pagerank_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/graph_theory/ranking/plot_01_pagerank`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">PageRank: ranking pages by a random surfer</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Heuristic search
+----------------
+
+A* search: shortest paths guided by an estimate of the remaining
+distance.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Finds a shortest path across a grid with a wall. With the Manhattan distance as its heuristic, A* reaches the same distance as Dijkstra&#x27;s algorithm while expanding far fewer vertices.">
+
+.. only:: html
+
+  .. image:: /api/gallery/graph_theory/search/images/thumb/sphx_glr_plot_01_astar_search_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/graph_theory/search/plot_01_astar_search`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">A* search on a grid with obstacles</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
 Shortest paths
 ----------------
 
@@ -141,7 +465,7 @@ Dijkstra, Bellman-Ford, and Floyd-Warshall.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Compares the three shortest-path algorithms on the same weighted graph, including a negative-weight edge that only Bellman-Ford can handle correctly.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Runs Dijkstra&#x27;s algorithm from one source on a small weighted graph and draws the resulting shortest-path tree. Bellman-Ford gives the same distances there, and takes over on a graph with a negative edge, where Dijkstra&#x27;s greedy assumption breaks down.">
 
 .. only:: html
 
@@ -152,7 +476,24 @@ Dijkstra, Bellman-Ford, and Floyd-Warshall.
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Dijkstra vs. Bellman-Ford, and all-pairs Floyd-Warshall</div>
+      <div class="sphx-glr-thumbnail-title">Dijkstra's shortest-path algorithm (and when Bellman-Ford is needed)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Computes every shortest-path distance in a weighted graph at once with the Floyd-Warshall algorithm, and checks that it agrees with running Dijkstra&#x27;s algorithm from every vertex.">
+
+.. only:: html
+
+  .. image:: /api/gallery/graph_theory/shortest_paths/images/thumb/sphx_glr_plot_02_floyd_warshall_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/graph_theory/shortest_paths/plot_02_floyd_warshall`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Floyd-Warshall: all-pairs shortest paths</div>
     </div>
 
 
@@ -196,6 +537,23 @@ Kruskal's (scipy) vs. Prim's (hand-rolled) MST.
     </div>
 
 
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Counts spanning trees with a single determinant of the reduced Laplacian, and checks the count by brute-force enumeration of edge subsets on a small graph.">
+
+.. only:: html
+
+  .. image:: /api/gallery/graph_theory/spanning_tree/images/thumb/sphx_glr_plot_02_matrix_tree_theorem_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/graph_theory/spanning_tree/plot_02_matrix_tree_theorem`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Kirchhoff's matrix-tree theorem</div>
+    </div>
+
+
 .. thumbnail-parent-div-close
 
 .. raw:: html
@@ -232,7 +590,7 @@ The graph Laplacian, algebraic connectivity, and spectral bipartition.
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Spectral bipartition of a "barbell" graph</div>
+      <div class="sphx-glr-thumbnail-title">Fiedler's spectral bipartition of a "barbell" graph</div>
     </div>
 
 
@@ -248,8 +606,16 @@ The graph Laplacian, algebraic connectivity, and spectral bipartition.
    :includehidden:
 
 
+   /api/gallery/graph_theory/assignment/index.rst
    /api/gallery/graph_theory/coloring/index.rst
+   /api/gallery/graph_theory/components/index.rst
+   /api/gallery/graph_theory/eulerian/index.rst
+   /api/gallery/graph_theory/extremal/index.rst
+   /api/gallery/graph_theory/hamiltonian/index.rst
+   /api/gallery/graph_theory/matching/index.rst
    /api/gallery/graph_theory/max_flow/index.rst
+   /api/gallery/graph_theory/ranking/index.rst
+   /api/gallery/graph_theory/search/index.rst
    /api/gallery/graph_theory/shortest_paths/index.rst
    /api/gallery/graph_theory/spanning_tree/index.rst
    /api/gallery/graph_theory/spectral/index.rst

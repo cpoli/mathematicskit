@@ -468,8 +468,11 @@ this domain covers what’s distinctly <em>fractal</em>: Lyapunov exponent
 estimation for 1D maps and flows (quantifying the chaos that cascade
 ends in); fractal (box-counting) dimension estimation; Mandelbrot and
 Julia set generation; iterated function systems (Barnsley fern,
-Sierpinski triangle/carpet); and elementary (Wolfram-numbered) cellular
-automata plus Conway’s Game of Life.</p>
+Sierpinski triangle/carpet); classical fractal curves (Weierstrass,
+Koch, Hilbert), Richardson’s divider length, and the similarity
+dimension; Lindenmayer systems with turtle graphics; the Hénon map;
+diffusion-limited aggregation; and elementary (Wolfram-numbered)
+cellular automata plus Conway’s Game of Life.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="mathematicskit.fractals_chaos.BarnsleyFern">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.fractals_chaos.</span></span><span class="sig-name descname"><span class="pre">BarnsleyFern</span></span><a class="reference internal" href="../_modules/mathematicskit/fractals_chaos/systems/ifs.html#BarnsleyFern"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.fractals_chaos.BarnsleyFern" title="Link to this definition">#</a></dt>
@@ -637,7 +640,7 @@ pattern.</p></li>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Rule 90 is the XOR of a cell&#39;s two neighbors, producing a</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Rule 90 is the XOR of a cell's two neighbors, producing a</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># discrete Sierpinski triangle from a single seed cell.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ca</span> <span class="o">=</span> <span class="n">ElementaryCA</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ca</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
@@ -728,7 +731,7 @@ Scientific American 223.</p>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># A &quot;blinker&quot;: a 3-cell line, period-2 oscillator.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># A "blinker": a 3-cell line, period-2 oscillator.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">grid</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">life</span> <span class="o">=</span> <span class="n">GameOfLife</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
@@ -877,10 +880,12 @@ See Barnsley, <em>Fractals Everywhere</em>, 2nd ed., Ch. 3.</p>
 each of several sizes, and counts <span class="math notranslate nohighlight">\(N(\text{size})\)</span> = the number
 of grid cells containing at least one point.
 <span class="math notranslate nohighlight">\(N(\text{size}) \sim \text{size}^{-D}\)</span> defines the box-counting
-dimension <span class="math notranslate nohighlight">\(D\)</span>, estimated here as minus the slope of
-<span class="math notranslate nohighlight">\(\log N\)</span> vs. <span class="math notranslate nohighlight">\(\log(1/\text{size})\)</span> (least-squares fit via
-<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.polyfit.html#numpy.polyfit" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.polyfit()</span></code></a>). See Falconer, <em>Fractal Geometry</em>, 3rd ed.,
-Ch. 3, equation (3.1).</p>
+dimension <span class="math notranslate nohighlight">\(D\)</span>. Taking logs gives <span class="math notranslate nohighlight">\(\log N =
+D\log(1/\text{size}) + c\)</span>, so <span class="math notranslate nohighlight">\(D\)</span> is the <em>slope</em> of
+<span class="math notranslate nohighlight">\(\log N\)</span> against <span class="math notranslate nohighlight">\(\log(1/\text{size})\)</span> (least-squares fit
+via <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.polyfit.html#numpy.polyfit" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.polyfit()</span></code></a>) – inverting the size axis is what turns the
+minus sign in the exponent into a positive slope. See Falconer,
+<em>Fractal Geometry</em>, 3rd ed., Ch. 3, equation (3.1).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -957,6 +962,131 @@ a selection probability (must sum to 1).</p></li>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.fractals_chaos.divider_length">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.fractals_chaos.</span></span><span class="sig-name descname"><span class="pre">divider_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">curve</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ruler</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/fractals_chaos/systems/curves.html#divider_length"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.fractals_chaos.divider_length" title="Link to this definition">#</a></dt>
+<dd><p>Length of a polygonal curve measured by walking a pair of dividers of opening <code class="docutils literal notranslate"><span class="pre">ruler</span></code> along it.</p>
+<p>Starting at the first vertex, each step jumps to the first later
+point of the curve at distance <code class="docutils literal notranslate"><span class="pre">ruler</span></code>. Lewis Fry Richardson found
+empirically that measured coastline lengths grow as
+<span class="math notranslate nohighlight">\(L(\varepsilon) \propto \varepsilon^{1-D}\)</span> as the ruler
+<span class="math notranslate nohighlight">\(\varepsilon\)</span> shrinks, and Benoit Mandelbrot identified
+<span class="math notranslate nohighlight">\(D\)</span> as a fractal dimension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>curve</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>) – Vertices of a polyline, finely sampled compared with <code class="docutils literal notranslate"><span class="pre">ruler</span></code>.</p></li>
+<li><p><strong>ruler</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em> – Number of full steps times <code class="docutils literal notranslate"><span class="pre">ruler</span></code>, plus the final partial step.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">line</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1001</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1001</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">divider_length</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.fractals_chaos.dla_cluster">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.fractals_chaos.</span></span><span class="sig-name descname"><span class="pre">dla_cluster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_particles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">801</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/fractals_chaos/systems/dla.html#dla_cluster"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.fractals_chaos.dla_cluster" title="Link to this definition">#</a></dt>
+<dd><p>Grow a two-dimensional DLA cluster on the square lattice.</p>
+<p>Particles are released one at a time on a circle just outside the
+cluster and random-walk until they touch it, then stick. Walkers
+that stray too far are relaunched. The branched clusters that result
+have fractal dimension about 1.71.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_particles</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Target cluster size, including the seed particle.</p></li>
+<li><p><strong>seed</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Random seed.</p></li>
+<li><p><strong>size</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Lattice width; growth stops early if the cluster nears the edge.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (m, 2), int</em> – Lattice coordinates of the cluster’s particles relative to the
+seed, in the order they stuck (<code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">&lt;=</span> <span class="pre">n_particles</span></code>).</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cluster</span> <span class="o">=</span> <span class="n">dla_cluster</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cluster</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cluster</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="go">[0, 0]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.fractals_chaos.henon_map">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.fractals_chaos.</span></span><span class="sig-name descname"><span class="pre">henon_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0.0,</span> <span class="pre">0.0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">discard</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/fractals_chaos/systems/maps.html#henon_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.fractals_chaos.henon_map" title="Link to this definition">#</a></dt>
+<dd><p>An orbit of the Hénon map <span class="math notranslate nohighlight">\((x, y) \mapsto (1 - a x^2 + y,\; b x)\)</span>.</p>
+<p>With Michel Hénon’s parameters <span class="math notranslate nohighlight">\(a = 1.4\)</span>, <span class="math notranslate nohighlight">\(b = 0.3\)</span> the
+orbit settles onto a strange attractor with box-counting dimension
+about 1.26. The map contracts areas by the factor <span class="math notranslate nohighlight">\(|b|\)</span> at every
+step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_points</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of orbit points returned.</p></li>
+<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>x0</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>discard</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Initial transient iterations dropped.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (n_points, 2)</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">orbit</span> <span class="o">=</span> <span class="n">henon_map</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">orbit</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mf">1.5</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.fractals_chaos.hilbert_curve">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.fractals_chaos.</span></span><span class="sig-name descname"><span class="pre">hilbert_curve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/fractals_chaos/systems/curves.html#hilbert_curve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.fractals_chaos.hilbert_curve" title="Link to this definition">#</a></dt>
+<dd><p>Vertices of the order-<code class="docutils literal notranslate"><span class="pre">order</span></code> Hilbert curve, visiting every cell of a <span class="math notranslate nohighlight">\(2^n \times 2^n\)</span> grid.</p>
+<p>David Hilbert’s 1891 space-filling curve is the limit of these
+polygons. Consecutive vertices are grid neighbours, so points close
+along the curve stay close in the plane. Uses the standard
+index-to-coordinate conversion (Hacker’s Delight, Sec. 16-2).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>order</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (4**order, 2), int</em> – Integer grid coordinates in <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">2**order)</span></code>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hilbert_curve</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="go">[[0, 0], [0, 1], [1, 1], [1, 0]]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.fractals_chaos.julia_set">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.fractals_chaos.</span></span><span class="sig-name descname"><span class="pre">julia_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(-2.0,</span> <span class="pre">2.0,</span> <span class="pre">-2.0,</span> <span class="pre">2.0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">400</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/fractals_chaos/systems/mandelbrot_julia.html#julia_set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.fractals_chaos.julia_set" title="Link to this definition">#</a></dt>
 <dd><p>Escape-time grid for the filled Julia set of <span class="math notranslate nohighlight">\(z \mapsto z^2 + c\)</span>, <code class="docutils literal notranslate"><span class="pre">c</span></code> fixed.</p>
@@ -989,6 +1119,85 @@ Chaotic Dynamical Systems</em>, 2nd ed., Ch. 15.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="n">_escape_time_julia</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.5</span><span class="p">]]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">]]),</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mi">200</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
 <span class="go">200</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.fractals_chaos.koch_curve">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.fractals_chaos.</span></span><span class="sig-name descname"><span class="pre">koch_curve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0.0,</span> <span class="pre">0.0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(1.0,</span> <span class="pre">0.0)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/fractals_chaos/systems/curves.html#koch_curve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.fractals_chaos.koch_curve" title="Link to this definition">#</a></dt>
+<dd><p>Vertices of the Koch curve after <code class="docutils literal notranslate"><span class="pre">order</span></code> refinements of a segment.</p>
+<p>Each step replaces every segment by four segments one third as long,
+with the middle third raised into an equilateral bump. Helge von
+Koch’s 1904 construction is continuous, nowhere differentiable, and
+has similarity dimension <span class="math notranslate nohighlight">\(\log 4/\log 3 \approx 1.2619\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>order</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>start</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Endpoints of the initial segment.</p></li>
+<li><p><strong>end</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Endpoints of the initial segment.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (4**order + 1, 2)</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">koch_curve</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(17, 2)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.fractals_chaos.koch_snowflake">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.fractals_chaos.</span></span><span class="sig-name descname"><span class="pre">koch_snowflake</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/fractals_chaos/systems/curves.html#koch_snowflake"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.fractals_chaos.koch_snowflake" title="Link to this definition">#</a></dt>
+<dd><p>Vertices of the closed Koch snowflake: three Koch curves on an equilateral triangle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>order</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (3 * 4**order + 1, 2)</em> – The first vertex is repeated at the end to close the curve.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">koch_snowflake</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(13, 2)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.fractals_chaos.lsystem">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.fractals_chaos.</span></span><span class="sig-name descname"><span class="pre">lsystem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">axiom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rules</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterations</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/fractals_chaos/systems/lsystems.html#lsystem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.fractals_chaos.lsystem" title="Link to this definition">#</a></dt>
+<dd><p>Rewrite every symbol of <code class="docutils literal notranslate"><span class="pre">axiom</span></code> in parallel, <code class="docutils literal notranslate"><span class="pre">iterations</span></code> times.</p>
+<p>Symbols without a rule are copied unchanged.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>axiom</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>)</p></li>
+<li><p><strong>rules</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span>) – <code class="docutils literal notranslate"><span class="pre">{symbol:</span> <span class="pre">replacement}</span></code>.</p></li>
+<li><p><strong>iterations</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>str</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lsystem</span><span class="p">(</span><span class="s2">"A"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"A"</span><span class="p">:</span> <span class="s2">"AB"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">:</span> <span class="s2">"A"</span><span class="p">},</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># Lindenmayer's algae: lengths are Fibonacci numbers</span>
+<span class="go">'ABAABABAABAAB'</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1111,6 +1320,100 @@ scaled to keep pixels roughly square).</p></li>
 </div>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.fractals_chaos.similarity_dimension">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.fractals_chaos.</span></span><span class="sig-name descname"><span class="pre">similarity_dimension</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ratios</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/fractals_chaos/systems/curves.html#similarity_dimension"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.fractals_chaos.similarity_dimension" title="Link to this definition">#</a></dt>
+<dd><p>The similarity dimension <span class="math notranslate nohighlight">\(D\)</span> solving Moran’s equation <span class="math notranslate nohighlight">\(\sum_i r_i^D = 1\)</span>.</p>
+<p>For a self-similar set built from maps with contraction ratios
+<span class="math notranslate nohighlight">\(r_i\)</span> that do not overlap too much (the open set condition),
+Patrick Moran proved in 1946 that <span class="math notranslate nohighlight">\(D\)</span> equals the Hausdorff
+dimension. With <span class="math notranslate nohighlight">\(m\)</span> equal ratios <span class="math notranslate nohighlight">\(r\)</span> it reduces to
+<span class="math notranslate nohighlight">\(\log m / \log(1/r)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ratios</strong> (<em>sequence</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Contraction ratios, each in <span class="math notranslate nohighlight">\((0, 1)\)</span>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">similarity_dimension</span><span class="p">([</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>  <span class="c1"># Koch curve: log 4 / log 3</span>
+<span class="go">1.26186</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">similarity_dimension</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">]),</span> <span class="mi">6</span><span class="p">)</span>  <span class="c1"># 0.5^D + 2 * 0.25^D = 1</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.fractals_chaos.turtle_path">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.fractals_chaos.</span></span><span class="sig-name descname"><span class="pre">turtle_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">commands</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">90.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">draw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'FG'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/fractals_chaos/systems/lsystems.html#turtle_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.fractals_chaos.turtle_path" title="Link to this definition">#</a></dt>
+<dd><p>Interpret an L-system word as turtle-graphics moves.</p>
+<p><code class="docutils literal notranslate"><span class="pre">F</span></code> and <code class="docutils literal notranslate"><span class="pre">G</span></code> (or the symbols in <code class="docutils literal notranslate"><span class="pre">draw</span></code>) move forward drawing a
+line, <code class="docutils literal notranslate"><span class="pre">f</span></code> moves without drawing, <code class="docutils literal notranslate"><span class="pre">+</span></code>/<code class="docutils literal notranslate"><span class="pre">-</span></code> turn left/right by
+<code class="docutils literal notranslate"><span class="pre">angle</span></code> degrees, and <code class="docutils literal notranslate"><span class="pre">[</span></code>/<code class="docutils literal notranslate"><span class="pre">]</span></code> push and pop the turtle’s state
+(for branching plants). Other symbols are ignored.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>commands</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>)</p></li>
+<li><p><strong>angle</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Turning angle in degrees.</p></li>
+<li><p><strong>step</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>heading</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial heading in degrees (90 = up).</p></li>
+<li><p><strong>draw</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Symbols that draw a forward line.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>list of ndarray</em> – Polylines, each of shape (k, 2); a new polyline starts after each
+pen-up move or state pop.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">turtle_path</span><span class="p">(</span><span class="s2">"F+F"</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="n">heading</span><span class="o">=</span><span class="mi">0</span><span class="p">)]</span>
+<span class="go">[[[0.0, 0.0], [1.0, 0.0], [1.0, 1.0]]]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.fractals_chaos.weierstrass_function">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.fractals_chaos.</span></span><span class="sig-name descname"><span class="pre">weierstrass_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_terms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/fractals_chaos/systems/curves.html#weierstrass_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.fractals_chaos.weierstrass_function" title="Link to this definition">#</a></dt>
+<dd><p>Partial sum of the Weierstrass function <span class="math notranslate nohighlight">\(W(x) = \sum_{n \ge 0} a^n \cos(b^n \pi x)\)</span>.</p>
+<p>Karl Weierstrass showed in 1872 that for <span class="math notranslate nohighlight">\(0 &lt; a &lt; 1\)</span>, odd
+integer <span class="math notranslate nohighlight">\(b\)</span>, and <span class="math notranslate nohighlight">\(ab &gt; 1 + 3\pi/2\)</span> the sum is continuous
+everywhere but differentiable nowhere. G. H. Hardy (1916) extended
+this to all <span class="math notranslate nohighlight">\(ab \ge 1\)</span>. Its graph has box-counting dimension
+<span class="math notranslate nohighlight">\(2 + \log a / \log b\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>array_like</em>)</p></li>
+<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Amplitude ratio, <span class="math notranslate nohighlight">\(0 &lt; a &lt; 1\)</span>.</p></li>
+<li><p><strong>b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Frequency ratio.</p></li>
+<li><p><strong>n_terms</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of terms kept.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">weierstrass_function</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">n_terms</span><span class="o">=</span><span class="mi">40</span><span class="p">)),</span> <span class="mi">6</span><span class="p">)</span>  <span class="c1"># sum of 0.5^n</span>
+<span class="go">2.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </section>
 
 
@@ -1206,10 +1509,20 @@ scaled to keep pixels roughly square).</p></li>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.fractals_chaos.box_counting_dimension"><code class="docutils literal notranslate"><span class="pre">box_counting_dimension()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.fractals_chaos.chaos_game"><code class="docutils literal notranslate"><span class="pre">chaos_game()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.fractals_chaos.divider_length"><code class="docutils literal notranslate"><span class="pre">divider_length()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.fractals_chaos.dla_cluster"><code class="docutils literal notranslate"><span class="pre">dla_cluster()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.fractals_chaos.henon_map"><code class="docutils literal notranslate"><span class="pre">henon_map()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.fractals_chaos.hilbert_curve"><code class="docutils literal notranslate"><span class="pre">hilbert_curve()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.fractals_chaos.julia_set"><code class="docutils literal notranslate"><span class="pre">julia_set()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.fractals_chaos.koch_curve"><code class="docutils literal notranslate"><span class="pre">koch_curve()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.fractals_chaos.koch_snowflake"><code class="docutils literal notranslate"><span class="pre">koch_snowflake()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.fractals_chaos.lsystem"><code class="docutils literal notranslate"><span class="pre">lsystem()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.fractals_chaos.lyapunov_exponent_1d_map"><code class="docutils literal notranslate"><span class="pre">lyapunov_exponent_1d_map()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.fractals_chaos.lyapunov_exponent_flow"><code class="docutils literal notranslate"><span class="pre">lyapunov_exponent_flow()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.fractals_chaos.mandelbrot_set"><code class="docutils literal notranslate"><span class="pre">mandelbrot_set()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.fractals_chaos.similarity_dimension"><code class="docutils literal notranslate"><span class="pre">similarity_dimension()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.fractals_chaos.turtle_path"><code class="docutils literal notranslate"><span class="pre">turtle_path()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.fractals_chaos.weierstrass_function"><code class="docutils literal notranslate"><span class="pre">weierstrass_function()</span></code></a></li>
 </ul>
   </nav></div>
 

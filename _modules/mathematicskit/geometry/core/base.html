@@ -410,15 +410,15 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.geometry.core.base</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Result containers for mathematicskit.geometry.</span>
+<span></span><span class="sd">"""Result containers for mathematicskit.geometry.</span>
 
 <span class="sd">Every ``scipy.spatial``-backed algorithm in this domain (convex hull,</span>
 <span class="sd">Delaunay triangulation, Voronoi diagram) returns one of the small</span>
-<span class="sd">dataclasses below, extracting the fields mathematicskit&#39;s examples/tests</span>
-<span class="sd">actually use from scipy&#39;s own (already rich) result objects, for a</span>
-<span class="sd">consistent interface alongside this domain&#39;s hand-rolled algorithms</span>
+<span class="sd">dataclasses below, extracting the fields mathematicskit's examples/tests</span>
+<span class="sd">actually use from scipy's own (already rich) result objects, for a</span>
+<span class="sd">consistent interface alongside this domain's hand-rolled algorithms</span>
 <span class="sd">(segment intersection, point-in-polygon, the Frenet-Serret frame).</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -427,35 +427,45 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ConvexHullResult&quot;</span><span class="p">,</span> <span class="s2">&quot;TriangulationResult&quot;</span><span class="p">,</span> <span class="s2">&quot;VoronoiResult&quot;</span><span class="p">,</span> <span class="s2">&quot;CurveFrameResult&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"ConvexHullResult"</span><span class="p">,</span>
+    <span class="s2">"TriangulationResult"</span><span class="p">,</span>
+    <span class="s2">"VoronoiResult"</span><span class="p">,</span>
+    <span class="s2">"CurveFrameResult"</span><span class="p">,</span>
+    <span class="s2">"SurfaceCurvatureResult"</span><span class="p">,</span>
+    <span class="s2">"PolyhedronResult"</span><span class="p">,</span>
+    <span class="s2">"CircleResult"</span><span class="p">,</span>
+    <span class="s2">"LatticePolygonResult"</span><span class="p">,</span>
+    <span class="s2">"ClosestPairResult"</span><span class="p">,</span>
+<span class="p">]</span>
 
 
 <div class="viewcode-block" id="ConvexHullResult">
 <a class="viewcode-back" href="../../../../api/geometry.html#mathematicskit.geometry.ConvexHullResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">ConvexHullResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for a convex hull.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Container for a convex hull."""</span>
 
     <span class="n">points</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (n, d): The input points.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""ndarray, shape (n, d): The input points."""</span>
 
     <span class="n">vertices</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, int: Indices into `points` of the hull&#39;s vertices (in</span>
-<span class="sd">    counterclockwise order for 2D, via ``scipy.spatial.ConvexHull``).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""ndarray, int: Indices into `points` of the hull's vertices (in</span>
+<span class="sd">    counterclockwise order for 2D, via ``scipy.spatial.ConvexHull``)."""</span>
 
     <span class="n">simplices</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, int, shape (n_facets, d): Indices forming each facet</span>
-<span class="sd">    (edges in 2D, triangles in 3D).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""ndarray, int, shape (n_facets, d): Indices forming each facet</span>
+<span class="sd">    (edges in 2D, triangles in 3D)."""</span>
 
     <span class="n">volume</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: The hull&#39;s enclosed volume (*area*, in 2D -- scipy&#39;s own</span>
-<span class="sd">    naming convention).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""float: The hull's enclosed volume (*area*, in 2D -- scipy's own</span>
+<span class="sd">    naming convention)."""</span>
 
     <span class="n">area</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: The hull&#39;s surface area (*perimeter*, in 2D).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""float: The hull's surface area (*perimeter*, in 2D)."""</span>
 
-    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;str: ``&quot;qhull&quot;`` (via scipy) or ``&quot;graham_scan&quot;`` (hand-rolled, 2D only).&quot;&quot;&quot;</span></div>
+    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
+<span class="w">    </span><span class="sd">"""str: ``"qhull"`` (via scipy) or ``"graham_scan"`` (hand-rolled, 2D only)."""</span></div>
 
 
 
@@ -463,11 +473,11 @@
 <a class="viewcode-back" href="../../../../api/geometry.html#mathematicskit.geometry.TriangulationResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">TriangulationResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for a Delaunay triangulation.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Container for a Delaunay triangulation."""</span>
 
     <span class="n">points</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
     <span class="n">simplices</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, int, shape (n_triangles, d + 1): Indices of each simplex&#39;s vertices.&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sd">"""ndarray, int, shape (n_triangles, d + 1): Indices of each simplex's vertices."""</span></div>
 
 
 
@@ -475,20 +485,20 @@
 <a class="viewcode-back" href="../../../../api/geometry.html#mathematicskit.geometry.VoronoiResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">VoronoiResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for a Voronoi diagram (the Delaunay triangulation&#39;s dual).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Container for a Voronoi diagram (the Delaunay triangulation's dual)."""</span>
 
     <span class="n">points</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
     <span class="n">vertices</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (n_vertices, d): Voronoi vertices (circumcenters of</span>
-<span class="sd">    the dual Delaunay simplices).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""ndarray, shape (n_vertices, d): Voronoi vertices (circumcenters of</span>
+<span class="sd">    the dual Delaunay simplices)."""</span>
 
     <span class="n">regions</span><span class="p">:</span> <span class="nb">list</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;list of list of int: Each input point&#39;s Voronoi region, as</span>
-<span class="sd">    indices into `vertices` (``-1`` marks an unbounded region).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""list of list of int: Each input point's Voronoi region, as</span>
+<span class="sd">    indices into `vertices` (``-1`` marks an unbounded region)."""</span>
 
     <span class="n">ridge_points</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, int, shape (n_ridges, 2): The two input points each</span>
-<span class="sd">    Voronoi ridge separates.&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sd">"""ndarray, int, shape (n_ridges, 2): The two input points each</span>
+<span class="sd">    Voronoi ridge separates."""</span></div>
 
 
 
@@ -496,25 +506,110 @@
 <a class="viewcode-back" href="../../../../api/geometry.html#mathematicskit.geometry.CurveFrameResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">CurveFrameResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Container for a parametric curve&#39;s Frenet-Serret frame.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Container for a parametric curve's Frenet-Serret frame."""</span>
 
     <span class="n">t</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
     <span class="n">position</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
     <span class="n">tangent</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray: Unit tangent vector :math:`T` at each ``t``.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""ndarray: Unit tangent vector :math:`T` at each ``t``."""</span>
 
     <span class="n">normal</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray: Unit (principal) normal vector :math:`N` at each ``t``.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""ndarray: Unit (principal) normal vector :math:`N` at each ``t``."""</span>
 
     <span class="n">binormal</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, optional: Unit binormal :math:`B = T \\times N` (3D curves only).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""ndarray, optional: Unit binormal :math:`B = T \\times N` (3D curves only)."""</span>
 
     <span class="n">curvature</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([]))</span>
     <span class="n">torsion</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, optional: Torsion (3D curves only).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""ndarray, optional: Torsion (3D curves only)."""</span>
 
     <span class="n">arc_length</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([]))</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray: Cumulative arc length from ``t[0]`` to each ``t[k]``.&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sd">"""ndarray: Cumulative arc length from ``t[0]`` to each ``t[k]``."""</span></div>
+
+
+
+<div class="viewcode-block" id="SurfaceCurvatureResult">
+<a class="viewcode-back" href="../../../../api/geometry.html#mathematicskit.geometry.SurfaceCurvatureResult">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SurfaceCurvatureResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Container for the curvatures of a parametric surface :math:`\mathbf{r}(u, v)` on a grid."""</span>
+
+    <span class="n">u</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">v</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">points</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""ndarray, shape (3, nu, nv): Surface points :math:`\mathbf{r}(u, v)`."""</span>
+
+    <span class="n">gaussian</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sd">"""ndarray, shape (nu, nv): Gaussian curvature :math:`K = (LN - M^2)/(EG - F^2)`."""</span>
+
+    <span class="n">mean</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sd">"""ndarray, shape (nu, nv): Mean curvature :math:`H`."""</span>
+
+    <span class="n">area_element</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""ndarray, shape (nu, nv): :math:`\sqrt{EG - F^2}`, so that :math:`dA = \sqrt{EG - F^2}\,du\,dv`."""</span></div>
+
+
+
+<div class="viewcode-block" id="PolyhedronResult">
+<a class="viewcode-back" href="../../../../api/geometry.html#mathematicskit.geometry.PolyhedronResult">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">PolyhedronResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Container for the vertex, edge, and face counts of a convex polyhedron."""</span>
+
+    <span class="n">vertices</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">edges</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">faces</span><span class="p">:</span> <span class="nb">int</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">euler_characteristic</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""int: :math:`V - E + F`, equal to 2 for every convex polyhedron."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">edges</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">faces</span></div>
+
+
+
+<div class="viewcode-block" id="CircleResult">
+<a class="viewcode-back" href="../../../../api/geometry.html#mathematicskit.geometry.CircleResult">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CircleResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Container for a circle in the plane."""</span>
+
+    <span class="n">center</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">radius</span><span class="p">:</span> <span class="nb">float</span></div>
+
+
+
+<div class="viewcode-block" id="LatticePolygonResult">
+<a class="viewcode-back" href="../../../../api/geometry.html#mathematicskit.geometry.LatticePolygonResult">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">LatticePolygonResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Container for the lattice-point counts of a polygon with integer vertices."""</span>
+
+    <span class="n">interior</span><span class="p">:</span> <span class="nb">int</span>
+<span class="w">    </span><span class="sd">"""int: Lattice points strictly inside the polygon."""</span>
+
+    <span class="n">boundary</span><span class="p">:</span> <span class="nb">int</span>
+<span class="w">    </span><span class="sd">"""int: Lattice points on the polygon's boundary."""</span>
+
+    <span class="n">area</span><span class="p">:</span> <span class="nb">float</span>
+<span class="w">    </span><span class="sd">"""float: The polygon's area, from the shoelace formula."""</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pick_area</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""float: Pick's formula :math:`I + B/2 - 1`."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">interior</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span></div>
+
+
+
+<div class="viewcode-block" id="ClosestPairResult">
+<a class="viewcode-back" href="../../../../api/geometry.html#mathematicskit.geometry.ClosestPairResult">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ClosestPairResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Container for the closest pair of points in a point set."""</span>
+
+    <span class="n">indices</span><span class="p">:</span> <span class="nb">tuple</span>
+<span class="w">    </span><span class="sd">"""tuple of int: Indices of the two closest points."""</span>
+
+    <span class="n">distance</span><span class="p">:</span> <span class="nb">float</span></div>
 
 </pre></div>
 

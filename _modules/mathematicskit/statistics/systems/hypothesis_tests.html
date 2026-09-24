@@ -410,21 +410,21 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.statistics.systems.hypothesis_tests</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Hypothesis tests: one/two-sample z- and t-tests, chi-square</span>
+<span></span><span class="sa">r</span><span class="sd">"""Hypothesis tests: one/two-sample z- and t-tests, chi-square</span>
 <span class="sd">goodness-of-fit and independence tests, and one-way ANOVA.</span>
 
 <span class="sd">The z-tests use :class:`mathematicskit.probability.Normal` for the p-value</span>
-<span class="sd">(mathematicskit.probability&#39;s own reference distribution); the t-test,</span>
-<span class="sd">chi-square tests, and ANOVA reference distributions (Student&#39;s t,</span>
-<span class="sd">:math:`\chi^2`, F) aren&#39;t part of mathematicskit.probability&#39;s roster (which</span>
+<span class="sd">(mathematicskit.probability's own reference distribution); the t-test,</span>
+<span class="sd">chi-square tests, and ANOVA reference distributions (Student's t,</span>
+<span class="sd">:math:`\chi^2`, F) aren't part of mathematicskit.probability's roster (which</span>
 <span class="sd">covers binomial/Poisson/geometric/uniform/exponential/normal/gamma), so</span>
 <span class="sd">their p-values come directly from :mod:`scipy.stats` (``scipy.stats.t``,</span>
-<span class="sd">``.chi2``, ``.f``) -- consistent with the same &quot;call the library</span>
-<span class="sd">directly&quot; rule. The test statistics themselves are simple closed-form</span>
+<span class="sd">``.chi2``, ``.f``) -- consistent with the same "call the library</span>
+<span class="sd">directly" rule. The test statistics themselves are simple closed-form</span>
 <span class="sd">arithmetic, not something a library computes for you as a standalone</span>
 <span class="sd">step. See DeGroot &amp; Schervish, *Probability and Statistics*, 4th ed.,</span>
 <span class="sd">Ch. 9 (estimation) and Ch. 10 (hypothesis testing).</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -435,32 +435,32 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.statistics.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">HypothesisTestResult</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;one_sample_z_test&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;two_sample_z_test&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;one_sample_t_test&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;two_sample_t_test&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;chi_square_goodness_of_fit&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;chi_square_independence&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;one_way_anova&quot;</span><span class="p">,</span>
+    <span class="s2">"one_sample_z_test"</span><span class="p">,</span>
+    <span class="s2">"two_sample_z_test"</span><span class="p">,</span>
+    <span class="s2">"one_sample_t_test"</span><span class="p">,</span>
+    <span class="s2">"two_sample_t_test"</span><span class="p">,</span>
+    <span class="s2">"chi_square_goodness_of_fit"</span><span class="p">,</span>
+    <span class="s2">"chi_square_independence"</span><span class="p">,</span>
+    <span class="s2">"one_way_anova"</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="n">_STANDARD_NORMAL</span> <span class="o">=</span> <span class="n">Normal</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_p_value</span><span class="p">(</span><span class="n">stat</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">cdf</span><span class="p">,</span> <span class="n">alternative</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">alternative</span> <span class="o">==</span> <span class="s2">&quot;two-sided&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">alternative</span> <span class="o">==</span> <span class="s2">"two-sided"</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="nb">min</span><span class="p">(</span><span class="n">cdf</span><span class="p">(</span><span class="n">stat</span><span class="p">),</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">cdf</span><span class="p">(</span><span class="n">stat</span><span class="p">)))</span>
-    <span class="k">if</span> <span class="n">alternative</span> <span class="o">==</span> <span class="s2">&quot;less&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">alternative</span> <span class="o">==</span> <span class="s2">"less"</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">cdf</span><span class="p">(</span><span class="n">stat</span><span class="p">))</span>
-    <span class="k">if</span> <span class="n">alternative</span> <span class="o">==</span> <span class="s2">&quot;greater&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">alternative</span> <span class="o">==</span> <span class="s2">"greater"</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">cdf</span><span class="p">(</span><span class="n">stat</span><span class="p">))</span>
-    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;alternative must be &#39;two-sided&#39;, &#39;less&#39;, or &#39;greater&#39;, got </span><span class="si">{</span><span class="n">alternative</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"alternative must be 'two-sided', 'less', or 'greater', got </span><span class="si">{</span><span class="n">alternative</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="one_sample_z_test">
 <a class="viewcode-back" href="../../../../api/statistics.html#mathematicskit.statistics.one_sample_z_test">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">one_sample_z_test</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">mu0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">alternative</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;two-sided&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HypothesisTestResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;One-sample z-test for the mean, with known population standard deviation.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">one_sample_z_test</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">mu0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">alternative</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"two-sided"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HypothesisTestResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""One-sample z-test for the mean, with known population standard deviation.</span>
 
 <span class="sd">    :math:`z = \dfrac{\bar x - \mu_0}{\sigma/\sqrt n}`, referred to</span>
 <span class="sd">    :class:`mathematicskit.probability.Normal`\ (0, 1). See DeGroot &amp; Schervish,</span>
@@ -473,7 +473,7 @@
 <span class="sd">        Hypothesized mean under :math:`H_0`.</span>
 <span class="sd">    sigma : float</span>
 <span class="sd">        Known population standard deviation.</span>
-<span class="sd">    alternative : {&quot;two-sided&quot;, &quot;less&quot;, &quot;greater&quot;}</span>
+<span class="sd">    alternative : {"two-sided", "less", "greater"}</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -487,19 +487,19 @@
 <span class="sd">    &gt;&gt;&gt; result = one_sample_z_test(data, mu0=5.0, sigma=2.0)</span>
 <span class="sd">    &gt;&gt;&gt; bool(result.reject_null(alpha=0.05))</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">z</span> <span class="o">=</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">-</span> <span class="n">mu0</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">sigma</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">_p_value</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">_STANDARD_NORMAL</span><span class="o">.</span><span class="n">cdf</span><span class="p">,</span> <span class="n">alternative</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">HypothesisTestResult</span><span class="p">(</span><span class="n">statistic</span><span class="o">=</span><span class="n">z</span><span class="p">,</span> <span class="n">p_value</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;one_sample_z&quot;</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">HypothesisTestResult</span><span class="p">(</span><span class="n">statistic</span><span class="o">=</span><span class="n">z</span><span class="p">,</span> <span class="n">p_value</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"one_sample_z"</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="two_sample_z_test">
 <a class="viewcode-back" href="../../../../api/statistics.html#mathematicskit.statistics.two_sample_z_test">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">two_sample_z_test</span><span class="p">(</span><span class="n">data1</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">data2</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">sigma1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">sigma2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">alternative</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;two-sided&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HypothesisTestResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Two-sample z-test for a difference of means, with known population standard deviations.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">two_sample_z_test</span><span class="p">(</span><span class="n">data1</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">data2</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">sigma1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">sigma2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">alternative</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"two-sided"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HypothesisTestResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Two-sample z-test for a difference of means, with known population standard deviations.</span>
 
 <span class="sd">    :math:`z = \dfrac{\bar x_1 - \bar x_2}{\sqrt{\sigma_1^2/n_1 +</span>
 <span class="sd">    \sigma_2^2/n_2}}`. See DeGroot &amp; Schervish, *Probability and</span>
@@ -510,27 +510,27 @@
 <span class="sd">    data1, data2 : array-like</span>
 <span class="sd">    sigma1, sigma2 : float</span>
 <span class="sd">        Known population standard deviations.</span>
-<span class="sd">    alternative : {&quot;two-sided&quot;, &quot;less&quot;, &quot;greater&quot;}</span>
+<span class="sd">    alternative : {"two-sided", "less", "greater"}</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    HypothesisTestResult</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data2</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span> <span class="o">=</span> <span class="n">x1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x2</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">se</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sigma1</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">n1</span> <span class="o">+</span> <span class="n">sigma2</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">n2</span><span class="p">)</span>
     <span class="n">z</span> <span class="o">=</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x1</span><span class="p">))</span> <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x2</span><span class="p">)))</span> <span class="o">/</span> <span class="n">se</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">_p_value</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">_STANDARD_NORMAL</span><span class="o">.</span><span class="n">cdf</span><span class="p">,</span> <span class="n">alternative</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">HypothesisTestResult</span><span class="p">(</span><span class="n">statistic</span><span class="o">=</span><span class="n">z</span><span class="p">,</span> <span class="n">p_value</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;two_sample_z&quot;</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">HypothesisTestResult</span><span class="p">(</span><span class="n">statistic</span><span class="o">=</span><span class="n">z</span><span class="p">,</span> <span class="n">p_value</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"two_sample_z"</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="one_sample_t_test">
 <a class="viewcode-back" href="../../../../api/statistics.html#mathematicskit.statistics.one_sample_t_test">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">one_sample_t_test</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">mu0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">alternative</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;two-sided&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HypothesisTestResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;One-sample t-test for the mean, with unknown population standard deviation.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">one_sample_t_test</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">mu0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">alternative</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"two-sided"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HypothesisTestResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""One-sample t-test for the mean, with unknown population standard deviation.</span>
 
-<span class="sd">    :math:`t = \dfrac{\bar x - \mu_0}{s/\sqrt n}`, referred to Student&#39;s</span>
+<span class="sd">    :math:`t = \dfrac{\bar x - \mu_0}{s/\sqrt n}`, referred to Student's</span>
 <span class="sd">    t distribution with :math:`n-1` degrees of freedom</span>
 <span class="sd">    (:class:`scipy.stats.t`). See DeGroot &amp; Schervish, *Probability and</span>
 <span class="sd">    Statistics*, 4th ed., Sec. 9.5.</span>
@@ -539,7 +539,7 @@
 <span class="sd">    ----------</span>
 <span class="sd">    data : array-like, shape (n,)</span>
 <span class="sd">    mu0 : float</span>
-<span class="sd">    alternative : {&quot;two-sided&quot;, &quot;less&quot;, &quot;greater&quot;}</span>
+<span class="sd">    alternative : {"two-sided", "less", "greater"}</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -553,23 +553,23 @@
 <span class="sd">    &gt;&gt;&gt; result = one_sample_t_test(data, mu0=100.0)</span>
 <span class="sd">    &gt;&gt;&gt; result.df</span>
 <span class="sd">    39.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">df</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">-</span> <span class="n">mu0</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">_p_value</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">df</span><span class="p">),</span> <span class="n">alternative</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">HypothesisTestResult</span><span class="p">(</span><span class="n">statistic</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">p_value</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;one_sample_t&quot;</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">HypothesisTestResult</span><span class="p">(</span><span class="n">statistic</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">p_value</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"one_sample_t"</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="two_sample_t_test">
 <a class="viewcode-back" href="../../../../api/statistics.html#mathematicskit.statistics.two_sample_t_test">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">two_sample_t_test</span><span class="p">(</span><span class="n">data1</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">data2</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">equal_var</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">alternative</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;two-sided&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HypothesisTestResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Two-sample t-test for a difference of means.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">two_sample_t_test</span><span class="p">(</span><span class="n">data1</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">data2</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">equal_var</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">alternative</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"two-sided"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HypothesisTestResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Two-sample t-test for a difference of means.</span>
 
-<span class="sd">    Pooled-variance (&quot;Student&#39;s&quot;) t-test if ``equal_var=True``,</span>
-<span class="sd">    otherwise Welch&#39;s t-test with the Welch-Satterthwaite degrees of</span>
+<span class="sd">    Pooled-variance ("Student's") t-test if ``equal_var=True``,</span>
+<span class="sd">    otherwise Welch's t-test with the Welch-Satterthwaite degrees of</span>
 <span class="sd">    freedom. Referred to :class:`scipy.stats.t`. See DeGroot &amp; Schervish,</span>
 <span class="sd">    *Probability and Statistics*, 4th ed., Sec. 9.6, and Welch (1947),</span>
 <span class="sd">    Biometrika 34.</span>
@@ -578,7 +578,7 @@
 <span class="sd">    ----------</span>
 <span class="sd">    data1, data2 : array-like</span>
 <span class="sd">    equal_var : bool</span>
-<span class="sd">    alternative : {&quot;two-sided&quot;, &quot;less&quot;, &quot;greater&quot;}</span>
+<span class="sd">    alternative : {"two-sided", "less", "greater"}</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -593,7 +593,7 @@
 <span class="sd">    &gt;&gt;&gt; result = two_sample_t_test(a, b)</span>
 <span class="sd">    &gt;&gt;&gt; bool(result.statistic &lt; 0)</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data2</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span> <span class="o">=</span> <span class="n">x1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x2</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -607,19 +607,27 @@
         <span class="n">df</span> <span class="o">=</span> <span class="p">(</span><span class="n">v1</span> <span class="o">/</span> <span class="n">n1</span> <span class="o">+</span> <span class="n">v2</span> <span class="o">/</span> <span class="n">n2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="p">((</span><span class="n">v1</span> <span class="o">/</span> <span class="n">n1</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">n1</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">v2</span> <span class="o">/</span> <span class="n">n2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">n2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">mean_diff</span> <span class="o">/</span> <span class="n">se</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">_p_value</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">df</span><span class="p">),</span> <span class="n">alternative</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">HypothesisTestResult</span><span class="p">(</span><span class="n">statistic</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">p_value</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">df</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;two_sample_t&quot;</span> <span class="k">if</span> <span class="n">equal_var</span> <span class="k">else</span> <span class="s2">&quot;welch_t&quot;</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">HypothesisTestResult</span><span class="p">(</span><span class="n">statistic</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">p_value</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">df</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s2">"two_sample_t"</span> <span class="k">if</span> <span class="n">equal_var</span> <span class="k">else</span> <span class="s2">"welch_t"</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="chi_square_goodness_of_fit">
 <a class="viewcode-back" href="../../../../api/statistics.html#mathematicskit.statistics.chi_square_goodness_of_fit">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">chi_square_goodness_of_fit</span><span class="p">(</span><span class="n">observed</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">expected</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HypothesisTestResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Chi-square goodness-of-fit test: does `observed` match `expected` proportions/counts?</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Chi-square goodness-of-fit test: does `observed` match `expected` proportions/counts?</span>
 
 <span class="sd">    :math:`\chi^2 = \sum_i (O_i - E_i)^2/E_i`, referred to</span>
 <span class="sd">    :class:`scipy.stats.chi2` with :math:`k-1` degrees of freedom</span>
-<span class="sd">    (``k`` categories). See DeGroot &amp; Schervish, *Probability and</span>
-<span class="sd">    Statistics*, 4th ed., Sec. 10.3.</span>
+<span class="sd">    (``k`` categories).</span>
+
+<span class="sd">    The single degree of freedom subtracted is the one used up by the</span>
+<span class="sd">    constraint that the counts sum to :math:`n`; this function assumes</span>
+<span class="sd">    `expected` is fully specified in advance. If the expected counts were</span>
+<span class="sd">    themselves obtained by estimating :math:`m` parameters from the same</span>
+<span class="sd">    data (fitting a Poisson rate, say), the correct degrees of freedom are</span>
+<span class="sd">    :math:`k-1-m`, and the p-value reported here will be too large --</span>
+<span class="sd">    conservative about rejecting :math:`H_0`. See DeGroot &amp; Schervish,</span>
+<span class="sd">    *Probability and Statistics*, 4th ed., Sec. 10.3.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -643,20 +651,20 @@
 <span class="sd">    5.0</span>
 <span class="sd">    &gt;&gt;&gt; result.reject_null(alpha=0.05)</span>
 <span class="sd">    False</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">o</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">observed</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">chi2</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">o</span> <span class="o">-</span> <span class="n">e</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">e</span><span class="p">))</span>
     <span class="n">df</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">o</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">p</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">chi2</span><span class="p">,</span> <span class="n">df</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">HypothesisTestResult</span><span class="p">(</span><span class="n">statistic</span><span class="o">=</span><span class="n">chi2</span><span class="p">,</span> <span class="n">p_value</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;chi_square_goodness_of_fit&quot;</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">HypothesisTestResult</span><span class="p">(</span><span class="n">statistic</span><span class="o">=</span><span class="n">chi2</span><span class="p">,</span> <span class="n">p_value</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"chi_square_goodness_of_fit"</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="chi_square_independence">
 <a class="viewcode-back" href="../../../../api/statistics.html#mathematicskit.statistics.chi_square_independence">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">chi_square_independence</span><span class="p">(</span><span class="n">contingency_table</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HypothesisTestResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Chi-square test of independence for a two-way contingency table.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Chi-square test of independence for a two-way contingency table.</span>
 
 <span class="sd">    Expected counts under independence are :math:`E_{ij} = (\text{row</span>
 <span class="sd">    total}_i)(\text{col total}_j)/N`; :math:`\chi^2 = \sum_{ij}</span>
@@ -672,7 +680,7 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    HypothesisTestResult</span>
-<span class="sd">        ``extra[&quot;expected&quot;]`` holds the expected-counts table.</span>
+<span class="sd">        ``extra["expected"]`` holds the expected-counts table.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -683,7 +691,7 @@
 <span class="sd">    1.0</span>
 <span class="sd">    &gt;&gt;&gt; result.reject_null(alpha=0.01)</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">o</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">contingency_table</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">row_totals</span> <span class="o">=</span> <span class="n">o</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">col_totals</span> <span class="o">=</span> <span class="n">o</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -692,14 +700,14 @@
     <span class="n">chi2</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">o</span> <span class="o">-</span> <span class="n">e</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">e</span><span class="p">))</span>
     <span class="n">df</span> <span class="o">=</span> <span class="nb">float</span><span class="p">((</span><span class="n">o</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">o</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
     <span class="n">p</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">chi2</span><span class="p">,</span> <span class="n">df</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">HypothesisTestResult</span><span class="p">(</span><span class="n">statistic</span><span class="o">=</span><span class="n">chi2</span><span class="p">,</span> <span class="n">p_value</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;chi_square_independence&quot;</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;expected&quot;</span><span class="p">:</span> <span class="n">e</span><span class="p">})</span></div>
+    <span class="k">return</span> <span class="n">HypothesisTestResult</span><span class="p">(</span><span class="n">statistic</span><span class="o">=</span><span class="n">chi2</span><span class="p">,</span> <span class="n">p_value</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"chi_square_independence"</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="p">{</span><span class="s2">"expected"</span><span class="p">:</span> <span class="n">e</span><span class="p">})</span></div>
 
 
 
 <div class="viewcode-block" id="one_way_anova">
 <a class="viewcode-back" href="../../../../api/statistics.html#mathematicskit.statistics.one_way_anova">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">one_way_anova</span><span class="p">(</span><span class="o">*</span><span class="n">groups</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HypothesisTestResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;One-way analysis of variance: do 2+ groups share a common mean?</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""One-way analysis of variance: do 2+ groups share a common mean?</span>
 
 <span class="sd">    :math:`F = \dfrac{\text{between-group variance}}{\text{within-group</span>
 <span class="sd">    variance}} = \dfrac{SSB/(k-1)}{SSW/(N-k)}`, referred to</span>
@@ -715,7 +723,7 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    HypothesisTestResult</span>
-<span class="sd">        ``extra[&quot;group_means&quot;]`` holds each group&#39;s sample mean.</span>
+<span class="sd">        ``extra["group_means"]`` holds each group's sample mean.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -726,9 +734,9 @@
 <span class="sd">    &gt;&gt;&gt; result = one_way_anova(a, b, c)</span>
 <span class="sd">    &gt;&gt;&gt; result.reject_null(alpha=0.01)</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">groups</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;one_way_anova needs at least 2 groups&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"one_way_anova needs at least 2 groups"</span><span class="p">)</span>
     <span class="n">arrays</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">]</span>
     <span class="n">k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">arrays</span><span class="p">)</span>
     <span class="n">n_total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">arrays</span><span class="p">)</span>
@@ -740,7 +748,7 @@
     <span class="n">p</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">stats</span><span class="o">.</span><span class="n">f</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">f_stat</span><span class="p">,</span> <span class="n">df_between</span><span class="p">,</span> <span class="n">df_within</span><span class="p">))</span>
     <span class="n">group_means</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">a</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">arrays</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">HypothesisTestResult</span><span class="p">(</span>
-        <span class="n">statistic</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">f_stat</span><span class="p">),</span> <span class="n">p_value</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">df_between</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;one_way_anova&quot;</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;df_within&quot;</span><span class="p">:</span> <span class="n">df_within</span><span class="p">,</span> <span class="s2">&quot;group_means&quot;</span><span class="p">:</span> <span class="n">group_means</span><span class="p">}</span>
+        <span class="n">statistic</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">f_stat</span><span class="p">),</span> <span class="n">p_value</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">df_between</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"one_way_anova"</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="p">{</span><span class="s2">"df_within"</span><span class="p">:</span> <span class="n">df_within</span><span class="p">,</span> <span class="s2">"group_means"</span><span class="p">:</span> <span class="n">group_means</span><span class="p">}</span>
     <span class="p">)</span></div>
 
 </pre></div>

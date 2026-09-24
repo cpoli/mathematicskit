@@ -5,8 +5,9 @@
 Numerical stability
 --------------------
 
-Least squares via the normal equations vs. via QR, and why the former
-squares the condition number of the design matrix.
+The condition number: how much a linear system amplifies errors in its
+data, and why least squares via the normal equations squares it while
+QR does not.
 
 
 .. raw:: html
@@ -22,18 +23,18 @@ squares the condition number of the design matrix.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Solving the normal equations A^T A x = A^T b is simple but squares the condition number of A; solving via A = Q R instead avoids ever forming A^T A, so the effective conditioning stays at kappa(A) rather than kappa(A)^2.">
+    <div class="sphx-glr-thumbcontainer" tooltip="kappa_2(A) = sigma_max / sigma_min bounds how much a relative perturbation of the data can grow in the solution of A x = b, whichever algorithm solves it: expect to lose about log10(kappa) digits. The same number explains why least squares through the normal equations A^T A x = A^T b is fragile -- kappa(A^T A) = kappa(A)^2 -- while QR works with kappa(A) itself.">
 
 .. only:: html
 
-  .. image:: /api/gallery/linalg/stability/images/thumb/sphx_glr_plot_01_normal_equations_vs_qr_thumb.png
+  .. image:: /api/gallery/linalg/stability/images/thumb/sphx_glr_plot_01_condition_number_thumb.png
     :alt:
 
-  :doc:`/api/gallery/linalg/stability/plot_01_normal_equations_vs_qr`
+  :doc:`/api/gallery/linalg/stability/plot_01_condition_number`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Least squares: normal equations vs. QR</div>
+      <div class="sphx-glr-thumbnail-title">Turing's condition number: how much a linear system amplifies error</div>
     </div>
 
 
@@ -47,5 +48,5 @@ squares the condition number of the design matrix.
 .. toctree::
    :hidden:
 
-   /api/gallery/linalg/stability/plot_01_normal_equations_vs_qr
+   /api/gallery/linalg/stability/plot_01_condition_number
 

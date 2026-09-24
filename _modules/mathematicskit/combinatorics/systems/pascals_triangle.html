@@ -410,7 +410,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.combinatorics.systems.pascals_triangle</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Pascal&#39;s triangle: the binomial-coefficient recurrence, built by hand.</span>
+<span></span><span class="sa">r</span><span class="sd">"""Pascal's triangle: the binomial-coefficient recurrence, built by hand.</span>
 
 <span class="sd">Kept hand-rolled purely as a pedagogical illustration of the recurrence</span>
 <span class="sd">:math:`\binom{n}{k} = \binom{n-1}{k-1}+\binom{n-1}{k}` itself -- for</span>
@@ -418,18 +418,18 @@
 <span class="sd">:func:`mathematicskit.combinatorics.systems.counting.combinations_count`</span>
 <span class="sd">(:func:`scipy.special.comb`) is the primary API. See Graham, Knuth &amp;</span>
 <span class="sd">Patashnik, *Concrete Mathematics*, 2nd ed., Sec. 5.1, eq. (5.8) (the</span>
-<span class="sd">&quot;Pascal&#39;s Triangle&quot; recurrence and its addition-formula proof).</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"Pascal's Triangle" recurrence and its addition-formula proof).</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;pascals_triangle&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"pascals_triangle"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="pascals_triangle">
 <a class="viewcode-back" href="../../../../api/combinatorics.html#mathematicskit.combinatorics.pascals_triangle">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">pascals_triangle</span><span class="p">(</span><span class="n">n_rows</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Build the first `n_rows` rows of Pascal&#39;s triangle via the addition recurrence.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Build the first `n_rows` rows of Pascal's triangle via the addition recurrence.</span>
 
 <span class="sd">    Row ``n`` (0-indexed) holds :math:`\binom{n}{0}, \dots, \binom{n}{n}`,</span>
 <span class="sd">    each computed as the sum of the two entries above it in the previous</span>
@@ -450,9 +450,9 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; pascals_triangle(5)</span>
 <span class="sd">    [[1], [1, 1], [1, 2, 1], [1, 3, 3, 1], [1, 4, 6, 4, 1]]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">n_rows</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;n_rows must be &gt;= 1&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"n_rows must be &gt;= 1"</span><span class="p">)</span>
     <span class="n">triangle</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">]]</span>
     <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_rows</span><span class="p">):</span>
         <span class="n">prev</span> <span class="o">=</span> <span class="n">triangle</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>

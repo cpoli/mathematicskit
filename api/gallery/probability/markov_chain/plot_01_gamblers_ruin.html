@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Gambler’s ruin: absorption probabilities and expected duration &#8212; mathematicskit 0.2.0 documentation</title>
+    <title>Markov chains: gambler’s ruin as an absorbing chain &#8212; mathematicskit 0.2.0 documentation</title>
   
   
   
@@ -52,7 +52,7 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="Monte Carlo integration" href="../monte_carlo/index.html" />
+    <link rel="next" title="Kolmogorov’s equations: a continuous-time Markov chain" href="plot_02_continuous_time_chain.html" />
     <link rel="prev" title="Markov chains" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -374,47 +374,78 @@
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../abstract_algebra/index.html">mathematicskit.abstract_algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../abstract_algebra/actions/index.html">Group actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../abstract_algebra/codes/index.html">Error-correcting codes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../abstract_algebra/finite_fields/index.html">Finite fields</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../abstract_algebra/groups/index.html">Groups</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../abstract_algebra/homomorphisms/index.html">Homomorphisms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../abstract_algebra/polynomial_ring/index.html">Polynomial ring arithmetic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../abstract_algebra/structure/index.html">Group structure</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../abstract_algebra/subgroups/index.html">Subgroups and cosets</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../calculus/index.html">mathematicskit.calculus</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../calculus/autodiff/index.html">Reverse-mode autodiff</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../calculus/dual_numbers/index.html">Dual numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../calculus/exhaustion/index.html">Method of exhaustion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../calculus/finite_differences/index.html">Finite differences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../calculus/newton_leibniz/index.html">Newton and Leibniz</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../calculus/quadrature/index.html">Quadrature</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../calculus/taylor_series/index.html">Taylor series</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../combinatorics/index.html">mathematicskit.combinatorics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../combinatorics/counting/index.html">Counting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../combinatorics/designs/index.html">Combinatorial designs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../combinatorics/extremal/index.html">Extremal combinatorics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../combinatorics/inclusion_exclusion/index.html">Inclusion-exclusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../combinatorics/matching/index.html">Matchings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../combinatorics/necklaces/index.html">Necklaces</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../combinatorics/partitions/index.html">Integer partitions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../combinatorics/pascals_triangle/index.html">Pascal’s triangle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../combinatorics/sequences/index.html">Integer sequences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../combinatorics/special_numbers/index.html">Special numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../combinatorics/trees/index.html">Labeled trees</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../fractals_chaos/index.html">mathematicskit.fractals_chaos</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../fractals_chaos/box_counting/index.html">Box-counting dimension</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../fractals_chaos/cellular_automata/index.html">Cellular automata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fractals_chaos/curves/index.html">Fractal curves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fractals_chaos/dla/index.html">Aggregation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../fractals_chaos/ifs/index.html">Iterated function systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fractals_chaos/lsystems/index.html">Lindenmayer systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../fractals_chaos/lyapunov/index.html">Lyapunov exponents</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../fractals_chaos/mandelbrot_julia/index.html">Mandelbrot and Julia sets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fractals_chaos/maps/index.html">Discrete maps</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../geometry/index.html">mathematicskit.geometry</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../geometry/bezier/index.html">Bézier curves</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../geometry/convex_hull/index.html">Convex hull</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../geometry/curves/index.html">Curves and the Frenet-Serret frame</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../geometry/intersections/index.html">Segment intersection and point-in-polygon</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../geometry/polygon/index.html">Polygon area and centroid</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../geometry/triangulation/index.html">Delaunay triangulation and Voronoi diagrams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../geometry/distances/index.html">Distances between shapes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../geometry/enclosing/index.html">Enclosing circles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../geometry/intersections/index.html">Point-in-polygon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../geometry/polygon/index.html">Polygon area</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../geometry/polyhedra/index.html">Polyhedra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../geometry/proximity/index.html">Proximity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../geometry/simplification/index.html">Line simplification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../geometry/surfaces/index.html">Surfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../geometry/triangulation/index.html">Voronoi diagrams and Delaunay triangulation</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../graph_theory/index.html">mathematicskit.graph_theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../graph_theory/assignment/index.html">Assignment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../graph_theory/coloring/index.html">Graph coloring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../graph_theory/components/index.html">Connected components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../graph_theory/eulerian/index.html">Eulerian paths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../graph_theory/extremal/index.html">Extremal graph theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../graph_theory/hamiltonian/index.html">Hamiltonian cycles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../graph_theory/matching/index.html">Bipartite matching</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../graph_theory/max_flow/index.html">Maximum flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../graph_theory/ranking/index.html">Ranking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../graph_theory/search/index.html">Heuristic search</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../graph_theory/shortest_paths/index.html">Shortest paths</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../graph_theory/spanning_tree/index.html">Minimum spanning tree</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../graph_theory/spectral/index.html">Spectral graph theory</a></li>
@@ -422,6 +453,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../linalg/index.html">mathematicskit.linalg</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../linalg/cholesky/index.html">Cholesky decomposition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linalg/classical/index.html">Classical matrix theory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../linalg/eigen/index.html">Eigenvalue algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../linalg/iterative/index.html">Iterative solvers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../linalg/lu/index.html">LU decomposition</a></li>
@@ -434,14 +466,22 @@
 <li class="toctree-l2"><a class="reference internal" href="../../number_theory/continued_fractions/index.html">Continued fractions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../number_theory/crt/index.html">Chinese Remainder Theorem</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../number_theory/diophantine/index.html">Diophantine equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../number_theory/factorization/index.html">Integer factorization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../number_theory/modular_arithmetic/index.html">Modular arithmetic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../number_theory/primality/index.html">Primality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../number_theory/prime_distribution/index.html">Distribution of primes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../number_theory/quadratic_residues/index.html">Quadratic residues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../number_theory/sums_of_squares/index.html">Sums of squares</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../number_theory/totient/index.html">Multiplicative functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../number_theory/zeta/index.html">The zeta function</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../numerical_analysis/index.html">mathematicskit.numerical_analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../numerical_analysis/chebyshev/index.html">Chebyshev nodes and the Runge phenomenon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../numerical_analysis/approximation/index.html">Function approximation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../numerical_analysis/chebyshev/index.html">Runge’s phenomenon and Chebyshev nodes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../numerical_analysis/floating_point/index.html">Floating-point arithmetic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../numerical_analysis/interpolation/index.html">Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../numerical_analysis/polynomials/index.html">Polynomials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../numerical_analysis/regression/index.html">Least-squares regression</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../numerical_analysis/root_finding/index.html">Root finding</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../numerical_analysis/splines/index.html">Cubic splines</a></li>
@@ -449,42 +489,73 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../ode_dynamics/index.html">mathematicskit.ode_dynamics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/bifurcations/index.html">Bifurcation normal forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/chaotic_flows/index.html">Chaotic flows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/epidemics/index.html">Epidemic models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/excitable/index.html">Excitable systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/limit_cycles/index.html">Limit cycles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/logistic_map/index.html">The logistic map</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/phase_portrait/index.html">Phase portraits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/poincare/index.html">Poincare sections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/population/index.html">Population models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/stability/index.html">Fixed-point stability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/synchronization/index.html">Synchronization</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../optimization/index.html">mathematicskit.optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../optimization/conjugate_gradient/index.html">Nonlinear conjugate gradient</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../optimization/constrained/index.html">Constrained optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../optimization/direct_search/index.html">Direct search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../optimization/dynamic_programming/index.html">Dynamic programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../optimization/game_theory/index.html">Game theory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../optimization/gradient_descent/index.html">Gradient descent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../optimization/least_squares/index.html">Nonlinear least squares</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../optimization/linear_programming/index.html">Linear programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../optimization/momentum/index.html">Momentum methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../optimization/newton_quasi_newton/index.html">Newton’s method and BFGS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../optimization/scalar_search/index.html">One-dimensional search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../optimization/stochastic/index.html">Stochastic approximation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../optimization/test_functions/index.html">Benchmark functions</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">mathematicskit.probability</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../axioms/index.html">Kolmogorov’s axioms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bayes/index.html">Bayesian inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../branching/index.html">Branching processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../classical/index.html">Classical problems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../continuous/index.html">Continuous distributions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../discrete/index.html">Discrete distributions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../limit_theorems/index.html">Law of Large Numbers and Central Limit Theorem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../limit_theorems/index.html">Limit theorems and inequalities</a></li>
 <li class="toctree-l2 current active"><a class="reference internal" href="index.html">Markov chains</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../monte_carlo/index.html">Monte Carlo integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../queueing/index.html">Queueing theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stochastic_processes/index.html">Random walks and Brownian motion</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../special_functions/index.html">mathematicskit.special_functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../special_functions/airy/index.html">Airy functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../special_functions/bessel/index.html">Bessel functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../special_functions/elliptic/index.html">Elliptic functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../special_functions/error_functions/index.html">Error function and Fresnel integrals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../special_functions/fourier_transform/index.html">Discrete Fourier transform</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../special_functions/gamma_beta/index.html">Gamma and beta functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../special_functions/hypergeometric/index.html">Hypergeometric functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../special_functions/lambert_w/index.html">Lambert W function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../special_functions/mathieu/index.html">Mathieu functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../special_functions/orthogonal_polynomials/index.html">Orthogonal polynomials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../special_functions/zeta/index.html">Riemann zeta function</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/index.html">mathematicskit.statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/bootstrap/index.html">Bootstrap resampling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/confidence_intervals/index.html">Confidence intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/correlation/index.html">Correlation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/descriptive/index.html">Descriptive statistics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/hypothesis_tests/index.html">Hypothesis tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/likelihood/index.html">Likelihood</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/multiple_testing/index.html">Multiple testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/nonparametric/index.html">Nonparametric tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/regression/index.html">Linear regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/shrinkage/index.html">Shrinkage estimation</a></li>
 </ul>
 </details></li>
 </ul>
@@ -536,7 +607,7 @@
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Markov chains</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Gambler’s ruin: absorption probabilities and expected duration</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Markov chains: gambler’s ruin as an absorbing chain</span></li>
   </ul>
 </nav>
 </div>
@@ -558,10 +629,14 @@
 <p><a class="reference internal" href="#sphx-glr-download-api-gallery-probability-markov-chain-plot-01-gamblers-ruin-py"><span class="std std-ref">Go to the end</span></a>
 to download the full example code.</p>
 </div>
-<section class="sphx-glr-example-title" id="gambler-s-ruin-absorption-probabilities-and-expected-duration">
-<span id="sphx-glr-api-gallery-probability-markov-chain-plot-01-gamblers-ruin-py"></span><h1>Gambler’s ruin: absorption probabilities and expected duration<a class="headerlink" href="#gambler-s-ruin-absorption-probabilities-and-expected-duration" title="Link to this heading">#</a></h1>
-<p>A gambler with capital <code class="docutils literal notranslate"><span class="pre">i</span></code> (out of a target <code class="docutils literal notranslate"><span class="pre">N</span></code>) makes fair
-even-money bets until reaching 0 (ruin) or <code class="docutils literal notranslate"><span class="pre">N</span></code> (target). Both the
+<section class="sphx-glr-example-title" id="markov-chains-gambler-s-ruin-as-an-absorbing-chain">
+<span id="sphx-glr-api-gallery-probability-markov-chain-plot-01-gamblers-ruin-py"></span><h1>Markov chains: gambler’s ruin as an absorbing chain<a class="headerlink" href="#markov-chains-gambler-s-ruin-as-an-absorbing-chain" title="Link to this heading">#</a></h1>
+<p>A Markov chain moves between states with probabilities that depend only
+on the current state, not on how it got there, so the whole process is
+described by one transition matrix. In gambler’s ruin, a gambler with
+capital <code class="docutils literal notranslate"><span class="pre">i</span></code> (out of a target <code class="docutils literal notranslate"><span class="pre">N</span></code>) makes fair even-money bets until
+reaching 0 (ruin) or <code class="docutils literal notranslate"><span class="pre">N</span></code> (target); the capital after each bet is a
+Markov chain on the states 0..N with two absorbing ends. Both the
 absorption probabilities and the expected number of steps have simple
 closed forms for a fair game, used here to check the numerical solve.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -585,7 +660,7 @@ closed forms for a fair game, used here to check the numerical solve.</p>
 <span class="n">plot_transition_matrix</span><span class="p">(</span><span class="n">chain</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../../../../_images/sphx_glr_plot_01_gamblers_ruin_001.png" srcset="../../../../_images/sphx_glr_plot_01_gamblers_ruin_001.png" alt="Transition matrix" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;Axes: title={&#39;center&#39;: &#39;Transition matrix&#39;}, xlabel=&#39;to state&#39;, ylabel=&#39;from state&#39;&gt;
+<img src="../../../../_images/sphx_glr_plot_01_gamblers_ruin_001.png" srcset="../../../../_images/sphx_glr_plot_01_gamblers_ruin_001.png" alt="Transition matrix" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;Axes: title={'center': 'Transition matrix'}, xlabel='to state', ylabel='from state'&gt;
 </pre></div>
 </div>
 </section>
@@ -597,8 +672,8 @@ closed forms for a fair game, used here to check the numerical solve.</p>
 
 <span class="k">for</span> <a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a><span class="p">,</span> <span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">row</span></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">steps</span></a><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">transient</span></a><span class="p">,</span> <span class="nb">zip</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">b</span></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">t</span></a><span class="p">)):</span>
     <span class="nb">print</span><span class="p">(</span>
-        <span class="sa">f</span><span class="s2">&quot;start at </span><span class="si">{</span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a><span class="si">}</span><span class="s2">: P(ruin)=</span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">row</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, P(reach </span><span class="si">{</span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n_capital</span></a><span class="si">}</span><span class="s2">)=</span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">row</span></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> &quot;</span>
-        <span class="sa">f</span><span class="s2">&quot;(closed form </span><span class="si">{</span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a><span class="w"> </span><span class="o">/</span><span class="w"> </span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n_capital</span></a><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">), E[steps]=</span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">steps</span></a><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> (closed form </span><span class="si">{</span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n_capital</span></a><span class="w"> </span><span class="o">-</span><span class="w"> </span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="sa">f</span><span class="s2">"start at </span><span class="si">{</span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a><span class="si">}</span><span class="s2">: P(ruin)=</span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">row</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, P(reach </span><span class="si">{</span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n_capital</span></a><span class="si">}</span><span class="s2">)=</span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">row</span></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> "</span>
+        <span class="sa">f</span><span class="s2">"(closed form </span><span class="si">{</span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a><span class="w"> </span><span class="o">/</span><span class="w"> </span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n_capital</span></a><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">), E[steps]=</span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">steps</span></a><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> (closed form </span><span class="si">{</span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n_capital</span></a><span class="w"> </span><span class="o">-</span><span class="w"> </span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a><span class="p">)</span><span class="si">}</span><span class="s2">)"</span>
     <span class="p">)</span>
 </pre></div>
 </div>
@@ -609,7 +684,7 @@ start at 4: P(ruin)=0.3333, P(reach 6)=0.6667 (closed form 0.6667), E[steps]=8.0
 start at 5: P(ruin)=0.1667, P(reach 6)=0.8333 (closed form 0.8333), E[steps]=5.00 (closed form 5)
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.019 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.021 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-api-gallery-probability-markov-chain-plot-01-gamblers-ruin-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../../../_downloads/ef9f9ad91da82b35ca87b803447501e3/plot_01_gamblers_ruin.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_01_gamblers_ruin.ipynb</span></code></a></p>
@@ -645,11 +720,11 @@ start at 5: P(ruin)=0.1667, P(reach 6)=0.8333 (closed form 0.8333), E[steps]=5.0
       </div>
     </a>
     <a class="right-next"
-       href="../monte_carlo/index.html"
+       href="plot_02_continuous_time_chain.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Monte Carlo integration</p>
+        <p class="prev-next-title">Kolmogorov’s equations: a continuous-time Markov chain</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

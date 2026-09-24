@@ -468,7 +468,68 @@ polygon tests (hand-rolled – no direct scipy equivalent); polygon area
 and centroid via the shoelace formula; and curvature, arc length, and
 the Frenet-Serret frame for parametric plane/space curves (derivatives
 via <code class="docutils literal notranslate"><span class="pre">numpy.gradient</span></code>, arc length via <code class="docutils literal notranslate"><span class="pre">scipy.integrate</span></code>, the frame
-itself assembled by mathematicskit’s own code).</p>
+itself assembled by mathematicskit’s own code); Heron’s formula and
+Pick’s lattice-point counts; Euler’s polyhedron formula on 3D hulls;
+Gaussian and mean curvature of parametric surfaces; the smallest
+enclosing circle (Welzl); the Hausdorff distance; Bézier curves via de
+Casteljau; Douglas-Peucker line simplification; and the closest pair of
+points by divide and conquer.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.geometry.CircleResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.geometry.</span></span><span class="sig-name descname"><span class="pre">CircleResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">center</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/geometry/core/base.html#CircleResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.geometry.CircleResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Container for a circle in the plane.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>center</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>radius</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.geometry.CircleResult.center">
+<span class="sig-name descname"><span class="pre">center</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.geometry.CircleResult.center" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.geometry.CircleResult.radius">
+<span class="sig-name descname"><span class="pre">radius</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.geometry.CircleResult.radius" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.geometry.ClosestPairResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.geometry.</span></span><span class="sig-name descname"><span class="pre">ClosestPairResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/geometry/core/base.html#ClosestPairResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.geometry.ClosestPairResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Container for the closest pair of points in a point set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>indices</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a>)</p></li>
+<li><p><strong>distance</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.geometry.ClosestPairResult.distance">
+<span class="sig-name descname"><span class="pre">distance</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.geometry.ClosestPairResult.distance" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.geometry.ClosestPairResult.indices">
+<span class="sig-name descname"><span class="pre">indices</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a></span><a class="headerlink" href="#mathematicskit.geometry.ClosestPairResult.indices" title="Link to this definition">#</a></dt>
+<dd><p>Indices of the two closest points.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)">tuple</a> of <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="mathematicskit.geometry.ConvexHullResult">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.geometry.</span></span><span class="sig-name descname"><span class="pre">ConvexHullResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">simplices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">area</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/geometry/core/base.html#ConvexHullResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.geometry.ConvexHullResult" title="Link to this definition">#</a></dt>
@@ -649,6 +710,181 @@ naming convention).</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.geometry.LatticePolygonResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.geometry.</span></span><span class="sig-name descname"><span class="pre">LatticePolygonResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interior</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">area</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/geometry/core/base.html#LatticePolygonResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.geometry.LatticePolygonResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Container for the lattice-point counts of a polygon with integer vertices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>interior</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>)</p></li>
+<li><p><strong>boundary</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>)</p></li>
+<li><p><strong>area</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.geometry.LatticePolygonResult.area">
+<span class="sig-name descname"><span class="pre">area</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.geometry.LatticePolygonResult.area" title="Link to this definition">#</a></dt>
+<dd><p>The polygon’s area, from the shoelace formula.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.geometry.LatticePolygonResult.boundary">
+<span class="sig-name descname"><span class="pre">boundary</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#mathematicskit.geometry.LatticePolygonResult.boundary" title="Link to this definition">#</a></dt>
+<dd><p>Lattice points on the polygon’s boundary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.geometry.LatticePolygonResult.interior">
+<span class="sig-name descname"><span class="pre">interior</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#mathematicskit.geometry.LatticePolygonResult.interior" title="Link to this definition">#</a></dt>
+<dd><p>Lattice points strictly inside the polygon.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mathematicskit.geometry.LatticePolygonResult.pick_area">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">pick_area</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.geometry.LatticePolygonResult.pick_area" title="Link to this definition">#</a></dt>
+<dd><p>Pick’s formula <span class="math notranslate nohighlight">\(I + B/2 - 1\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.geometry.PolyhedronResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.geometry.</span></span><span class="sig-name descname"><span class="pre">PolyhedronResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vertices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edges</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">faces</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/geometry/core/base.html#PolyhedronResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.geometry.PolyhedronResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Container for the vertex, edge, and face counts of a convex polyhedron.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vertices</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>)</p></li>
+<li><p><strong>edges</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>)</p></li>
+<li><p><strong>faces</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.geometry.PolyhedronResult.edges">
+<span class="sig-name descname"><span class="pre">edges</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#mathematicskit.geometry.PolyhedronResult.edges" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mathematicskit.geometry.PolyhedronResult.euler_characteristic">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">euler_characteristic</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#mathematicskit.geometry.PolyhedronResult.euler_characteristic" title="Link to this definition">#</a></dt>
+<dd><p><span class="math notranslate nohighlight">\(V - E + F\)</span>, equal to 2 for every convex polyhedron.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.geometry.PolyhedronResult.faces">
+<span class="sig-name descname"><span class="pre">faces</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#mathematicskit.geometry.PolyhedronResult.faces" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.geometry.PolyhedronResult.vertices">
+<span class="sig-name descname"><span class="pre">vertices</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#mathematicskit.geometry.PolyhedronResult.vertices" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.geometry.SurfaceCurvatureResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.geometry.</span></span><span class="sig-name descname"><span class="pre">SurfaceCurvatureResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gaussian</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">area_element</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/geometry/core/base.html#SurfaceCurvatureResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.geometry.SurfaceCurvatureResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Container for the curvatures of a parametric surface <span class="math notranslate nohighlight">\(\mathbf{r}(u, v)\)</span> on a grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>u</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>v</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>points</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>gaussian</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>mean</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>area_element</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.geometry.SurfaceCurvatureResult.area_element">
+<span class="sig-name descname"><span class="pre">area_element</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.geometry.SurfaceCurvatureResult.area_element" title="Link to this definition">#</a></dt>
+<dd><p><span class="math notranslate nohighlight">\(\sqrt{EG - F^2}\)</span>, so that <span class="math notranslate nohighlight">\(dA = \sqrt{EG - F^2}\,du\,dv\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (nu, nv)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.geometry.SurfaceCurvatureResult.gaussian">
+<span class="sig-name descname"><span class="pre">gaussian</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.geometry.SurfaceCurvatureResult.gaussian" title="Link to this definition">#</a></dt>
+<dd><p>Gaussian curvature <span class="math notranslate nohighlight">\(K = (LN - M^2)/(EG - F^2)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (nu, nv)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.geometry.SurfaceCurvatureResult.mean">
+<span class="sig-name descname"><span class="pre">mean</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.geometry.SurfaceCurvatureResult.mean" title="Link to this definition">#</a></dt>
+<dd><p>Mean curvature <span class="math notranslate nohighlight">\(H\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (nu, nv)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.geometry.SurfaceCurvatureResult.points">
+<span class="sig-name descname"><span class="pre">points</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.geometry.SurfaceCurvatureResult.points" title="Link to this definition">#</a></dt>
+<dd><p>Surface points <span class="math notranslate nohighlight">\(\mathbf{r}(u, v)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (3, nu, nv)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.geometry.SurfaceCurvatureResult.u">
+<span class="sig-name descname"><span class="pre">u</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.geometry.SurfaceCurvatureResult.u" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.geometry.SurfaceCurvatureResult.v">
+<span class="sig-name descname"><span class="pre">v</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.geometry.SurfaceCurvatureResult.v" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="mathematicskit.geometry.TriangulationResult">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.geometry.</span></span><span class="sig-name descname"><span class="pre">TriangulationResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">simplices</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/geometry/core/base.html#TriangulationResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.geometry.TriangulationResult" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
@@ -738,6 +974,31 @@ the dual Delaunay simplices).</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.geometry.bezier_curve">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.geometry.</span></span><span class="sig-name descname"><span class="pre">bezier_curve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">control_points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/geometry/systems/bezier.html#bezier_curve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.geometry.bezier_curve" title="Link to this definition">#</a></dt>
+<dd><p>Points <span class="math notranslate nohighlight">\(\mathbf{B}(t) = \sum_i \binom{n}{i} t^i (1-t)^{n-i} \mathbf{p}_i\)</span> on a Bézier curve.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>control_points</strong> (<em>array_like</em><em>, </em><em>shape</em><em> (</em><em>n + 1</em><em>, </em><a class="reference internal" href="number_theory.html#mathematicskit.number_theory.PellResult.d" title="mathematicskit.number_theory.PellResult.d"><em>d</em></a><em>)</em>)</p></li>
+<li><p><strong>t</strong> (<em>array_like</em>) – Parameter values in <span class="math notranslate nohighlight">\([0, 1]\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (len(t), d)</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bezier_curve</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="go">[[0.0, 0.0], [1.0, 1.0], [2.0, 0.0]]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.geometry.circle">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.geometry.</span></span><span class="sig-name descname"><span class="pre">circle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/geometry/utils/curves_library.html#circle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.geometry.circle" title="Link to this definition">#</a></dt>
 <dd><p>A circle of the given radius in the xy-plane: <span class="math notranslate nohighlight">\(\gamma(t) = (r\cos t, r\sin t)\)</span>.</p>
@@ -750,6 +1011,33 @@ the dual Delaunay simplices).</p>
 <dd class="field-even"><p><em>callable</em> – <code class="docutils literal notranslate"><span class="pre">curve(t)</span> <span class="pre">-&gt;</span> <span class="pre">ndarray</span></code> of shape <code class="docutils literal notranslate"><span class="pre">(len(t),</span> <span class="pre">2)</span></code>.</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.geometry.closest_pair">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.geometry.</span></span><span class="sig-name descname"><span class="pre">closest_pair</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/geometry/systems/proximity.html#closest_pair"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.geometry.closest_pair" title="Link to this definition">#</a></dt>
+<dd><p>The two closest points in a planar point set, in <span class="math notranslate nohighlight">\(O(n \log n)\)</span> time.</p>
+<p>Sorts by <span class="math notranslate nohighlight">\(x\)</span>, splits at the median, solves both halves, and
+then checks only points within the current best distance <span class="math notranslate nohighlight">\(\delta\)</span>
+of the dividing line. Sorted by <span class="math notranslate nohighlight">\(y\)</span>, each such point needs to be
+compared with at most seven of its successors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>points</strong> (<em>array_like</em><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n"><em>n</em></a><em>, </em><em>2</em><em>)</em>) – At least two points.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.geometry.ClosestPairResult" title="mathematicskit.geometry.core.base.ClosestPairResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClosestPairResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ClosestPairResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">closest_pair</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mf">5.5</span><span class="p">,</span> <span class="mi">5</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">indices</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">distance</span>
+<span class="go">((1, 4), 0.5)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -783,6 +1071,57 @@ C</em>, 2nd ed., Ch. 4.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.geometry.cylinder_surface">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.geometry.</span></span><span class="sig-name descname"><span class="pre">cylinder_surface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/geometry/systems/surfaces.html#cylinder_surface"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.geometry.cylinder_surface" title="Link to this definition">#</a></dt>
+<dd><p>The cylinder <span class="math notranslate nohighlight">\((R\cos v, R\sin v, u)\)</span>: curved in space, yet <span class="math notranslate nohighlight">\(K = 0\)</span>, since it unrolls flat.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>radius</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>callable</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">cylinder_surface</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="go">[1.0, 0.0, 2.0]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.geometry.de_casteljau">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.geometry.</span></span><span class="sig-name descname"><span class="pre">de_casteljau</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">control_points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/geometry/systems/bezier.html#de_casteljau"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.geometry.de_casteljau" title="Link to this definition">#</a></dt>
+<dd><p>All intermediate point sets of de Casteljau’s algorithm at parameter <code class="docutils literal notranslate"><span class="pre">t</span></code>.</p>
+<p>Each level replaces consecutive points <span class="math notranslate nohighlight">\(p_i, p_{i+1}\)</span> by
+<span class="math notranslate nohighlight">\((1-t)p_i + t\,p_{i+1}\)</span>; the single point of the last level is
+the curve point <span class="math notranslate nohighlight">\(\mathbf{B}(t)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>control_points</strong> (<em>array_like</em><em>, </em><em>shape</em><em> (</em><em>n + 1</em><em>, </em><a class="reference internal" href="number_theory.html#mathematicskit.number_theory.PellResult.d" title="mathematicskit.number_theory.PellResult.d"><em>d</em></a><em>)</em>)</p></li>
+<li><p><strong>t</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>list of ndarray</em> – Level <code class="docutils literal notranslate"><span class="pre">k</span></code> has shape <code class="docutils literal notranslate"><span class="pre">(n</span> <span class="pre">+</span> <span class="pre">1</span> <span class="pre">-</span> <span class="pre">k,</span> <span class="pre">d)</span></code>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">levels</span> <span class="o">=</span> <span class="n">de_casteljau</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">levels</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="go">[[1.0, 1.0]]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.geometry.delaunay_triangulation">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.geometry.</span></span><span class="sig-name descname"><span class="pre">delaunay_triangulation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/geometry/systems/triangulation.html#delaunay_triangulation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.geometry.delaunay_triangulation" title="Link to this definition">#</a></dt>
 <dd><p>Delaunay triangulation of a point set, via <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Delaunay.html#scipy.spatial.Delaunay" title="(in SciPy v1.18.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.spatial.Delaunay</span></code></a> (Qhull).</p>
@@ -807,6 +1146,34 @@ inside any triangle’s circumcircle. See de Berg et al.,
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">delaunay_triangulation</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">simplices</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># each simplex is a triangle: 3 vertices</span>
 <span class="go">3</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.geometry.douglas_peucker">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.geometry.</span></span><span class="sig-name descname"><span class="pre">douglas_peucker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/geometry/systems/simplification.html#douglas_peucker"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.geometry.douglas_peucker" title="Link to this definition">#</a></dt>
+<dd><p>Simplify a polyline so that no removed point lies farther than <code class="docutils literal notranslate"><span class="pre">epsilon</span></code> from the result.</p>
+<p>Keeps the two endpoints, finds the interior point farthest from the
+segment joining them, and recurses on both halves if that distance
+exceeds <code class="docutils literal notranslate"><span class="pre">epsilon</span></code>; otherwise drops every interior point.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>points</strong> (<em>array_like</em><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n"><em>n</em></a><em>, </em><em>2</em><em>)</em>)</p></li>
+<li><p><strong>epsilon</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Tolerance, in the same units as the points.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (m, 2)</em> – The retained vertices, a subset of <code class="docutils literal notranslate"><span class="pre">points</span></code> in their original order.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">douglas_peucker</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]],</span> <span class="mf">1.0</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="go">[[0.0, 0.0], [2.0, -0.1], [3.0, 5.0], [5.0, 7.0]]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -889,9 +1256,14 @@ result, not as the primary 2D convex-hull API. See de Berg et al.,
 <dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.geometry.ConvexHullResult" title="mathematicskit.geometry.core.base.ConvexHullResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConvexHullResult</span></code></a></span></p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><em>ConvexHullResult</em> – <code class="docutils literal notranslate"><span class="pre">simplices</span></code> is left empty (Graham scan only produces the
-ordered hull vertices); <code class="docutils literal notranslate"><span class="pre">volume</span></code> is the enclosed area via the
-shoelace formula on those vertices.</p>
+<dd class="field-odd"><p><em>ConvexHullResult</em> – <code class="docutils literal notranslate"><span class="pre">vertices</span></code> holds the hull’s point indices in counterclockwise
+order. <code class="docutils literal notranslate"><span class="pre">simplices</span></code> is left empty, since the Graham scan produces
+only the ordered vertex cycle, not a facet list. <code class="docutils literal notranslate"><span class="pre">volume</span></code> is the
+enclosed area via the shoelace formula on those vertices –
+matching <a class="reference internal" href="#mathematicskit.geometry.convex_hull" title="mathematicskit.geometry.convex_hull"><code class="xref py py-func docutils literal notranslate"><span class="pre">convex_hull()</span></code></a>, where Qhull likewise reports the
+enclosed area as <code class="docutils literal notranslate"><span class="pre">volume</span></code> in 2D. <code class="docutils literal notranslate"><span class="pre">area</span></code> is left at <code class="docutils literal notranslate"><span class="pre">0.0</span></code>:
+Qhull uses it for the hull’s perimeter, which this scan does not
+compute.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -902,6 +1274,34 @@ shoelace formula on those vertices.</p>
 <span class="go">[0, 1, 2, 3]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">volume</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 <span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.geometry.hausdorff_distance">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.geometry.</span></span><span class="sig-name descname"><span class="pre">hausdorff_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/geometry/systems/distances.html#hausdorff_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.geometry.hausdorff_distance" title="Link to this definition">#</a></dt>
+<dd><p>The Hausdorff distance <span class="math notranslate nohighlight">\(d_H(A, B) = \max\{\sup_{a}\inf_{b}\|a-b\|,\; \sup_{b}\inf_{a}\|a-b\|\}\)</span>.</p>
+<p>The smallest <span class="math notranslate nohighlight">\(r\)</span> such that each set lies within distance
+<span class="math notranslate nohighlight">\(r\)</span> of the other. Unlike the distance between closest points,
+it is zero only when the (closed) sets coincide.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>array_like</em><em>, </em><em>shape</em><em> (</em><em>m</em><em>, </em><a class="reference internal" href="number_theory.html#mathematicskit.number_theory.PellResult.d" title="mathematicskit.number_theory.PellResult.d"><em>d</em></a><em>)</em>)</p></li>
+<li><p><strong>b</strong> (<em>array_like</em><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n"><em>n</em></a><em>, </em><a class="reference internal" href="number_theory.html#mathematicskit.number_theory.PellResult.d" title="mathematicskit.number_theory.PellResult.d"><em>d</em></a><em>)</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hausdorff_distance</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="go">3.0</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -923,6 +1323,100 @@ shoelace formula on those vertices.</p>
 <dd class="field-even"><p><em>callable</em> – <code class="docutils literal notranslate"><span class="pre">curve(t)</span> <span class="pre">-&gt;</span> <span class="pre">ndarray</span></code> of shape <code class="docutils literal notranslate"><span class="pre">(len(t),</span> <span class="pre">3)</span></code>.</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.geometry.heron_area">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.geometry.</span></span><span class="sig-name descname"><span class="pre">heron_area</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/geometry/systems/polygon.html#heron_area"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.geometry.heron_area" title="Link to this definition">#</a></dt>
+<dd><p>Area of a triangle from its three side lengths, by Heron’s formula.</p>
+<p>With semi-perimeter <span class="math notranslate nohighlight">\(s = (a+b+c)/2\)</span>,
+<span class="math notranslate nohighlight">\(A = \sqrt{s(s-a)(s-b)(s-c)}\)</span>. Evaluated in William Kahan’s
+numerically stable arrangement, which stays accurate for needle-like
+triangles where the textbook form loses digits: with
+<span class="math notranslate nohighlight">\(a \ge b \ge c\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[A = \tfrac14\sqrt{(a+(b+c))(c-(a-b))(c+(a-b))(a+(b-c))}.\]</div>
+<p>See W. Kahan, “Miscalculating Area and Angles of a Needle-like
+Triangle” (lecture notes, University of California, Berkeley, 2014).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Side lengths satisfying the triangle inequality.</p></li>
+<li><p><strong>b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Side lengths satisfying the triangle inequality.</p></li>
+<li><p><strong>c</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Side lengths satisfying the triangle inequality.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">heron_area</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">)</span>
+<span class="go">6.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.geometry.lattice_point_counts">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.geometry.</span></span><span class="sig-name descname"><span class="pre">lattice_point_counts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vertices</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/geometry/systems/polygon.html#lattice_point_counts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.geometry.lattice_point_counts" title="Link to this definition">#</a></dt>
+<dd><p>Count the lattice points inside and on the boundary of a simple polygon with integer vertices.</p>
+<p>Boundary points are counted edge by edge with
+<span class="math notranslate nohighlight">\(\gcd(|\Delta x|, |\Delta y|)\)</span>; interior points are counted
+directly by testing every lattice point in the bounding box with
+<code class="xref py py-func docutils literal notranslate"><span class="pre">point_in_polygon()</span></code>.
+Pick’s theorem says the area equals <span class="math notranslate nohighlight">\(I + B/2 - 1\)</span>; the result
+reports both sides so the theorem can be checked.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>vertices</strong> (<em>array_like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n"><em>n</em></a><em>, </em><em>2</em><em>)</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.geometry.LatticePolygonResult" title="mathematicskit.geometry.core.base.LatticePolygonResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">LatticePolygonResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>LatticePolygonResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">lattice_point_counts</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">interior</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">boundary</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">area</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">pick_area</span>
+<span class="go">(6, 14, 12.0, 12.0)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.geometry.min_enclosing_circle">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.geometry.</span></span><span class="sig-name descname"><span class="pre">min_enclosing_circle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/geometry/systems/enclosing.html#min_enclosing_circle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.geometry.min_enclosing_circle" title="Link to this definition">#</a></dt>
+<dd><p>The smallest circle containing every point, by Welzl’s move-to-front algorithm.</p>
+<p>Processes the points in random order. Whenever a point falls outside
+the current circle, the optimal circle must pass through it, and the
+search restarts on the points seen so far with that point fixed on
+the boundary. The optimum is determined by at most three points.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>points</strong> (<em>array_like</em><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n"><em>n</em></a><em>, </em><em>2</em><em>)</em>)</p></li>
+<li><p><strong>seed</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Seed for the random processing order (the result does not depend on it).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.geometry.CircleResult" title="mathematicskit.geometry.core.base.CircleResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">CircleResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>CircleResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">min_enclosing_circle</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">center</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">result</span><span class="o">.</span><span class="n">radius</span>
+<span class="go">([1.0, 0.0], 1.0)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -1012,6 +1506,37 @@ correct for a regular polygon). See Bourke (1988).</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.geometry.polyhedron_counts">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.geometry.</span></span><span class="sig-name descname"><span class="pre">polyhedron_counts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decimals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">9</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/geometry/systems/polyhedra.html#polyhedron_counts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.geometry.polyhedron_counts" title="Link to this definition">#</a></dt>
+<dd><p>Count the vertices, edges, and faces of the convex hull of 3D points.</p>
+<p>Triangles whose supporting planes agree (to <code class="docutils literal notranslate"><span class="pre">decimals</span></code> places) are
+merged into one face; an edge is counted only where two different
+faces meet.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>points</strong> (<em>array_like</em><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n"><em>n</em></a><em>, </em><em>3</em><em>)</em>)</p></li>
+<li><p><strong>decimals</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Rounding used to decide that two facet planes coincide.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.geometry.PolyhedronResult" title="mathematicskit.geometry.core.base.PolyhedronResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">PolyhedronResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>PolyhedronResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cube</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">3</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">polyhedron_counts</span><span class="p">(</span><span class="n">cube</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">vertices</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">edges</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">faces</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">euler_characteristic</span>
+<span class="go">(8, 12, 6, 2)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.geometry.segment_intersection">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.geometry.</span></span><span class="sig-name descname"><span class="pre">segment_intersection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/geometry/systems/intersections.html#segment_intersection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.geometry.segment_intersection" title="Link to this definition">#</a></dt>
 <dd><p>Intersection point of segments <code class="docutils literal notranslate"><span class="pre">p1-p2</span></code> and <code class="docutils literal notranslate"><span class="pre">p3-p4</span></code>, if they cross.</p>
@@ -1044,6 +1569,88 @@ Ch. 2.</p>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">segment_intersection</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]))</span> <span class="ow">is</span> <span class="kc">None</span>
 <span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.geometry.sphere_surface">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.geometry.</span></span><span class="sig-name descname"><span class="pre">sphere_surface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/geometry/systems/surfaces.html#sphere_surface"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.geometry.sphere_surface" title="Link to this definition">#</a></dt>
+<dd><p>The sphere <span class="math notranslate nohighlight">\(\mathbf{r}(u, v) = R(\sin u \cos v, \sin u \sin v, \cos u)\)</span>; <span class="math notranslate nohighlight">\(K = 1/R^2\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>radius</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>callable</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">sphere_surface</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="go">[1.0, 0.0, 0.0]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.geometry.surface_curvature">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.geometry.</span></span><span class="sig-name descname"><span class="pre">surface_curvature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">surface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/geometry/systems/surfaces.html#surface_curvature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.geometry.surface_curvature" title="Link to this definition">#</a></dt>
+<dd><p>Gaussian curvature <span class="math notranslate nohighlight">\(K\)</span> and mean curvature <span class="math notranslate nohighlight">\(H\)</span> of <span class="math notranslate nohighlight">\(\mathbf{r}(u, v)\)</span> on a grid.</p>
+<div class="math notranslate nohighlight">
+\[K = \frac{LN - M^2}{EG - F^2}, \qquad H = \frac{EN - 2FM + GL}{2(EG - F^2)},\]</div>
+<p>with <span class="math notranslate nohighlight">\(E = \mathbf{r}_u\cdot\mathbf{r}_u\)</span>, <span class="math notranslate nohighlight">\(F = \mathbf{r}_u\cdot\mathbf{r}_v\)</span>,
+<span class="math notranslate nohighlight">\(G = \mathbf{r}_v\cdot\mathbf{r}_v\)</span>, and <span class="math notranslate nohighlight">\(L, M, N\)</span> the
+components of <span class="math notranslate nohighlight">\(\mathbf{r}_{uu}, \mathbf{r}_{uv}, \mathbf{r}_{vv}\)</span>
+along the unit normal. Derivatives are second-order accurate,
+including at the grid’s edges (<code class="docutils literal notranslate"><span class="pre">edge_order=2</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>surface</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a></span>) – <code class="docutils literal notranslate"><span class="pre">surface(U,</span> <span class="pre">V)</span></code> returns an array of shape <code class="docutils literal notranslate"><span class="pre">(3,</span> <span class="pre">*U.shape)</span></code>.</p></li>
+<li><p><strong>u</strong> (<em>array_like</em>) – Increasing, equally spaced 1D parameter grids.</p></li>
+<li><p><strong>v</strong> (<em>array_like</em>) – Increasing, equally spaced 1D parameter grids.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.geometry.SurfaceCurvatureResult" title="mathematicskit.geometry.core.base.SurfaceCurvatureResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">SurfaceCurvatureResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>SurfaceCurvatureResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mi">81</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">81</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">surface_curvature</span><span class="p">(</span><span class="n">sphere_surface</span><span class="p">(</span><span class="mf">2.0</span><span class="p">),</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">gaussian</span><span class="p">)),</span> <span class="mi">4</span><span class="p">)</span>  <span class="c1"># 1 / R^2</span>
+<span class="go">0.25</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.geometry.torus_surface">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.geometry.</span></span><span class="sig-name descname"><span class="pre">torus_surface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">major</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/geometry/systems/surfaces.html#torus_surface"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.geometry.torus_surface" title="Link to this definition">#</a></dt>
+<dd><p>The torus <span class="math notranslate nohighlight">\(((R + r\cos u)\cos v, (R + r\cos u)\sin v, r\sin u)\)</span>; <span class="math notranslate nohighlight">\(K = \cos u / (r(R + r\cos u))\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>major</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Distance <span class="math notranslate nohighlight">\(R\)</span> from the axis to the tube’s center, and tube radius <span class="math notranslate nohighlight">\(r\)</span>.</p></li>
+<li><p><strong>minor</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Distance <span class="math notranslate nohighlight">\(R\)</span> from the axis to the tube’s center, and tube radius <span class="math notranslate nohighlight">\(r\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>callable</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">torus_surface</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="go">[3.0, 0.0, 0.0]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1128,6 +1735,16 @@ Ch. 7.</p>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.CircleResult"><code class="docutils literal notranslate"><span class="pre">CircleResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.CircleResult.center"><code class="docutils literal notranslate"><span class="pre">CircleResult.center</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.CircleResult.radius"><code class="docutils literal notranslate"><span class="pre">CircleResult.radius</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.ClosestPairResult"><code class="docutils literal notranslate"><span class="pre">ClosestPairResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.ClosestPairResult.distance"><code class="docutils literal notranslate"><span class="pre">ClosestPairResult.distance</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.ClosestPairResult.indices"><code class="docutils literal notranslate"><span class="pre">ClosestPairResult.indices</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.ConvexHullResult"><code class="docutils literal notranslate"><span class="pre">ConvexHullResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.ConvexHullResult.area"><code class="docutils literal notranslate"><span class="pre">ConvexHullResult.area</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.ConvexHullResult.method"><code class="docutils literal notranslate"><span class="pre">ConvexHullResult.method</span></code></a></li>
@@ -1148,6 +1765,29 @@ Ch. 7.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.CurveFrameResult.torsion"><code class="docutils literal notranslate"><span class="pre">CurveFrameResult.torsion</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.LatticePolygonResult"><code class="docutils literal notranslate"><span class="pre">LatticePolygonResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.LatticePolygonResult.area"><code class="docutils literal notranslate"><span class="pre">LatticePolygonResult.area</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.LatticePolygonResult.boundary"><code class="docutils literal notranslate"><span class="pre">LatticePolygonResult.boundary</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.LatticePolygonResult.interior"><code class="docutils literal notranslate"><span class="pre">LatticePolygonResult.interior</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.LatticePolygonResult.pick_area"><code class="docutils literal notranslate"><span class="pre">LatticePolygonResult.pick_area</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.PolyhedronResult"><code class="docutils literal notranslate"><span class="pre">PolyhedronResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.PolyhedronResult.edges"><code class="docutils literal notranslate"><span class="pre">PolyhedronResult.edges</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.PolyhedronResult.euler_characteristic"><code class="docutils literal notranslate"><span class="pre">PolyhedronResult.euler_characteristic</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.PolyhedronResult.faces"><code class="docutils literal notranslate"><span class="pre">PolyhedronResult.faces</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.PolyhedronResult.vertices"><code class="docutils literal notranslate"><span class="pre">PolyhedronResult.vertices</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.SurfaceCurvatureResult"><code class="docutils literal notranslate"><span class="pre">SurfaceCurvatureResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.SurfaceCurvatureResult.area_element"><code class="docutils literal notranslate"><span class="pre">SurfaceCurvatureResult.area_element</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.SurfaceCurvatureResult.gaussian"><code class="docutils literal notranslate"><span class="pre">SurfaceCurvatureResult.gaussian</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.SurfaceCurvatureResult.mean"><code class="docutils literal notranslate"><span class="pre">SurfaceCurvatureResult.mean</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.SurfaceCurvatureResult.points"><code class="docutils literal notranslate"><span class="pre">SurfaceCurvatureResult.points</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.SurfaceCurvatureResult.u"><code class="docutils literal notranslate"><span class="pre">SurfaceCurvatureResult.u</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.SurfaceCurvatureResult.v"><code class="docutils literal notranslate"><span class="pre">SurfaceCurvatureResult.v</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.TriangulationResult"><code class="docutils literal notranslate"><span class="pre">TriangulationResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.TriangulationResult.points"><code class="docutils literal notranslate"><span class="pre">TriangulationResult.points</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.TriangulationResult.simplices"><code class="docutils literal notranslate"><span class="pre">TriangulationResult.simplices</span></code></a></li>
@@ -1160,17 +1800,30 @@ Ch. 7.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.VoronoiResult.vertices"><code class="docutils literal notranslate"><span class="pre">VoronoiResult.vertices</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.bezier_curve"><code class="docutils literal notranslate"><span class="pre">bezier_curve()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.circle"><code class="docutils literal notranslate"><span class="pre">circle()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.closest_pair"><code class="docutils literal notranslate"><span class="pre">closest_pair()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.convex_hull"><code class="docutils literal notranslate"><span class="pre">convex_hull()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.cylinder_surface"><code class="docutils literal notranslate"><span class="pre">cylinder_surface()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.de_casteljau"><code class="docutils literal notranslate"><span class="pre">de_casteljau()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.delaunay_triangulation"><code class="docutils literal notranslate"><span class="pre">delaunay_triangulation()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.douglas_peucker"><code class="docutils literal notranslate"><span class="pre">douglas_peucker()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.ellipse"><code class="docutils literal notranslate"><span class="pre">ellipse()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.frenet_serret_frame"><code class="docutils literal notranslate"><span class="pre">frenet_serret_frame()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.graham_scan"><code class="docutils literal notranslate"><span class="pre">graham_scan()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.hausdorff_distance"><code class="docutils literal notranslate"><span class="pre">hausdorff_distance()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.helix"><code class="docutils literal notranslate"><span class="pre">helix()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.heron_area"><code class="docutils literal notranslate"><span class="pre">heron_area()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.lattice_point_counts"><code class="docutils literal notranslate"><span class="pre">lattice_point_counts()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.min_enclosing_circle"><code class="docutils literal notranslate"><span class="pre">min_enclosing_circle()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.point_in_polygon"><code class="docutils literal notranslate"><span class="pre">point_in_polygon()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.polygon_area"><code class="docutils literal notranslate"><span class="pre">polygon_area()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.polygon_centroid"><code class="docutils literal notranslate"><span class="pre">polygon_centroid()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.polyhedron_counts"><code class="docutils literal notranslate"><span class="pre">polyhedron_counts()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.segment_intersection"><code class="docutils literal notranslate"><span class="pre">segment_intersection()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.sphere_surface"><code class="docutils literal notranslate"><span class="pre">sphere_surface()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.surface_curvature"><code class="docutils literal notranslate"><span class="pre">surface_curvature()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.torus_surface"><code class="docutils literal notranslate"><span class="pre">torus_surface()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.geometry.voronoi_diagram"><code class="docutils literal notranslate"><span class="pre">voronoi_diagram()</span></code></a></li>
 </ul>
   </nav></div>

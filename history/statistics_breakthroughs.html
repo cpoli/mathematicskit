@@ -456,64 +456,127 @@
 <blockquote class="epigraph">
 <div><p>“To consult the statistician after an experiment is finished is often
 merely to ask him to conduct a post mortem examination. He can perhaps
-say what the experiment died of.” – Ronald A. Fisher, <em>Presidential
-Address to the First Indian Statistical Congress</em>, 1938</p>
+say what the experiment died of.”
+– Ronald Fisher, Presidential Address to the First Indian Statistical
+Congress, 1938</p>
 </div></blockquote>
-<p>Where probability theory asks “given a known distribution, what data
-should we expect,” statistical inference asks the reverse question:
-given the data actually observed, what can be said about the unknown
-distribution it came from. This chronology traces the ideas behind
-<a class="reference internal" href="../api/statistics.html#module-mathematicskit.statistics" title="mathematicskit.statistics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.statistics</span></code></a>, from Gauss’s original error theory to the
-computer-age bootstrap that sidesteps needing a closed-form sampling
-distribution at all.</p>
+<p>Probability theory asks, “Given a known distribution, what data should
+we expect?” Statistical inference asks the reverse: “Given the data
+actually observed, what can we say about the unknown distribution it
+came from?” This chronology traces the ideas behind
+<a class="reference internal" href="../api/statistics.html#module-mathematicskit.statistics" title="mathematicskit.statistics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.statistics</span></code></a>, from Carl Friedrich Gauss’s theory of
+errors to the computer-age bootstrap, which avoids the need for a
+closed-form sampling distribution altogether, and to the false
+discovery rate, which makes it possible to run thousands of tests at
+once.</p>
 <nav class="contents local" id="timeline">
 <p class="topic-title">Timeline</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#gauss-and-the-theory-of-errors" id="id1">1809 – Gauss and the Theory of Errors</a></p></li>
-<li><p><a class="reference internal" href="#pearson-s-chi-square-test" id="id2">1900 – Pearson’s Chi-Square Test</a></p></li>
-<li><p><a class="reference internal" href="#gosset-s-t-distribution" id="id3">1908 – Gosset’s t-Distribution</a></p></li>
-<li><p><a class="reference internal" href="#fisher-and-the-analysis-of-variance" id="id4">1925 – Fisher and the Analysis of Variance</a></p></li>
-<li><p><a class="reference internal" href="#neyman-s-confidence-intervals" id="id5">1937 – Neyman’s Confidence Intervals</a></p></li>
-<li><p><a class="reference internal" href="#ordinary-least-squares-regression" id="id6">1805 – 1809 – Ordinary Least-Squares Regression</a></p></li>
-<li><p><a class="reference internal" href="#efron-s-bootstrap" id="id7">1979 – Efron’s Bootstrap</a></p></li>
-<li><p><a class="reference internal" href="#see-also" id="id8">See Also</a></p></li>
+<li><p><a class="reference internal" href="#ordinary-least-squares-regression" id="id1">1805-1809 – Ordinary Least-Squares Regression</a></p></li>
+<li><p><a class="reference internal" href="#gauss-and-the-theory-of-errors" id="id2">1809 – Gauss and the Theory of Errors</a></p></li>
+<li><p><a class="reference internal" href="#galton-pearson-and-the-correlation-coefficient" id="id3">1888-1896 – Galton, Pearson, and the Correlation Coefficient</a></p></li>
+<li><p><a class="reference internal" href="#pearson-s-chi-square-test" id="id4">1900 – Pearson’s Chi-Square Test</a></p></li>
+<li><p><a class="reference internal" href="#spearman-s-rank-correlation" id="id5">1904 – Spearman’s Rank Correlation</a></p></li>
+<li><p><a class="reference internal" href="#gosset-s-t-distribution" id="id6">1908 – Gosset’s t-Distribution</a></p></li>
+<li><p><a class="reference internal" href="#fisher-s-maximum-likelihood" id="id7">1922 – Fisher’s Maximum Likelihood</a></p></li>
+<li><p><a class="reference internal" href="#fisher-and-the-analysis-of-variance" id="id8">1925 – Fisher and the Analysis of Variance</a></p></li>
+<li><p><a class="reference internal" href="#kolmogorov-smirnov-and-distribution-free-goodness-of-fit" id="id9">1933-1939 – Kolmogorov, Smirnov, and Distribution-Free Goodness of Fit</a></p></li>
+<li><p><a class="reference internal" href="#fisher-s-exact-test-and-the-lady-tasting-tea" id="id10">1935 – Fisher’s Exact Test and the Lady Tasting Tea</a></p></li>
+<li><p><a class="reference internal" href="#neyman-s-confidence-intervals" id="id11">1937 – Neyman’s Confidence Intervals</a></p></li>
+<li><p><a class="reference internal" href="#wilks-s-theorem-and-the-likelihood-ratio-test" id="id12">1938 – Wilks’s Theorem and the Likelihood-Ratio Test</a></p></li>
+<li><p><a class="reference internal" href="#wilcoxon-mann-whitney-and-rank-tests" id="id13">1945-1947 – Wilcoxon, Mann, Whitney, and Rank Tests</a></p></li>
+<li><p><a class="reference internal" href="#quenouille-tukey-and-the-jackknife" id="id14">1949-1958 – Quenouille, Tukey, and the Jackknife</a></p></li>
+<li><p><a class="reference internal" href="#stein-s-paradox-and-the-james-stein-estimator" id="id15">1956-1961 – Stein’s Paradox and the James-Stein Estimator</a></p></li>
+<li><p><a class="reference internal" href="#efron-s-bootstrap" id="id16">1979 – Efron’s Bootstrap</a></p></li>
+<li><p><a class="reference internal" href="#benjamini-hochberg-and-the-false-discovery-rate" id="id17">1995 – Benjamini, Hochberg, and the False Discovery Rate</a></p></li>
+<li><p><a class="reference internal" href="#see-also" id="id18">See Also</a></p></li>
 </ul>
 </nav>
+<section id="ordinary-least-squares-regression">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">1805-1809 – Ordinary Least-Squares Regression</a><a class="headerlink" href="#ordinary-least-squares-regression" title="Link to this heading">#</a></h2>
+<p>The least-squares fitting procedure of Adrien-Marie Legendre and Carl
+Friedrich Gauss (see the numerical-analysis chronology) extends to
+statistical <em>inference</em> about the fitted coefficients once the
+residuals are modeled as random noise. Each coefficient gets a standard
+error, a t-statistic, and a p-value against the null hypothesis that it
+is exactly zero, and the <span class="math notranslate nohighlight">\(R^2\)</span> statistic measures how much of the
+response’s variance the model explains. This statistical apparatus
+grew up around the early-19th-century fitting principle over the
+following hundred years, as the theory of linear models matured.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.statistics.systems.regression.linear_regression()</span></code>
+builds this apparatus around a <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.lstsq.html#numpy.linalg.lstsq" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.lstsq()</span></code></a> fit, with
+coefficient significance referred to <code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.stats.t</span></code>.</p>
+<p><em>References:</em> A.-M. Legendre, <em>Nouvelles méthodes pour la détermination
+des orbites des comètes</em> (Paris: Courcier, 1805), Appendix; C. F. Gauss,
+<em>Theoria Motus Corporum Coelestium</em> (Hamburg: Perthes et Besser, 1809).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Fits a noisy linear relationship and inspects the fit: coefficient standard errors/p-values, R^2, and a residuals-vs-fitted-values plot."><img alt="" src="../_images/sphx_glr_plot_01_ols_diagnostics_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/statistics/regression/plot_01_ols_diagnostics.html"><span class="doc">OLS regression with residual diagnostics</span></a></p>
+  <div class="sphx-glr-thumbnail-title">OLS regression with residual diagnostics</div>
+</div></div></section>
 <section id="gauss-and-the-theory-of-errors">
-<h2><a class="toc-backref" href="#id1" role="doc-backlink">1809 – Gauss and the Theory of Errors</a><a class="headerlink" href="#gauss-and-the-theory-of-errors" title="Link to this heading">#</a></h2>
-<p>Carl Friedrich Gauss’s <em>Theoria Motus</em>, alongside its role in the
-least-squares story (see the numerical-analysis chronology), derived the
-normal distribution as the error law implied by requiring the arithmetic
-mean to be the most probable estimate of a repeatedly measured quantity
-– laying the theoretical foundation for treating measurement error
-itself as a random variable with a definite, analyzable distribution,
-the starting point for essentially all of classical statistical
-inference that followed.</p>
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">1809 – Gauss and the Theory of Errors</a><a class="headerlink" href="#gauss-and-the-theory-of-errors" title="Link to this heading">#</a></h2>
+<p>Besides its role in the least-squares story (see the numerical-analysis
+chronology), Carl Friedrich Gauss’s <em>Theoria Motus</em> derived the normal
+distribution as the error law that follows from requiring the
+arithmetic mean to be the most probable estimate of a repeatedly
+measured quantity. It laid the foundation for treating measurement
+error as a random variable with a definite, analyzable distribution,
+the starting point of nearly all classical statistical inference.</p>
 <p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.statistics.systems.confidence_intervals.mean_confidence_interval()</span></code>
-and every hypothesis test in this domain build directly on exactly this
-normal (or, for small samples, Student’s t) error model.</p>
+and every hypothesis test in this domain build on this normal error
+model, or on Student’s t for small samples.</p>
 <p><em>References:</em> C. F. Gauss, <em>Theoria Motus Corporum Coelestium</em> (Hamburg:
 Perthes et Besser, 1809), Book II, Section 3.</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Builds many 95% confidence intervals from repeated samples of a known population, and checks that close to 95% of them actually contain the true parameter -- the frequentist interpretation of &quot;95% confidence.&quot;"><img alt="" src="../_images/sphx_glr_plot_01_coverage_simulation_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/statistics/confidence_intervals/plot_01_coverage_simulation.html"><span class="doc">Confirming a 95% confidence interval’s coverage by simulation</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Confirming a 95% confidence interval's coverage by simulation</div>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Repeated measurements of one quantity scatter around its true value. Gauss (1809) asked which error law makes the arithmetic mean of the measurements the most probable value of the quantity, and found the normal law. This example simulates noisy measurements, compares their errors with the normal curve, and checks that the mean both maximizes the normal error probability and minimizes the sum of squared errors."><img alt="" src="../_images/sphx_glr_plot_02_gauss_error_law_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/statistics/descriptive/plot_02_gauss_error_law.html"><span class="doc">Gauss’s normal law of errors</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Gauss's normal law of errors</div>
+</div></div></section>
+<section id="galton-pearson-and-the-correlation-coefficient">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">1888-1896 – Galton, Pearson, and the Correlation Coefficient</a><a class="headerlink" href="#galton-pearson-and-the-correlation-coefficient" title="Link to this heading">#</a></h2>
+<p>Francis Galton, studying the heights of parents and their grown
+children, noticed that tall parents tend to have tall children, but
+children who are on average <em>less</em> extreme than their parents. He called
+this “regression toward mediocrity,” and in 1888 introduced
+“co-relation” as a single number measuring how closely two variables
+move together. Karl Pearson put the idea on a rigorous footing in 1896
+with the product-moment formula still used today:</p>
+<div class="math notranslate nohighlight">
+\[r = \frac{\sum_i (x_i - \bar x)(y_i - \bar y)}
+         {\sqrt{\sum_i (x_i - \bar x)^2 \, \sum_i (y_i - \bar y)^2}}.\]</div>
+<p>The coefficient lies between <span class="math notranslate nohighlight">\(-1\)</span> and <span class="math notranslate nohighlight">\(1\)</span>, reaching the
+extremes only when the points fall exactly on a straight line. After
+both variables are standardized, it is also the slope of the regression
+line, which is exactly Galton’s regression toward the mean.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.statistics.systems.correlation.pearson_correlation()</span></code>
+wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.pearsonr.html#scipy.stats.pearsonr" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.stats.pearsonr()</span></code></a>. The tests check the coefficient
+against the defining formula and its p-value against the t-statistic
+<span class="math notranslate nohighlight">\(r\sqrt{(n-2)/(1-r^2)}\)</span> with <span class="math notranslate nohighlight">\(n-2\)</span> degrees of freedom.</p>
+<p><em>References:</em> F. Galton, “Co-relations and their Measurement, Chiefly
+from Anthropometric Data,” Proceedings of the Royal Society of London 45
+(1888), 135-145; K. Pearson, “Mathematical Contributions to the Theory
+of Evolution. III. Regression, Heredity, and Panmixia,” Philosophical
+Transactions of the Royal Society A 187 (1896), 253-318.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Simulates parent and child heights in the spirit of Francis Galton&#x27;s 1880s data: the two are positively correlated, but tall parents have children who are on average less extreme -- &quot;regression toward the mean&quot;. Pearson&#x27;s r measures the strength of that linear relation."><img alt="" src="../_images/sphx_glr_plot_01_galton_pearson_correlation_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/statistics/correlation/plot_01_galton_pearson_correlation.html"><span class="doc">Galton’s heights and Pearson’s correlation</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Galton's heights and Pearson's correlation</div>
 </div></div></section>
 <section id="pearson-s-chi-square-test">
-<h2><a class="toc-backref" href="#id2" role="doc-backlink">1900 – Pearson’s Chi-Square Test</a><a class="headerlink" href="#pearson-s-chi-square-test" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">1900 – Pearson’s Chi-Square Test</a><a class="headerlink" href="#pearson-s-chi-square-test" title="Link to this heading">#</a></h2>
 <p>Karl Pearson’s 1900 paper introduced a general-purpose test of whether
-observed category counts are consistent with an expected (hypothesized)
-distribution: sum the squared, normalized discrepancies between observed
-and expected counts, and compare against the chi-square distribution –
-one of the first tests to give an explicit, distribution-based measure
-of statistical significance, and still the standard tool for categorical
-goodness-of-fit and independence testing today.</p>
+observed category counts are consistent with a hypothesized
+distribution. Sum the squared, normalized differences between observed
+and expected counts, and compare the total against the chi-square
+distribution. It was one of the first tests to give an explicit,
+distribution-based measure of statistical significance, and it is still
+the standard tool for categorical goodness-of-fit and independence
+testing.</p>
 <div class="math notranslate nohighlight">
 \[\chi^2 = \sum_i \frac{(O_i - E_i)^2}{E_i}\]</div>
 <p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.statistics.systems.hypothesis_tests.chi_square_goodness_of_fit()</span></code>
 and <code class="xref py py-func docutils literal notranslate"><span class="pre">chi_square_independence()</span></code>
-implement exactly this statistic, referred to <code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.stats.chi2</span></code>,
-cross-checked against <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chisquare.html#scipy.stats.chisquare" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.stats.chisquare()</span></code></a>/<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chi2_contingency.html#scipy.stats.chi2_contingency" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">chi2_contingency()</span></code></a>
-in the test suite.</p>
+compute this statistic, referred to <code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.stats.chi2</span></code>, and the
+test suite cross-checks them against
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chisquare.html#scipy.stats.chisquare" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.stats.chisquare()</span></code></a>/<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chi2_contingency.html#scipy.stats.chi2_contingency" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">chi2_contingency()</span></code></a>.</p>
 <p><em>References:</em> K. Pearson, “On the Criterion that a Given System of
 Deviations from the Probable in the Case of a Correlated System of
 Variables is Such that it Can be Reasonably Supposed to have Arisen from
@@ -523,66 +586,163 @@ Random Sampling,” Philosophical Magazine Series 5, 50(302) (1900),
 <p><a class="reference internal" href="../api/gallery/statistics/hypothesis_tests/plot_02_chi_square_tests.html"><span class="doc">Chi-square goodness-of-fit and independence tests</span></a></p>
   <div class="sphx-glr-thumbnail-title">Chi-square goodness-of-fit and independence tests</div>
 </div></div></section>
+<section id="spearman-s-rank-correlation">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">1904 – Spearman’s Rank Correlation</a><a class="headerlink" href="#spearman-s-rank-correlation" title="Link to this heading">#</a></h2>
+<p>The psychologist Charles Spearman wanted to measure association between
+quantities, like ability rankings, that are only meaningful as an
+order. His answer was to replace each observation by its rank and
+compute the correlation of the ranks. With no ties this reduces to</p>
+<div class="math notranslate nohighlight">
+\[\rho = 1 - \frac{6 \sum_i d_i^2}{n(n^2 - 1)},\]</div>
+<p>where <span class="math notranslate nohighlight">\(d_i\)</span> is the difference between observation <span class="math notranslate nohighlight">\(i\)</span>’s two
+ranks. Because only the order matters, <span class="math notranslate nohighlight">\(\rho = 1\)</span> for <em>any</em>
+increasing relationship, however curved, and one wild outlier can shift
+it by only a limited amount. It was one of the first rank-based
+statistics, an idea taken up again in the nonparametric tests of the
+1940s.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.statistics.systems.correlation.spearman_correlation()</span></code>
+wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.spearmanr.html#scipy.stats.spearmanr" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.stats.spearmanr()</span></code></a>. The tests verify the rank-difference
+formula above and that any monotone transformation gives
+<span class="math notranslate nohighlight">\(\rho = 1\)</span>.</p>
+<p><em>References:</em> C. Spearman, “The Proof and Measurement of Association
+between Two Things,” American Journal of Psychology 15(1) (1904),
+72-101.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Spearman&#x27;s rho is Pearson&#x27;s r applied to ranks. It equals 1 for any increasing relationship, however curved, and a single wild outlier barely moves it, while Pearson&#x27;s r can swing a long way."><img alt="" src="../_images/sphx_glr_plot_02_spearman_rank_correlation_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/statistics/correlation/plot_02_spearman_rank_correlation.html"><span class="doc">Spearman’s rank correlation</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Spearman's rank correlation</div>
+</div></div></section>
 <section id="gosset-s-t-distribution">
-<h2><a class="toc-backref" href="#id3" role="doc-backlink">1908 – Gosset’s t-Distribution</a><a class="headerlink" href="#gosset-s-t-distribution" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">1908 – Gosset’s t-Distribution</a><a class="headerlink" href="#gosset-s-t-distribution" title="Link to this heading">#</a></h2>
 <p>William Sealy Gosset, a chemist at the Guinness brewery in Dublin,
-needed a way to draw reliable conclusions from the small sample sizes
-his brewing experiments actually produced, where the normal
-distribution’s usual large-sample assumptions did not hold. Publishing
-under the pseudonym “Student” (Guinness restricted its employees from
-publishing under their own names, to protect trade secrets), Gosset’s
-1908 paper derived the exact sampling distribution of a mean estimated
-from a small sample with unknown variance – heavier-tailed than the
-normal distribution, converging to it only as the sample size grows.</p>
+needed reliable conclusions from the small samples his brewing
+experiments produced, where the usual large-sample normal approximation
+did not hold. Guinness did not let employees publish under their own
+names, to protect trade secrets, so Gosset wrote as “Student.” His 1908
+paper derived the exact sampling distribution of a mean estimated from
+a small sample with unknown variance. The distribution has heavier
+tails than the normal and approaches it only as the sample size grows.</p>
 <p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.statistics.systems.hypothesis_tests.one_sample_t_test()</span></code>
 and <code class="xref py py-func docutils literal notranslate"><span class="pre">two_sample_t_test()</span></code>
-implement exactly this test, referred to <code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.stats.t</span></code>,
-cross-checked against <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_1samp.html#scipy.stats.ttest_1samp" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.stats.ttest_1samp()</span></code></a>/<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_ind.html#scipy.stats.ttest_ind" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">ttest_ind()</span></code></a>.</p>
+implement this test, referred to <code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.stats.t</span></code>, and are
+cross-checked against
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_1samp.html#scipy.stats.ttest_1samp" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.stats.ttest_1samp()</span></code></a>/<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_ind.html#scipy.stats.ttest_ind" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">ttest_ind()</span></code></a>.</p>
 <p><em>References:</em> Student [W. S. Gosset], “The Probable Error of a Mean,”
 Biometrika 6(1) (1908), 1-25.</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Compares three fertilizer treatments&#x27; effect on plant growth: a pairwise t-test between two of them, and a one-way ANOVA across all three, alongside an effect-size measure (Cohen&#x27;s d)."><img alt="" src="../_images/sphx_glr_plot_01_t_test_and_anova_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/statistics/hypothesis_tests/plot_01_t_test_and_anova.html"><span class="doc">Two-sample t-test and one-way ANOVA</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Two-sample t-test and one-way ANOVA</div>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="With only a handful of measurements, the standardized mean t = (\bar x - \mu_0)/(s/\sqrt n) is not normal: estimating the spread from the same small sample gives it heavier tails. Gosset (&quot;Student&quot;, 1908) derived its exact distribution. This example shows the heavy tails, how a normal cutoff misleads for small samples, and the one- and two-sample t-tests built on Student&#x27;s distribution."><img alt="" src="../_images/sphx_glr_plot_01_student_t_test_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/statistics/hypothesis_tests/plot_01_student_t_test.html"><span class="doc">Student’s t-distribution and the small-sample t-test</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Student's t-distribution and the small-sample t-test</div>
+</div></div></section>
+<section id="fisher-s-maximum-likelihood">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">1922 – Fisher’s Maximum Likelihood</a><a class="headerlink" href="#fisher-s-maximum-likelihood" title="Link to this heading">#</a></h2>
+<p>In “On the Mathematical Foundations of Theoretical Statistics,” Ronald
+Fisher set out a general recipe for estimating a model’s parameters:
+choose the values that make the observed data most probable. For
+independent observations with density <span class="math notranslate nohighlight">\(f(x;\theta)\)</span>, that means
+maximizing the log-likelihood</p>
+<div class="math notranslate nohighlight">
+\[\ell(\theta) = \sum_{i=1}^n \log f(x_i; \theta).\]</div>
+<p>Fisher also introduced the vocabulary of consistency, efficiency, and
+sufficiency to judge estimators, and argued that maximum likelihood
+does as well as possible in large samples. For a normal sample, the
+maximizers are the sample mean and the variance with divisor <span class="math notranslate nohighlight">\(n\)</span>
+(not <span class="math notranslate nohighlight">\(n-1\)</span>): maximum likelihood is efficient, but not always
+unbiased.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.statistics.systems.likelihood.maximum_likelihood_fit()</span></code>
+wraps the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method of any <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/stats.html#module-scipy.stats" title="(in SciPy v1.18.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.stats</span></code></a> continuous
+distribution and returns a
+<a class="reference internal" href="../api/statistics.html#mathematicskit.statistics.MaximumLikelihoodResult" title="mathematicskit.statistics.core.base.MaximumLikelihoodResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">MaximumLikelihoodResult</span></code></a>.
+The tests check the closed-form normal and exponential estimates and
+the normal log-likelihood.</p>
+<p><em>References:</em> R. A. Fisher, “On the Mathematical Foundations of
+Theoretical Statistics,” Philosophical Transactions of the Royal
+Society A 222 (1922), 309-368.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Fits an exponential and a gamma distribution to the same skewed data by maximum likelihood, and plots the exponential model&#x27;s log-likelihood as a function of its scale: the curve peaks exactly at the sample mean, the closed-form MLE."><img alt="" src="../_images/sphx_glr_plot_01_maximum_likelihood_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/statistics/likelihood/plot_01_maximum_likelihood.html"><span class="doc">Fisher’s maximum likelihood</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Fisher's maximum likelihood</div>
 </div></div></section>
 <section id="fisher-and-the-analysis-of-variance">
-<h2><a class="toc-backref" href="#id4" role="doc-backlink">1925 – Fisher and the Analysis of Variance</a><a class="headerlink" href="#fisher-and-the-analysis-of-variance" title="Link to this heading">#</a></h2>
-<p>Ronald Fisher’s 1925 book <em>Statistical Methods for Research Workers</em>,
-distilling work from his time at the Rothamsted agricultural experiment
-station, introduced the analysis of variance (ANOVA): partition a
-dataset’s total variability into a between-groups component and a
-within-groups component, and compare their ratio (an F-statistic,
-named after Fisher by George Snedecor) against the distribution expected
-under the null hypothesis that every group shares a common mean. It
-let Fisher test many treatment groups’ means for equality in a single
-coherent test, rather than an error-compounding cascade of pairwise
-t-tests.</p>
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">1925 – Fisher and the Analysis of Variance</a><a class="headerlink" href="#fisher-and-the-analysis-of-variance" title="Link to this heading">#</a></h2>
+<p>Ronald Fisher’s 1925 book <em>Statistical Methods for Research Workers</em>
+distilled his work at the Rothamsted agricultural experiment station.
+It introduced the analysis of variance (ANOVA) to a wide audience:
+split a dataset’s total variability into a between-groups component
+and a within-groups component, and compare their ratio with the
+distribution expected if every group shares a common mean. George
+Snedecor later named that ratio the F-statistic, after Fisher. ANOVA
+tests many treatment groups for equal means in one coherent test,
+instead of a cascade of pairwise t-tests whose errors compound.</p>
 <div class="math notranslate nohighlight">
 \[F = \frac{\text{between-group variance}}{\text{within-group variance}}\]</div>
 <p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.statistics.systems.hypothesis_tests.one_way_anova()</span></code>
-implements exactly this decomposition, referred to
-<code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.stats.f</span></code>, cross-checked against <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.f_oneway.html#scipy.stats.f_oneway" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.stats.f_oneway()</span></code></a>.</p>
+implements this decomposition, referred to <code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.stats.f</span></code>, and
+is cross-checked against <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.f_oneway.html#scipy.stats.f_oneway" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.stats.f_oneway()</span></code></a>.</p>
 <p><em>References:</em> R. A. Fisher, <em>Statistical Methods for Research Workers</em>
 (Edinburgh: Oliver and Boyd, 1925), Ch. 7.</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Compares three fertilizer treatments&#x27; effect on plant growth: a pairwise t-test between two of them, and a one-way ANOVA across all three, alongside an effect-size measure (Cohen&#x27;s d)."><img alt="" src="../_images/sphx_glr_plot_01_t_test_and_anova_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/statistics/hypothesis_tests/plot_01_t_test_and_anova.html"><span class="doc">Two-sample t-test and one-way ANOVA</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Two-sample t-test and one-way ANOVA</div>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Compares three fertilizer treatments&#x27; effect on plant growth, as in Fisher&#x27;s Rothamsted field trials. ANOVA splits the total variability into a between-groups and a within-groups sum of squares; their ratio, the F-statistic, tests all group means for equality in one test."><img alt="" src="../_images/sphx_glr_plot_04_one_way_anova_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/statistics/hypothesis_tests/plot_04_one_way_anova.html"><span class="doc">Fisher’s one-way analysis of variance</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Fisher's one-way analysis of variance</div>
+</div></div></section>
+<section id="kolmogorov-smirnov-and-distribution-free-goodness-of-fit">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">1933-1939 – Kolmogorov, Smirnov, and Distribution-Free Goodness of Fit</a><a class="headerlink" href="#kolmogorov-smirnov-and-distribution-free-goodness-of-fit" title="Link to this heading">#</a></h2>
+<p>Pearson’s chi-square test needs the data grouped into bins, and the
+answer depends on the choice of bins. Andrey Kolmogorov proposed
+comparing the whole empirical distribution function <span class="math notranslate nohighlight">\(F_n\)</span> with
+the hypothesized CDF <span class="math notranslate nohighlight">\(F\)</span>, through the largest vertical gap</p>
+<div class="math notranslate nohighlight">
+\[D_n = \sup_x \lvert F_n(x) - F(x) \rvert.\]</div>
+<p>He proved that <span class="math notranslate nohighlight">\(\sqrt n D_n\)</span> has the same limiting distribution
+for <em>every</em> continuous <span class="math notranslate nohighlight">\(F\)</span>, so one table of critical values serves
+all continuous models. Nikolai Smirnov extended the idea in 1939 to
+testing whether two samples come from the same distribution.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.statistics.systems.nonparametric.kolmogorov_smirnov_test()</span></code>
+wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kstest.html#scipy.stats.kstest" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.stats.kstest()</span></code></a> and <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ks_2samp.html#scipy.stats.ks_2samp" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.stats.ks_2samp()</span></code></a>. The
+tests compute <span class="math notranslate nohighlight">\(D_n\)</span> directly from the sorted sample.</p>
+<p><em>References:</em> A. N. Kolmogorov, “Sulla determinazione empirica di una
+legge di distribuzione,” Giornale dell’Istituto Italiano degli Attuari
+4 (1933), 83-91; N. V. Smirnov, “On the Estimation of the Discrepancy
+between Empirical Curves of Distribution for Two Independent Samples,”
+Bulletin Mathématique de l’Université de Moscou 2(2) (1939), 3-14.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Draws a sample from a Student t distribution with 3 degrees of freedom and compares its empirical CDF with the standard normal CDF. The KS statistic is the largest vertical gap between the two curves."><img alt="" src="../_images/sphx_glr_plot_01_kolmogorov_smirnov_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/statistics/nonparametric/plot_01_kolmogorov_smirnov.html"><span class="doc">The Kolmogorov-Smirnov test</span></a></p>
+  <div class="sphx-glr-thumbnail-title">The Kolmogorov-Smirnov test</div>
+</div></div></section>
+<section id="fisher-s-exact-test-and-the-lady-tasting-tea">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">1935 – Fisher’s Exact Test and the Lady Tasting Tea</a><a class="headerlink" href="#fisher-s-exact-test-and-the-lady-tasting-tea" title="Link to this heading">#</a></h2>
+<p><em>The Design of Experiments</em> opens with a thought experiment. A lady
+claims she can taste whether the milk or the tea was poured into the cup
+first. She is given eight cups in random order, four of each kind, and
+asked to pick out the four milk-first cups. If she is only guessing,
+each of the <span class="math notranslate nohighlight">\(\binom84 = 70\)</span> possible choices is equally likely, so
+she picks all four correctly with probability exactly <span class="math notranslate nohighlight">\(1/70\)</span>.
+Conditioning on the table’s margins in this way turns any 2x2 table
+into a hypergeometric probability calculation. The result is an exact
+p-value that stays valid for counts too small for the chi-square
+approximation. The same example made randomization the foundation of
+experimental design.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.statistics.systems.nonparametric.fisher_exact_test()</span></code>
+wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.fisher_exact.html#scipy.stats.fisher_exact" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.stats.fisher_exact()</span></code></a>. The tests reproduce the
+<span class="math notranslate nohighlight">\(1/70\)</span> and <span class="math notranslate nohighlight">\(17/70\)</span> p-values of the tea-tasting experiment.</p>
+<p><em>References:</em> R. A. Fisher, <em>The Design of Experiments</em> (Edinburgh:
+Oliver and Boyd, 1935), Ch. 2.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Fisher&#x27;s thought experiment: a lady claims she can tell whether milk or tea was poured first. She is given 8 cups, 4 of each, and told so. If she is only guessing, the number of milk-first cups she identifies correctly follows a hypergeometric distribution, and getting all 4 right happens with probability exactly 1/70."><img alt="" src="../_images/sphx_glr_plot_03_fisher_exact_lady_tea_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/statistics/hypothesis_tests/plot_03_fisher_exact_lady_tea.html"><span class="doc">Fisher’s exact test and the lady tasting tea</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Fisher's exact test and the lady tasting tea</div>
 </div></div></section>
 <section id="neyman-s-confidence-intervals">
-<h2><a class="toc-backref" href="#id5" role="doc-backlink">1937 – Neyman’s Confidence Intervals</a><a class="headerlink" href="#neyman-s-confidence-intervals" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">1937 – Neyman’s Confidence Intervals</a><a class="headerlink" href="#neyman-s-confidence-intervals" title="Link to this heading">#</a></h2>
 <p>Jerzy Neyman’s 1937 paper gave the confidence interval its now-standard
-frequentist interpretation, carefully distinguished from the
-superficially similar but philosophically distinct Bayesian credible
-interval: a procedure for constructing an interval from data such that,
-across repeated sampling, the constructed interval contains the true
-parameter value a specified proportion (e.g. 95%) of the time – a
-statement about the <em>procedure’s</em> long-run reliability, not a
-probability statement about any one particular interval.</p>
+frequentist meaning, and distinguished it from Ronald Fisher’s
+superficially similar fiducial intervals. A confidence interval comes
+from a procedure that, over repeated sampling, produces intervals
+containing the true parameter value a specified proportion of the time,
+such as 95%. It is a statement about the <em>procedure’s</em> long-run
+reliability, not a probability statement about any one interval.</p>
 <p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.statistics.systems.confidence_intervals.mean_confidence_interval()</span></code>,
 <code class="xref py py-func docutils literal notranslate"><span class="pre">proportion_confidence_interval()</span></code>,
 and <code class="xref py py-func docutils literal notranslate"><span class="pre">variance_confidence_interval()</span></code>
-all implement exactly this procedure for their respective parameters,
-and this domain’s own tests verify the long-run coverage rate directly
-by repeated simulation.</p>
+implement this procedure for their respective parameters. This
+domain’s tests verify the long-run coverage rate directly by repeated
+simulation.</p>
 <p><em>References:</em> J. Neyman, “Outline of a Theory of Statistical Estimation
 Based on the Classical Theory of Probability,” Philosophical
 Transactions of the Royal Society A 236(767) (1937), 333-380.</p>
@@ -590,48 +750,172 @@ Transactions of the Royal Society A 236(767) (1937), 333-380.</p>
 <p><a class="reference internal" href="../api/gallery/statistics/confidence_intervals/plot_01_coverage_simulation.html"><span class="doc">Confirming a 95% confidence interval’s coverage by simulation</span></a></p>
   <div class="sphx-glr-thumbnail-title">Confirming a 95% confidence interval's coverage by simulation</div>
 </div></div></section>
-<section id="ordinary-least-squares-regression">
-<h2><a class="toc-backref" href="#id6" role="doc-backlink">1805 – 1809 – Ordinary Least-Squares Regression</a><a class="headerlink" href="#ordinary-least-squares-regression" title="Link to this heading">#</a></h2>
-<p>The least-squares fitting procedure of Legendre and Gauss (see the
-numerical-analysis chronology) extends directly to statistical
-<em>inference</em> about the fitted coefficients once the residuals are modeled
-as random noise: each coefficient’s standard error, t-statistic, and
-p-value against the null hypothesis that it is exactly zero, together
-with the <span class="math notranslate nohighlight">\(R^2\)</span> measure of how much of the response’s variance the
-model explains – a full statistical apparatus around the same
-20th-century-old fitting principle, formalized progressively through
-the 19th and early 20th centuries as the theory of linear models matured.</p>
-<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.statistics.systems.regression.linear_regression()</span></code>
-implements exactly this apparatus around a <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.lstsq.html#numpy.linalg.lstsq" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.lstsq()</span></code></a>
-fit, with coefficient significance referred to <code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.stats.t</span></code>.</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Fits a noisy linear relationship and inspects the fit: coefficient standard errors/p-values, R^2, and a residuals-vs-fitted-values plot."><img alt="" src="../_images/sphx_glr_plot_01_ols_diagnostics_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/statistics/regression/plot_01_ols_diagnostics.html"><span class="doc">OLS regression with residual diagnostics</span></a></p>
-  <div class="sphx-glr-thumbnail-title">OLS regression with residual diagnostics</div>
+<section id="wilks-s-theorem-and-the-likelihood-ratio-test">
+<h2><a class="toc-backref" href="#id12" role="doc-backlink">1938 – Wilks’s Theorem and the Likelihood-Ratio Test</a><a class="headerlink" href="#wilks-s-theorem-and-the-likelihood-ratio-test" title="Link to this heading">#</a></h2>
+<p>Jerzy Neyman and Egon Pearson had shown in 1933 that the most powerful
+test between two simple hypotheses rejects when the likelihood ratio is
+large. Samuel Wilks supplied the tool that made the likelihood ratio
+usable for composite hypotheses. If a restricted model is nested
+inside a larger one with <span class="math notranslate nohighlight">\(k\)</span> more free parameters, then under the
+restricted model</p>
+<div class="math notranslate nohighlight">
+\[\Lambda = 2\bigl(\ell(\hat\theta_1) - \ell(\hat\theta_0)\bigr)
+\xrightarrow{d} \chi^2_k,\]</div>
+<p>whatever the model. Any two nested models fitted by maximum likelihood
+can therefore be compared with the same chi-square table, and many
+classical tests turn out to be special cases.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.statistics.systems.likelihood.likelihood_ratio_test()</span></code>
+refers <span class="math notranslate nohighlight">\(\Lambda\)</span> to <code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.stats.chi2</span></code>. The tests check it
+against the closed form <span class="math notranslate nohighlight">\(n\log(\hat\sigma_0^2/\hat\sigma_1^2)\)</span>
+for testing a normal mean.</p>
+<p><em>References:</em> S. S. Wilks, “The Large-Sample Distribution of the
+Likelihood Ratio for Testing Composite Hypotheses,” Annals of
+Mathematical Statistics 9(1) (1938), 60-62; J. Neyman and E. S.
+Pearson, “On the Problem of the Most Efficient Tests of Statistical
+Hypotheses,” Philosophical Transactions of the Royal Society A 231
+(1933), 289-337.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Repeatedly tests the true null hypothesis &quot;the normal mean is 0&quot; with the likelihood-ratio statistic 2(l1 - l0). Wilks&#x27;s theorem says the statistic&#x27;s null distribution approaches chi-square with one degree of freedom, the number of parameters the null hypothesis fixes."><img alt="" src="../_images/sphx_glr_plot_02_wilks_likelihood_ratio_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/statistics/likelihood/plot_02_wilks_likelihood_ratio.html"><span class="doc">Wilks’s theorem and the likelihood-ratio test</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Wilks's theorem and the likelihood-ratio test</div>
+</div></div></section>
+<section id="wilcoxon-mann-whitney-and-rank-tests">
+<h2><a class="toc-backref" href="#id13" role="doc-backlink">1945-1947 – Wilcoxon, Mann, Whitney, and Rank Tests</a><a class="headerlink" href="#wilcoxon-mann-whitney-and-rank-tests" title="Link to this heading">#</a></h2>
+<p>Frank Wilcoxon, a chemist at American Cyanamid, wanted a quick test
+that would not be thrown off by the occasional wild measurement. In a
+four-page 1945 paper, he replaced the observations by their ranks. To
+compare paired measurements, rank the absolute differences and add up
+the ranks of the positive ones. To compare two independent samples, add
+up the ranks of one sample within the combined data. Under the null
+hypothesis every assignment of ranks is equally likely, so the null
+distribution can be counted exactly and does not depend on the shape of
+the data’s distribution. Henry Mann and Donald Whitney recast the
+two-sample version in 1947 as the statistic <span class="math notranslate nohighlight">\(U\)</span>, the number of
+pairs in which the first sample’s value is larger, and tabulated it.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.statistics.systems.nonparametric.wilcoxon_signed_rank_test()</span></code>
+and <code class="xref py py-func docutils literal notranslate"><span class="pre">mann_whitney_u_test()</span></code>
+wrap <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.wilcoxon.html#scipy.stats.wilcoxon" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.stats.wilcoxon()</span></code></a> and <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mannwhitneyu.html#scipy.stats.mannwhitneyu" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.stats.mannwhitneyu()</span></code></a>.
+The tests check exact small-sample p-values such as <span class="math notranslate nohighlight">\(1/32\)</span> for
+five positive differences.</p>
+<p><em>References:</em> F. Wilcoxon, “Individual Comparisons by Ranking Methods,”
+Biometrics Bulletin 1(6) (1945), 80-83; H. B. Mann and D. R. Whitney,
+“On a Test of Whether One of Two Random Variables is Stochastically
+Larger than the Other,” Annals of Mathematical Statistics 18(1)
+(1947), 50-60.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Rank tests throw away the raw values and keep only their order, so a few extreme observations cannot dominate. With heavy-tailed data they detect a shift that the t-test misses."><img alt="" src="../_images/sphx_glr_plot_02_wilcoxon_mann_whitney_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/statistics/nonparametric/plot_02_wilcoxon_mann_whitney.html"><span class="doc">Wilcoxon and Mann-Whitney rank tests</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Wilcoxon and Mann-Whitney rank tests</div>
+</div></div></section>
+<section id="quenouille-tukey-and-the-jackknife">
+<h2><a class="toc-backref" href="#id14" role="doc-backlink">1949-1958 – Quenouille, Tukey, and the Jackknife</a><a class="headerlink" href="#quenouille-tukey-and-the-jackknife" title="Link to this heading">#</a></h2>
+<p>Maurice Quenouille proposed reducing an estimator’s bias by
+recomputing it with each observation left out in turn. If
+<span class="math notranslate nohighlight">\(\hat\theta_{(i)}\)</span> is the estimate without observation <span class="math notranslate nohighlight">\(i\)</span>
+and <span class="math notranslate nohighlight">\(\hat\theta_{(\cdot)}\)</span> their average, the bias estimate is
+<span class="math notranslate nohighlight">\((n-1)(\hat\theta_{(\cdot)} - \hat\theta)\)</span>. John Tukey saw in
+1958 that the same leave-one-out replicates also give a standard
+error,</p>
+<div class="math notranslate nohighlight">
+\[\widehat{\text{se}} = \sqrt{\frac{n-1}{n}\sum_{i=1}^n
+\bigl(\hat\theta_{(i)} - \hat\theta_{(\cdot)}\bigr)^2},\]</div>
+<p>and named the method the “jackknife,” a rough-and-ready tool for many
+jobs. It was the first general-purpose resampling method. Its failures
+on non-smooth statistics such as the median led directly to Efron’s
+bootstrap.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.statistics.systems.jackknife.jackknife()</span></code>
+is written by hand (SciPy has no general jackknife) and returns a
+<a class="reference internal" href="../api/statistics.html#mathematicskit.statistics.JackknifeResult" title="mathematicskit.statistics.core.base.JackknifeResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">JackknifeResult</span></code></a>. The tests
+check two exact identities: the jackknife standard error of the mean is
+<span class="math notranslate nohighlight">\(s/\sqrt n\)</span>, and bias-correcting the divide-by-<span class="math notranslate nohighlight">\(n\)</span> variance
+gives the unbiased divide-by-<span class="math notranslate nohighlight">\((n-1)\)</span> variance.</p>
+<p><em>References:</em> M. H. Quenouille, “Approximate Tests of Correlation in
+Time-Series,” Journal of the Royal Statistical Society B 11(1) (1949),
+68-84; M. H. Quenouille, “Notes on Bias in Estimation,” Biometrika
+43(3/4) (1956), 353-360; J. W. Tukey, “Bias and Confidence in
+Not-quite Large Samples” (abstract), Annals of Mathematical Statistics
+29(2) (1958), 614.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Leaves out one observation at a time and recomputes the statistic. For the plug-in variance, the jackknife&#x27;s bias correction recovers the unbiased n - 1 variance exactly, and for the mean its standard error is exactly the classical s / sqrt(n). For a non-smooth statistic such as the midrange, the jackknife standard error is unreliable and disagrees with the bootstrap&#x27;s -- one of the shortcomings Efron&#x27;s bootstrap was designed to overcome."><img alt="" src="../_images/sphx_glr_plot_02_jackknife_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/statistics/bootstrap/plot_02_jackknife.html"><span class="doc">The jackknife</span></a></p>
+  <div class="sphx-glr-thumbnail-title">The jackknife</div>
+</div></div></section>
+<section id="stein-s-paradox-and-the-james-stein-estimator">
+<h2><a class="toc-backref" href="#id15" role="doc-backlink">1956-1961 – Stein’s Paradox and the James-Stein Estimator</a><a class="headerlink" href="#stein-s-paradox-and-the-james-stein-estimator" title="Link to this heading">#</a></h2>
+<p>Suppose each of <span class="math notranslate nohighlight">\(p\)</span> unrelated quantities is measured once with
+normal noise, <span class="math notranslate nohighlight">\(x_i \sim N(\theta_i, \sigma^2)\)</span>. The obvious
+estimate of each <span class="math notranslate nohighlight">\(\theta_i\)</span> is <span class="math notranslate nohighlight">\(x_i\)</span> itself. Charles Stein
+proved in 1956 that when <span class="math notranslate nohighlight">\(p \ge 3\)</span> this is <em>inadmissible</em>: another
+estimator has lower expected total squared error for every possible
+<span class="math notranslate nohighlight">\(\theta\)</span>. In 1961 Willard James and Stein gave an explicit one,</p>
+<div class="math notranslate nohighlight">
+\[\hat\theta_{JS} = \left(1 - \frac{(p-2)\sigma^2}{\lVert x\rVert^2}\right) x,\]</div>
+<p>which shrinks every observation toward a common point. The quantities
+need not be related at all. The result shocked statisticians, and it
+underlies the empirical Bayes methods, ridge regression, and
+regularization of later decades.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.statistics.systems.shrinkage.james_stein_estimator()</span></code>
+implements the (optionally positive-part) estimator directly. The tests
+check the shrinkage factor and, by seeded simulation, the lower total
+squared error.</p>
+<p><em>References:</em> C. Stein, “Inadmissibility of the Usual Estimator for the
+Mean of a Multivariate Normal Distribution,” Proceedings of the Third
+Berkeley Symposium on Mathematical Statistics and Probability, vol. 1
+(1956), 197-206; W. James and C. Stein, “Estimation with Quadratic
+Loss,” Proceedings of the Fourth Berkeley Symposium on Mathematical
+Statistics and Probability, vol. 1 (1961), 361-379.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Estimates p unrelated normal means from one observation each. Shrinking all the observations toward zero by the James-Stein factor lowers the total squared error for every p &gt;= 3, even though no single observation carries information about the others."><img alt="" src="../_images/sphx_glr_plot_01_james_stein_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/statistics/shrinkage/plot_01_james_stein.html"><span class="doc">Stein’s paradox</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Stein's paradox</div>
 </div></div></section>
 <section id="efron-s-bootstrap">
-<h2><a class="toc-backref" href="#id7" role="doc-backlink">1979 – Efron’s Bootstrap</a><a class="headerlink" href="#efron-s-bootstrap" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id16" role="doc-backlink">1979 – Efron’s Bootstrap</a><a class="headerlink" href="#efron-s-bootstrap" title="Link to this heading">#</a></h2>
 <p>Bradley Efron’s 1979 paper proposed a strikingly simple, purely
 computational alternative to deriving a statistic’s sampling
-distribution analytically: resample the observed data itself, with
-replacement, thousands of times, recomputing the statistic of interest
-on each resample, and use the resulting empirical distribution directly
-to build confidence intervals or standard errors – no closed-form
-sampling distribution required at all, at the cost of needing a computer
-fast enough to resample thousands of times, which by 1979 had finally
-become routinely available.</p>
+distribution analytically. Resample the observed data with replacement
+thousands of times, recompute the statistic on each resample, and use
+the resulting empirical distribution directly to build confidence
+intervals or standard errors. No closed-form sampling distribution is
+needed. The price is thousands of recomputations, which by 1979
+computers could routinely afford.</p>
 <p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.statistics.systems.bootstrap.bootstrap_confidence_interval()</span></code>
-wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bootstrap.html#scipy.stats.bootstrap" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.stats.bootstrap()</span></code></a> directly, which already implements
-the percentile, “basic”, and bias-corrected-and-accelerated (BCa)
-interval-construction methods Efron’s original proposal and its
-refinements developed.</p>
+wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bootstrap.html#scipy.stats.bootstrap" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.stats.bootstrap()</span></code></a>, which implements the percentile,
+“basic”, and bias-corrected and accelerated (BCa) interval methods
+developed from Efron’s original proposal.</p>
 <p><em>References:</em> B. Efron, “Bootstrap Methods: Another Look at the
 Jackknife,” The Annals of Statistics 7(1) (1979), 1-26.</p>
 <div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Compares a bootstrap confidence interval for the median (which has no simple closed form) against the parametric t-based interval for the mean, on the same skewed dataset."><img alt="" src="../_images/sphx_glr_plot_01_bootstrap_vs_parametric_thumb.png" />
 <p><a class="reference internal" href="../api/gallery/statistics/bootstrap/plot_01_bootstrap_vs_parametric.html"><span class="doc">Bootstrap vs. parametric confidence intervals</span></a></p>
   <div class="sphx-glr-thumbnail-title">Bootstrap vs. parametric confidence intervals</div>
 </div></div></section>
+<section id="benjamini-hochberg-and-the-false-discovery-rate">
+<h2><a class="toc-backref" href="#id17" role="doc-backlink">1995 – Benjamini, Hochberg, and the False Discovery Rate</a><a class="headerlink" href="#benjamini-hochberg-and-the-false-discovery-rate" title="Link to this heading">#</a></h2>
+<p>When a thousand hypotheses are tested at the 5% level, about fifty true
+nulls are rejected by chance alone. The classical Bonferroni fix tests
+each hypothesis at <span class="math notranslate nohighlight">\(\alpha/m\)</span>, which controls the chance of even
+one false rejection but misses most real effects. Yoav Benjamini and
+Yosef Hochberg proposed controlling a different quantity, the expected
+<em>fraction</em> of rejections that are false (the false discovery rate).
+Their step-up procedure sorts the p-values
+<span class="math notranslate nohighlight">\(p_{(1)} \le \dots \le p_{(m)}\)</span>, finds the largest <span class="math notranslate nohighlight">\(k\)</span> with</p>
+<div class="math notranslate nohighlight">
+\[p_{(k)} \le \frac{k}{m}\,\alpha,\]</div>
+<p>and rejects the <span class="math notranslate nohighlight">\(k\)</span> smallest. For independent tests the false
+discovery rate is then at most <span class="math notranslate nohighlight">\(\alpha\)</span>. The procedure made
+large-scale testing workable in genomics, neuroimaging, and other
+fields that run thousands of tests at once.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.statistics.systems.multiple_testing.benjamini_hochberg()</span></code>
+and <code class="xref py py-func docutils literal notranslate"><span class="pre">bonferroni_correction()</span></code>
+return adjusted p-values and rejection decisions in a
+<a class="reference internal" href="../api/statistics.html#mathematicskit.statistics.MultipleTestingResult" title="mathematicskit.statistics.core.base.MultipleTestingResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleTestingResult</span></code></a>.
+The tests work a textbook example by hand and cross-check against
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.false_discovery_control.html#scipy.stats.false_discovery_control" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.stats.false_discovery_control()</span></code></a> where available.</p>
+<p><em>References:</em> Y. Benjamini and Y. Hochberg, “Controlling the False
+Discovery Rate: A Practical and Powerful Approach to Multiple Testing,”
+Journal of the Royal Statistical Society B 57(1) (1995), 289-300.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Runs 1000 one-sample t-tests, 100 of which have a real effect. With no correction, dozens of the &quot;discoveries&quot; are false; Bonferroni avoids false discoveries but misses most real effects; Benjamini-Hochberg keeps the fraction of false discoveries near the chosen 5% while finding far more of the real ones."><img alt="" src="../_images/sphx_glr_plot_01_false_discovery_rate_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/statistics/multiple_testing/plot_01_false_discovery_rate.html"><span class="doc">Benjamini-Hochberg and the false discovery rate</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Benjamini-Hochberg and the false discovery rate</div>
+</div></div></section>
 <section id="see-also">
-<h2><a class="toc-backref" href="#id8" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id18" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="../api/statistics.html"><span class="doc">mathematicskit.statistics</span></a></p></li>
 <li><p><a class="reference internal" href="probability_breakthroughs.html"><span class="doc">Breakthroughs in Probability Theory</span></a></p></li>
@@ -687,13 +971,23 @@ Jackknife,” The Annals of Statistics 7(1) (1979), 1-26.</p>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ordinary-least-squares-regression">1805-1809 – Ordinary Least-Squares Regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gauss-and-the-theory-of-errors">1809 – Gauss and the Theory of Errors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#galton-pearson-and-the-correlation-coefficient">1888-1896 – Galton, Pearson, and the Correlation Coefficient</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pearson-s-chi-square-test">1900 – Pearson’s Chi-Square Test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spearman-s-rank-correlation">1904 – Spearman’s Rank Correlation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gosset-s-t-distribution">1908 – Gosset’s t-Distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fisher-s-maximum-likelihood">1922 – Fisher’s Maximum Likelihood</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fisher-and-the-analysis-of-variance">1925 – Fisher and the Analysis of Variance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kolmogorov-smirnov-and-distribution-free-goodness-of-fit">1933-1939 – Kolmogorov, Smirnov, and Distribution-Free Goodness of Fit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fisher-s-exact-test-and-the-lady-tasting-tea">1935 – Fisher’s Exact Test and the Lady Tasting Tea</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neyman-s-confidence-intervals">1937 – Neyman’s Confidence Intervals</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ordinary-least-squares-regression">1805 – 1809 – Ordinary Least-Squares Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wilks-s-theorem-and-the-likelihood-ratio-test">1938 – Wilks’s Theorem and the Likelihood-Ratio Test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wilcoxon-mann-whitney-and-rank-tests">1945-1947 – Wilcoxon, Mann, Whitney, and Rank Tests</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quenouille-tukey-and-the-jackknife">1949-1958 – Quenouille, Tukey, and the Jackknife</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stein-s-paradox-and-the-james-stein-estimator">1956-1961 – Stein’s Paradox and the James-Stein Estimator</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#efron-s-bootstrap">1979 – Efron’s Bootstrap</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benjamini-hochberg-and-the-false-discovery-rate">1995 – Benjamini, Hochberg, and the False Discovery Rate</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#see-also">See Also</a></li>
 </ul>
   </nav></div>

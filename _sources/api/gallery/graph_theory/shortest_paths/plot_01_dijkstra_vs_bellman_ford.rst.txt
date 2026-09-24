@@ -18,18 +18,22 @@
 .. _sphx_glr_api_gallery_graph_theory_shortest_paths_plot_01_dijkstra_vs_bellman_ford.py:
 
 
-Dijkstra vs. Bellman-Ford, and all-pairs Floyd-Warshall
-==============================================================
+Dijkstra's shortest-path algorithm (and when Bellman-Ford is needed)
+==========================================================================
 
-Compares the three shortest-path algorithms on the same weighted graph,
-including a negative-weight edge that only Bellman-Ford can handle
-correctly.
+Runs Dijkstra's algorithm from one source on a small weighted graph and
+draws the resulting shortest-path tree. Bellman-Ford gives the same
+distances there, and takes over on a graph with a negative edge, where
+Dijkstra's greedy assumption breaks down.
 
-.. GENERATED FROM PYTHON SOURCE LINES 11-13
+.. GENERATED FROM PYTHON SOURCE LINES 12-17
 
 .. code-block:: Python
 
-    from mathematicskit.graph_theory import Graph, bellman_ford_shortest_paths, dijkstra_shortest_paths, floyd_warshall_shortest_paths
+    import matplotlib.pyplot as plt
+
+    from mathematicskit.graph_theory import Graph, bellman_ford_shortest_paths, dijkstra_shortest_paths
+    from mathematicskit.graph_theory.visualizers.plots import circular_layout, plot_graph
 
 
 
@@ -38,12 +42,12 @@ correctly.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 14-16
+.. GENERATED FROM PYTHON SOURCE LINES 18-20
 
-A graph with non-negative weights: Dijkstra and Bellman-Ford agree
+Single-source shortest paths with Dijkstra
 -------------------------------------------------------------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 16-30
+.. GENERATED FROM PYTHON SOURCE LINES 20-34
 
 .. code-block:: Python
 
@@ -75,12 +79,60 @@ A graph with non-negative weights: Dijkstra and Bellman-Ford agree
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 31-33
+.. GENERATED FROM PYTHON SOURCE LINES 35-41
+
+The shortest-path tree
+-------------------------------------------------------------------------
+
+Each vertex's predecessor on its shortest path from vertex 0 defines a
+tree. The direct edge 0-1 (weight 4) is not used: the detour through
+vertex 2 costs only 3.
+
+.. GENERATED FROM PYTHON SOURCE LINES 41-57
+
+.. code-block:: Python
+
+
+    tree = [(int(p), v) for v, p in enumerate(dijkstra_result.predecessors) if p >= 0]
+    print("shortest-path tree edges:", tree)
+
+    pos = circular_layout(g.n_vertices)
+    fig, ax = plt.subplots(figsize=(5, 5))
+    plot_graph(g, ax=ax, positions=pos, highlight_edges=tree)
+    for u, v, w in g.edges():
+        if u < v:
+            ax.annotate(f"{w:g}", pos[[u, v]].mean(axis=0), ha="center", va="center", color="0.3", bbox={"fc": "white", "ec": "none"})
+    for v, d in enumerate(dijkstra_result.distances):
+        ax.annotate(f"d = {d:g}", 1.3 * pos[v], ha="center", va="center", color="firebrick")
+    ax.set_xlim(-1.6, 1.6)
+    ax.set_ylim(-1.6, 1.6)
+    ax.set_title("Dijkstra's shortest-path tree from vertex 0")
+
+
+
+
+.. image-sg:: /api/gallery/graph_theory/shortest_paths/images/sphx_glr_plot_01_dijkstra_vs_bellman_ford_001.png
+   :alt: Dijkstra's shortest-path tree from vertex 0
+   :srcset: /api/gallery/graph_theory/shortest_paths/images/sphx_glr_plot_01_dijkstra_vs_bellman_ford_001.png
+   :class: sphx-glr-single-img
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    shortest-path tree edges: [(2, 1), (0, 2), (1, 3), (3, 4)]
+
+    Text(0.5, 1.0, "Dijkstra's shortest-path tree from vertex 0")
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 58-60
 
 A directed graph with a negative edge: only Bellman-Ford applies
 -------------------------------------------------------------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 33-41
+.. GENERATED FROM PYTHON SOURCE LINES 60-67
 
 .. code-block:: Python
 
@@ -95,7 +147,6 @@ A directed graph with a negative edge: only Bellman-Ford applies
 
 
 
-
 .. rst-class:: sphx-glr-script-out
 
  .. code-block:: none
@@ -106,42 +157,10 @@ A directed graph with a negative edge: only Bellman-Ford applies
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 42-44
-
-All-pairs distances via Floyd-Warshall
------------------------------------------------------
-
-.. GENERATED FROM PYTHON SOURCE LINES 44-48
-
-.. code-block:: Python
-
-
-    fw_result = floyd_warshall_shortest_paths(g)
-    print("\nall-pairs distance matrix:")
-    print(fw_result.distances)
-
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-
-    all-pairs distance matrix:
-    [[0. 3. 1. 4. 7.]
-     [3. 0. 2. 1. 4.]
-     [1. 2. 0. 3. 6.]
-     [4. 1. 3. 0. 3.]
-     [7. 4. 6. 3. 0.]]
-
-
-
-
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.001 seconds)
+   **Total running time of the script:** (0 minutes 0.019 seconds)
 
 
 .. _sphx_glr_download_api_gallery_graph_theory_shortest_paths_plot_01_dijkstra_vs_bellman_ford.py:

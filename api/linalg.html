@@ -475,7 +475,14 @@ SVD (<a class="reference external" href="https://numpy.org/doc/stable/reference/
 (<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.cg.html#scipy.sparse.linalg.cg" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.sparse.linalg.cg()</span></code></a>/<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.gmres.html#scipy.sparse.linalg.gmres" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">gmres()</span></code></a>);
 condition number (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.cond.html#numpy.linalg.cond" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.cond()</span></code></a>) and least-squares
 (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.lstsq.html#numpy.linalg.lstsq" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.lstsq()</span></code></a>), with a comparison utility showing why
-normal equations are less stable than QR for ill-conditioned systems.</p>
+normal equations are less stable than QR for ill-conditioned systems.
+Also: Cramer’s rule (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.slogdet.html#numpy.linalg.slogdet" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.slogdet()</span></code></a>); characteristic
+polynomials (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.poly.html#numpy.poly" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.poly()</span></code></a>) and the Cayley-Hamilton theorem;
+Jacobi, Gauss-Seidel, and SOR stationary iterations (hand-rolled – no
+library equivalent); the Moore-Penrose pseudoinverse
+(<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.pinv.html#numpy.linalg.pinv" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.pinv()</span></code></a>); Gershgorin discs; Lanczos extreme
+eigenpairs (<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.eigsh.html#scipy.sparse.linalg.eigsh" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.sparse.linalg.eigsh()</span></code></a>); and Hessenberg/Schur
+forms (<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.hessenberg.html#scipy.linalg.hessenberg" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.linalg.hessenberg()</span></code></a>/<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.schur.html#scipy.linalg.schur" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">schur()</span></code></a>).</p>
 <p>mathematicskit’s <code class="docutils literal notranslate"><span class="pre">systems/</span></code> classes/functions wrap these library calls in the
 package’s own dataclass results, docstrings, and stability commentary –
 they are thin, well-tested wrappers, not reimplementations of already-
@@ -562,7 +569,16 @@ sufficient).</p></li>
 <dt class="sig sig-object py" id="mathematicskit.linalg.EigenResult">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.linalg.</span></span><span class="sig-name descname"><span class="pre">EigenResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eigenvalues</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eigenvectors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">converged</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/linalg/core/base.html#EigenResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.linalg.EigenResult" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>Output of a symmetric eigenvalue algorithm.</p>
+<p>Output of an eigenvalue computation, whole-spectrum or single-pair.</p>
+<p>The whole-spectrum solvers
+(<code class="xref py py-func docutils literal notranslate"><span class="pre">eigen_symmetric()</span></code>,
+<code class="xref py py-func docutils literal notranslate"><span class="pre">eigen_general()</span></code>) fill
+<cite>eigenvalues</cite>/<cite>eigenvectors</cite> with the full spectrum in one shot and
+report <code class="docutils literal notranslate"><span class="pre">iterations=1,</span> <span class="pre">converged=True</span></code>, since LAPACK does not expose
+its internal iteration count. The hand-rolled iterations
+(<code class="xref py py-func docutils literal notranslate"><span class="pre">power_iteration()</span></code>,
+<code class="xref py py-func docutils literal notranslate"><span class="pre">inverse_iteration()</span></code>) return a
+single eigenpair and a genuine iteration count and convergence flag.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -578,7 +594,8 @@ sufficient).</p></li>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.linalg.EigenResult.converged">
 <span class="sig-name descname"><span class="pre">converged</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></span><a class="headerlink" href="#mathematicskit.linalg.EigenResult.converged" title="Link to this definition">#</a></dt>
-<dd><p>Whether the convergence tolerance was met.</p>
+<dd><p>Whether the convergence tolerance was met (always <code class="docutils literal notranslate"><span class="pre">True</span></code> for
+the direct library solvers, which do not iterate visibly).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)">bool</a></p>
@@ -589,10 +606,13 @@ sufficient).</p></li>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.linalg.EigenResult.eigenvalues">
 <span class="sig-name descname"><span class="pre">eigenvalues</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.linalg.EigenResult.eigenvalues" title="Link to this definition">#</a></dt>
-<dd><p>Eigenvalue(s) found.</p>
+<dd><p>The whole spectrum, shape (n,), for the library-backed
+solvers; a single dominant (or shift-selected) eigenvalue, shape (1,),
+for power/inverse iteration. Real and ascending from <code class="docutils literal notranslate"><span class="pre">eigh</span></code>, possibly
+complex and unordered from <code class="docutils literal notranslate"><span class="pre">eig</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ndarray, shape (<a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>,) or scalar-like shape (1,)</p>
+<dd class="field-odd"><p>ndarray</p>
 </dd>
 </dl>
 </dd></dl>
@@ -600,10 +620,13 @@ sufficient).</p></li>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.linalg.EigenResult.eigenvectors">
 <span class="sig-name descname"><span class="pre">eigenvectors</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.linalg.EigenResult.eigenvectors" title="Link to this definition">#</a></dt>
-<dd><p>Corresponding eigenvector(s), as columns.</p>
+<dd><p>Shape (n, n) with eigenvectors as <em>columns</em> for the
+whole-spectrum solvers, so <code class="docutils literal notranslate"><span class="pre">eigenvectors[:,</span> <span class="pre">k]</span></code> pairs with
+<code class="docutils literal notranslate"><span class="pre">eigenvalues[k]</span></code>; a single unit eigenvector of shape (n,) for
+power/inverse iteration.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ndarray, shape (<a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>, <a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>) or (<a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>,)</p>
+<dd class="field-odd"><p>ndarray</p>
 </dd>
 </dl>
 </dd></dl>
@@ -611,7 +634,7 @@ sufficient).</p></li>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.linalg.EigenResult.extra">
 <span class="sig-name descname"><span class="pre">extra</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a></span><a class="headerlink" href="#mathematicskit.linalg.EigenResult.extra" title="Link to this definition">#</a></dt>
-<dd><p>Free-form diagnostics slot (e.g. Jacobi’s off-diagonal norm history).</p>
+<dd><p>Free-form diagnostics slot, unused by the current solvers.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)">dict</a></p>
@@ -622,7 +645,8 @@ sufficient).</p></li>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.linalg.EigenResult.iterations">
 <span class="sig-name descname"><span class="pre">iterations</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></span><a class="headerlink" href="#mathematicskit.linalg.EigenResult.iterations" title="Link to this definition">#</a></dt>
-<dd><p>Number of iterations/sweeps performed.</p>
+<dd><p>Number of iterations performed (always 1 for the library-backed
+solvers, which do not expose LAPACK’s internal count).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
@@ -633,7 +657,8 @@ sufficient).</p></li>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.linalg.EigenResult.method">
 <span class="sig-name descname"><span class="pre">method</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></span><a class="headerlink" href="#mathematicskit.linalg.EigenResult.method" title="Link to this definition">#</a></dt>
-<dd><p>e.g. <code class="docutils literal notranslate"><span class="pre">&quot;jacobi&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;qr_algorithm&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;power_iteration&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;inverse_iteration&quot;</span></code>.</p>
+<dd><p>One of <code class="docutils literal notranslate"><span class="pre">&quot;numpy_eigh&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;numpy_eig&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;power_iteration&quot;</span></code>,
+or <code class="docutils literal notranslate"><span class="pre">&quot;inverse_iteration&quot;</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
@@ -692,6 +717,92 @@ Computations</em>, 4th ed., Ch. 9.3.3.</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><em>IterativeSolveResult</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.linalg.GaussSeidel">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.linalg.</span></span><span class="sig-name descname"><span class="pre">GaussSeidel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-08</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/linalg/systems/stationary.html#GaussSeidel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.linalg.GaussSeidel" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mathematicskit.linalg.SOR" title="mathematicskit.linalg.systems.stationary.SOR"><code class="xref py py-class docutils literal notranslate"><span class="pre">SOR</span></code></a></p>
+<p>Gauss-Seidel iteration (Gauss 1823, Seidel 1874): <a class="reference internal" href="#mathematicskit.linalg.SOR" title="mathematicskit.linalg.SOR"><code class="xref py py-class docutils literal notranslate"><span class="pre">SOR</span></code></a> with <code class="docutils literal notranslate"><span class="pre">omega</span> <span class="pre">=</span> <span class="pre">1</span></code>.</p>
+<p>Each unknown is solved from its own equation using the <em>newest</em>
+values of the unknowns already updated in this sweep. Converges for
+strictly diagonally dominant or symmetric positive-definite <code class="docutils literal notranslate"><span class="pre">A</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tol</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>max_iter</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">GaussSeidel</span><span class="p">(</span><span class="n">tol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">)</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="go">array([0.09090909, 0.63636364])</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.linalg.GaussSeidel.method">
+<span class="sig-name descname"><span class="pre">method</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'gauss_seidel'</span></span><a class="headerlink" href="#mathematicskit.linalg.GaussSeidel.method" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.linalg.GershgorinResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.linalg.</span></span><span class="sig-name descname"><span class="pre">GershgorinResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">centers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radii</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/linalg/core/base.html#GershgorinResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.linalg.GershgorinResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>The Gershgorin discs of a square matrix.</p>
+<p>Disc <span class="math notranslate nohighlight">\(k\)</span> is centered at <span class="math notranslate nohighlight">\(a_{kk}\)</span> with radius
+<span class="math notranslate nohighlight">\(R_k = \sum_{j \ne k} |a_{kj}|\)</span>; every eigenvalue lies in the
+union of the discs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>centers</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>radii</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.linalg.GershgorinResult.centers">
+<span class="sig-name descname"><span class="pre">centers</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.linalg.GershgorinResult.centers" title="Link to this definition">#</a></dt>
+<dd><p>Disc centers, the diagonal entries (possibly complex).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (<a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mathematicskit.linalg.GershgorinResult.contains">
+<span class="sig-name descname"><span class="pre">contains</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">z</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/linalg/core/base.html#GershgorinResult.contains"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.linalg.GershgorinResult.contains" title="Link to this definition">#</a></dt>
+<dd><p>Whether the complex number <cite>z</cite> lies in the union of the discs (boundary included, up to rounding).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>z</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#complex" title="(in Python v3.14)"><em>complex</em></a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.linalg.GershgorinResult.radii">
+<span class="sig-name descname"><span class="pre">radii</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.linalg.GershgorinResult.radii" title="Link to this definition">#</a></dt>
+<dd><p>Disc radii, the off-diagonal absolute row (or column) sums.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (<a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>,)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -775,7 +886,8 @@ Computations</em>, 4th ed., Ch. 9.3.3.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.linalg.IterativeSolveResult.method">
 <span class="sig-name descname"><span class="pre">method</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></span><a class="headerlink" href="#mathematicskit.linalg.IterativeSolveResult.method" title="Link to this definition">#</a></dt>
-<dd><p><code class="docutils literal notranslate"><span class="pre">&quot;conjugate_gradient&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;gmres&quot;</span></code>.</p>
+<dd><p><code class="docutils literal notranslate"><span class="pre">&quot;conjugate_gradient&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;gmres&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;jacobi&quot;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&quot;gauss_seidel&quot;</span></code>, or <code class="docutils literal notranslate"><span class="pre">&quot;sor&quot;</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
@@ -786,7 +898,11 @@ Computations</em>, 4th ed., Ch. 9.3.3.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.linalg.IterativeSolveResult.residual_history">
 <span class="sig-name descname"><span class="pre">residual_history</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.linalg.IterativeSolveResult.residual_history" title="Link to this definition">#</a></dt>
-<dd><p><code class="docutils literal notranslate"><span class="pre">||b</span> <span class="pre">-</span> <span class="pre">A</span> <span class="pre">x_k||</span></code> at each iterate.</p>
+<dd><p>The <em>relative</em> residual norm
+<code class="docutils literal notranslate"><span class="pre">||b</span> <span class="pre">-</span> <span class="pre">A</span> <span class="pre">x_k||</span> <span class="pre">/</span> <span class="pre">||b||</span></code> at each iterate, starting from the initial
+guess. Normalizing by <code class="docutils literal notranslate"><span class="pre">||b||</span></code> is what makes the history directly
+comparable to <cite>method</cite>’s <code class="docutils literal notranslate"><span class="pre">tol</span></code> (itself a relative tolerance) and
+comparable across right-hand sides of different magnitudes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>ndarray, shape (iterations + 1,)</p>
@@ -804,6 +920,38 @@ Computations</em>, 4th ed., Ch. 9.3.3.</p>
 </dd>
 </dl>
 </dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.linalg.JacobiIteration">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.linalg.</span></span><span class="sig-name descname"><span class="pre">JacobiIteration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-08</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/linalg/systems/stationary.html#JacobiIteration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.linalg.JacobiIteration" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mathematicskit.linalg.SOR" title="mathematicskit.linalg.systems.stationary.SOR"><code class="xref py py-class docutils literal notranslate"><span class="pre">SOR</span></code></a></p>
+<p>Jacobi iteration (Jacobi 1845): every unknown updated <em>simultaneously</em> from the previous iterate.</p>
+<p><span class="math notranslate nohighlight">\(x_{k+1} = D^{-1}(b - (L + U) x_k)\)</span>. Simpler and fully parallel,
+but for consistently ordered matrices it needs about twice as many
+sweeps as Gauss-Seidel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tol</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>max_iter</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">JacobiIteration</span><span class="p">(</span><span class="n">tol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">)</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">A</span> <span class="o">@</span> <span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.linalg.JacobiIteration.method">
+<span class="sig-name descname"><span class="pre">method</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'jacobi'</span></span><a class="headerlink" href="#mathematicskit.linalg.JacobiIteration.method" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -981,6 +1129,65 @@ squares it).</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.linalg.SOR">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.linalg.</span></span><span class="sig-name descname"><span class="pre">SOR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omega</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-08</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/linalg/systems/stationary.html#SOR"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.linalg.SOR" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mathematicskit.linalg.IterativeLinearSolver" title="mathematicskit.linalg.core.base.IterativeLinearSolver"><code class="xref py py-class docutils literal notranslate"><span class="pre">IterativeLinearSolver</span></code></a></p>
+<p>Successive over-relaxation (Frankel 1950, Young 1950).</p>
+<p>One sweep updates the unknowns in order, blending the Gauss-Seidel
+value with the old one:</p>
+<div class="math notranslate nohighlight">
+\[x_i \leftarrow (1 - \omega)\, x_i + \frac{\omega}{a_{ii}}
+\Big(b_i - \sum_{j &lt; i} a_{ij} x_j^{\text{new}} - \sum_{j &gt; i} a_{ij} x_j^{\text{old}}\Big).\]</div>
+<p><code class="docutils literal notranslate"><span class="pre">omega</span> <span class="pre">=</span> <span class="pre">1</span></code> is Gauss-Seidel; <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">&lt;</span> <span class="pre">omega</span> <span class="pre">&lt;</span> <span class="pre">2</span></code> over-relaxes. For
+symmetric positive-definite <code class="docutils literal notranslate"><span class="pre">A</span></code> it converges for every
+<code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&lt;</span> <span class="pre">omega</span> <span class="pre">&lt;</span> <span class="pre">2</span></code> (Ostrowski-Reich).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>omega</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Relaxation factor, <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&lt;</span> <span class="pre">omega</span> <span class="pre">&lt;</span> <span class="pre">2</span></code>.</p></li>
+<li><p><strong>tol</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Relative residual tolerance, <code class="docutils literal notranslate"><span class="pre">||b</span> <span class="pre">-</span> <span class="pre">A</span> <span class="pre">x_k||</span> <span class="pre">&lt;</span> <span class="pre">tol</span> <span class="pre">*</span> <span class="pre">||b||</span></code>.</p></li>
+<li><p><strong>max_iter</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Maximum number of sweeps.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">SOR</span><span class="p">(</span><span class="n">omega</span><span class="o">=</span><span class="mf">1.1</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">)</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">A</span> <span class="o">@</span> <span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="n">result</span><span class="o">.</span><span class="n">method</span>
+<span class="go">(True, 'sor')</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.linalg.SOR.method">
+<span class="sig-name descname"><span class="pre">method</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'sor'</span></span><a class="headerlink" href="#mathematicskit.linalg.SOR.method" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mathematicskit.linalg.SOR.solve">
+<span class="sig-name descname"><span class="pre">solve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/linalg/systems/stationary.html#SOR.solve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.linalg.SOR.solve" title="Link to this definition">#</a></dt>
+<dd><p>Solve <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">b</span></code> iteratively.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>)</p></li>
+<li><p><strong>b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>)</p></li>
+<li><p><strong>x0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Initial guess; defaults to the zero vector.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.linalg.IterativeSolveResult" title="mathematicskit.linalg.core.base.IterativeSolveResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">IterativeSolveResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>IterativeSolveResult</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="mathematicskit.linalg.SVDResult">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.linalg.</span></span><span class="sig-name descname"><span class="pre">SVDResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">U</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/linalg/core/base.html#SVDResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.linalg.SVDResult" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
@@ -1000,7 +1207,7 @@ squares it).</p>
 <dd><p>Singular values, descending.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ndarray, shape (k,)</p>
+<dd class="field-odd"><p>ndarray, shape (<a class="reference internal" href="probability.html#mathematicskit.probability.TailBoundResult.k" title="mathematicskit.probability.TailBoundResult.k">k</a>,)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1011,7 +1218,7 @@ squares it).</p>
 <dd><p>Left singular vectors.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ndarray, shape (m, k)</p>
+<dd class="field-odd"><p>ndarray, shape (m, <a class="reference internal" href="probability.html#mathematicskit.probability.TailBoundResult.k" title="mathematicskit.probability.TailBoundResult.k">k</a>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1022,11 +1229,90 @@ squares it).</p>
 <dd><p>Right singular vectors, transposed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ndarray, shape (k, <a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>)</p>
+<dd class="field-odd"><p>ndarray, shape (<a class="reference internal" href="probability.html#mathematicskit.probability.TailBoundResult.k" title="mathematicskit.probability.TailBoundResult.k">k</a>, <a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>)</p>
 </dd>
 </dl>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.linalg.SchurResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.linalg.</span></span><span class="sig-name descname"><span class="pre">SchurResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Z</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/linalg/core/base.html#SchurResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.linalg.SchurResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Output of a Schur decomposition: <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">=</span> <span class="pre">Z</span> <span class="pre">T</span> <span class="pre">Z^H</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>Z</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.linalg.SchurResult.T">
+<span class="sig-name descname"><span class="pre">T</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.linalg.SchurResult.T" title="Link to this definition">#</a></dt>
+<dd><p>Schur form – upper triangular (complex
+output) or quasi-upper-triangular with 2x2 blocks for complex-conjugate
+eigenvalue pairs (real output). Its diagonal (or block) entries are the
+eigenvalues of <code class="docutils literal notranslate"><span class="pre">A</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (<a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>, <a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.linalg.SchurResult.Z">
+<span class="sig-name descname"><span class="pre">Z</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.linalg.SchurResult.Z" title="Link to this definition">#</a></dt>
+<dd><p>Unitary (orthogonal, for real output) Schur vectors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (<a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>, <a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mathematicskit.linalg.SchurResult.eigenvalues">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">eigenvalues</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.linalg.SchurResult.eigenvalues" title="Link to this definition">#</a></dt>
+<dd><p>Eigenvalues read off <code class="docutils literal notranslate"><span class="pre">T</span></code> (2x2 diagonal blocks resolved with <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.eigvals.html#numpy.linalg.eigvals" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.eigvals()</span></code></a>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (<a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.linalg.characteristic_polynomial">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.linalg.</span></span><span class="sig-name descname"><span class="pre">characteristic_polynomial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/linalg/systems/matrix_polynomial.html#characteristic_polynomial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.linalg.characteristic_polynomial" title="Link to this definition">#</a></dt>
+<dd><p>Coefficients of <span class="math notranslate nohighlight">\(p_A(\lambda) = \det(\lambda I - A)\)</span>, highest degree first, via <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.poly.html#numpy.poly" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.poly()</span></code></a>.</p>
+<p>The polynomial is monic, the coefficient of <span class="math notranslate nohighlight">\(\lambda^{n-1}\)</span> is
+<span class="math notranslate nohighlight">\(-\operatorname{tr} A\)</span>, and the constant term is
+<span class="math notranslate nohighlight">\((-1)^n \det A\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (n + 1,)</em> – Real if <code class="docutils literal notranslate"><span class="pre">a</span></code> is real (imaginary round-off from complex-conjugate
+eigenvalue pairs is discarded).</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">characteristic_polynomial</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="mi">8</span><span class="p">)</span>  <span class="c1"># l^2 - 5 l - 2</span>
+<span class="go">array([ 1., -5., -2.])</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -1120,6 +1406,38 @@ this matters concretely for least squares. See Trefethen &amp; Bau,
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.linalg.cramer_solve">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.linalg.</span></span><span class="sig-name descname"><span class="pre">cramer_solve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/linalg/systems/cramer.html#cramer_solve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.linalg.cramer_solve" title="Link to this definition">#</a></dt>
+<dd><p>Solve <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">b</span></code> by Cramer’s rule, <span class="math notranslate nohighlight">\(x_i = \det(A_i) / \det(A)\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(A_i\)</span> is <code class="docutils literal notranslate"><span class="pre">A</span></code> with its <code class="docutils literal notranslate"><span class="pre">i</span></code>-th column replaced by <code class="docutils literal notranslate"><span class="pre">b</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>) – Nonsingular coefficient matrix.</p></li>
+<li><p><strong>b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (n,)</em></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.LinAlgError.html#scipy.linalg.LinAlgError" title="(in SciPy v1.18.0)"><strong>numpy.linalg.LinAlgError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">det(A)</span></code> is (numerically) zero.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">cramer_solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="mi">8</span><span class="p">)</span>
+<span class="go">array([0.8, 1.4])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.linalg.eigen_general">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.linalg.</span></span><span class="sig-name descname"><span class="pre">eigen_general</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/linalg/systems/eigen.html#eigen_general"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.linalg.eigen_general" title="Link to this definition">#</a></dt>
 <dd><p>Eigenvalues/eigenvectors of a general (possibly non-symmetric) matrix, via <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.eig.html#numpy.linalg.eig" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.eig()</span></code></a>.</p>
@@ -1202,6 +1520,41 @@ Van Loan, <em>Matrix Computations</em>, 4th ed., Ch. 8.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.linalg.gershgorin_discs">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.linalg.</span></span><span class="sig-name descname"><span class="pre">gershgorin_discs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">by</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'rows'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/linalg/systems/gershgorin.html#gershgorin_discs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.linalg.gershgorin_discs" title="Link to this definition">#</a></dt>
+<dd><p>The Gershgorin discs of a square matrix.</p>
+<p>Disc <span class="math notranslate nohighlight">\(k\)</span> has center <span class="math notranslate nohighlight">\(a_{kk}\)</span> and radius
+<span class="math notranslate nohighlight">\(R_k = \sum_{j \ne k} |a_{kj}|\)</span> (<code class="docutils literal notranslate"><span class="pre">by=&quot;rows&quot;</span></code>) or
+<span class="math notranslate nohighlight">\(\sum_{j \ne k} |a_{jk}|\)</span> (<code class="docutils literal notranslate"><span class="pre">by=&quot;columns&quot;</span></code>). A consequence:
+a strictly diagonally dominant matrix (every <span class="math notranslate nohighlight">\(|a_{kk}| &gt; R_k\)</span>)
+has no eigenvalue at 0 and is therefore nonsingular.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>) – Real or complex square matrix.</p></li>
+<li><p><strong>by</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.linalg.GershgorinResult" title="mathematicskit.linalg.core.base.GershgorinResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">GershgorinResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>GershgorinResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">discs</span> <span class="o">=</span> <span class="n">gershgorin_discs</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">discs</span><span class="o">.</span><span class="n">centers</span><span class="p">,</span> <span class="n">discs</span><span class="o">.</span><span class="n">radii</span>
+<span class="go">(array([10.,  8.,  2.]), array([1. , 0.4, 2. ]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">all</span><span class="p">(</span><span class="n">discs</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">lam</span><span class="p">)</span> <span class="k">for</span> <span class="n">lam</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.linalg.gram_schmidt_qr">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.linalg.</span></span><span class="sig-name descname"><span class="pre">gram_schmidt_qr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modified</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/linalg/systems/qr.html#gram_schmidt_qr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.linalg.gram_schmidt_qr" title="Link to this definition">#</a></dt>
 <dd><p>QR decomposition by (modified or classical) Gram-Schmidt.</p>
@@ -1235,6 +1588,38 @@ especially for near-collinear columns. See Trefethen &amp; Bau,
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">gram_schmidt_qr</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">Q</span> <span class="o">@</span> <span class="n">result</span><span class="o">.</span><span class="n">R</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
 <span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.linalg.hessenberg_reduce">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.linalg.</span></span><span class="sig-name descname"><span class="pre">hessenberg_reduce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/linalg/systems/schur.html#hessenberg_reduce"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.linalg.hessenberg_reduce" title="Link to this definition">#</a></dt>
+<dd><p>Upper-Hessenberg form <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">=</span> <span class="pre">Q</span> <span class="pre">H</span> <span class="pre">Q^T</span></code> via <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.hessenberg.html#scipy.linalg.hessenberg" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.linalg.hessenberg()</span></code></a>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">H</span></code> is zero below its first subdiagonal. Reducing to it first (by
+Householder reflections) cuts each QR step from <span class="math notranslate nohighlight">\(O(n^3)\)</span> to
+<span class="math notranslate nohighlight">\(O(n^2)\)</span>, and the QR iteration preserves the Hessenberg shape.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>H</strong> (<em>ndarray, shape (n, n)</em>)</p></li>
+<li><p><strong>Q</strong> (<em>ndarray, shape (n, n)</em>) – Orthogonal (unitary) similarity.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">16.0</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">H</span><span class="p">,</span> <span class="n">Q</span> <span class="o">=</span> <span class="n">hessenberg_reduce</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">tril</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">)),</span> <span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">Q</span> <span class="o">@</span> <span class="n">H</span> <span class="o">@</span> <span class="n">Q</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">A</span><span class="p">))</span>
+<span class="go">(True, True)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1360,6 +1745,78 @@ Loan, <em>Matrix Computations</em>, 4th ed., Ch. 8.2.2.</p>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_symmetric_positive_definite</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]]))</span>
 <span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.linalg.jacobi_spectral_radius">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.linalg.</span></span><span class="sig-name descname"><span class="pre">jacobi_spectral_radius</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/linalg/systems/stationary.html#jacobi_spectral_radius"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.linalg.jacobi_spectral_radius" title="Link to this definition">#</a></dt>
+<dd><p>Spectral radius <span class="math notranslate nohighlight">\(\rho(G_J)\)</span> of the Jacobi iteration matrix <span class="math notranslate nohighlight">\(G_J = I - D^{-1} A\)</span>.</p>
+<p>Computed with <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.eigvals.html#numpy.linalg.eigvals" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.eigvals()</span></code></a>. The Jacobi iteration
+converges from every starting vector iff this is below 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">jacobi_spectral_radius</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.linalg.lanczos_eigsh">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.linalg.</span></span><span class="sig-name descname"><span class="pre">lanczos_eigsh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">which</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/linalg/systems/lanczos.html#lanczos_eigsh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.linalg.lanczos_eigsh" title="Link to this definition">#</a></dt>
+<dd><p>The <code class="docutils literal notranslate"><span class="pre">k</span></code> extreme eigenpairs of a symmetric matrix, via <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.eigsh.html#scipy.sparse.linalg.eigsh" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.sparse.linalg.eigsh()</span></code></a> (Lanczos/ARPACK).</p>
+<p>Lanczos builds an orthonormal basis <span class="math notranslate nohighlight">\(Q_m\)</span> of the Krylov
+subspace <span class="math notranslate nohighlight">\(\operatorname{span}\{v, Av, \dots, A^{m-1}v\}\)</span> with
+a three-term recurrence, in which
+<span class="math notranslate nohighlight">\(T_m = Q_m^T A Q_m\)</span> is tridiagonal; the eigenvalues of
+<span class="math notranslate nohighlight">\(T_m\)</span> (Ritz values) converge first to the extreme eigenvalues
+of <code class="docutils literal notranslate"><span class="pre">A</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>ndarray</em><em>, </em><em>sparse matrix</em><em>, or </em><em>LinearOperator</em><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n"><em>n</em></a><em>, </em><a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n"><em>n</em></a><em>)</em>) – Symmetric (Hermitian) matrix.</p></li>
+<li><p><strong>k</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of eigenpairs, <code class="docutils literal notranslate"><span class="pre">k</span> <span class="pre">&lt;</span> <span class="pre">n</span></code>.</p></li>
+<li><p><strong>which</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Largest/smallest algebraic, largest/smallest magnitude, or both
+ends of the spectrum.</p></li>
+<li><p><strong>tol</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Relative accuracy for the Ritz values; <code class="docutils literal notranslate"><span class="pre">0</span></code> means machine
+precision.</p></li>
+<li><p><strong>sigma</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Shift-invert mode: run Lanczos on <span class="math notranslate nohighlight">\((A - \sigma I)^{-1}\)</span>
+(factored once by sparse LU), which returns the <code class="docutils literal notranslate"><span class="pre">k</span></code> eigenvalues
+nearest <code class="docutils literal notranslate"><span class="pre">sigma</span></code> when <code class="docutils literal notranslate"><span class="pre">which=&quot;LM&quot;</span></code>. The standard route to
+interior or tightly clustered eigenvalues, which plain Lanczos
+resolves only slowly.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.linalg.EigenResult" title="mathematicskit.linalg.core.base.EigenResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">EigenResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>EigenResult</em> – <code class="docutils literal notranslate"><span class="pre">eigenvalues</span></code> shape (k,) ascending, <code class="docutils literal notranslate"><span class="pre">eigenvectors</span></code> shape
+(n, k), <code class="docutils literal notranslate"><span class="pre">method=&quot;lanczos_arpack&quot;</span></code>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">21.0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">lanczos_eigsh</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="go">array([18., 19., 20.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">lanczos_eigsh</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">7.2</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">"LM"</span><span class="p">)</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="go">array([7., 8.])</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1503,6 +1960,10 @@ Factorizations”), and Trefethen &amp; Bau, <em>Numerical Linear Algebra</em>,
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">lu_decompose</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">P</span> <span class="o">@</span> <span class="n">A</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">L</span> <span class="o">@</span> <span class="n">result</span><span class="o">.</span><span class="n">U</span><span class="p">)</span>
 <span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Singularity is judged from U's pivots, not from det(A), which</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># underflows to 0.0 for large well-conditioned matrices.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">lu_decompose</span><span class="p">(</span><span class="mf">0.01</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">200</span><span class="p">))</span><span class="o">.</span><span class="n">U</span><span class="p">,</span> <span class="mf">0.01</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">200</span><span class="p">))</span>
+<span class="go">True</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1603,13 +2064,78 @@ marginally faster since it skips reconstructing the dense factors.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.linalg.matrix_polynomial">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.linalg.</span></span><span class="sig-name descname"><span class="pre">matrix_polynomial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coeffs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/linalg/systems/matrix_polynomial.html#matrix_polynomial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.linalg.matrix_polynomial" title="Link to this definition">#</a></dt>
+<dd><p>Evaluate <span class="math notranslate nohighlight">\(p(A) = c_0 A^d + c_1 A^{d-1} + \dots + c_d I\)</span> by Horner’s rule.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">coeffs</span> <span class="pre">=</span> <span class="pre">characteristic_polynomial(a)</span></code> the result is the zero
+matrix, up to rounding – the Cayley-Hamilton theorem.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>coeffs</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>) – Polynomial coefficients, highest degree first (the
+<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.polyval.html#numpy.polyval" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.polyval()</span></code></a> convention).</p></li>
+<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (n, n)</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">matrix_polynomial</span><span class="p">(</span><span class="n">characteristic_polynomial</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">A</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.linalg.optimal_sor_omega">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.linalg.</span></span><span class="sig-name descname"><span class="pre">optimal_sor_omega</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/linalg/systems/stationary.html#optimal_sor_omega"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.linalg.optimal_sor_omega" title="Link to this definition">#</a></dt>
+<dd><p>Young’s optimal SOR relaxation factor <span class="math notranslate nohighlight">\(\omega^* = 2 / (1 + \sqrt{1 - \rho(G_J)^2})\)</span>.</p>
+<p>Exact for consistently ordered matrices whose Jacobi iteration matrix
+has real eigenvalues with <span class="math notranslate nohighlight">\(\rho(G_J) &lt; 1\)</span> (e.g. the discrete
+Poisson matrices); at <span class="math notranslate nohighlight">\(\omega^*\)</span> the SOR spectral radius drops
+to <span class="math notranslate nohighlight">\(\omega^* - 1\)</span>. See D. M. Young, Trans. AMS 76 (1954),
+92-111.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">k</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># rho_J = cos(pi/4)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">optimal_sor_omega</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>  <span class="c1"># 2 / (1 + sqrt(1 - cos(pi/4)^2))</span>
+<span class="go">1.171573</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.linalg.orthogonality_error">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.linalg.</span></span><span class="sig-name descname"><span class="pre">orthogonality_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/linalg/systems/qr.html#orthogonality_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.linalg.orthogonality_error" title="Link to this definition">#</a></dt>
 <dd><p>Measure how far <code class="docutils literal notranslate"><span class="pre">Q</span></code>’s columns are from exactly orthonormal.</p>
-<p><span class="math notranslate nohighlight">\(\|Q^T Q - I\|_\infty\)</span>, a direct numerical demonstration of
-which QR method loses orthogonality for ill-conditioned inputs. See
-Trefethen &amp; Bau, <em>Numerical Linear Algebra</em>, 1997, Lecture 9 (Figure
-9.2’s classical-vs-modified Gram-Schmidt comparison).</p>
+<p><span class="math notranslate nohighlight">\(\max_{ij}\left|(Q^TQ - I)_{ij}\right|\)</span>: the largest entry of
+<code class="docutils literal notranslate"><span class="pre">Q</span></code>’s Gram matrix minus the identity. (This is the entrywise max
+norm, not the induced <span class="math notranslate nohighlight">\(\infty\)</span>-norm, which would be the largest
+row <em>sum</em>.) Exactly zero for a perfectly orthonormal <code class="docutils literal notranslate"><span class="pre">Q</span></code>, and a
+direct numerical demonstration of which QR method loses orthogonality
+on ill-conditioned input: on a degree-12 Vandermonde matrix, classical
+Gram-Schmidt reaches order 1, modified Gram-Schmidt stays near 1e-10,
+and Householder near machine epsilon. See Trefethen &amp; Bau, <em>Numerical
+Linear Algebra</em>, 1997, Lecture 9 (Figure 9.2’s classical-vs-modified
+comparison).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>q</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>)</p>
@@ -1624,6 +2150,37 @@ Trefethen &amp; Bau, <em>Numerical Linear Algebra</em>, 1997, Lecture 9 (Figure
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">orthogonality_error</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span> <span class="o">==</span> <span class="mf">0.0</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.linalg.penrose_residuals">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.linalg.</span></span><span class="sig-name descname"><span class="pre">penrose_residuals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/linalg/systems/pseudoinverse.html#penrose_residuals"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.linalg.penrose_residuals" title="Link to this definition">#</a></dt>
+<dd><p>Frobenius-norm residuals of Penrose’s four equations for a candidate <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">A^+</span></code>.</p>
+<div class="math notranslate nohighlight">
+\[AXA = A, \qquad XAX = X, \qquad (AX)^H = AX, \qquad (XA)^H = XA.\]</div>
+<p>Penrose (1955) proved exactly one <code class="docutils literal notranslate"><span class="pre">X</span></code> satisfies all four.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>)</p></li>
+<li><p><strong>x</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (4,)</em> – <code class="docutils literal notranslate"><span class="pre">||AXA</span> <span class="pre">-</span> <span class="pre">A||_F</span></code>, <code class="docutils literal notranslate"><span class="pre">||XAX</span> <span class="pre">-</span> <span class="pre">X||_F</span></code>, <code class="docutils literal notranslate"><span class="pre">||(AX)^H</span> <span class="pre">-</span> <span class="pre">AX||_F</span></code>,
+<code class="docutils literal notranslate"><span class="pre">||(XA)^H</span> <span class="pre">-</span> <span class="pre">XA||_F</span></code>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">penrose_residuals</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">pseudoinverse</span><span class="p">(</span><span class="n">A</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">1e-12</span><span class="p">))</span>
 <span class="go">True</span>
 </pre></div>
 </div>
@@ -1667,6 +2224,38 @@ Ch. 9.3.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.linalg.pseudoinverse">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.linalg.</span></span><span class="sig-name descname"><span class="pre">pseudoinverse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rcond</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/linalg/systems/pseudoinverse.html#pseudoinverse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.linalg.pseudoinverse" title="Link to this definition">#</a></dt>
+<dd><p>Moore-Penrose pseudoinverse <span class="math notranslate nohighlight">\(A^+ = V \Sigma^+ U^T\)</span>, via <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.pinv.html#numpy.linalg.pinv" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.pinv()</span></code></a>.</p>
+<p>For any right-hand side <code class="docutils literal notranslate"><span class="pre">b</span></code>, <span class="math notranslate nohighlight">\(x = A^+ b\)</span> is the
+minimum-norm least-squares solution of <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">b</span></code> – it exists and is
+unique even when <code class="docutils literal notranslate"><span class="pre">A</span></code> is rectangular or rank-deficient.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>)</p></li>
+<li><p><strong>rcond</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Singular values below <code class="docutils literal notranslate"><span class="pre">rcond</span> <span class="pre">*</span> <span class="pre">max(S)</span></code> are treated as zero;
+defaults to numpy’s <code class="docutils literal notranslate"><span class="pre">max(m,</span> <span class="pre">n)</span> <span class="pre">*</span> <span class="pre">eps</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (n, m)</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]])</span>  <span class="c1"># rank 1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pseudoinverse</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="go">array([[0.25, 0.25],</span>
+<span class="go">       [0.25, 0.25]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.linalg.random_spd_matrix">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.linalg.</span></span><span class="sig-name descname"><span class="pre">random_spd_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/linalg/utils/matrix_utils.html#random_spd_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.linalg.random_spd_matrix" title="Link to this definition">#</a></dt>
 <dd><p>Generate a random symmetric positive-definite matrix.</p>
@@ -1696,6 +2285,38 @@ worse-conditioned for stability demonstrations.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvalsh</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.linalg.schur_decompose">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.linalg.</span></span><span class="sig-name descname"><span class="pre">schur_decompose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'real'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/linalg/systems/schur.html#schur_decompose"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.linalg.schur_decompose" title="Link to this definition">#</a></dt>
+<dd><p>Schur decomposition <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">=</span> <span class="pre">Z</span> <span class="pre">T</span> <span class="pre">Z^H</span></code> via <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.schur.html#scipy.linalg.schur" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.linalg.schur()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>)</p></li>
+<li><p><strong>output</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – <code class="docutils literal notranslate"><span class="pre">&quot;real&quot;</span></code> keeps a real <code class="docutils literal notranslate"><span class="pre">T</span></code> with 2x2 diagonal blocks for
+complex-conjugate eigenvalue pairs; <code class="docutils literal notranslate"><span class="pre">&quot;complex&quot;</span></code> returns a truly
+upper-triangular <code class="docutils literal notranslate"><span class="pre">T</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.linalg.SchurResult" title="mathematicskit.linalg.core.base.SchurResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">SchurResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>SchurResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">]])</span>  <span class="c1"># eigenvalues 2 and 5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">schur_decompose</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">T</span><span class="p">)),</span> <span class="mi">8</span><span class="p">)</span>
+<span class="go">array([2., 5.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">Z</span> <span class="o">@</span> <span class="n">result</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">result</span><span class="o">.</span><span class="n">Z</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">A</span><span class="p">))</span>
 <span class="go">True</span>
 </pre></div>
 </div>
@@ -1802,6 +2423,16 @@ values are returned in descending order (numpy’s convention).</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.GMRES.solve"><code class="docutils literal notranslate"><span class="pre">GMRES.solve()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.GaussSeidel"><code class="docutils literal notranslate"><span class="pre">GaussSeidel</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.GaussSeidel.method"><code class="docutils literal notranslate"><span class="pre">GaussSeidel.method</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.GershgorinResult"><code class="docutils literal notranslate"><span class="pre">GershgorinResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.GershgorinResult.centers"><code class="docutils literal notranslate"><span class="pre">GershgorinResult.centers</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.GershgorinResult.contains"><code class="docutils literal notranslate"><span class="pre">GershgorinResult.contains()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.GershgorinResult.radii"><code class="docutils literal notranslate"><span class="pre">GershgorinResult.radii</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.IterativeLinearSolver"><code class="docutils literal notranslate"><span class="pre">IterativeLinearSolver</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.IterativeLinearSolver.solve"><code class="docutils literal notranslate"><span class="pre">IterativeLinearSolver.solve()</span></code></a></li>
 </ul>
@@ -1812,6 +2443,10 @@ values are returned in descending order (numpy’s convention).</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.IterativeSolveResult.method"><code class="docutils literal notranslate"><span class="pre">IterativeSolveResult.method</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.IterativeSolveResult.residual_history"><code class="docutils literal notranslate"><span class="pre">IterativeSolveResult.residual_history</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.IterativeSolveResult.x"><code class="docutils literal notranslate"><span class="pre">IterativeSolveResult.x</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.JacobiIteration"><code class="docutils literal notranslate"><span class="pre">JacobiIteration</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.JacobiIteration.method"><code class="docutils literal notranslate"><span class="pre">JacobiIteration.method</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.LUResult"><code class="docutils literal notranslate"><span class="pre">LUResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
@@ -1834,23 +2469,40 @@ values are returned in descending order (numpy’s convention).</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.QRResult.method"><code class="docutils literal notranslate"><span class="pre">QRResult.method</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.SOR"><code class="docutils literal notranslate"><span class="pre">SOR</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.SOR.method"><code class="docutils literal notranslate"><span class="pre">SOR.method</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.SOR.solve"><code class="docutils literal notranslate"><span class="pre">SOR.solve()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.SVDResult"><code class="docutils literal notranslate"><span class="pre">SVDResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.SVDResult.S"><code class="docutils literal notranslate"><span class="pre">SVDResult.S</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.SVDResult.U"><code class="docutils literal notranslate"><span class="pre">SVDResult.U</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.SVDResult.Vt"><code class="docutils literal notranslate"><span class="pre">SVDResult.Vt</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.SchurResult"><code class="docutils literal notranslate"><span class="pre">SchurResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.SchurResult.T"><code class="docutils literal notranslate"><span class="pre">SchurResult.T</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.SchurResult.Z"><code class="docutils literal notranslate"><span class="pre">SchurResult.Z</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.SchurResult.eigenvalues"><code class="docutils literal notranslate"><span class="pre">SchurResult.eigenvalues</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.characteristic_polynomial"><code class="docutils literal notranslate"><span class="pre">characteristic_polynomial()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.cholesky_decompose"><code class="docutils literal notranslate"><span class="pre">cholesky_decompose()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.cholesky_solve"><code class="docutils literal notranslate"><span class="pre">cholesky_solve()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.condition_number_2norm"><code class="docutils literal notranslate"><span class="pre">condition_number_2norm()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.cramer_solve"><code class="docutils literal notranslate"><span class="pre">cramer_solve()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.eigen_general"><code class="docutils literal notranslate"><span class="pre">eigen_general()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.eigen_symmetric"><code class="docutils literal notranslate"><span class="pre">eigen_symmetric()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.frobenius_norm"><code class="docutils literal notranslate"><span class="pre">frobenius_norm()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.gershgorin_discs"><code class="docutils literal notranslate"><span class="pre">gershgorin_discs()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.gram_schmidt_qr"><code class="docutils literal notranslate"><span class="pre">gram_schmidt_qr()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.hessenberg_reduce"><code class="docutils literal notranslate"><span class="pre">hessenberg_reduce()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.householder_qr"><code class="docutils literal notranslate"><span class="pre">householder_qr()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.inverse_iteration"><code class="docutils literal notranslate"><span class="pre">inverse_iteration()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.is_symmetric"><code class="docutils literal notranslate"><span class="pre">is_symmetric()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.is_symmetric_positive_definite"><code class="docutils literal notranslate"><span class="pre">is_symmetric_positive_definite()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.jacobi_spectral_radius"><code class="docutils literal notranslate"><span class="pre">jacobi_spectral_radius()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.lanczos_eigsh"><code class="docutils literal notranslate"><span class="pre">lanczos_eigsh()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.least_squares_lstsq"><code class="docutils literal notranslate"><span class="pre">least_squares_lstsq()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.least_squares_normal_equations"><code class="docutils literal notranslate"><span class="pre">least_squares_normal_equations()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.least_squares_qr"><code class="docutils literal notranslate"><span class="pre">least_squares_qr()</span></code></a></li>
@@ -1858,9 +2510,14 @@ values are returned in descending order (numpy’s convention).</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.lu_det"><code class="docutils literal notranslate"><span class="pre">lu_det()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.lu_solve"><code class="docutils literal notranslate"><span class="pre">lu_solve()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.lu_solve_system"><code class="docutils literal notranslate"><span class="pre">lu_solve_system()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.matrix_polynomial"><code class="docutils literal notranslate"><span class="pre">matrix_polynomial()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.optimal_sor_omega"><code class="docutils literal notranslate"><span class="pre">optimal_sor_omega()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.orthogonality_error"><code class="docutils literal notranslate"><span class="pre">orthogonality_error()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.penrose_residuals"><code class="docutils literal notranslate"><span class="pre">penrose_residuals()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.power_iteration"><code class="docutils literal notranslate"><span class="pre">power_iteration()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.pseudoinverse"><code class="docutils literal notranslate"><span class="pre">pseudoinverse()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.random_spd_matrix"><code class="docutils literal notranslate"><span class="pre">random_spd_matrix()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.schur_decompose"><code class="docutils literal notranslate"><span class="pre">schur_decompose()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.linalg.svd_decompose"><code class="docutils literal notranslate"><span class="pre">svd_decompose()</span></code></a></li>
 </ul>
   </nav></div>

@@ -14,12 +14,12 @@ Each script in this gallery is self-contained and can be run directly with
 Sections
 --------
 
-- **convex_hull** -- scipy's Qhull-based convex hull vs. a hand-rolled
-  Graham scan.
-- **triangulation** -- Delaunay triangulation and its dual Voronoi
-  diagram.
-- **intersections** -- segment intersection and point-in-polygon tests.
-- **polygon** -- polygon area and centroid via the shoelace formula.
+- **convex_hull** -- Graham's scan, checked against scipy's Qhull.
+- **triangulation** -- Voronoi diagrams and Delaunay triangulation.
+- **intersections** -- ray-casting point-in-polygon and the Jordan curve
+  theorem.
+- **polygon** -- Euclid's equal areas, Heron's formula, and Pick's
+  theorem.
 - **curves** -- curvature, arc length, and the Frenet-Serret frame.
 
 
@@ -40,10 +40,10 @@ Sections
 
     </div>
 
-Convex hull
+Bézier curves
 -------------
 
-scipy's Qhull-based convex hull vs. a hand-rolled Graham scan.
+Curves built from control points by repeated linear interpolation.
 
 
 .. raw:: html
@@ -59,18 +59,58 @@ scipy's Qhull-based convex hull vs. a hand-rolled Graham scan.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Both methods find the same convex hull of a random point set -- scipy&#x27;s Qhull-based implementation is the primary API, with a hand-rolled Graham scan kept for comparison.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Draws a cubic Bézier curve and the construction lines of de Casteljau&#x27;s algorithm at t = 0.4: interpolate between neighbouring control points, then between the new points, until one point, the curve point, is left.">
 
 .. only:: html
 
-  .. image:: /api/gallery/geometry/convex_hull/images/thumb/sphx_glr_plot_01_qhull_vs_graham_scan_thumb.png
+  .. image:: /api/gallery/geometry/bezier/images/thumb/sphx_glr_plot_01_de_casteljau_thumb.png
     :alt:
 
-  :doc:`/api/gallery/geometry/convex_hull/plot_01_qhull_vs_graham_scan`
+  :doc:`/api/gallery/geometry/bezier/plot_01_de_casteljau`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Qhull vs. Graham scan</div>
+      <div class="sphx-glr-thumbnail-title">De Casteljau's algorithm and Bézier curves</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Convex hull
+-------------
+
+Graham's angular-sweep convex hull, checked against scipy's Qhull.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Graham&#x27;s scan sorts the points by angle around the lowest point, then sweeps through them, dropping any point that would make a clockwise turn. The picture shows the angular order the sweep follows and the hull it produces; the result is checked against scipy&#x27;s Qhull-based convex_hull.">
+
+.. only:: html
+
+  .. image:: /api/gallery/geometry/convex_hull/images/thumb/sphx_glr_plot_01_graham_scan_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/geometry/convex_hull/plot_01_graham_scan`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Graham's scan: the convex hull by an angular sweep</div>
     </div>
 
 
@@ -120,10 +160,91 @@ Curvature, arc length, and the moving frame along a parametric curve.
 
     </div>
 
-Segment intersection and point-in-polygon
+Distances between shapes
+------------------------
+
+The Hausdorff distance between point sets.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Compares a circle with approximating polygons. The Hausdorff distance measures the worst-case gap between the two shapes and shrinks like 1/n^2 as the polygon gains sides; a single stray point makes it large even though every other point matches.">
+
+.. only:: html
+
+  .. image:: /api/gallery/geometry/distances/images/thumb/sphx_glr_plot_01_hausdorff_distance_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/geometry/distances/plot_01_hausdorff_distance`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Hausdorff distance between shapes</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Enclosing circles
+-----------------
+
+The smallest circle containing a set of points.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Finds the smallest circle containing a random point cloud with Welzl&#x27;s algorithm. The optimal circle always passes through two or three of the points.">
+
+.. only:: html
+
+  .. image:: /api/gallery/geometry/enclosing/images/thumb/sphx_glr_plot_01_smallest_enclosing_circle_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/geometry/enclosing/plot_01_smallest_enclosing_circle`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Sylvester's problem: the smallest enclosing circle</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Point-in-polygon
 ------------------------------------------------
 
-Elementary computational-geometry primitives with no scipy equivalent.
+Ray casting and the Jordan curve theorem, with crossings found by
+segment intersection.
 
 
 .. raw:: html
@@ -139,18 +260,18 @@ Elementary computational-geometry primitives with no scipy equivalent.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Finds where two segments cross, and tests a grid of points against a concave (&quot;L&quot;-shaped) polygon.">
+    <div class="sphx-glr-thumbcontainer" tooltip="A simple closed polygon splits the plane into an inside and an outside (the Jordan curve theorem). A ray cast from a point crosses the boundary an odd number of times exactly when the point is inside. The crossings are found edge by edge with segment_intersection, and their parity agrees with point_in_polygon on a concave, spiral-like polygon.">
 
 .. only:: html
 
-  .. image:: /api/gallery/geometry/intersections/images/thumb/sphx_glr_plot_01_segments_and_polygons_thumb.png
+  .. image:: /api/gallery/geometry/intersections/images/thumb/sphx_glr_plot_01_jordan_ray_casting_thumb.png
     :alt:
 
-  :doc:`/api/gallery/geometry/intersections/plot_01_segments_and_polygons`
+  :doc:`/api/gallery/geometry/intersections/plot_01_jordan_ray_casting`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Segment intersection and point-in-polygon</div>
+      <div class="sphx-glr-thumbnail-title">The Jordan curve theorem and ray casting: inside or outside?</div>
     </div>
 
 
@@ -160,10 +281,11 @@ Elementary computational-geometry primitives with no scipy equivalent.
 
     </div>
 
-Polygon area and centroid
+Polygon area
 ----------------------------
 
-The shoelace formula.
+Euclid's equal areas, Heron's formula, and Pick's theorem, all checked
+against the shoelace formula.
 
 
 .. raw:: html
@@ -179,18 +301,52 @@ The shoelace formula.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Confirms the shoelace formula&#x27;s area against the closed-form regular- polygon area formula.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Euclid&#x27;s theory of area (Elements I.35-41) rests on two facts: parallelograms on the same base and between the same parallels are equal in area (I.35), and so are triangles (I.37), each triangle being half of the parallelogram (I.41). Sliding the top side along its parallel line changes every shape but, as the shoelace formula in polygon_area confirms, never the area.">
 
 .. only:: html
 
-  .. image:: /api/gallery/geometry/polygon/images/thumb/sphx_glr_plot_01_shoelace_formula_thumb.png
+  .. image:: /api/gallery/geometry/polygon/images/thumb/sphx_glr_plot_01_euclid_equal_areas_thumb.png
     :alt:
 
-  :doc:`/api/gallery/geometry/polygon/plot_01_shoelace_formula`
+  :doc:`/api/gallery/geometry/polygon/plot_01_euclid_equal_areas`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">The shoelace formula: area and centroid of a regular hexagon</div>
+      <div class="sphx-glr-thumbnail-title">Euclid's Elements, Book I: equal areas between parallels</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Checks Heron&#x27;s formula against the shoelace formula, then shows why the arrangement matters: for a thin &quot;needle&quot; triangle the textbook form sqrt(s(s-a)(s-b)(s-c)) loses most of its digits, while Kahan&#x27;s rearrangement stays accurate.">
+
+.. only:: html
+
+  .. image:: /api/gallery/geometry/polygon/images/thumb/sphx_glr_plot_02_heron_formula_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/geometry/polygon/plot_02_heron_formula`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Heron's formula and needle-like triangles</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Counts the lattice points inside and on the boundary of polygons with integer vertices, and checks Pick&#x27;s formula A = I + B/2 - 1 against the shoelace area.">
+
+.. only:: html
+
+  .. image:: /api/gallery/geometry/polygon/images/thumb/sphx_glr_plot_03_pick_theorem_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/geometry/polygon/plot_03_pick_theorem`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Pick's theorem: area from lattice points</div>
     </div>
 
 
@@ -200,10 +356,10 @@ The shoelace formula.
 
     </div>
 
-Delaunay triangulation and Voronoi diagrams
---------------------------------------------------
+Polyhedra
+---------
 
-Duals of each other, both via scipy's Qhull wrapper.
+Vertex, edge, and face counts of convex polyhedra, and Euler's formula.
 
 
 .. raw:: html
@@ -219,18 +375,196 @@ Duals of each other, both via scipy's Qhull wrapper.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Builds both a Delaunay triangulation and its dual Voronoi diagram for the same random point set.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Counts vertices, edges, and faces of the five Platonic solids and of random convex polyhedra. Every one satisfies V - E + F = 2.">
 
 .. only:: html
 
-  .. image:: /api/gallery/geometry/triangulation/images/thumb/sphx_glr_plot_01_delaunay_and_voronoi_thumb.png
+  .. image:: /api/gallery/geometry/polyhedra/images/thumb/sphx_glr_plot_01_euler_polyhedron_formula_thumb.png
     :alt:
 
-  :doc:`/api/gallery/geometry/triangulation/plot_01_delaunay_and_voronoi`
+  :doc:`/api/gallery/geometry/polyhedra/plot_01_euler_polyhedron_formula`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Delaunay triangulation and its Voronoi dual</div>
+      <div class="sphx-glr-thumbnail-title">Euler's polyhedron formula: V - E + F = 2</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Proximity
+---------
+
+The closest pair of points by divide and conquer.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Finds the closest pair in random point sets by divide and conquer, checks the answer with a k-d tree, and compares the running time with the brute-force comparison of every pair.">
+
+.. only:: html
+
+  .. image:: /api/gallery/geometry/proximity/images/thumb/sphx_glr_plot_01_closest_pair_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/geometry/proximity/plot_01_closest_pair`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Shamos and Hoey: the closest pair of points</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Line simplification
+-------------------
+
+Reducing the number of vertices of a polyline within a tolerance.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Simplifies a wiggly coastline-like curve at several tolerances. Larger tolerances keep fewer vertices, and every discarded vertex stays within the tolerance of the simplified line.">
+
+.. only:: html
+
+  .. image:: /api/gallery/geometry/simplification/images/thumb/sphx_glr_plot_01_douglas_peucker_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/geometry/simplification/plot_01_douglas_peucker`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Douglas-Peucker line simplification</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Surfaces
+--------
+
+Gaussian and mean curvature of parametric surfaces.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Computes the Gaussian curvature K of a sphere, a cylinder, and a torus. The cylinder bends in space but has K = 0, because it can be unrolled flat without stretching, while no piece of a sphere can. Integrating K over the whole surface gives 4 pi for the sphere and 0 for the torus, as the Gauss-Bonnet theorem predicts.">
+
+.. only:: html
+
+  .. image:: /api/gallery/geometry/surfaces/images/thumb/sphx_glr_plot_01_theorema_egregium_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/geometry/surfaces/plot_01_theorema_egregium`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Gauss's Theorema Egregium: curvature you can measure from inside</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Voronoi diagrams and Delaunay triangulation
+--------------------------------------------------
+
+Nearest-site partitions and empty-circumcircle triangulations, both via
+scipy's Qhull wrapper.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Partitions the plane around a set of sites so that each region holds every location closer to its site than to any other. Colouring a fine grid by nearest site reproduces exactly the cells that voronoi_diagram computes, and each Voronoi vertex is equidistant from the three sites whose cells meet there.">
+
+.. only:: html
+
+  .. image:: /api/gallery/geometry/triangulation/images/thumb/sphx_glr_plot_01_voronoi_diagram_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/geometry/triangulation/plot_01_voronoi_diagram`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Voronoi diagrams: every location goes to its nearest site</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Triangulates a random point set with delaunay_triangulation, checks Delaunay&#x27;s defining property (no point lies inside any triangle&#x27;s circumcircle), and shows on four points that choosing the Delaunay diagonal maximizes the smallest angle and avoids needle-like triangles.">
+
+.. only:: html
+
+  .. image:: /api/gallery/geometry/triangulation/images/thumb/sphx_glr_plot_02_delaunay_triangulation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/geometry/triangulation/plot_02_delaunay_triangulation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Delaunay triangulation: empty circumcircles and fat triangles</div>
     </div>
 
 
@@ -246,10 +580,17 @@ Duals of each other, both via scipy's Qhull wrapper.
    :includehidden:
 
 
+   /api/gallery/geometry/bezier/index.rst
    /api/gallery/geometry/convex_hull/index.rst
    /api/gallery/geometry/curves/index.rst
+   /api/gallery/geometry/distances/index.rst
+   /api/gallery/geometry/enclosing/index.rst
    /api/gallery/geometry/intersections/index.rst
    /api/gallery/geometry/polygon/index.rst
+   /api/gallery/geometry/polyhedra/index.rst
+   /api/gallery/geometry/proximity/index.rst
+   /api/gallery/geometry/simplification/index.rst
+   /api/gallery/geometry/surfaces/index.rst
    /api/gallery/geometry/triangulation/index.rst
 
 

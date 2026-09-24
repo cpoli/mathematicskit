@@ -410,10 +410,10 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.fractals_chaos.utils.ifs_utils</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Shared &quot;chaos game&quot; driver for random iterated function systems --</span>
+<span></span><span class="sd">"""Shared "chaos game" driver for random iterated function systems --</span>
 <span class="sd">supporting numerics for :mod:`mathematicskit.fractals_chaos.systems.ifs`, not a</span>
 <span class="sd">model in its own right.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -421,19 +421,19 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;chaos_game&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"chaos_game"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="chaos_game">
 <a class="viewcode-back" href="../../../../api/fractals_chaos.html#mathematicskit.fractals_chaos.chaos_game">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">chaos_game</span><span class="p">(</span><span class="n">transforms</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="nb">float</span><span class="p">]],</span> <span class="n">n_points</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x0</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Run the &quot;chaos game&quot;: repeatedly apply a randomly chosen affine map.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Run the "chaos game": repeatedly apply a randomly chosen affine map.</span>
 
 <span class="sd">    At each step, one of the ``(A_k, b_k, p_k)`` triples is chosen with</span>
 <span class="sd">    probability :math:`p_k` and the current point :math:`x` is replaced</span>
 <span class="sd">    by :math:`A_k x + b_k`. For a contractive *iterated function system*</span>
 <span class="sd">    (every :math:`A_k` a contraction), the orbit converges (in</span>
-<span class="sd">    distribution) onto the IFS&#39;s unique attractor regardless of the</span>
+<span class="sd">    distribution) onto the IFS's unique attractor regardless of the</span>
 <span class="sd">    starting point -- the standard randomized algorithm for rendering</span>
 <span class="sd">    self-similar fractals such as the Sierpinski triangle and the</span>
 <span class="sd">    Barnsley fern. See Barnsley, *Fractals Everywhere*, 2nd ed., Ch. 3.</span>
@@ -462,11 +462,11 @@
 <span class="sd">    &gt;&gt;&gt; pts = chaos_game(transforms, n_points=5, x0=np.zeros(2))</span>
 <span class="sd">    &gt;&gt;&gt; np.allclose(pts, [[1.0, 2.0]] * 5)</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
     <span class="n">probs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">transforms</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">probs</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;transform probabilities must sum to 1&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"transform probabilities must sum to 1"</span><span class="p">)</span>
     <span class="n">choices</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">transforms</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="n">n_points</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">probs</span><span class="p">)</span>
 
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">if</span> <span class="n">x0</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>

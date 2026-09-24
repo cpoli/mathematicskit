@@ -4,9 +4,12 @@ Examples
 ========
 
 This gallery walks through every public feature of ``mathematicskit.special_functions``:
-the gamma/beta functions, Bessel functions, orthogonal polynomial
-families, and the discrete Fourier transform (naive DFT vs. hand-rolled
-radix-2 FFT vs. ``numpy.fft``).
+the gamma/beta functions and Stirling's series, Bessel, Airy, and
+Mathieu functions, elliptic functions, hypergeometric functions, the
+error function and Fresnel integrals, the Riemann zeta function, the
+Lambert W function, orthogonal polynomial families, and the discrete
+Fourier transform (naive DFT vs. hand-rolled radix-2 FFT vs.
+``numpy.fft``).
 
 Each script in this gallery is self-contained and can be run directly with
 ``python examples/special_functions/<section>/<script>.py``.
@@ -14,8 +17,17 @@ Each script in this gallery is self-contained and can be run directly with
 Sections
 --------
 
-- **gamma_beta** -- the gamma and beta functions.
+- **gamma_beta** -- the gamma and beta functions, and Stirling's
+  approximation.
+- **lambert_w** -- the Lambert W function and its two real branches.
+- **elliptic** -- elliptic integrals, the arithmetic-geometric mean, and
+  Jacobi elliptic functions.
+- **hypergeometric** -- Gauss's and Kummer's hypergeometric functions.
+- **error_functions** -- the error function and the Fresnel integrals.
 - **bessel** -- Bessel functions of the first and second kind.
+- **airy** -- the Airy functions Ai and Bi.
+- **zeta** -- the Riemann zeta function and Euler's product.
+- **mathieu** -- Mathieu functions and their characteristic values.
 - **orthogonal_polynomials** -- Legendre, Chebyshev, Hermite, and
   Laguerre polynomials, with numerically verified orthogonality.
 - **fourier_transform** -- naive DFT vs. radix-2 FFT vs. ``numpy.fft``.
@@ -31,6 +43,46 @@ Sections
     <div class="sphx-glr-thumbnails">
 
 .. thumbnail-parent-div-open
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Airy functions
+--------------
+
+Solutions of ``y'' = xy``, oscillating on one side and exponential on the other.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Plots Ai and Bi across the turning point x = 0 where y&#x27;&#x27; = xy switches from oscillation to exponential behaviour, and checks the Wronskian Ai Bi&#x27; - Ai&#x27; Bi = 1/pi.">
+
+.. only:: html
+
+  .. image:: /api/gallery/special_functions/airy/images/thumb/sphx_glr_plot_01_airy_functions_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/special_functions/airy/plot_01_airy_functions`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Airy functions Ai and Bi</div>
+    </div>
+
 
 .. thumbnail-parent-div-close
 
@@ -69,6 +121,120 @@ Bessel functions of the first and second kind.
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">Bessel functions of the first and second kind</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Elliptic functions
+------------------
+
+Elliptic integrals, the arithmetic-geometric mean, and Jacobi elliptic functions.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Iterates the AGM by hand to show its quadratic convergence, then checks Gauss&#x27;s 1799 identity K(m) = pi / (2 AGM(1, sqrt(1 - m))) and uses E(m) for the perimeter of an ellipse.">
+
+.. only:: html
+
+  .. image:: /api/gallery/special_functions/elliptic/images/thumb/sphx_glr_plot_01_agm_elliptic_integrals_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/special_functions/elliptic/plot_01_agm_elliptic_integrals`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Gauss's arithmetic-geometric mean and the elliptic integral K</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Plots sn, cn, dn for m = 0.9, showing their real period 4K(m), and uses them to write the exact motion of a large-amplitude pendulum.">
+
+.. only:: html
+
+  .. image:: /api/gallery/special_functions/elliptic/images/thumb/sphx_glr_plot_02_jacobi_elliptic_functions_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/special_functions/elliptic/plot_02_jacobi_elliptic_functions`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Jacobi elliptic functions and the pendulum</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Error function and Fresnel integrals
+------------------------------------
+
+Gaussian integrals along the real axis and along the diagonal of the complex plane.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Draws the Euler-Cornu spiral (C(t), S(t)), which winds into the points (1/2, 1/2) and (-1/2, -1/2), and the knife-edge diffraction intensity that Fresnel computed from it.">
+
+.. only:: html
+
+  .. image:: /api/gallery/special_functions/error_functions/images/thumb/sphx_glr_plot_01_fresnel_cornu_spiral_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/special_functions/error_functions/plot_01_fresnel_cornu_spiral`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Fresnel integrals and the Cornu spiral</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Recovers the 68-95-99.7 rule from erf, and shows why erfc is needed in the far tail, where 1 - erf(x) rounds to zero.">
+
+.. only:: html
+
+  .. image:: /api/gallery/special_functions/error_functions/images/thumb/sphx_glr_plot_02_error_function_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/special_functions/error_functions/plot_02_error_function`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The error function and the normal distribution</div>
     </div>
 
 
@@ -121,7 +287,7 @@ Naive DFT vs. hand-rolled radix-2 FFT vs. ``numpy.fft``.
 Gamma and beta functions
 ---------------------------
 
-The gamma and beta functions.
+The gamma and beta functions, and Stirling's approximation.
 
 
 .. raw:: html
@@ -152,17 +318,33 @@ The gamma and beta functions.
     </div>
 
 
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Shows that sqrt(2 pi n) (n/e)^n approximates n! with relative error about 1/(12n), and that Stirling&#x27;s full series for log Gamma(x) is asymptotic: at small x, adding terms first helps and then hurts.">
+
+.. only:: html
+
+  .. image:: /api/gallery/special_functions/gamma_beta/images/thumb/sphx_glr_plot_02_stirling_formula_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/special_functions/gamma_beta/plot_02_stirling_formula`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Stirling's formula and its asymptotic series</div>
+    </div>
+
+
 .. thumbnail-parent-div-close
 
 .. raw:: html
 
     </div>
 
-Orthogonal polynomials
+Hypergeometric functions
 ------------------------
 
-Legendre, Chebyshev, Hermite, and Laguerre polynomials, with
-numerically verified orthogonality.
+Gauss's hypergeometric function and Kummer's confluent hypergeometric function.
 
 
 .. raw:: html
@@ -178,18 +360,213 @@ numerically verified orthogonality.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Plots the first few Legendre, Chebyshev, Hermite, and Laguerre polynomials, and numerically verifies each family&#x27;s orthogonality against its own weight function.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Recovers log(1 + z), arcsin z, and a Chebyshev polynomial from 2F1 with special parameters, and checks Gauss&#x27;s summation theorem at z = 1.">
 
 .. only:: html
 
-  .. image:: /api/gallery/special_functions/orthogonal_polynomials/images/thumb/sphx_glr_plot_01_four_families_thumb.png
+  .. image:: /api/gallery/special_functions/hypergeometric/images/thumb/sphx_glr_plot_01_gauss_hypergeometric_thumb.png
     :alt:
 
-  :doc:`/api/gallery/special_functions/orthogonal_polynomials/plot_01_four_families`
+  :doc:`/api/gallery/special_functions/hypergeometric/plot_01_gauss_hypergeometric`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Four orthogonal polynomial families</div>
+      <div class="sphx-glr-thumbnail-title">Gauss's hypergeometric function contains the elementary functions</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Checks Kummer&#x27;s transformation M(a, b, z) = e^z M(b - a, b, -z) and shows 2F1(a, c; b; z/c) merging into 1F1(a; b; z) as c grows.">
+
+.. only:: html
+
+  .. image:: /api/gallery/special_functions/hypergeometric/images/thumb/sphx_glr_plot_02_kummer_confluent_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/special_functions/hypergeometric/plot_02_kummer_confluent`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Kummer's confluent hypergeometric function</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Lambert W function
+------------------
+
+The inverse of w e^w and its two real branches.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Plots W_0 and W_{-1}, the two real inverses of w e^w, which meet at the branch point z = -1/e, and uses W to solve x^x = 27.">
+
+.. only:: html
+
+  .. image:: /api/gallery/special_functions/lambert_w/images/thumb/sphx_glr_plot_01_lambert_w_branches_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/special_functions/lambert_w/plot_01_lambert_w_branches`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The two real branches of the Lambert W function</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Mathieu functions
+-----------------
+
+Periodic solutions of Mathieu's equation and their characteristic values.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Plots the first even Mathieu functions ce_m(x, q) and how the characteristic values a_m(q), b_m(q) split away from m^2 as q grows -- the band structure behind the Mathieu stability chart.">
+
+.. only:: html
+
+  .. image:: /api/gallery/special_functions/mathieu/images/thumb/sphx_glr_plot_01_mathieu_functions_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/special_functions/mathieu/plot_01_mathieu_functions`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Mathieu functions and their characteristic values</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Orthogonal polynomials
+------------------------
+
+Legendre and Chebyshev polynomials on [-1, 1], and Hermite and Laguerre
+polynomials on infinite domains, with numerically verified orthogonality.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Plots the first Legendre polynomials P_n (weight 1) beside the first Chebyshev polynomials T_n (weight 1/sqrt(1 - x^2)), checks each family&#x27;s orthogonality, and confirms Chebyshev&#x27;s closed form T_n(cos t) = cos(nt), whose equal ripples between -1 and 1 are its minimal-oscillation property.">
+
+.. only:: html
+
+  .. image:: /api/gallery/special_functions/orthogonal_polynomials/images/thumb/sphx_glr_plot_01_legendre_chebyshev_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/special_functions/orthogonal_polynomials/plot_01_legendre_chebyshev`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Legendre and Chebyshev polynomials on [-1, 1]</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Plots the first Hermite polynomials H_n (weight e^{-x^2} on the whole line) and Laguerre polynomials L_n (weight e^{-x} on the half-line), checks their orthogonality over infinite intervals, and draws the quantum harmonic oscillator states H_n(x) e^{-x^2/2} they describe.">
+
+.. only:: html
+
+  .. image:: /api/gallery/special_functions/orthogonal_polynomials/images/thumb/sphx_glr_plot_02_hermite_laguerre_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/special_functions/orthogonal_polynomials/plot_02_hermite_laguerre`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Hermite and Laguerre polynomials on infinite domains</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Riemann zeta function
+---------------------
+
+The zeta function, its analytic continuation, and Euler's product over primes.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Plots zeta(s) on the real line, including its analytic continuation to s &lt; 1 with trivial zeros at the negative even integers, and shows Euler&#x27;s product over primes converging to zeta(2) = pi^2/6.">
+
+.. only:: html
+
+  .. image:: /api/gallery/special_functions/zeta/images/thumb/sphx_glr_plot_01_riemann_zeta_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/special_functions/zeta/plot_01_riemann_zeta`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Riemann zeta function and Euler's product</div>
     </div>
 
 
@@ -205,10 +582,17 @@ numerically verified orthogonality.
    :includehidden:
 
 
+   /api/gallery/special_functions/airy/index.rst
    /api/gallery/special_functions/bessel/index.rst
+   /api/gallery/special_functions/elliptic/index.rst
+   /api/gallery/special_functions/error_functions/index.rst
    /api/gallery/special_functions/fourier_transform/index.rst
    /api/gallery/special_functions/gamma_beta/index.rst
+   /api/gallery/special_functions/hypergeometric/index.rst
+   /api/gallery/special_functions/lambert_w/index.rst
+   /api/gallery/special_functions/mathieu/index.rst
    /api/gallery/special_functions/orthogonal_polynomials/index.rst
+   /api/gallery/special_functions/zeta/index.rst
 
 
 

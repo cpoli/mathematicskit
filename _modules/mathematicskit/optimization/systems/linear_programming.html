@@ -410,13 +410,19 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.optimization.systems.linear_programming</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Linear programming, via :func:`scipy.optimize.linprog`.</span>
+<span></span><span class="sa">r</span><span class="sd">"""Linear programming, via :func:`scipy.optimize.linprog`.</span>
 
 <span class="sd">``linprog`` already implements the simplex method (and, by default, a</span>
 <span class="sd">modern interior-point/HiGHS solver) directly and robustly; mathematicskit does</span>
 <span class="sd">not hand-write the simplex tableau. See Nocedal &amp; Wright, *Numerical</span>
 <span class="sd">Optimization*, 2nd ed., Ch. 13, for the algorithm this wraps.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">Integer linear programs are solved by :func:`scipy.optimize.milp`</span>
+<span class="sd">(HiGHS's branch-and-cut solver), the modern descendant of Land and</span>
+<span class="sd">Doig's branch-and-bound; see A. H. Land and A. G. Doig, "An Automatic</span>
+<span class="sd">Method of Solving Discrete Programming Problems," Econometrica 28(3)</span>
+<span class="sd">(1960), 497-520.</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -427,7 +433,7 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.optimization.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearProgramResult</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;linear_program&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"linear_program"</span><span class="p">,</span> <span class="s2">"integer_linear_program"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="linear_program">
@@ -440,10 +446,10 @@
     <span class="n">b_eq</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">bounds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LinearProgramResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Solve a linear program :math:`\min_x c^T x` subject to :math:`A_{ub}x \leq b_{ub}`, :math:`A_{eq}x = b_{eq}`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Solve a linear program :math:`\min_x c^T x` subject to :math:`A_{ub}x \leq b_{ub}`, :math:`A_{eq}x = b_{eq}`.</span>
 
-<span class="sd">    Thin wrapper around :func:`scipy.optimize.linprog` (``method=&quot;highs&quot;``,</span>
-<span class="sd">    scipy&#39;s default modern solver, which dispatches between a dual</span>
+<span class="sd">    Thin wrapper around :func:`scipy.optimize.linprog` (``method="highs"``,</span>
+<span class="sd">    scipy's default modern solver, which dispatches between a dual</span>
 <span class="sd">    simplex and an interior-point method depending on problem structure).</span>
 <span class="sd">    See Nocedal &amp; Wright, *Numerical Optimization*, 2nd ed., Ch. 13.</span>
 
@@ -459,7 +465,7 @@
 <span class="sd">        Equality constraints :math:`A_{eq} x = b_{eq}`.</span>
 <span class="sd">    bounds : sequence of (float, float), optional</span>
 <span class="sd">        Per-variable bounds; defaults to ``(0, None)`` for every</span>
-<span class="sd">        variable (scipy&#39;s convention, matching the standard-form LP).</span>
+<span class="sd">        variable (scipy's convention, matching the standard-form LP).</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -476,9 +482,70 @@
 <span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; round(result.fun, 6)</span>
 <span class="sd">    -8.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="n">sopt</span><span class="o">.</span><span class="n">linprog</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">A_ub</span><span class="o">=</span><span class="n">a_ub</span><span class="p">,</span> <span class="n">b_ub</span><span class="o">=</span><span class="n">b_ub</span><span class="p">,</span> <span class="n">A_eq</span><span class="o">=</span><span class="n">a_eq</span><span class="p">,</span> <span class="n">b_eq</span><span class="o">=</span><span class="n">b_eq</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;highs&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">LinearProgramResult</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">fun</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">fun</span><span class="p">)</span> <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">fun</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;nan&quot;</span><span class="p">),</span> <span class="n">success</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">success</span><span class="p">),</span> <span class="n">message</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">message</span><span class="p">)</span></div>
+<span class="sd">    """</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">sopt</span><span class="o">.</span><span class="n">linprog</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">A_ub</span><span class="o">=</span><span class="n">a_ub</span><span class="p">,</span> <span class="n">b_ub</span><span class="o">=</span><span class="n">b_ub</span><span class="p">,</span> <span class="n">A_eq</span><span class="o">=</span><span class="n">a_eq</span><span class="p">,</span> <span class="n">b_eq</span><span class="o">=</span><span class="n">b_eq</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"highs"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">LinearProgramResult</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">fun</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">fun</span><span class="p">)</span> <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">fun</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"nan"</span><span class="p">),</span> <span class="n">success</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">success</span><span class="p">),</span> <span class="n">message</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">message</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="integer_linear_program">
+<a class="viewcode-back" href="../../../../api/optimization.html#mathematicskit.optimization.integer_linear_program">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">integer_linear_program</span><span class="p">(</span>
+    <span class="n">c</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">a_ub</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">b_ub</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">a_eq</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">b_eq</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">bounds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">integrality</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LinearProgramResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Solve a (mixed-)integer linear program by branch and bound.</span>
+
+<span class="sd">    Same problem as :func:`linear_program` with some or all variables</span>
+<span class="sd">    restricted to integers. Land and Doig's branch-and-bound solves the</span>
+<span class="sd">    LP relaxation, then splits on a fractional variable</span>
+<span class="sd">    :math:`x_j = t` into the subproblems :math:`x_j \leq \lfloor t \rfloor`</span>
+<span class="sd">    and :math:`x_j \geq \lceil t \rceil`, pruning any branch whose</span>
+<span class="sd">    relaxation cannot beat the best integer solution found so far. This</span>
+<span class="sd">    wraps :func:`scipy.optimize.milp` (HiGHS branch-and-cut).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    c, a_ub, b_ub, a_eq, b_eq, bounds</span>
+<span class="sd">        As for :func:`linear_program` (default bounds ``(0, None)``).</span>
+<span class="sd">    integrality : array_like of int, shape (n,), optional</span>
+<span class="sd">        ``1`` for an integer variable, ``0`` for a continuous one;</span>
+<span class="sd">        defaults to all integer.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    LinearProgramResult</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; # maximize 5x + 4y s.t. 6x + 4y &lt;= 24, x + 2y &lt;= 6, x, y &gt;= 0 integer.</span>
+<span class="sd">    &gt;&gt;&gt; result = integer_linear_program(np.array([-5.0, -4.0]), a_ub=np.array([[6.0, 4.0], [1.0, 2.0]]), b_ub=np.array([24.0, 6.0]))</span>
+<span class="sd">    &gt;&gt;&gt; (result.x.round() + 0.0).tolist(), round(-result.fun, 6)</span>
+<span class="sd">    ([4.0, 0.0], 20.0)</span>
+<span class="sd">    """</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">size</span>
+    <span class="n">constraints</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">a_ub</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">constraints</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sopt</span><span class="o">.</span><span class="n">LinearConstraint</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">a_ub</span><span class="p">),</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">b_ub</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)))</span>
+    <span class="k">if</span> <span class="n">a_eq</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">b_eq</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">constraints</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sopt</span><span class="o">.</span><span class="n">LinearConstraint</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">a_eq</span><span class="p">),</span> <span class="n">b</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">bounds</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">bounds</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)]</span> <span class="o">*</span> <span class="n">n</span>
+    <span class="n">lo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span> <span class="k">if</span> <span class="n">bd</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">bd</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">bd</span> <span class="ow">in</span> <span class="n">bounds</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">hi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span> <span class="k">if</span> <span class="n">bd</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">bd</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">bd</span> <span class="ow">in</span> <span class="n">bounds</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">integrality</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">integrality</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">sopt</span><span class="o">.</span><span class="n">milp</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">constraints</span><span class="o">=</span><span class="n">constraints</span><span class="p">,</span> <span class="n">integrality</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">integrality</span><span class="p">),</span> <span class="n">bounds</span><span class="o">=</span><span class="n">sopt</span><span class="o">.</span><span class="n">Bounds</span><span class="p">(</span><span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">))</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span> <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">LinearProgramResult</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">fun</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">fun</span><span class="p">)</span> <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">fun</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"nan"</span><span class="p">),</span> <span class="n">success</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">success</span><span class="p">),</span> <span class="n">message</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">message</span><span class="p">)</span></div>
 
 </pre></div>
 

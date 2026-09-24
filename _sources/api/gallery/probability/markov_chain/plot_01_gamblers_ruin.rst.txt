@@ -18,15 +18,19 @@
 .. _sphx_glr_api_gallery_probability_markov_chain_plot_01_gamblers_ruin.py:
 
 
-Gambler's ruin: absorption probabilities and expected duration
+Markov chains: gambler's ruin as an absorbing chain
 ======================================================================
 
-A gambler with capital ``i`` (out of a target ``N``) makes fair
-even-money bets until reaching 0 (ruin) or ``N`` (target). Both the
+A Markov chain moves between states with probabilities that depend only
+on the current state, not on how it got there, so the whole process is
+described by one transition matrix. In gambler's ruin, a gambler with
+capital ``i`` (out of a target ``N``) makes fair even-money bets until
+reaching 0 (ruin) or ``N`` (target); the capital after each bet is a
+Markov chain on the states 0..N with two absorbing ends. Both the
 absorption probabilities and the expected number of steps have simple
 closed forms for a fair game, used here to check the numerical solve.
 
-.. GENERATED FROM PYTHON SOURCE LINES 12-17
+.. GENERATED FROM PYTHON SOURCE LINES 16-21
 
 .. code-block:: Python
 
@@ -42,12 +46,12 @@ closed forms for a fair game, used here to check the numerical solve.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 18-20
+.. GENERATED FROM PYTHON SOURCE LINES 22-24
 
 Build the transition matrix for capital 0..N
 ------------------------------------------------------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 20-33
+.. GENERATED FROM PYTHON SOURCE LINES 24-37
 
 .. code-block:: Python
 
@@ -82,12 +86,12 @@ Build the transition matrix for capital 0..N
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 34-36
+.. GENERATED FROM PYTHON SOURCE LINES 38-40
 
 Absorption probabilities and expected duration
 ------------------------------------------------------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 36-46
+.. GENERATED FROM PYTHON SOURCE LINES 40-50
 
 .. code-block:: Python
 
@@ -121,7 +125,7 @@ Absorption probabilities and expected duration
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.019 seconds)
+   **Total running time of the script:** (0 minutes 0.021 seconds)
 
 
 .. _sphx_glr_download_api_gallery_probability_markov_chain_plot_01_gamblers_ruin.py:

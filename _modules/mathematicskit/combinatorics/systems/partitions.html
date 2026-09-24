@@ -410,28 +410,28 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.combinatorics.systems.partitions</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Integer partitions: the partition function and partition enumeration.</span>
+<span></span><span class="sa">r</span><span class="sd">"""Integer partitions: the partition function and partition enumeration.</span>
 
 <span class="sd">No scipy/numpy equivalent (integer partitions are a discrete,</span>
 <span class="sd">exact-arithmetic combinatorial object). See Andrews &amp; Eriksson, *Integer</span>
 <span class="sd">Partitions*, 2nd ed., Ch. 1, and Hardy &amp; Wright, *An Introduction to the</span>
 <span class="sd">Theory of Numbers*, 6th ed., Ch. 19.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">cache</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;partition_function&quot;</span><span class="p">,</span> <span class="s2">&quot;integer_partitions&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"partition_function"</span><span class="p">,</span> <span class="s2">"integer_partitions"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="partition_function">
 <a class="viewcode-back" href="../../../../api/combinatorics.html#mathematicskit.combinatorics.partition_function">[docs]</a>
 <span class="nd">@cache</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">partition_function</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The partition function :math:`p(n)`: the number of ways to write ``n`` as a sum of positive integers (order irrelevant).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""The partition function :math:`p(n)`: the number of ways to write ``n`` as a sum of positive integers (order irrelevant).</span>
 
-<span class="sd">    Computed via Euler&#39;s pentagonal number theorem recurrence,</span>
+<span class="sd">    Computed via Euler's pentagonal number theorem recurrence,</span>
 
 <span class="sd">    .. math::</span>
 
@@ -459,7 +459,7 @@
 <span class="sd">    7</span>
 <span class="sd">    &gt;&gt;&gt; partition_function(10)</span>
 <span class="sd">    42</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">0</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -484,7 +484,7 @@
 <div class="viewcode-block" id="integer_partitions">
 <a class="viewcode-back" href="../../../../api/combinatorics.html#mathematicskit.combinatorics.integer_partitions">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">integer_partitions</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Enumerate every integer partition of ``n``, each as a non-increasing list of parts.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Enumerate every integer partition of ``n``, each as a non-increasing list of parts.</span>
 
 <span class="sd">    Generated recursively: every partition of ``n`` with largest part</span>
 <span class="sd">    :math:`\leq m` either has largest part exactly ``m`` (prepend ``m``</span>
@@ -508,9 +508,9 @@
 <span class="sd">    [[4], [3, 1], [2, 2], [2, 1, 1], [1, 1, 1, 1]]</span>
 <span class="sd">    &gt;&gt;&gt; len(integer_partitions(10)) == partition_function(10)</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;n must be &gt;= 0&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"n must be &gt;= 0"</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">[[]]</span>
 

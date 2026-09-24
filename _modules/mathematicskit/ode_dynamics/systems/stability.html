@@ -410,32 +410,41 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.ode_dynamics.systems.stability</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Fixed-point stability analysis for 2D autonomous systems via Jacobian</span>
+<span></span><span class="sa">r</span><span class="sd">"""Fixed-point stability analysis for 2D autonomous systems via Jacobian</span>
 <span class="sd">linearization: the trace-determinant classification of node/saddle/</span>
 <span class="sd">spiral/center, and a multivariate Newton solver (built on</span>
 <span class="sd">:mod:`mathematicskit.linalg`) to locate fixed points numerically.</span>
 
 <span class="sd">See Strogatz, *Nonlinear Dynamics and Chaos*, 2nd ed., Ch. 5</span>
-<span class="sd">(&quot;Linear Systems&quot;) and Ch. 6.3 (&quot;Linearization&quot;), and Burden &amp; Faires,</span>
-<span class="sd">*Numerical Analysis*, 10th ed., Ch. 10.2 (multivariate Newton&#39;s method).</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">("Linear Systems") and Ch. 6.3 ("Linearization"), and Burden &amp; Faires,</span>
+<span class="sd">*Numerical Analysis*, 10th ed., Ch. 10.2 (multivariate Newton's method).</span>
+<span class="sd">:func:`lyapunov_quadratic_form` implements Lyapunov's (1892) direct</span>
+<span class="sd">method for linear systems via the continuous Lyapunov equation.</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.linalg</span><span class="w"> </span><span class="kn">import</span> <span class="n">solve_continuous_lyapunov</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.linalg.systems.lu</span><span class="w"> </span><span class="kn">import</span> <span class="n">lu_solve_system</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.ode_dynamics.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">FixedPointResult</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.ode_dynamics.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">FixedPointResult</span><span class="p">,</span> <span class="n">LyapunovFunctionResult</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;classify_fixed_point_2d&quot;</span><span class="p">,</span> <span class="s2">&quot;find_fixed_point_newton&quot;</span><span class="p">,</span> <span class="s2">&quot;numerical_jacobian&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"classify_fixed_point_2d"</span><span class="p">,</span> <span class="s2">"find_fixed_point_newton"</span><span class="p">,</span> <span class="s2">"numerical_jacobian"</span><span class="p">,</span> <span class="s2">"lyapunov_quadratic_form"</span><span class="p">]</span>
+
+<span class="n">_BORDERLINE_TOL</span> <span class="o">=</span> <span class="mf">1e-12</span>
+<span class="sd">"""Tolerance for the borderline cases in :func:`classify_fixed_point_2d`:</span>
+<span class="sd">a repeated eigenvalue (:math:`\\tau^2 = 4\\Delta`) and a pure center</span>
+<span class="sd">(:math:`\\tau = 0`). Both are exact-equality conditions that floating-point</span>
+<span class="sd">arithmetic will essentially never hit on the nose."""</span>
 
 
 <div class="viewcode-block" id="classify_fixed_point_2d">
 <a class="viewcode-back" href="../../../../api/ode_dynamics.html#mathematicskit.ode_dynamics.classify_fixed_point_2d">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">classify_fixed_point_2d</span><span class="p">(</span><span class="n">jacobian</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FixedPointResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Classify a 2D linear system&#39;s fixed point from its Jacobian.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Classify a 2D linear system's fixed point from its Jacobian.</span>
 
 <span class="sd">    For :math:`\dot{\mathbf x} = J\mathbf x` (or the linearization of a</span>
 <span class="sd">    nonlinear system about a fixed point), let :math:`\tau =</span>
@@ -450,6 +459,13 @@
 <span class="sd">    - :math:`\Delta &gt; 0`, :math:`\tau = 0`: center (purely imaginary).</span>
 <span class="sd">    - :math:`\tau^2 = 4\Delta \neq 0`: degenerate node (repeated real eigenvalue).</span>
 
+<span class="sd">    The last two are exact-equality conditions, tested here against a small</span>
+<span class="sd">    tolerance rather than against zero. A *near*-borderline system is</span>
+<span class="sd">    genuinely ambiguous rather than merely hard to classify numerically:</span>
+<span class="sd">    linearization is inconclusive for centers and degenerate nodes, since an</span>
+<span class="sd">    arbitrarily small nonlinear term can push the trajectory either way</span>
+<span class="sd">    (Strogatz, Sec. 6.3).</span>
+
 <span class="sd">    See Strogatz, *Nonlinear Dynamics and Chaos*, 2nd ed., Ch. 5.2</span>
 <span class="sd">    (the classification diagram in the :math:`(\tau, \Delta)` plane).</span>
 
@@ -457,7 +473,7 @@
 <span class="sd">    ----------</span>
 <span class="sd">    jacobian : ndarray, shape (2, 2)</span>
 <span class="sd">    location : ndarray, shape (2,), optional</span>
-<span class="sd">        The fixed point&#39;s coordinates, for record-keeping; defaults to</span>
+<span class="sd">        The fixed point's coordinates, for record-keeping; defaults to</span>
 <span class="sd">        the origin.</span>
 
 <span class="sd">    Returns</span>
@@ -469,11 +485,11 @@
 <span class="sd">    &gt;&gt;&gt; import numpy as np</span>
 <span class="sd">    &gt;&gt;&gt; result = classify_fixed_point_2d(np.array([[-1.0, 0.0], [0.0, -2.0]]))</span>
 <span class="sd">    &gt;&gt;&gt; result.classification</span>
-<span class="sd">    &#39;stable node&#39;</span>
+<span class="sd">    'stable node'</span>
 <span class="sd">    &gt;&gt;&gt; result2 = classify_fixed_point_2d(np.array([[0.0, 1.0], [-1.0, 0.0]]))</span>
 <span class="sd">    &gt;&gt;&gt; result2.classification</span>
-<span class="sd">    &#39;center&#39;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    'center'</span>
+<span class="sd">    """</span>
     <span class="n">j</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">jacobian</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">tau</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">j</span><span class="p">))</span>
     <span class="n">delta</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">j</span><span class="p">))</span>
@@ -485,22 +501,26 @@
         <span class="n">sqrt_disc</span> <span class="o">=</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="n">disc</span><span class="p">)</span>
         <span class="n">eigenvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">tau</span> <span class="o">+</span> <span class="n">sqrt_disc</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">,</span> <span class="p">(</span><span class="n">tau</span> <span class="o">-</span> <span class="n">sqrt_disc</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
 
+    <span class="c1"># The borderline cases -- a repeated eigenvalue (disc == 0) and a pure</span>
+    <span class="c1"># center (tau == 0) -- are exact-equality conditions that floating-point</span>
+    <span class="c1"># arithmetic essentially never reproduces, so both are tested against a</span>
+    <span class="c1"># small tolerance rather than against zero. Note that this makes the</span>
+    <span class="c1"># classification of a near-borderline system genuinely ambiguous, which</span>
+    <span class="c1"># is the mathematics, not a defect: an arbitrarily small perturbation</span>
+    <span class="c1"># turns a center into a spiral either way (Strogatz, Sec. 6.3, on why</span>
+    <span class="c1"># linearization is inconclusive for borderline cases).</span>
     <span class="k">if</span> <span class="n">delta</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;saddle&quot;</span>
+        <span class="n">classification</span> <span class="o">=</span> <span class="s2">"saddle"</span>
     <span class="k">elif</span> <span class="n">delta</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;non-isolated (zero eigenvalue)&quot;</span>
+        <span class="n">classification</span> <span class="o">=</span> <span class="s2">"non-isolated (zero eigenvalue)"</span>
+    <span class="k">elif</span> <span class="nb">abs</span><span class="p">(</span><span class="n">disc</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">_BORDERLINE_TOL</span><span class="p">:</span>
+        <span class="n">classification</span> <span class="o">=</span> <span class="s2">"degenerate node"</span>
     <span class="k">elif</span> <span class="n">disc</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">tau</span> <span class="o">*</span> <span class="n">tau</span> <span class="o">-</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="n">delta</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-12</span><span class="p">:</span>
-            <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;degenerate node&quot;</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;stable node&quot;</span> <span class="k">if</span> <span class="n">tau</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;unstable node&quot;</span>
-    <span class="k">elif</span> <span class="n">disc</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">tau</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-12</span><span class="p">:</span>
-            <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;center&quot;</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;stable spiral&quot;</span> <span class="k">if</span> <span class="n">tau</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;unstable spiral&quot;</span>
-    <span class="k">else</span><span class="p">:</span>  <span class="c1"># disc == 0, delta &gt; 0</span>
-        <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;degenerate node&quot;</span>
+        <span class="n">classification</span> <span class="o">=</span> <span class="s2">"stable node"</span> <span class="k">if</span> <span class="n">tau</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">"unstable node"</span>
+    <span class="k">elif</span> <span class="nb">abs</span><span class="p">(</span><span class="n">tau</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">_BORDERLINE_TOL</span><span class="p">:</span>
+        <span class="n">classification</span> <span class="o">=</span> <span class="s2">"center"</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">classification</span> <span class="o">=</span> <span class="s2">"stable spiral"</span> <span class="k">if</span> <span class="n">tau</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">"unstable spiral"</span>
 
     <span class="n">stable</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">eigenvalues</span><span class="o">.</span><span class="n">real</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">))</span>
     <span class="n">loc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">if</span> <span class="n">location</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">location</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
@@ -511,7 +531,7 @@
 <div class="viewcode-block" id="numerical_jacobian">
 <a class="viewcode-back" href="../../../../api/ode_dynamics.html#mathematicskit.ode_dynamics.numerical_jacobian">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">numerical_jacobian</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">h</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-6</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Central-difference Jacobian of a vector field ``f: R^n -&gt; R^n``.</span>
+<span class="w">    </span><span class="sd">"""Central-difference Jacobian of a vector field ``f: R^n -&gt; R^n``.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -531,7 +551,7 @@
 <span class="sd">    &gt;&gt;&gt; np.round(numerical_jacobian(f, np.array([0.0, 0.0])), 6)</span>
 <span class="sd">    array([[ 0.,  1.],</span>
 <span class="sd">           [-1.,  0.]])</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">jac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
@@ -546,7 +566,7 @@
 <div class="viewcode-block" id="find_fixed_point_newton">
 <a class="viewcode-back" href="../../../../api/ode_dynamics.html#mathematicskit.ode_dynamics.find_fixed_point_newton">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">find_fixed_point_newton</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">x0</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-10</span><span class="p">,</span> <span class="n">max_iter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Locate a fixed point of ``f(x) = 0`` via multivariate Newton&#39;s method.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Locate a fixed point of ``f(x) = 0`` via multivariate Newton's method.</span>
 
 <span class="sd">    :math:`x_{k+1} = x_k - J(x_k)^{-1} f(x_k)`, with the linear solve at</span>
 <span class="sd">    each step done via :func:`mathematicskit.linalg.systems.lu.lu_solve_system`</span>
@@ -579,7 +599,7 @@
 <span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; np.allclose(f(x), 0.0, atol=1e-8)</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">converged</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iter</span><span class="p">):</span>
@@ -596,6 +616,64 @@
             <span class="k">break</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">x_new</span>
     <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">converged</span></div>
+
+
+
+<div class="viewcode-block" id="lyapunov_quadratic_form">
+<a class="viewcode-back" href="../../../../api/ode_dynamics.html#mathematicskit.ode_dynamics.lyapunov_quadratic_form">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">lyapunov_quadratic_form</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">Q</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LyapunovFunctionResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Quadratic Lyapunov function for the linear system :math:`\dot x = Ax`.</span>
+
+<span class="sd">    Lyapunov's direct method (1892) proves stability without solving the</span>
+<span class="sd">    ODE: if a function :math:`V(x) &gt; 0` (for :math:`x \neq 0`) strictly</span>
+<span class="sd">    decreases along every trajectory, the origin is asymptotically</span>
+<span class="sd">    stable. For a linear system, try :math:`V(x) = x^T P x`; then</span>
+<span class="sd">    :math:`\dot V = x^T(A^T P + P A)x = -x^T Q x`. Solving the</span>
+<span class="sd">    continuous *Lyapunov equation*</span>
+
+<span class="sd">    .. math:: A^T P + P A = -Q</span>
+
+<span class="sd">    for a chosen :math:`Q \succ 0` gives a positive-definite :math:`P`</span>
+<span class="sd">    if and only if every eigenvalue of :math:`A` has negative real part</span>
+<span class="sd">    (Lyapunov's theorem). The equation is solved with</span>
+<span class="sd">    :func:`scipy.linalg.solve_continuous_lyapunov` (Bartels-Stewart).</span>
+<span class="sd">    See Khalil, *Nonlinear Systems*, 3rd ed., Thm. 4.6.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    A : array-like, shape (n, n)</span>
+<span class="sd">        System matrix.</span>
+<span class="sd">    Q : array-like, shape (n, n), optional</span>
+<span class="sd">        Symmetric positive-definite matrix; defaults to the identity.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    LyapunovFunctionResult</span>
+<span class="sd">        ``P``, ``Q``, and whether ``P`` is positive definite.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; res = lyapunov_quadratic_form([[-1.0, 0.0], [0.0, -2.0]])</span>
+<span class="sd">    &gt;&gt;&gt; np.round(res.P, 6)</span>
+<span class="sd">    array([[0.5 , 0.  ],</span>
+<span class="sd">           [0.  , 0.25]])</span>
+<span class="sd">    &gt;&gt;&gt; res.positive_definite</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; lyapunov_quadratic_form([[1.0, 0.0], [0.0, -1.0]]).positive_definite</span>
+<span class="sd">    False</span>
+<span class="sd">    """</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">A</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"A must be a square matrix"</span><span class="p">)</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="n">Q</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">Q</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Q must have the same shape as A"</span><span class="p">)</span>
+    <span class="c1"># scipy solves a X + X a^H = q; with a = A^T this is A^T P + P A = -Q.</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">solve_continuous_lyapunov</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="o">-</span><span class="n">Q</span><span class="p">)</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">P</span> <span class="o">+</span> <span class="n">P</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">positive_definite</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvalsh</span><span class="p">(</span><span class="n">P</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">LyapunovFunctionResult</span><span class="p">(</span><span class="n">P</span><span class="o">=</span><span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="o">=</span><span class="n">Q</span><span class="p">,</span> <span class="n">positive_definite</span><span class="o">=</span><span class="n">positive_definite</span><span class="p">)</span></div>
 
 </pre></div>
 

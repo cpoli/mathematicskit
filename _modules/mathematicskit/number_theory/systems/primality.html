@@ -410,28 +410,31 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.number_theory.systems.primality</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Primality testing (trial division, Miller-Rabin) and prime generation</span>
-<span class="sd">(sieve of Eratosthenes).</span>
+<span></span><span class="sa">r</span><span class="sd">"""Primality testing (trial division, Miller-Rabin, Lucas-Lehmer for</span>
+<span class="sd">Mersenne numbers) and prime generation (sieve of Eratosthenes).</span>
 
 <span class="sd">No numpy/scipy equivalent (these are exact-integer algorithms). See</span>
 <span class="sd">Cormen et al., *Introduction to Algorithms*, 3rd ed., Ch. 31.8</span>
 <span class="sd">(Miller-Rabin) and Niven, Zuckerman &amp; Montgomery, *An Introduction to</span>
 <span class="sd">the Theory of Numbers*, 5th ed., Sec. 1.1 (sieve of Eratosthenes).</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.number_theory.systems.modular_arithmetic</span><span class="w"> </span><span class="kn">import</span> <span class="n">fast_mod_pow</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;is_prime_trial_division&quot;</span><span class="p">,</span> <span class="s2">&quot;is_prime_miller_rabin&quot;</span><span class="p">,</span> <span class="s2">&quot;sieve_of_eratosthenes&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"is_prime_trial_division"</span><span class="p">,</span> <span class="s2">"is_prime_miller_rabin"</span><span class="p">,</span> <span class="s2">"sieve_of_eratosthenes"</span><span class="p">,</span> <span class="s2">"lucas_lehmer"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="is_prime_trial_division">
 <a class="viewcode-back" href="../../../../api/number_theory.html#mathematicskit.number_theory.is_prime_trial_division">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">is_prime_trial_division</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Primality test by trial division up to :math:`\sqrt n`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Primality test by trial division up to :math:`\sqrt n`.</span>
 
 <span class="sd">    :math:`O(\sqrt n)`: a composite ``n`` must have a factor</span>
 <span class="sd">    :math:`\leq\sqrt n`, so it suffices to check candidate divisors up</span>
@@ -451,7 +454,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; [k for k in range(2, 30) if is_prime_trial_division(k)]</span>
 <span class="sd">    [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">False</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
@@ -470,13 +473,13 @@
 <div class="viewcode-block" id="is_prime_miller_rabin">
 <a class="viewcode-back" href="../../../../api/number_theory.html#mathematicskit.number_theory.is_prime_miller_rabin">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">is_prime_miller_rabin</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Probabilistic primality test (Miller-Rabin).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Probabilistic primality test (Miller-Rabin).</span>
 
 <span class="sd">    Writes :math:`n-1 = 2^r d` with ``d`` odd, and for each of ``k``</span>
 <span class="sd">    random witnesses ``a`` checks whether :math:`a^d \equiv 1` or</span>
 <span class="sd">    :math:`a^{2^i d} \equiv -1 \pmod n` for some :math:`0\leq i&lt;r`; if</span>
-<span class="sd">    neither holds, ``n`` is certainly composite (&quot;``a`` is a witness to</span>
-<span class="sd">    compositeness&quot;), otherwise ``n`` is declared *probably* prime. Each</span>
+<span class="sd">    neither holds, ``n`` is certainly composite ("``a`` is a witness to</span>
+<span class="sd">    compositeness"), otherwise ``n`` is declared *probably* prime. Each</span>
 <span class="sd">    round has failure probability :math:`\leq 1/4` for composite ``n``,</span>
 <span class="sd">    so :math:`k=40` rounds give false-positive probability</span>
 <span class="sd">    :math:`\leq 4^{-40}` -- negligible in practice, but this remains a</span>
@@ -504,7 +507,9 @@
 <span class="sd">    False</span>
 <span class="sd">    &gt;&gt;&gt; is_prime_miller_rabin(2**61 - 1)  # a known Mersenne prime</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &gt;&gt;&gt; is_prime_miller_rabin(2**89 - 1)  # arbitrary precision: no 64-bit ceiling</span>
+<span class="sd">    True</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">False</span>
     <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">37</span><span class="p">):</span>
@@ -518,9 +523,14 @@
         <span class="n">r</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">d</span> <span class="o">//=</span> <span class="mi">2</span>
 
-    <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="c1"># Witnesses are drawn with Python's ``random`` rather than</span>
+    <span class="c1"># ``numpy.random``: ``Generator.integers`` is capped at int64, so a</span>
+    <span class="c1"># numpy-drawn witness raises for any n &gt;= 2**63 -- precisely the regime</span>
+    <span class="c1"># where a probabilistic test beats trial division, and where Python's</span>
+    <span class="c1"># arbitrary-precision ints are the whole point.</span>
+    <span class="n">rng</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">Random</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
-        <span class="n">a</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">fast_mod_pow</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">x</span> <span class="o">==</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">continue</span>
@@ -539,7 +549,7 @@
 <div class="viewcode-block" id="sieve_of_eratosthenes">
 <a class="viewcode-back" href="../../../../api/number_theory.html#mathematicskit.number_theory.sieve_of_eratosthenes">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">sieve_of_eratosthenes</span><span class="p">(</span><span class="n">limit</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;All primes up to and including `limit`, via the sieve of Eratosthenes.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""All primes up to and including `limit`, via the sieve of Eratosthenes.</span>
 
 <span class="sd">    Marks composites by striking out multiples of each prime found, from</span>
 <span class="sd">    2 upward -- :math:`O(n\log\log n)`, far faster than testing each</span>
@@ -559,15 +569,59 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; sieve_of_eratosthenes(30)</span>
 <span class="sd">    array([ 2,  3,  5,  7, 11, 13, 17, 19, 23, 29])</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">limit</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
     <span class="n">is_composite</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">limit</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
     <span class="n">is_composite</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">limit</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">isqrt</span><span class="p">(</span><span class="n">limit</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">is_composite</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
             <span class="n">is_composite</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">i</span> <span class="p">::</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">flatnonzero</span><span class="p">(</span><span class="o">~</span><span class="n">is_composite</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="lucas_lehmer">
+<a class="viewcode-back" href="../../../../api/number_theory.html#mathematicskit.number_theory.lucas_lehmer">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">lucas_lehmer</span><span class="p">(</span><span class="n">p</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Lucas-Lehmer test: is the Mersenne number :math:`M_p = 2^p - 1` prime?</span>
+
+<span class="sd">    For an odd prime ``p``, set :math:`s_0 = 4` and :math:`s_{k+1} =</span>
+<span class="sd">    s_k^2 - 2 \bmod M_p`; then :math:`M_p` is prime if and only if</span>
+<span class="sd">    :math:`s_{p-2} \equiv 0 \pmod{M_p}` (Lucas, 1878; Lehmer, 1930).</span>
+<span class="sd">    Only ``p - 2`` modular squarings are needed, so the test is a</span>
+<span class="sd">    deterministic proof of primality far faster than any general</span>
+<span class="sd">    method -- it is why the largest known primes are almost all Mersenne</span>
+<span class="sd">    primes. See Crandall &amp; Pomerance, *Prime Numbers: A Computational</span>
+<span class="sd">    Perspective*, 2nd ed., Theorem 4.2.6.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    p : int</span>
+<span class="sd">        Exponent, ``p &gt;= 2``. A composite ``p`` gives a composite</span>
+<span class="sd">        :math:`M_p` and returns ``False`` immediately; ``p = 2`` (where</span>
+<span class="sd">        :math:`M_2 = 3`) is handled as a special case.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bool</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; [p for p in range(2, 130) if lucas_lehmer(p)]  # exponents of Mersenne primes</span>
+<span class="sd">    [2, 3, 5, 7, 13, 17, 19, 31, 61, 89, 107, 127]</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"p must be &gt;= 2"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_prime_trial_division</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">p</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="n">s</span> <span class="o">*</span> <span class="n">s</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="n">m</span>
+    <span class="k">return</span> <span class="n">s</span> <span class="o">==</span> <span class="mi">0</span></div>
 
 </pre></div>
 

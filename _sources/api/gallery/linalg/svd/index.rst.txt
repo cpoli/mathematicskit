@@ -5,7 +5,9 @@
 Singular value decomposition
 -----------------------------
 
-SVD via :func:`numpy.linalg.svd`.
+SVD via :func:`numpy.linalg.svd` and the Eckart-Young best low-rank approximation.
+
+Also the Moore-Penrose pseudoinverse and minimum-norm least squares.
 
 
 .. raw:: html
@@ -21,7 +23,7 @@ SVD via :func:`numpy.linalg.svd`.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Computes the SVD A = U diag(S) V^T via numpy.linalg.svd (LAPACK&#x27;s bidiagonalization-based ?gesdd), the numerically stable production route -- rather than the textbook-definition route of eigendecomposing A^T A, which squares the condition number of the problem being solved.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Truncating the SVD A = U diag(S) V^T to its k largest singular values gives the best rank-``k`` approximation of A: its error is sqrt(sigma_{k+1}^2 + ...) in the Frobenius norm and sigma_{k+1} in the spectral norm, and no other rank-``k`` matrix does better. The SVD itself comes from numpy.linalg.svd (LAPACK&#x27;s stable bidiagonalization route, not the eigendecomposition of A^T A).">
 
 .. only:: html
 
@@ -32,7 +34,24 @@ SVD via :func:`numpy.linalg.svd`.
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Singular value decomposition</div>
+      <div class="sphx-glr-thumbnail-title">Eckart-Young: the best low-rank approximation from the SVD</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="For a rectangular or rank-deficient A there is no inverse, but there is exactly one matrix A^+ satisfying Penrose&#x27;s four equations, and x = A^+ b is the shortest vector among all least-squares solutions.">
+
+.. only:: html
+
+  .. image:: /api/gallery/linalg/svd/images/thumb/sphx_glr_plot_02_moore_penrose_pseudoinverse_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/linalg/svd/plot_02_moore_penrose_pseudoinverse`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Moore-Penrose pseudoinverse</div>
     </div>
 
 
@@ -47,4 +66,5 @@ SVD via :func:`numpy.linalg.svd`.
    :hidden:
 
    /api/gallery/linalg/svd/plot_01_svd
+   /api/gallery/linalg/svd/plot_02_moore_penrose_pseudoinverse
 

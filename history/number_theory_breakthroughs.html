@@ -455,226 +455,497 @@
 </div>
 <blockquote class="epigraph">
 <div><p>“Mathematics is the queen of the sciences, and number theory is the
-queen of mathematics.” – attributed to Carl Friedrich Gauss (per
-Wolfgang Sartorius von Waltershausen’s 1856 memoir)</p>
+queen of mathematics.”
+– attributed to Carl Friedrich Gauss by Wolfgang Sartorius von
+Waltershausen, 1856</p>
 </div></blockquote>
-<p>Number theory is the oldest continuously studied branch of mathematics
-still yielding both deep theorems and, unexpectedly, some of the most
-consequential applied technology of the digital age. This chronology
-traces the ideas behind <a class="reference internal" href="../api/number_theory.html#module-mathematicskit.number_theory" title="mathematicskit.number_theory"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.number_theory</span></code></a>, from Euclid’s
-original algorithm to the discovery that its arithmetic underlies modern
+<p>Number theory is the oldest continuously studied branch of mathematics.
+It still yields deep theorems and, unexpectedly, some of the most
+consequential technology of the digital age. This chronology traces the
+ideas behind <a class="reference internal" href="../api/number_theory.html#module-mathematicskit.number_theory" title="mathematicskit.number_theory"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.number_theory</span></code></a>, from Euclid’s original
+algorithm to the discovery that its arithmetic underlies modern
 public-key cryptography.</p>
 <nav class="contents local" id="timeline">
 <p class="topic-title">Timeline</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#c-300-bce-euclid-s-algorithm" id="id1">c. 300 BCE – Euclid’s Algorithm</a></p></li>
 <li><p><a class="reference internal" href="#c-250-ce-diophantus-and-indeterminate-equations" id="id2">c. 250 CE – Diophantus and Indeterminate Equations</a></p></li>
-<li><p><a class="reference internal" href="#continued-fractions-and-best-rational-approximation" id="id3">1613 – 1737 – Continued Fractions and Best Rational Approximation</a></p></li>
-<li><p><a class="reference internal" href="#fermat-euler-and-pell-s-equation" id="id4">1657 – 1767 – Fermat, Euler, and Pell’s Equation</a></p></li>
-<li><p><a class="reference internal" href="#gauss-s-disquisitiones-arithmeticae" id="id5">1801 – Gauss’s Disquisitiones Arithmeticae</a></p></li>
-<li><p><a class="reference internal" href="#euler-s-totient-function" id="id6">1760 – Euler’s Totient Function</a></p></li>
-<li><p><a class="reference internal" href="#miller-rabin-and-primality-testing" id="id7">1976 – 1980 – Miller, Rabin, and Primality Testing</a></p></li>
-<li><p><a class="reference internal" href="#rsa-and-public-key-cryptography" id="id8">1977 – 1978 – RSA and Public-Key Cryptography</a></p></li>
-<li><p><a class="reference internal" href="#see-also" id="id9">See Also</a></p></li>
+<li><p><a class="reference internal" href="#continued-fractions-and-best-rational-approximation" id="id3">1613-1737 – Continued Fractions and Best Rational Approximation</a></p></li>
+<li><p><a class="reference internal" href="#fermat-s-two-squares-theorem" id="id4">1640-1749 – Fermat’s Two-Squares Theorem</a></p></li>
+<li><p><a class="reference internal" href="#fermat-euler-and-pell-s-equation" id="id5">1657-1768 – Fermat, Euler, and Pell’s Equation</a></p></li>
+<li><p><a class="reference internal" href="#the-basel-problem-and-euler-s-product-formula" id="id6">1735-1737 – The Basel Problem and Euler’s Product Formula</a></p></li>
+<li><p><a class="reference internal" href="#euler-s-totient-function" id="id7">1763 – Euler’s Totient Function</a></p></li>
+<li><p><a class="reference internal" href="#lagrange-s-four-square-theorem" id="id8">1770 – Lagrange’s Four-Square Theorem</a></p></li>
+<li><p><a class="reference internal" href="#gauss-and-quadratic-reciprocity" id="id9">1796 – Gauss and Quadratic Reciprocity</a></p></li>
+<li><p><a class="reference internal" href="#gauss-s-disquisitiones-arithmeticae" id="id10">1801 – Gauss’s Disquisitiones Arithmeticae</a></p></li>
+<li><p><a class="reference internal" href="#dirichlet-s-theorem-on-primes-in-arithmetic-progressions" id="id11">1837 – Dirichlet’s Theorem on Primes in Arithmetic Progressions</a></p></li>
+<li><p><a class="reference internal" href="#lucas-lehmer-and-mersenne-primes" id="id12">1876-1930 – Lucas, Lehmer, and Mersenne Primes</a></p></li>
+<li><p><a class="reference internal" href="#the-prime-number-theorem" id="id13">1896 – The Prime Number Theorem</a></p></li>
+<li><p><a class="reference internal" href="#rsa-and-public-key-cryptography" id="id14">1973-1978 – RSA and Public-Key Cryptography</a></p></li>
+<li><p><a class="reference internal" href="#pollard-s-rho-factorization" id="id15">1975 – Pollard’s Rho Factorization</a></p></li>
+<li><p><a class="reference internal" href="#miller-rabin-and-primality-testing" id="id16">1976-1980 – Miller, Rabin, and Primality Testing</a></p></li>
+<li><p><a class="reference internal" href="#see-also" id="id17">See Also</a></p></li>
 </ul>
 </nav>
 <section id="c-300-bce-euclid-s-algorithm">
 <h2><a class="toc-backref" href="#id1" role="doc-backlink">c. 300 BCE – Euclid’s Algorithm</a><a class="headerlink" href="#c-300-bce-euclid-s-algorithm" title="Link to this heading">#</a></h2>
-<p>Book VII of Euclid’s <em>Elements</em> describes a procedure for finding the
-greatest common measure of two lengths by repeated subtraction –
-mathematically identical to the greatest common divisor algorithm still
-bearing his name, and a strong candidate for the oldest algorithm still
-in everyday use, over two thousand years after it was first written
-down. The <em>extended</em> Euclidean algorithm – tracking not just the gcd but
-the integer coefficients expressing it as a combination of the two
-inputs – is comparatively modern, but builds directly on Euclid’s
-original recursive structure.</p>
+<p>Book VII of Euclid’s <em>Elements</em> finds the greatest common measure of two
+numbers by repeated subtraction. It is the same greatest-common-divisor
+algorithm that still bears his name, and a strong candidate for the
+oldest algorithm still in everyday use. The <em>extended</em> algorithm also
+tracks the integer coefficients that express the gcd as a combination
+of the two inputs. It is nearly as old: Aryabhata’s <em>kuttaka</em> method of
+499 CE solves the same problem. In Europe, Claude-Gaspard Bachet de
+Méziriac stated the resulting identity for integers in 1624, and Étienne
+Bézout, whose name it now carries, generalized it to polynomials in
+1779.</p>
 <div class="math notranslate nohighlight">
 \[\gcd(a, b) = \gcd(b, a \bmod b), \qquad ax + by = \gcd(a, b)\]</div>
 <p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.number_theory.systems.modular_arithmetic.extended_gcd()</span></code>
-implements exactly the extended algorithm, unwinding Euclid’s own
-recursion to recover Bezout’s coefficients directly;
+implements the extended algorithm, unwinding Euclid’s recursion to
+recover Bézout’s coefficients;
 <code class="xref py py-func docutils literal notranslate"><span class="pre">mod_inverse()</span></code>
 uses it to compute modular inverses.</p>
 <p><em>References:</em> Euclid, <em>Elements</em>, Book VII, Propositions 1-2 (c. 300
 BCE), as translated in T. L. Heath, <em>The Thirteen Books of Euclid’s
 Elements</em>, 2nd ed. (Cambridge: Cambridge University Press, 1926).</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="RSA&#x27;s key generation, encryption, and decryption are exactly mod_inverse (to find the private exponent) and fast_mod_pow (to encrypt/decrypt) -- demonstrated here with small (textbook-toy, NOT cryptographically secure) primes."><img alt="" src="../_images/sphx_glr_plot_01_toy_rsa_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/number_theory/modular_arithmetic/plot_01_toy_rsa.html"><span class="doc">A toy RSA encryption/decryption round trip</span></a></p>
-  <div class="sphx-glr-thumbnail-title">A toy RSA encryption/decryption round trip</div>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Euclid&#x27;s Elements (Book VII, Propositions 1-2) finds the greatest common divisor by repeating \gcd(a, b) = \gcd(b, a \bmod b) until the remainder vanishes. This script traces the division steps for one pair, recovers Bézout&#x27;s coefficients ax + by = \gcd(a, b) with extended_gcd, and maps how many steps the algorithm needs: the slowest inputs are consecutive Fibonacci numbers (Lamé, 1844)."><img alt="" src="../_images/sphx_glr_plot_01_euclidean_algorithm_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/number_theory/modular_arithmetic/plot_01_euclidean_algorithm.html"><span class="doc">Euclid’s algorithm and Bézout’s identity</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Euclid's algorithm and Bézout's identity</div>
 </div></div></section>
 <section id="c-250-ce-diophantus-and-indeterminate-equations">
 <h2><a class="toc-backref" href="#id2" role="doc-backlink">c. 250 CE – Diophantus and Indeterminate Equations</a><a class="headerlink" href="#c-250-ce-diophantus-and-indeterminate-equations" title="Link to this heading">#</a></h2>
 <p>Diophantus of Alexandria’s <em>Arithmetica</em> systematically studied
-equations to be solved in whole numbers or rationals – a class of
-problem now named “Diophantine” in his honor. A linear Diophantine
-equation <span class="math notranslate nohighlight">\(ax+by=c\)</span> has an integer solution precisely when
-<span class="math notranslate nohighlight">\(\gcd(a,b)\)</span> divides <span class="math notranslate nohighlight">\(c\)</span>, a fact that follows directly from
-Euclid’s algorithm above; the far harder quadratic case, <span class="math notranslate nohighlight">\(x^2 -
-Dy^2 = 1\)</span>, would not be fully understood for another millennium and a
-half.</p>
+equations to be solved in whole numbers or rationals, a class of
+problem now called “Diophantine” in his honor. A linear Diophantine
+equation <span class="math notranslate nohighlight">\(ax+by=c\)</span> has an integer solution exactly when
+<span class="math notranslate nohighlight">\(\gcd(a,b)\)</span> divides <span class="math notranslate nohighlight">\(c\)</span>, which follows directly from
+Euclid’s algorithm (above). The much harder quadratic case,
+<span class="math notranslate nohighlight">\(x^2 - Dy^2 = 1\)</span>, would not be fully understood for another
+millennium and a half.</p>
 <p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.number_theory.systems.diophantine.solve_linear_diophantine()</span></code>
-implements exactly the linear case, via the extended Euclidean
-algorithm’s Bezout coefficients.</p>
+solves the linear case with the Bézout coefficients from the extended
+Euclidean algorithm.</p>
 <p><em>References:</em> Diophantus of Alexandria, <em>Arithmetica</em> (c. 250 CE), as
 reconstructed and translated in T. L. Heath, <em>Diophantus of Alexandria:
 A Study in the History of Greek Algebra</em>, 2nd ed. (Cambridge: Cambridge
 University Press, 1910).</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Finds the fundamental solution of x^2 - 61y^2 = 1 (famous for its surprisingly large fundamental solution) and solves a linear Diophantine equation with its full solution family."><img alt="" src="../_images/sphx_glr_plot_01_pell_and_linear_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/number_theory/diophantine/plot_01_pell_and_linear.html"><span class="doc">Pell’s equation and a linear Diophantine equation</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Pell's equation and a linear Diophantine equation</div>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Diophantus&#x27;s Arithmetica asks for whole-number solutions of equations with more unknowns than constraints. For the linear case ax + by = c, integer solutions exist exactly when \gcd(a, b) divides c, and then they form one infinite family spaced evenly along the line. This script solves 12x + 18y = 30, shows that 12x + 18y = 31 has no solution, and plots the integer points on the line."><img alt="" src="../_images/sphx_glr_plot_01_linear_diophantine_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/number_theory/diophantine/plot_01_linear_diophantine.html"><span class="doc">Diophantus and the linear equation ax + by = c</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Diophantus and the linear equation ax + by = c</div>
 </div></div></section>
 <section id="continued-fractions-and-best-rational-approximation">
-<h2><a class="toc-backref" href="#id3" role="doc-backlink">1613 – 1737 – Continued Fractions and Best Rational Approximation</a><a class="headerlink" href="#continued-fractions-and-best-rational-approximation" title="Link to this heading">#</a></h2>
-<p>Pietro Cataldi’s 1613 treatise gave the first published continued-
-fraction expansion, approximating a square root by an infinite nested
-sequence of reciprocals; Leonhard Euler’s 1737 “De Fractionibus
-Continuis” gave the construction its first systematic theory, proving
-the property that makes continued fractions useful for far more than
-square roots: each successive convergent <span class="math notranslate nohighlight">\(p_k/q_k\)</span>, built by
-truncating the expansion, is provably the best rational approximation to
-the original value among every fraction with an equal or smaller
-denominator.</p>
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">1613-1737 – Continued Fractions and Best Rational Approximation</a><a class="headerlink" href="#continued-fractions-and-best-rational-approximation" title="Link to this heading">#</a></h2>
+<p>Pietro Cataldi’s 1613 treatise on square roots gave the first published
+continued-fraction expansion, approximating a square root by an
+infinite nested sequence of reciprocals. Leonhard Euler’s “De
+Fractionibus Continuis,” presented in 1737, gave continued fractions
+their first systematic theory. Joseph-Louis Lagrange later proved the
+property that makes them useful far beyond square roots: each
+convergent <span class="math notranslate nohighlight">\(p_k/q_k\)</span>, obtained by truncating the expansion, is the
+best rational approximation to the original number among all fractions
+with an equal or smaller denominator.</p>
 <div class="math notranslate nohighlight">
 \[x = a_0 + \cfrac{1}{a_1 + \cfrac{1}{a_2 + \cfrac{1}{a_3 + \dots}}}\]</div>
 <p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.number_theory.systems.continued_fractions.continued_fraction_expansion()</span></code>
-implements exactly this expansion and its convergents via the standard
-recurrence <span class="math notranslate nohighlight">\(p_k = a_k p_{k-1} + p_{k-2}\)</span>;
+computes the expansion and its convergents with the standard recurrence
+<span class="math notranslate nohighlight">\(p_k = a_k p_{k-1} + p_{k-2}\)</span>.
 <code class="xref py py-func docutils literal notranslate"><span class="pre">best_rational_approximation()</span></code>
 uses it to find the best rational approximation under a denominator
 bound, reproducing the classical approximation <span class="math notranslate nohighlight">\(\pi \approx
-355/113\)</span> directly. The same expansion, applied to <span class="math notranslate nohighlight">\(\sqrt D\)</span>, is
-exactly the solution method Euler and Lagrange developed for Pell’s
-equation below.</p>
-<p><em>References:</em> L. Euler, “De Fractionibus Continuis Dissertatio,”
-Commentarii Academiae Scientiarum Petropolitanae 9 (1744), 98-137
-(presented to the St. Petersburg Academy in 1737).</p>
+355/113\)</span>. Applied to <span class="math notranslate nohighlight">\(\sqrt D\)</span>, the same expansion is the method
+for solving Pell’s equation (below).</p>
+<p><em>References:</em> P. A. Cataldi, <em>Trattato del modo brevissimo di trovar la
+radice quadra delli numeri</em> (Bologna, 1613); L. Euler, “De Fractionibus
+Continuis Dissertatio,” Commentarii Academiae Scientiarum
+Petropolitanae 9 (1744), 98-137 (presented to the St. Petersburg
+Academy in 1737).</p>
 <div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Expands pi as a continued fraction and shows how quickly its convergents (355/113 famously accurate to 7 digits) approach the true value."><img alt="" src="../_images/sphx_glr_plot_01_approximating_pi_thumb.png" />
 <p><a class="reference internal" href="../api/gallery/number_theory/continued_fractions/plot_01_approximating_pi.html"><span class="doc">Approximating pi by continued fractions</span></a></p>
   <div class="sphx-glr-thumbnail-title">Approximating pi by continued fractions</div>
 </div></div></section>
-<section id="fermat-euler-and-pell-s-equation">
-<h2><a class="toc-backref" href="#id4" role="doc-backlink">1657 – 1767 – Fermat, Euler, and Pell’s Equation</a><a class="headerlink" href="#fermat-euler-and-pell-s-equation" title="Link to this heading">#</a></h2>
-<p>Pierre de Fermat posed the equation <span class="math notranslate nohighlight">\(x^2 - Dy^2 = 1\)</span> as a
-challenge to his contemporaries in 1657, having recognized that its
-solutions – despite the deceptively simple quadratic form – could involve
-surprisingly enormous numbers for innocuous-looking values of <span class="math notranslate nohighlight">\(D\)</span>
-(the case <span class="math notranslate nohighlight">\(D=61\)</span> has fundamental solution <span class="math notranslate nohighlight">\(x=1766319049\)</span>).
-The equation’s now-standard name, honoring John Pell, is a historical
-misattribution introduced by Leonhard Euler, who conflated Pell’s
-unrelated editorial work with the actual solution method – continued
-fractions of <span class="math notranslate nohighlight">\(\sqrt D\)</span> (above) – that Euler himself, building on earlier
-work by Brahmagupta and Bhaskara II, worked out in the 18th century and
-Joseph-Louis Lagrange proved terminates and gives every solution in
-1767-68.</p>
-<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.number_theory.systems.diophantine.solve_pell_equation()</span></code>
-implements exactly this continued-fraction algorithm, reproducing the
-<span class="math notranslate nohighlight">\(D=61\)</span> fundamental solution directly.</p>
-<p><em>References:</em> J.-L. Lagrange, “Solution d’un probleme d’arithmetique,”
-Miscellanea Taurinensia 4 (1766-69), 19-99.</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Finds the fundamental solution of x^2 - 61y^2 = 1 (famous for its surprisingly large fundamental solution) and solves a linear Diophantine equation with its full solution family."><img alt="" src="../_images/sphx_glr_plot_01_pell_and_linear_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/number_theory/diophantine/plot_01_pell_and_linear.html"><span class="doc">Pell’s equation and a linear Diophantine equation</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Pell's equation and a linear Diophantine equation</div>
+<section id="fermat-s-two-squares-theorem">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">1640-1749 – Fermat’s Two-Squares Theorem</a><a class="headerlink" href="#fermat-s-two-squares-theorem" title="Link to this heading">#</a></h2>
+<p>In a letter to Marin Mersenne dated Christmas Day 1640, Pierre de Fermat
+claimed that an odd prime is a sum of two squares exactly when it
+leaves remainder 1 on division by 4: <span class="math notranslate nohighlight">\(5 = 1^2 + 2^2\)</span> and
+<span class="math notranslate nohighlight">\(13 = 2^2 + 3^2\)</span>, but no prime <span class="math notranslate nohighlight">\(p \equiv 3 \pmod 4\)</span> can be
+written this way. Fermat, as usual, gave no proof. Leonhard Euler
+supplied the first one after years of effort, announcing it in 1749 and
+publishing it in 1760. The theorem extends to every integer: <span class="math notranslate nohighlight">\(n\)</span>
+is a sum of two squares exactly when each prime <span class="math notranslate nohighlight">\(q \equiv 3
+\pmod 4\)</span> divides it to an even power. Proofs have kept coming ever
+since, down to Don Zagier’s famous “one-sentence proof” of 1990.</p>
+<div class="math notranslate nohighlight">
+\[p = a^2 + b^2 \iff p = 2 \ \text{or}\ p \equiv 1 \pmod 4\]</div>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.number_theory.systems.sums_of_squares.sum_of_two_squares()</span></code>
+finds a representation <span class="math notranslate nohighlight">\(n = a^2 + b^2\)</span> by searching
+<span class="math notranslate nohighlight">\(a \le \sqrt{n/2}\)</span>, or reports that none exists. The test suite
+checks Fermat’s criterion on every prime below 2000 and the general
+criterion on every <span class="math notranslate nohighlight">\(n &lt; 1500\)</span>.</p>
+<p><em>References:</em> P. de Fermat, letter to M. Mersenne, 25 December 1640, in
+<em>Œuvres de Fermat</em>, vol. 2, ed. P. Tannery and C. Henry (Paris:
+Gauthier-Villars, 1894); L. Euler, “Demonstratio theorematis Fermatiani
+omnem numerum primum formae 4n+1 esse summam duorum quadratorum,” Novi
+Commentarii Academiae Scientiarum Petropolitanae 5 (1760), 3-13;
+D. Zagier, “A One-Sentence Proof That Every Prime <span class="math notranslate nohighlight">\(p \equiv 1
+\pmod 4\)</span> Is a Sum of Two Squares,” American Mathematical Monthly 97(2)
+(1990), 144.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Every prime p \equiv 1 \pmod 4 is a sum of two squares a^2 + b^2, and no prime p \equiv 3 \pmod 4 is. This script checks the theorem for every prime below 10,000 and plots each representation as a lattice point (a, b) on the circle of radius \sqrt p."><img alt="" src="../_images/sphx_glr_plot_01_fermat_two_squares_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/number_theory/sums_of_squares/plot_01_fermat_two_squares.html"><span class="doc">Fermat’s two-squares theorem</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Fermat's two-squares theorem</div>
 </div></div></section>
-<section id="gauss-s-disquisitiones-arithmeticae">
-<h2><a class="toc-backref" href="#id5" role="doc-backlink">1801 – Gauss’s Disquisitiones Arithmeticae</a><a class="headerlink" href="#gauss-s-disquisitiones-arithmeticae" title="Link to this heading">#</a></h2>
-<p>Carl Friedrich Gauss’s <em>Disquisitiones Arithmeticae</em>, published when he
-was 24, systematized congruence arithmetic (“clock arithmetic,” modular
-reduction) as the central organizing language of number theory, and gave
-it the notation (<span class="math notranslate nohighlight">\(a \equiv b \pmod m\)</span>) still used unchanged today.
-Among its results is the first complete proof of the Chinese Remainder
-Theorem’s general case – combining several congruences with pairwise
-coprime moduli into a single equivalent one – whose oldest special case
-appears in the 3rd-5th century Chinese text <em>Sunzi Suanjing</em>, from which
-the theorem takes its name.</p>
-<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.number_theory.systems.crt.chinese_remainder_theorem()</span></code>
-implements exactly this combination, and
-<code class="xref py py-func docutils literal notranslate"><span class="pre">fast_mod_pow()</span></code>
-implements the fast modular exponentiation that makes large-modulus
-congruence arithmetic practical.</p>
-<p><em>References:</em> C. F. Gauss, <em>Disquisitiones Arithmeticae</em> (Leipzig:
-Fleischer, 1801), Sections 1-2 and 32-36 (Chinese Remainder Theorem).</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="The 3rd-5th-century Chinese text Sunzi Suanjing poses: &quot;There are certain things whose number is unknown. Repeatedly divided by 3, the remainder is 2; by 5 the remainder is 3; by 7 the remainder is 2. What is the number?&quot; -- the original problem the Chinese Remainder Theorem is named for."><img alt="" src="../_images/sphx_glr_plot_01_sunzi_problem_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/number_theory/crt/plot_01_sunzi_problem.html"><span class="doc">Sunzi’s classic “remainder problem”</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Sunzi's classic "remainder problem"</div>
+<section id="fermat-euler-and-pell-s-equation">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">1657-1768 – Fermat, Euler, and Pell’s Equation</a><a class="headerlink" href="#fermat-euler-and-pell-s-equation" title="Link to this heading">#</a></h2>
+<p>In 1657 Pierre de Fermat challenged his contemporaries to solve
+<span class="math notranslate nohighlight">\(x^2 - Dy^2 = 1\)</span> in integers. He knew that, despite the simple
+form, the solutions can be enormous for innocent-looking values of
+<span class="math notranslate nohighlight">\(D\)</span>: for <span class="math notranslate nohighlight">\(D=61\)</span> the smallest solution has
+<span class="math notranslate nohighlight">\(x=1766319049\)</span>. William Brouncker answered the challenge with a
+general method in 1657-58, and Brahmagupta and Bhaskara II had solved
+many cases centuries earlier. The name “Pell’s equation” is a
+misattribution: Leonhard Euler wrongly credited John Pell with
+Brouncker’s method. Euler connected the method to the continued
+fraction of <span class="math notranslate nohighlight">\(\sqrt D\)</span> (above), and in 1768 Joseph-Louis Lagrange
+proved that it always terminates and yields every solution.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.number_theory.systems.diophantine.solve_pell_equation()</span></code>
+implements this continued-fraction algorithm and reproduces the
+<span class="math notranslate nohighlight">\(D=61\)</span> fundamental solution.</p>
+<p><em>References:</em> J.-L. Lagrange, “Solution d’un problème d’arithmétique,”
+Miscellanea Taurinensia 4 (1766-69), 19-99.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Fermat&#x27;s 1657 challenge: solve x^2 - Dy^2 = 1 in integers. The continued fraction of \sqrt D always yields the fundamental solution (Lagrange, 1768), but its size is wildly erratic -- for D = 61 it is x = 1766319049, while D = 60 needs only x = 31. This script reproduces Fermat&#x27;s D = 61 case, generates further solutions from the fundamental one, and plots the fundamental x for every non-square D \le 120."><img alt="" src="../_images/sphx_glr_plot_02_pell_equation_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/number_theory/diophantine/plot_02_pell_equation.html"><span class="doc">Pell’s equation x^2 - Dy^2 = 1</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Pell's equation x^2 - Dy^2 = 1</div>
+</div></div></section>
+<section id="the-basel-problem-and-euler-s-product-formula">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">1735-1737 – The Basel Problem and Euler’s Product Formula</a><a class="headerlink" href="#the-basel-problem-and-euler-s-product-formula" title="Link to this heading">#</a></h2>
+<p>The Basel problem asked for the exact value of <span class="math notranslate nohighlight">\(\sum 1/n^2\)</span>; it
+had defeated Pietro Mengoli, Gottfried Leibniz, and the Bernoulli
+brothers. In 1735 the 28-year-old Leonhard Euler announced the answer,
+<span class="math notranslate nohighlight">\(\pi^2/6\)</span>. Two years later, in “Variae observationes circa series
+infinitas,” he found a far deeper identity: the same kind of sum can be
+rewritten as a product over the primes. Expanding each factor as a
+geometric series and multiplying out produces every term <span class="math notranslate nohighlight">\(1/n^s\)</span>
+exactly once, which is unique prime factorization in analytic form. At
+<span class="math notranslate nohighlight">\(s = 1\)</span> the sum is the divergent harmonic series, so the product
+must diverge too. That gives a new proof that there are infinitely
+many primes, and the first link between the primes and analysis.
+Bernhard Riemann’s 1859 study of this function of a complex variable
+<span class="math notranslate nohighlight">\(s\)</span>, now the Riemann zeta function, founded analytic number
+theory.</p>
+<div class="math notranslate nohighlight">
+\[\zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s}
+         = \prod_{p\ \text{prime}} \frac{1}{1 - p^{-s}}, \qquad
+\zeta(2) = \frac{\pi^2}{6}\]</div>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.number_theory.systems.zeta.euler_product()</span></code>
+evaluates the product over primes up to a bound. The test suite checks
+it against <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.zeta.html#scipy.special.zeta" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.zeta()</span></code></a> and <span class="math notranslate nohighlight">\(\pi^2/6\)</span>, and at
+<span class="math notranslate nohighlight">\(s = 1\)</span> against Mertens’ asymptotic <span class="math notranslate nohighlight">\(e^{\gamma}\ln N\)</span>.</p>
+<p><em>References:</em> L. Euler, “De summis serierum reciprocarum,” Commentarii
+Academiae Scientiarum Petropolitanae 7 (1740), 123-134 (presented
+1735); L. Euler, “Variae observationes circa series infinitas,”
+Commentarii Academiae Scientiarum Petropolitanae 9 (1744), 160-188
+(presented 1737).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Euler showed in 1735 that \sum 1/n^2 = \pi^2/6, and in 1737 that the same sum is a product over the primes, \zeta(s) = \prod_p (1 - p^{-s})^{-1}. This script compares how fast the partial sums and the truncated Euler product approach \pi^2/6, and shows the product diverging at s = 1."><img alt="" src="../_images/sphx_glr_plot_01_basel_euler_product_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/number_theory/zeta/plot_01_basel_euler_product.html"><span class="doc">The Basel problem and Euler’s product formula</span></a></p>
+  <div class="sphx-glr-thumbnail-title">The Basel problem and Euler's product formula</div>
 </div></div></section>
 <section id="euler-s-totient-function">
-<h2><a class="toc-backref" href="#id6" role="doc-backlink">1760 – Euler’s Totient Function</a><a class="headerlink" href="#euler-s-totient-function" title="Link to this heading">#</a></h2>
-<p>Leonhard Euler introduced, in work on generalizing Fermat’s Little
-Theorem, the function <span class="math notranslate nohighlight">\(\varphi(n)\)</span> counting the integers up to
-<span class="math notranslate nohighlight">\(n\)</span> coprime to it – now called Euler’s totient function. Euler’s
-theorem, <span class="math notranslate nohighlight">\(a^{\varphi(n)} \equiv 1 \pmod n\)</span> for <span class="math notranslate nohighlight">\(\gcd(a,n)=1\)</span>,
-generalizes Fermat’s Little Theorem (the special case <span class="math notranslate nohighlight">\(n\)</span> prime,
-where <span class="math notranslate nohighlight">\(\varphi(n)=n-1\)</span>) and is, two centuries later, the exact
-mathematical fact RSA public-key cryptography depends on to guarantee
-that decryption correctly inverts encryption.</p>
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">1763 – Euler’s Totient Function</a><a class="headerlink" href="#euler-s-totient-function" title="Link to this heading">#</a></h2>
+<p>While generalizing Fermat’s little theorem, Leonhard Euler introduced
+the function <span class="math notranslate nohighlight">\(\varphi(n)\)</span> that counts the integers up to
+<span class="math notranslate nohighlight">\(n\)</span> that are coprime to it. The symbol <span class="math notranslate nohighlight">\(\varphi\)</span> is Carl
+Friedrich Gauss’s, and James Joseph Sylvester later named it the
+“totient.” Euler’s theorem, <span class="math notranslate nohighlight">\(a^{\varphi(n)} \equiv 1 \pmod n\)</span> for
+<span class="math notranslate nohighlight">\(\gcd(a,n)=1\)</span>, generalizes Fermat’s little theorem, which is the
+special case of a prime <span class="math notranslate nohighlight">\(n\)</span> with <span class="math notranslate nohighlight">\(\varphi(n)=n-1\)</span>. Two
+centuries later, it is exactly the fact that RSA public-key
+cryptography relies on to guarantee that decryption undoes encryption.</p>
 <p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.number_theory.systems.totient.euler_totient()</span></code>
-implements exactly this function via prime factorization, alongside the
-related Mobius function
-(<code class="xref py py-func docutils literal notranslate"><span class="pre">mobius()</span></code>) and divisor-sum
-function (<code class="xref py py-func docutils literal notranslate"><span class="pre">divisor_sum()</span></code>).</p>
+computes this function from the prime factorization, alongside the
+related Möbius function
+(<code class="xref py py-func docutils literal notranslate"><span class="pre">mobius()</span></code>) and
+divisor-sum function
+(<code class="xref py py-func docutils literal notranslate"><span class="pre">divisor_sum()</span></code>).</p>
 <p><em>References:</em> L. Euler, “Theoremata arithmetica nova methodo demonstrata,”
-Novi Commentarii Academiae Scientiarum Petropolitanae 8 (1763), 74-104
-(presented to the St. Petersburg Academy in 1760).</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="A perfect number equals the sum of its own proper divisors (\sigma(n) = 2n); this script finds the first few and plots Euler&#x27;s totient function over a range of n."><img alt="" src="../_images/sphx_glr_plot_01_perfect_numbers_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/number_theory/totient/plot_01_perfect_numbers.html"><span class="doc">Perfect numbers and Euler’s totient function</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Perfect numbers and Euler's totient function</div>
+Novi Commentarii Academiae Scientiarum Petropolitanae 8 (1763), 74-104.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Euler&#x27;s \varphi(n) counts the integers in 1, \dots, n coprime to n. His 1763 theorem, a^{\varphi(n)} \equiv 1 \pmod n for \gcd(a, n) = 1, generalizes Fermat&#x27;s little theorem (\varphi(p) = p - 1 for a prime p). This script checks the definition and the theorem and plots \varphi(n), whose top edge n - 1 is traced by the primes."><img alt="" src="../_images/sphx_glr_plot_01_euler_totient_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/number_theory/totient/plot_01_euler_totient.html"><span class="doc">Euler’s totient function and Euler’s theorem</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Euler's totient function and Euler's theorem</div>
+</div></div></section>
+<section id="lagrange-s-four-square-theorem">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">1770 – Lagrange’s Four-Square Theorem</a><a class="headerlink" href="#lagrange-s-four-square-theorem" title="Link to this heading">#</a></h2>
+<p>Diophantus’s <em>Arithmetica</em> already seems to assume that every positive
+integer is a sum of four squares, and Claude-Gaspard Bachet de Méziriac
+stated the claim explicitly in his 1621 edition of the book. Fermat
+said he had a proof, and Euler worked on the problem for four decades
+without finishing it. Joseph-Louis Lagrange completed the proof in 1770,
+building on Euler’s identity that a product of two sums of four squares
+is again a sum of four squares. Three squares are not always enough:
+Adrien-Marie Legendre showed in 1798 that the numbers
+<span class="math notranslate nohighlight">\(4^k(8m+7)\)</span>, such as 7, 15, and 28, need all four. In 1829 Carl
+Jacobi counted the representations exactly.</p>
+<div class="math notranslate nohighlight">
+\[n = a^2 + b^2 + c^2 + d^2, \qquad
+r_4(n) = 8 \sum_{d \mid n,\ 4 \nmid d} d\]</div>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.number_theory.systems.sums_of_squares.sum_of_four_squares()</span></code>
+finds a representation <span class="math notranslate nohighlight">\(a \ge b \ge c \ge d\)</span> for any
+<span class="math notranslate nohighlight">\(n \ge 0\)</span>. The test suite checks every <span class="math notranslate nohighlight">\(n &lt; 3000\)</span>, and the
+gallery example sorts <span class="math notranslate nohighlight">\(n &lt; 10{,}000\)</span> by the fewest squares each
+one needs.</p>
+<p><em>References:</em> J.-L. Lagrange, “Démonstration d’un théorème
+d’arithmétique,” Nouveaux Mémoires de l’Académie Royale des Sciences et
+Belles-Lettres de Berlin (1770), 123-133; C. G. J. Jacobi, <em>Fundamenta
+Nova Theoriae Functionum Ellipticarum</em> (Königsberg: Borntraeger, 1829).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Every non-negative integer is a sum of four squares. This script finds a representation for every n &lt; 10{,}000 and plots the fewest squares each n actually needs: one for perfect squares, two by Fermat&#x27;s criterion, four exactly for n = 4^k(8m+7) (Legendre&#x27;s three-square theorem), and three otherwise."><img alt="" src="../_images/sphx_glr_plot_02_lagrange_four_squares_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/number_theory/sums_of_squares/plot_02_lagrange_four_squares.html"><span class="doc">Lagrange’s four-square theorem</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Lagrange's four-square theorem</div>
+</div></div></section>
+<section id="gauss-and-quadratic-reciprocity">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">1796 – Gauss and Quadratic Reciprocity</a><a class="headerlink" href="#gauss-and-quadratic-reciprocity" title="Link to this heading">#</a></h2>
+<p>Which numbers are perfect squares modulo a prime <span class="math notranslate nohighlight">\(p\)</span>? Leonhard
+Euler and Adrien-Marie Legendre discovered a surprising symmetry: for
+distinct odd primes <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q\)</span>, whether <span class="math notranslate nohighlight">\(p\)</span> is a
+square modulo <span class="math notranslate nohighlight">\(q\)</span> determines whether <span class="math notranslate nohighlight">\(q\)</span> is a square modulo
+<span class="math notranslate nohighlight">\(p\)</span>. Legendre’s 1785 attempt at a proof was incomplete. On 8
+April 1796, aged 18, Carl Friedrich Gauss found the first complete
+proof, and he published it in the <em>Disquisitiones Arithmeticae</em> (1801)
+as the “fundamental theorem.” He went on to give eight proofs in all,
+and more than 200 are known today. The law also turns the Legendre
+symbol into a fast, Euclid-like algorithm: with Carl Jacobi’s 1837
+extension to composite moduli, it can be evaluated without factoring
+anything. Alberto Tonelli’s 1891 algorithm then finds the square root
+itself.</p>
+<div class="math notranslate nohighlight">
+\[\left(\frac{p}{q}\right)\left(\frac{q}{p}\right)
+= (-1)^{\frac{p-1}{2}\cdot\frac{q-1}{2}}\]</div>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.number_theory.systems.quadratic_residues.legendre_symbol()</span></code>
+evaluates the symbol by Euler’s criterion
+<span class="math notranslate nohighlight">\(a^{(p-1)/2} \bmod p\)</span>.
+<code class="xref py py-func docutils literal notranslate"><span class="pre">jacobi_symbol()</span></code>
+uses reciprocity to evaluate the Jacobi symbol without factoring, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">sqrt_mod()</span></code>
+computes modular square roots with the Tonelli-Shanks algorithm. The
+test suite checks the reciprocity law for every pair of odd primes
+below 200.</p>
+<p><em>References:</em> C. F. Gauss, <em>Disquisitiones Arithmeticae</em> (Leipzig:
+Fleischer, 1801), Section IV, Articles 94-152; A.-M. Legendre,
+“Recherches d’analyse indéterminée,” Histoire de l’Académie Royale des
+Sciences (1785), 465-559; A. Tonelli, “Bemerkung über die Auflösung
+quadratischer Congruenzen,” Nachrichten von der Königlichen
+Gesellschaft der Wissenschaften zu Göttingen (1891), 344-346.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="For distinct odd primes p, q, \left(\frac{p}{q}\right)\left(\frac{q}{p}\right) = (-1)^{\frac{p-1}{2}\frac{q-1}{2}}: whether p is a square mod q is tied to whether q is a square mod p. The plot tabulates the Legendre symbol for odd primes below 100; reflecting in the diagonal flips the sign exactly when both primes are 3 \bmod 4."><img alt="" src="../_images/sphx_glr_plot_01_quadratic_reciprocity_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/number_theory/quadratic_residues/plot_01_quadratic_reciprocity.html"><span class="doc">The law of quadratic reciprocity</span></a></p>
+  <div class="sphx-glr-thumbnail-title">The law of quadratic reciprocity</div>
+</div></div></section>
+<section id="gauss-s-disquisitiones-arithmeticae">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">1801 – Gauss’s Disquisitiones Arithmeticae</a><a class="headerlink" href="#gauss-s-disquisitiones-arithmeticae" title="Link to this heading">#</a></h2>
+<p>Carl Friedrich Gauss published the <em>Disquisitiones Arithmeticae</em> at 24.
+It made congruence arithmetic (“clock arithmetic”) the central
+organizing language of number theory, and introduced the notation
+<span class="math notranslate nohighlight">\(a \equiv b \pmod m\)</span> that is still used today. Among its results
+is a general treatment of the Chinese remainder theorem, which combines
+several congruences with pairwise coprime moduli into a single
+equivalent one. The theorem is named for its Chinese origin: its oldest
+known instance is a puzzle in the <em>Sunzi Suanjing</em>, written between the
+3rd and 5th centuries.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.number_theory.systems.crt.chinese_remainder_theorem()</span></code>
+implements this combination, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">fast_mod_pow()</span></code>
+implements the fast modular exponentiation that makes congruence
+arithmetic with large moduli practical.</p>
+<p><em>References:</em> C. F. Gauss, <em>Disquisitiones Arithmeticae</em> (Leipzig:
+Fleischer, 1801), Sections I-II, especially Articles 32-36 (Chinese
+remainder theorem).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Gauss&#x27;s Disquisitiones Arithmeticae (1801) opens by defining a \equiv b \pmod m and computing with residues instead of numbers. Its Articles 32-36 prove that congruences with pairwise coprime moduli combine into one: working modulo m_1 m_2 is the same as working modulo m_1 and m_2 at once. This script checks Gauss&#x27;s rules of congruence arithmetic, draws the residue grid that pairs each class mod 35 with one class mod 5 and one mod 7, and reduces a huge power with fast modular exponentiation."><img alt="" src="../_images/sphx_glr_plot_02_gauss_congruences_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/number_theory/crt/plot_02_gauss_congruences.html"><span class="doc">Gauss’s Disquisitiones: congruences and the remainder theorem</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Gauss's Disquisitiones: congruences and the remainder theorem</div>
+</div></div></section>
+<section id="dirichlet-s-theorem-on-primes-in-arithmetic-progressions">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">1837 – Dirichlet’s Theorem on Primes in Arithmetic Progressions</a><a class="headerlink" href="#dirichlet-s-theorem-on-primes-in-arithmetic-progressions" title="Link to this heading">#</a></h2>
+<p>Euclid’s argument shows there are infinitely many primes, but does the
+progression <span class="math notranslate nohighlight">\(1, 11, 21, 31, \dots\)</span> contain infinitely many?
+Peter Gustav Lejeune Dirichlet proved in 1837 that every progression
+<span class="math notranslate nohighlight">\(a, a+q, a+2q, \dots\)</span> with <span class="math notranslate nohighlight">\(\gcd(a, q) = 1\)</span> does. His proof
+generalized Euler’s product formula (above), replacing <span class="math notranslate nohighlight">\(\zeta(s)\)</span>
+with what are now called Dirichlet <span class="math notranslate nohighlight">\(L\)</span>-functions, built from the
+characters of the group <span class="math notranslate nohighlight">\((\mathbb{Z}/q\mathbb{Z})^{\times}\)</span>. This
+was the first proof of a result about integers that relied on complex
+analysis and group characters, and it launched analytic number theory
+as a subject. The coprime residue classes eventually share the primes
+equally, but not uniformly along the way. Pafnuty Chebyshev noticed in
+1853 that primes <span class="math notranslate nohighlight">\(\equiv 3 \pmod 4\)</span> almost always outnumber those
+<span class="math notranslate nohighlight">\(\equiv 1 \pmod 4\)</span>, and John Leech found in 1957 that the lead
+first changes hands at 26,861. Michael Rubinstein and Peter Sarnak
+explained this “Chebyshev’s bias” in 1994.</p>
+<div class="math notranslate nohighlight">
+\[\pi(x; q, a) \sim \frac{\pi(x)}{\varphi(q)} \qquad (\gcd(a, q) = 1)\]</div>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.number_theory.systems.prime_distribution.primes_in_progression()</span></code>
+lists the primes in a residue class up to a bound. The gallery example
+uses it to show the equal split of primes modulo 10 and the mod-4 prime
+race.</p>
+<p><em>References:</em> P. G. L. Dirichlet, “Beweis des Satzes, dass jede
+unbegrenzte arithmetische Progression, deren erstes Glied und Differenz
+ganze Zahlen ohne gemeinschaftlichen Factor sind, unendlich viele
+Primzahlen enthält,” Abhandlungen der Königlich Preussischen Akademie
+der Wissenschaften zu Berlin (1837), 45-81; M. Rubinstein and P. Sarnak,
+“Chebyshev’s Bias,” Experimental Mathematics 3(3) (1994), 173-197.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Dirichlet proved in 1837 that every progression a, a+q, a+2q, \dots with \gcd(a, q) = 1 contains infinitely many primes, and the classes share the primes equally in the limit. Equal in the limit is not equal at every point: the race between primes \equiv 3 and \equiv 1 \pmod 4 is led by the 3s almost all the time (&quot;Chebyshev&#x27;s bias&quot;, 1853)."><img alt="" src="../_images/sphx_glr_plot_02_dirichlet_prime_races_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/number_theory/prime_distribution/plot_02_dirichlet_prime_races.html"><span class="doc">Dirichlet’s theorem and prime races</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Dirichlet's theorem and prime races</div>
+</div></div></section>
+<section id="lucas-lehmer-and-mersenne-primes">
+<h2><a class="toc-backref" href="#id12" role="doc-backlink">1876-1930 – Lucas, Lehmer, and Mersenne Primes</a><a class="headerlink" href="#lucas-lehmer-and-mersenne-primes" title="Link to this heading">#</a></h2>
+<p>Numbers of the form <span class="math notranslate nohighlight">\(M_p = 2^p - 1\)</span> have attracted attention
+since Euclid, who showed that each prime <span class="math notranslate nohighlight">\(M_p\)</span> gives a perfect
+number <span class="math notranslate nohighlight">\(2^{p-1}M_p\)</span>. They take their name from Marin Mersenne,
+whose 1644 list of exponents was partly wrong. In 1876 Édouard Lucas
+proved by hand that <span class="math notranslate nohighlight">\(M_{127}\)</span>, a 39-digit number, is prime. It
+remained the largest known prime for 75 years. His method, completed
+by Derrick Henry Lehmer in 1930, needs only <span class="math notranslate nohighlight">\(p - 2\)</span> squarings
+modulo <span class="math notranslate nohighlight">\(M_p\)</span>, far fewer than any general primality test. Raphael
+Robinson ran it on the SWAC computer in 1952 and found five new
+Mersenne primes, the first found by a computer. The Great Internet
+Mersenne Prime Search still relies on the same test, which is why
+nearly every record prime since then has been a Mersenne prime.</p>
+<div class="math notranslate nohighlight">
+\[s_0 = 4, \quad s_{k+1} = s_k^2 - 2 \bmod M_p; \qquad
+M_p \ \text{prime} \iff s_{p-2} \equiv 0 \pmod{M_p}\]</div>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.number_theory.systems.primality.lucas_lehmer()</span></code>
+runs the test with Python’s arbitrary-precision integers. The test
+suite recovers every Mersenne exponent below 650 and cross-checks each
+result against
+<code class="xref py py-func docutils literal notranslate"><span class="pre">is_prime_miller_rabin()</span></code>.</p>
+<p><em>References:</em> É. Lucas, “Théorie des fonctions numériques simplement
+périodiques,” American Journal of Mathematics 1 (1878), 184-240 and
+289-321; D. H. Lehmer, “An Extended Theory of Lucas’ Functions,” Annals
+of Mathematics 31(3) (1930), 419-448.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="The Lucas-Lehmer test decides whether M_p = 2^p - 1 is prime with only p - 2 modular squarings. This script rediscovers every Mersenne prime with exponent below 1300 -- including M_{521} through M_{1279}, found by Raphael Robinson on the SWAC computer in 1952 -- and plots the exponents, which grow roughly geometrically."><img alt="" src="../_images/sphx_glr_plot_02_lucas_lehmer_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/number_theory/primality/plot_02_lucas_lehmer.html"><span class="doc">Mersenne primes and the Lucas-Lehmer test</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Mersenne primes and the Lucas-Lehmer test</div>
+</div></div></section>
+<section id="the-prime-number-theorem">
+<h2><a class="toc-backref" href="#id13" role="doc-backlink">1896 – The Prime Number Theorem</a><a class="headerlink" href="#the-prime-number-theorem" title="Link to this heading">#</a></h2>
+<p>Around 1792, the teenage Carl Friedrich Gauss studied tables of primes
+and noticed that near <span class="math notranslate nohighlight">\(x\)</span> their density is about
+<span class="math notranslate nohighlight">\(1/\ln x\)</span>. That suggests counting the primes up to <span class="math notranslate nohighlight">\(x\)</span> with
+the logarithmic integral <span class="math notranslate nohighlight">\(\operatorname{li}(x)\)</span>. Adrien-Marie
+Legendre published a similar guess in 1798. Pafnuty Chebyshev showed
+in 1850 that <span class="math notranslate nohighlight">\(\pi(x)\)</span> stays within about 11% of
+<span class="math notranslate nohighlight">\(x/\ln x\)</span>, and Bernhard Riemann’s 1859 memoir tied the exact
+error to the zeros of the zeta function (above). In 1896 Jacques
+Hadamard and Charles-Jean de la Vallée Poussin independently proved the
+conjecture by showing that <span class="math notranslate nohighlight">\(\zeta(s)\)</span> has no zeros on the line
+<span class="math notranslate nohighlight">\(\operatorname{Re}(s) = 1\)</span>. Atle Selberg and Paul Erdős found an
+“elementary” proof, with no complex analysis, in 1949.</p>
+<div class="math notranslate nohighlight">
+\[\pi(x) \sim \operatorname{li}(x) = \int_0^x \frac{dt}{\ln t}
+\sim \frac{x}{\ln x}\]</div>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.number_theory.systems.prime_distribution.prime_counting()</span></code>
+evaluates <span class="math notranslate nohighlight">\(\pi(x)\)</span> for a whole array of <span class="math notranslate nohighlight">\(x\)</span> from a single
+sieve, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">logarithmic_integral()</span></code>
+evaluates <span class="math notranslate nohighlight">\(\operatorname{li}(x) = \operatorname{Ei}(\ln x)\)</span> with
+<code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.expi()</span></code>. At <span class="math notranslate nohighlight">\(x = 10^7\)</span> the logarithmic
+integral is off by 0.05%, <span class="math notranslate nohighlight">\(x/\ln x\)</span> by 7%.</p>
+<p><em>References:</em> J. Hadamard, “Sur la distribution des zéros de la fonction
+<span class="math notranslate nohighlight">\(\zeta(s)\)</span> et ses conséquences arithmétiques,” Bulletin de la
+Société Mathématique de France 24 (1896), 199-220; C.-J. de la Vallée
+Poussin, “Recherches analytiques sur la théorie des nombres premiers,”
+Annales de la Société Scientifique de Bruxelles 20 (1896), 183-256;
+B. Riemann, “Ueber die Anzahl der Primzahlen unter einer gegebenen
+Grösse,” Monatsberichte der Königlichen Preussischen Akademie der
+Wissenschaften zu Berlin (1859), 671-680.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Compares the prime-counting function \pi(x) with Gauss&#x27;s logarithmic integral \operatorname{li}(x) and Legendre-style x/\ln x up to ten million. Both ratios tend to 1, as Hadamard and de la Vallée Poussin proved in 1896, but \operatorname{li}(x) is far more accurate."><img alt="" src="../_images/sphx_glr_plot_01_prime_number_theorem_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/number_theory/prime_distribution/plot_01_prime_number_theorem.html"><span class="doc">The prime number theorem</span></a></p>
+  <div class="sphx-glr-thumbnail-title">The prime number theorem</div>
+</div></div></section>
+<section id="rsa-and-public-key-cryptography">
+<h2><a class="toc-backref" href="#id14" role="doc-backlink">1973-1978 – RSA and Public-Key Cryptography</a><a class="headerlink" href="#rsa-and-public-key-cryptography" title="Link to this heading">#</a></h2>
+<p>Ronald Rivest, Adi Shamir, and Leonard Adleman’s 1978 paper turned
+Leonhard Euler’s 1763 theorem into a working cryptosystem. Choose two
+large primes, and publish their product together with an exponent. A
+message encrypted with that public exponent can be decrypted only by
+the holder of the matching private exponent, because recovering it
+requires factoring the product – which, as far as anyone has publicly
+shown, is computationally infeasible. The scheme is built from the
+totient and modular-inverse machinery that Euler and Carl Friedrich
+Gauss had developed two centuries earlier for entirely different
+reasons. Clifford Cocks at Britain’s GCHQ had derived an equivalent
+scheme in 1973, but it stayed classified until 1997.</p>
+<p><em>Implementation:</em> mathematicskit’s toy demonstration combines
+<code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.number_theory.systems.totient.euler_totient()</span></code>,
+<code class="xref py py-func docutils literal notranslate"><span class="pre">mod_inverse()</span></code>,
+and <code class="xref py py-func docutils literal notranslate"><span class="pre">fast_mod_pow()</span></code>
+to run an RSA key-generation, encryption, and decryption round trip. Its
+small primes are illustrative, not cryptographically secure.</p>
+<p><em>References:</em> R. L. Rivest, A. Shamir, and L. Adleman, “A Method for
+Obtaining Digital Signatures and Public-Key Cryptosystems,”
+Communications of the ACM 21(2) (1978), 120-126.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="RSA&#x27;s key generation, encryption, and decryption are exactly mod_inverse (to find the private exponent) and fast_mod_pow (to encrypt/decrypt) -- demonstrated here with small (textbook-toy, NOT cryptographically secure) primes."><img alt="" src="../_images/sphx_glr_plot_02_toy_rsa_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/number_theory/modular_arithmetic/plot_02_toy_rsa.html"><span class="doc">A toy RSA encryption/decryption round trip</span></a></p>
+  <div class="sphx-glr-thumbnail-title">A toy RSA encryption/decryption round trip</div>
+</div></div></section>
+<section id="pollard-s-rho-factorization">
+<h2><a class="toc-backref" href="#id15" role="doc-backlink">1975 – Pollard’s Rho Factorization</a><a class="headerlink" href="#pollard-s-rho-factorization" title="Link to this heading">#</a></h2>
+<p>RSA’s security (above) rests on factoring being hard, which makes
+faster factoring algorithms a matter of practical importance. John
+Pollard’s 1975 “Monte Carlo method” iterates the pseudo-random map
+<span class="math notranslate nohighlight">\(x \mapsto x^2 + c \bmod n\)</span>. Modulo an unknown prime factor
+<span class="math notranslate nohighlight">\(p\)</span> of <span class="math notranslate nohighlight">\(n\)</span>, the sequence must repeat within about
+<span class="math notranslate nohighlight">\(\sqrt{p}\)</span> steps (the birthday paradox), and its path traces
+the Greek letter <span class="math notranslate nohighlight">\(\rho\)</span>. Robert Floyd’s tortoise-and-hare trick
+detects the repeat, and a gcd with <span class="math notranslate nohighlight">\(n\)</span> then reveals <span class="math notranslate nohighlight">\(p\)</span>.
+The method finds a factor <span class="math notranslate nohighlight">\(p\)</span> in about <span class="math notranslate nohighlight">\(\sqrt p\)</span> steps
+using almost no memory, compared with <span class="math notranslate nohighlight">\(p\)</span> steps for trial
+division. In 1980 Richard Brent and Pollard used a refined version to
+factor the eighth Fermat number <span class="math notranslate nohighlight">\(2^{256}+1\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[x_{i+1} = x_i^2 + c \bmod n, \qquad
+d = \gcd(|x_i - x_{2i}|, n)\]</div>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.number_theory.systems.factorization.pollard_rho()</span></code>
+implements the method with Floyd cycle detection, restarting with a new
+constant <span class="math notranslate nohighlight">\(c\)</span> if the cycle closes modulo every factor at once. It
+returns a <a class="reference internal" href="../api/number_theory.html#mathematicskit.number_theory.PollardRhoResult" title="mathematicskit.number_theory.core.base.PollardRhoResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">PollardRhoResult</span></code></a>
+with the factor, cofactor, and step count. The gallery example
+factors the Fermat number <span class="math notranslate nohighlight">\(2^{64}+1 = 274177 \times
+67280421310721\)</span> (first factored by Fortuné Landry in 1880) and shows
+the step count growing like <span class="math notranslate nohighlight">\(\sqrt p\)</span>.</p>
+<p><em>References:</em> J. M. Pollard, “A Monte Carlo Method for Factorization,”
+BIT Numerical Mathematics 15(3) (1975), 331-334; R. P. Brent and J. M.
+Pollard, “Factorization of the Eighth Fermat Number,” Mathematics of
+Computation 36(154) (1981), 627-630.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Pollard&#x27;s rho method finds a prime factor p of n in roughly \sqrt p steps, by waiting for a birthday-paradox collision in the sequence x \mapsto x^2 + 1 \bmod p. This script factors the Fermat number F_6 = 2^{64}+1 and plots the step count against the smallest prime factor for a batch of semiprimes."><img alt="" src="../_images/sphx_glr_plot_01_pollard_rho_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/number_theory/factorization/plot_01_pollard_rho.html"><span class="doc">Pollard’s rho factorization</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Pollard's rho factorization</div>
 </div></div></section>
 <section id="miller-rabin-and-primality-testing">
-<h2><a class="toc-backref" href="#id7" role="doc-backlink">1976 – 1980 – Miller, Rabin, and Primality Testing</a><a class="headerlink" href="#miller-rabin-and-primality-testing" title="Link to this heading">#</a></h2>
-<p>Gary Miller’s 1976 paper gave a deterministic primality test, but one
-whose correctness depended on an unproven number-theoretic conjecture
-(the generalized Riemann hypothesis); Michael Rabin’s 1980 paper turned
-Miller’s test into an unconditionally correct <em>probabilistic</em> one by
-choosing the test witness randomly, at the cost of an exponentially
-small (and freely adjustable) chance of error – fast enough, unlike
-trial division, to certify primality for numbers hundreds of digits
-long, exactly the size RSA key generation requires.</p>
+<h2><a class="toc-backref" href="#id16" role="doc-backlink">1976-1980 – Miller, Rabin, and Primality Testing</a><a class="headerlink" href="#miller-rabin-and-primality-testing" title="Link to this heading">#</a></h2>
+<p>Gary Miller’s 1976 paper gave a deterministic primality test whose
+correctness depends on an unproven conjecture, the generalized Riemann
+hypothesis. Michael Rabin’s 1980 paper turned Miller’s test into an
+unconditionally correct <em>probabilistic</em> one by choosing the test
+witnesses at random. The price is a chance of error that shrinks
+exponentially with the number of witnesses tried. Unlike trial
+division, the test is fast enough to certify primes hundreds of digits
+long, exactly the size RSA key generation needs.</p>
 <p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.number_theory.systems.primality.is_prime_miller_rabin()</span></code>
-implements exactly this randomized test, cross-checked against the
-much slower but always-certain
-<code class="xref py py-func docutils literal notranslate"><span class="pre">is_prime_trial_division()</span></code>
-over a wide range in the test suite;
+implements this randomized test. The test suite checks it over a wide
+range against the much slower but always-certain
+<code class="xref py py-func docutils literal notranslate"><span class="pre">is_prime_trial_division()</span></code>.
 <code class="xref py py-func docutils literal notranslate"><span class="pre">sieve_of_eratosthenes()</span></code>
-implements the much older (c. 250 BCE) sieve of Eratosthenes for
-generating every prime up to a limit at once.</p>
+implements the much older (c. 240 BCE) sieve of Eratosthenes, which
+generates every prime up to a limit at once.</p>
 <p><em>References:</em> G. L. Miller, “Riemann’s Hypothesis and Tests for
 Primality,” Journal of Computer and System Sciences 13(3) (1976),
 300-317; M. O. Rabin, “Probabilistic Algorithm for Testing Primality,”
 Journal of Number Theory 12(1) (1980), 128-138.</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Sieves all primes up to 100,000 and compares the prime-counting function \pi(n) against the prime number theorem&#x27;s approximation n/\ln n."><img alt="" src="../_images/sphx_glr_plot_01_prime_counting_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/number_theory/primality/plot_01_prime_counting.html"><span class="doc">The prime-counting function and the prime number theorem</span></a></p>
-  <div class="sphx-glr-thumbnail-title">The prime-counting function and the prime number theorem</div>
-</div></div></section>
-<section id="rsa-and-public-key-cryptography">
-<h2><a class="toc-backref" href="#id8" role="doc-backlink">1977 – 1978 – RSA and Public-Key Cryptography</a><a class="headerlink" href="#rsa-and-public-key-cryptography" title="Link to this heading">#</a></h2>
-<p>Ronald Rivest, Adi Shamir, and Leonard Adleman’s 1978 paper turned Euler’s
-1760 totient theorem into a working cryptographic system: choose two
-large primes, publish their product and an exponent, and the sheer
-computational difficulty of factoring that product back into its two
-primes (as far as anyone has publicly shown) protects a message
-encrypted with the public exponent from being decrypted by anyone but
-the holder of the corresponding private exponent – built from the same
-totient function and modular-inverse machinery Euler and Gauss had
-developed two centuries earlier for entirely different reasons. Clifford
-Cocks, working at Britain’s GCHQ, had derived an equivalent scheme in
-1973, but it remained classified until 1997.</p>
-<p><em>Implementation:</em> mathematicskit’s toy demonstration composes
-<code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.number_theory.systems.totient.euler_totient()</span></code>,
-<code class="xref py py-func docutils literal notranslate"><span class="pre">mod_inverse()</span></code>,
-and <code class="xref py py-func docutils literal notranslate"><span class="pre">fast_mod_pow()</span></code>
-directly, exactly reproducing an RSA key-generation, encryption, and
-decryption round trip (with small, illustrative rather than
-cryptographically secure primes).</p>
-<p><em>References:</em> R. L. Rivest, A. Shamir, and L. Adleman, “A Method for
-Obtaining Digital Signatures and Public-Key Cryptosystems,”
-Communications of the ACM 21(2) (1978), 120-126.</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="RSA&#x27;s key generation, encryption, and decryption are exactly mod_inverse (to find the private exponent) and fast_mod_pow (to encrypt/decrypt) -- demonstrated here with small (textbook-toy, NOT cryptographically secure) primes."><img alt="" src="../_images/sphx_glr_plot_01_toy_rsa_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/number_theory/modular_arithmetic/plot_01_toy_rsa.html"><span class="doc">A toy RSA encryption/decryption round trip</span></a></p>
-  <div class="sphx-glr-thumbnail-title">A toy RSA encryption/decryption round trip</div>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Rabin&#x27;s 1980 randomization of Miller&#x27;s test declares n &quot;probably prime&quot; after k random witnesses; for a composite n each witness is fooled with probability at most 1/4, so the error shrinks like 4^{-k}. This script shows the test exposing a Carmichael number that fools Fermat&#x27;s test, measures the error rate against the number of rounds for two hard composites, and certifies a 39-digit prime far beyond trial division&#x27;s reach."><img alt="" src="../_images/sphx_glr_plot_01_miller_rabin_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/number_theory/primality/plot_01_miller_rabin.html"><span class="doc">The Miller-Rabin probabilistic primality test</span></a></p>
+  <div class="sphx-glr-thumbnail-title">The Miller-Rabin probabilistic primality test</div>
 </div></div></section>
 <section id="see-also">
-<h2><a class="toc-backref" href="#id9" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id17" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="../api/number_theory.html"><span class="doc">mathematicskit.number_theory</span></a></p></li>
 <li><p><a class="reference internal" href="combinatorics_breakthroughs.html"><span class="doc">Breakthroughs in Combinatorics</span></a></p></li>
@@ -732,12 +1003,20 @@ Communications of the ACM 21(2) (1978), 120-126.</p>
     <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-300-bce-euclid-s-algorithm">c. 300 BCE – Euclid’s Algorithm</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-250-ce-diophantus-and-indeterminate-equations">c. 250 CE – Diophantus and Indeterminate Equations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continued-fractions-and-best-rational-approximation">1613 – 1737 – Continued Fractions and Best Rational Approximation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fermat-euler-and-pell-s-equation">1657 – 1767 – Fermat, Euler, and Pell’s Equation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continued-fractions-and-best-rational-approximation">1613-1737 – Continued Fractions and Best Rational Approximation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fermat-s-two-squares-theorem">1640-1749 – Fermat’s Two-Squares Theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fermat-euler-and-pell-s-equation">1657-1768 – Fermat, Euler, and Pell’s Equation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-basel-problem-and-euler-s-product-formula">1735-1737 – The Basel Problem and Euler’s Product Formula</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-s-totient-function">1763 – Euler’s Totient Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lagrange-s-four-square-theorem">1770 – Lagrange’s Four-Square Theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gauss-and-quadratic-reciprocity">1796 – Gauss and Quadratic Reciprocity</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gauss-s-disquisitiones-arithmeticae">1801 – Gauss’s Disquisitiones Arithmeticae</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-s-totient-function">1760 – Euler’s Totient Function</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#miller-rabin-and-primality-testing">1976 – 1980 – Miller, Rabin, and Primality Testing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rsa-and-public-key-cryptography">1977 – 1978 – RSA and Public-Key Cryptography</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dirichlet-s-theorem-on-primes-in-arithmetic-progressions">1837 – Dirichlet’s Theorem on Primes in Arithmetic Progressions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lucas-lehmer-and-mersenne-primes">1876-1930 – Lucas, Lehmer, and Mersenne Primes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-prime-number-theorem">1896 – The Prime Number Theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rsa-and-public-key-cryptography">1973-1978 – RSA and Public-Key Cryptography</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pollard-s-rho-factorization">1975 – Pollard’s Rho Factorization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#miller-rabin-and-primality-testing">1976-1980 – Miller, Rabin, and Primality Testing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#see-also">See Also</a></li>
 </ul>
   </nav></div>

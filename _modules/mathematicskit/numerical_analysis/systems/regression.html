@@ -410,22 +410,22 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.numerical_analysis.systems.regression</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Least-squares polynomial regression, via :func:`numpy.linalg.lstsq`.</span>
+<span></span><span class="sd">"""Least-squares polynomial regression, via :func:`numpy.linalg.lstsq`.</span>
 
 <span class="sd">Fits a degree-``d`` polynomial minimizing :math:`\\sum_i (y_i -</span>
 <span class="sd">p(x_i))^2` for the Vandermonde design matrix :math:`V`, the problem</span>
 <span class="sd">posed in Burden &amp; Faires, *Numerical Analysis*, 10th ed., Ch. 8.1</span>
-<span class="sd">(&quot;Discrete Least Squares Approximation&quot;). Rather than forming and</span>
+<span class="sd">("Discrete Least Squares Approximation"). Rather than forming and</span>
 <span class="sd">solving the normal equations :math:`V^T V c = V^T y` by hand (which</span>
-<span class="sd">squares :math:`V`&#39;s condition number -- see :mod:`mathematicskit.linalg.systems.stability`</span>
+<span class="sd">squares :math:`V`'s condition number -- see :mod:`mathematicskit.linalg.systems.stability`</span>
 <span class="sd">for a worked-out demonstration of exactly this instability),</span>
 <span class="sd">:func:`numpy.linalg.lstsq` solves the least-squares problem directly on</span>
-<span class="sd">:math:`V` via an SVD-based routine (LAPACK&#39;s ``?gelsd``), which is</span>
+<span class="sd">:math:`V` via an SVD-based routine (LAPACK's ``?gelsd``), which is</span>
 <span class="sd">numerically stable even when :math:`V` is ill-conditioned. The condition</span>
 <span class="sd">number reported in :class:`~mathematicskit.numerical_analysis.core.base.RegressionResult`</span>
 <span class="sd">comes from :func:`~mathematicskit.numerical_analysis.utils.error_analysis.condition_number`</span>
 <span class="sd">(:func:`numpy.linalg.cond`) applied to :math:`V` itself.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -434,20 +434,20 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.numerical_analysis.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">RegressionResult</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.numerical_analysis.utils.error_analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">condition_number</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;PolynomialRegression&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"PolynomialRegression"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="PolynomialRegression">
 <a class="viewcode-back" href="../../../../api/numerical_analysis.html#mathematicskit.numerical_analysis.PolynomialRegression">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">PolynomialRegression</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Least-squares polynomial fit of degree `degree` to ``(x_i, y_i)``.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Least-squares polynomial fit of degree `degree` to ``(x_i, y_i)``.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    x, y : array-like, shape (n,)</span>
 <span class="sd">        Data points.</span>
 <span class="sd">    degree : int</span>
-<span class="sd">        Polynomial degree (``degree &lt; n`` is required so the fit isn&#39;t</span>
+<span class="sd">        Polynomial degree (``degree &lt; n`` is required so the fit isn't</span>
 <span class="sd">        underdetermined into exact interpolation).</span>
 
 <span class="sd">    Examples</span>
@@ -462,17 +462,17 @@
 <span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; round(result.r_squared, 6)</span>
 <span class="sd">    1.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">degree</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;x and y must have the same shape&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"x and y must have the same shape"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">degree</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;degree must be non-negative&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"degree must be non-negative"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">degree</span> <span class="o">&gt;=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;degree must be smaller than the number of data points&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"degree must be smaller than the number of data points"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">degree</span> <span class="o">=</span> <span class="n">degree</span>
@@ -484,12 +484,12 @@
 <div class="viewcode-block" id="PolynomialRegression.fit">
 <a class="viewcode-back" href="../../../../api/numerical_analysis.html#mathematicskit.numerical_analysis.PolynomialRegression.fit">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RegressionResult</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fit the model and return the result.</span>
+<span class="w">        </span><span class="sd">"""Fit the model and return the result.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        RegressionResult</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vandermonde</span><span class="p">()</span>
         <span class="n">coefficients</span><span class="p">,</span> <span class="n">_residuals</span><span class="p">,</span> <span class="n">_rank</span><span class="p">,</span> <span class="n">_sv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">rcond</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
@@ -523,9 +523,12 @@
 <div class="viewcode-block" id="PolynomialRegression.predict">
 <a class="viewcode-back" href="../../../../api/numerical_analysis.html#mathematicskit.numerical_analysis.PolynomialRegression.predict">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_new</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the fitted polynomial at new points.</span>
+<span class="w">        </span><span class="sd">"""Evaluate the fitted polynomial at new points.</span>
 
-<span class="sd">        Requires :meth:`fit` to have been called first.</span>
+<span class="sd">        Fits the model on first use and caches the coefficients, so calling</span>
+<span class="sd">        :meth:`fit` beforehand is optional; the cache is never invalidated,</span>
+<span class="sd">        since a :class:`PolynomialRegression` instance's data and degree are</span>
+<span class="sd">        fixed at construction.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -534,8 +537,8 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        ndarray</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_coefficients&quot;</span><span class="p">):</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"_coefficients"</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_coefficients</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">coefficients</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_coefficients</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x_new</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span></div>
 </div>

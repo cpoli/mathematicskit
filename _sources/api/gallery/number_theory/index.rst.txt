@@ -19,14 +19,22 @@ Sections
 
 - **modular_arithmetic** -- the extended Euclidean algorithm, modular
   inverses, and fast modular exponentiation (used in RSA).
-- **primality** -- trial division, Miller-Rabin, and the sieve of
-  Eratosthenes.
+- **primality** -- trial division, Miller-Rabin, the sieve of
+  Eratosthenes, and the Lucas-Lehmer test.
 - **crt** -- the Chinese Remainder Theorem.
 - **continued_fractions** -- continued-fraction expansion and best
   rational approximations.
 - **totient** -- Euler's totient function and other multiplicative
   functions.
 - **diophantine** -- linear and Pell Diophantine equation solvers.
+- **sums_of_squares** -- Fermat's two-squares and Lagrange's four-square
+  theorems.
+- **zeta** -- Euler's product formula and the Basel problem.
+- **quadratic_residues** -- Legendre and Jacobi symbols, quadratic
+  reciprocity, and Tonelli-Shanks square roots.
+- **prime_distribution** -- the prime number theorem and Dirichlet's
+  primes in arithmetic progressions.
+- **factorization** -- Pollard's rho method.
 
 
 .. raw:: html
@@ -120,6 +128,23 @@ Combining congruences with pairwise-coprime moduli.
     </div>
 
 
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Gauss&#x27;s Disquisitiones Arithmeticae (1801) opens by defining a \equiv b \pmod m and computing with residues instead of numbers. Its Articles 32-36 prove that congruences with pairwise coprime moduli combine into one: working modulo m_1 m_2 is the same as working modulo m_1 and m_2 at once. This script checks Gauss&#x27;s rules of congruence arithmetic, draws the residue grid that pairs each class mod 35 with one class mod 5 and one mod 7, and reduces a huge power with fast modular exponentiation.">
+
+.. only:: html
+
+  .. image:: /api/gallery/number_theory/crt/images/thumb/sphx_glr_plot_02_gauss_congruences_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/number_theory/crt/plot_02_gauss_congruences`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Gauss's Disquisitiones: congruences and the remainder theorem</div>
+    </div>
+
+
 .. thumbnail-parent-div-close
 
 .. raw:: html
@@ -145,18 +170,75 @@ Linear and Pell Diophantine equation solvers.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Finds the fundamental solution of x^2 - 61y^2 = 1 (famous for its surprisingly large fundamental solution) and solves a linear Diophantine equation with its full solution family.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Diophantus&#x27;s Arithmetica asks for whole-number solutions of equations with more unknowns than constraints. For the linear case ax + by = c, integer solutions exist exactly when \gcd(a, b) divides c, and then they form one infinite family spaced evenly along the line. This script solves 12x + 18y = 30, shows that 12x + 18y = 31 has no solution, and plots the integer points on the line.">
 
 .. only:: html
 
-  .. image:: /api/gallery/number_theory/diophantine/images/thumb/sphx_glr_plot_01_pell_and_linear_thumb.png
+  .. image:: /api/gallery/number_theory/diophantine/images/thumb/sphx_glr_plot_01_linear_diophantine_thumb.png
     :alt:
 
-  :doc:`/api/gallery/number_theory/diophantine/plot_01_pell_and_linear`
+  :doc:`/api/gallery/number_theory/diophantine/plot_01_linear_diophantine`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Pell's equation and a linear Diophantine equation</div>
+      <div class="sphx-glr-thumbnail-title">Diophantus and the linear equation ax + by = c</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Fermat&#x27;s 1657 challenge: solve x^2 - Dy^2 = 1 in integers. The continued fraction of \sqrt D always yields the fundamental solution (Lagrange, 1768), but its size is wildly erratic -- for D = 61 it is x = 1766319049, while D = 60 needs only x = 31. This script reproduces Fermat&#x27;s D = 61 case, generates further solutions from the fundamental one, and plots the fundamental x for every non-square D \le 120.">
+
+.. only:: html
+
+  .. image:: /api/gallery/number_theory/diophantine/images/thumb/sphx_glr_plot_02_pell_equation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/number_theory/diophantine/plot_02_pell_equation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Pell's equation x^2 - Dy^2 = 1</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Integer factorization
+---------------------
+
+Pollard's rho method.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Pollard&#x27;s rho method finds a prime factor p of n in roughly \sqrt p steps, by waiting for a birthday-paradox collision in the sequence x \mapsto x^2 + 1 \bmod p. This script factors the Fermat number F_6 = 2^{64}+1 and plots the step count against the smallest prime factor for a batch of semiprimes.">
+
+.. only:: html
+
+  .. image:: /api/gallery/number_theory/factorization/images/thumb/sphx_glr_plot_01_pollard_rho_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/number_theory/factorization/plot_01_pollard_rho`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Pollard's rho factorization</div>
     </div>
 
 
@@ -186,14 +268,31 @@ exponentiation.
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="Euclid&#x27;s Elements (Book VII, Propositions 1-2) finds the greatest common divisor by repeating \gcd(a, b) = \gcd(b, a \bmod b) until the remainder vanishes. This script traces the division steps for one pair, recovers Bézout&#x27;s coefficients ax + by = \gcd(a, b) with extended_gcd, and maps how many steps the algorithm needs: the slowest inputs are consecutive Fibonacci numbers (Lamé, 1844).">
+
+.. only:: html
+
+  .. image:: /api/gallery/number_theory/modular_arithmetic/images/thumb/sphx_glr_plot_01_euclidean_algorithm_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/number_theory/modular_arithmetic/plot_01_euclidean_algorithm`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Euclid's algorithm and Bézout's identity</div>
+    </div>
+
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="RSA&#x27;s key generation, encryption, and decryption are exactly mod_inverse (to find the private exponent) and fast_mod_pow (to encrypt/decrypt) -- demonstrated here with small (textbook-toy, NOT cryptographically secure) primes.">
 
 .. only:: html
 
-  .. image:: /api/gallery/number_theory/modular_arithmetic/images/thumb/sphx_glr_plot_01_toy_rsa_thumb.png
+  .. image:: /api/gallery/number_theory/modular_arithmetic/images/thumb/sphx_glr_plot_02_toy_rsa_thumb.png
     :alt:
 
-  :doc:`/api/gallery/number_theory/modular_arithmetic/plot_01_toy_rsa`
+  :doc:`/api/gallery/number_theory/modular_arithmetic/plot_02_toy_rsa`
 
 .. raw:: html
 
@@ -226,18 +325,206 @@ Trial division, Miller-Rabin, and the sieve of Eratosthenes.
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="Rabin&#x27;s 1980 randomization of Miller&#x27;s test declares n &quot;probably prime&quot; after k random witnesses; for a composite n each witness is fooled with probability at most 1/4, so the error shrinks like 4^{-k}. This script shows the test exposing a Carmichael number that fools Fermat&#x27;s test, measures the error rate against the number of rounds for two hard composites, and certifies a 39-digit prime far beyond trial division&#x27;s reach.">
+
+.. only:: html
+
+  .. image:: /api/gallery/number_theory/primality/images/thumb/sphx_glr_plot_01_miller_rabin_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/number_theory/primality/plot_01_miller_rabin`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Miller-Rabin probabilistic primality test</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The Lucas-Lehmer test decides whether M_p = 2^p - 1 is prime with only p - 2 modular squarings. This script rediscovers every Mersenne prime with exponent below 1300 -- including M_{521} through M_{1279}, found by Raphael Robinson on the SWAC computer in 1952 -- and plots the exponents, which grow roughly geometrically.">
+
+.. only:: html
+
+  .. image:: /api/gallery/number_theory/primality/images/thumb/sphx_glr_plot_02_lucas_lehmer_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/number_theory/primality/plot_02_lucas_lehmer`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Mersenne primes and the Lucas-Lehmer test</div>
+    </div>
+
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="Sieves all primes up to 100,000 and compares the prime-counting function \pi(n) against the prime number theorem&#x27;s approximation n/\ln n.">
 
 .. only:: html
 
-  .. image:: /api/gallery/number_theory/primality/images/thumb/sphx_glr_plot_01_prime_counting_thumb.png
+  .. image:: /api/gallery/number_theory/primality/images/thumb/sphx_glr_plot_03_prime_counting_thumb.png
     :alt:
 
-  :doc:`/api/gallery/number_theory/primality/plot_01_prime_counting`
+  :doc:`/api/gallery/number_theory/primality/plot_03_prime_counting`
 
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">The prime-counting function and the prime number theorem</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Distribution of primes
+----------------------
+
+The prime number theorem and primes in arithmetic progressions.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Compares the prime-counting function \pi(x) with Gauss&#x27;s logarithmic integral \operatorname{li}(x) and Legendre-style x/\ln x up to ten million. Both ratios tend to 1, as Hadamard and de la Vallée Poussin proved in 1896, but \operatorname{li}(x) is far more accurate.">
+
+.. only:: html
+
+  .. image:: /api/gallery/number_theory/prime_distribution/images/thumb/sphx_glr_plot_01_prime_number_theorem_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/number_theory/prime_distribution/plot_01_prime_number_theorem`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The prime number theorem</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Dirichlet proved in 1837 that every progression a, a+q, a+2q, \dots with \gcd(a, q) = 1 contains infinitely many primes, and the classes share the primes equally in the limit. Equal in the limit is not equal at every point: the race between primes \equiv 3 and \equiv 1 \pmod 4 is led by the 3s almost all the time (&quot;Chebyshev&#x27;s bias&quot;, 1853).">
+
+.. only:: html
+
+  .. image:: /api/gallery/number_theory/prime_distribution/images/thumb/sphx_glr_plot_02_dirichlet_prime_races_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/number_theory/prime_distribution/plot_02_dirichlet_prime_races`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Dirichlet's theorem and prime races</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Quadratic residues
+------------------
+
+Legendre and Jacobi symbols, quadratic reciprocity, and modular square roots.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="For distinct odd primes p, q, \left(\frac{p}{q}\right)\left(\frac{q}{p}\right) = (-1)^{\frac{p-1}{2}\frac{q-1}{2}}: whether p is a square mod q is tied to whether q is a square mod p. The plot tabulates the Legendre symbol for odd primes below 100; reflecting in the diagonal flips the sign exactly when both primes are 3 \bmod 4.">
+
+.. only:: html
+
+  .. image:: /api/gallery/number_theory/quadratic_residues/images/thumb/sphx_glr_plot_01_quadratic_reciprocity_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/number_theory/quadratic_residues/plot_01_quadratic_reciprocity`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The law of quadratic reciprocity</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Sums of squares
+---------------
+
+Fermat's two-squares theorem and Lagrange's four-square theorem.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Every prime p \equiv 1 \pmod 4 is a sum of two squares a^2 + b^2, and no prime p \equiv 3 \pmod 4 is. This script checks the theorem for every prime below 10,000 and plots each representation as a lattice point (a, b) on the circle of radius \sqrt p.">
+
+.. only:: html
+
+  .. image:: /api/gallery/number_theory/sums_of_squares/images/thumb/sphx_glr_plot_01_fermat_two_squares_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/number_theory/sums_of_squares/plot_01_fermat_two_squares`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Fermat's two-squares theorem</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Every non-negative integer is a sum of four squares. This script finds a representation for every n &lt; 10{,}000 and plots the fewest squares each n actually needs: one for perfect squares, two by Fermat&#x27;s criterion, four exactly for n = 4^k(8m+7) (Legendre&#x27;s three-square theorem), and three otherwise.">
+
+.. only:: html
+
+  .. image:: /api/gallery/number_theory/sums_of_squares/images/thumb/sphx_glr_plot_02_lagrange_four_squares_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/number_theory/sums_of_squares/plot_02_lagrange_four_squares`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Lagrange's four-square theorem</div>
     </div>
 
 
@@ -266,18 +553,75 @@ Euler's totient function, the Mobius function, and divisor sums.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="A perfect number equals the sum of its own proper divisors (\sigma(n) = 2n); this script finds the first few and plots Euler&#x27;s totient function over a range of n.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Euler&#x27;s \varphi(n) counts the integers in 1, \dots, n coprime to n. His 1763 theorem, a^{\varphi(n)} \equiv 1 \pmod n for \gcd(a, n) = 1, generalizes Fermat&#x27;s little theorem (\varphi(p) = p - 1 for a prime p). This script checks the definition and the theorem and plots \varphi(n), whose top edge n - 1 is traced by the primes.">
 
 .. only:: html
 
-  .. image:: /api/gallery/number_theory/totient/images/thumb/sphx_glr_plot_01_perfect_numbers_thumb.png
+  .. image:: /api/gallery/number_theory/totient/images/thumb/sphx_glr_plot_01_euler_totient_thumb.png
     :alt:
 
-  :doc:`/api/gallery/number_theory/totient/plot_01_perfect_numbers`
+  :doc:`/api/gallery/number_theory/totient/plot_01_euler_totient`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Perfect numbers and Euler's totient function</div>
+      <div class="sphx-glr-thumbnail-title">Euler's totient function and Euler's theorem</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="A perfect number equals the sum of its own proper divisors (\sigma(n) = 2n). This script finds the perfect numbers below 10,000 with divisor_sum and checks Euclid&#x27;s form 2^{p-1}(2^p - 1) for each.">
+
+.. only:: html
+
+  .. image:: /api/gallery/number_theory/totient/images/thumb/sphx_glr_plot_02_perfect_numbers_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/number_theory/totient/plot_02_perfect_numbers`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Perfect numbers and the divisor-sum function</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+The zeta function
+-----------------
+
+Euler's product formula and the Basel problem.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Euler showed in 1735 that \sum 1/n^2 = \pi^2/6, and in 1737 that the same sum is a product over the primes, \zeta(s) = \prod_p (1 - p^{-s})^{-1}. This script compares how fast the partial sums and the truncated Euler product approach \pi^2/6, and shows the product diverging at s = 1.">
+
+.. only:: html
+
+  .. image:: /api/gallery/number_theory/zeta/images/thumb/sphx_glr_plot_01_basel_euler_product_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/number_theory/zeta/plot_01_basel_euler_product`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Basel problem and Euler's product formula</div>
     </div>
 
 
@@ -296,9 +640,14 @@ Euler's totient function, the Mobius function, and divisor sums.
    /api/gallery/number_theory/continued_fractions/index.rst
    /api/gallery/number_theory/crt/index.rst
    /api/gallery/number_theory/diophantine/index.rst
+   /api/gallery/number_theory/factorization/index.rst
    /api/gallery/number_theory/modular_arithmetic/index.rst
    /api/gallery/number_theory/primality/index.rst
+   /api/gallery/number_theory/prime_distribution/index.rst
+   /api/gallery/number_theory/quadratic_residues/index.rst
+   /api/gallery/number_theory/sums_of_squares/index.rst
    /api/gallery/number_theory/totient/index.rst
+   /api/gallery/number_theory/zeta/index.rst
 
 
 

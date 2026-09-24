@@ -17,17 +17,21 @@ Each script in this gallery is self-contained and can be run directly with
 Sections
 --------
 
-- **lu** -- LU decomposition with partial pivoting, and solving/computing
-  determinants from it.
+- **classical** -- Cramer's rule and the Cayley-Hamilton theorem.
+- **lu** -- elimination in the *Nine Chapters*, LU decomposition with
+  partial pivoting, and solving/computing determinants from it.
 - **qr** -- Householder vs. Gram-Schmidt QR, and why Householder stays
   orthogonal for ill-conditioned matrices.
 - **cholesky** -- Cholesky decomposition for SPD matrices.
-- **eigen** -- eigenvalue computation via numpy.linalg.eigh/eig, power
-  iteration, and inverse iteration.
-- **svd** -- singular value decomposition via numpy.linalg.svd.
-- **iterative** -- conjugate gradient and GMRES convergence.
-- **stability** -- least squares via normal equations vs. QR, and why the
-  former squares the condition number.
+- **eigen** -- Cauchy's spectral theorem via numpy.linalg.eigh/eig, power
+  iteration, inverse iteration, Gershgorin discs, Lanczos, and the QR
+  algorithm / Schur form.
+- **svd** -- the SVD and Eckart-Young low-rank approximation, and the
+  Moore-Penrose pseudoinverse.
+- **iterative** -- conjugate gradient and GMRES convergence; Jacobi,
+  Gauss-Seidel, and SOR.
+- **stability** -- the condition number, and why least squares via the
+  normal equations squares it while QR does not.
 
 
 .. raw:: html
@@ -88,12 +92,11 @@ solving linear systems from it.
 
     </div>
 
-Eigenvalue algorithms
----------------------
+Classical matrix theory
+-----------------------
 
-Eigenvalue computation via :func:`numpy.linalg.eigh`/:func:`numpy.linalg.eig`,
-alongside hand-rolled power iteration and inverse iteration -- two routes
-to a single eigenpair when the full spectrum isn't needed.
+Cramer's rule and the Cayley-Hamilton theorem: the determinant-era
+results that predate numerical linear algebra.
 
 
 .. raw:: html
@@ -109,18 +112,148 @@ to a single eigenpair when the full spectrum isn't needed.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="numpy.linalg.eigh finds the full spectrum directly; power iteration finds only the dominant eigenvalue; inverse iteration finds whichever eigenvalue is nearest a chosen shift. All three are compared here on the same matrix.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Cramer&#x27;s rule gives every unknown as a ratio of two determinants, x_i = det(A_i) / det(A). It is exact in theory but needs n + 1 determinants, each an O(n^3) factorization, so its cost grows like n^4 against elimination&#x27;s n^3.">
 
 .. only:: html
 
-  .. image:: /api/gallery/linalg/eigen/images/thumb/sphx_glr_plot_01_eigenvalue_methods_compared_thumb.png
+  .. image:: /api/gallery/linalg/classical/images/thumb/sphx_glr_plot_01_cramers_rule_thumb.png
     :alt:
 
-  :doc:`/api/gallery/linalg/eigen/plot_01_eigenvalue_methods_compared`
+  :doc:`/api/gallery/linalg/classical/plot_01_cramers_rule`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Three routes to a symmetric matrix's eigenvalues</div>
+      <div class="sphx-glr-thumbnail-title">Cramer's rule vs. elimination</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Every square matrix satisfies its own characteristic equation: if p(l) = det(l I - A), then p(A) = 0. A consequence is that A^{-1} (and every higher power of A) is a polynomial in A of degree below n.">
+
+.. only:: html
+
+  .. image:: /api/gallery/linalg/classical/images/thumb/sphx_glr_plot_02_cayley_hamilton_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/linalg/classical/plot_02_cayley_hamilton`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Cayley-Hamilton theorem</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Eigenvalue algorithms
+---------------------
+
+Cauchy's spectral theorem for symmetric matrices, and hand-rolled power
+iteration and inverse iteration -- two routes to a single eigenpair when
+the full spectrum isn't needed.
+
+Also: Gershgorin discs, Lanczos iteration for a few eigenpairs of a large
+sparse matrix, and the QR algorithm converging to the Schur form.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Cauchy&#x27;s 1829 memoir showed that a real symmetric matrix has only real eigenvalues and an orthonormal basis of eigenvectors, so A = V diag(lambda) V^T. Geometrically, the eigenvectors are the principal axes of the quadric x^T A x = 1. A non-symmetric matrix enjoys neither property.">
+
+.. only:: html
+
+  .. image:: /api/gallery/linalg/eigen/images/thumb/sphx_glr_plot_01_cauchy_spectral_theorem_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/linalg/eigen/plot_01_cauchy_spectral_theorem`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Cauchy's spectral theorem: principal axes of a quadratic form</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Power iteration v_{k+1} = A v_k / ||A v_k|| converges to the dominant eigenvector at the rate |lambda_2 / lambda_1| per step (squared for the Rayleigh quotient of a symmetric matrix). Inverse iteration applies the same step to (A - mu I)^{-1} and homes in on the eigenvalue nearest the shift mu, at the much faster rate |lambda - mu| / |lambda&#x27; - mu|.">
+
+.. only:: html
+
+  .. image:: /api/gallery/linalg/eigen/images/thumb/sphx_glr_plot_02_power_and_inverse_iteration_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/linalg/eigen/plot_02_power_and_inverse_iteration`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Von Mises power iteration and Wielandt inverse iteration</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Without computing anything but row sums, Gershgorin&#x27;s theorem traps every eigenvalue in a union of discs centered on the diagonal entries. Shrinking the off-diagonal part shrinks the discs onto the eigenvalues.">
+
+.. only:: html
+
+  .. image:: /api/gallery/linalg/eigen/images/thumb/sphx_glr_plot_03_gershgorin_discs_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/linalg/eigen/plot_03_gershgorin_discs`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Gershgorin discs</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The 1-D discrete Laplacian tridiag(-1, 2, -1) of size n has eigenvalues 2 - 2 cos(j pi / (n + 1)). Lanczos iteration (through ARPACK) finds a handful of them using only matrix-vector products. In shift-invert mode it handles a sparse n = 100 000 instance, where a dense eigensolver would need 80 GB just to store the matrix.">
+
+.. only:: html
+
+  .. image:: /api/gallery/linalg/eigen/images/thumb/sphx_glr_plot_04_lanczos_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/linalg/eigen/plot_04_lanczos`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Lanczos: a few eigenvalues of a very large matrix</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Factor A_k = Q_k R_k and multiply back in reverse order, A_{k+1} = R_k Q_k = Q_k^T A_k Q_k. Every iterate is similar to A, and the subdiagonal entries decay like |lambda_{i+1} / lambda_i|^k, so the iterates converge to an upper triangular Schur form with the eigenvalues on the diagonal. Production codes add Hessenberg reduction and Francis&#x27;s shifts; the result is what scipy.linalg.schur returns.">
+
+.. only:: html
+
+  .. image:: /api/gallery/linalg/eigen/images/thumb/sphx_glr_plot_05_francis_qr_algorithm_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/linalg/eigen/plot_05_francis_qr_algorithm`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The QR algorithm and the Schur form</div>
     </div>
 
 
@@ -135,6 +268,9 @@ Iterative solvers
 
 Conjugate gradient (SPD systems) and GMRES (general systems): Krylov
 subspace methods that never form a dense factorization.
+
+Also the classical stationary iterations: Jacobi, Gauss-Seidel, and
+successive over-relaxation (SOR).
 
 
 .. raw:: html
@@ -165,6 +301,23 @@ subspace methods that never form a dense factorization.
     </div>
 
 
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The three classical stationary iterations on the 1-D Poisson matrix tridiag(-1, 2, -1). Gauss-Seidel contracts the error about twice as fast per sweep as Jacobi, and SOR at Young&#x27;s optimal relaxation factor is faster by an order of magnitude.">
+
+.. only:: html
+
+  .. image:: /api/gallery/linalg/iterative/images/thumb/sphx_glr_plot_02_gauss_seidel_and_sor_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/linalg/iterative/plot_02_gauss_seidel_and_sor`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Jacobi, Gauss-Seidel, and successive over-relaxation</div>
+    </div>
+
+
 .. thumbnail-parent-div-close
 
 .. raw:: html
@@ -174,8 +327,9 @@ subspace methods that never form a dense factorization.
 LU decomposition
 ----------------
 
-Partial-pivoted LU decomposition, and solving systems / computing
-determinants from a single factorization.
+Elimination as the *Nine Chapters* did it, and Gauss's elimination
+recorded as a partial-pivoted LU decomposition for solving systems and
+computing determinants from a single factorization.
 
 
 .. raw:: html
@@ -191,14 +345,31 @@ determinants from a single factorization.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Factors P A = L U and reuses the factorization to solve multiple right-hand sides and compute the determinant, both far cheaper than refactoring from scratch each time.">
+    <div class="sphx-glr-thumbcontainer" tooltip="The first problem of Chapter 8 (Fangcheng, &quot;rectangular arrays&quot;) of the Nine Chapters on the Mathematical Art: 3 bundles of top-grade, 2 of medium-grade and 1 of low-grade grain yield 39 dou; 2, 3 and 1 bundles yield 34; 1, 2 and 3 bundles yield 26. How much does one bundle of each grade yield?">
 
 .. only:: html
 
-  .. image:: /api/gallery/linalg/lu/images/thumb/sphx_glr_plot_01_lu_decomposition_thumb.png
+  .. image:: /api/gallery/linalg/lu/images/thumb/sphx_glr_plot_01_nine_chapters_elimination_thumb.png
     :alt:
 
-  :doc:`/api/gallery/linalg/lu/plot_01_lu_decomposition`
+  :doc:`/api/gallery/linalg/lu/plot_01_nine_chapters_elimination`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Elimination in the Nine Chapters: the three grades of grain</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Gaussian elimination, with its multipliers stored in L and the eliminated rows in U, factors P A = L U. The script reuses the factorization to solve multiple right-hand sides and compute the determinant, both far cheaper than refactoring from scratch each time.">
+
+.. only:: html
+
+  .. image:: /api/gallery/linalg/lu/images/thumb/sphx_glr_plot_02_lu_decomposition_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/linalg/lu/plot_02_lu_decomposition`
 
 .. raw:: html
 
@@ -256,8 +427,9 @@ orthogonality each preserves for an ill-conditioned matrix.
 Numerical stability
 --------------------
 
-Least squares via the normal equations vs. via QR, and why the former
-squares the condition number of the design matrix.
+The condition number: how much a linear system amplifies errors in its
+data, and why least squares via the normal equations squares it while
+QR does not.
 
 
 .. raw:: html
@@ -273,18 +445,18 @@ squares the condition number of the design matrix.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Solving the normal equations A^T A x = A^T b is simple but squares the condition number of A; solving via A = Q R instead avoids ever forming A^T A, so the effective conditioning stays at kappa(A) rather than kappa(A)^2.">
+    <div class="sphx-glr-thumbcontainer" tooltip="kappa_2(A) = sigma_max / sigma_min bounds how much a relative perturbation of the data can grow in the solution of A x = b, whichever algorithm solves it: expect to lose about log10(kappa) digits. The same number explains why least squares through the normal equations A^T A x = A^T b is fragile -- kappa(A^T A) = kappa(A)^2 -- while QR works with kappa(A) itself.">
 
 .. only:: html
 
-  .. image:: /api/gallery/linalg/stability/images/thumb/sphx_glr_plot_01_normal_equations_vs_qr_thumb.png
+  .. image:: /api/gallery/linalg/stability/images/thumb/sphx_glr_plot_01_condition_number_thumb.png
     :alt:
 
-  :doc:`/api/gallery/linalg/stability/plot_01_normal_equations_vs_qr`
+  :doc:`/api/gallery/linalg/stability/plot_01_condition_number`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Least squares: normal equations vs. QR</div>
+      <div class="sphx-glr-thumbnail-title">Turing's condition number: how much a linear system amplifies error</div>
     </div>
 
 
@@ -297,7 +469,9 @@ squares the condition number of the design matrix.
 Singular value decomposition
 -----------------------------
 
-SVD via :func:`numpy.linalg.svd`.
+SVD via :func:`numpy.linalg.svd` and the Eckart-Young best low-rank approximation.
+
+Also the Moore-Penrose pseudoinverse and minimum-norm least squares.
 
 
 .. raw:: html
@@ -313,7 +487,7 @@ SVD via :func:`numpy.linalg.svd`.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Computes the SVD A = U diag(S) V^T via numpy.linalg.svd (LAPACK&#x27;s bidiagonalization-based ?gesdd), the numerically stable production route -- rather than the textbook-definition route of eigendecomposing A^T A, which squares the condition number of the problem being solved.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Truncating the SVD A = U diag(S) V^T to its k largest singular values gives the best rank-``k`` approximation of A: its error is sqrt(sigma_{k+1}^2 + ...) in the Frobenius norm and sigma_{k+1} in the spectral norm, and no other rank-``k`` matrix does better. The SVD itself comes from numpy.linalg.svd (LAPACK&#x27;s stable bidiagonalization route, not the eigendecomposition of A^T A).">
 
 .. only:: html
 
@@ -324,7 +498,24 @@ SVD via :func:`numpy.linalg.svd`.
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Singular value decomposition</div>
+      <div class="sphx-glr-thumbnail-title">Eckart-Young: the best low-rank approximation from the SVD</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="For a rectangular or rank-deficient A there is no inverse, but there is exactly one matrix A^+ satisfying Penrose&#x27;s four equations, and x = A^+ b is the shortest vector among all least-squares solutions.">
+
+.. only:: html
+
+  .. image:: /api/gallery/linalg/svd/images/thumb/sphx_glr_plot_02_moore_penrose_pseudoinverse_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/linalg/svd/plot_02_moore_penrose_pseudoinverse`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Moore-Penrose pseudoinverse</div>
     </div>
 
 
@@ -341,6 +532,7 @@ SVD via :func:`numpy.linalg.svd`.
 
 
    /api/gallery/linalg/cholesky/index.rst
+   /api/gallery/linalg/classical/index.rst
    /api/gallery/linalg/eigen/index.rst
    /api/gallery/linalg/iterative/index.rst
    /api/gallery/linalg/lu/index.rst

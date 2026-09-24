@@ -469,7 +469,13 @@ exponentiation; primality testing (trial division, Miller-Rabin) and
 prime generation (sieve of Eratosthenes); the Chinese Remainder Theorem;
 continued-fraction expansion and best rational approximations; Euler’s
 totient function and other multiplicative number-theoretic functions
-(Mobius, divisor-sum); and linear and Pell Diophantine equation solvers.</p>
+(Mobius, divisor-sum); and linear and Pell Diophantine equation solvers;
+the Lucas-Lehmer test for Mersenne primes; Pollard’s rho factorization;
+Legendre and Jacobi symbols and Tonelli-Shanks modular square roots;
+sums of two and four squares; Euler’s product for the zeta function
+(checked against <code class="docutils literal notranslate"><span class="pre">scipy.special.zeta</span></code>); and the prime-counting
+function, logarithmic integral (<code class="docutils literal notranslate"><span class="pre">scipy.special.expi</span></code>), and primes in
+arithmetic progressions.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="mathematicskit.number_theory.BezoutResult">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.number_theory.</span></span><span class="sig-name descname"><span class="pre">BezoutResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gcd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/number_theory/core/base.html#BezoutResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.number_theory.BezoutResult" title="Link to this definition">#</a></dt>
@@ -487,7 +493,7 @@ totient function and other multiplicative number-theoretic functions
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.number_theory.BezoutResult.gcd">
 <span class="sig-name descname"><span class="pre">gcd</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#mathematicskit.number_theory.BezoutResult.gcd" title="Link to this definition">#</a></dt>
-<dd><p><span class="math notranslate nohighlight">\(\gcd(a, b)\)</span>.</p>
+<dd><p><span class="math notranslate nohighlight">\(\gcd(a, b)\)</span>, always non-negative.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
@@ -498,12 +504,18 @@ totient function and other multiplicative number-theoretic functions
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.number_theory.BezoutResult.x">
 <span class="sig-name descname"><span class="pre">x</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#mathematicskit.number_theory.BezoutResult.x" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>The Bezout coefficient of <code class="docutils literal notranslate"><span class="pre">a</span></code> in <span class="math notranslate nohighlight">\(ax + by = \gcd(a,b)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.number_theory.BezoutResult.y">
 <span class="sig-name descname"><span class="pre">y</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#mathematicskit.number_theory.BezoutResult.y" title="Link to this definition">#</a></dt>
-<dd><p>Bezout coefficients with <span class="math notranslate nohighlight">\(ax + by = \gcd(a,b)\)</span>.</p>
+<dd><p>The Bezout coefficient of <code class="docutils literal notranslate"><span class="pre">b</span></code> in <span class="math notranslate nohighlight">\(ax + by = \gcd(a,b)\)</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
@@ -609,7 +621,8 @@ approximations <span class="math notranslate nohighlight">\(p_k/q_k\)</span>, in
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.number_theory.LinearDiophantineResult.gcd">
 <span class="sig-name descname"><span class="pre">gcd</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></span><a class="headerlink" href="#mathematicskit.number_theory.LinearDiophantineResult.gcd" title="Link to this definition">#</a></dt>
-<dd><p><span class="math notranslate nohighlight">\(\gcd(a, b)\)</span>.</p>
+<dd><p><span class="math notranslate nohighlight">\(\gcd(a, b)\)</span>, or <code class="docutils literal notranslate"><span class="pre">0</span></code> in the degenerate
+<code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">b</span> <span class="pre">==</span> <span class="pre">0</span></code> case, where there is no gcd to speak of.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
@@ -632,17 +645,31 @@ approximations <span class="math notranslate nohighlight">\(p_k/q_k\)</span>, in
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.number_theory.LinearDiophantineResult.x0">
 <span class="sig-name descname"><span class="pre">x0</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#mathematicskit.number_theory.LinearDiophantineResult.x0" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>The <code class="docutils literal notranslate"><span class="pre">x</span></code> of one particular solution, or <code class="docutils literal notranslate"><span class="pre">None</span></code>
+when <cite>has_solution</cite> is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a>, optional</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.number_theory.LinearDiophantineResult.x_step">
 <span class="sig-name descname"><span class="pre">x_step</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></span><a class="headerlink" href="#mathematicskit.number_theory.LinearDiophantineResult.x_step" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p><span class="math notranslate nohighlight">\(b/\gcd(a,b)\)</span>, the amount <code class="docutils literal notranslate"><span class="pre">x</span></code> advances per step along
+the solution family.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.number_theory.LinearDiophantineResult.y0">
 <span class="sig-name descname"><span class="pre">y0</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#mathematicskit.number_theory.LinearDiophantineResult.y0" title="Link to this definition">#</a></dt>
-<dd><p>A particular solution, if one exists.</p>
+<dd><p>The <code class="docutils literal notranslate"><span class="pre">y</span></code> of that same particular solution.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a>, optional</p>
@@ -653,8 +680,9 @@ approximations <span class="math notranslate nohighlight">\(p_k/q_k\)</span>, in
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.number_theory.LinearDiophantineResult.y_step">
 <span class="sig-name descname"><span class="pre">y_step</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></span><a class="headerlink" href="#mathematicskit.number_theory.LinearDiophantineResult.y_step" title="Link to this definition">#</a></dt>
-<dd><p>The general solution is <code class="docutils literal notranslate"><span class="pre">(x0</span> <span class="pre">+</span> <span class="pre">k*x_step,</span> <span class="pre">y0</span> <span class="pre">-</span> <span class="pre">k*y_step)</span></code>
-for any integer <code class="docutils literal notranslate"><span class="pre">k</span></code>.</p>
+<dd><p><span class="math notranslate nohighlight">\(a/\gcd(a,b)\)</span>. Together with <cite>x_step</cite>, the general
+solution is <code class="docutils literal notranslate"><span class="pre">(x0</span> <span class="pre">+</span> <span class="pre">k*x_step,</span> <span class="pre">y0</span> <span class="pre">-</span> <span class="pre">k*y_step)</span></code> for any integer <code class="docutils literal notranslate"><span class="pre">k</span></code>;
+note the <em>minus</em> sign on the <code class="docutils literal notranslate"><span class="pre">y</span></code> component.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
@@ -693,17 +721,96 @@ for any integer <code class="docutils literal notranslate"><span class="pre">k</
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.number_theory.PellResult.extra">
 <span class="sig-name descname"><span class="pre">extra</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a></span><a class="headerlink" href="#mathematicskit.number_theory.PellResult.extra" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>Free-form diagnostics slot, unused by the current solver.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.number_theory.PellResult.x">
 <span class="sig-name descname"><span class="pre">x</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#mathematicskit.number_theory.PellResult.x" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>The <code class="docutils literal notranslate"><span class="pre">x</span></code> of the fundamental (smallest positive) solution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.number_theory.PellResult.y">
 <span class="sig-name descname"><span class="pre">y</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#mathematicskit.number_theory.PellResult.y" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>The <code class="docutils literal notranslate"><span class="pre">y</span></code> of the fundamental solution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.number_theory.PollardRhoResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.number_theory.</span></span><span class="sig-name descname"><span class="pre">PollardRhoResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cofactor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/number_theory/core/base.html#PollardRhoResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.number_theory.PollardRhoResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Container for a factor found by Pollard’s rho method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>factor</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>)</p></li>
+<li><p><strong>cofactor</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>)</p></li>
+<li><p><strong>iterations</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>)</p></li>
+<li><p><strong>c</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.number_theory.PollardRhoResult.c">
+<span class="sig-name descname"><span class="pre">c</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#mathematicskit.number_theory.PollardRhoResult.c" title="Link to this definition">#</a></dt>
+<dd><p>The additive constant of <span class="math notranslate nohighlight">\(x \mapsto x^2 + c\)</span> that succeeded.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.number_theory.PollardRhoResult.cofactor">
+<span class="sig-name descname"><span class="pre">cofactor</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#mathematicskit.number_theory.PollardRhoResult.cofactor" title="Link to this definition">#</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">//</span> <span class="pre">factor</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.number_theory.PollardRhoResult.factor">
+<span class="sig-name descname"><span class="pre">factor</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#mathematicskit.number_theory.PollardRhoResult.factor" title="Link to this definition">#</a></dt>
+<dd><p>A nontrivial factor of <code class="docutils literal notranslate"><span class="pre">n</span></code> (not necessarily prime).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.number_theory.PollardRhoResult.iterations">
+<span class="sig-name descname"><span class="pre">iterations</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#mathematicskit.number_theory.PollardRhoResult.iterations" title="Link to this definition">#</a></dt>
+<dd><p>Total tortoise-and-hare steps taken, across all restarts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -711,16 +818,25 @@ for any integer <code class="docutils literal notranslate"><span class="pre">k</
 <dt class="sig sig-object py" id="mathematicskit.number_theory.best_rational_approximation">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.number_theory.</span></span><span class="sig-name descname"><span class="pre">best_rational_approximation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_denominator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/number_theory/systems/continued_fractions.html#best_rational_approximation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.number_theory.best_rational_approximation" title="Link to this definition">#</a></dt>
 <dd><p>Best rational approximation to <code class="docutils literal notranslate"><span class="pre">x</span></code> with denominator <span class="math notranslate nohighlight">\(\leq\)</span> <cite>max_denominator</cite>.</p>
-<p>Expands <code class="docutils literal notranslate"><span class="pre">x</span></code>’s continued fraction and returns the last convergent
-whose denominator doesn’t exceed <cite>max_denominator</cite> – convergents
-are provably the best rational approximations achievable at or below
-their own denominator. See Niven, Zuckerman &amp; Montgomery, <em>An
-Introduction to the Theory of Numbers</em>, 5th ed., Theorem 7.13.</p>
+<p>Expands <code class="docutils literal notranslate"><span class="pre">x</span></code>’s continued fraction and takes the last convergent
+<span class="math notranslate nohighlight">\(p_k/q_k\)</span> with <span class="math notranslate nohighlight">\(q_k \leq\)</span> <cite>max_denominator</cite>, then compares
+it against the best <em>semiconvergent</em> (or “intermediate fraction”)
+<span class="math notranslate nohighlight">\(\dfrac{p_{k-1} + t\,p_k}{q_{k-1} + t\,q_k}\)</span> that still fits
+under the denominator bound, returning whichever is closer to <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p>
+<p>Both candidates are needed: a convergent is only guaranteed to be the
+best approximation among fractions with denominator at most <em>its own</em>
+<span class="math notranslate nohighlight">\(q_k\)</span>, and the next convergent’s denominator can jump far past
+<cite>max_denominator</cite>, leaving room for a semiconvergent in between. For
+<span class="math notranslate nohighlight">\(x=\pi\)</span> with <code class="docutils literal notranslate"><span class="pre">max_denominator=57</span></code>, for instance, the last
+convergent is <span class="math notranslate nohighlight">\(22/7\)</span> but the semiconvergent <span class="math notranslate nohighlight">\(179/57\)</span>
+(between <span class="math notranslate nohighlight">\(22/7\)</span> and <span class="math notranslate nohighlight">\(333/106\)</span>) is genuinely closer. See
+Niven, Zuckerman &amp; Montgomery, <em>An Introduction to the Theory of
+Numbers</em>, 5th ed., Theorem 7.13 and Sec. 7.4.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>x</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
-<li><p><strong>max_denominator</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>max_denominator</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">1</span></code>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -734,6 +850,11 @@ Introduction to the Theory of Numbers</em>, 5th ed., Theorem 7.13.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># The classic approximation pi ~ 355/113 (denominator &lt;= 200).</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">best_rational_approximation</span><span class="p">(</span><span class="mf">3.14159265358979</span><span class="p">,</span> <span class="n">max_denominator</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
 <span class="go">(355, 113)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Under 57, the best fraction is the semiconvergent 179/57, not 22/7.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">best_rational_approximation</span><span class="p">(</span><span class="mf">3.14159265358979</span><span class="p">,</span> <span class="n">max_denominator</span><span class="o">=</span><span class="mi">57</span><span class="p">)</span>
+<span class="go">(179, 57)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">abs</span><span class="p">(</span><span class="mi">179</span> <span class="o">/</span> <span class="mi">57</span> <span class="o">-</span> <span class="mf">3.14159265358979</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">abs</span><span class="p">(</span><span class="mi">22</span> <span class="o">/</span> <span class="mi">7</span> <span class="o">-</span> <span class="mf">3.14159265358979</span><span class="p">)</span>
+<span class="go">True</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -810,7 +931,7 @@ than this (exact termination for rational <code class="docutils literal notransl
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">convergents</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">abs</span><span class="p">(</span><span class="n">p</span> <span class="o">/</span> <span class="n">q</span> <span class="o">-</span> <span class="mf">3.245</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-9</span>
 <span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># The golden ratio&#39;s continued fraction is famously all 1s.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># The golden ratio's continued fraction is famously all 1s.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">phi</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">5</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">continued_fraction_expansion</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">max_terms</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">terms</span>
 <span class="go">[1, 1, 1, 1, 1, 1, 1, 1]</span>
@@ -849,6 +970,44 @@ Introduction to the Theory of Numbers</em>, 5th ed., Sec. 4.2.</p>
 <span class="go">56</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">divisor_sum</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="n">power</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># 1, 2, 3, 4, 6, 12: 6 divisors</span>
 <span class="go">6</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.number_theory.euler_product">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.number_theory.</span></span><span class="sig-name descname"><span class="pre">euler_product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/number_theory/systems/zeta.html#euler_product"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.number_theory.euler_product" title="Link to this definition">#</a></dt>
+<dd><p>Truncated Euler product <span class="math notranslate nohighlight">\(\prod_{p \le N} (1 - p^{-s})^{-1}\)</span>.</p>
+<p>Euler (1737) showed that for <span class="math notranslate nohighlight">\(s &gt; 1\)</span></p>
+<div class="math notranslate nohighlight">
+\[\zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s}
+         = \prod_{p\ \mathrm{prime}} \frac{1}{1 - p^{-s}},\]</div>
+<p>which is unique factorization written analytically. Truncating the
+product at primes <span class="math notranslate nohighlight">\(p \le N\)</span> converges to <span class="math notranslate nohighlight">\(\zeta(s)\)</span> as
+<span class="math notranslate nohighlight">\(N \to \infty\)</span>; at <span class="math notranslate nohighlight">\(s = 1\)</span> it diverges like
+<span class="math notranslate nohighlight">\(e^{\gamma}\ln N\)</span> (Mertens’ third theorem), reproving that
+there are infinitely many primes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Exponent, <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>.</p></li>
+<li><p><strong>limit</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Include primes up to and including <cite>limit</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.special</span><span class="w"> </span><span class="kn">import</span> <span class="n">zeta</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">abs</span><span class="p">(</span><span class="n">euler_product</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">5</span><span class="p">)</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">6</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-5</span>  <span class="c1"># the Basel problem</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">euler_product</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">-</span> <span class="n">zeta</span><span class="p">(</span><span class="mf">3.0</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">1e-6</span><span class="p">)</span>
+<span class="go">True</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1019,6 +1178,8 @@ Algorithms</em>, 3rd ed., Ch. 31.8.</p>
 <span class="go">False</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_prime_miller_rabin</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">61</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># a known Mersenne prime</span>
 <span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_prime_miller_rabin</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">89</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># arbitrary precision: no 64-bit ceiling</span>
+<span class="go">True</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1051,6 +1212,41 @@ Numbers</em>, 5th ed., Sec. 1.1.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.number_theory.jacobi_symbol">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.number_theory.</span></span><span class="sig-name descname"><span class="pre">jacobi_symbol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/number_theory/systems/quadratic_residues.html#jacobi_symbol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.number_theory.jacobi_symbol" title="Link to this definition">#</a></dt>
+<dd><p>The Jacobi symbol <span class="math notranslate nohighlight">\(\left(\frac{a}{n}\right)\)</span> for odd <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>.</p>
+<p>The multiplicative extension of the Legendre symbol to odd
+composite moduli. Computed without factoring <code class="docutils literal notranslate"><span class="pre">n</span></code> by the
+Euclid-like algorithm that quadratic reciprocity makes possible:
+pull out factors of 2 with <span class="math notranslate nohighlight">\(\left(\frac{2}{n}\right) =
+(-1)^{(n^2-1)/8}\)</span> and flip the symbol with <span class="math notranslate nohighlight">\(\left(\frac{a}{n}\right)
+\left(\frac{n}{a}\right) = (-1)^{\frac{a-1}{2}\frac{n-1}{2}}\)</span>. See
+Cohen, <em>A Course in Computational Algebraic Number Theory</em>, Algorithm
+1.4.10.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Odd, <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>int</em> – One of <code class="docutils literal notranslate"><span class="pre">-1</span></code>, <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">jacobi_symbol</span><span class="p">(</span><span class="mi">1001</span><span class="p">,</span> <span class="mi">9907</span><span class="p">)</span>
+<span class="go">-1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jacobi_symbol</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>  <span class="c1"># = (2/3)(2/5) = (-1)(-1), yet 2 is not a square mod 15</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.number_theory.lcm">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.number_theory.</span></span><span class="sig-name descname"><span class="pre">lcm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/number_theory/utils/gcd_lcm.html#lcm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.number_theory.lcm" title="Link to this definition">#</a></dt>
 <dd><p>Least common multiple: <span class="math notranslate nohighlight">\(\mathrm{lcm}(a,b) = |ab|/\gcd(a,b)\)</span>.</p>
@@ -1073,6 +1269,93 @@ Numbers</em>, 5th ed., Sec. 1.1.</p>
 <span class="go">12</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lcm</span><span class="p">(</span><span class="mi">21</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 <span class="go">42</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.number_theory.legendre_symbol">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.number_theory.</span></span><span class="sig-name descname"><span class="pre">legendre_symbol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/number_theory/systems/quadratic_residues.html#legendre_symbol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.number_theory.legendre_symbol" title="Link to this definition">#</a></dt>
+<dd><p>The Legendre symbol <span class="math notranslate nohighlight">\(\left(\frac{a}{p}\right)\)</span> via Euler’s criterion.</p>
+<p>For an odd prime <code class="docutils literal notranslate"><span class="pre">p</span></code>, <span class="math notranslate nohighlight">\(\left(\frac{a}{p}\right) \equiv
+a^{(p-1)/2} \pmod p\)</span> is <code class="docutils literal notranslate"><span class="pre">1</span></code> when <code class="docutils literal notranslate"><span class="pre">a</span></code> is a nonzero square modulo
+<code class="docutils literal notranslate"><span class="pre">p</span></code>, <code class="docutils literal notranslate"><span class="pre">-1</span></code> when it is not, and <code class="docutils literal notranslate"><span class="pre">0</span></code> when <code class="docutils literal notranslate"><span class="pre">p</span></code> divides <code class="docutils literal notranslate"><span class="pre">a</span></code>.
+See Niven, Zuckerman &amp; Montgomery, 5th ed., Sec. 3.1, Theorem 3.1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>p</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – An odd prime (not checked).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>int</em> – One of <code class="docutils literal notranslate"><span class="pre">-1</span></code>, <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">legendre_symbol</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">)]</span>  <span class="c1"># squares mod 7: 1, 2, 4</span>
+<span class="go">[0, 1, 1, -1, 1, -1, -1]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.number_theory.logarithmic_integral">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.number_theory.</span></span><span class="sig-name descname"><span class="pre">logarithmic_integral</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/number_theory/systems/prime_distribution.html#logarithmic_integral"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.number_theory.logarithmic_integral" title="Link to this definition">#</a></dt>
+<dd><p>The logarithmic integral <span class="math notranslate nohighlight">\(\operatorname{li}(x) = \int_0^x \frac{dt}{\ln t}\)</span>.</p>
+<p>The (Cauchy principal value) integral equals <span class="math notranslate nohighlight">\(\operatorname{Ei}(\ln x)\)</span>,
+evaluated with <code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.expi()</span></code>. Gauss’s conjectured
+approximation to <span class="math notranslate nohighlight">\(\pi(x)\)</span>: the prime number theorem (Hadamard
+and de la Vallée Poussin, 1896) states <span class="math notranslate nohighlight">\(\pi(x) \sim
+\operatorname{li}(x) \sim x/\ln x\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array_like</em>) – <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">logarithmic_integral</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)),</span> <span class="mi">6</span><span class="p">)</span>  <span class="c1"># li(2), the Ramanujan-Soldner offset</span>
+<span class="go">1.045164</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">logarithmic_integral</span><span class="p">(</span><span class="mf">1e6</span><span class="p">)))</span>  <span class="c1"># vs. pi(10**6) = 78498</span>
+<span class="go">78628</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.number_theory.lucas_lehmer">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.number_theory.</span></span><span class="sig-name descname"><span class="pre">lucas_lehmer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/number_theory/systems/primality.html#lucas_lehmer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.number_theory.lucas_lehmer" title="Link to this definition">#</a></dt>
+<dd><p>Lucas-Lehmer test: is the Mersenne number <span class="math notranslate nohighlight">\(M_p = 2^p - 1\)</span> prime?</p>
+<p>For an odd prime <code class="docutils literal notranslate"><span class="pre">p</span></code>, set <span class="math notranslate nohighlight">\(s_0 = 4\)</span> and <span class="math notranslate nohighlight">\(s_{k+1} =
+s_k^2 - 2 \bmod M_p\)</span>; then <span class="math notranslate nohighlight">\(M_p\)</span> is prime if and only if
+<span class="math notranslate nohighlight">\(s_{p-2} \equiv 0 \pmod{M_p}\)</span> (Lucas, 1878; Lehmer, 1930).
+Only <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">-</span> <span class="pre">2</span></code> modular squarings are needed, so the test is a
+deterministic proof of primality far faster than any general
+method – it is why the largest known primes are almost all Mersenne
+primes. See Crandall &amp; Pomerance, <em>Prime Numbers: A Computational
+Perspective</em>, 2nd ed., Theorem 4.2.6.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>p</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Exponent, <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">&gt;=</span> <span class="pre">2</span></code>. A composite <code class="docutils literal notranslate"><span class="pre">p</span></code> gives a composite
+<span class="math notranslate nohighlight">\(M_p\)</span> and returns <code class="docutils literal notranslate"><span class="pre">False</span></code> immediately; <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">=</span> <span class="pre">2</span></code> (where
+<span class="math notranslate nohighlight">\(M_2 = 3\)</span>) is handled as a special case.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>bool</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">130</span><span class="p">)</span> <span class="k">if</span> <span class="n">lucas_lehmer</span><span class="p">(</span><span class="n">p</span><span class="p">)]</span>  <span class="c1"># exponents of Mersenne primes</span>
+<span class="go">[2, 3, 5, 7, 13, 17, 19, 31, 61, 89, 107, 127]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1137,6 +1420,75 @@ Numbers</em>, 5th ed., Sec. 2.1.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.number_theory.pollard_rho">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.number_theory.</span></span><span class="sig-name descname"><span class="pre">pollard_rho</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/number_theory/systems/factorization.html#pollard_rho"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.number_theory.pollard_rho" title="Link to this definition">#</a></dt>
+<dd><p>Find a nontrivial factor of composite <code class="docutils literal notranslate"><span class="pre">n</span></code> with Pollard’s rho method.</p>
+<p>Iterates the pseudo-random map <span class="math notranslate nohighlight">\(x \mapsto x^2 + c \bmod n\)</span>.
+Reduced modulo an unknown prime factor <span class="math notranslate nohighlight">\(p\)</span> of <code class="docutils literal notranslate"><span class="pre">n</span></code>, the
+sequence must repeat within about <span class="math notranslate nohighlight">\(\sqrt{\pi p/2}\)</span> steps (the
+birthday paradox), tracing out the Greek letter <span class="math notranslate nohighlight">\(\rho\)</span>. Floyd’s
+tortoise-and-hare cycle detection finds that repeat by comparing
+<span class="math notranslate nohighlight">\(x_i\)</span> with <span class="math notranslate nohighlight">\(x_{2i}\)</span> and testing <span class="math notranslate nohighlight">\(\gcd(|x_i - x_{2i}|,
+n)\)</span>. The expected cost is <span class="math notranslate nohighlight">\(O(\sqrt p) \le O(n^{1/4})\)</span> steps,
+compared with <span class="math notranslate nohighlight">\(O(\sqrt n)\)</span> for trial division. If the cycle
+closes modulo every factor at once (the gcd is <code class="docutils literal notranslate"><span class="pre">n</span></code> itself), the
+constant <code class="docutils literal notranslate"><span class="pre">c</span></code> is incremented and the search restarted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Composite, <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;=</span> <span class="pre">4</span></code>. An even <code class="docutils literal notranslate"><span class="pre">n</span></code> returns the factor 2
+immediately.</p></li>
+<li><p><strong>c</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Initial additive constant of the iteration map.</p></li>
+<li><p><strong>x0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Starting value.</p></li>
+<li><p><strong>max_iter</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Total iteration budget across all restarts.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.number_theory.PollardRhoResult" title="mathematicskit.number_theory.core.base.PollardRhoResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">PollardRhoResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>PollardRhoResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">pollard_rho</span><span class="p">(</span><span class="mi">8051</span><span class="p">)</span>  <span class="c1"># Pollard's own worked example: 83 * 97</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">([</span><span class="n">result</span><span class="o">.</span><span class="n">factor</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">cofactor</span><span class="p">])</span>
+<span class="go">[83, 97]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">pollard_rho</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">64</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Landry, 1880: 274177 * 67280421310721</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">([</span><span class="n">result</span><span class="o">.</span><span class="n">factor</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">cofactor</span><span class="p">])</span>
+<span class="go">[274177, 67280421310721]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.number_theory.prime_counting">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.number_theory.</span></span><span class="sig-name descname"><span class="pre">prime_counting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/number_theory/systems/prime_distribution.html#prime_counting"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.number_theory.prime_counting" title="Link to this definition">#</a></dt>
+<dd><p>The prime-counting function <span class="math notranslate nohighlight">\(\pi(x)\)</span>: the number of primes <span class="math notranslate nohighlight">\(\le x\)</span>.</p>
+<p>Sieves once up to <code class="docutils literal notranslate"><span class="pre">max(x)</span></code> and counts with
+<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.searchsorted.html#numpy.searchsorted" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.searchsorted()</span></code></a>, so a whole array of <code class="docutils literal notranslate"><span class="pre">x</span></code> costs a single
+sieve.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em> or </em><em>array_like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – Non-negative arguments.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>int or ndarray of int</em> – Same shape as <cite>x</cite>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="n">prime_counting</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+<span class="go">25</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prime_counting</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">])</span>
+<span class="go">array([   4,   25,  168, 1229])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.number_theory.prime_factorization">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.number_theory.</span></span><span class="sig-name descname"><span class="pre">prime_factorization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/number_theory/systems/totient.html#prime_factorization"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.number_theory.prime_factorization" title="Link to this definition">#</a></dt>
 <dd><p>Prime factorization of <code class="docutils literal notranslate"><span class="pre">n</span></code> via trial division: <span class="math notranslate nohighlight">\(n = \prod_i p_i^{e_i}\)</span>.</p>
@@ -1154,6 +1506,39 @@ Numbers</em>, 5th ed., Sec. 2.1.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prime_factorization</span><span class="p">(</span><span class="mi">360</span><span class="p">)</span>
 <span class="go">{2: 3, 3: 2, 5: 1}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.number_theory.primes_in_progression">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.number_theory.</span></span><span class="sig-name descname"><span class="pre">primes_in_progression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/number_theory/systems/prime_distribution.html#primes_in_progression"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.number_theory.primes_in_progression" title="Link to this definition">#</a></dt>
+<dd><p>Primes <span class="math notranslate nohighlight">\(p \le\)</span> <cite>limit</cite> with <span class="math notranslate nohighlight">\(p \equiv a \pmod q\)</span>.</p>
+<p>Dirichlet’s theorem (1837) guarantees infinitely many such primes
+whenever <span class="math notranslate nohighlight">\(\gcd(a, q) = 1\)</span>; the prime number theorem for
+arithmetic progressions sharpens this to each of the
+<span class="math notranslate nohighlight">\(\varphi(q)\)</span> coprime residue classes receiving an asymptotic
+share <span class="math notranslate nohighlight">\(1/\varphi(q)\)</span> of all primes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Residue class.</p></li>
+<li><p><strong>q</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Modulus, <code class="docutils literal notranslate"><span class="pre">q</span> <span class="pre">&gt;=</span> <span class="pre">1</span></code>.</p></li>
+<li><p><strong>limit</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray of int</em> – The primes in <code class="docutils literal notranslate"><span class="pre">[2,</span> <span class="pre">limit]</span></code> congruent to <code class="docutils literal notranslate"><span class="pre">a</span></code> mod <code class="docutils literal notranslate"><span class="pre">q</span></code>, ascending.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">primes_in_progression</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="go">array([ 3,  7, 11, 19, 23, 31, 43, 47])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">primes_in_progression</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>  <span class="c1"># gcd(2, 4) = 2: only the prime 2</span>
+<span class="go">array([2])</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1220,6 +1605,10 @@ Theorem 2.9.</p>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">solve_linear_diophantine</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">has_solution</span>  <span class="c1"># gcd(2,4)=2 does not divide 3</span>
 <span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">solve_linear_diophantine</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">has_solution</span>  <span class="c1"># 0x + 0y = 5 is unsolvable</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">solve_linear_diophantine</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">has_solution</span>  <span class="c1"># ... but 0x + 0y = 0 holds for every (x, y)</span>
+<span class="go">True</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1259,6 +1648,104 @@ Introduction to the Theory of Numbers</em>, 5th ed., Sec. 7.8, Theorem
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result2</span> <span class="o">=</span> <span class="n">solve_pell_equation</span><span class="p">(</span><span class="mi">61</span><span class="p">)</span>  <span class="c1"># a famously large fundamental solution</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result2</span><span class="o">.</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">61</span> <span class="o">*</span> <span class="n">result2</span><span class="o">.</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span>
 <span class="go">1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.number_theory.sqrt_mod">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.number_theory.</span></span><span class="sig-name descname"><span class="pre">sqrt_mod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/number_theory/systems/quadratic_residues.html#sqrt_mod"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.number_theory.sqrt_mod" title="Link to this definition">#</a></dt>
+<dd><p>A square root of <code class="docutils literal notranslate"><span class="pre">a</span></code> modulo an odd prime <code class="docutils literal notranslate"><span class="pre">p</span></code> (Tonelli-Shanks).</p>
+<p>Writes <span class="math notranslate nohighlight">\(p - 1 = 2^s q\)</span> with <code class="docutils literal notranslate"><span class="pre">q</span></code> odd, starts from the
+candidate <span class="math notranslate nohighlight">\(a^{(q+1)/2}\)</span>, and repeatedly corrects it with powers
+of a quadratic non-residue until the error term has order 1
+(Tonelli, 1891; Shanks, 1973). Runs in <span class="math notranslate nohighlight">\(O(\log^2 p)\)</span> modular
+multiplications. See Cohen, Algorithm 1.5.1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – A quadratic residue modulo <code class="docutils literal notranslate"><span class="pre">p</span></code> (<code class="docutils literal notranslate"><span class="pre">legendre_symbol(a,</span> <span class="pre">p)</span> <span class="pre">!=</span> <span class="pre">-1</span></code>).</p></li>
+<li><p><strong>p</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – An odd prime.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>int</em> – The root <code class="docutils literal notranslate"><span class="pre">x</span></code> in <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">p</span> <span class="pre">//</span> <span class="pre">2]</span></code>; the other root is <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">-</span> <span class="pre">x</span></code>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sqrt_mod</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">13</span><span class="p">)</span>  <span class="c1"># 6*6 = 36 = 10 (mod 13)</span>
+<span class="go">6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">sqrt_mod</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="mi">61</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">%</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">61</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.number_theory.sum_of_four_squares">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.number_theory.</span></span><span class="sig-name descname"><span class="pre">sum_of_four_squares</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/number_theory/systems/sums_of_squares.html#sum_of_four_squares"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.number_theory.sum_of_four_squares" title="Link to this definition">#</a></dt>
+<dd><p>Write <code class="docutils literal notranslate"><span class="pre">n</span></code> as <span class="math notranslate nohighlight">\(a^2 + b^2 + c^2 + d^2\)</span> (Lagrange’s four-square theorem).</p>
+<p>Lagrange proved in 1770 that <em>every</em> non-negative integer is a sum of
+four squares, so this function always succeeds. The search tries
+<span class="math notranslate nohighlight">\(a \ge b \ge c\)</span> in decreasing order and solves for <code class="docutils literal notranslate"><span class="pre">d</span></code>; for
+<code class="docutils literal notranslate"><span class="pre">n</span></code> up to a few million it returns almost immediately. The number
+of ordered, signed representations is given by Jacobi’s (1829)
+formula <span class="math notranslate nohighlight">\(r_4(n) = 8\sum_{d \mid n,\ 4 \nmid d} d\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;=</span> <span class="pre">0</span></code>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>tuple of (int, int, int, int)</em> – <code class="docutils literal notranslate"><span class="pre">(a,</span> <span class="pre">b,</span> <span class="pre">c,</span> <span class="pre">d)</span></code> with <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&gt;=</span> <span class="pre">b</span> <span class="pre">&gt;=</span> <span class="pre">c</span> <span class="pre">&gt;=</span> <span class="pre">d</span> <span class="pre">&gt;=</span> <span class="pre">0</span></code> and squares
+summing to <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sum_of_four_squares</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>  <span class="c1"># 7 = 4 + 1 + 1 + 1 needs all four squares</span>
+<span class="go">(2, 1, 1, 1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sum_of_four_squares</span><span class="p">(</span><span class="mi">310</span><span class="p">)</span>
+<span class="go">(17, 4, 2, 1)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.number_theory.sum_of_two_squares">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.number_theory.</span></span><span class="sig-name descname"><span class="pre">sum_of_two_squares</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/number_theory/systems/sums_of_squares.html#sum_of_two_squares"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.number_theory.sum_of_two_squares" title="Link to this definition">#</a></dt>
+<dd><p>Write <code class="docutils literal notranslate"><span class="pre">n</span></code> as <span class="math notranslate nohighlight">\(a^2 + b^2\)</span> with <span class="math notranslate nohighlight">\(0 \le a \le b\)</span>, if possible.</p>
+<p>By Fermat’s two-squares theorem (stated 1640, first proved by Euler
+in 1749) an odd prime <span class="math notranslate nohighlight">\(p\)</span> is a sum of two squares exactly when
+<span class="math notranslate nohighlight">\(p \equiv 1 \pmod 4\)</span>; more generally <code class="docutils literal notranslate"><span class="pre">n</span></code> is a sum of two
+squares exactly when every prime <span class="math notranslate nohighlight">\(q \equiv 3 \pmod 4\)</span> divides
+<code class="docutils literal notranslate"><span class="pre">n</span></code> to an even power (Hardy &amp; Wright, 6th ed., Theorem 366). The
+search runs over <span class="math notranslate nohighlight">\(a \le \sqrt{n/2}\)</span> – <span class="math notranslate nohighlight">\(O(\sqrt n)\)</span> –
+and returns the representation with the smallest <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;=</span> <span class="pre">0</span></code>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>] | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>tuple of (int, int) or None</em> – <code class="docutils literal notranslate"><span class="pre">(a,</span> <span class="pre">b)</span></code> with <code class="docutils literal notranslate"><span class="pre">a*a</span> <span class="pre">+</span> <span class="pre">b*b</span> <span class="pre">==</span> <span class="pre">n</span></code> and <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&lt;=</span> <span class="pre">b</span></code>, or <code class="docutils literal notranslate"><span class="pre">None</span></code>
+when no representation exists.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sum_of_two_squares</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>  <span class="c1"># 13 = 1 (mod 4): 4 + 9</span>
+<span class="go">(2, 3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sum_of_two_squares</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>  <span class="c1"># 7 = 3 (mod 4)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sum_of_two_squares</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">31</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>  <span class="c1"># a Mersenne prime is always 3 (mod 4)</span>
+<span class="go">True</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1344,23 +1831,41 @@ Introduction to the Theory of Numbers</em>, 5th ed., Sec. 7.8, Theorem
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.PellResult.y"><code class="docutils literal notranslate"><span class="pre">PellResult.y</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.PollardRhoResult"><code class="docutils literal notranslate"><span class="pre">PollardRhoResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.PollardRhoResult.c"><code class="docutils literal notranslate"><span class="pre">PollardRhoResult.c</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.PollardRhoResult.cofactor"><code class="docutils literal notranslate"><span class="pre">PollardRhoResult.cofactor</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.PollardRhoResult.factor"><code class="docutils literal notranslate"><span class="pre">PollardRhoResult.factor</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.PollardRhoResult.iterations"><code class="docutils literal notranslate"><span class="pre">PollardRhoResult.iterations</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.best_rational_approximation"><code class="docutils literal notranslate"><span class="pre">best_rational_approximation()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.chinese_remainder_theorem"><code class="docutils literal notranslate"><span class="pre">chinese_remainder_theorem()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.continued_fraction_expansion"><code class="docutils literal notranslate"><span class="pre">continued_fraction_expansion()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.divisor_sum"><code class="docutils literal notranslate"><span class="pre">divisor_sum()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.euler_product"><code class="docutils literal notranslate"><span class="pre">euler_product()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.euler_totient"><code class="docutils literal notranslate"><span class="pre">euler_totient()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.extended_gcd"><code class="docutils literal notranslate"><span class="pre">extended_gcd()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.fast_mod_pow"><code class="docutils literal notranslate"><span class="pre">fast_mod_pow()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.gcd"><code class="docutils literal notranslate"><span class="pre">gcd()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.is_prime_miller_rabin"><code class="docutils literal notranslate"><span class="pre">is_prime_miller_rabin()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.is_prime_trial_division"><code class="docutils literal notranslate"><span class="pre">is_prime_trial_division()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.jacobi_symbol"><code class="docutils literal notranslate"><span class="pre">jacobi_symbol()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.lcm"><code class="docutils literal notranslate"><span class="pre">lcm()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.legendre_symbol"><code class="docutils literal notranslate"><span class="pre">legendre_symbol()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.logarithmic_integral"><code class="docutils literal notranslate"><span class="pre">logarithmic_integral()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.lucas_lehmer"><code class="docutils literal notranslate"><span class="pre">lucas_lehmer()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.mobius"><code class="docutils literal notranslate"><span class="pre">mobius()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.mod_inverse"><code class="docutils literal notranslate"><span class="pre">mod_inverse()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.pollard_rho"><code class="docutils literal notranslate"><span class="pre">pollard_rho()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.prime_counting"><code class="docutils literal notranslate"><span class="pre">prime_counting()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.prime_factorization"><code class="docutils literal notranslate"><span class="pre">prime_factorization()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.primes_in_progression"><code class="docutils literal notranslate"><span class="pre">primes_in_progression()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.sieve_of_eratosthenes"><code class="docutils literal notranslate"><span class="pre">sieve_of_eratosthenes()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.solve_linear_diophantine"><code class="docutils literal notranslate"><span class="pre">solve_linear_diophantine()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.solve_pell_equation"><code class="docutils literal notranslate"><span class="pre">solve_pell_equation()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.sqrt_mod"><code class="docutils literal notranslate"><span class="pre">sqrt_mod()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.sum_of_four_squares"><code class="docutils literal notranslate"><span class="pre">sum_of_four_squares()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.number_theory.sum_of_two_squares"><code class="docutils literal notranslate"><span class="pre">sum_of_two_squares()</span></code></a></li>
 </ul>
   </nav></div>
 

@@ -410,10 +410,10 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.optimization.utils.comparison</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Convergence-rate comparison utilities across optimization methods on a</span>
+<span></span><span class="sd">"""Convergence-rate comparison utilities across optimization methods on a</span>
 <span class="sd">shared test function -- supporting numerics for the examples gallery,</span>
 <span class="sd">not a model in its own right.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -423,7 +423,7 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.optimization.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">OptimizeResult</span><span class="p">,</span> <span class="n">UnconstrainedOptimizer</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;compare_optimizers&quot;</span><span class="p">,</span> <span class="s2">&quot;function_value_gap&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"compare_optimizers"</span><span class="p">,</span> <span class="s2">"function_value_gap"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="compare_optimizers">
@@ -431,7 +431,7 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">compare_optimizers</span><span class="p">(</span>
     <span class="n">optimizers</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">UnconstrainedOptimizer</span><span class="p">],</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">],</span> <span class="n">grad</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">x0</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">OptimizeResult</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run several optimizers from the same starting point on the same problem.</span>
+<span class="w">    </span><span class="sd">"""Run several optimizers from the same starting point on the same problem.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -451,10 +451,10 @@
 <span class="sd">    &gt;&gt;&gt; from mathematicskit.optimization.systems.gradient_descent import GradientDescent, GradientDescentLineSearch</span>
 <span class="sd">    &gt;&gt;&gt; f = lambda x: x[0] ** 2 + x[1] ** 2</span>
 <span class="sd">    &gt;&gt;&gt; grad = lambda x: np.array([2.0 * x[0], 2.0 * x[1]])</span>
-<span class="sd">    &gt;&gt;&gt; results = compare_optimizers({&quot;fixed&quot;: GradientDescent(alpha=0.1), &quot;line_search&quot;: GradientDescentLineSearch()}, f, grad, np.array([3.0, 4.0]))</span>
+<span class="sd">    &gt;&gt;&gt; results = compare_optimizers({"fixed": GradientDescent(alpha=0.1), "line_search": GradientDescentLineSearch()}, f, grad, np.array([3.0, 4.0]))</span>
 <span class="sd">    &gt;&gt;&gt; sorted(results.keys())</span>
-<span class="sd">    [&#39;fixed&#39;, &#39;line_search&#39;]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    ['fixed', 'line_search']</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">opt</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">grad</span><span class="p">,</span> <span class="n">x0</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">opt</span> <span class="ow">in</span> <span class="n">optimizers</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span></div>
 
 
@@ -462,7 +462,7 @@
 <div class="viewcode-block" id="function_value_gap">
 <a class="viewcode-back" href="../../../../api/optimization.html#mathematicskit.optimization.function_value_gap">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">function_value_gap</span><span class="p">(</span><span class="n">result</span><span class="p">:</span> <span class="n">OptimizeResult</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">],</span> <span class="n">f_star</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute ``f(x_k) - f*`` at every recorded iterate -- the standard</span>
+<span class="w">    </span><span class="sd">"""Compute ``f(x_k) - f*`` at every recorded iterate -- the standard</span>
 <span class="sd">    y-axis for a convergence-rate plot (log-scale reveals linear vs.</span>
 <span class="sd">    superlinear vs. quadratic convergence as a straight, curving-down, or</span>
 <span class="sd">    sharply-curving-down line, respectively).</span>
@@ -489,7 +489,7 @@
 <span class="sd">    &gt;&gt;&gt; gap = function_value_gap(result, f, f_star=0.0)</span>
 <span class="sd">    &gt;&gt;&gt; bool(np.all(np.diff(gap) &lt;= 1e-12))</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">f_star</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">path</span><span class="p">])</span></div>
 
 </pre></div>

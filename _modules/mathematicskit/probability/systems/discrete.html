@@ -410,14 +410,14 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.probability.systems.discrete</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Discrete probability distributions, built directly on :mod:`scipy.stats`.</span>
+<span></span><span class="sa">r</span><span class="sd">"""Discrete probability distributions, built directly on :mod:`scipy.stats`.</span>
 
 <span class="sd">Each class stores a frozen ``scipy.stats`` distribution for PMF/CDF/</span>
 <span class="sd">mean/variance and adds a closed-form moment generating function (MGF),</span>
-<span class="sd">which ``scipy.stats`` doesn&#39;t expose. See DeGroot &amp; Schervish,</span>
+<span class="sd">which ``scipy.stats`` doesn't expose. See DeGroot &amp; Schervish,</span>
 <span class="sd">*Probability and Statistics*, 4th ed., Ch. 5, for the distributions and</span>
 <span class="sd">their MGF derivations.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -426,13 +426,13 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.probability.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">DiscreteDistribution</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Binomial&quot;</span><span class="p">,</span> <span class="s2">&quot;Poisson&quot;</span><span class="p">,</span> <span class="s2">&quot;Geometric&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Binomial"</span><span class="p">,</span> <span class="s2">"Poisson"</span><span class="p">,</span> <span class="s2">"Geometric"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="Binomial">
 <a class="viewcode-back" href="../../../../api/probability.html#mathematicskit.probability.Binomial">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Binomial</span><span class="p">(</span><span class="n">DiscreteDistribution</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Binomial distribution: number of successes in ``n`` i.i.d. Bernoulli(``p``) trials.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Binomial distribution: number of successes in ``n`` i.i.d. Bernoulli(``p``) trials.</span>
 
 <span class="sd">    :math:`P(X=k) = \binom{n}{k}p^k(1-p)^{n-k}`, via :class:`scipy.stats.binom`.</span>
 <span class="sd">    MGF: :math:`M(t) = (1-p+pe^t)^n`. See DeGroot &amp; Schervish,</span>
@@ -454,7 +454,7 @@
 <span class="sd">    2.1</span>
 <span class="sd">    &gt;&gt;&gt; round(float(b.mgf(0.0)), 10)</span>
 <span class="sd">    1.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
@@ -478,7 +478,7 @@
 <div class="viewcode-block" id="Poisson">
 <a class="viewcode-back" href="../../../../api/probability.html#mathematicskit.probability.Poisson">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Poisson</span><span class="p">(</span><span class="n">DiscreteDistribution</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Poisson distribution: count of events in a fixed interval at rate ``mu``.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Poisson distribution: count of events in a fixed interval at rate ``mu``.</span>
 
 <span class="sd">    :math:`P(X=k) = e^{-\mu}\mu^k/k!`, via :class:`scipy.stats.poisson`.</span>
 <span class="sd">    MGF: :math:`M(t) = e^{\mu(e^t - 1)}`. See DeGroot &amp; Schervish,</span>
@@ -494,7 +494,7 @@
 <span class="sd">    &gt;&gt;&gt; p = Poisson(mu=4.0)</span>
 <span class="sd">    &gt;&gt;&gt; p.mean == p.variance == 4.0</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mu</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mu</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span>
@@ -517,10 +517,10 @@
 <div class="viewcode-block" id="Geometric">
 <a class="viewcode-back" href="../../../../api/probability.html#mathematicskit.probability.Geometric">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Geometric</span><span class="p">(</span><span class="n">DiscreteDistribution</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Geometric distribution: number of trials up to and including the first success.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Geometric distribution: number of trials up to and including the first success.</span>
 
-<span class="sd">    :math:`P(X=k) = (1-p)^{k-1}p`, ``k = 1, 2, \dots`` (scipy&#39;s</span>
-<span class="sd">    &quot;number of trials&quot; convention), via :class:`scipy.stats.geom`. MGF:</span>
+<span class="sd">    :math:`P(X=k) = (1-p)^{k-1}p`, ``k = 1, 2, \dots`` (scipy's</span>
+<span class="sd">    "number of trials" convention), via :class:`scipy.stats.geom`. MGF:</span>
 <span class="sd">    :math:`M(t) = \dfrac{pe^t}{1-(1-p)e^t}`, for :math:`t &lt;</span>
 <span class="sd">    -\ln(1-p)`. See DeGroot &amp; Schervish, *Probability and Statistics*,</span>
 <span class="sd">    4th ed., Sec. 5.3.</span>
@@ -535,7 +535,7 @@
 <span class="sd">    &gt;&gt;&gt; g = Geometric(p=0.25)</span>
 <span class="sd">    &gt;&gt;&gt; round(g.mean, 4)</span>
 <span class="sd">    4.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">p</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>

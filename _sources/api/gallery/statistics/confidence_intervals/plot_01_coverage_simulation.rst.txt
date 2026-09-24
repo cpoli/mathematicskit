@@ -25,10 +25,11 @@ Builds many 95% confidence intervals from repeated samples of a known
 population, and checks that close to 95% of them actually contain the
 true parameter -- the frequentist interpretation of "95% confidence."
 
-.. GENERATED FROM PYTHON SOURCE LINES 11-15
+.. GENERATED FROM PYTHON SOURCE LINES 11-16
 
 .. code-block:: Python
 
+    import matplotlib.pyplot as plt
     import numpy as np
 
     from mathematicskit.statistics import mean_confidence_interval, proportion_confidence_interval
@@ -40,12 +41,12 @@ true parameter -- the frequentist interpretation of "95% confidence."
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 16-18
+.. GENERATED FROM PYTHON SOURCE LINES 17-19
 
 Mean confidence interval coverage
 -----------------------------------------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 18-30
+.. GENERATED FROM PYTHON SOURCE LINES 19-33
 
 .. code-block:: Python
 
@@ -53,13 +54,15 @@ Mean confidence interval coverage
     rng = np.random.default_rng(0)
     true_mean = 50.0
     n_trials = 2000
-    covered = 0
+    intervals = []
     for _ in range(n_trials):
         sample = rng.normal(loc=true_mean, scale=10.0, size=40)
         result = mean_confidence_interval(sample, sigma=10.0)
-        covered += result.lower < true_mean < result.upper
+        intervals.append((result.lower, result.upper))
+    intervals = np.array(intervals)
+    hits = (intervals[:, 0] < true_mean) & (true_mean < intervals[:, 1])
 
-    print(f"mean CI empirical coverage: {covered / n_trials:.4f} (target 0.95)")
+    print(f"mean CI empirical coverage: {hits.mean():.4f} (target 0.95)")
 
 
 
@@ -74,12 +77,52 @@ Mean confidence interval coverage
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 31-33
+.. GENERATED FROM PYTHON SOURCE LINES 34-39
+
+The first 100 intervals
+-----------------------------------------------------
+
+Each interval either contains the true mean or it does not; "95%" is
+the long-run hit rate of the procedure, visible as the few misses.
+
+.. GENERATED FROM PYTHON SOURCE LINES 39-49
+
+.. code-block:: Python
+
+
+    fig, ax = plt.subplots(figsize=(6, 7))
+    for i, ((lo, hi), hit) in enumerate(zip(intervals[:100], hits[:100])):
+        ax.plot([lo, hi], [i, i], color="C0" if hit else "C3", lw=1.5)
+    ax.axvline(true_mean, color="k", ls="--", label="true mean")
+    ax.set_xlabel("95% confidence interval for the mean")
+    ax.set_ylabel("repeated sample")
+    ax.set_title(f"{np.sum(~hits[:100])} of 100 intervals miss (red)")
+    ax.legend()
+
+
+
+
+.. image-sg:: /api/gallery/statistics/confidence_intervals/images/sphx_glr_plot_01_coverage_simulation_001.png
+   :alt: 5 of 100 intervals miss (red)
+   :srcset: /api/gallery/statistics/confidence_intervals/images/sphx_glr_plot_01_coverage_simulation_001.png
+   :class: sphx-glr-single-img
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+
+    <matplotlib.legend.Legend object at 0x1196e3e00>
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 50-52
 
 Proportion confidence interval
 -----------------------------------------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 33-36
+.. GENERATED FROM PYTHON SOURCE LINES 52-55
 
 .. code-block:: Python
 
@@ -102,7 +145,7 @@ Proportion confidence interval
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.041 seconds)
+   **Total running time of the script:** (0 minutes 0.083 seconds)
 
 
 .. _sphx_glr_download_api_gallery_statistics_confidence_intervals_plot_01_coverage_simulation.py:

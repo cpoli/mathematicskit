@@ -410,24 +410,24 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.probability.systems.limit_theorems</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Simulation/verification of the (weak/strong) Law of Large Numbers and</span>
+<span></span><span class="sa">r</span><span class="sd">"""Simulation/verification of the (weak/strong) Law of Large Numbers and</span>
 <span class="sd">the Central Limit Theorem, via :mod:`numpy.random` sampling.</span>
 
 <span class="sd">See DeGroot &amp; Schervish, *Probability and Statistics*, 4th ed., Ch. 6.2</span>
 <span class="sd">(LLN) and Ch. 6.3 (CLT).</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;law_of_large_numbers_trace&quot;</span><span class="p">,</span> <span class="s2">&quot;central_limit_theorem_sample_means&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"law_of_large_numbers_trace"</span><span class="p">,</span> <span class="s2">"central_limit_theorem_sample_means"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="law_of_large_numbers_trace">
 <a class="viewcode-back" href="../../../../api/probability.html#mathematicskit.probability.law_of_large_numbers_trace">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">law_of_large_numbers_trace</span><span class="p">(</span><span class="n">dist</span><span class="p">,</span> <span class="n">n_values</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sample means at increasing sample sizes, illustrating the Law of Large Numbers.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Sample means at increasing sample sizes, illustrating the Law of Large Numbers.</span>
 
 <span class="sd">    Draws one long sequence of ``max(n_values)`` i.i.d. samples from</span>
 <span class="sd">    `dist` and returns the running sample mean truncated at each</span>
@@ -455,7 +455,7 @@
 <span class="sd">    &gt;&gt;&gt; means = law_of_large_numbers_trace(Exponential(rate=2.0), n_values=[100, 10000, 1000000], seed=0)</span>
 <span class="sd">    &gt;&gt;&gt; bool(abs(means[-1] - 0.5) &lt; abs(means[0] - 0.5))</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">n_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">n_values</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
     <span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">n_values</span><span class="o">.</span><span class="n">max</span><span class="p">()),</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">cumulative_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">samples</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
@@ -466,14 +466,14 @@
 <div class="viewcode-block" id="central_limit_theorem_sample_means">
 <a class="viewcode-back" href="../../../../api/probability.html#mathematicskit.probability.central_limit_theorem_sample_means">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">central_limit_theorem_sample_means</span><span class="p">(</span><span class="n">dist</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n_trials</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2000</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Standardized sample means from repeated trials, illustrating the CLT.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Standardized sample means from repeated trials, illustrating the CLT.</span>
 
 <span class="sd">    Draws `n_trials` independent samples of size `n` from `dist`, and</span>
 <span class="sd">    returns the standardized sample mean</span>
 <span class="sd">    :math:`Z = \dfrac{\bar X_n - E[X]}{\sigma/\sqrt n}` for each trial;</span>
 <span class="sd">    by the CLT, this converges in distribution to :math:`\mathcal N(0,</span>
-<span class="sd">    1)` as :math:`n \to \infty`, regardless of `dist`&#39;s own shape --</span>
-<span class="sd">    verify with e.g. ``scipy.stats.kstest(result, &quot;norm&quot;)`` (a two-sided</span>
+<span class="sd">    1)` as :math:`n \to \infty`, regardless of `dist`'s own shape --</span>
+<span class="sd">    verify with e.g. ``scipy.stats.kstest(result, "norm")`` (a two-sided</span>
 <span class="sd">    goodness-of-fit test against the standard normal CDF). See DeGroot &amp;</span>
 <span class="sd">    Schervish, *Probability and Statistics*, 4th ed., Theorem 6.3.2.</span>
 
@@ -498,7 +498,7 @@
 <span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; abs(float(z.std()) - 1.0) &lt; 0.1</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n_trials</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">sample_means</span> <span class="o">=</span> <span class="n">samples</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">sample_means</span> <span class="o">-</span> <span class="n">dist</span><span class="o">.</span><span class="n">mean</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">std</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">))</span></div>

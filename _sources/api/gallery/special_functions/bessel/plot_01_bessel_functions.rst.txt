@@ -24,10 +24,11 @@ Bessel functions of the first and second kind
 Plots J_0, J_1 (regular at the origin) and Y_0 (singular at the
 origin) over a range of x, and finds J_0's first zero.
 
-.. GENERATED FROM PYTHON SOURCE LINES 10-14
+.. GENERATED FROM PYTHON SOURCE LINES 10-15
 
 .. code-block:: Python
 
+    import matplotlib.pyplot as plt
     import numpy as np
 
     from mathematicskit.special_functions import bessel_first_kind, bessel_second_kind
@@ -39,12 +40,12 @@ origin) over a range of x, and finds J_0's first zero.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 15-17
+.. GENERATED FROM PYTHON SOURCE LINES 16-18
 
 Evaluate over a range
 -----------------------------------------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 17-25
+.. GENERATED FROM PYTHON SOURCE LINES 18-36
 
 .. code-block:: Python
 
@@ -54,10 +55,25 @@ Evaluate over a range
     j1 = bessel_first_kind(1.0, x)
     y0 = bessel_second_kind(0.0, x)
 
+    fig, ax = plt.subplots()
+    ax.plot(x, j0, label=r"$J_0(x)$")
+    ax.plot(x, j1, label=r"$J_1(x)$")
+    ax.plot(x, y0, label=r"$Y_0(x)$")
+    ax.axhline(0, color="gray", lw=0.5)
+    ax.set_ylim(-1.5, 1.1)
+    ax.set_xlabel("x")
+    ax.set_title("Bessel functions of the first and second kind")
+    ax.legend()
+
     print(f"J_0(0.1) = {j0[0]:.4f}, Y_0(0.1) = {y0[0]:.4f} (Y_0 diverges toward x=0)")
 
 
 
+
+.. image-sg:: /api/gallery/special_functions/bessel/images/sphx_glr_plot_01_bessel_functions_001.png
+   :alt: Bessel functions of the first and second kind
+   :srcset: /api/gallery/special_functions/bessel/images/sphx_glr_plot_01_bessel_functions_001.png
+   :class: sphx-glr-single-img
 
 
 .. rst-class:: sphx-glr-script-out
@@ -69,12 +85,12 @@ Evaluate over a range
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 26-28
+.. GENERATED FROM PYTHON SOURCE LINES 37-39
 
 The first zero of J_0 (approximately 2.4048)
 -----------------------------------------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 28-32
+.. GENERATED FROM PYTHON SOURCE LINES 39-43
 
 .. code-block:: Python
 
@@ -99,7 +115,7 @@ The first zero of J_0 (approximately 2.4048)
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.001 seconds)
+   **Total running time of the script:** (0 minutes 0.028 seconds)
 
 
 .. _sphx_glr_download_api_gallery_special_functions_bessel_plot_01_bessel_functions.py:

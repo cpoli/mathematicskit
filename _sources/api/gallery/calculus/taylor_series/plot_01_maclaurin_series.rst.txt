@@ -18,22 +18,26 @@
 .. _sphx_glr_api_gallery_calculus_taylor_series_plot_01_maclaurin_series.py:
 
 
-Maclaurin series and their radius of convergence
-=====================================================
+Taylor's theorem: polynomials, remainder bound, and convergence
+=================================================================
 
-Truncated Maclaurin series for exp, sin, cos, log(1+x), and arctan, and
-how well they approximate the true function -- including outside their
-radius of convergence, where the partial sums stop improving (or
-diverge) no matter how many terms are added.
+Taylor's theorem expands a function in powers of :math:`x - x_0` built
+from its derivatives at one point, with a Lagrange remainder
+:math:`|R_n(x)| \le M|x-x_0|^{n+1}/(n+1)!`. This example draws the
+Taylor (Maclaurin, :math:`x_0 = 0`) polynomials of :math:`\sin` closing
+in on the function, checks the true error against
+:func:`~mathematicskit.calculus.taylor_remainder_bound`, and shows what
+happens outside a series' radius of convergence, where adding terms no
+longer helps.
 
-.. GENERATED FROM PYTHON SOURCE LINES 12-18
+.. GENERATED FROM PYTHON SOURCE LINES 16-22
 
 .. code-block:: Python
 
     import matplotlib.pyplot as plt
     import numpy as np
 
-    from mathematicskit.calculus.systems.taylor_series import estimate_radius_of_convergence, evaluate_series, maclaurin_coefficients
+    from mathematicskit.calculus.systems.taylor_series import estimate_radius_of_convergence, evaluate_series, maclaurin_coefficients, taylor_remainder_bound
     from mathematicskit.calculus.utils.series_utils import truncation_error
 
 
@@ -43,12 +47,81 @@ diverge) no matter how many terms are added.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 19-21
+.. GENERATED FROM PYTHON SOURCE LINES 23-25
+
+Taylor polynomials of sin approach the function
+-----------------------------------------------
+
+.. GENERATED FROM PYTHON SOURCE LINES 25-37
+
+.. code-block:: Python
+
+
+    sin_coeffs = maclaurin_coefficients("sin", order=15)
+    grid = np.linspace(-2 * np.pi, 2 * np.pi, 400)
+    fig, ax = plt.subplots(figsize=(6, 4))
+    ax.plot(grid, np.sin(grid), "k", lw=2, label="sin x")
+    for degree in (1, 3, 5, 9, 15):
+        ax.plot(grid, evaluate_series(sin_coeffs[: degree + 1], grid), "--", label=f"degree {degree}")
+    ax.set_ylim(-2, 2)
+    ax.set_title("Taylor polynomials of sin about x = 0")
+    ax.legend(fontsize=8)
+    fig.tight_layout()
+
+
+
+
+.. image-sg:: /api/gallery/calculus/taylor_series/images/sphx_glr_plot_01_maclaurin_series_001.png
+   :alt: Taylor polynomials of sin about x = 0
+   :srcset: /api/gallery/calculus/taylor_series/images/sphx_glr_plot_01_maclaurin_series_001.png
+   :class: sphx-glr-single-img
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 38-43
+
+The Lagrange remainder bounds the true error
+--------------------------------------------
+
+Every derivative of :math:`\sin` is bounded by :math:`M = 1`, so
+Taylor's theorem guarantees :math:`|R_n(x)| \le |x|^{n+1}/(n+1)!`.
+
+.. GENERATED FROM PYTHON SOURCE LINES 43-50
+
+.. code-block:: Python
+
+
+    x = 1.5
+    for degree in (1, 3, 5, 7, 9):
+        actual = abs(np.sin(x) - evaluate_series(sin_coeffs[: degree + 1], x))
+        bound = taylor_remainder_bound(1.0, degree, x)
+        print(f"degree {degree}: |error|={actual:.3e} <= bound {bound:.3e}: {actual <= bound}")
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    degree 1: |error|=5.025e-01 <= bound 1.125e+00: True
+    degree 3: |error|=5.999e-02 <= bound 2.109e-01: True
+    degree 5: |error|=3.286e-03 <= bound 1.582e-02: True
+    degree 7: |error|=1.038e-04 <= bound 6.356e-04: True
+    degree 9: |error|=2.136e-06 <= bound 1.589e-05: True
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 51-53
 
 Convergence inside the radius: log(1+x) at x=0.5 (R=1)
 ------------------------------------------------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 21-32
+.. GENERATED FROM PYTHON SOURCE LINES 53-64
 
 .. code-block:: Python
 
@@ -66,21 +139,21 @@ Convergence inside the radius: log(1+x) at x=0.5 (R=1)
 
 
 
-.. image-sg:: /api/gallery/calculus/taylor_series/images/sphx_glr_plot_01_maclaurin_series_001.png
+.. image-sg:: /api/gallery/calculus/taylor_series/images/sphx_glr_plot_01_maclaurin_series_002.png
    :alt: log(1+x) series error at x=0.5 (inside R=1)
-   :srcset: /api/gallery/calculus/taylor_series/images/sphx_glr_plot_01_maclaurin_series_001.png
+   :srcset: /api/gallery/calculus/taylor_series/images/sphx_glr_plot_01_maclaurin_series_002.png
    :class: sphx-glr-single-img
 
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 33-35
+.. GENERATED FROM PYTHON SOURCE LINES 65-67
 
 Failure to converge outside the radius: log(1+x) at x=1.5 (R=1)
 ------------------------------------------------------------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 35-41
+.. GENERATED FROM PYTHON SOURCE LINES 67-73
 
 .. code-block:: Python
 
@@ -105,12 +178,12 @@ Failure to converge outside the radius: log(1+x) at x=1.5 (R=1)
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 42-44
+.. GENERATED FROM PYTHON SOURCE LINES 74-76
 
 Radius-of-convergence estimates for each series
 ------------------------------------------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 44-52
+.. GENERATED FROM PYTHON SOURCE LINES 76-84
 
 .. code-block:: Python
 
@@ -130,9 +203,9 @@ Radius-of-convergence estimates for each series
 
  .. code-block:: none
 
-           exp: estimated R ~ 30.0000
-           sin: estimated R ~ 28.4956
-           cos: estimated R ~ 29.4958
+           exp: estimated R ~ inf
+           sin: estimated R ~ inf
+           cos: estimated R ~ inf
          log1p: estimated R ~ 1.0345
      geometric: estimated R ~ 1.0000
         arctan: estimated R ~ 1.0364
@@ -144,7 +217,7 @@ Radius-of-convergence estimates for each series
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.042 seconds)
+   **Total running time of the script:** (0 minutes 0.089 seconds)
 
 
 .. _sphx_glr_download_api_gallery_calculus_taylor_series_plot_01_maclaurin_series.py:

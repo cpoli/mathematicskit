@@ -410,17 +410,19 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.ode_dynamics.core.base</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Abstract base classes and result containers for mathematicskit.ode_dynamics.</span>
+<span></span><span class="sd">"""Abstract base classes and result containers for mathematicskit.ode_dynamics.</span>
 
 <span class="sd">:class:`FlowSystem` wraps an autonomous ODE ``dy/dt = f(y, t)`` built as</span>
 <span class="sd">a standalone ``@njit`` callback (the first-class-function pattern</span>
-<span class="sd">documented in physicskit&#39;s ``classical/core/base_system.py``: a</span>
-<span class="sd">module-level factory closes over the system&#39;s numeric parameters and</span>
+<span class="sd">documented in physicskit's ``classical/core/base_system.py``: a</span>
+<span class="sd">module-level factory closes over the system's numeric parameters and</span>
 <span class="sd">returns a dispatcher, never a bound method), and integrates it via</span>
 <span class="sd">:mod:`mathematicskit.integrators`. :class:`FixedPointResult` is the stable</span>
 <span class="sd">result type for linear-stability analysis</span>
-<span class="sd">(:mod:`mathematicskit.ode_dynamics.systems.stability`).</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">(:mod:`mathematicskit.ode_dynamics.systems.stability`);</span>
+<span class="sd">:class:`LyapunovFunctionResult` and :class:`BendixsonResult` hold the</span>
+<span class="sd">outputs of Lyapunov's direct method and Bendixson's negative criterion.</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -431,39 +433,39 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.integrators</span><span class="w"> </span><span class="kn">import</span> <span class="n">dopri5_integrate</span><span class="p">,</span> <span class="n">rk4_integrate</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;OdeTrajectory&quot;</span><span class="p">,</span> <span class="s2">&quot;FlowSystem&quot;</span><span class="p">,</span> <span class="s2">&quot;FixedPointResult&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"OdeTrajectory"</span><span class="p">,</span> <span class="s2">"FlowSystem"</span><span class="p">,</span> <span class="s2">"FixedPointResult"</span><span class="p">,</span> <span class="s2">"LyapunovFunctionResult"</span><span class="p">,</span> <span class="s2">"BendixsonResult"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="OdeTrajectory">
 <a class="viewcode-back" href="../../../../api/ode_dynamics.html#mathematicskit.ode_dynamics.OdeTrajectory">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">OdeTrajectory</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for the output of a :meth:`FlowSystem.integrate` call.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Container for the output of a :meth:`FlowSystem.integrate` call."""</span>
 
     <span class="n">t</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (n_steps + 1,): Time samples.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""ndarray, shape (n_steps + 1,): Time samples."""</span>
 
     <span class="n">y</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (n_steps + 1, dim): State trajectory.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""ndarray, shape (n_steps + 1, dim): State trajectory."""</span>
 
-    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;str: Integrator used (``&quot;rk4&quot;`` or ``&quot;dopri5&quot;``).&quot;&quot;&quot;</span>
+    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
+<span class="w">    </span><span class="sd">"""str: Integrator used (``"rk4"`` or ``"dopri5"``)."""</span>
 
     <span class="n">extra</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;dict: Free-form diagnostics slot.&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sd">"""dict: Free-form diagnostics slot."""</span></div>
 
 
 
 <div class="viewcode-block" id="FlowSystem">
 <a class="viewcode-back" href="../../../../api/ode_dynamics.html#mathematicskit.ode_dynamics.FlowSystem">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FlowSystem</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Common base for an autonomous flow ``dy/dt = f(y, t)``.</span>
+<span class="w">    </span><span class="sd">"""Common base for an autonomous flow ``dy/dt = f(y, t)``.</span>
 
 <span class="sd">    Concrete subclasses must set ``self._rhs_njit`` (an ``@njit``</span>
 <span class="sd">    dispatcher, signature ``(state, t, params) -&gt; dstate``, the</span>
 <span class="sd">    :data:`mathematicskit.integrators.RHSFunc` convention) and ``self.params``</span>
 <span class="sd">    in ``__init__``, and call ``super().__init__(state0)``.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">_rhs_njit</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">params</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -476,13 +478,13 @@
 <a class="viewcode-back" href="../../../../api/ode_dynamics.html#mathematicskit.ode_dynamics.FlowSystem.rhs">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">rhs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Plain-Python evaluation of ``dy/dt`` (thin wrapper around ``self._rhs_njit``).&quot;&quot;&quot;</span></div>
+<span class="w">        </span><span class="sd">"""Plain-Python evaluation of ``dy/dt`` (thin wrapper around ``self._rhs_njit``)."""</span></div>
 
 
 <div class="viewcode-block" id="FlowSystem.reset">
 <a class="viewcode-back" href="../../../../api/ode_dynamics.html#mathematicskit.ode_dynamics.FlowSystem.reset">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">t0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset state and clock; see e.g. physicskit&#39;s identical pattern.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Reset state and clock; see e.g. physicskit's identical pattern."""</span>
         <span class="k">if</span> <span class="n">state0</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">state0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="n">t0</span>
@@ -491,35 +493,35 @@
 
 <div class="viewcode-block" id="FlowSystem.integrate">
 <a class="viewcode-back" href="../../../../api/ode_dynamics.html#mathematicskit.ode_dynamics.FlowSystem.integrate">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;rk4&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OdeTrajectory</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Integrate the flow forward in time.</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"rk4"</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OdeTrajectory</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Integrate the flow forward in time.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        t_span : tuple of float</span>
 <span class="sd">            ``(t0, t1)``.</span>
 <span class="sd">        dt : float, optional</span>
-<span class="sd">            Fixed step (required for ``method=&quot;rk4&quot;``); initial step</span>
-<span class="sd">            attempt for ``method=&quot;dopri5&quot;`` (defaults to ``(t1-t0)/1000``).</span>
-<span class="sd">        method : {&quot;rk4&quot;, &quot;dopri5&quot;}</span>
+<span class="sd">            Fixed step (required for ``method="rk4"``); initial step</span>
+<span class="sd">            attempt for ``method="dopri5"`` (defaults to ``(t1-t0)/1000``).</span>
+<span class="sd">        method : {"rk4", "dopri5"}</span>
 <span class="sd">        **kwargs</span>
 <span class="sd">            Forwarded to :func:`mathematicskit.integrators.dopri5_integrate`.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        OdeTrajectory</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">t0</span><span class="p">,</span> <span class="n">t1</span> <span class="o">=</span> <span class="n">t_span</span>
-        <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;rk4&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">"rk4"</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">dt</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;dt is required for method=&#39;rk4&#39;&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"dt is required for method='rk4'"</span><span class="p">)</span>
             <span class="n">n_steps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">((</span><span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span> <span class="o">/</span> <span class="n">dt</span><span class="p">))</span>
             <span class="n">ts</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="n">rk4_integrate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rhs_njit</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;dopri5&quot;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">"dopri5"</span><span class="p">:</span>
             <span class="n">dt0</span> <span class="o">=</span> <span class="n">dt</span> <span class="k">if</span> <span class="n">dt</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">(</span><span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1000.0</span>
             <span class="n">ts</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="n">dopri5_integrate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rhs_njit</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">dt0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown method &#39;</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">&#39; for FlowSystem&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Unknown method '</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">' for FlowSystem"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">ys</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="n">ts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">OdeTrajectory</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="n">ts</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">ys</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">)</span></div>
@@ -531,24 +533,64 @@
 <a class="viewcode-back" href="../../../../api/ode_dynamics.html#mathematicskit.ode_dynamics.FixedPointResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">FixedPointResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for a 2D fixed point&#39;s linear-stability classification.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Container for a 2D fixed point's linear-stability classification."""</span>
 
     <span class="n">location</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (2,): Fixed-point coordinates.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""ndarray, shape (2,): Fixed-point coordinates."""</span>
 
     <span class="n">jacobian</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (2, 2): Jacobian evaluated at the fixed point.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""ndarray, shape (2, 2): Jacobian evaluated at the fixed point."""</span>
 
     <span class="n">eigenvalues</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (2,), complex: Eigenvalues of the Jacobian.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""ndarray, shape (2,), complex: Eigenvalues of the Jacobian."""</span>
 
-    <span class="n">classification</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;str: One of ``&quot;stable node&quot;``, ``&quot;unstable node&quot;``, ``&quot;saddle&quot;``,</span>
-<span class="sd">    ``&quot;stable spiral&quot;``, ``&quot;unstable spiral&quot;``, ``&quot;center&quot;``,</span>
-<span class="sd">    ``&quot;degenerate node&quot;``.&quot;&quot;&quot;</span>
+    <span class="n">classification</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
+<span class="w">    </span><span class="sd">"""str: One of ``"stable node"``, ``"unstable node"``, ``"saddle"``,</span>
+<span class="sd">    ``"stable spiral"``, ``"unstable spiral"``, ``"center"``,</span>
+<span class="sd">    ``"degenerate node"``."""</span>
 
     <span class="n">stable</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;bool: Whether both eigenvalues have negative real part.&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sd">"""bool: Whether both eigenvalues have negative real part."""</span></div>
+
+
+
+<div class="viewcode-block" id="LyapunovFunctionResult">
+<a class="viewcode-back" href="../../../../api/ode_dynamics.html#mathematicskit.ode_dynamics.LyapunovFunctionResult">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">LyapunovFunctionResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Container for a quadratic Lyapunov function ``V(x) = x^T P x``."""</span>
+
+    <span class="n">P</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sd">"""ndarray, shape (n, n): Symmetric solution of ``A^T P + P A = -Q``."""</span>
+
+    <span class="n">Q</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sd">"""ndarray, shape (n, n): Symmetric positive-definite right-hand side used."""</span>
+
+    <span class="n">positive_definite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="w">    </span><span class="sd">"""bool: Whether ``P`` is positive definite, i.e. whether ``V`` certifies</span>
+<span class="sd">    asymptotic stability of the origin (Lyapunov's theorem)."""</span></div>
+
+
+
+<div class="viewcode-block" id="BendixsonResult">
+<a class="viewcode-back" href="../../../../api/ode_dynamics.html#mathematicskit.ode_dynamics.BendixsonResult">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">BendixsonResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Container for Bendixson's negative criterion evaluated on a grid."""</span>
+
+    <span class="n">X</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sd">"""ndarray, shape (n, n): Grid x-coordinates."""</span>
+
+    <span class="n">Y</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sd">"""ndarray, shape (n, n): Grid y-coordinates."""</span>
+
+    <span class="n">divergence</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sd">"""ndarray, shape (n, n): Divergence ``df/dx + dg/dy`` of the vector field ``(f, g)``."""</span>
+
+    <span class="n">rules_out_periodic_orbits</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="w">    </span><span class="sd">"""bool: ``True`` if the divergence is strictly of one sign on the whole</span>
+<span class="sd">    grid, so no closed orbit lies entirely inside the (simply connected)</span>
+<span class="sd">    rectangle."""</span></div>
 
 </pre></div>
 

@@ -410,22 +410,22 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.statistics.utils.effect_size</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Effect-size measures -- supporting numerics that accompany a</span>
-<span class="sd">hypothesis test&#39;s p-value (a significant result can still be a tiny,</span>
+<span></span><span class="sa">r</span><span class="sd">"""Effect-size measures -- supporting numerics that accompany a</span>
+<span class="sd">hypothesis test's p-value (a significant result can still be a tiny,</span>
 <span class="sd">practically unimportant effect), not a test in their own right.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;cohens_d&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"cohens_d"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="cohens_d">
 <a class="viewcode-back" href="../../../../api/statistics.html#mathematicskit.statistics.cohens_d">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">cohens_d</span><span class="p">(</span><span class="n">data1</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">data2</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Cohen&#39;s d: a standardized (unit-free) mean difference between two groups.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Cohen's d: a standardized (unit-free) mean difference between two groups.</span>
 
 <span class="sd">    :math:`d = \dfrac{\bar x_1 - \bar x_2}{s_{\text{pooled}}}`, where</span>
 <span class="sd">    :math:`s_{\text{pooled}} = \sqrt{\dfrac{(n_1-1)s_1^2 +</span>
@@ -453,7 +453,7 @@
 <span class="sd">    &gt;&gt;&gt; b = a + 1.0  # every value shifted up by 1</span>
 <span class="sd">    &gt;&gt;&gt; round(cohens_d(a, b), 4)</span>
 <span class="sd">    -0.6325</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data2</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span> <span class="o">=</span> <span class="n">x1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x2</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>

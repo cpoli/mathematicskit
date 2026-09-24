@@ -5,7 +5,9 @@ Examples
 
 This gallery walks through every public feature of ``mathematicskit.statistics``:
 descriptive statistics, hypothesis tests, confidence intervals,
-ordinary least-squares regression, and bootstrap resampling.
+ordinary least-squares regression, correlation, maximum likelihood,
+nonparametric tests, bootstrap and jackknife resampling, shrinkage
+estimation, and multiple-testing corrections.
 
 See also the narrative tutorial:
 
@@ -17,13 +19,22 @@ Each script in this gallery is self-contained and can be run directly with
 Sections
 --------
 
-- **descriptive** -- the five-number summary, skewness, and kurtosis.
-- **hypothesis_tests** -- z-tests, t-tests, chi-square tests, and ANOVA.
+- **descriptive** -- the five-number summary, skewness, and kurtosis,
+  and Gauss's normal law of measurement errors.
+- **hypothesis_tests** -- z-tests, t-tests, chi-square tests, ANOVA, and
+  Fisher's exact test.
 - **confidence_intervals** -- intervals for means, proportions, and
   variances.
 - **regression** -- ordinary least squares with residual diagnostics.
+- **correlation** -- Pearson's and Spearman's correlation coefficients.
+- **likelihood** -- maximum-likelihood fitting and Wilks's
+  likelihood-ratio test.
+- **nonparametric** -- the Kolmogorov-Smirnov, Wilcoxon signed-rank, and
+  Mann-Whitney U tests.
 - **bootstrap** -- bootstrap confidence intervals via
-  ``scipy.stats.bootstrap``.
+  ``scipy.stats.bootstrap``, and the jackknife.
+- **shrinkage** -- the James-Stein estimator.
+- **multiple_testing** -- Bonferroni and Benjamini-Hochberg corrections.
 
 
 .. raw:: html
@@ -46,7 +57,8 @@ Sections
 Bootstrap resampling
 ----------------------
 
-Bootstrap confidence intervals via ``scipy.stats.bootstrap``.
+Bootstrap confidence intervals via ``scipy.stats.bootstrap``, and the
+leave-one-out jackknife.
 
 
 .. raw:: html
@@ -74,6 +86,23 @@ Bootstrap confidence intervals via ``scipy.stats.bootstrap``.
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">Bootstrap vs. parametric confidence intervals</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Leaves out one observation at a time and recomputes the statistic. For the plug-in variance, the jackknife&#x27;s bias correction recovers the unbiased n - 1 variance exactly, and for the mean its standard error is exactly the classical s / sqrt(n). For a non-smooth statistic such as the midrange, the jackknife standard error is unreliable and disagrees with the bootstrap&#x27;s -- one of the shortcomings Efron&#x27;s bootstrap was designed to overcome.">
+
+.. only:: html
+
+  .. image:: /api/gallery/statistics/bootstrap/images/thumb/sphx_glr_plot_02_jackknife_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/statistics/bootstrap/plot_02_jackknife`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The jackknife</div>
     </div>
 
 
@@ -123,10 +152,68 @@ Intervals for means, proportions, and variances.
 
     </div>
 
+Correlation
+-----------
+
+Pearson's product-moment and Spearman's rank correlation coefficients.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Simulates parent and child heights in the spirit of Francis Galton&#x27;s 1880s data: the two are positively correlated, but tall parents have children who are on average less extreme -- &quot;regression toward the mean&quot;. Pearson&#x27;s r measures the strength of that linear relation.">
+
+.. only:: html
+
+  .. image:: /api/gallery/statistics/correlation/images/thumb/sphx_glr_plot_01_galton_pearson_correlation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/statistics/correlation/plot_01_galton_pearson_correlation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Galton's heights and Pearson's correlation</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Spearman&#x27;s rho is Pearson&#x27;s r applied to ranks. It equals 1 for any increasing relationship, however curved, and a single wild outlier barely moves it, while Pearson&#x27;s r can swing a long way.">
+
+.. only:: html
+
+  .. image:: /api/gallery/statistics/correlation/images/thumb/sphx_glr_plot_02_spearman_rank_correlation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/statistics/correlation/plot_02_spearman_rank_correlation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Spearman's rank correlation</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
 Descriptive statistics
 ------------------------
 
-The five-number summary, skewness, and kurtosis.
+The five-number summary, skewness, and kurtosis, and Gauss's normal law
+of measurement errors.
 
 
 .. raw:: html
@@ -157,6 +244,23 @@ The five-number summary, skewness, and kurtosis.
     </div>
 
 
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Repeated measurements of one quantity scatter around its true value. Gauss (1809) asked which error law makes the arithmetic mean of the measurements the most probable value of the quantity, and found the normal law. This example simulates noisy measurements, compares their errors with the normal curve, and checks that the mean both maximizes the normal error probability and minimizes the sum of squared errors.">
+
+.. only:: html
+
+  .. image:: /api/gallery/statistics/descriptive/images/thumb/sphx_glr_plot_02_gauss_error_law_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/statistics/descriptive/plot_02_gauss_error_law`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Gauss's normal law of errors</div>
+    </div>
+
+
 .. thumbnail-parent-div-close
 
 .. raw:: html
@@ -166,8 +270,8 @@ The five-number summary, skewness, and kurtosis.
 Hypothesis tests
 ------------------
 
-z-tests, t-tests, chi-square tests (goodness-of-fit and independence),
-and one-way ANOVA.
+z-tests, Student's t-tests, chi-square tests (goodness-of-fit and
+independence), Fisher's exact test, and one-way ANOVA.
 
 
 .. raw:: html
@@ -183,18 +287,18 @@ and one-way ANOVA.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Compares three fertilizer treatments&#x27; effect on plant growth: a pairwise t-test between two of them, and a one-way ANOVA across all three, alongside an effect-size measure (Cohen&#x27;s d).">
+    <div class="sphx-glr-thumbcontainer" tooltip="With only a handful of measurements, the standardized mean t = (\bar x - \mu_0)/(s/\sqrt n) is not normal: estimating the spread from the same small sample gives it heavier tails. Gosset (&quot;Student&quot;, 1908) derived its exact distribution. This example shows the heavy tails, how a normal cutoff misleads for small samples, and the one- and two-sample t-tests built on Student&#x27;s distribution.">
 
 .. only:: html
 
-  .. image:: /api/gallery/statistics/hypothesis_tests/images/thumb/sphx_glr_plot_01_t_test_and_anova_thumb.png
+  .. image:: /api/gallery/statistics/hypothesis_tests/images/thumb/sphx_glr_plot_01_student_t_test_thumb.png
     :alt:
 
-  :doc:`/api/gallery/statistics/hypothesis_tests/plot_01_t_test_and_anova`
+  :doc:`/api/gallery/statistics/hypothesis_tests/plot_01_student_t_test`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Two-sample t-test and one-way ANOVA</div>
+      <div class="sphx-glr-thumbnail-title">Student's t-distribution and the small-sample t-test</div>
     </div>
 
 
@@ -212,6 +316,194 @@ and one-way ANOVA.
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">Chi-square goodness-of-fit and independence tests</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Fisher&#x27;s thought experiment: a lady claims she can tell whether milk or tea was poured first. She is given 8 cups, 4 of each, and told so. If she is only guessing, the number of milk-first cups she identifies correctly follows a hypergeometric distribution, and getting all 4 right happens with probability exactly 1/70.">
+
+.. only:: html
+
+  .. image:: /api/gallery/statistics/hypothesis_tests/images/thumb/sphx_glr_plot_03_fisher_exact_lady_tea_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/statistics/hypothesis_tests/plot_03_fisher_exact_lady_tea`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Fisher's exact test and the lady tasting tea</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Compares three fertilizer treatments&#x27; effect on plant growth, as in Fisher&#x27;s Rothamsted field trials. ANOVA splits the total variability into a between-groups and a within-groups sum of squares; their ratio, the F-statistic, tests all group means for equality in one test.">
+
+.. only:: html
+
+  .. image:: /api/gallery/statistics/hypothesis_tests/images/thumb/sphx_glr_plot_04_one_way_anova_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/statistics/hypothesis_tests/plot_04_one_way_anova`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Fisher's one-way analysis of variance</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Likelihood
+----------
+
+Maximum-likelihood fitting and the likelihood-ratio test.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Fits an exponential and a gamma distribution to the same skewed data by maximum likelihood, and plots the exponential model&#x27;s log-likelihood as a function of its scale: the curve peaks exactly at the sample mean, the closed-form MLE.">
+
+.. only:: html
+
+  .. image:: /api/gallery/statistics/likelihood/images/thumb/sphx_glr_plot_01_maximum_likelihood_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/statistics/likelihood/plot_01_maximum_likelihood`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Fisher's maximum likelihood</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Repeatedly tests the true null hypothesis &quot;the normal mean is 0&quot; with the likelihood-ratio statistic 2(l1 - l0). Wilks&#x27;s theorem says the statistic&#x27;s null distribution approaches chi-square with one degree of freedom, the number of parameters the null hypothesis fixes.">
+
+.. only:: html
+
+  .. image:: /api/gallery/statistics/likelihood/images/thumb/sphx_glr_plot_02_wilks_likelihood_ratio_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/statistics/likelihood/plot_02_wilks_likelihood_ratio`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Wilks's theorem and the likelihood-ratio test</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Multiple testing
+----------------
+
+Bonferroni and Benjamini-Hochberg corrections for many simultaneous tests.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Runs 1000 one-sample t-tests, 100 of which have a real effect. With no correction, dozens of the &quot;discoveries&quot; are false; Bonferroni avoids false discoveries but misses most real effects; Benjamini-Hochberg keeps the fraction of false discoveries near the chosen 5% while finding far more of the real ones.">
+
+.. only:: html
+
+  .. image:: /api/gallery/statistics/multiple_testing/images/thumb/sphx_glr_plot_01_false_discovery_rate_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/statistics/multiple_testing/plot_01_false_discovery_rate`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Benjamini-Hochberg and the false discovery rate</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Nonparametric tests
+-------------------
+
+The Kolmogorov-Smirnov test and the Wilcoxon and Mann-Whitney rank tests.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Draws a sample from a Student t distribution with 3 degrees of freedom and compares its empirical CDF with the standard normal CDF. The KS statistic is the largest vertical gap between the two curves.">
+
+.. only:: html
+
+  .. image:: /api/gallery/statistics/nonparametric/images/thumb/sphx_glr_plot_01_kolmogorov_smirnov_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/statistics/nonparametric/plot_01_kolmogorov_smirnov`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Kolmogorov-Smirnov test</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Rank tests throw away the raw values and keep only their order, so a few extreme observations cannot dominate. With heavy-tailed data they detect a shift that the t-test misses.">
+
+.. only:: html
+
+  .. image:: /api/gallery/statistics/nonparametric/images/thumb/sphx_glr_plot_02_wilcoxon_mann_whitney_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/statistics/nonparametric/plot_02_wilcoxon_mann_whitney`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Wilcoxon and Mann-Whitney rank tests</div>
     </div>
 
 
@@ -261,6 +553,46 @@ Ordinary least squares with residual diagnostics.
 
     </div>
 
+Shrinkage estimation
+--------------------
+
+The James-Stein estimator and Stein's paradox.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Estimates p unrelated normal means from one observation each. Shrinking all the observations toward zero by the James-Stein factor lowers the total squared error for every p &gt;= 3, even though no single observation carries information about the others.">
+
+.. only:: html
+
+  .. image:: /api/gallery/statistics/shrinkage/images/thumb/sphx_glr_plot_01_james_stein_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/statistics/shrinkage/plot_01_james_stein`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Stein's paradox</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
 
 .. toctree::
    :hidden:
@@ -269,9 +601,14 @@ Ordinary least squares with residual diagnostics.
 
    /api/gallery/statistics/bootstrap/index.rst
    /api/gallery/statistics/confidence_intervals/index.rst
+   /api/gallery/statistics/correlation/index.rst
    /api/gallery/statistics/descriptive/index.rst
    /api/gallery/statistics/hypothesis_tests/index.rst
+   /api/gallery/statistics/likelihood/index.rst
+   /api/gallery/statistics/multiple_testing/index.rst
+   /api/gallery/statistics/nonparametric/index.rst
    /api/gallery/statistics/regression/index.rst
+   /api/gallery/statistics/shrinkage/index.rst
 
 
 

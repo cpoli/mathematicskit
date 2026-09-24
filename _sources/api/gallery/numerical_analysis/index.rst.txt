@@ -4,9 +4,12 @@ Examples
 ========
 
 This gallery walks through every public feature of ``mathematicskit.numerical_analysis``:
-scalar root finding with convergence-order verification, polynomial
-interpolation (Lagrange, Newton divided-difference, cubic splines,
-Chebyshev nodes), and least-squares polynomial regression.
+scalar root finding with convergence-order verification and
+acceleration, polynomial interpolation (Lagrange, Newton
+divided-difference, Hermite, cubic splines, Chebyshev nodes), function
+approximation (Bernstein, Padé, Remez minimax), polynomial evaluation and
+root conditioning, compensated summation, and least-squares polynomial
+regression.
 
 See also the narrative tutorial:
 
@@ -24,15 +27,22 @@ Sections
 
 - **root_finding** -- bisection, Newton-Raphson, secant, and fixed-point
   iteration side by side on the same problem, with each method's empirical
-  convergence order verified against its theoretical rate.
+  convergence order verified against its theoretical rate; Halley's cubic
+  method; Aitken's delta-squared process and Steffensen's method.
 - **interpolation** -- Lagrange and Newton divided-difference polynomial
   interpolation, shown to agree exactly and to reproduce any polynomial up
-  to the interpolation degree.
+  to the interpolation degree; Hermite interpolation of values and slopes.
 - **splines** -- natural and clamped cubic spline interpolation, and why a
   spline avoids the oscillation a single high-degree polynomial would show.
 - **chebyshev** -- Chebyshev interpolation nodes and the Runge phenomenon:
   why equally spaced nodes can diverge as degree grows, and Chebyshev nodes
   don't.
+- **approximation** -- Bernstein polynomials and the Weierstrass theorem,
+  Padé approximants, and Remez's best uniform (minimax) approximation.
+- **polynomials** -- Horner's scheme with deflation, and Wilkinson's
+  ill-conditioned polynomial.
+- **floating_point** -- Kahan's compensated summation against naive and
+  pairwise summation.
 - **regression** -- least-squares polynomial regression via the normal
   equations, and how the fit's condition number worsens with degree.
 
@@ -54,8 +64,84 @@ Sections
 
     </div>
 
-Chebyshev nodes and the Runge phenomenon
------------------------------------------
+Function approximation
+----------------------
+
+Approximating a function over a whole interval: Bernstein polynomials and
+the Weierstrass theorem, Padé rational approximants, and Remez's best
+uniform (minimax) polynomials.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Weierstrass proved in 1885 that every continuous function on a closed interval is a uniform limit of polynomials. Sergei Bernstein&#x27;s 1912 proof builds the polynomials explicitly: average f(k/n) with binomial weights. This script approximates a function with a kink, |x - 1/2|, and shows the uniform error shrinking, slowly, as the degree grows.">
+
+.. only:: html
+
+  .. image:: /api/gallery/numerical_analysis/approximation/images/thumb/sphx_glr_plot_01_bernstein_polynomials_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/numerical_analysis/approximation/plot_01_bernstein_polynomials`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Bernstein polynomials and the Weierstrass theorem</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Henri Padé&#x27;s 1892 thesis organized rational approximations p(x)/q(x) that match a function&#x27;s Taylor series as far as possible. The Taylor series of \log(1 + x) diverges for x &gt; 1, but the Padé approximants built from the same coefficients keep converging well beyond it.">
+
+.. only:: html
+
+  .. image:: /api/gallery/numerical_analysis/approximation/images/thumb/sphx_glr_plot_02_pade_approximants_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/numerical_analysis/approximation/plot_02_pade_approximants`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Padé approximants beyond the radius of convergence</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Chebyshev showed that the polynomial of degree n closest to f in the maximum norm is characterized by an error curve that reaches its peak magnitude n + 2 times with alternating sign. Evgeny Remez&#x27;s 1934 exchange algorithm finds it by repeatedly levelling the error on a set of reference points. This script computes the best degree-6 approximation to e^x \sin(3x) on [-1, 1] and compares its error with Chebyshev interpolation of the same degree.">
+
+.. only:: html
+
+  .. image:: /api/gallery/numerical_analysis/approximation/images/thumb/sphx_glr_plot_03_remez_minimax_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/numerical_analysis/approximation/plot_03_remez_minimax`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Remez's algorithm and best uniform approximation</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Runge's phenomenon and Chebyshev nodes
+--------------------------------------
 
 Why node placement matters: equally spaced interpolation nodes can make
 the error diverge as the polynomial degree grows (Runge's 1901 example),
@@ -75,7 +161,7 @@ while Chebyshev nodes keep the error shrinking.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Interpolating Runge&#x27;s classic example, f(x) = 1/(1+25x^2), at equally spaced nodes on [-1, 1] makes the interpolation error diverge near the endpoints as the polynomial degree grows -- a famous 1901 counterexample to the intuition that more nodes always means a better fit. Clustering nodes near the endpoints instead, at the Chebyshev points, eliminates the divergence entirely.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Carl Runge&#x27;s 1901 example f(x) = 1/(1+25x^2) is smooth on [-1, 1], yet interpolating it at more equally spaced nodes makes the fit worse: oscillations near the endpoints grow without bound as the degree increases. This script shows the overshoot for growing degree, the maximum error blowing up, and the exponentially growing Lebesgue constant of equally spaced nodes that causes it.">
 
 .. only:: html
 
@@ -86,7 +172,65 @@ while Chebyshev nodes keep the error shrinking.
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">The Runge phenomenon: why node placement matters</div>
+      <div class="sphx-glr-thumbnail-title">Runge's phenomenon: equally spaced interpolation diverges</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Chebyshev&#x27;s least-deviation polynomials suggest placing interpolation nodes at the extrema of T_n(x) = \cos(n \arccos x), which cluster toward the ends of [-1, 1]. At these nodes the Lebesgue constant grows only logarithmically, so the interpolant of Runge&#x27;s function 1/(1+25x^2) converges as the degree rises. This script shows the node clustering, the degree-20 Chebyshev interpolant, and its error shrinking geometrically.">
+
+.. only:: html
+
+  .. image:: /api/gallery/numerical_analysis/chebyshev/images/thumb/sphx_glr_plot_02_chebyshev_nodes_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/numerical_analysis/chebyshev/plot_02_chebyshev_nodes`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Chebyshev nodes: the cure for Runge's phenomenon</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Floating-point arithmetic
+-------------------------
+
+Rounding error in floating-point computation, and algorithms that
+compensate for it.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Adding n floating-point numbers one at a time can accumulate error proportional to n. William Kahan&#x27;s 1965 algorithm carries the rounding error of each addition forward in a correction term, so the error stays at a few units in the last place however many terms are added. This script sums 0.1 repeatedly and compares the naive loop, Kahan&#x27;s algorithm, and NumPy&#x27;s pairwise summation against the exactly rounded result from math.fsum.">
+
+.. only:: html
+
+  .. image:: /api/gallery/numerical_analysis/floating_point/images/thumb/sphx_glr_plot_01_kahan_summation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/numerical_analysis/floating_point/plot_01_kahan_summation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Kahan's compensated summation</div>
     </div>
 
 
@@ -128,6 +272,81 @@ unique interpolating polynomial, built and evaluated two different ways.
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">Lagrange vs. Newton divided-difference interpolation</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Charles Hermite&#x27;s 1878 interpolant matches both f(x_i) and f&#x27;(x_i), so n + 1 nodes fix a polynomial of degree 2n + 1. On the same few nodes it follows \sin far more closely than the Lagrange interpolant, which knows only the values.">
+
+.. only:: html
+
+  .. image:: /api/gallery/numerical_analysis/interpolation/images/thumb/sphx_glr_plot_02_hermite_interpolation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/numerical_analysis/interpolation/plot_02_hermite_interpolation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Hermite interpolation: matching slopes as well as values</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Polynomials
+-----------
+
+Evaluating polynomials efficiently with Horner's scheme, and how
+sensitive their roots can be to tiny changes in the coefficients.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Horner&#x27;s 1819 scheme rewrites a_n x^n + \dots + a_0 as nested multiplications, using n multiplications instead of the 2n - 1 of the term-by-term form. Its intermediate values are the coefficients of the quotient p(x) / (x - x_0), which gives the derivative for Newton&#x27;s method and lets a found root be divided out (&quot;deflation&quot;). This script finds all roots of a quartic that way and compares operation counts.">
+
+.. only:: html
+
+  .. image:: /api/gallery/numerical_analysis/polynomials/images/thumb/sphx_glr_plot_01_horner_method_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/numerical_analysis/polynomials/plot_01_horner_method`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Horner's method: evaluation, derivative, and deflation</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="w(x) = (x - 1)(x - 2) \cdots (x - 20) has well separated integer roots, yet James Wilkinson found that subtracting 2^{-23} from its x^{19} coefficient, -210, sends ten of the roots far into the complex plane. The root condition numbers explain why: the roots near 16 amplify a relative change in that coefficient by a factor of about 3 \times 10^{10}.">
+
+.. only:: html
+
+  .. image:: /api/gallery/numerical_analysis/polynomials/images/thumb/sphx_glr_plot_02_wilkinson_polynomial_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/numerical_analysis/polynomials/plot_02_wilkinson_polynomial`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Wilkinson's perfidious polynomial</div>
     </div>
 
 
@@ -181,9 +400,9 @@ fit's numerical conditioning worsens as the polynomial degree grows.
 Root finding
 ------------
 
-Bisection, Newton-Raphson, secant, and fixed-point iteration compared on
-the same problem, with empirical convergence order verified against each
-method's theoretical rate.
+The Babylonian square-root rule and bisection, Newton-Raphson's tangent
+iteration, Halley's cubically convergent method, and Aitken/Steffensen
+acceleration, each with its empirical convergence order measured.
 
 
 .. raw:: html
@@ -199,18 +418,69 @@ method's theoretical rate.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Bisection, Newton-Raphson, secant, and fixed-point iteration all solve f(x) = x^2 - 2 = 0, i.e. find \sqrt{2}, but converge at very different rates: bisection and (generic) fixed-point iteration are linear (order 1), secant is superlinear (order \approx 1.618, the golden ratio), and Newton-Raphson is quadratic (order 2). This script runs all four and verifies each empirical order against its theoretical one via mathematicskit.numerical_analysis.utils.error_analysis.estimate_convergence_order.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Old Babylonian tablets give \sqrt{2} to about six decimal places. The rule Heron of Alexandria later wrote down averages a guess with a divided by the guess, x_{n+1} = \tfrac12(x_n + a/x_n). Bisection needs even less: it halves a bracket [a, b] on which f changes sign, relying only on the intermediate value theorem. This script computes \sqrt{2} both ways and shows the bracket shrinking by exactly half per step, against the Babylonian rule&#x27;s doubling of correct digits.">
 
 .. only:: html
 
-  .. image:: /api/gallery/numerical_analysis/root_finding/images/thumb/sphx_glr_plot_01_methods_compared_thumb.png
+  .. image:: /api/gallery/numerical_analysis/root_finding/images/thumb/sphx_glr_plot_01_babylonian_bisection_thumb.png
     :alt:
 
-  :doc:`/api/gallery/numerical_analysis/root_finding/plot_01_methods_compared`
+  :doc:`/api/gallery/numerical_analysis/root_finding/plot_01_babylonian_bisection`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Root-finding methods and their convergence orders</div>
+      <div class="sphx-glr-thumbnail-title">The Babylonian square root and bisection</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Newton and Raphson&#x27;s iteration replaces f by its tangent line at the current guess and steps to where that line crosses zero, x_{n+1} = x_n - f(x_n)/f&#x27;(x_n). This script draws the first tangent steps for f(x) = x^3 - 2x - 5 (the cubic Newton himself used as his example) and shows the number of correct digits roughly doubling at every step, i.e. convergence of order 2.">
+
+.. only:: html
+
+  .. image:: /api/gallery/numerical_analysis/root_finding/images/thumb/sphx_glr_plot_02_newton_raphson_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/numerical_analysis/root_finding/plot_02_newton_raphson`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Newton-Raphson's method: tangent lines and quadratic convergence</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Edmond Halley&#x27;s 1694 iteration uses the second derivative as well as the first, stepping to the root of an osculating hyperbola instead of a tangent line. Near a simple root it triples the number of correct digits per step, against Newton&#x27;s doubling. This script solves x^3 = 2 with both methods from the same starting guess and compares their error histories and empirical convergence orders.">
+
+.. only:: html
+
+  .. image:: /api/gallery/numerical_analysis/root_finding/images/thumb/sphx_glr_plot_03_halley_method_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/numerical_analysis/root_finding/plot_03_halley_method`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Halley's method: cubic convergence</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Aitken&#x27;s \Delta^2 process (1926) extrapolates a linearly convergent sequence from three consecutive terms. Applied to the slowly converging Leibniz series for \pi, one pass gains several digits. Steffensen&#x27;s method (1933) applies the same extrapolation inside a fixed-point iteration, turning the linear convergence of x_{n+1} = \cos x_n into quadratic convergence without any derivative.">
+
+.. only:: html
+
+  .. image:: /api/gallery/numerical_analysis/root_finding/images/thumb/sphx_glr_plot_04_aitken_steffensen_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/numerical_analysis/root_finding/plot_04_aitken_steffensen`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Aitken's delta-squared process and Steffensen's method</div>
     </div>
 
 
@@ -268,8 +538,11 @@ show on the same data.
    :includehidden:
 
 
+   /api/gallery/numerical_analysis/approximation/index.rst
    /api/gallery/numerical_analysis/chebyshev/index.rst
+   /api/gallery/numerical_analysis/floating_point/index.rst
    /api/gallery/numerical_analysis/interpolation/index.rst
+   /api/gallery/numerical_analysis/polynomials/index.rst
    /api/gallery/numerical_analysis/regression/index.rst
    /api/gallery/numerical_analysis/root_finding/index.rst
    /api/gallery/numerical_analysis/splines/index.rst

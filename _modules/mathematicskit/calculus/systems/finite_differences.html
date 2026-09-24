@@ -410,30 +410,32 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.calculus.systems.finite_differences</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Finite-difference derivatives (forward/backward/central) and Richardson</span>
+<span></span><span class="sa">r</span><span class="sd">"""Finite-difference derivatives (forward/backward/central) and Richardson</span>
 <span class="sd">extrapolation for higher accuracy.</span>
 
 <span class="sd">See Burden &amp; Faires, *Numerical Analysis*, 10th ed., Ch. 4.1</span>
-<span class="sd">(&quot;Numerical Differentiation&quot;) for the difference formulas and their</span>
-<span class="sd">truncation-error orders, and Ch. 4.2 (&quot;Richardson&#39;s Extrapolation&quot;) for</span>
+<span class="sd">("Numerical Differentiation") for the difference formulas and their</span>
+<span class="sd">truncation-error orders, and Ch. 4.2 ("Richardson's Extrapolation") for</span>
 <span class="sd">combining two lower-order estimates into a higher-order one.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.calculus.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">DerivativeResult</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;forward_difference&quot;</span><span class="p">,</span> <span class="s2">&quot;backward_difference&quot;</span><span class="p">,</span> <span class="s2">&quot;central_difference&quot;</span><span class="p">,</span> <span class="s2">&quot;richardson_extrapolation&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"forward_difference"</span><span class="p">,</span> <span class="s2">"backward_difference"</span><span class="p">,</span> <span class="s2">"central_difference"</span><span class="p">,</span> <span class="s2">"complex_step_derivative"</span><span class="p">,</span> <span class="s2">"richardson_extrapolation"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="forward_difference">
 <a class="viewcode-back" href="../../../../api/calculus.html#mathematicskit.calculus.forward_difference">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">forward_difference</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">],</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">h</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Forward-difference derivative estimate, :math:`O(h)`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Forward-difference derivative estimate, :math:`O(h)`.</span>
 
-<span class="sd">    :math:`f&#39;(x) \approx \dfrac{f(x+h) - f(x)}{h}`. See Burden &amp; Faires,</span>
+<span class="sd">    :math:`f'(x) \approx \dfrac{f(x+h) - f(x)}{h}`. See Burden &amp; Faires,</span>
 <span class="sd">    *Numerical Analysis*, 10th ed., Ch. 4.1.</span>
 
 <span class="sd">    Parameters</span>
@@ -451,7 +453,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; round(forward_difference(lambda t: t**2, 3.0, h=1e-4), 3)</span>
 <span class="sd">    6.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">/</span> <span class="n">h</span></div>
 
 
@@ -459,9 +461,9 @@
 <div class="viewcode-block" id="backward_difference">
 <a class="viewcode-back" href="../../../../api/calculus.html#mathematicskit.calculus.backward_difference">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">backward_difference</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">],</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">h</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Backward-difference derivative estimate, :math:`O(h)`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Backward-difference derivative estimate, :math:`O(h)`.</span>
 
-<span class="sd">    :math:`f&#39;(x) \approx \dfrac{f(x) - f(x-h)}{h}`.</span>
+<span class="sd">    :math:`f'(x) \approx \dfrac{f(x) - f(x-h)}{h}`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -477,7 +479,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; round(backward_difference(lambda t: t**2, 3.0, h=1e-4), 3)</span>
 <span class="sd">    6.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">h</span><span class="p">))</span> <span class="o">/</span> <span class="n">h</span></div>
 
 
@@ -485,9 +487,9 @@
 <div class="viewcode-block" id="central_difference">
 <a class="viewcode-back" href="../../../../api/calculus.html#mathematicskit.calculus.central_difference">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">central_difference</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">],</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">h</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Central-difference derivative estimate, :math:`O(h^2)`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Central-difference derivative estimate, :math:`O(h^2)`.</span>
 
-<span class="sd">    :math:`f&#39;(x) \approx \dfrac{f(x+h) - f(x-h)}{2h}` -- one order of</span>
+<span class="sd">    :math:`f'(x) \approx \dfrac{f(x+h) - f(x-h)}{2h}` -- one order of</span>
 <span class="sd">    accuracy better than forward/backward differences at the same cost</span>
 <span class="sd">    (2 evaluations), since the :math:`O(h)` error terms in the underlying</span>
 <span class="sd">    Taylor expansions cancel. See Burden &amp; Faires, *Numerical Analysis*,</span>
@@ -508,18 +510,55 @@
 <span class="sd">    &gt;&gt;&gt; import numpy as np</span>
 <span class="sd">    &gt;&gt;&gt; round(float(central_difference(np.sin, 0.0, h=1e-4)), 8)</span>
 <span class="sd">    1.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">h</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">h</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="complex_step_derivative">
+<a class="viewcode-back" href="../../../../api/calculus.html#mathematicskit.calculus.complex_step_derivative">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">complex_step_derivative</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">h</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-20</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Complex-step derivative estimate, :math:`O(h^2)` with no subtractive cancellation.</span>
+
+<span class="sd">    :math:`f'(x) \approx \operatorname{Im} f(x + ih) / h`. Because no</span>
+<span class="sd">    two nearly equal numbers are subtracted, ``h`` can be taken absurdly</span>
+<span class="sd">    small and the result is accurate to machine precision. Requires ``f``</span>
+<span class="sd">    to be real-analytic and implemented with complex-capable operations</span>
+<span class="sd">    (e.g. :mod:`numpy` ufuncs). See J. N. Lyness and C. B. Moler,</span>
+<span class="sd">    "Numerical Differentiation of Analytic Functions," SIAM Journal on</span>
+<span class="sd">    Numerical Analysis 4(2) (1967), 202-210, and W. Squire and G. Trapp,</span>
+<span class="sd">    "Using Complex Variables to Estimate Derivatives of Real Functions,"</span>
+<span class="sd">    SIAM Review 40(1) (1998), 110-112.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    f : callable</span>
+<span class="sd">        Accepts a complex argument.</span>
+<span class="sd">    x : float</span>
+<span class="sd">    h : float</span>
+<span class="sd">        Imaginary step size.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; abs(complex_step_derivative(np.exp, 1.0) - np.e) &lt; 1e-15</span>
+<span class="sd">    True</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">h</span><span class="p">))</span> <span class="o">/</span> <span class="n">h</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="richardson_extrapolation">
 <a class="viewcode-back" href="../../../../api/calculus.html#mathematicskit.calculus.richardson_extrapolation">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">richardson_extrapolation</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">],</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">h</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-2</span><span class="p">,</span> <span class="n">levels</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DerivativeResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Richardson-extrapolate central differences to arbitrarily high order.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Richardson-extrapolate central differences to arbitrarily high order.</span>
 
 <span class="sd">    Central differences have an error series in even powers of ``h``:</span>
-<span class="sd">    :math:`D(h) = f&#39;(x) + c_1 h^2 + c_2 h^4 + \dots`. Combining</span>
+<span class="sd">    :math:`D(h) = f'(x) + c_1 h^2 + c_2 h^4 + \dots`. Combining</span>
 <span class="sd">    :math:`D(h)` and :math:`D(h/2)` as</span>
 <span class="sd">    :math:`\dfrac{4 D(h/2) - D(h)}{3}` cancels the :math:`h^2` term,</span>
 <span class="sd">    leaving :math:`O(h^4)`; repeating with successively halved step sizes</span>
@@ -550,7 +589,7 @@
 <span class="sd">    &gt;&gt;&gt; result = richardson_extrapolation(np.sin, 0.0, h=0.2, levels=5)</span>
 <span class="sd">    &gt;&gt;&gt; round(float(result.value), 12)</span>
 <span class="sd">    1.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">table</span> <span class="o">=</span> <span class="p">[[</span><span class="n">central_difference</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">levels</span><span class="p">)]]</span>
     <span class="k">for</span> <span class="n">level</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">levels</span><span class="p">):</span>
         <span class="n">row</span> <span class="o">=</span> <span class="p">[]</span>
@@ -561,7 +600,7 @@
         <span class="n">table</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
     <span class="n">best</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
     <span class="n">error_estimate</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">table</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span> <span class="k">if</span> <span class="n">levels</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mf">0.0</span>
-    <span class="k">return</span> <span class="n">DerivativeResult</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">best</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">h</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="n">levels</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;richardson&quot;</span><span class="p">,</span> <span class="n">error_estimate</span><span class="o">=</span><span class="n">error_estimate</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">DerivativeResult</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">best</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">h</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="n">levels</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">method</span><span class="o">=</span><span class="s2">"richardson"</span><span class="p">,</span> <span class="n">error_estimate</span><span class="o">=</span><span class="n">error_estimate</span><span class="p">)</span></div>
 
 </pre></div>
 

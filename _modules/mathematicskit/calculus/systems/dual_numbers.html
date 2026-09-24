@@ -410,32 +410,32 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.calculus.systems.dual_numbers</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Forward-mode automatic differentiation via dual numbers.</span>
+<span></span><span class="sa">r</span><span class="sd">"""Forward-mode automatic differentiation via dual numbers.</span>
 
 <span class="sd">A dual number :math:`a + b\varepsilon` with :math:`\varepsilon^2 = 0`</span>
-<span class="sd">propagates a function&#39;s value *and* its exact derivative together</span>
+<span class="sd">propagates a function's value *and* its exact derivative together</span>
 <span class="sd">through ordinary arithmetic: substituting :math:`x + \varepsilon` (i.e.</span>
 <span class="sd">:math:`dx/dx = 1`) into any function built from ``+``, ``-``, ``*``,</span>
 <span class="sd">``/``, and elementary functions and expanding via</span>
-<span class="sd">:math:`f(a+b\varepsilon) = f(a) + b f&#39;(a)\varepsilon` (Taylor&#39;s theorem,</span>
+<span class="sd">:math:`f(a+b\varepsilon) = f(a) + b f'(a)\varepsilon` (Taylor's theorem,</span>
 <span class="sd">truncated after the linear term since :math:`\varepsilon^2=0`) computes</span>
-<span class="sd">:math:`f(x)` and :math:`f&#39;(x)` in one pass with no finite-difference</span>
+<span class="sd">:math:`f(x)` and :math:`f'(x)` in one pass with no finite-difference</span>
 <span class="sd">truncation error. See Griewank &amp; Walther, *Evaluating Derivatives*, 2nd</span>
 <span class="sd">ed., Ch. 3, and Clifford (1873) for the original dual-number algebra.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Dual&quot;</span><span class="p">,</span> <span class="s2">&quot;derivative&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Dual"</span><span class="p">,</span> <span class="s2">"derivative"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="Dual">
 <a class="viewcode-back" href="../../../../api/calculus.html#mathematicskit.calculus.Dual">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Dual</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A dual number :math:`\text{real} + \text{dual}\,\varepsilon`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""A dual number :math:`\text{real} + \text{dual}\,\varepsilon`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -447,19 +447,19 @@
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; x = Dual(3.0, 1.0)  # seed dx/dx = 1</span>
-<span class="sd">    &gt;&gt;&gt; y = x * x + 2.0 * x  # f(x) = x^2 + 2x, f&#39;(x) = 2x + 2</span>
+<span class="sd">    &gt;&gt;&gt; y = x * x + 2.0 * x  # f(x) = x^2 + 2x, f'(x) = 2x + 2</span>
 <span class="sd">    &gt;&gt;&gt; y.real, y.dual</span>
 <span class="sd">    (15.0, 8.0)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;real&quot;</span><span class="p">,</span> <span class="s2">&quot;dual&quot;</span><span class="p">)</span>
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"real"</span><span class="p">,</span> <span class="s2">"dual"</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">real</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">dual</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">real</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">real</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dual</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">dual</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Dual(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">real</span><span class="si">!r}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dual</span><span class="si">!r}</span><span class="s2">)&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"Dual(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">real</span><span class="si">!r}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dual</span><span class="si">!r}</span><span class="s2">)"</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_coerce</span><span class="p">(</span><span class="n">other</span><span class="p">):</span>
@@ -480,14 +480,14 @@
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="n">other</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coerce</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
-        <span class="c1"># Product rule: (u v)&#39; = u&#39;v + u v&#39;</span>
+        <span class="c1"># Product rule: (u v)' = u'v + u v'</span>
         <span class="k">return</span> <span class="n">Dual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">real</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dual</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">real</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">real</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">dual</span><span class="p">)</span>
 
     <span class="fm">__rmul__</span> <span class="o">=</span> <span class="fm">__mul__</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__truediv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="n">other</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coerce</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
-        <span class="c1"># Quotient rule: (u/v)&#39; = (u&#39;v - u v&#39;) / v^2</span>
+        <span class="c1"># Quotient rule: (u/v)' = (u'v - u v') / v^2</span>
         <span class="k">return</span> <span class="n">Dual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">real</span> <span class="o">/</span> <span class="n">other</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dual</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">real</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">real</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">dual</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">real</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__rtruediv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
@@ -497,7 +497,7 @@
         <span class="k">return</span> <span class="n">Dual</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">dual</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__pow__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-        <span class="c1"># Power rule: (u^p)&#39; = p u^(p-1) u&#39;</span>
+        <span class="c1"># Power rule: (u^p)' = p u^(p-1) u'</span>
         <span class="k">return</span> <span class="n">Dual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">real</span><span class="o">**</span><span class="n">p</span><span class="p">,</span> <span class="n">p</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">real</span> <span class="o">**</span> <span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dual</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Dual.sin">
@@ -537,7 +537,7 @@
 <div class="viewcode-block" id="derivative">
 <a class="viewcode-back" href="../../../../api/calculus.html#mathematicskit.calculus.derivative">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">derivative</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Dual</span><span class="p">],</span> <span class="n">Dual</span><span class="p">],</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Exact derivative of ``f`` at ``x`` via forward-mode dual numbers.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Exact derivative of ``f`` at ``x`` via forward-mode dual numbers.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -552,7 +552,7 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    float</span>
-<span class="sd">        :math:`f&#39;(x)`, exact up to floating-point roundoff (no</span>
+<span class="sd">        :math:`f'(x)`, exact up to floating-point roundoff (no</span>
 <span class="sd">        truncation error, unlike finite differences).</span>
 
 <span class="sd">    Examples</span>
@@ -560,7 +560,7 @@
 <span class="sd">    &gt;&gt;&gt; f = lambda x: (x * x).sin()</span>
 <span class="sd">    &gt;&gt;&gt; round(derivative(f, 1.0), 10) == round(2.0 * 1.0 * math.cos(1.0 * 1.0), 10)</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="n">Dual</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span><span class="o">.</span><span class="n">dual</span></div>
 
 </pre></div>

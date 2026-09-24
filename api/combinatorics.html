@@ -470,7 +470,60 @@ pentagonal-number recurrence, and full enumeration) and Young/Ferrers
 diagrams; the inclusion-exclusion principle and the classic derangement-
 counting application; and Stirling numbers (first and second kind),
 Catalan numbers, and Bell numbers with their combinatorial
-interpretations – all hand-rolled, with no scipy/numpy equivalent.</p>
+interpretations; Fibonacci and Bernoulli numbers, power sums, and Gray
+codes; Latin squares; Prüfer codes for labeled trees; Ramsey’s
+R(3,3) and Erdős-Szekeres monotone subsequences; Hall’s marriage
+theorem; and Pólya necklace counting – all hand-rolled, with no
+scipy/numpy equivalent.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.combinatorics.HallResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.combinatorics.</span></span><span class="sig-name descname"><span class="pre">HallResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">satisfied</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">violating_subset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">frozenset({})</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matching</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/combinatorics/core/base.html#HallResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.combinatorics.HallResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Container for a Hall’s-condition check on a bipartite graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>satisfied</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>)</p></li>
+<li><p><strong>violating_subset</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#frozenset" title="(in Python v3.14)"><em>frozenset</em></a>)</p></li>
+<li><p><strong>matching</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.combinatorics.HallResult.matching">
+<span class="sig-name descname"><span class="pre">matching</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a></span><a class="headerlink" href="#mathematicskit.combinatorics.HallResult.matching" title="Link to this definition">#</a></dt>
+<dd><p>A maximum matching <code class="docutils literal notranslate"><span class="pre">{left:</span> <span class="pre">right}</span></code> found by augmenting paths.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.combinatorics.HallResult.satisfied">
+<span class="sig-name descname"><span class="pre">satisfied</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><a class="headerlink" href="#mathematicskit.combinatorics.HallResult.satisfied" title="Link to this definition">#</a></dt>
+<dd><p>Whether every subset <code class="docutils literal notranslate"><span class="pre">S</span></code> of the left side has <code class="docutils literal notranslate"><span class="pre">|N(S)|</span> <span class="pre">&gt;=</span> <span class="pre">|S|</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.combinatorics.HallResult.violating_subset">
+<span class="sig-name descname"><span class="pre">violating_subset</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#frozenset" title="(in Python v3.14)"><span class="pre">frozenset</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">frozenset({})</span></span><a class="headerlink" href="#mathematicskit.combinatorics.HallResult.violating_subset" title="Link to this definition">#</a></dt>
+<dd><p>A left-side subset with too few neighbors, when the condition fails.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#frozenset" title="(in Python v3.14)">frozenset</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="mathematicskit.combinatorics.YoungDiagram">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.combinatorics.</span></span><span class="sig-name descname"><span class="pre">YoungDiagram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/combinatorics/core/base.html#YoungDiagram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.combinatorics.YoungDiagram" title="Link to this definition">#</a></dt>
@@ -547,6 +600,31 @@ are <span class="math notranslate nohighlight">\(\geq k\)</span>.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.combinatorics.are_orthogonal">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.combinatorics.</span></span><span class="sig-name descname"><span class="pre">are_orthogonal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/combinatorics/systems/designs.html#are_orthogonal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.combinatorics.are_orthogonal" title="Link to this definition">#</a></dt>
+<dd><p>Whether two Latin squares are orthogonal: superimposed, every ordered pair of symbols appears exactly once.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>array_like</em><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n"><em>n</em></a><em>, </em><a class="reference internal" href="#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n"><em>n</em></a><em>)</em>)</p></li>
+<li><p><strong>b</strong> (<em>array_like</em><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n"><em>n</em></a><em>, </em><a class="reference internal" href="#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n"><em>n</em></a><em>)</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>bool</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">are_orthogonal</span><span class="p">(</span><span class="n">cyclic_latin_square</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">cyclic_latin_square</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.combinatorics.bell_number">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.combinatorics.</span></span><span class="sig-name descname"><span class="pre">bell_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/combinatorics/utils/bell_number.html#bell_number"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.combinatorics.bell_number" title="Link to this definition">#</a></dt>
 <dd><p>The <code class="docutils literal notranslate"><span class="pre">n</span></code>-th Bell number: the total number of ways to partition <code class="docutils literal notranslate"><span class="pre">n</span></code> labeled elements into any number of non-empty unlabeled blocks.</p>
@@ -568,6 +646,31 @@ over every possible number of blocks. See Graham, Knuth &amp; Patashnik,
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">bell_number</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)]</span>
 <span class="go">[1, 1, 2, 5, 15, 52]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.combinatorics.bernoulli_numbers">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.combinatorics.</span></span><span class="sig-name descname"><span class="pre">bernoulli_numbers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/combinatorics/systems/sequences.html#bernoulli_numbers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.combinatorics.bernoulli_numbers" title="Link to this definition">#</a></dt>
+<dd><p>The Bernoulli numbers <span class="math notranslate nohighlight">\(B_0, \dots, B_n\)</span> as exact fractions, with <span class="math notranslate nohighlight">\(B_1 = +\tfrac12\)</span>.</p>
+<p>From the recurrence <span class="math notranslate nohighlight">\(\sum_{j=0}^{m} \binom{m+1}{j} B_j = m+1\)</span>,
+which fixes the convention <span class="math notranslate nohighlight">\(B_1 = +\tfrac12\)</span> used by Jacob
+Bernoulli in <em>Ars Conjectandi</em> (1713).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>list of Fraction</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">bernoulli_numbers</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
+<span class="go">['1', '1/2', '1/6', '0', '-1/30', '0', '1/42', '0', '-1/30']</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -633,6 +736,132 @@ Sec. 7.5.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.combinatorics.count_bracelets">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.combinatorics.</span></span><span class="sig-name descname"><span class="pre">count_bracelets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/combinatorics/systems/necklaces.html#count_bracelets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.combinatorics.count_bracelets" title="Link to this definition">#</a></dt>
+<dd><p>Number of bracelets of <code class="docutils literal notranslate"><span class="pre">n</span></code> beads in <code class="docutils literal notranslate"><span class="pre">k</span></code> colors, up to rotation and reflection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>k</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>int</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">count_bracelets</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">)]</span>
+<span class="go">[2, 3, 4, 6, 8, 13, 18, 30]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.combinatorics.count_labeled_trees">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.combinatorics.</span></span><span class="sig-name descname"><span class="pre">count_labeled_trees</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/combinatorics/systems/trees.html#count_labeled_trees"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.combinatorics.count_labeled_trees" title="Link to this definition">#</a></dt>
+<dd><p>Cayley’s formula: <span class="math notranslate nohighlight">\(n^{n-2}\)</span> labeled trees on <code class="docutils literal notranslate"><span class="pre">n</span></code> vertices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;=</span> <span class="pre">1</span></code>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>int</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">count_labeled_trees</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)]</span>
+<span class="go">[1, 1, 3, 16, 125, 1296]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.combinatorics.count_necklaces">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.combinatorics.</span></span><span class="sig-name descname"><span class="pre">count_necklaces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/combinatorics/systems/necklaces.html#count_necklaces"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.combinatorics.count_necklaces" title="Link to this definition">#</a></dt>
+<dd><p>Number of necklaces of <code class="docutils literal notranslate"><span class="pre">n</span></code> beads in <code class="docutils literal notranslate"><span class="pre">k</span></code> colors, up to rotation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of beads, <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;=</span> <span class="pre">1</span></code>.</p></li>
+<li><p><strong>k</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of colors.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>int</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">count_necklaces</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">)]</span>
+<span class="go">[2, 3, 4, 6, 8, 14, 20, 36]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.combinatorics.count_triangle_free_colorings">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.combinatorics.</span></span><span class="sig-name descname"><span class="pre">count_triangle_free_colorings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/combinatorics/systems/extremal.html#count_triangle_free_colorings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.combinatorics.count_triangle_free_colorings" title="Link to this definition">#</a></dt>
+<dd><p>The number of red/blue edge colorings of <span class="math notranslate nohighlight">\(K_n\)</span> with no monochromatic triangle.</p>
+<p>Exhaustive over all <span class="math notranslate nohighlight">\(2^{\binom{n}{2}}\)</span> colorings, so feasible
+only for <span class="math notranslate nohighlight">\(n \le 6\)</span>. It is zero for <span class="math notranslate nohighlight">\(n = 6\)</span>, which proves
+<span class="math notranslate nohighlight">\(R(3,3) \le 6\)</span>: among any six people, three are mutual friends
+or three are mutual strangers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&lt;=</span> <span class="pre">6</span></code>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>int</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">count_triangle_free_colorings</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">count_triangle_free_colorings</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="go">(12, 0)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.combinatorics.cyclic_latin_square">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.combinatorics.</span></span><span class="sig-name descname"><span class="pre">cyclic_latin_square</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiplier</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/combinatorics/systems/designs.html#cyclic_latin_square"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.combinatorics.cyclic_latin_square" title="Link to this definition">#</a></dt>
+<dd><p>The Latin square <span class="math notranslate nohighlight">\(L_{ij} = (a\,i + j) \bmod n\)</span> for a multiplier <span class="math notranslate nohighlight">\(a\)</span> coprime to <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>multiplier</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – The coefficient <span class="math notranslate nohighlight">\(a\)</span>; it must be coprime to <code class="docutils literal notranslate"><span class="pre">n</span></code> for every
+column to be a permutation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (n, n), int</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cyclic_latin_square</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">array([[0, 1, 2],</span>
+<span class="go">       [1, 2, 0],</span>
+<span class="go">       [2, 0, 1]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.combinatorics.derangement_count">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.combinatorics.</span></span><span class="sig-name descname"><span class="pre">derangement_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/combinatorics/systems/inclusion_exclusion.html#derangement_count"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.combinatorics.derangement_count" title="Link to this definition">#</a></dt>
 <dd><p>Number of derangements <span class="math notranslate nohighlight">\(D_n\)</span>: permutations of <code class="docutils literal notranslate"><span class="pre">n</span></code> items with no fixed points.</p>
@@ -665,6 +894,53 @@ Algorithms</em>, 3rd ed., Ch. C.4.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">brute_force</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">permutations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span> <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">derangement_count</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="n">brute_force</span>
 <span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.combinatorics.domino_tilings">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.combinatorics.</span></span><span class="sig-name descname"><span class="pre">domino_tilings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/combinatorics/systems/sequences.html#domino_tilings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.combinatorics.domino_tilings" title="Link to this definition">#</a></dt>
+<dd><p>Number of ways to tile a <span class="math notranslate nohighlight">\(2 \times n\)</span> strip with <span class="math notranslate nohighlight">\(1 \times 2\)</span> dominoes, <span class="math notranslate nohighlight">\(F_{n+1}\)</span>.</p>
+<p>Equivalently, the number of ways to write <span class="math notranslate nohighlight">\(n\)</span> as an ordered sum
+of 1s and 2s – the counting problem behind the Sanskrit prosodists’
+study of long and short syllables, centuries before Fibonacci.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>int</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">domino_tilings</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>  <span class="c1"># 1111, 112, 121, 211, 22</span>
+<span class="go">5</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.combinatorics.fibonacci">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.combinatorics.</span></span><span class="sig-name descname"><span class="pre">fibonacci</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/combinatorics/systems/sequences.html#fibonacci"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.combinatorics.fibonacci" title="Link to this definition">#</a></dt>
+<dd><p>The Fibonacci number <span class="math notranslate nohighlight">\(F_n\)</span>, with <span class="math notranslate nohighlight">\(F_0 = 0\)</span>, <span class="math notranslate nohighlight">\(F_1 = 1\)</span>, <span class="math notranslate nohighlight">\(F_{n} = F_{n-1} + F_{n-2}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;=</span> <span class="pre">0</span></code>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>int</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+<span class="go">[0, 1, 1, 2, 3, 5, 8, 13, 21, 34]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -723,6 +999,84 @@ Algorithms</em>, 3rd ed., Ch. C.4.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.combinatorics.gray_code">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.combinatorics.</span></span><span class="sig-name descname"><span class="pre">gray_code</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/combinatorics/systems/sequences.html#gray_code"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.combinatorics.gray_code" title="Link to this definition">#</a></dt>
+<dd><p>The reflected binary Gray code on <code class="docutils literal notranslate"><span class="pre">n</span></code> bits, as integers <span class="math notranslate nohighlight">\(g_k = k \oplus (k \gg 1)\)</span>.</p>
+<p>Consecutive codes differ in exactly one bit, including the wrap from
+the last code back to the first. Frank Gray’s 1953 patent used the
+code in analog-to-digital converters. See Knuth, <em>The Art of Computer
+Programming</em>, Vol. 4A, Sec. 7.2.1.1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>list of int</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">format</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="s2">"03b"</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gray_code</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+<span class="go">['000', '001', '011', '010', '110', '111', '101', '100']</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.combinatorics.hall_condition">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.combinatorics.</span></span><span class="sig-name descname"><span class="pre">hall_condition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adjacency</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/combinatorics/systems/matching.html#hall_condition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.combinatorics.hall_condition" title="Link to this definition">#</a></dt>
+<dd><p>Check Hall’s condition <span class="math notranslate nohighlight">\(|N(S)| \ge |S|\)</span> for every subset <span class="math notranslate nohighlight">\(S\)</span> of the left side.</p>
+<p>Checks all <span class="math notranslate nohighlight">\(2^n\)</span> subsets, so it is meant for small
+illustrations. Hall’s theorem says the condition holds exactly when
+<a class="reference internal" href="#mathematicskit.combinatorics.maximum_matching" title="mathematicskit.combinatorics.maximum_matching"><code class="xref py py-func docutils literal notranslate"><span class="pre">maximum_matching()</span></code></a> covers every left vertex; this function
+returns both, so the two can be compared.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>adjacency</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span>) – <code class="docutils literal notranslate"><span class="pre">{left_vertex:</span> <span class="pre">iterable</span> <span class="pre">of</span> <span class="pre">right</span> <span class="pre">vertices}</span></code>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.combinatorics.HallResult" title="mathematicskit.combinatorics.core.base.HallResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">HallResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>HallResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hall_condition</span><span class="p">({</span><span class="s2">"a"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">"b"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">"c"</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">]})</span><span class="o">.</span><span class="n">violating_subset</span> <span class="o">==</span> <span class="nb">frozenset</span><span class="p">({</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">})</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.combinatorics.has_monochromatic_triangle">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.combinatorics.</span></span><span class="sig-name descname"><span class="pre">has_monochromatic_triangle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coloring</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/combinatorics/systems/extremal.html#has_monochromatic_triangle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.combinatorics.has_monochromatic_triangle" title="Link to this definition">#</a></dt>
+<dd><p>Whether a 2-coloring of the edges of <span class="math notranslate nohighlight">\(K_n\)</span> contains a triangle with all three edges the same color.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>coloring</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span>) – <code class="docutils literal notranslate"><span class="pre">{(i,</span> <span class="pre">j):</span> <span class="pre">color}</span></code> for every pair <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">&lt;</span> <span class="pre">j</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>bool</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pentagon</span> <span class="o">=</span> <span class="p">{(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span> <span class="nb">int</span><span class="p">((</span><span class="n">j</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span> <span class="o">%</span> <span class="mi">5</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="mi">2</span><span class="p">)}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">has_monochromatic_triangle</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">pentagon</span><span class="p">)</span>  <span class="c1"># K_5 can avoid them: R(3,3) &gt; 5</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.combinatorics.integer_partitions">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.combinatorics.</span></span><span class="sig-name descname"><span class="pre">integer_partitions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/combinatorics/systems/partitions.html#integer_partitions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.combinatorics.integer_partitions" title="Link to this definition">#</a></dt>
 <dd><p>Enumerate every integer partition of <code class="docutils literal notranslate"><span class="pre">n</span></code>, each as a non-increasing list of parts.</p>
@@ -747,6 +1101,97 @@ Andrews &amp; Eriksson, <em>Integer Partitions</em>, 2nd ed., Ch. 1.</p>
 <span class="go">[[4], [3, 1], [2, 2], [2, 1, 1], [1, 1, 1, 1]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">integer_partitions</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span> <span class="o">==</span> <span class="n">partition_function</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 <span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.combinatorics.is_latin_square">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.combinatorics.</span></span><span class="sig-name descname"><span class="pre">is_latin_square</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">square</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/combinatorics/systems/designs.html#is_latin_square"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.combinatorics.is_latin_square" title="Link to this definition">#</a></dt>
+<dd><p>Whether every row and every column of an <span class="math notranslate nohighlight">\(n \times n\)</span> array is a permutation of <code class="docutils literal notranslate"><span class="pre">0..n-1</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>square</strong> (<em>array_like</em><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n"><em>n</em></a><em>, </em><a class="reference internal" href="#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n"><em>n</em></a><em>)</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>bool</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_latin_square</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]),</span> <span class="n">is_latin_square</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="go">(True, False)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.combinatorics.longest_decreasing_subsequence">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.combinatorics.</span></span><span class="sig-name descname"><span class="pre">longest_decreasing_subsequence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequence</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/combinatorics/systems/extremal.html#longest_decreasing_subsequence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.combinatorics.longest_decreasing_subsequence" title="Link to this definition">#</a></dt>
+<dd><p>A longest strictly decreasing subsequence; see <a class="reference internal" href="#mathematicskit.combinatorics.longest_increasing_subsequence" title="mathematicskit.combinatorics.longest_increasing_subsequence"><code class="xref py py-func docutils literal notranslate"><span class="pre">longest_increasing_subsequence()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sequence</strong> (<em>sequence</em><em> of </em><em>numbers</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>list</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">longest_decreasing_subsequence</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="go">[9, 6, 5, 3]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.combinatorics.longest_increasing_subsequence">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.combinatorics.</span></span><span class="sig-name descname"><span class="pre">longest_increasing_subsequence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequence</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/combinatorics/systems/extremal.html#longest_increasing_subsequence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.combinatorics.longest_increasing_subsequence" title="Link to this definition">#</a></dt>
+<dd><p>A longest strictly increasing subsequence, by patience sorting in <span class="math notranslate nohighlight">\(O(n \log n)\)</span>.</p>
+<p>The Erdős-Szekeres theorem guarantees that any sequence of
+<span class="math notranslate nohighlight">\((r-1)(s-1)+1\)</span> distinct numbers has an increasing subsequence
+of length <span class="math notranslate nohighlight">\(r\)</span> or a decreasing one of length <span class="math notranslate nohighlight">\(s\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sequence</strong> (<em>sequence</em><em> of </em><em>comparable values</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>list</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">longest_increasing_subsequence</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="go">[1, 2, 3, 5]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.combinatorics.maximum_matching">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.combinatorics.</span></span><span class="sig-name descname"><span class="pre">maximum_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adjacency</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/combinatorics/systems/matching.html#maximum_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.combinatorics.maximum_matching" title="Link to this definition">#</a></dt>
+<dd><p>A maximum matching of a bipartite graph, by repeated augmenting-path search.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>adjacency</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span>) – <code class="docutils literal notranslate"><span class="pre">{left_vertex:</span> <span class="pre">iterable</span> <span class="pre">of</span> <span class="pre">right</span> <span class="pre">vertices}</span></code>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>dict</em> – <code class="docutils literal notranslate"><span class="pre">{left:</span> <span class="pre">right}</span></code> for every matched left vertex.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">maximum_matching</span><span class="p">({</span><span class="s2">"a"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="s2">"b"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">"c"</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]})</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+<span class="go">[('a', 2), ('b', 1), ('c', 3)]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -778,6 +1223,32 @@ ed., Sec. 5.5.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">multinomial_coefficient</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
 <span class="go">2520</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.combinatorics.orthogonal_latin_square_pair">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.combinatorics.</span></span><span class="sig-name descname"><span class="pre">orthogonal_latin_square_pair</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/combinatorics/systems/designs.html#orthogonal_latin_square_pair"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.combinatorics.orthogonal_latin_square_pair" title="Link to this definition">#</a></dt>
+<dd><p>A pair of orthogonal Latin squares of odd order <code class="docutils literal notranslate"><span class="pre">n</span></code>: <span class="math notranslate nohighlight">\(L_{ij} = i + j\)</span> and <span class="math notranslate nohighlight">\(M_{ij} = 2i + j \pmod n\)</span>.</p>
+<p>Euler conjectured in 1782 that no pair exists when
+<span class="math notranslate nohighlight">\(n \equiv 2 \pmod 4\)</span>. Gaston Tarry confirmed it for
+<span class="math notranslate nohighlight">\(n = 6\)</span> in 1900, but R. C. Bose, S. S. Shrikhande, and E. T.
+Parker disproved the conjecture for every other such <span class="math notranslate nohighlight">\(n &gt; 6\)</span>
+in 1959-1960. This construction covers odd <span class="math notranslate nohighlight">\(n\)</span>, where 2 is
+invertible modulo <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Odd, <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;=</span> <span class="pre">3</span></code>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>tuple of ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">orthogonal_latin_square_pair</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">are_orthogonal</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="go">True</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -874,6 +1345,58 @@ permutations, <span class="math notranslate nohighlight">\(P(n,n) = n!\)</span>.
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.combinatorics.prufer_decode">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.combinatorics.</span></span><span class="sig-name descname"><span class="pre">prufer_decode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequence</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/combinatorics/systems/trees.html#prufer_decode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.combinatorics.prufer_decode" title="Link to this definition">#</a></dt>
+<dd><p>The labeled tree with the given Prüfer sequence, as a sorted edge list.</p>
+<p>Inverts <a class="reference internal" href="#mathematicskit.combinatorics.prufer_encode" title="mathematicskit.combinatorics.prufer_encode"><code class="xref py py-func docutils literal notranslate"><span class="pre">prufer_encode()</span></code></a>: a sequence of length <span class="math notranslate nohighlight">\(n - 2\)</span>
+over <code class="docutils literal notranslate"><span class="pre">0..n-1</span></code> determines a unique tree on <code class="docutils literal notranslate"><span class="pre">n</span></code> vertices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sequence</strong> (<em>sequence</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>list of tuple</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prufer_decode</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="go">[(0, 3), (1, 3), (2, 3), (3, 4)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.combinatorics.prufer_encode">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.combinatorics.</span></span><span class="sig-name descname"><span class="pre">prufer_encode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edges</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/combinatorics/systems/trees.html#prufer_encode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.combinatorics.prufer_encode" title="Link to this definition">#</a></dt>
+<dd><p>The Prüfer sequence of a labeled tree on vertices <code class="docutils literal notranslate"><span class="pre">0..n-1</span></code>.</p>
+<p>Repeatedly removes the smallest-labeled leaf and records its
+neighbor, until two vertices remain. The result has length
+<span class="math notranslate nohighlight">\(n - 2\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>edges</strong> (<em>iterable</em><em> of </em><em>(</em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>)</em>) – The tree’s <span class="math notranslate nohighlight">\(n - 1\)</span> edges.</p></li>
+<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of vertices, <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;=</span> <span class="pre">2</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>list of int</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prufer_encode</span><span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)],</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># a star around 3, plus 4</span>
+<span class="go">[3, 3, 3]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.combinatorics.stirling_first_kind">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.combinatorics.</span></span><span class="sig-name descname"><span class="pre">stirling_first_kind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/combinatorics/systems/special_numbers.html#stirling_first_kind"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.combinatorics.stirling_first_kind" title="Link to this definition">#</a></dt>
 <dd><p>Stirling numbers of the first kind: permutations of <code class="docutils literal notranslate"><span class="pre">n</span></code> elements with exactly <code class="docutils literal notranslate"><span class="pre">k</span></code> cycles.</p>
@@ -939,6 +1462,35 @@ Patashnik, <em>Concrete Mathematics</em>, 2nd ed., Sec. 6.1.</p>
 <span class="go">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">stirling_second_kind</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># only one way: every element its own block</span>
 <span class="go">1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.combinatorics.sum_of_powers">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.combinatorics.</span></span><span class="sig-name descname"><span class="pre">sum_of_powers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/combinatorics/systems/sequences.html#sum_of_powers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.combinatorics.sum_of_powers" title="Link to this definition">#</a></dt>
+<dd><p>The power sum <span class="math notranslate nohighlight">\(1^p + 2^p + \cdots + n^p\)</span>, by Faulhaber’s formula.</p>
+<p>Jacob Bernoulli’s formula expresses the sum as a polynomial in
+<span class="math notranslate nohighlight">\(n\)</span> whose coefficients involve the Bernoulli numbers:</p>
+<div class="math notranslate nohighlight">
+\[\sum_{k=1}^{n} k^p = \frac{1}{p+1} \sum_{j=0}^{p} \binom{p+1}{j} B_j\, n^{p+1-j}.\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>p</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">&gt;=</span> <span class="pre">0</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>int</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sum_of_powers</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>  <span class="c1"># Bernoulli's own boast: computed "in half of a quarter of an hour"</span>
+<span class="go">91409924241424243424241924242500</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1022,6 +1574,12 @@ Sec. 8.3, eq. (8.63).</p>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.HallResult"><code class="docutils literal notranslate"><span class="pre">HallResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.HallResult.matching"><code class="docutils literal notranslate"><span class="pre">HallResult.matching</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.HallResult.satisfied"><code class="docutils literal notranslate"><span class="pre">HallResult.satisfied</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.HallResult.violating_subset"><code class="docutils literal notranslate"><span class="pre">HallResult.violating_subset</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.YoungDiagram"><code class="docutils literal notranslate"><span class="pre">YoungDiagram</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.YoungDiagram.conjugate"><code class="docutils literal notranslate"><span class="pre">YoungDiagram.conjugate()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.YoungDiagram.ferrers_diagram"><code class="docutils literal notranslate"><span class="pre">YoungDiagram.ferrers_diagram()</span></code></a></li>
@@ -1029,19 +1587,39 @@ Sec. 8.3, eq. (8.63).</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.YoungDiagram.parts"><code class="docutils literal notranslate"><span class="pre">YoungDiagram.parts</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.are_orthogonal"><code class="docutils literal notranslate"><span class="pre">are_orthogonal()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.bell_number"><code class="docutils literal notranslate"><span class="pre">bell_number()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.bernoulli_numbers"><code class="docutils literal notranslate"><span class="pre">bernoulli_numbers()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.catalan_number"><code class="docutils literal notranslate"><span class="pre">catalan_number()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.combinations_count"><code class="docutils literal notranslate"><span class="pre">combinations_count()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.count_bracelets"><code class="docutils literal notranslate"><span class="pre">count_bracelets()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.count_labeled_trees"><code class="docutils literal notranslate"><span class="pre">count_labeled_trees()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.count_necklaces"><code class="docutils literal notranslate"><span class="pre">count_necklaces()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.count_triangle_free_colorings"><code class="docutils literal notranslate"><span class="pre">count_triangle_free_colorings()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.cyclic_latin_square"><code class="docutils literal notranslate"><span class="pre">cyclic_latin_square()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.derangement_count"><code class="docutils literal notranslate"><span class="pre">derangement_count()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.domino_tilings"><code class="docutils literal notranslate"><span class="pre">domino_tilings()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.fibonacci"><code class="docutils literal notranslate"><span class="pre">fibonacci()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.generate_combinations"><code class="docutils literal notranslate"><span class="pre">generate_combinations()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.generate_permutations"><code class="docutils literal notranslate"><span class="pre">generate_permutations()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.gray_code"><code class="docutils literal notranslate"><span class="pre">gray_code()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.hall_condition"><code class="docutils literal notranslate"><span class="pre">hall_condition()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.has_monochromatic_triangle"><code class="docutils literal notranslate"><span class="pre">has_monochromatic_triangle()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.integer_partitions"><code class="docutils literal notranslate"><span class="pre">integer_partitions()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.is_latin_square"><code class="docutils literal notranslate"><span class="pre">is_latin_square()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.longest_decreasing_subsequence"><code class="docutils literal notranslate"><span class="pre">longest_decreasing_subsequence()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.longest_increasing_subsequence"><code class="docutils literal notranslate"><span class="pre">longest_increasing_subsequence()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.maximum_matching"><code class="docutils literal notranslate"><span class="pre">maximum_matching()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.multinomial_coefficient"><code class="docutils literal notranslate"><span class="pre">multinomial_coefficient()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.orthogonal_latin_square_pair"><code class="docutils literal notranslate"><span class="pre">orthogonal_latin_square_pair()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.partition_function"><code class="docutils literal notranslate"><span class="pre">partition_function()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.pascals_triangle"><code class="docutils literal notranslate"><span class="pre">pascals_triangle()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.permutations_count"><code class="docutils literal notranslate"><span class="pre">permutations_count()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.prufer_decode"><code class="docutils literal notranslate"><span class="pre">prufer_decode()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.prufer_encode"><code class="docutils literal notranslate"><span class="pre">prufer_encode()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.stirling_first_kind"><code class="docutils literal notranslate"><span class="pre">stirling_first_kind()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.stirling_second_kind"><code class="docutils literal notranslate"><span class="pre">stirling_second_kind()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.sum_of_powers"><code class="docutils literal notranslate"><span class="pre">sum_of_powers()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.combinatorics.union_size_inclusion_exclusion"><code class="docutils literal notranslate"><span class="pre">union_size_inclusion_exclusion()</span></code></a></li>
 </ul>
   </nav></div>

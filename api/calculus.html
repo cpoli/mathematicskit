@@ -461,11 +461,13 @@ automatic differentiation via dual numbers and a reverse-mode
 subject); Taylor/Maclaurin series expansion and convergence-radius
 estimation.</p>
 <p id="module-mathematicskit.calculus">mathematicskit.calculus: numerical differentiation and integration.</p>
-<p>Finite-difference derivatives (forward/backward/central) with Richardson
-extrapolation for higher accuracy (hand-rolled – no scipy equivalent);
-numerical quadrature built on <code class="docutils literal notranslate"><span class="pre">scipy.integrate</span></code> (composite trapezoidal,
+<p>Archimedes’ polygon bounds on pi; finite-difference derivatives
+(forward/backward/central, complex step) with Richardson extrapolation
+for higher accuracy (hand-rolled – no scipy equivalent); numerical
+quadrature built on <code class="docutils literal notranslate"><span class="pre">scipy.integrate</span></code> (composite trapezoidal,
 composite Simpson’s, Gauss-Legendre via <code class="docutils literal notranslate"><span class="pre">fixed_quad</span></code>, adaptive
-quadrature via <code class="docutils literal notranslate"><span class="pre">quad</span></code>); forward-mode automatic differentiation via dual
+quadrature via <code class="docutils literal notranslate"><span class="pre">quad</span></code>) alongside hand-rolled Riemann sums, Romberg,
+Clenshaw-Curtis, tanh-sinh, and Euler-Maclaurin-corrected rules; forward-mode automatic differentiation via dual
 numbers and a small reverse-mode (backpropagation-style) autodiff
 engine (hand-rolled – autodiff is the pedagogical subject); Taylor/
 Maclaurin series expansion and convergence-radius estimation for
@@ -498,6 +500,50 @@ generalizes.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="mathematicskit.calculus.AdaptiveQuadrature.integrate">
 <span class="sig-name descname"><span class="pre">integrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/calculus/systems/quadrature.html#AdaptiveQuadrature.integrate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.calculus.AdaptiveQuadrature.integrate" title="Link to this definition">#</a></dt>
+<dd><p>Estimate <span class="math notranslate nohighlight">\(\int_a^b f(x)\,dx\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>], <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]</span>) – Integrand <code class="docutils literal notranslate"><span class="pre">f(x)</span> <span class="pre">-&gt;</span> <span class="pre">float</span></code>.</p></li>
+<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Integration bounds.</p></li>
+<li><p><strong>b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Integration bounds.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.calculus.QuadratureResult" title="mathematicskit.calculus.core.base.QuadratureResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuadratureResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>QuadratureResult</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.calculus.ClenshawCurtisQuadrature">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.calculus.</span></span><span class="sig-name descname"><span class="pre">ClenshawCurtisQuadrature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">16</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/calculus/systems/quadrature.html#ClenshawCurtisQuadrature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.calculus.ClenshawCurtisQuadrature" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mathematicskit.calculus.Quadrature" title="mathematicskit.calculus.core.base.Quadrature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Quadrature</span></code></a></p>
+<p>Clenshaw-Curtis quadrature: integrate the Chebyshev interpolant at <span class="math notranslate nohighlight">\(\cos(k\pi/n)\)</span>.</p>
+<p>For smooth integrands it converges nearly as fast as Gauss-Legendre
+quadrature with the same number of points, and its nodes nest when
+<code class="docutils literal notranslate"><span class="pre">n</span></code> doubles. See C. W. Clenshaw and A. R. Curtis, “A Method for
+Numerical Integration on an Automatic Computer,” Numerische
+Mathematik 2 (1960), 197-205.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of intervals (<code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">+</span> <span class="pre">1</span></code> function evaluations).</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">ClenshawCurtisQuadrature</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">abs</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">value</span> <span class="o">-</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">e</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">1e-14</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="mathematicskit.calculus.ClenshawCurtisQuadrature.integrate">
+<span class="sig-name descname"><span class="pre">integrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/calculus/systems/quadrature.html#ClenshawCurtisQuadrature.integrate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.calculus.ClenshawCurtisQuadrature.integrate" title="Link to this definition">#</a></dt>
 <dd><p>Estimate <span class="math notranslate nohighlight">\(\int_a^b f(x)\,dx\)</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -594,7 +640,7 @@ generalizes.</p>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">Dual</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># seed dx/dx = 1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">x</span>  <span class="c1"># f(x) = x^2 + 2x, f&#39;(x) = 2x + 2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">x</span>  <span class="c1"># f(x) = x^2 + 2x, f'(x) = 2x + 2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">dual</span>
 <span class="go">(15.0, 8.0)</span>
 </pre></div>
@@ -633,6 +679,55 @@ generalizes.</p>
 <dt class="sig sig-object py" id="mathematicskit.calculus.Dual.sqrt">
 <span class="sig-name descname"><span class="pre">sqrt</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/calculus/systems/dual_numbers.html#Dual.sqrt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.calculus.Dual.sqrt" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.calculus.ExhaustionResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.calculus.</span></span><span class="sig-name descname"><span class="pre">ExhaustionResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sides</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lower</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/calculus/core/base.html#ExhaustionResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.calculus.ExhaustionResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Container for Archimedes’ polygon bounds on <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sides</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a>)</p></li>
+<li><p><strong>lower</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a>)</p></li>
+<li><p><strong>upper</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.calculus.ExhaustionResult.lower">
+<span class="sig-name descname"><span class="pre">lower</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a></span><a class="headerlink" href="#mathematicskit.calculus.ExhaustionResult.lower" title="Link to this definition">#</a></dt>
+<dd><p>Inscribed-polygon lower bounds on <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)">list</a> of <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.calculus.ExhaustionResult.sides">
+<span class="sig-name descname"><span class="pre">sides</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a></span><a class="headerlink" href="#mathematicskit.calculus.ExhaustionResult.sides" title="Link to this definition">#</a></dt>
+<dd><p>Number of polygon sides at each doubling (6, 12, 24, …).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)">list</a> of <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.calculus.ExhaustionResult.upper">
+<span class="sig-name descname"><span class="pre">upper</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a></span><a class="headerlink" href="#mathematicskit.calculus.ExhaustionResult.upper" title="Link to this definition">#</a></dt>
+<dd><p>Circumscribed-polygon upper bounds on <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)">list</a> of <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -782,6 +877,101 @@ trapezoidal/Simpson for the same accuracy. See Burden &amp; Faires,
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.calculus.RiemannSum">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.calculus.</span></span><span class="sig-name descname"><span class="pre">RiemannSum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rule</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'midpoint'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/calculus/systems/quadrature.html#RiemannSum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.calculus.RiemannSum" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mathematicskit.calculus.Quadrature" title="mathematicskit.calculus.core.base.Quadrature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Quadrature</span></code></a></p>
+<p>A Riemann sum on <code class="docutils literal notranslate"><span class="pre">n</span></code> equal subintervals, sampling each at its left end, right end, or midpoint.</p>
+<p>Bernhard Riemann’s 1854 definition of the integral is the limit of
+such sums as the subintervals shrink. The left and right rules are
+<span class="math notranslate nohighlight">\(O(h)\)</span> accurate; the midpoint rule is <span class="math notranslate nohighlight">\(O(h^2)\)</span>.
+Hand-rolled, since the sum is the definition being illustrated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of subintervals.</p></li>
+<li><p><strong>rule</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>)</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RiemannSum</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">rule</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+<span class="go">0.375</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">RiemannSum</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">rule</span><span class="o">=</span><span class="s2">"midpoint"</span><span class="p">)</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+<span class="go">0.5</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="mathematicskit.calculus.RiemannSum.integrate">
+<span class="sig-name descname"><span class="pre">integrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/calculus/systems/quadrature.html#RiemannSum.integrate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.calculus.RiemannSum.integrate" title="Link to this definition">#</a></dt>
+<dd><p>Estimate <span class="math notranslate nohighlight">\(\int_a^b f(x)\,dx\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>], <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]</span>) – Integrand <code class="docutils literal notranslate"><span class="pre">f(x)</span> <span class="pre">-&gt;</span> <span class="pre">float</span></code>.</p></li>
+<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Integration bounds.</p></li>
+<li><p><strong>b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Integration bounds.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.calculus.QuadratureResult" title="mathematicskit.calculus.core.base.QuadratureResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuadratureResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>QuadratureResult</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.calculus.RombergQuadrature">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.calculus.</span></span><span class="sig-name descname"><span class="pre">RombergQuadrature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">levels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/calculus/systems/quadrature.html#RombergQuadrature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.calculus.RombergQuadrature" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mathematicskit.calculus.Quadrature" title="mathematicskit.calculus.core.base.Quadrature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Quadrature</span></code></a></p>
+<p>Romberg integration: Richardson extrapolation applied to repeatedly halved trapezoidal rules.</p>
+<p>Builds the triangular table</p>
+<div class="math notranslate nohighlight">
+\[R_{i,0} = T_{2^i}, \qquad R_{i,j} = R_{i,j-1} + \frac{R_{i,j-1} - R_{i-1,j-1}}{4^j - 1},\]</div>
+<p>where <span class="math notranslate nohighlight">\(T_{2^i}\)</span> is the trapezoidal rule on <span class="math notranslate nohighlight">\(2^i\)</span>
+subintervals. Each column cancels the next even power of <span class="math notranslate nohighlight">\(h\)</span>
+in the trapezoidal error expansion. Hand-rolled because
+<code class="docutils literal notranslate"><span class="pre">scipy.integrate.romberg</span></code> was removed in SciPy 1.15. See W.
+Romberg, “Vereinfachte numerische Integration,” Det Kongelige Norske
+Videnskabers Selskabs Forhandlinger 28(7) (1955), 30-36.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>levels</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of halvings; the finest rule uses <span class="math notranslate nohighlight">\(2^{\text{levels}}\)</span> subintervals.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">RombergQuadrature</span><span class="p">(</span><span class="n">levels</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">abs</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">value</span> <span class="o">-</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">e</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">1e-12</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="mathematicskit.calculus.RombergQuadrature.integrate">
+<span class="sig-name descname"><span class="pre">integrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/calculus/systems/quadrature.html#RombergQuadrature.integrate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.calculus.RombergQuadrature.integrate" title="Link to this definition">#</a></dt>
+<dd><p>Estimate <span class="math notranslate nohighlight">\(\int_a^b f(x)\,dx\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>], <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]</span>) – Integrand <code class="docutils literal notranslate"><span class="pre">f(x)</span> <span class="pre">-&gt;</span> <span class="pre">float</span></code>.</p></li>
+<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Integration bounds.</p></li>
+<li><p><strong>b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Integration bounds.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.calculus.QuadratureResult" title="mathematicskit.calculus.core.base.QuadratureResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuadratureResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>QuadratureResult</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="mathematicskit.calculus.SimpsonsRule">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.calculus.</span></span><span class="sig-name descname"><span class="pre">SimpsonsRule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/calculus/systems/quadrature.html#SimpsonsRule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.calculus.SimpsonsRule" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#mathematicskit.calculus.Quadrature" title="mathematicskit.calculus.core.base.Quadrature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Quadrature</span></code></a></p>
@@ -804,6 +994,60 @@ trapezoidal/Simpson for the same accuracy. See Burden &amp; Faires,
 <dl class="py method">
 <dt class="sig sig-object py" id="mathematicskit.calculus.SimpsonsRule.integrate">
 <span class="sig-name descname"><span class="pre">integrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/calculus/systems/quadrature.html#SimpsonsRule.integrate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.calculus.SimpsonsRule.integrate" title="Link to this definition">#</a></dt>
+<dd><p>Estimate <span class="math notranslate nohighlight">\(\int_a^b f(x)\,dx\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>], <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]</span>) – Integrand <code class="docutils literal notranslate"><span class="pre">f(x)</span> <span class="pre">-&gt;</span> <span class="pre">float</span></code>.</p></li>
+<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Integration bounds.</p></li>
+<li><p><strong>b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Integration bounds.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.calculus.QuadratureResult" title="mathematicskit.calculus.core.base.QuadratureResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuadratureResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>QuadratureResult</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.calculus.TanhSinhQuadrature">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.calculus.</span></span><span class="sig-name descname"><span class="pre">TanhSinhQuadrature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">h</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/calculus/systems/quadrature.html#TanhSinhQuadrature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.calculus.TanhSinhQuadrature" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mathematicskit.calculus.Quadrature" title="mathematicskit.calculus.core.base.Quadrature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Quadrature</span></code></a></p>
+<p>Tanh-sinh (double-exponential) quadrature, robust to endpoint singularities.</p>
+<p>Substitutes <span class="math notranslate nohighlight">\(x = \tfrac{a+b}{2} + \tfrac{b-a}{2}\tanh(\tfrac{\pi}{2}\sinh t)\)</span>
+and applies the trapezoidal rule in <span class="math notranslate nohighlight">\(t\)</span>. The transformed
+integrand decays double-exponentially, so the trapezoidal rule
+converges very fast even when <span class="math notranslate nohighlight">\(f\)</span> blows up at an endpoint. The
+endpoints themselves are never evaluated. Nodes crowd toward the
+endpoints, so accuracy is limited by how precisely <code class="docutils literal notranslate"><span class="pre">f</span></code> can be
+evaluated there: an integrand such as <span class="math notranslate nohighlight">\(1/\sqrt{1-x^2}\)</span> loses
+digits once <span class="math notranslate nohighlight">\(x\)</span> is rounded near <span class="math notranslate nohighlight">\(\pm1\)</span>. Hand-rolled for SciPy
+versions before 1.15, which lack <code class="docutils literal notranslate"><span class="pre">scipy.integrate.tanhsinh</span></code>. See H.
+Takahasi and M. Mori, “Double Exponential Formulas for Numerical
+Integration,” Publications of the Research Institute for
+Mathematical Sciences 9(3) (1974), 721-741.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>h</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Step size in the transformed variable <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p><strong>t_max</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – The rule sums over <span class="math notranslate nohighlight">\(t \in [-t_{\max}, t_{\max}]\)</span>.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">TanhSinhQuadrature</span><span class="p">(</span><span class="n">h</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">abs</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">value</span> <span class="o">-</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-10</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="mathematicskit.calculus.TanhSinhQuadrature.integrate">
+<span class="sig-name descname"><span class="pre">integrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/calculus/systems/quadrature.html#TanhSinhQuadrature.integrate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.calculus.TanhSinhQuadrature.integrate" title="Link to this definition">#</a></dt>
 <dd><p>Estimate <span class="math notranslate nohighlight">\(\int_a^b f(x)\,dx\)</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -885,7 +1129,7 @@ by the operation that created this node.</p></li>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">x</span>  <span class="c1"># f(x) = x^2 + 2x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">grad</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>  <span class="c1"># f&#39;(3) = 2*3 + 2 = 8</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">grad</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>  <span class="c1"># f'(3) = 2*3 + 2 = 8</span>
 <span class="go">8.0</span>
 </pre></div>
 </div>
@@ -929,6 +1173,33 @@ traversal.</p>
 <span class="sig-name descname"><span class="pre">value</span></span><a class="headerlink" href="#mathematicskit.calculus.Variable.value" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.calculus.archimedes_pi_bounds">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.calculus.</span></span><span class="sig-name descname"><span class="pre">archimedes_pi_bounds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_doublings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/calculus/systems/exhaustion.html#archimedes_pi_bounds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.calculus.archimedes_pi_bounds" title="Link to this definition">#</a></dt>
+<dd><p>Lower and upper bounds on <span class="math notranslate nohighlight">\(\pi\)</span> from regular polygons with <span class="math notranslate nohighlight">\(6 \cdot 2^k\)</span> sides.</p>
+<p>Four doublings reach Archimedes’ 96-gon, which gives
+<span class="math notranslate nohighlight">\(3\tfrac{10}{71} &lt; \pi &lt; 3\tfrac{1}{7}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n_doublings</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of side doublings after the initial hexagon.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.calculus.ExhaustionResult" title="mathematicskit.calculus.core.base.ExhaustionResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExhaustionResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ExhaustionResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">archimedes_pi_bounds</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">sides</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">96</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">3</span> <span class="o">+</span> <span class="mi">10</span> <span class="o">/</span> <span class="mi">71</span> <span class="o">&lt;</span> <span class="n">result</span><span class="o">.</span><span class="n">lower</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">&lt;</span> <span class="n">result</span><span class="o">.</span><span class="n">upper</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">7</span>
+<span class="go">True</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -991,6 +1262,67 @@ Taylor expansions cancel. See Burden &amp; Faires, <em>Numerical Analysis</em>,
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.calculus.clenshaw_curtis_nodes_and_weights">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.calculus.</span></span><span class="sig-name descname"><span class="pre">clenshaw_curtis_nodes_and_weights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/calculus/systems/quadrature.html#clenshaw_curtis_nodes_and_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.calculus.clenshaw_curtis_nodes_and_weights" title="Link to this definition">#</a></dt>
+<dd><p>Clenshaw-Curtis nodes <span class="math notranslate nohighlight">\(x_k = \cos(k\pi/n)\)</span> and weights on <span class="math notranslate nohighlight">\([-1, 1]\)</span>.</p>
+<p>The weights integrate exactly the Chebyshev interpolant through the
+<span class="math notranslate nohighlight">\(n+1\)</span> nodes. Computed with the explicit cosine-sum formula of
+L. N. Trefethen, <em>Spectral Methods in MATLAB</em> (Philadelphia: SIAM,
+2000), program <code class="docutils literal notranslate"><span class="pre">clencurt</span></code>. Hand-rolled: SciPy has no
+Clenshaw-Curtis rule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of intervals; there are <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">+</span> <span class="pre">1</span></code> nodes.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>nodes, weights</strong> (<em>ndarray, shape (n + 1,)</em>)</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">clenshaw_curtis_nodes_and_weights</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span> <span class="mi">12</span><span class="p">)</span>  <span class="c1"># integrates 1 exactly: length of [-1, 1]</span>
+<span class="go">2.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.calculus.complex_step_derivative">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.calculus.</span></span><span class="sig-name descname"><span class="pre">complex_step_derivative</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-20</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/calculus/systems/finite_differences.html#complex_step_derivative"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.calculus.complex_step_derivative" title="Link to this definition">#</a></dt>
+<dd><p>Complex-step derivative estimate, <span class="math notranslate nohighlight">\(O(h^2)\)</span> with no subtractive cancellation.</p>
+<p><span class="math notranslate nohighlight">\(f'(x) \approx \operatorname{Im} f(x + ih) / h\)</span>. Because no
+two nearly equal numbers are subtracted, <code class="docutils literal notranslate"><span class="pre">h</span></code> can be taken absurdly
+small and the result is accurate to machine precision. Requires <code class="docutils literal notranslate"><span class="pre">f</span></code>
+to be real-analytic and implemented with complex-capable operations
+(e.g. <a class="reference external" href="https://numpy.org/doc/stable/reference/index.html#module-numpy" title="(in NumPy v2.5)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">numpy</span></code></a> ufuncs). See J. N. Lyness and C. B. Moler,
+“Numerical Differentiation of Analytic Functions,” SIAM Journal on
+Numerical Analysis 4(2) (1967), 202-210, and W. Squire and G. Trapp,
+“Using Complex Variables to Estimate Derivatives of Real Functions,”
+SIAM Review 40(1) (1998), 110-112.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a></span>) – Accepts a complex argument.</p></li>
+<li><p><strong>x</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>h</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Imaginary step size.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">abs</span><span class="p">(</span><span class="n">complex_step_derivative</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">e</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-15</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.calculus.derivative">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.calculus.</span></span><span class="sig-name descname"><span class="pre">derivative</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/calculus/systems/dual_numbers.html#derivative"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.calculus.derivative" title="Link to this definition">#</a></dt>
 <dd><p>Exact derivative of <code class="docutils literal notranslate"><span class="pre">f</span></code> at <code class="docutils literal notranslate"><span class="pre">x</span></code> via forward-mode dual numbers.</p>
@@ -1022,30 +1354,93 @@ truncation error, unlike finite differences).</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.calculus.estimate_radius_of_convergence">
-<span class="sig-prename descclassname"><span class="pre">mathematicskit.calculus.</span></span><span class="sig-name descname"><span class="pre">estimate_radius_of_convergence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coefficients</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/calculus/systems/taylor_series.html#estimate_radius_of_convergence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.calculus.estimate_radius_of_convergence" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.calculus.</span></span><span class="sig-name descname"><span class="pre">estimate_radius_of_convergence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coefficients</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">growth_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/calculus/systems/taylor_series.html#estimate_radius_of_convergence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.calculus.estimate_radius_of_convergence" title="Link to this definition">#</a></dt>
 <dd><p>Estimate a power series’ radius of convergence via the ratio test.</p>
-<p><span class="math notranslate nohighlight">\(R \approx \lim_{n\to\infty} |a_n / a_{n+1}|\)</span>, estimated here
-from the last two nonzero coefficients (appropriate for series like
-<code class="docutils literal notranslate"><span class="pre">&quot;sin&quot;</span></code>/<code class="docutils literal notranslate"><span class="pre">&quot;cos&quot;</span></code> whose odd or even coefficients are exactly zero).
-See any standard calculus text’s treatment of the ratio test for
-power series (e.g. Stewart, <em>Calculus</em>, 8th ed., Ch. 11.8).</p>
+<p><span class="math notranslate nohighlight">\(R = \lim_{n\to\infty}|a_n/a_{n+1}|\)</span>, estimated from the
+spacing-adjusted ratio <span class="math notranslate nohighlight">\(|a_i/a_j|^{1/(j-i)}\)</span> over consecutive
+nonzero coefficients (the <span class="math notranslate nohighlight">\(1/(j-i)\)</span> exponent is what makes series
+like <code class="docutils literal notranslate"><span class="pre">&quot;sin&quot;</span></code>/<code class="docutils literal notranslate"><span class="pre">&quot;cos&quot;</span></code>, whose even or odd coefficients vanish
+identically, come out on the same footing as dense ones).</p>
+<p>A truncated series can only ever <em>sample</em> that limit, so a series with
+infinite radius – <code class="docutils literal notranslate"><span class="pre">&quot;exp&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;sin&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;cos&quot;</span></code> – shows up not as a
+large number but as a ratio that keeps climbing with every term added.
+This function detects exactly that: if the estimate from the series’
+<em>last</em> two nonzero coefficients exceeds the estimate from its <em>first</em>
+two by more than <cite>growth_factor</cite>, the ratio has not settled and <code class="docutils literal notranslate"><span class="pre">inf</span></code>
+is returned, rather than a number that is really just an artifact of
+where the series happened to be cut off (a degree-20 <code class="docutils literal notranslate"><span class="pre">&quot;exp&quot;</span></code> would
+otherwise report <code class="docutils literal notranslate"><span class="pre">R</span> <span class="pre">=</span> <span class="pre">20</span></code>, and a degree-30 one <code class="docutils literal notranslate"><span class="pre">R</span> <span class="pre">=</span> <span class="pre">30</span></code>). See any
+standard calculus text’s treatment of the ratio test for power series
+(e.g. Stewart, <em>Calculus</em>, 8th ed., Ch. 11.8).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>coefficients</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>)</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>coefficients</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>) – <code class="docutils literal notranslate"><span class="pre">a[n]</span></code> is the coefficient of <span class="math notranslate nohighlight">\(x^n\)</span> (as from
+<a class="reference internal" href="#mathematicskit.calculus.maclaurin_coefficients" title="mathematicskit.calculus.maclaurin_coefficients"><code class="xref py py-func docutils literal notranslate"><span class="pre">maclaurin_coefficients()</span></code></a>).</p></li>
+<li><p><strong>growth_factor</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – How much larger the last ratio estimate must be than the first
+before the radius is judged unbounded. <code class="docutils literal notranslate"><span class="pre">&gt;</span> <span class="pre">1</span></code>.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><em>float</em> – <code class="docutils literal notranslate"><span class="pre">inf</span></code> if the series appears to have unbounded radius (fewer
-than 2 nonzero coefficients to compare, or a genuinely growing
-ratio).</p>
+<dd class="field-odd"><p><em>float</em> – The estimated radius, or <code class="docutils literal notranslate"><span class="pre">inf</span></code> when fewer than two nonzero
+coefficients are available to compare, or when the ratio is still
+growing (an unbounded radius of convergence).</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coeffs</span> <span class="o">=</span> <span class="n">maclaurin_coefficients</span><span class="p">(</span><span class="s2">&quot;geometric&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coeffs</span> <span class="o">=</span> <span class="n">maclaurin_coefficients</span><span class="p">(</span><span class="s2">"geometric"</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">estimate_radius_of_convergence</span><span class="p">(</span><span class="n">coeffs</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
 <span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">estimate_radius_of_convergence</span><span class="p">(</span><span class="n">maclaurin_coefficients</span><span class="p">(</span><span class="s2">"log1p"</span><span class="p">,</span> <span class="mi">30</span><span class="p">)),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">1.03</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># exp and sin converge everywhere: their ratio never settles.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">estimate_radius_of_convergence</span><span class="p">(</span><span class="n">maclaurin_coefficients</span><span class="p">(</span><span class="s2">"exp"</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+<span class="go">inf</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">estimate_radius_of_convergence</span><span class="p">(</span><span class="n">maclaurin_coefficients</span><span class="p">(</span><span class="s2">"sin"</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+<span class="go">inf</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.calculus.euler_maclaurin_trapezoid">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.calculus.</span></span><span class="sig-name descname"><span class="pre">euler_maclaurin_trapezoid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">odd_derivatives</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/calculus/systems/quadrature.html#euler_maclaurin_trapezoid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.calculus.euler_maclaurin_trapezoid" title="Link to this definition">#</a></dt>
+<dd><p>Trapezoidal rule plus Euler-Maclaurin endpoint corrections.</p>
+<div class="math notranslate nohighlight">
+\[\int_a^b f\,dx \approx T_n - \sum_{k=1}^{m} \frac{B_{2k} h^{2k}}{(2k)!}
+\left(f^{(2k-1)}(b) - f^{(2k-1)}(a)\right),\]</div>
+<p>with Bernoulli numbers <span class="math notranslate nohighlight">\(B_{2k}\)</span> from
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.bernoulli.html#scipy.special.bernoulli" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.bernoulli()</span></code></a>. Each correction removes one more
+even power of <span class="math notranslate nohighlight">\(h\)</span> from the trapezoidal error. Leonhard Euler
+(1735) and Colin Maclaurin (1742) found the formula independently.
+See Burden &amp; Faires, <em>Numerical Analysis</em>, 10th ed., Ch. 4.5.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>], <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]</span>)</p></li>
+<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of trapezoidal subintervals.</p></li>
+<li><p><strong>odd_derivatives</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></span>) – The odd-order derivatives of <code class="docutils literal notranslate"><span class="pre">f</span></code>, first, third, fifth and so
+on; one correction term is applied per derivative given.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.calculus.QuadratureResult" title="mathematicskit.calculus.core.base.QuadratureResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuadratureResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>QuadratureResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">exact</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">e</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plain</span> <span class="o">=</span> <span class="n">euler_maclaurin_trapezoid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="p">[])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">corrected</span> <span class="o">=</span> <span class="n">euler_maclaurin_trapezoid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">abs</span><span class="p">(</span><span class="n">corrected</span><span class="o">.</span><span class="n">value</span> <span class="o">-</span> <span class="n">exact</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-3</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">plain</span><span class="o">.</span><span class="n">value</span> <span class="o">-</span> <span class="n">exact</span><span class="p">)</span>
+<span class="go">True</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1062,16 +1457,13 @@ ratio).</p>
 <li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><em>float or ndarray</em></p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">coeffs</span> <span class="o">=</span> <span class="n">maclaurin_coefficients</span><span class="p">(</span><span class="s2">&quot;exp&quot;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coeffs</span> <span class="o">=</span> <span class="n">maclaurin_coefficients</span><span class="p">(</span><span class="s2">"exp"</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">evaluate_series</span><span class="p">(</span><span class="n">coeffs</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)),</span> <span class="mi">10</span><span class="p">)</span> <span class="o">==</span> <span class="nb">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">e</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 <span class="go">True</span>
 </pre></div>
@@ -1191,7 +1583,7 @@ iteration on the asymptotic initial guess. See Press et al.,
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">coeffs</span> <span class="o">=</span> <span class="n">maclaurin_coefficients</span><span class="p">(</span><span class="s2">&quot;exp&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coeffs</span> <span class="o">=</span> <span class="n">maclaurin_coefficients</span><span class="p">(</span><span class="s2">"exp"</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">coeffs</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="mf">6.0</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="mf">24.0</span><span class="p">])</span>
 <span class="go">True</span>
 </pre></div>
@@ -1320,7 +1712,7 @@ Theorem 1.14 (Taylor’s Theorem).</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.calculus.systems.taylor_series</span><span class="w"> </span><span class="kn">import</span> <span class="n">maclaurin_coefficients</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">coeffs</span> <span class="o">=</span> <span class="n">maclaurin_coefficients</span><span class="p">(</span><span class="s2">&quot;exp&quot;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coeffs</span> <span class="o">=</span> <span class="n">maclaurin_coefficients</span><span class="p">(</span><span class="s2">"exp"</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">errors</span> <span class="o">=</span> <span class="n">truncation_error</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">,</span> <span class="n">coeffs</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">errors</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">errors</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="go">True</span>
@@ -1381,6 +1773,10 @@ Theorem 1.14 (Taylor’s Theorem).</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.AdaptiveQuadrature.integrate"><code class="docutils literal notranslate"><span class="pre">AdaptiveQuadrature.integrate()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.ClenshawCurtisQuadrature"><code class="docutils literal notranslate"><span class="pre">ClenshawCurtisQuadrature</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.ClenshawCurtisQuadrature.integrate"><code class="docutils literal notranslate"><span class="pre">ClenshawCurtisQuadrature.integrate()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.DerivativeResult"><code class="docutils literal notranslate"><span class="pre">DerivativeResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.DerivativeResult.error_estimate"><code class="docutils literal notranslate"><span class="pre">DerivativeResult.error_estimate</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.DerivativeResult.method"><code class="docutils literal notranslate"><span class="pre">DerivativeResult.method</span></code></a></li>
@@ -1396,6 +1792,12 @@ Theorem 1.14 (Taylor’s Theorem).</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.Dual.real"><code class="docutils literal notranslate"><span class="pre">Dual.real</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.Dual.sin"><code class="docutils literal notranslate"><span class="pre">Dual.sin()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.Dual.sqrt"><code class="docutils literal notranslate"><span class="pre">Dual.sqrt()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.ExhaustionResult"><code class="docutils literal notranslate"><span class="pre">ExhaustionResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.ExhaustionResult.lower"><code class="docutils literal notranslate"><span class="pre">ExhaustionResult.lower</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.ExhaustionResult.sides"><code class="docutils literal notranslate"><span class="pre">ExhaustionResult.sides</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.ExhaustionResult.upper"><code class="docutils literal notranslate"><span class="pre">ExhaustionResult.upper</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.GaussianQuadrature"><code class="docutils literal notranslate"><span class="pre">GaussianQuadrature</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
@@ -1414,8 +1816,20 @@ Theorem 1.14 (Taylor’s Theorem).</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.QuadratureResult.value"><code class="docutils literal notranslate"><span class="pre">QuadratureResult.value</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.RiemannSum"><code class="docutils literal notranslate"><span class="pre">RiemannSum</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.RiemannSum.integrate"><code class="docutils literal notranslate"><span class="pre">RiemannSum.integrate()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.RombergQuadrature"><code class="docutils literal notranslate"><span class="pre">RombergQuadrature</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.RombergQuadrature.integrate"><code class="docutils literal notranslate"><span class="pre">RombergQuadrature.integrate()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.SimpsonsRule"><code class="docutils literal notranslate"><span class="pre">SimpsonsRule</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.SimpsonsRule.integrate"><code class="docutils literal notranslate"><span class="pre">SimpsonsRule.integrate()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.TanhSinhQuadrature"><code class="docutils literal notranslate"><span class="pre">TanhSinhQuadrature</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.TanhSinhQuadrature.integrate"><code class="docutils literal notranslate"><span class="pre">TanhSinhQuadrature.integrate()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.TrapezoidalRule"><code class="docutils literal notranslate"><span class="pre">TrapezoidalRule</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
@@ -1432,10 +1846,14 @@ Theorem 1.14 (Taylor’s Theorem).</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.Variable.value"><code class="docutils literal notranslate"><span class="pre">Variable.value</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.archimedes_pi_bounds"><code class="docutils literal notranslate"><span class="pre">archimedes_pi_bounds()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.backward_difference"><code class="docutils literal notranslate"><span class="pre">backward_difference()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.central_difference"><code class="docutils literal notranslate"><span class="pre">central_difference()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.clenshaw_curtis_nodes_and_weights"><code class="docutils literal notranslate"><span class="pre">clenshaw_curtis_nodes_and_weights()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.complex_step_derivative"><code class="docutils literal notranslate"><span class="pre">complex_step_derivative()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.derivative"><code class="docutils literal notranslate"><span class="pre">derivative()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.estimate_radius_of_convergence"><code class="docutils literal notranslate"><span class="pre">estimate_radius_of_convergence()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.euler_maclaurin_trapezoid"><code class="docutils literal notranslate"><span class="pre">euler_maclaurin_trapezoid()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.evaluate_series"><code class="docutils literal notranslate"><span class="pre">evaluate_series()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.forward_difference"><code class="docutils literal notranslate"><span class="pre">forward_difference()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.calculus.gradient"><code class="docutils literal notranslate"><span class="pre">gradient()</span></code></a></li>

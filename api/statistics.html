@@ -464,8 +464,13 @@ tests, one-way ANOVA) using <code class="docutils literal notranslate"><span cla
 z-tests and <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code>’s t/chi-square/F distributions elsewhere;
 confidence intervals for means, proportions, and variances; ordinary
 least-squares linear regression with residual diagnostics and
-R^2/adjusted-R^2; and bootstrap resampling via
-<code class="docutils literal notranslate"><span class="pre">scipy.stats.bootstrap</span></code> for confidence intervals and standard errors.</p>
+R^2/adjusted-R^2; bootstrap resampling via <code class="docutils literal notranslate"><span class="pre">scipy.stats.bootstrap</span></code>
+and the leave-one-out jackknife for confidence intervals, bias, and
+standard errors; Pearson and Spearman correlation; maximum-likelihood
+fitting and the likelihood-ratio test; distribution-free and exact tests
+(Kolmogorov-Smirnov, Fisher’s exact, Wilcoxon signed-rank,
+Mann-Whitney U); James-Stein shrinkage; and Bonferroni and
+Benjamini-Hochberg multiple-testing corrections.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="mathematicskit.statistics.BootstrapResult">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.statistics.</span></span><span class="sig-name descname"><span class="pre">BootstrapResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">estimate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lower</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std_error</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">confidence_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.95</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'BCa'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/statistics/core/base.html#BootstrapResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.statistics.BootstrapResult" title="Link to this definition">#</a></dt>
@@ -486,7 +491,13 @@ R^2/adjusted-R^2; and bootstrap resampling via
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.statistics.BootstrapResult.confidence_level">
 <span class="sig-name descname"><span class="pre">confidence_level</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.95</span></span><a class="headerlink" href="#mathematicskit.statistics.BootstrapResult.confidence_level" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>The interval’s nominal coverage probability.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.statistics.BootstrapResult.estimate">
@@ -502,7 +513,13 @@ R^2/adjusted-R^2; and bootstrap resampling via
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.statistics.BootstrapResult.lower">
 <span class="sig-name descname"><span class="pre">lower</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.statistics.BootstrapResult.lower" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>Lower endpoint of the bootstrap confidence interval.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.statistics.BootstrapResult.method">
@@ -519,12 +536,26 @@ R^2/adjusted-R^2; and bootstrap resampling via
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.statistics.BootstrapResult.std_error">
 <span class="sig-name descname"><span class="pre">std_error</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.statistics.BootstrapResult.std_error" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>The bootstrap distribution’s standard deviation – the
+resampling estimate of <cite>estimate</cite>’s standard error, obtained without
+any closed-form sampling-distribution assumption.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.statistics.BootstrapResult.upper">
 <span class="sig-name descname"><span class="pre">upper</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.statistics.BootstrapResult.upper" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>Upper endpoint of the bootstrap confidence interval.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -547,7 +578,16 @@ R^2/adjusted-R^2; and bootstrap resampling via
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.statistics.ConfidenceIntervalResult.confidence_level">
 <span class="sig-name descname"><span class="pre">confidence_level</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.95</span></span><a class="headerlink" href="#mathematicskit.statistics.ConfidenceIntervalResult.confidence_level" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>The interval’s nominal coverage probability. The endpoints
+come from the <span class="math notranslate nohighlight">\(\alpha/2\)</span> and <span class="math notranslate nohighlight">\(1-\alpha/2\)</span> quantiles of the
+reference distribution, with <span class="math notranslate nohighlight">\(\alpha = 1 - \text{confidence
+level}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.statistics.ConfidenceIntervalResult.estimate">
@@ -563,7 +603,13 @@ R^2/adjusted-R^2; and bootstrap resampling via
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.statistics.ConfidenceIntervalResult.lower">
 <span class="sig-name descname"><span class="pre">lower</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.statistics.ConfidenceIntervalResult.lower" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>The interval’s lower endpoint.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.statistics.ConfidenceIntervalResult.method">
@@ -579,7 +625,13 @@ R^2/adjusted-R^2; and bootstrap resampling via
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.statistics.ConfidenceIntervalResult.upper">
 <span class="sig-name descname"><span class="pre">upper</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.statistics.ConfidenceIntervalResult.upper" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>The interval’s upper endpoint.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mathematicskit.statistics.ConfidenceIntervalResult.width">
@@ -588,6 +640,67 @@ R^2/adjusted-R^2; and bootstrap resampling via
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.statistics.CorrelationResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.statistics.</span></span><span class="sig-name descname"><span class="pre">CorrelationResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coefficient</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/statistics/core/base.html#CorrelationResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.statistics.CorrelationResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Container for a correlation coefficient and its significance test.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>coefficient</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>p_value</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>)</p></li>
+<li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.statistics.CorrelationResult.coefficient">
+<span class="sig-name descname"><span class="pre">coefficient</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.statistics.CorrelationResult.coefficient" title="Link to this definition">#</a></dt>
+<dd><p>The correlation coefficient, in <span class="math notranslate nohighlight">\([-1, 1]\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.statistics.CorrelationResult.method">
+<span class="sig-name descname"><span class="pre">method</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></span><a class="headerlink" href="#mathematicskit.statistics.CorrelationResult.method" title="Link to this definition">#</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">&quot;pearson&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;spearman&quot;</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.statistics.CorrelationResult.n">
+<span class="sig-name descname"><span class="pre">n</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#mathematicskit.statistics.CorrelationResult.n" title="Link to this definition">#</a></dt>
+<dd><p>Number of paired observations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.statistics.CorrelationResult.p_value">
+<span class="sig-name descname"><span class="pre">p_value</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.statistics.CorrelationResult.p_value" title="Link to this definition">#</a></dt>
+<dd><p>Two-sided p-value for <span class="math notranslate nohighlight">\(H_0\)</span>: no association.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -631,7 +744,14 @@ distribution has kurtosis 0 under this convention).</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.statistics.DescriptiveStatsResult.maximum">
 <span class="sig-name descname"><span class="pre">maximum</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.statistics.DescriptiveStatsResult.maximum" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>The largest observation. Together with <cite>minimum</cite>, <cite>q1</cite>,
+<cite>median</cite> and <cite>q3</cite> this makes up the five-number summary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.statistics.DescriptiveStatsResult.mean">
@@ -647,12 +767,24 @@ distribution has kurtosis 0 under this convention).</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.statistics.DescriptiveStatsResult.median">
 <span class="sig-name descname"><span class="pre">median</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.statistics.DescriptiveStatsResult.median" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>The 50th percentile.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.statistics.DescriptiveStatsResult.minimum">
 <span class="sig-name descname"><span class="pre">minimum</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.statistics.DescriptiveStatsResult.minimum" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>The smallest observation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.statistics.DescriptiveStatsResult.n">
@@ -813,6 +945,214 @@ distribution has kurtosis 0 under this convention).</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.statistics.JackknifeResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.statistics.</span></span><span class="sig-name descname"><span class="pre">JackknifeResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">estimate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bias</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std_error</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bias_corrected</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replicates</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/statistics/core/base.html#JackknifeResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.statistics.JackknifeResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Container for a jackknife bias and standard-error estimate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>estimate</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>bias</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>std_error</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>bias_corrected</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>replicates</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.statistics.JackknifeResult.bias">
+<span class="sig-name descname"><span class="pre">bias</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.statistics.JackknifeResult.bias" title="Link to this definition">#</a></dt>
+<dd><p>Quenouille’s jackknife bias estimate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.statistics.JackknifeResult.bias_corrected">
+<span class="sig-name descname"><span class="pre">bias_corrected</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.statistics.JackknifeResult.bias_corrected" title="Link to this definition">#</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">estimate</span> <span class="pre">-</span> <span class="pre">bias</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.statistics.JackknifeResult.estimate">
+<span class="sig-name descname"><span class="pre">estimate</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.statistics.JackknifeResult.estimate" title="Link to this definition">#</a></dt>
+<dd><p>The statistic computed on the full sample.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.statistics.JackknifeResult.replicates">
+<span class="sig-name descname"><span class="pre">replicates</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.statistics.JackknifeResult.replicates" title="Link to this definition">#</a></dt>
+<dd><p>The leave-one-out values of the statistic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (<a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.statistics.JackknifeResult.std_error">
+<span class="sig-name descname"><span class="pre">std_error</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.statistics.JackknifeResult.std_error" title="Link to this definition">#</a></dt>
+<dd><p>Tukey’s jackknife standard-error estimate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.statistics.MaximumLikelihoodResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.statistics.</span></span><span class="sig-name descname"><span class="pre">MaximumLikelihoodResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_likelihood</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distribution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/statistics/core/base.html#MaximumLikelihoodResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.statistics.MaximumLikelihoodResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Container for a maximum-likelihood distribution fit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>params</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a>)</p></li>
+<li><p><strong>log_likelihood</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>n_params</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>)</p></li>
+<li><p><strong>distribution</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="mathematicskit.statistics.MaximumLikelihoodResult.aic">
+<span class="sig-name descname"><span class="pre">aic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/statistics/core/base.html#MaximumLikelihoodResult.aic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.statistics.MaximumLikelihoodResult.aic" title="Link to this definition">#</a></dt>
+<dd><p>float: Akaike’s information criterion, <span class="math notranslate nohighlight">\(2k - 2\ell(\hat\theta)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.statistics.MaximumLikelihoodResult.distribution">
+<span class="sig-name descname"><span class="pre">distribution</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></span><a class="headerlink" href="#mathematicskit.statistics.MaximumLikelihoodResult.distribution" title="Link to this definition">#</a></dt>
+<dd><p>The <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> distribution name, e.g. <code class="docutils literal notranslate"><span class="pre">&quot;norm&quot;</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.statistics.MaximumLikelihoodResult.log_likelihood">
+<span class="sig-name descname"><span class="pre">log_likelihood</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.statistics.MaximumLikelihoodResult.log_likelihood" title="Link to this definition">#</a></dt>
+<dd><p>The maximized log-likelihood <span class="math notranslate nohighlight">\(\ell(\hat\theta)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.statistics.MaximumLikelihoodResult.n_params">
+<span class="sig-name descname"><span class="pre">n_params</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#mathematicskit.statistics.MaximumLikelihoodResult.n_params" title="Link to this definition">#</a></dt>
+<dd><p>Number of parameters actually estimated (fixed ones excluded).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.statistics.MaximumLikelihoodResult.params">
+<span class="sig-name descname"><span class="pre">params</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a></span><a class="headerlink" href="#mathematicskit.statistics.MaximumLikelihoodResult.params" title="Link to this definition">#</a></dt>
+<dd><p>The fitted parameters, in <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> order (shape
+parameters first, then <code class="docutils literal notranslate"><span class="pre">loc</span></code> and <code class="docutils literal notranslate"><span class="pre">scale</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)">tuple</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mathematicskit.statistics.MultipleTestingResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.statistics.</span></span><span class="sig-name descname"><span class="pre">MultipleTestingResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rejected</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">adjusted_p_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/statistics/core/base.html#MultipleTestingResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.statistics.MultipleTestingResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Container for a multiple-testing correction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rejected</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>adjusted_p_values</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>alpha</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.statistics.MultipleTestingResult.adjusted_p_values">
+<span class="sig-name descname"><span class="pre">adjusted_p_values</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.statistics.MultipleTestingResult.adjusted_p_values" title="Link to this definition">#</a></dt>
+<dd><p>Adjusted p-values, comparable directly with <cite>alpha</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (m,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.statistics.MultipleTestingResult.alpha">
+<span class="sig-name descname"><span class="pre">alpha</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.05</span></span><a class="headerlink" href="#mathematicskit.statistics.MultipleTestingResult.alpha" title="Link to this definition">#</a></dt>
+<dd><p>The error rate being controlled (family-wise error rate or
+false discovery rate, depending on <cite>method</cite>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.statistics.MultipleTestingResult.method">
+<span class="sig-name descname"><span class="pre">method</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></span><a class="headerlink" href="#mathematicskit.statistics.MultipleTestingResult.method" title="Link to this definition">#</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">&quot;bonferroni&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;benjamini_hochberg&quot;</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mathematicskit.statistics.MultipleTestingResult.rejected">
+<span class="sig-name descname"><span class="pre">rejected</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.statistics.MultipleTestingResult.rejected" title="Link to this definition">#</a></dt>
+<dd><p>Which null hypotheses are rejected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray of <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)">bool</a>, shape (m,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="mathematicskit.statistics.RegressionResult">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.statistics.</span></span><span class="sig-name descname"><span class="pre">RegressionResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coefficients</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">standard_errors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_statistics</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fitted_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residuals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_squared</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">adjusted_r_squared</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/statistics/core/base.html#RegressionResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.statistics.RegressionResult" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
@@ -834,7 +1174,16 @@ distribution has kurtosis 0 under this convention).</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.statistics.RegressionResult.adjusted_r_squared">
 <span class="sig-name descname"><span class="pre">adjusted_r_squared</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.statistics.RegressionResult.adjusted_r_squared" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p><cite>r_squared</cite> penalized for the number of predictors,
+<span class="math notranslate nohighlight">\(1 - (1-R^2)(n-1)/(n-p)\)</span>. Unlike <cite>r_squared</cite>, it does not rise
+automatically each time another predictor is added, so it is the
+fairer figure when comparing models of different size.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.statistics.RegressionResult.coefficients">
@@ -842,7 +1191,7 @@ distribution has kurtosis 0 under this convention).</p>
 <dd><p>Fitted coefficients (intercept first, if included).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ndarray, shape (p,)</p>
+<dd class="field-odd"><p>ndarray, shape (<a class="reference internal" href="abstract_algebra.html#mathematicskit.abstract_algebra.SylowResult.p" title="mathematicskit.abstract_algebra.SylowResult.p">p</a>,)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -850,7 +1199,14 @@ distribution has kurtosis 0 under this convention).</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.statistics.RegressionResult.fitted_values">
 <span class="sig-name descname"><span class="pre">fitted_values</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.statistics.RegressionResult.fitted_values" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p><span class="math notranslate nohighlight">\(X\hat\beta\)</span>, the model’s prediction at
+each observed predictor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (<a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>,)</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.statistics.RegressionResult.p_values">
@@ -858,7 +1214,7 @@ distribution has kurtosis 0 under this convention).</p>
 <dd><p>Per-coefficient two-sided p-value.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ndarray, shape (p,)</p>
+<dd class="field-odd"><p>ndarray, shape (<a class="reference internal" href="abstract_algebra.html#mathematicskit.abstract_algebra.SylowResult.p" title="mathematicskit.abstract_algebra.SylowResult.p">p</a>,)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -866,12 +1222,26 @@ distribution has kurtosis 0 under this convention).</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.statistics.RegressionResult.r_squared">
 <span class="sig-name descname"><span class="pre">r_squared</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#mathematicskit.statistics.RegressionResult.r_squared" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>The fraction of the response’s variance the fit explains,
+<span class="math notranslate nohighlight">\(1 - SS_{\text{res}}/SS_{\text{tot}}\)</span>; <code class="docutils literal notranslate"><span class="pre">1.0</span></code> for a perfect
+fit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.statistics.RegressionResult.residuals">
 <span class="sig-name descname"><span class="pre">residuals</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#mathematicskit.statistics.RegressionResult.residuals" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p><code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">-</span> <span class="pre">fitted_values</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (<a class="reference internal" href="combinatorics.html#mathematicskit.combinatorics.YoungDiagram.n" title="mathematicskit.combinatorics.YoungDiagram.n">n</a>,)</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mathematicskit.statistics.RegressionResult.standard_errors">
@@ -879,7 +1249,7 @@ distribution has kurtosis 0 under this convention).</p>
 <dd><p>Standard error of each coefficient.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ndarray, shape (p,)</p>
+<dd class="field-odd"><p>ndarray, shape (<a class="reference internal" href="abstract_algebra.html#mathematicskit.abstract_algebra.SylowResult.p" title="mathematicskit.abstract_algebra.SylowResult.p">p</a>,)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -890,11 +1260,71 @@ distribution has kurtosis 0 under this convention).</p>
 <dd><p>Per-coefficient t-statistic for <code class="docutils literal notranslate"><span class="pre">H0:</span> <span class="pre">beta_j</span> <span class="pre">=</span> <span class="pre">0</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ndarray, shape (p,)</p>
+<dd class="field-odd"><p>ndarray, shape (<a class="reference internal" href="abstract_algebra.html#mathematicskit.abstract_algebra.SylowResult.p" title="mathematicskit.abstract_algebra.SylowResult.p">p</a>,)</p>
 </dd>
 </dl>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.statistics.benjamini_hochberg">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.statistics.</span></span><span class="sig-name descname"><span class="pre">benjamini_hochberg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/statistics/systems/multiple_testing.html#benjamini_hochberg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.statistics.benjamini_hochberg" title="Link to this definition">#</a></dt>
+<dd><p>Benjamini-Hochberg step-up procedure controlling the false discovery rate.</p>
+<p>Sort the p-values <span class="math notranslate nohighlight">\(p_{(1)} \le \dots \le p_{(m)}\)</span>, find the
+largest <span class="math notranslate nohighlight">\(k\)</span> with <span class="math notranslate nohighlight">\(p_{(k)} \le k\alpha/m\)</span>, and reject
+<span class="math notranslate nohighlight">\(H_{(1)}, \dots, H_{(k)}\)</span>. The adjusted p-values are
+<span class="math notranslate nohighlight">\(\min_{j \ge i} \min(1, m p_{(j)}/j)\)</span>. See Benjamini &amp; Hochberg
+(1995), J. R. Statist. Soc. B 57(1), 289-300.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_values</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>)</p></li>
+<li><p><strong>alpha</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Target false discovery rate.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.statistics.MultipleTestingResult" title="mathematicskit.statistics.core.base.MultipleTestingResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleTestingResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>MultipleTestingResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">benjamini_hochberg</span><span class="p">([</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">adjusted_p_values</span><span class="p">]</span>
+<span class="go">[0.04, 0.0533, 0.0533, 0.5]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">rejected</span>
+<span class="go">array([ True, False, False, False])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.statistics.bonferroni_correction">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.statistics.</span></span><span class="sig-name descname"><span class="pre">bonferroni_correction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/statistics/systems/multiple_testing.html#bonferroni_correction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.statistics.bonferroni_correction" title="Link to this definition">#</a></dt>
+<dd><p>Bonferroni correction: reject <span class="math notranslate nohighlight">\(H_i\)</span> when <span class="math notranslate nohighlight">\(m p_i \le \alpha\)</span>.</p>
+<p>Controls the family-wise error rate (the chance of <em>any</em> false
+rejection) at <span class="math notranslate nohighlight">\(\alpha\)</span>, under any dependence between tests.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_values</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>)</p></li>
+<li><p><strong>alpha</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.statistics.MultipleTestingResult" title="mathematicskit.statistics.core.base.MultipleTestingResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleTestingResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>MultipleTestingResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bonferroni_correction</span><span class="p">([</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">])</span><span class="o">.</span><span class="n">adjusted_p_values</span>
+<span class="go">array([0.03, 0.06, 0.6 ])</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -946,8 +1376,15 @@ that is. See Efron &amp; Tibshirani, <em>An Introduction to the Bootstrap</em>,
 <dd><p>Chi-square goodness-of-fit test: does <cite>observed</cite> match <cite>expected</cite> proportions/counts?</p>
 <p><span class="math notranslate nohighlight">\(\chi^2 = \sum_i (O_i - E_i)^2/E_i\)</span>, referred to
 <code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.stats.chi2</span></code> with <span class="math notranslate nohighlight">\(k-1\)</span> degrees of freedom
-(<code class="docutils literal notranslate"><span class="pre">k</span></code> categories). See DeGroot &amp; Schervish, <em>Probability and
-Statistics</em>, 4th ed., Sec. 10.3.</p>
+(<code class="docutils literal notranslate"><span class="pre">k</span></code> categories).</p>
+<p>The single degree of freedom subtracted is the one used up by the
+constraint that the counts sum to <span class="math notranslate nohighlight">\(n\)</span>; this function assumes
+<cite>expected</cite> is fully specified in advance. If the expected counts were
+themselves obtained by estimating <span class="math notranslate nohighlight">\(m\)</span> parameters from the same
+data (fitting a Poisson rate, say), the correct degrees of freedom are
+<span class="math notranslate nohighlight">\(k-1-m\)</span>, and the p-value reported here will be too large –
+conservative about rejecting <span class="math notranslate nohighlight">\(H_0\)</span>. See DeGroot &amp; Schervish,
+<em>Probability and Statistics</em>, 4th ed., Sec. 10.3.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -1078,6 +1515,174 @@ five-number summary (min, quartiles, max). See DeGroot &amp; Schervish,
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.statistics.fisher_exact_test">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.statistics.</span></span><span class="sig-name descname"><span class="pre">fisher_exact_test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alternative</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'two-sided'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/statistics/systems/nonparametric.html#fisher_exact_test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.statistics.fisher_exact_test" title="Link to this definition">#</a></dt>
+<dd><p>Fisher’s exact test of independence for a 2x2 contingency table.</p>
+<p>Conditioning on both margins, the top-left count follows a
+hypergeometric distribution under independence, so the p-value is an
+exact sum of hypergeometric probabilities rather than a chi-square
+approximation. Wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.fisher_exact.html#scipy.stats.fisher_exact" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.stats.fisher_exact()</span></code></a>. See R. A.
+Fisher, <em>The Design of Experiments</em> (1935), Ch. 2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>table</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>) – Observed counts.</p></li>
+<li><p><strong>alternative</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.statistics.HypothesisTestResult" title="mathematicskit.statistics.core.base.HypothesisTestResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">HypothesisTestResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>HypothesisTestResult</em> – <cite>statistic</cite> is the sample odds ratio <span class="math notranslate nohighlight">\(ad/bc\)</span>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># The lady tasting tea: all 8 cups classified correctly.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">fisher_exact_test</span><span class="p">([[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">]],</span> <span class="n">alternative</span><span class="o">=</span><span class="s2">"greater"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">p_value</span> <span class="o">*</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>  <span class="c1"># exactly 1/70</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.statistics.jackknife">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.statistics.</span></span><span class="sig-name descname"><span class="pre">jackknife</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">statistic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;function</span> <span class="pre">mean&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/statistics/systems/jackknife.html#jackknife"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.statistics.jackknife" title="Link to this definition">#</a></dt>
+<dd><p>Jackknife bias and standard-error estimates for a statistic.</p>
+<p>Recomputes <cite>statistic</cite> on each of the <span class="math notranslate nohighlight">\(n\)</span> samples that leave
+one observation out. For the sample mean the jackknife standard
+error is exactly <span class="math notranslate nohighlight">\(s/\sqrt n\)</span>; for the plug-in variance
+<span class="math notranslate nohighlight">\(\frac1n\sum(x_i-\bar x)^2\)</span> the bias-corrected estimate is
+exactly the unbiased <span class="math notranslate nohighlight">\(\frac1{n-1}\sum(x_i-\bar x)^2\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>)</p></li>
+<li><p><strong>statistic</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>], <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]</span>) – <code class="docutils literal notranslate"><span class="pre">statistic(sample)</span> <span class="pre">-&gt;</span> <span class="pre">float</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.statistics.JackknifeResult" title="mathematicskit.statistics.core.base.JackknifeResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">JackknifeResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>JackknifeResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">,</span> <span class="mf">9.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">jackknife</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">)</span>  <span class="c1"># plug-in variance, ddof=0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">bias_corrected</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.statistics.james_stein_estimator">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.statistics.</span></span><span class="sig-name descname"><span class="pre">james_stein_estimator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">positive_part</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/statistics/systems/shrinkage.html#james_stein_estimator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.statistics.james_stein_estimator" title="Link to this definition">#</a></dt>
+<dd><p>James-Stein estimate of a normal mean vector.</p>
+<p>Shrinks <cite>x</cite> toward <cite>target</cite> (the origin by default) by the factor
+<span class="math notranslate nohighlight">\(1 - (p-2)\sigma^2/\lVert x - \text{target}\rVert^2\)</span>. The
+positive-part version clips that factor at 0, which never does worse
+and avoids overshooting past the target.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>) – One observation of each of <span class="math notranslate nohighlight">\(p \ge 3\)</span> normal means.</p></li>
+<li><p><strong>sigma</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Known common standard deviation of each observation.</p></li>
+<li><p><strong>target</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Point to shrink toward; defaults to the origin.</p></li>
+<li><p><strong>positive_part</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – Clip the shrinkage factor at 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (p,)</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">james_stein_estimator</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]))</span>  <span class="c1"># factor 1 - 2/16</span>
+<span class="go">array([1.75, 1.75, 1.75, 1.75])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.statistics.kolmogorov_smirnov_test">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.statistics.</span></span><span class="sig-name descname"><span class="pre">kolmogorov_smirnov_test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'norm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alternative</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'two-sided'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/statistics/systems/nonparametric.html#kolmogorov_smirnov_test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.statistics.kolmogorov_smirnov_test" title="Link to this definition">#</a></dt>
+<dd><p>Kolmogorov-Smirnov test against a distribution or a second sample.</p>
+<p>The statistic is the largest vertical gap between the empirical CDF
+<span class="math notranslate nohighlight">\(F_n\)</span> and the reference CDF <span class="math notranslate nohighlight">\(F\)</span>,
+<span class="math notranslate nohighlight">\(D_n = \sup_x |F_n(x) - F(x)|\)</span>. Kolmogorov (1933) showed that
+<span class="math notranslate nohighlight">\(\sqrt n D_n\)</span> has the same limiting distribution for <em>every</em>
+continuous <span class="math notranslate nohighlight">\(F\)</span>; Smirnov (1939) extended it to two samples.
+Wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kstest.html#scipy.stats.kstest" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.stats.kstest()</span></code></a> (one sample) or
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ks_2samp.html#scipy.stats.ks_2samp" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.stats.ks_2samp()</span></code></a> (two samples).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>)</p></li>
+<li><p><strong>reference</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a> | <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>) – A <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> distribution name or a CDF callable (one-sample
+test), or a second sample (two-sample test).</p></li>
+<li><p><strong>args</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></span>) – Parameters of the reference distribution, e.g. <code class="docutils literal notranslate"><span class="pre">(loc,</span> <span class="pre">scale)</span></code>.
+They must be fixed in advance, not estimated from <cite>data</cite>.</p></li>
+<li><p><strong>alternative</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.statistics.HypothesisTestResult" title="mathematicskit.statistics.core.base.HypothesisTestResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">HypothesisTestResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>HypothesisTestResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">kolmogorov_smirnov_test</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">]),</span> <span class="s2">"uniform"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">statistic</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>  <span class="c1"># largest gap is at x = 0.7: 1 - 0.7</span>
+<span class="go">0.3</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.statistics.likelihood_ratio_test">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.statistics.</span></span><span class="sig-name descname"><span class="pre">likelihood_ratio_test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_likelihood_null</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_likelihood_alt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/statistics/systems/likelihood.html#likelihood_ratio_test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.statistics.likelihood_ratio_test" title="Link to this definition">#</a></dt>
+<dd><p>Likelihood-ratio test of a nested null model against a larger model.</p>
+<p>The statistic <span class="math notranslate nohighlight">\(\Lambda = 2(\ell_1 - \ell_0)\)</span> is, by Wilks’s
+theorem, asymptotically <span class="math notranslate nohighlight">\(\chi^2_{df}\)</span> under <span class="math notranslate nohighlight">\(H_0\)</span>, where
+<cite>df</cite> is the number of extra free parameters in the alternative model.
+See Wilks (1938), Ann. Math. Statist. 9(1), 60-62.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>log_likelihood_null</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Maximized log-likelihood of the restricted (null) model.</p></li>
+<li><p><strong>log_likelihood_alt</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Maximized log-likelihood of the full (alternative) model.</p></li>
+<li><p><strong>df</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Difference in the number of free parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.statistics.HypothesisTestResult" title="mathematicskit.statistics.core.base.HypothesisTestResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">HypothesisTestResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>HypothesisTestResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">likelihood_ratio_test</span><span class="p">(</span><span class="o">-</span><span class="mf">10.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.0</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">statistic</span>
+<span class="go">4.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">p_value</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">0.0455</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.statistics.linear_regression">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.statistics.</span></span><span class="sig-name descname"><span class="pre">linear_regression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_intercept</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/statistics/systems/regression.html#linear_regression"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.statistics.linear_regression" title="Link to this definition">#</a></dt>
 <dd><p>Ordinary least squares: <span class="math notranslate nohighlight">\(y = X\beta + \varepsilon\)</span>.</p>
@@ -1113,6 +1718,75 @@ intercept term). <code class="docutils literal notranslate"><span class="pre">co
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">r_squared</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 <span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.statistics.mann_whitney_u_test">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.statistics.</span></span><span class="sig-name descname"><span class="pre">mann_whitney_u_test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alternative</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'two-sided'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/statistics/systems/nonparametric.html#mann_whitney_u_test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.statistics.mann_whitney_u_test" title="Link to this definition">#</a></dt>
+<dd><p>Mann-Whitney U (Wilcoxon rank-sum) test for two independent samples.</p>
+<p><span class="math notranslate nohighlight">\(U\)</span> counts the pairs <span class="math notranslate nohighlight">\((x_i, y_j)\)</span> with <span class="math notranslate nohighlight">\(x_i &gt; y_j\)</span>
+(ties count one half); <span class="math notranslate nohighlight">\(U/(n_1 n_2)\)</span> estimates
+<span class="math notranslate nohighlight">\(P(X &gt; Y)\)</span>. Wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mannwhitneyu.html#scipy.stats.mannwhitneyu" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.stats.mannwhitneyu()</span></code></a>. See
+Wilcoxon (1945) and H. B. Mann &amp; D. R. Whitney, Ann. Math. Statist.
+18(1) (1947), 50-60.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>)</p></li>
+<li><p><strong>y</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>)</p></li>
+<li><p><strong>alternative</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.statistics.HypothesisTestResult" title="mathematicskit.statistics.core.base.HypothesisTestResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">HypothesisTestResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>HypothesisTestResult</em> – <cite>statistic</cite> is <span class="math notranslate nohighlight">\(U\)</span> for <cite>x</cite>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">mann_whitney_u_test</span><span class="p">([</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">statistic</span>  <span class="c1"># every x beats every y: U = 3 * 3</span>
+<span class="go">9.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.statistics.maximum_likelihood_fit">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.statistics.</span></span><span class="sig-name descname"><span class="pre">maximum_likelihood_fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distribution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'norm'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">fixed</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/statistics/systems/likelihood.html#maximum_likelihood_fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.statistics.maximum_likelihood_fit" title="Link to this definition">#</a></dt>
+<dd><p>Fit a continuous distribution to <cite>data</cite> by maximum likelihood.</p>
+<p>Finds <span class="math notranslate nohighlight">\(\hat\theta = \arg\max_\theta \sum_i \log f(x_i;\theta)\)</span>
+using <code class="docutils literal notranslate"><span class="pre">scipy.stats.&lt;distribution&gt;.fit</span></code>. For the normal distribution
+the maximizer is closed-form: <span class="math notranslate nohighlight">\(\hat\mu = \bar x\)</span> and
+<span class="math notranslate nohighlight">\(\hat\sigma^2 = \frac1n\sum_i (x_i-\bar x)^2\)</span> (note the
+<span class="math notranslate nohighlight">\(1/n\)</span>, not <span class="math notranslate nohighlight">\(1/(n-1)\)</span>). See Fisher (1922), Phil. Trans. R.
+Soc. A 222, 309-368.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>)</p></li>
+<li><p><strong>distribution</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> | <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.rv_continuous.html#scipy.stats.rv_continuous" title="(in SciPy v1.18.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">rv_continuous</span></code></a></span>) – A continuous <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> distribution or its name
+(<code class="docutils literal notranslate"><span class="pre">&quot;norm&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;expon&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;gamma&quot;</span></code>, …).</p></li>
+<li><p><strong>**fixed</strong> – Parameters held fixed rather than estimated, using <code class="docutils literal notranslate"><span class="pre">scipy</span></code>’s
+<code class="docutils literal notranslate"><span class="pre">f</span></code>-prefix convention (e.g. <code class="docutils literal notranslate"><span class="pre">floc=0</span></code>).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.statistics.MaximumLikelihoodResult" title="mathematicskit.statistics.core.base.MaximumLikelihoodResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">MaximumLikelihoodResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>MaximumLikelihoodResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">maximum_likelihood_fit</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s2">"norm"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">params</span><span class="p">]</span>  <span class="c1"># mean and sqrt(2)</span>
+<span class="go">[3.0, 1.414214]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1281,6 +1955,41 @@ Sec. 11.3.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.statistics.pearson_correlation">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.statistics.</span></span><span class="sig-name descname"><span class="pre">pearson_correlation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/statistics/systems/correlation.html#pearson_correlation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.statistics.pearson_correlation" title="Link to this definition">#</a></dt>
+<dd><p>Pearson’s product-moment correlation coefficient.</p>
+<div class="math notranslate nohighlight">
+\[r = \frac{\sum_i (x_i - \bar x)(y_i - \bar y)}
+         {\sqrt{\sum_i (x_i - \bar x)^2 \sum_i (y_i - \bar y)^2}},\]</div>
+<p>with the p-value from <span class="math notranslate nohighlight">\(t = r\sqrt{(n-2)/(1-r^2)}\)</span> referred to
+Student’s t with <span class="math notranslate nohighlight">\(n-2\)</span> degrees of freedom (exact for bivariate
+normal data). Wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.pearsonr.html#scipy.stats.pearsonr" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.stats.pearsonr()</span></code></a>. See Pearson (1896),
+Phil. Trans. R. Soc. A 187, 253-318.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>) – Paired observations, <span class="math notranslate nohighlight">\(n \ge 3\)</span>.</p></li>
+<li><p><strong>y</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>) – Paired observations, <span class="math notranslate nohighlight">\(n \ge 3\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.statistics.CorrelationResult" title="mathematicskit.statistics.core.base.CorrelationResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">CorrelationResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>CorrelationResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">pearson_correlation</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">coefficient</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.statistics.proportion_confidence_interval">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.statistics.</span></span><span class="sig-name descname"><span class="pre">proportion_confidence_interval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">successes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">confidence_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.95</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/statistics/systems/confidence_intervals.html#proportion_confidence_interval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.statistics.proportion_confidence_interval" title="Link to this definition">#</a></dt>
 <dd><p>Wald (normal-approximation) confidence interval for a population proportion.</p>
@@ -1308,6 +2017,40 @@ and Statistics</em>, 4th ed., Sec. 9.5.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">proportion_confidence_interval</span><span class="p">(</span><span class="n">successes</span><span class="o">=</span><span class="mi">520</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">estimate</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <span class="go">0.52</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.statistics.spearman_correlation">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.statistics.</span></span><span class="sig-name descname"><span class="pre">spearman_correlation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/statistics/systems/correlation.html#spearman_correlation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.statistics.spearman_correlation" title="Link to this definition">#</a></dt>
+<dd><p>Spearman’s rank correlation coefficient.</p>
+<p>Pearson’s <span class="math notranslate nohighlight">\(r\)</span> computed on the ranks of <cite>x</cite> and <cite>y</cite> (ties get
+their average rank). Without ties it reduces to Spearman’s formula</p>
+<div class="math notranslate nohighlight">
+\[\rho = 1 - \frac{6 \sum_i d_i^2}{n(n^2 - 1)},\]</div>
+<p>where <span class="math notranslate nohighlight">\(d_i\)</span> is the difference between the two ranks of
+observation <span class="math notranslate nohighlight">\(i\)</span>. Wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.spearmanr.html#scipy.stats.spearmanr" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.stats.spearmanr()</span></code></a>. See
+Spearman (1904), Am. J. Psychol. 15(1), 72-101.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>) – Paired observations, <span class="math notranslate nohighlight">\(n \ge 3\)</span>.</p></li>
+<li><p><strong>y</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>) – Paired observations, <span class="math notranslate nohighlight">\(n \ge 3\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.statistics.CorrelationResult" title="mathematicskit.statistics.core.base.CorrelationResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">CorrelationResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>CorrelationResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">spearman_correlation</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">.</span><span class="n">coefficient</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>  <span class="c1"># any increasing map gives 1</span>
+<span class="go">1.0</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1408,6 +2151,40 @@ Statistics</em>, 4th ed., Sec. 9.8.</p>
 </div>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.statistics.wilcoxon_signed_rank_test">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.statistics.</span></span><span class="sig-name descname"><span class="pre">wilcoxon_signed_rank_test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alternative</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'two-sided'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/statistics/systems/nonparametric.html#wilcoxon_signed_rank_test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.statistics.wilcoxon_signed_rank_test" title="Link to this definition">#</a></dt>
+<dd><p>Wilcoxon signed-rank test for a median of zero (or paired differences).</p>
+<p>Ranks the absolute differences <span class="math notranslate nohighlight">\(|x_i - y_i|\)</span> and sums the ranks
+of the positive ones, <span class="math notranslate nohighlight">\(W^+\)</span>. Under <span class="math notranslate nohighlight">\(H_0\)</span> (differences
+symmetric about 0) each sign is a fair coin flip, which gives an
+exact null distribution. Wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.wilcoxon.html#scipy.stats.wilcoxon" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.stats.wilcoxon()</span></code></a>. See F.
+Wilcoxon, Biometrics Bulletin 1(6) (1945), 80-83.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>)</p></li>
+<li><p><strong>y</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Paired sample; if given, the test is applied to <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">-</span> <span class="pre">y</span></code>.</p></li>
+<li><p><strong>alternative</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#mathematicskit.statistics.HypothesisTestResult" title="mathematicskit.statistics.core.base.HypothesisTestResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">HypothesisTestResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>HypothesisTestResult</em> – <cite>statistic</cite> is scipy’s convention: <span class="math notranslate nohighlight">\(\min(W^+, W^-)\)</span> for
+two-sided tests, <span class="math notranslate nohighlight">\(W^+\)</span> otherwise.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># 5 positive differences: exact one-sided p = (1/2)^5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">wilcoxon_signed_rank_test</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">],</span> <span class="n">alternative</span><span class="o">=</span><span class="s2">"greater"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">p_value</span>
+<span class="go">0.03125</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </section>
 
 
@@ -1466,6 +2243,13 @@ Statistics</em>, 4th ed., Sec. 9.8.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.ConfidenceIntervalResult.width"><code class="docutils literal notranslate"><span class="pre">ConfidenceIntervalResult.width()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.CorrelationResult"><code class="docutils literal notranslate"><span class="pre">CorrelationResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.CorrelationResult.coefficient"><code class="docutils literal notranslate"><span class="pre">CorrelationResult.coefficient</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.CorrelationResult.method"><code class="docutils literal notranslate"><span class="pre">CorrelationResult.method</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.CorrelationResult.n"><code class="docutils literal notranslate"><span class="pre">CorrelationResult.n</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.CorrelationResult.p_value"><code class="docutils literal notranslate"><span class="pre">CorrelationResult.p_value</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.DescriptiveStatsResult"><code class="docutils literal notranslate"><span class="pre">DescriptiveStatsResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.DescriptiveStatsResult.kurtosis"><code class="docutils literal notranslate"><span class="pre">DescriptiveStatsResult.kurtosis</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.DescriptiveStatsResult.maximum"><code class="docutils literal notranslate"><span class="pre">DescriptiveStatsResult.maximum</span></code></a></li>
@@ -1489,6 +2273,29 @@ Statistics</em>, 4th ed., Sec. 9.8.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.HypothesisTestResult.statistic"><code class="docutils literal notranslate"><span class="pre">HypothesisTestResult.statistic</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.JackknifeResult"><code class="docutils literal notranslate"><span class="pre">JackknifeResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.JackknifeResult.bias"><code class="docutils literal notranslate"><span class="pre">JackknifeResult.bias</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.JackknifeResult.bias_corrected"><code class="docutils literal notranslate"><span class="pre">JackknifeResult.bias_corrected</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.JackknifeResult.estimate"><code class="docutils literal notranslate"><span class="pre">JackknifeResult.estimate</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.JackknifeResult.replicates"><code class="docutils literal notranslate"><span class="pre">JackknifeResult.replicates</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.JackknifeResult.std_error"><code class="docutils literal notranslate"><span class="pre">JackknifeResult.std_error</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.MaximumLikelihoodResult"><code class="docutils literal notranslate"><span class="pre">MaximumLikelihoodResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.MaximumLikelihoodResult.aic"><code class="docutils literal notranslate"><span class="pre">MaximumLikelihoodResult.aic()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.MaximumLikelihoodResult.distribution"><code class="docutils literal notranslate"><span class="pre">MaximumLikelihoodResult.distribution</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.MaximumLikelihoodResult.log_likelihood"><code class="docutils literal notranslate"><span class="pre">MaximumLikelihoodResult.log_likelihood</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.MaximumLikelihoodResult.n_params"><code class="docutils literal notranslate"><span class="pre">MaximumLikelihoodResult.n_params</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.MaximumLikelihoodResult.params"><code class="docutils literal notranslate"><span class="pre">MaximumLikelihoodResult.params</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.MultipleTestingResult"><code class="docutils literal notranslate"><span class="pre">MultipleTestingResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.MultipleTestingResult.adjusted_p_values"><code class="docutils literal notranslate"><span class="pre">MultipleTestingResult.adjusted_p_values</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.MultipleTestingResult.alpha"><code class="docutils literal notranslate"><span class="pre">MultipleTestingResult.alpha</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.MultipleTestingResult.method"><code class="docutils literal notranslate"><span class="pre">MultipleTestingResult.method</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.MultipleTestingResult.rejected"><code class="docutils literal notranslate"><span class="pre">MultipleTestingResult.rejected</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.RegressionResult"><code class="docutils literal notranslate"><span class="pre">RegressionResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.RegressionResult.adjusted_r_squared"><code class="docutils literal notranslate"><span class="pre">RegressionResult.adjusted_r_squared</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.RegressionResult.coefficients"><code class="docutils literal notranslate"><span class="pre">RegressionResult.coefficients</span></code></a></li>
@@ -1500,21 +2307,33 @@ Statistics</em>, 4th ed., Sec. 9.8.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.RegressionResult.t_statistics"><code class="docutils literal notranslate"><span class="pre">RegressionResult.t_statistics</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.benjamini_hochberg"><code class="docutils literal notranslate"><span class="pre">benjamini_hochberg()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.bonferroni_correction"><code class="docutils literal notranslate"><span class="pre">bonferroni_correction()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.bootstrap_confidence_interval"><code class="docutils literal notranslate"><span class="pre">bootstrap_confidence_interval()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.chi_square_goodness_of_fit"><code class="docutils literal notranslate"><span class="pre">chi_square_goodness_of_fit()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.chi_square_independence"><code class="docutils literal notranslate"><span class="pre">chi_square_independence()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.cohens_d"><code class="docutils literal notranslate"><span class="pre">cohens_d()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.descriptive_stats"><code class="docutils literal notranslate"><span class="pre">descriptive_stats()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.fisher_exact_test"><code class="docutils literal notranslate"><span class="pre">fisher_exact_test()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.jackknife"><code class="docutils literal notranslate"><span class="pre">jackknife()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.james_stein_estimator"><code class="docutils literal notranslate"><span class="pre">james_stein_estimator()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.kolmogorov_smirnov_test"><code class="docutils literal notranslate"><span class="pre">kolmogorov_smirnov_test()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.likelihood_ratio_test"><code class="docutils literal notranslate"><span class="pre">likelihood_ratio_test()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.linear_regression"><code class="docutils literal notranslate"><span class="pre">linear_regression()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.mann_whitney_u_test"><code class="docutils literal notranslate"><span class="pre">mann_whitney_u_test()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.maximum_likelihood_fit"><code class="docutils literal notranslate"><span class="pre">maximum_likelihood_fit()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.mean_confidence_interval"><code class="docutils literal notranslate"><span class="pre">mean_confidence_interval()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.one_sample_t_test"><code class="docutils literal notranslate"><span class="pre">one_sample_t_test()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.one_sample_z_test"><code class="docutils literal notranslate"><span class="pre">one_sample_z_test()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.one_way_anova"><code class="docutils literal notranslate"><span class="pre">one_way_anova()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.order_statistic"><code class="docutils literal notranslate"><span class="pre">order_statistic()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.pearson_correlation"><code class="docutils literal notranslate"><span class="pre">pearson_correlation()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.proportion_confidence_interval"><code class="docutils literal notranslate"><span class="pre">proportion_confidence_interval()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.spearman_correlation"><code class="docutils literal notranslate"><span class="pre">spearman_correlation()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.two_sample_t_test"><code class="docutils literal notranslate"><span class="pre">two_sample_t_test()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.two_sample_z_test"><code class="docutils literal notranslate"><span class="pre">two_sample_z_test()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.variance_confidence_interval"><code class="docutils literal notranslate"><span class="pre">variance_confidence_interval()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.statistics.wilcoxon_signed_rank_test"><code class="docutils literal notranslate"><span class="pre">wilcoxon_signed_rank_test()</span></code></a></li>
 </ul>
   </nav></div>
 

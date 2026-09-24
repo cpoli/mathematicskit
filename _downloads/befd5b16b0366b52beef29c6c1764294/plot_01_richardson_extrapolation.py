@@ -1,50 +1,74 @@
 r"""
-Richardson extrapolation dramatically improves accuracy
-============================================================
+Richardson extrapolation: cancelling error terms at a fixed step
+=================================================================
 
-Forward and backward differences are :math:`O(h)`, central differences
-:math:`O(h^2)`; Richardson extrapolation combines central differences at
-successively halved step sizes to cancel error terms one order at a
-time, reaching much higher accuracy without ever needing an
-analytically smaller ``h`` (which would eventually be swamped by
-floating-point cancellation error).
+Richardson's idea: if an estimate :math:`D(h)` has error
+:math:`c_1 h^2 + c_2 h^4 + \dots`, then combining :math:`D(h)` and
+:math:`D(h/2)` as :math:`(4D(h/2) - D(h))/3` cancels the :math:`h^2`
+term. Repeating the combination on successively halved steps removes
+one error order per level. This example applies
+:func:`~mathematicskit.calculus.richardson_extrapolation` to a central
+difference and shows it reaching near machine precision from a coarse
+starting step, where no plain difference quotient can.
 """
 
 # %%
 import matplotlib.pyplot as plt
 import numpy as np
 
-from mathematicskit.calculus.systems.finite_differences import backward_difference, central_difference, forward_difference, richardson_extrapolation
-
-# %%
-# Error vs. step size for the three basic differences
-# ---------------------------------------------------------
+from mathematicskit.calculus import central_difference, richardson_extrapolation
 
 f = np.exp
 x0 = 1.0
 exact = np.exp(1.0)
 
-hs = np.logspace(-1, -6, 20)
-err_fwd = [abs(forward_difference(f, x0, h) - exact) for h in hs]
-err_bwd = [abs(backward_difference(f, x0, h) - exact) for h in hs]
-err_ctr = [abs(central_difference(f, x0, h) - exact) for h in hs]
+# %%
+# One extrapolation step by hand
+# ------------------------------
+#
+# Two central differences, each only :math:`O(h^2)`, combine into an
+# :math:`O(h^4)` estimate at no extra cost.
 
-fig, ax = plt.subplots(figsize=(6, 4.5))
-ax.loglog(hs, err_fwd, "o-", label="forward, O(h)")
-ax.loglog(hs, err_bwd, "s-", label="backward, O(h)")
-ax.loglog(hs, err_ctr, "^-", label="central, O(h^2)")
-ax.set_xlabel("h")
-ax.set_ylabel("|error|")
-ax.set_title("Basic finite-difference error vs. step size")
-ax.legend()
-fig.tight_layout()
+h = 0.2
+d_h = central_difference(f, x0, h)
+d_h2 = central_difference(f, x0, h / 2)
+combined = (4 * d_h2 - d_h) / 3
+print(f"D(h)   error: {abs(d_h - exact):.3e}")
+print(f"D(h/2) error: {abs(d_h2 - exact):.3e}")
+print(f"(4D(h/2) - D(h))/3 error: {abs(combined - exact):.3e}")
 
 # %%
-# Richardson extrapolation: much better accuracy at a fixed coarse h
-# -------------------------------------------------------------------------
+# Each level cancels one more error order
+# ---------------------------------------
+#
+# Starting from the same coarse :math:`h = 0.2`, every extra level of
+# extrapolation gains roughly two more orders of accuracy, until
+# floating-point round-off takes over.
 
-for levels in (1, 2, 3, 4, 5):
-    result = richardson_extrapolation(f, x0, h=0.2, levels=levels)
-    print(f"levels={levels}: value={result.value:.14f}, error={abs(result.value - exact):.3e}")
+levels = np.arange(1, 7)
+errs = [abs(richardson_extrapolation(f, x0, h=0.2, levels=int(k)).value - exact) for k in levels]
+for k, e in zip(levels, errs):
+    print(f"levels={k}: error={e:.3e}")
+
+# %%
+# Extrapolation beats simply shrinking the step
+# ---------------------------------------------
+#
+# A plain central difference at step :math:`h` bottoms out near
+# :math:`10^{-11}` because of cancellation; Richardson reaches that
+# accuracy while its smallest step is still large.
+
+hs = np.logspace(-1, -7, 25)
+err_ctr = [abs(central_difference(f, x0, hh) - exact) for hh in hs]
+smallest_step = [0.2 / 2 ** (k - 1) for k in levels]
+
+fig, ax = plt.subplots(figsize=(6, 4.5))
+ax.loglog(hs, err_ctr, "o-", label="central difference alone")
+ax.loglog(smallest_step, np.maximum(errs, 1e-17), "s-", label="Richardson, levels 1..6")
+ax.set_xlabel("smallest step used")
+ax.set_ylabel("|error in f'(1)|")
+ax.set_title("Richardson extrapolation from a coarse step h = 0.2")
+ax.legend()
+fig.tight_layout()
 
 plt.show()

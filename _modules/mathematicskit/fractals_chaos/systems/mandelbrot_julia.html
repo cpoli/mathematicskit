@@ -410,18 +410,18 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.fractals_chaos.systems.mandelbrot_julia</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Mandelbrot and Julia set generation via escape-time iteration.</span>
+<span></span><span class="sa">r</span><span class="sd">"""Mandelbrot and Julia set generation via escape-time iteration.</span>
 
 <span class="sd">Both iterate :math:`z_{n+1} = z_n^2 + c` and record how many iterations</span>
 <span class="sd">it takes :math:`|z_n|` to exceed 2 (beyond which the orbit provably</span>
 <span class="sd">diverges to infinity), capping at `max_iter` for points that appear</span>
 <span class="sd">bounded. The per-pixel inner loop is the classic Numba</span>
-<span class="sd">factory-function pattern documented in physicskit&#39;s ``core/`` modules: a</span>
+<span class="sd">factory-function pattern documented in physicskit's ``core/`` modules: a</span>
 <span class="sd">module-level factory closes over nothing here (the grid itself is the</span>
 <span class="sd">input) and returns a standalone ``@njit`` kernel. See Devaney, *A First</span>
-<span class="sd">Course in Chaotic Dynamical Systems*, 2nd ed., Ch. 15 (&quot;The Mandelbrot</span>
-<span class="sd">Set&quot;), and Peitgen &amp; Richter, *The Beauty of Fractals*, 1986.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Course in Chaotic Dynamical Systems*, 2nd ed., Ch. 15 ("The Mandelbrot</span>
+<span class="sd">Set"), and Peitgen &amp; Richter, *The Beauty of Fractals*, 1986.</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -430,7 +430,7 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.fractals_chaos.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">EscapeTimeResult</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;mandelbrot_set&quot;</span><span class="p">,</span> <span class="s2">&quot;julia_set&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"mandelbrot_set"</span><span class="p">,</span> <span class="s2">"julia_set"</span><span class="p">]</span>
 
 
 <span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -467,7 +467,7 @@
 <div class="viewcode-block" id="mandelbrot_set">
 <a class="viewcode-back" href="../../../../api/fractals_chaos.html#mathematicskit.fractals_chaos.mandelbrot_set">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">mandelbrot_set</span><span class="p">(</span><span class="n">extent</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">),</span> <span class="n">resolution</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">400</span><span class="p">,</span> <span class="n">max_iter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">EscapeTimeResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Escape-time grid for the Mandelbrot set: :math:`z_0 = 0`, ``c`` sweeps the grid.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Escape-time grid for the Mandelbrot set: :math:`z_0 = 0`, ``c`` sweeps the grid.</span>
 
 <span class="sd">    The Mandelbrot set is :math:`\{c \in \mathbb{C} : z_{n+1}=z_n^2+c,\</span>
 <span class="sd">    z_0=0 \text{ stays bounded}\}`. See Devaney, *A First Course in</span>
@@ -497,7 +497,7 @@
 <span class="sd">    &gt;&gt;&gt; import numpy as np</span>
 <span class="sd">    &gt;&gt;&gt; int(_escape_time_mandelbrot(np.array([[-1.0]]), np.array([[0.0]]), 200)[0, 0])</span>
 <span class="sd">    200</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">re_min</span><span class="p">,</span> <span class="n">re_max</span><span class="p">,</span> <span class="n">im_min</span><span class="p">,</span> <span class="n">im_max</span> <span class="o">=</span> <span class="n">extent</span>
     <span class="n">nx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">resolution</span><span class="p">)</span>
     <span class="n">ny</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">nx</span> <span class="o">*</span> <span class="p">(</span><span class="n">im_max</span> <span class="o">-</span> <span class="n">im_min</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">re_max</span> <span class="o">-</span> <span class="n">re_min</span><span class="p">))),</span> <span class="mi">1</span><span class="p">)</span>
@@ -512,7 +512,7 @@
 <div class="viewcode-block" id="julia_set">
 <a class="viewcode-back" href="../../../../api/fractals_chaos.html#mathematicskit.fractals_chaos.julia_set">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">julia_set</span><span class="p">(</span><span class="n">c</span><span class="p">:</span> <span class="nb">complex</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">),</span> <span class="n">resolution</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">400</span><span class="p">,</span> <span class="n">max_iter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">EscapeTimeResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Escape-time grid for the filled Julia set of :math:`z \mapsto z^2 + c`, ``c`` fixed.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Escape-time grid for the filled Julia set of :math:`z \mapsto z^2 + c`, ``c`` fixed.</span>
 
 <span class="sd">    Unlike the Mandelbrot set (which sweeps ``c`` with a fixed</span>
 <span class="sd">    :math:`z_0=0`), the Julia set fixes ``c`` and sweeps the *initial</span>
@@ -544,7 +544,7 @@
 <span class="sd">    &gt;&gt;&gt; import numpy as np</span>
 <span class="sd">    &gt;&gt;&gt; int(_escape_time_julia(np.array([[0.5]]), np.array([[0.0]]), 0.0, 0.0, 200)[0, 0])</span>
 <span class="sd">    200</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">re_min</span><span class="p">,</span> <span class="n">re_max</span><span class="p">,</span> <span class="n">im_min</span><span class="p">,</span> <span class="n">im_max</span> <span class="o">=</span> <span class="n">extent</span>
     <span class="n">nx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">resolution</span><span class="p">)</span>
     <span class="n">ny</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">nx</span> <span class="o">*</span> <span class="p">(</span><span class="n">im_max</span> <span class="o">-</span> <span class="n">im_min</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">re_max</span> <span class="o">-</span> <span class="n">re_min</span><span class="p">))),</span> <span class="mi">1</span><span class="p">)</span>

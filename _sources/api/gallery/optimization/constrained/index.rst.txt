@@ -5,7 +5,8 @@
 Constrained optimization
 ---------------------------
 
-Lagrange multipliers, KKT-condition verification, and the penalty method.
+Lagrange multipliers and the KKT conditions, the Frank-Wolfe method, and
+the quadratic penalty method.
 
 
 .. raw:: html
@@ -21,18 +22,52 @@ Lagrange multipliers, KKT-condition verification, and the penalty method.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Minimizes x^2+y^2 subject to x+y=1: the closed-form solution is (0.5, 0.5) with multiplier \lambda=-1. Solved three ways -- directly via the Lagrange stationarity system, verified via the KKT conditions, and approached indirectly via the quadratic penalty method.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Minimizes x^2+y^2 subject to x+y=1. At the constrained optimum (0.5, 0.5) the objective&#x27;s gradient is parallel to the constraint&#x27;s gradient, \nabla f = -\lambda \nabla h with \lambda=-1, which is Lagrange&#x27;s condition. Rewriting the constraint as the inequality x+y \geq 1 gives a Karush-Kuhn-Tucker problem whose multiplier must also be non-negative.">
 
 .. only:: html
 
-  .. image:: /api/gallery/optimization/constrained/images/thumb/sphx_glr_plot_01_lagrange_kkt_and_penalty_thumb.png
+  .. image:: /api/gallery/optimization/constrained/images/thumb/sphx_glr_plot_01_lagrange_multipliers_kkt_thumb.png
     :alt:
 
-  :doc:`/api/gallery/optimization/constrained/plot_01_lagrange_kkt_and_penalty`
+  :doc:`/api/gallery/optimization/constrained/plot_01_lagrange_multipliers_kkt`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Lagrange multipliers, KKT verification, and the penalty method</div>
+      <div class="sphx-glr-thumbnail-title">Lagrange multipliers and the KKT conditions</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Minimizes a convex quadratic over the triangle \{x \geq 0,\ x_1 + x_2 + x_3 = 1\} without ever projecting onto it. Each step solves a linear program, whose solution is a vertex, and moves toward that vertex. The Frank-Wolfe gap certifies how far the objective is from optimal.">
+
+.. only:: html
+
+  .. image:: /api/gallery/optimization/constrained/images/thumb/sphx_glr_plot_02_frank_wolfe_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/optimization/constrained/plot_02_frank_wolfe`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Frank-Wolfe: optimization over the probability simplex</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Fiacco and McCormick&#x27;s sequential unconstrained minimization replaces \min x^2+y^2 subject to x+y=1 with the unconstrained problems \min x^2+y^2+\mu(x+y-1)^2 for growing \mu. Each penalized minimizer violates the constraint slightly, and the violation shrinks like 1/\mu as the minimizers approach the constrained optimum (0.5, 0.5).">
+
+.. only:: html
+
+  .. image:: /api/gallery/optimization/constrained/images/thumb/sphx_glr_plot_03_penalty_method_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/optimization/constrained/plot_03_penalty_method`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The quadratic penalty method: a sequence of unconstrained problems</div>
     </div>
 
 
@@ -46,5 +81,7 @@ Lagrange multipliers, KKT-condition verification, and the penalty method.
 .. toctree::
    :hidden:
 
-   /api/gallery/optimization/constrained/plot_01_lagrange_kkt_and_penalty
+   /api/gallery/optimization/constrained/plot_01_lagrange_multipliers_kkt
+   /api/gallery/optimization/constrained/plot_02_frank_wolfe
+   /api/gallery/optimization/constrained/plot_03_penalty_method
 

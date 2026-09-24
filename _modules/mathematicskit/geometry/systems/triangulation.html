@@ -410,7 +410,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.geometry.systems.triangulation</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Delaunay triangulation and its dual, the Voronoi diagram -- via</span>
+<span></span><span class="sa">r</span><span class="sd">"""Delaunay triangulation and its dual, the Voronoi diagram -- via</span>
 <span class="sd">:mod:`scipy.spatial` (Qhull).</span>
 
 <span class="sd">Bowyer-Watson (the textbook incremental Delaunay algorithm) is not</span>
@@ -418,7 +418,7 @@
 <span class="sd">Qhull, a robust, well-tested computational-geometry library. See de Berg</span>
 <span class="sd">et al., *Computational Geometry*, 3rd ed., Ch. 9 (Delaunay</span>
 <span class="sd">triangulations) and Ch. 7 (Voronoi diagrams).</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -428,17 +428,17 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.geometry.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">TriangulationResult</span><span class="p">,</span> <span class="n">VoronoiResult</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;delaunay_triangulation&quot;</span><span class="p">,</span> <span class="s2">&quot;voronoi_diagram&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"delaunay_triangulation"</span><span class="p">,</span> <span class="s2">"voronoi_diagram"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="delaunay_triangulation">
 <a class="viewcode-back" href="../../../../api/geometry.html#mathematicskit.geometry.delaunay_triangulation">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">delaunay_triangulation</span><span class="p">(</span><span class="n">points</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TriangulationResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Delaunay triangulation of a point set, via :class:`scipy.spatial.Delaunay` (Qhull).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Delaunay triangulation of a point set, via :class:`scipy.spatial.Delaunay` (Qhull).</span>
 
 <span class="sd">    The triangulation maximizing the minimum angle among all possible</span>
 <span class="sd">    triangulations of the point set -- equivalently, no point lies</span>
-<span class="sd">    inside any triangle&#39;s circumcircle. See de Berg et al.,</span>
+<span class="sd">    inside any triangle's circumcircle. See de Berg et al.,</span>
 <span class="sd">    *Computational Geometry*, 3rd ed., Ch. 9.1-9.3.</span>
 
 <span class="sd">    Parameters</span>
@@ -456,7 +456,7 @@
 <span class="sd">    &gt;&gt;&gt; result = delaunay_triangulation(points)</span>
 <span class="sd">    &gt;&gt;&gt; result.simplices.shape[1]  # each simplex is a triangle: 3 vertices</span>
 <span class="sd">    3</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">tri</span> <span class="o">=</span> <span class="n">_ScipyDelaunay</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">TriangulationResult</span><span class="p">(</span><span class="n">points</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">points</span><span class="p">),</span> <span class="n">simplices</span><span class="o">=</span><span class="n">tri</span><span class="o">.</span><span class="n">simplices</span><span class="p">)</span></div>
 
@@ -465,7 +465,7 @@
 <div class="viewcode-block" id="voronoi_diagram">
 <a class="viewcode-back" href="../../../../api/geometry.html#mathematicskit.geometry.voronoi_diagram">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">voronoi_diagram</span><span class="p">(</span><span class="n">points</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VoronoiResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Voronoi diagram of a point set, via :class:`scipy.spatial.Voronoi` (Qhull).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Voronoi diagram of a point set, via :class:`scipy.spatial.Voronoi` (Qhull).</span>
 
 <span class="sd">    The dual of the Delaunay triangulation: partitions the plane (or</span>
 <span class="sd">    higher-dimensional space) into regions, one per input point,</span>
@@ -489,7 +489,7 @@
 <span class="sd">    &gt;&gt;&gt; result = voronoi_diagram(points)</span>
 <span class="sd">    &gt;&gt;&gt; len(result.regions) &gt;= 4</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">vor</span> <span class="o">=</span> <span class="n">_ScipyVoronoi</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">VoronoiResult</span><span class="p">(</span><span class="n">points</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">points</span><span class="p">),</span> <span class="n">vertices</span><span class="o">=</span><span class="n">vor</span><span class="o">.</span><span class="n">vertices</span><span class="p">,</span> <span class="n">regions</span><span class="o">=</span><span class="n">vor</span><span class="o">.</span><span class="n">regions</span><span class="p">,</span> <span class="n">ridge_points</span><span class="o">=</span><span class="n">vor</span><span class="o">.</span><span class="n">ridge_points</span><span class="p">)</span></div>
 

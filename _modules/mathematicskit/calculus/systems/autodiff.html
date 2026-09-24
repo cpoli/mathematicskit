@@ -410,38 +410,38 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.calculus.systems.autodiff</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Reverse-mode (backpropagation-style) automatic differentiation.</span>
+<span></span><span class="sa">r</span><span class="sd">"""Reverse-mode (backpropagation-style) automatic differentiation.</span>
 
 <span class="sd">Builds a dynamic computation graph of :class:`Variable` nodes as a</span>
 <span class="sd">function executes, each remembering its parents and the local partial</span>
 <span class="sd">derivative(s) needed to propagate an incoming gradient to them (the</span>
-<span class="sd">&quot;vector-Jacobian product&quot; of one operation); calling :meth:`Variable.backward`</span>
+<span class="sd">"vector-Jacobian product" of one operation); calling :meth:`Variable.backward`</span>
 <span class="sd">then walks the graph in reverse topological order, accumulating</span>
 <span class="sd">:math:`\partial \text{output}/\partial v` at every node ``v`` via the</span>
 <span class="sd">multivariate chain rule -- exactly the algorithm behind modern deep</span>
 <span class="sd">learning frameworks, in miniature. See Rumelhart, Hinton &amp; Williams</span>
 <span class="sd">(1986), *Learning representations by back-propagating errors*, Nature</span>
 <span class="sd">323, and Griewank &amp; Walther, *Evaluating Derivatives*, 2nd ed., Ch. 3-4</span>
-<span class="sd">(the &quot;reverse mode&quot; / &quot;adjoint&quot; method).</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">(the "reverse mode" / "adjoint" method).</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Variable&quot;</span><span class="p">,</span> <span class="s2">&quot;gradient&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Variable"</span><span class="p">,</span> <span class="s2">"gradient"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="Variable">
 <a class="viewcode-back" href="../../../../api/calculus.html#mathematicskit.calculus.Variable">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Variable</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A scalar node in a reverse-mode autodiff computation graph.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""A scalar node in a reverse-mode autodiff computation graph.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    value : float</span>
-<span class="sd">        The node&#39;s forward value.</span>
+<span class="sd">        The node's forward value.</span>
 <span class="sd">    _parents : list of (Variable, float), optional</span>
 <span class="sd">        Internal: ``(parent, local_partial_derivative)`` pairs recorded</span>
 <span class="sd">        by the operation that created this node.</span>
@@ -451,11 +451,11 @@
 <span class="sd">    &gt;&gt;&gt; x = Variable(3.0)</span>
 <span class="sd">    &gt;&gt;&gt; y = x * x + 2.0 * x  # f(x) = x^2 + 2x</span>
 <span class="sd">    &gt;&gt;&gt; y.backward()</span>
-<span class="sd">    &gt;&gt;&gt; round(x.grad, 10)  # f&#39;(3) = 2*3 + 2 = 8</span>
+<span class="sd">    &gt;&gt;&gt; round(x.grad, 10)  # f'(3) = 2*3 + 2 = 8</span>
 <span class="sd">    8.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="s2">&quot;grad&quot;</span><span class="p">,</span> <span class="s2">&quot;_parents&quot;</span><span class="p">)</span>
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"value"</span><span class="p">,</span> <span class="s2">"grad"</span><span class="p">,</span> <span class="s2">"_parents"</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">_parents</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="n">Variable</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
@@ -463,7 +463,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_parents</span> <span class="o">=</span> <span class="n">_parents</span> <span class="ow">or</span> <span class="p">[]</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Variable(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="si">!r}</span><span class="s2">, grad=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">grad</span><span class="si">!r}</span><span class="s2">)&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"Variable(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="si">!r}</span><span class="s2">, grad=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">grad</span><span class="si">!r}</span><span class="s2">)"</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_coerce</span><span class="p">(</span><span class="n">other</span><span class="p">):</span>
@@ -544,13 +544,13 @@
 <div class="viewcode-block" id="Variable.backward">
 <a class="viewcode-back" href="../../../../api/calculus.html#mathematicskit.calculus.Variable.backward">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">backward</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Propagate gradients back through the computation graph.</span>
+<span class="w">        </span><span class="sd">"""Propagate gradients back through the computation graph.</span>
 
 <span class="sd">        Sets ``self.grad = 1`` (the seed) and accumulates</span>
 <span class="sd">        :math:`\\partial \\text{self}/\\partial v` into ``v.grad`` for</span>
 <span class="sd">        every node ``v`` reachable as a parent, via reverse topological</span>
 <span class="sd">        traversal.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_topological_order</span><span class="p">():</span>
             <span class="n">node</span><span class="o">.</span><span class="n">grad</span> <span class="o">=</span> <span class="mf">0.0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">grad</span> <span class="o">=</span> <span class="mf">1.0</span>
@@ -564,7 +564,7 @@
 <div class="viewcode-block" id="gradient">
 <a class="viewcode-back" href="../../../../api/calculus.html#mathematicskit.calculus.gradient">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">gradient</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">Variable</span><span class="p">],</span> <span class="n">x</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Gradient of a scalar function of several variables via reverse-mode AD.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Gradient of a scalar function of several variables via reverse-mode AD.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -585,7 +585,7 @@
 <span class="sd">    &gt;&gt;&gt; grad = gradient(f, [3.0, 2.0])</span>
 <span class="sd">    &gt;&gt;&gt; [round(g, 10) for g in grad]</span>
 <span class="sd">    [12.0, 10.0]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="n">Variable</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="k">for</span> <span class="n">xi</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
     <span class="n">out</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">variables</span><span class="p">)</span>
     <span class="n">out</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Richardson extrapolation dramatically improves accuracy &#8212; mathematicskit 0.2.0 documentation</title>
+    <title>Richardson extrapolation: cancelling error terms at a fixed step &#8212; mathematicskit 0.2.0 documentation</title>
   
   
   
@@ -53,7 +53,7 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="Quadrature" href="../quadrature/index.html" />
+    <link rel="next" title="Fermat’s adequality: maxima from a difference quotient" href="plot_02_fermat_adequality.html" />
     <link rel="prev" title="Finite differences" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -375,47 +375,78 @@
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../abstract_algebra/index.html">mathematicskit.abstract_algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../abstract_algebra/actions/index.html">Group actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../abstract_algebra/codes/index.html">Error-correcting codes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../abstract_algebra/finite_fields/index.html">Finite fields</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../abstract_algebra/groups/index.html">Groups</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../abstract_algebra/homomorphisms/index.html">Homomorphisms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../abstract_algebra/polynomial_ring/index.html">Polynomial ring arithmetic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../abstract_algebra/structure/index.html">Group structure</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../abstract_algebra/subgroups/index.html">Subgroups and cosets</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">mathematicskit.calculus</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../autodiff/index.html">Reverse-mode autodiff</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../dual_numbers/index.html">Dual numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../exhaustion/index.html">Method of exhaustion</a></li>
 <li class="toctree-l2 current active"><a class="reference internal" href="index.html">Finite differences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../newton_leibniz/index.html">Newton and Leibniz</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../quadrature/index.html">Quadrature</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../taylor_series/index.html">Taylor series</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../combinatorics/index.html">mathematicskit.combinatorics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../combinatorics/counting/index.html">Counting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../combinatorics/designs/index.html">Combinatorial designs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../combinatorics/extremal/index.html">Extremal combinatorics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../combinatorics/inclusion_exclusion/index.html">Inclusion-exclusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../combinatorics/matching/index.html">Matchings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../combinatorics/necklaces/index.html">Necklaces</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../combinatorics/partitions/index.html">Integer partitions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../combinatorics/pascals_triangle/index.html">Pascal’s triangle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../combinatorics/sequences/index.html">Integer sequences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../combinatorics/special_numbers/index.html">Special numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../combinatorics/trees/index.html">Labeled trees</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../fractals_chaos/index.html">mathematicskit.fractals_chaos</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../fractals_chaos/box_counting/index.html">Box-counting dimension</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../fractals_chaos/cellular_automata/index.html">Cellular automata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fractals_chaos/curves/index.html">Fractal curves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fractals_chaos/dla/index.html">Aggregation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../fractals_chaos/ifs/index.html">Iterated function systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fractals_chaos/lsystems/index.html">Lindenmayer systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../fractals_chaos/lyapunov/index.html">Lyapunov exponents</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../fractals_chaos/mandelbrot_julia/index.html">Mandelbrot and Julia sets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fractals_chaos/maps/index.html">Discrete maps</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../geometry/index.html">mathematicskit.geometry</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../geometry/bezier/index.html">Bézier curves</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../geometry/convex_hull/index.html">Convex hull</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../geometry/curves/index.html">Curves and the Frenet-Serret frame</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../geometry/intersections/index.html">Segment intersection and point-in-polygon</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../geometry/polygon/index.html">Polygon area and centroid</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../geometry/triangulation/index.html">Delaunay triangulation and Voronoi diagrams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../geometry/distances/index.html">Distances between shapes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../geometry/enclosing/index.html">Enclosing circles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../geometry/intersections/index.html">Point-in-polygon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../geometry/polygon/index.html">Polygon area</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../geometry/polyhedra/index.html">Polyhedra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../geometry/proximity/index.html">Proximity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../geometry/simplification/index.html">Line simplification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../geometry/surfaces/index.html">Surfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../geometry/triangulation/index.html">Voronoi diagrams and Delaunay triangulation</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../graph_theory/index.html">mathematicskit.graph_theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../graph_theory/assignment/index.html">Assignment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../graph_theory/coloring/index.html">Graph coloring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../graph_theory/components/index.html">Connected components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../graph_theory/eulerian/index.html">Eulerian paths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../graph_theory/extremal/index.html">Extremal graph theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../graph_theory/hamiltonian/index.html">Hamiltonian cycles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../graph_theory/matching/index.html">Bipartite matching</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../graph_theory/max_flow/index.html">Maximum flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../graph_theory/ranking/index.html">Ranking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../graph_theory/search/index.html">Heuristic search</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../graph_theory/shortest_paths/index.html">Shortest paths</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../graph_theory/spanning_tree/index.html">Minimum spanning tree</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../graph_theory/spectral/index.html">Spectral graph theory</a></li>
@@ -423,6 +454,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../linalg/index.html">mathematicskit.linalg</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../linalg/cholesky/index.html">Cholesky decomposition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linalg/classical/index.html">Classical matrix theory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../linalg/eigen/index.html">Eigenvalue algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../linalg/iterative/index.html">Iterative solvers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../linalg/lu/index.html">LU decomposition</a></li>
@@ -435,14 +467,22 @@
 <li class="toctree-l2"><a class="reference internal" href="../../number_theory/continued_fractions/index.html">Continued fractions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../number_theory/crt/index.html">Chinese Remainder Theorem</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../number_theory/diophantine/index.html">Diophantine equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../number_theory/factorization/index.html">Integer factorization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../number_theory/modular_arithmetic/index.html">Modular arithmetic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../number_theory/primality/index.html">Primality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../number_theory/prime_distribution/index.html">Distribution of primes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../number_theory/quadratic_residues/index.html">Quadratic residues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../number_theory/sums_of_squares/index.html">Sums of squares</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../number_theory/totient/index.html">Multiplicative functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../number_theory/zeta/index.html">The zeta function</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../numerical_analysis/index.html">mathematicskit.numerical_analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../numerical_analysis/chebyshev/index.html">Chebyshev nodes and the Runge phenomenon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../numerical_analysis/approximation/index.html">Function approximation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../numerical_analysis/chebyshev/index.html">Runge’s phenomenon and Chebyshev nodes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../numerical_analysis/floating_point/index.html">Floating-point arithmetic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../numerical_analysis/interpolation/index.html">Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../numerical_analysis/polynomials/index.html">Polynomials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../numerical_analysis/regression/index.html">Least-squares regression</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../numerical_analysis/root_finding/index.html">Root finding</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../numerical_analysis/splines/index.html">Cubic splines</a></li>
@@ -450,42 +490,73 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../ode_dynamics/index.html">mathematicskit.ode_dynamics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/bifurcations/index.html">Bifurcation normal forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/chaotic_flows/index.html">Chaotic flows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/epidemics/index.html">Epidemic models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/excitable/index.html">Excitable systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/limit_cycles/index.html">Limit cycles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/logistic_map/index.html">The logistic map</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/phase_portrait/index.html">Phase portraits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/poincare/index.html">Poincare sections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/population/index.html">Population models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/stability/index.html">Fixed-point stability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ode_dynamics/synchronization/index.html">Synchronization</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../optimization/index.html">mathematicskit.optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../optimization/conjugate_gradient/index.html">Nonlinear conjugate gradient</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../optimization/constrained/index.html">Constrained optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../optimization/direct_search/index.html">Direct search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../optimization/dynamic_programming/index.html">Dynamic programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../optimization/game_theory/index.html">Game theory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../optimization/gradient_descent/index.html">Gradient descent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../optimization/least_squares/index.html">Nonlinear least squares</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../optimization/linear_programming/index.html">Linear programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../optimization/momentum/index.html">Momentum methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../optimization/newton_quasi_newton/index.html">Newton’s method and BFGS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../optimization/scalar_search/index.html">One-dimensional search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../optimization/stochastic/index.html">Stochastic approximation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../optimization/test_functions/index.html">Benchmark functions</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../probability/index.html">mathematicskit.probability</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../probability/axioms/index.html">Kolmogorov’s axioms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../probability/bayes/index.html">Bayesian inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../probability/branching/index.html">Branching processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../probability/classical/index.html">Classical problems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../probability/continuous/index.html">Continuous distributions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../probability/discrete/index.html">Discrete distributions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../probability/limit_theorems/index.html">Law of Large Numbers and Central Limit Theorem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../probability/limit_theorems/index.html">Limit theorems and inequalities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../probability/markov_chain/index.html">Markov chains</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../probability/monte_carlo/index.html">Monte Carlo integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../probability/queueing/index.html">Queueing theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../probability/stochastic_processes/index.html">Random walks and Brownian motion</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../special_functions/index.html">mathematicskit.special_functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../special_functions/airy/index.html">Airy functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../special_functions/bessel/index.html">Bessel functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../special_functions/elliptic/index.html">Elliptic functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../special_functions/error_functions/index.html">Error function and Fresnel integrals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../special_functions/fourier_transform/index.html">Discrete Fourier transform</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../special_functions/gamma_beta/index.html">Gamma and beta functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../special_functions/hypergeometric/index.html">Hypergeometric functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../special_functions/lambert_w/index.html">Lambert W function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../special_functions/mathieu/index.html">Mathieu functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../special_functions/orthogonal_polynomials/index.html">Orthogonal polynomials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../special_functions/zeta/index.html">Riemann zeta function</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/index.html">mathematicskit.statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/bootstrap/index.html">Bootstrap resampling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/confidence_intervals/index.html">Confidence intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/correlation/index.html">Correlation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/descriptive/index.html">Descriptive statistics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/hypothesis_tests/index.html">Hypothesis tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/likelihood/index.html">Likelihood</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/multiple_testing/index.html">Multiple testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/nonparametric/index.html">Nonparametric tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/regression/index.html">Linear regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/shrinkage/index.html">Shrinkage estimation</a></li>
 </ul>
 </details></li>
 </ul>
@@ -537,7 +608,7 @@
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Finite differences</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Richardson extrapolation dramatically improves accuracy</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Richardson extrapolation: cancelling error terms at a fixed step</span></li>
   </ul>
 </nav>
 </div>
@@ -559,60 +630,87 @@
 <p><a class="reference internal" href="#sphx-glr-download-api-gallery-calculus-finite-differences-plot-01-richardson-extrapolation-py"><span class="std std-ref">Go to the end</span></a>
 to download the full example code.</p>
 </div>
-<section class="sphx-glr-example-title" id="richardson-extrapolation-dramatically-improves-accuracy">
-<span id="sphx-glr-api-gallery-calculus-finite-differences-plot-01-richardson-extrapolation-py"></span><h1>Richardson extrapolation dramatically improves accuracy<a class="headerlink" href="#richardson-extrapolation-dramatically-improves-accuracy" title="Link to this heading">#</a></h1>
-<p>Forward and backward differences are <span class="math notranslate nohighlight">\(O(h)\)</span>, central differences
-<span class="math notranslate nohighlight">\(O(h^2)\)</span>; Richardson extrapolation combines central differences at
-successively halved step sizes to cancel error terms one order at a
-time, reaching much higher accuracy without ever needing an
-analytically smaller <code class="docutils literal notranslate"><span class="pre">h</span></code> (which would eventually be swamped by
-floating-point cancellation error).</p>
+<section class="sphx-glr-example-title" id="richardson-extrapolation-cancelling-error-terms-at-a-fixed-step">
+<span id="sphx-glr-api-gallery-calculus-finite-differences-plot-01-richardson-extrapolation-py"></span><h1>Richardson extrapolation: cancelling error terms at a fixed step<a class="headerlink" href="#richardson-extrapolation-cancelling-error-terms-at-a-fixed-step" title="Link to this heading">#</a></h1>
+<p>Richardson’s idea: if an estimate <span class="math notranslate nohighlight">\(D(h)\)</span> has error
+<span class="math notranslate nohighlight">\(c_1 h^2 + c_2 h^4 + \dots\)</span>, then combining <span class="math notranslate nohighlight">\(D(h)\)</span> and
+<span class="math notranslate nohighlight">\(D(h/2)\)</span> as <span class="math notranslate nohighlight">\((4D(h/2) - D(h))/3\)</span> cancels the <span class="math notranslate nohighlight">\(h^2\)</span>
+term. Repeating the combination on successively halved steps removes
+one error order per level. This example applies
+<a class="reference internal" href="../../../calculus.html#mathematicskit.calculus.richardson_extrapolation" title="mathematicskit.calculus.richardson_extrapolation"><code class="xref py py-func docutils literal notranslate"><span class="pre">richardson_extrapolation()</span></code></a> to a central
+difference and shows it reaching near machine precision from a coarse
+starting step, where no plain difference quotient can.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.calculus.systems.finite_differences</span><span class="w"> </span><span class="kn">import</span> <span class="n">backward_difference</span><span class="p">,</span> <span class="n">central_difference</span><span class="p">,</span> <span class="n">forward_difference</span><span class="p">,</span> <span class="n">richardson_extrapolation</span>
-</pre></div>
-</div>
-<section id="error-vs-step-size-for-the-three-basic-differences">
-<h2>Error vs. step size for the three basic differences<a class="headerlink" href="#error-vs-step-size-for-the-three-basic-differences" title="Link to this heading">#</a></h2>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">f</span></a> <span class="o">=</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">np</span><span class="o">.</span><span class="n">exp</span></a>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.calculus</span><span class="w"> </span><span class="kn">import</span> <span class="n">central_difference</span><span class="p">,</span> <span class="n">richardson_extrapolation</span>
+
+<a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">f</span></a> <span class="o">=</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">np</span><span class="o">.</span><span class="n">exp</span></a>
 <a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x0</span></a> <span class="o">=</span> <span class="mf">1.0</span>
 <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">exact</span></a> <span class="o">=</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">np</span><span class="o">.</span><span class="n">exp</span></a><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
-
-<a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">hs</span></a> <span class="o">=</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.logspace.html#numpy.logspace" title="numpy.logspace" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">logspace</span></a><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
-<a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">err_fwd</span></a> <span class="o">=</span> <span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">forward_difference</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">f</span></a><span class="p">,</span> <a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x0</span></a><span class="p">,</span> <span class="n">h</span><span class="p">)</span> <span class="o">-</span> <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">exact</span></a><span class="p">)</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">hs</span></a><span class="p">]</span>
-<a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">err_bwd</span></a> <span class="o">=</span> <span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">backward_difference</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">f</span></a><span class="p">,</span> <a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x0</span></a><span class="p">,</span> <span class="n">h</span><span class="p">)</span> <span class="o">-</span> <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">exact</span></a><span class="p">)</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">hs</span></a><span class="p">]</span>
-<a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">err_ctr</span></a> <span class="o">=</span> <span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">central_difference</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">f</span></a><span class="p">,</span> <a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x0</span></a><span class="p">,</span> <span class="n">h</span><span class="p">)</span> <span class="o">-</span> <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">exact</span></a><span class="p">)</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">hs</span></a><span class="p">]</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">hs</span></a><span class="p">,</span> <a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">err_fwd</span></a><span class="p">,</span> <span class="s2">&quot;o-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;forward, O(h)&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">hs</span></a><span class="p">,</span> <a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">err_bwd</span></a><span class="p">,</span> <span class="s2">&quot;s-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;backward, O(h)&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">hs</span></a><span class="p">,</span> <a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">err_ctr</span></a><span class="p">,</span> <span class="s2">&quot;^-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;central, O(h^2)&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;h&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;|error|&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Basic finite-difference error vs. step size&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../../../_images/sphx_glr_plot_01_richardson_extrapolation_001.png" srcset="../../../../_images/sphx_glr_plot_01_richardson_extrapolation_001.png" alt="Basic finite-difference error vs. step size" class = "sphx-glr-single-img"/></section>
-<section id="richardson-extrapolation-much-better-accuracy-at-a-fixed-coarse-h">
-<h2>Richardson extrapolation: much better accuracy at a fixed coarse h<a class="headerlink" href="#richardson-extrapolation-much-better-accuracy-at-a-fixed-coarse-h" title="Link to this heading">#</a></h2>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">levels</span></a> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">richardson_extrapolation</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">f</span></a><span class="p">,</span> <a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x0</span></a><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">levels</span></a><span class="o">=</span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">levels</span></a><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;levels=</span><span class="si">{</span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">levels</span></a><span class="si">}</span><span class="s2">: value=</span><span class="si">{</span><a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">result</span><span class="o">.</span><span class="n">value</span></a><span class="si">:</span><span class="s2">.14f</span><span class="si">}</span><span class="s2">, error=</span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">result</span><span class="o">.</span><span class="n">value</span></a><span class="w"> </span><span class="o">-</span><span class="w"> </span><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">exact</span></a><span class="p">)</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<section id="one-extrapolation-step-by-hand">
+<h2>One extrapolation step by hand<a class="headerlink" href="#one-extrapolation-step-by-hand" title="Link to this heading">#</a></h2>
+<p>Two central differences, each only <span class="math notranslate nohighlight">\(O(h^2)\)</span>, combine into an
+<span class="math notranslate nohighlight">\(O(h^4)\)</span> estimate at no extra cost.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">h</span></a> <span class="o">=</span> <span class="mf">0.2</span>
+<a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">d_h</span></a> <span class="o">=</span> <span class="n">central_difference</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">f</span></a><span class="p">,</span> <a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x0</span></a><span class="p">,</span> <a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">h</span></a><span class="p">)</span>
+<a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">d_h2</span></a> <span class="o">=</span> <span class="n">central_difference</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">f</span></a><span class="p">,</span> <a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x0</span></a><span class="p">,</span> <a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">h</span></a> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+<a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">combined</span></a> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">d_h2</span></a> <span class="o">-</span> <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">d_h</span></a><span class="p">)</span> <span class="o">/</span> <span class="mi">3</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"D(h)   error: </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">d_h</span></a><span class="w"> </span><span class="o">-</span><span class="w"> </span><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">exact</span></a><span class="p">)</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"D(h/2) error: </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">d_h2</span></a><span class="w"> </span><span class="o">-</span><span class="w"> </span><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">exact</span></a><span class="p">)</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"(4D(h/2) - D(h))/3 error: </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">combined</span></a><span class="w"> </span><span class="o">-</span><span class="w"> </span><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">exact</span></a><span class="p">)</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>D(h)   error: 1.816e-02
+D(h/2) error: 4.533e-03
+(4D(h/2) - D(h))/3 error: 9.072e-06
+</pre></div>
+</div>
+</section>
+<section id="each-level-cancels-one-more-error-order">
+<h2>Each level cancels one more error order<a class="headerlink" href="#each-level-cancels-one-more-error-order" title="Link to this heading">#</a></h2>
+<p>Starting from the same coarse <span class="math notranslate nohighlight">\(h = 0.2\)</span>, every extra level of
+extrapolation gains roughly two more orders of accuracy, until
+floating-point round-off takes over.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">levels</span></a> <span class="o">=</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.arange.html#numpy.arange" title="numpy.arange" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">errs</span></a> <span class="o">=</span> <span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">richardson_extrapolation</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">f</span></a><span class="p">,</span> <a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x0</span></a><span class="p">,</span> <a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">h</span></a><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">levels</span></a><span class="o">=</span><span class="nb">int</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int64" title="numpy.int64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">k</span></a><span class="p">))</span><span class="o">.</span><span class="n">value</span> <span class="o">-</span> <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">exact</span></a><span class="p">)</span> <span class="k">for</span> <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int64" title="numpy.int64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">k</span></a> <span class="ow">in</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">levels</span></a><span class="p">]</span>
+<span class="k">for</span> <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int64" title="numpy.int64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">k</span></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">e</span></a> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">levels</span></a><span class="p">,</span> <a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">errs</span></a><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"levels=</span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int64" title="numpy.int64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">k</span></a><span class="si">}</span><span class="s2">: error=</span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">e</span></a><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>levels=1: error=1.816e-02
+levels=2: error=9.072e-06
+levels=3: error=5.397e-10
+levels=4: error=4.885e-15
+levels=5: error=2.709e-14
+levels=6: error=6.972e-14
+</pre></div>
+</div>
+</section>
+<section id="extrapolation-beats-simply-shrinking-the-step">
+<h2>Extrapolation beats simply shrinking the step<a class="headerlink" href="#extrapolation-beats-simply-shrinking-the-step" title="Link to this heading">#</a></h2>
+<p>A plain central difference at step <span class="math notranslate nohighlight">\(h\)</span> bottoms out near
+<span class="math notranslate nohighlight">\(10^{-11}\)</span> because of cancellation; Richardson reaches that
+accuracy while its smallest step is still large.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">hs</span></a> <span class="o">=</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.logspace.html#numpy.logspace" title="numpy.logspace" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">logspace</span></a><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+<a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">err_ctr</span></a> <span class="o">=</span> <span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">central_difference</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">f</span></a><span class="p">,</span> <a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x0</span></a><span class="p">,</span> <span class="n">hh</span><span class="p">)</span> <span class="o">-</span> <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">exact</span></a><span class="p">)</span> <span class="k">for</span> <span class="n">hh</span> <span class="ow">in</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">hs</span></a><span class="p">]</span>
+<a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">smallest_step</span></a> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int64" title="numpy.int64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">k</span></a> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int64" title="numpy.int64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">k</span></a> <span class="ow">in</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">levels</span></a><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">hs</span></a><span class="p">,</span> <a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">err_ctr</span></a><span class="p">,</span> <span class="s2">"o-"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"central difference alone"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">smallest_step</span></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">np</span><span class="o">.</span><span class="n">maximum</span></a><span class="p">(</span><a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">errs</span></a><span class="p">,</span> <span class="mf">1e-17</span><span class="p">),</span> <span class="s2">"s-"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Richardson, levels 1..6"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"smallest step used"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"|error in f'(1)|"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Richardson extrapolation from a coarse step h = 0.2"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>levels=1: value=2.73643998561020, error=1.816e-02
-levels=2: value=2.71827275672649, error=9.072e-06
-levels=3: value=2.71828182899878, error=5.397e-10
-levels=4: value=2.71828182845904, error=4.885e-15
-levels=5: value=2.71828182845902, error=2.709e-14
-</pre></div>
-</div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.158 seconds)</p>
+<img src="../../../../_images/sphx_glr_plot_01_richardson_extrapolation_001.png" srcset="../../../../_images/sphx_glr_plot_01_richardson_extrapolation_001.png" alt="Richardson extrapolation from a coarse step h = 0.2" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.107 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-api-gallery-calculus-finite-differences-plot-01-richardson-extrapolation-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../../../_downloads/be36addbb862fa7f006e0dd46b315fd9/plot_01_richardson_extrapolation.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_01_richardson_extrapolation.ipynb</span></code></a></p>
@@ -648,11 +746,11 @@ levels=5: value=2.71828182845902, error=2.709e-14
       </div>
     </a>
     <a class="right-next"
-       href="../quadrature/index.html"
+       href="plot_02_fermat_adequality.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Quadrature</p>
+        <p class="prev-next-title">Fermat’s adequality: maxima from a difference quotient</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -675,8 +773,9 @@ levels=5: value=2.71828182845902, error=2.709e-14
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-vs-step-size-for-the-three-basic-differences">Error vs. step size for the three basic differences</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#richardson-extrapolation-much-better-accuracy-at-a-fixed-coarse-h">Richardson extrapolation: much better accuracy at a fixed coarse h</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-extrapolation-step-by-hand">One extrapolation step by hand</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#each-level-cancels-one-more-error-order">Each level cancels one more error order</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extrapolation-beats-simply-shrinking-the-step">Extrapolation beats simply shrinking the step</a></li>
 </ul>
   </nav></div>
 

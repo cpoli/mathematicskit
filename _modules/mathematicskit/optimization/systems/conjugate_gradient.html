@@ -410,15 +410,15 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.optimization.systems.conjugate_gradient</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Nonlinear conjugate gradient (Fletcher-Reeves and Polak-Ribiere variants).</span>
+<span></span><span class="sa">r</span><span class="sd">"""Nonlinear conjugate gradient (Fletcher-Reeves and Polak-Ribiere variants).</span>
 
 <span class="sd">Hand-rolled, like :mod:`mathematicskit.optimization.systems.gradient_descent`,</span>
 <span class="sd">to expose the per-iterate path. Nonlinear CG is the natural next step up</span>
 <span class="sd">from steepest descent: it reuses previous search directions to avoid</span>
-<span class="sd">gradient descent&#39;s characteristic zig-zagging in narrow valleys, without</span>
-<span class="sd">needing second-derivative information the way Newton&#39;s method does. See</span>
+<span class="sd">gradient descent's characteristic zig-zagging in narrow valleys, without</span>
+<span class="sd">needing second-derivative information the way Newton's method does. See</span>
 <span class="sd">Nocedal &amp; Wright, *Numerical Optimization*, 2nd ed., Ch. 5.2.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -430,13 +430,13 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.optimization.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">OptimizeResult</span><span class="p">,</span> <span class="n">UnconstrainedOptimizer</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.optimization.utils.line_search</span><span class="w"> </span><span class="kn">import</span> <span class="n">backtracking_line_search</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;NonlinearConjugateGradient&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"NonlinearConjugateGradient"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="NonlinearConjugateGradient">
 <a class="viewcode-back" href="../../../../api/optimization.html#mathematicskit.optimization.NonlinearConjugateGradient">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">NonlinearConjugateGradient</span><span class="p">(</span><span class="n">UnconstrainedOptimizer</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Nonlinear conjugate gradient with a backtracking line search.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Nonlinear conjugate gradient with a backtracking line search.</span>
 
 <span class="sd">    Generates search directions :math:`d_{k+1} = -\nabla f(x_{k+1}) +</span>
 <span class="sd">    \beta_k d_k`, restarting at :math:`d_0 = -\nabla f(x_0)`. Two</span>
@@ -456,7 +456,7 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    variant : {&quot;polak_ribiere&quot;, &quot;fletcher_reeves&quot;}</span>
+<span class="sd">    variant : {"polak_ribiere", "fletcher_reeves"}</span>
 <span class="sd">    c1, rho, alpha0 : float</span>
 <span class="sd">        Forwarded to :func:`~mathematicskit.optimization.utils.line_search.backtracking_line_search`.</span>
 <span class="sd">    tol : float</span>
@@ -471,11 +471,11 @@
 <span class="sd">    &gt;&gt;&gt; result = NonlinearConjugateGradient(tol=1e-10).minimize(f, grad, np.array([3.0, 4.0]))</span>
 <span class="sd">    &gt;&gt;&gt; np.allclose(result.x, [0.0, 0.0], atol=1e-6)</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">variant</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;polak_ribiere&quot;</span><span class="p">,</span>
+        <span class="n">variant</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"polak_ribiere"</span><span class="p">,</span>
         <span class="n">c1</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-4</span><span class="p">,</span>
         <span class="n">rho</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
         <span class="n">alpha0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
@@ -483,8 +483,8 @@
         <span class="n">max_iter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">DEFAULT_MAX_ITER</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">tol</span><span class="o">=</span><span class="n">tol</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="n">max_iter</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">variant</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;polak_ribiere&quot;</span><span class="p">,</span> <span class="s2">&quot;fletcher_reeves&quot;</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;variant must be &#39;polak_ribiere&#39; or &#39;fletcher_reeves&#39;, got </span><span class="si">{</span><span class="n">variant</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">variant</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"polak_ribiere"</span><span class="p">,</span> <span class="s2">"fletcher_reeves"</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"variant must be 'polak_ribiere' or 'fletcher_reeves', got </span><span class="si">{</span><span class="n">variant</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">variant</span> <span class="o">=</span> <span class="n">variant</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rho</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha0</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">c1</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">rho</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">alpha0</span><span class="p">)</span>
 
@@ -510,7 +510,7 @@
             <span class="n">gg_old</span> <span class="o">=</span> <span class="n">g</span> <span class="o">@</span> <span class="n">g</span>
             <span class="k">if</span> <span class="n">gg_old</span> <span class="o">&lt;</span> <span class="mf">1e-300</span><span class="p">:</span>
                 <span class="n">beta</span> <span class="o">=</span> <span class="mf">0.0</span>
-            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">variant</span> <span class="o">==</span> <span class="s2">&quot;fletcher_reeves&quot;</span><span class="p">:</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">variant</span> <span class="o">==</span> <span class="s2">"fletcher_reeves"</span><span class="p">:</span>
                 <span class="n">beta</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">g_new</span> <span class="o">@</span> <span class="n">g_new</span><span class="p">)</span> <span class="o">/</span> <span class="n">gg_old</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">beta</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">g_new</span> <span class="o">@</span> <span class="p">(</span><span class="n">g_new</span> <span class="o">-</span> <span class="n">g</span><span class="p">))</span> <span class="o">/</span> <span class="n">gg_old</span><span class="p">)</span>
@@ -518,7 +518,7 @@
             <span class="n">d</span> <span class="o">=</span> <span class="o">-</span><span class="n">g_new</span> <span class="o">+</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">d</span>
             <span class="n">x</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">x_new</span><span class="p">,</span> <span class="n">g_new</span>
 
-        <span class="k">return</span> <span class="n">OptimizeResult</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">fun</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">path</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">path</span><span class="p">),</span> <span class="n">iterations</span><span class="o">=</span><span class="n">it</span><span class="p">,</span> <span class="n">converged</span><span class="o">=</span><span class="n">converged</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;nonlinear_cg_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">variant</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">OptimizeResult</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">fun</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">path</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">path</span><span class="p">),</span> <span class="n">iterations</span><span class="o">=</span><span class="n">it</span><span class="p">,</span> <span class="n">converged</span><span class="o">=</span><span class="n">converged</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="sa">f</span><span class="s2">"nonlinear_cg_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">variant</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span></div>
 </div>
 
 </pre></div>

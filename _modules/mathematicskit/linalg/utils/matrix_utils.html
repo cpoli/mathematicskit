@@ -410,26 +410,26 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.linalg.utils.matrix_utils</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Small matrix-generation and norm helpers used across mathematicskit.linalg&#39;s</span>
+<span></span><span class="sd">"""Small matrix-generation and norm helpers used across mathematicskit.linalg's</span>
 <span class="sd">systems/ modules and tests -- supporting numerics, not models themselves.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;random_spd_matrix&quot;</span><span class="p">,</span> <span class="s2">&quot;frobenius_norm&quot;</span><span class="p">,</span> <span class="s2">&quot;is_symmetric&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"random_spd_matrix"</span><span class="p">,</span> <span class="s2">"frobenius_norm"</span><span class="p">,</span> <span class="s2">"is_symmetric"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="random_spd_matrix">
 <a class="viewcode-back" href="../../../../api/linalg.html#mathematicskit.linalg.random_spd_matrix">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">random_spd_matrix</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">condition_scale</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Generate a random symmetric positive-definite matrix.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Generate a random symmetric positive-definite matrix.</span>
 
 <span class="sd">    Constructs :math:`A = M^T M + \epsilon I` for a random :math:`M`,</span>
 <span class="sd">    which is SPD for any nonsingular :math:`M` (:math:`x^T A x = \|Mx\|^2</span>
 <span class="sd">    + \epsilon\|x\|^2 &gt; 0` for :math:`x \neq 0`); `condition_scale` scales</span>
-<span class="sd">    :math:`M`&#39;s entries to make the resulting matrix better- or</span>
+<span class="sd">    :math:`M`'s entries to make the resulting matrix better- or</span>
 <span class="sd">    worse-conditioned for stability demonstrations.</span>
 
 <span class="sd">    Parameters</span>
@@ -439,7 +439,7 @@
 <span class="sd">    seed : int</span>
 <span class="sd">        Random seed, for reproducibility.</span>
 <span class="sd">    condition_scale : float</span>
-<span class="sd">        Multiplies the generating matrix&#39;s entries.</span>
+<span class="sd">        Multiplies the generating matrix's entries.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -453,7 +453,7 @@
 <span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; bool(np.all(np.linalg.eigvalsh(A) &gt; 0))</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
     <span class="n">m</span> <span class="o">=</span> <span class="n">condition_scale</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">m</span> <span class="o">+</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">)</span></div>
@@ -463,7 +463,7 @@
 <div class="viewcode-block" id="frobenius_norm">
 <a class="viewcode-back" href="../../../../api/linalg.html#mathematicskit.linalg.frobenius_norm">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">frobenius_norm</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Frobenius norm :math:`\|A\|_F = \sqrt{\sum_{ij} A_{ij}^2}`, via :func:`numpy.linalg.norm`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Frobenius norm :math:`\|A\|_F = \sqrt{\sum_{ij} A_{ij}^2}`, via :func:`numpy.linalg.norm`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -478,16 +478,16 @@
 <span class="sd">    &gt;&gt;&gt; import numpy as np</span>
 <span class="sd">    &gt;&gt;&gt; round(frobenius_norm(np.array([[3.0, 0.0], [0.0, 4.0]])), 6)</span>
 <span class="sd">    5.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="nb">ord</span><span class="o">=</span><span class="s2">&quot;fro&quot;</span><span class="p">))</span></div>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="nb">ord</span><span class="o">=</span><span class="s2">"fro"</span><span class="p">))</span></div>
 
 
 
 <div class="viewcode-block" id="is_symmetric">
 <a class="viewcode-back" href="../../../../api/linalg.html#mathematicskit.linalg.is_symmetric">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">is_symmetric</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">atol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-10</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check whether a matrix is (numerically) symmetric.</span>
+<span class="w">    </span><span class="sd">"""Check whether a matrix is (numerically) symmetric.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -503,7 +503,7 @@
 <span class="sd">    &gt;&gt;&gt; import numpy as np</span>
 <span class="sd">    &gt;&gt;&gt; is_symmetric(np.array([[1.0, 2.0], [2.0, 1.0]]))</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">))</span></div>
 

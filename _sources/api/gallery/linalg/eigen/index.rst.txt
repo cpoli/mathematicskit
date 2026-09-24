@@ -5,9 +5,12 @@
 Eigenvalue algorithms
 ---------------------
 
-Eigenvalue computation via :func:`numpy.linalg.eigh`/:func:`numpy.linalg.eig`,
-alongside hand-rolled power iteration and inverse iteration -- two routes
-to a single eigenpair when the full spectrum isn't needed.
+Cauchy's spectral theorem for symmetric matrices, and hand-rolled power
+iteration and inverse iteration -- two routes to a single eigenpair when
+the full spectrum isn't needed.
+
+Also: Gershgorin discs, Lanczos iteration for a few eigenpairs of a large
+sparse matrix, and the QR algorithm converging to the Schur form.
 
 
 .. raw:: html
@@ -23,18 +26,86 @@ to a single eigenpair when the full spectrum isn't needed.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="numpy.linalg.eigh finds the full spectrum directly; power iteration finds only the dominant eigenvalue; inverse iteration finds whichever eigenvalue is nearest a chosen shift. All three are compared here on the same matrix.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Cauchy&#x27;s 1829 memoir showed that a real symmetric matrix has only real eigenvalues and an orthonormal basis of eigenvectors, so A = V diag(lambda) V^T. Geometrically, the eigenvectors are the principal axes of the quadric x^T A x = 1. A non-symmetric matrix enjoys neither property.">
 
 .. only:: html
 
-  .. image:: /api/gallery/linalg/eigen/images/thumb/sphx_glr_plot_01_eigenvalue_methods_compared_thumb.png
+  .. image:: /api/gallery/linalg/eigen/images/thumb/sphx_glr_plot_01_cauchy_spectral_theorem_thumb.png
     :alt:
 
-  :doc:`/api/gallery/linalg/eigen/plot_01_eigenvalue_methods_compared`
+  :doc:`/api/gallery/linalg/eigen/plot_01_cauchy_spectral_theorem`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Three routes to a symmetric matrix's eigenvalues</div>
+      <div class="sphx-glr-thumbnail-title">Cauchy's spectral theorem: principal axes of a quadratic form</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Power iteration v_{k+1} = A v_k / ||A v_k|| converges to the dominant eigenvector at the rate |lambda_2 / lambda_1| per step (squared for the Rayleigh quotient of a symmetric matrix). Inverse iteration applies the same step to (A - mu I)^{-1} and homes in on the eigenvalue nearest the shift mu, at the much faster rate |lambda - mu| / |lambda&#x27; - mu|.">
+
+.. only:: html
+
+  .. image:: /api/gallery/linalg/eigen/images/thumb/sphx_glr_plot_02_power_and_inverse_iteration_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/linalg/eigen/plot_02_power_and_inverse_iteration`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Von Mises power iteration and Wielandt inverse iteration</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Without computing anything but row sums, Gershgorin&#x27;s theorem traps every eigenvalue in a union of discs centered on the diagonal entries. Shrinking the off-diagonal part shrinks the discs onto the eigenvalues.">
+
+.. only:: html
+
+  .. image:: /api/gallery/linalg/eigen/images/thumb/sphx_glr_plot_03_gershgorin_discs_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/linalg/eigen/plot_03_gershgorin_discs`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Gershgorin discs</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The 1-D discrete Laplacian tridiag(-1, 2, -1) of size n has eigenvalues 2 - 2 cos(j pi / (n + 1)). Lanczos iteration (through ARPACK) finds a handful of them using only matrix-vector products. In shift-invert mode it handles a sparse n = 100 000 instance, where a dense eigensolver would need 80 GB just to store the matrix.">
+
+.. only:: html
+
+  .. image:: /api/gallery/linalg/eigen/images/thumb/sphx_glr_plot_04_lanczos_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/linalg/eigen/plot_04_lanczos`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Lanczos: a few eigenvalues of a very large matrix</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Factor A_k = Q_k R_k and multiply back in reverse order, A_{k+1} = R_k Q_k = Q_k^T A_k Q_k. Every iterate is similar to A, and the subdiagonal entries decay like |lambda_{i+1} / lambda_i|^k, so the iterates converge to an upper triangular Schur form with the eigenvalues on the diagonal. Production codes add Hessenberg reduction and Francis&#x27;s shifts; the result is what scipy.linalg.schur returns.">
+
+.. only:: html
+
+  .. image:: /api/gallery/linalg/eigen/images/thumb/sphx_glr_plot_05_francis_qr_algorithm_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/linalg/eigen/plot_05_francis_qr_algorithm`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The QR algorithm and the Schur form</div>
     </div>
 
 
@@ -48,5 +119,9 @@ to a single eigenpair when the full spectrum isn't needed.
 .. toctree::
    :hidden:
 
-   /api/gallery/linalg/eigen/plot_01_eigenvalue_methods_compared
+   /api/gallery/linalg/eigen/plot_01_cauchy_spectral_theorem
+   /api/gallery/linalg/eigen/plot_02_power_and_inverse_iteration
+   /api/gallery/linalg/eigen/plot_03_gershgorin_discs
+   /api/gallery/linalg/eigen/plot_04_lanczos
+   /api/gallery/linalg/eigen/plot_05_francis_qr_algorithm
 

@@ -410,7 +410,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.linalg.systems.qr</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;QR decomposition via Householder reflections (library) and via</span>
+<span></span><span class="sd">"""QR decomposition via Householder reflections (library) and via</span>
 <span class="sd">Gram-Schmidt (hand-rolled, kept for the stability comparison).</span>
 
 <span class="sd">Both factor ``A = Q R`` with ``Q`` orthonormal-columns and ``R`` upper</span>
@@ -418,13 +418,13 @@
 <span class="sd">reflections produce a ``Q`` that is orthogonal to machine precision</span>
 <span class="sd">regardless of conditioning, while *classical* Gram-Schmidt can lose</span>
 <span class="sd">orthogonality badly for ill-conditioned ``A`` -- the textbook motivating</span>
-<span class="sd">example for why Householder is the default in practice (LAPACK&#39;s</span>
+<span class="sd">example for why Householder is the default in practice (LAPACK's</span>
 <span class="sd">``?geqrf``, wrapped here by :func:`scipy.linalg.qr`). The comparison</span>
 <span class="sd">itself, not the Householder QR result, is why a from-scratch Gram-Schmidt</span>
 <span class="sd">implementation is kept alongside the library call. See Trefethen &amp; Bau,</span>
 <span class="sd">*Numerical Linear Algebra*, 1997, Lectures 7-10, and Golub &amp; Van Loan,</span>
 <span class="sd">*Matrix Computations*, 4th ed., Ch. 5.1-5.2.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -433,20 +433,20 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.linalg.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">QRResult</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;householder_qr&quot;</span><span class="p">,</span> <span class="s2">&quot;gram_schmidt_qr&quot;</span><span class="p">,</span> <span class="s2">&quot;orthogonality_error&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"householder_qr"</span><span class="p">,</span> <span class="s2">"gram_schmidt_qr"</span><span class="p">,</span> <span class="s2">"orthogonality_error"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="householder_qr">
 <a class="viewcode-back" href="../../../../api/linalg.html#mathematicskit.linalg.householder_qr">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">householder_qr</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QRResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;QR decomposition by Householder reflections, via :func:`scipy.linalg.qr`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""QR decomposition by Householder reflections, via :func:`scipy.linalg.qr`.</span>
 
 <span class="sd">    Each column below the diagonal is zeroed by an orthogonal reflector</span>
 <span class="sd">    :math:`H_k = I - 2 v_k v_k^T / (v_k^T v_k)` chosen to map that</span>
-<span class="sd">    column&#39;s trailing part onto a multiple of :math:`e_1`; the product of</span>
-<span class="sd">    all the :math:`H_k` is ``Q``. ``mode=&quot;economic&quot;`` requests the thin</span>
+<span class="sd">    column's trailing part onto a multiple of :math:`e_1`; the product of</span>
+<span class="sd">    all the :math:`H_k` is ``Q``. ``mode="economic"`` requests the thin</span>
 <span class="sd">    factorization (``Q`` shape (m, n) rather than (m, m)) to match</span>
-<span class="sd">    :func:`gram_schmidt_qr`&#39;s shape. See Trefethen &amp; Bau, *Numerical</span>
+<span class="sd">    :func:`gram_schmidt_qr`'s shape. See Trefethen &amp; Bau, *Numerical</span>
 <span class="sd">    Linear Algebra*, 1997, Lecture 10.</span>
 
 <span class="sd">    Parameters</span>
@@ -457,7 +457,7 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    QRResult</span>
-<span class="sd">        With ``method=&quot;householder&quot;``, ``Q`` shape (m, n), ``R`` shape (n, n).</span>
+<span class="sd">        With ``method="householder"``, ``Q`` shape (m, n), ``R`` shape (n, n).</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -468,25 +468,25 @@
 <span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; np.allclose(result.Q.T @ result.Q, np.eye(2), atol=1e-10)</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">shape</span>
     <span class="k">if</span> <span class="n">m</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;a must have at least as many rows as columns&quot;</span><span class="p">)</span>
-    <span class="n">q</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">sla</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;economic&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">QRResult</span><span class="p">(</span><span class="n">Q</span><span class="o">=</span><span class="n">q</span><span class="p">,</span> <span class="n">R</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;householder&quot;</span><span class="p">)</span></div>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"a must have at least as many rows as columns"</span><span class="p">)</span>
+    <span class="n">q</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">sla</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"economic"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">QRResult</span><span class="p">(</span><span class="n">Q</span><span class="o">=</span><span class="n">q</span><span class="p">,</span> <span class="n">R</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"householder"</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="gram_schmidt_qr">
 <a class="viewcode-back" href="../../../../api/linalg.html#mathematicskit.linalg.gram_schmidt_qr">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">gram_schmidt_qr</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">modified</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QRResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;QR decomposition by (modified or classical) Gram-Schmidt.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""QR decomposition by (modified or classical) Gram-Schmidt.</span>
 
-<span class="sd">    Orthogonalizes ``A``&#39;s columns one at a time against the</span>
+<span class="sd">    Orthogonalizes ``A``'s columns one at a time against the</span>
 <span class="sd">    previously-computed ``Q`` columns. *Modified* Gram-Schmidt</span>
 <span class="sd">    (``modified=True``, the default) subtracts each projection</span>
-<span class="sd">    immediately as it&#39;s computed rather than all at once from the</span>
+<span class="sd">    immediately as it's computed rather than all at once from the</span>
 <span class="sd">    original vector (*classical* Gram-Schmidt, ``modified=False``) --</span>
 <span class="sd">    algebraically equivalent in exact arithmetic, but modified</span>
 <span class="sd">    Gram-Schmidt loses far less orthogonality in floating point,</span>
@@ -504,7 +504,7 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    QRResult</span>
-<span class="sd">        With ``method=&quot;gram_schmidt&quot;``.</span>
+<span class="sd">        With ``method="gram_schmidt"``.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -513,11 +513,11 @@
 <span class="sd">    &gt;&gt;&gt; result = gram_schmidt_qr(A)</span>
 <span class="sd">    &gt;&gt;&gt; np.allclose(result.Q @ result.R, A)</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">shape</span>
     <span class="k">if</span> <span class="n">m</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;a must have at least as many rows as columns&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"a must have at least as many rows as columns"</span><span class="p">)</span>
     <span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
 
@@ -526,7 +526,7 @@
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
             <span class="n">r</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">v</span><span class="p">[:,</span> <span class="n">k</span><span class="p">])</span>
             <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">1e-300</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">(</span><span class="s2">&quot;columns of a are linearly dependent&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">(</span><span class="s2">"columns of a are linearly dependent"</span><span class="p">)</span>
             <span class="n">q</span><span class="p">[:,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">[:,</span> <span class="n">k</span><span class="p">]</span> <span class="o">/</span> <span class="n">r</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
                 <span class="n">r</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">q</span><span class="p">[:,</span> <span class="n">k</span><span class="p">]</span> <span class="o">@</span> <span class="n">v</span><span class="p">[:,</span> <span class="n">j</span><span class="p">]</span>
@@ -539,22 +539,28 @@
                 <span class="n">v</span> <span class="o">-=</span> <span class="n">r</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">q</span><span class="p">[:,</span> <span class="n">j</span><span class="p">]</span>
             <span class="n">r</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">1e-300</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">(</span><span class="s2">&quot;columns of a are linearly dependent&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">(</span><span class="s2">"columns of a are linearly dependent"</span><span class="p">)</span>
             <span class="n">q</span><span class="p">[:,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span> <span class="o">/</span> <span class="n">r</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span>
 
-    <span class="k">return</span> <span class="n">QRResult</span><span class="p">(</span><span class="n">Q</span><span class="o">=</span><span class="n">q</span><span class="p">,</span> <span class="n">R</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;gram_schmidt&quot;</span> <span class="k">if</span> <span class="n">modified</span> <span class="k">else</span> <span class="s2">&quot;gram_schmidt_classical&quot;</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">QRResult</span><span class="p">(</span><span class="n">Q</span><span class="o">=</span><span class="n">q</span><span class="p">,</span> <span class="n">R</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"gram_schmidt"</span> <span class="k">if</span> <span class="n">modified</span> <span class="k">else</span> <span class="s2">"gram_schmidt_classical"</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="orthogonality_error">
 <a class="viewcode-back" href="../../../../api/linalg.html#mathematicskit.linalg.orthogonality_error">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">orthogonality_error</span><span class="p">(</span><span class="n">q</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Measure how far ``Q``&#39;s columns are from exactly orthonormal.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Measure how far ``Q``'s columns are from exactly orthonormal.</span>
 
-<span class="sd">    :math:`\|Q^T Q - I\|_\infty`, a direct numerical demonstration of</span>
-<span class="sd">    which QR method loses orthogonality for ill-conditioned inputs. See</span>
-<span class="sd">    Trefethen &amp; Bau, *Numerical Linear Algebra*, 1997, Lecture 9 (Figure</span>
-<span class="sd">    9.2&#39;s classical-vs-modified Gram-Schmidt comparison).</span>
+<span class="sd">    :math:`\max_{ij}\left|(Q^TQ - I)_{ij}\right|`: the largest entry of</span>
+<span class="sd">    ``Q``'s Gram matrix minus the identity. (This is the entrywise max</span>
+<span class="sd">    norm, not the induced :math:`\infty`-norm, which would be the largest</span>
+<span class="sd">    row *sum*.) Exactly zero for a perfectly orthonormal ``Q``, and a</span>
+<span class="sd">    direct numerical demonstration of which QR method loses orthogonality</span>
+<span class="sd">    on ill-conditioned input: on a degree-12 Vandermonde matrix, classical</span>
+<span class="sd">    Gram-Schmidt reaches order 1, modified Gram-Schmidt stays near 1e-10,</span>
+<span class="sd">    and Householder near machine epsilon. See Trefethen &amp; Bau, *Numerical</span>
+<span class="sd">    Linear Algebra*, 1997, Lecture 9 (Figure 9.2's classical-vs-modified</span>
+<span class="sd">    comparison).</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -569,7 +575,7 @@
 <span class="sd">    &gt;&gt;&gt; import numpy as np</span>
 <span class="sd">    &gt;&gt;&gt; orthogonality_error(np.eye(3)) == 0.0</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">q</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">))))</span></div>
 

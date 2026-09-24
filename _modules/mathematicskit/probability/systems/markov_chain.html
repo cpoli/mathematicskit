@@ -410,18 +410,18 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.probability.systems.markov_chain</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Discrete-time Markov chains: transition matrices, stationary</span>
+<span></span><span class="sa">r</span><span class="sd">"""Discrete-time Markov chains: transition matrices, stationary</span>
 <span class="sd">distributions, and absorption probabilities.</span>
 
 <span class="sd">The stationary distribution is found via :func:`numpy.linalg.eig` (the</span>
 <span class="sd">left eigenvector for eigenvalue 1) with a hand-rolled power-iteration</span>
 <span class="sd">alternative kept alongside it (the iteration itself -- watching</span>
 <span class="sd">:math:`\pi_k = \pi_0 P^k` converge -- is the standard pedagogical way to</span>
-<span class="sd">*see* a Markov chain &quot;forget&quot; its initial distribution, with no direct</span>
+<span class="sd">*see* a Markov chain "forget" its initial distribution, with no direct</span>
 <span class="sd">library equivalent for that iterative process); absorption probabilities</span>
 <span class="sd">and expected time to absorption are solved via :func:`numpy.linalg.solve`.</span>
 <span class="sd">See Grinstead &amp; Snell, *Introduction to Probability*, 2nd ed., Ch. 11.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -429,13 +429,13 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;MarkovChain&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"MarkovChain"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="MarkovChain">
 <a class="viewcode-back" href="../../../../api/probability.html#mathematicskit.probability.MarkovChain">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">MarkovChain</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A discrete-time, finite-state Markov chain given its transition matrix.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""A discrete-time, finite-state Markov chain given its transition matrix.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -452,24 +452,24 @@
 <span class="sd">    &gt;&gt;&gt; pi = chain.stationary_distribution()</span>
 <span class="sd">    &gt;&gt;&gt; np.allclose(pi, [5.0 / 6.0, 1.0 / 6.0], atol=1e-8)</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transition_matrix</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
         <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">transition_matrix</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="n">n</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;transition_matrix must be square&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"transition_matrix must be square"</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;every row of transition_matrix must sum to 1&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"every row of transition_matrix must sum to 1"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">p</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">1e-12</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;transition_matrix must be non-negative&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"transition_matrix must be non-negative"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">p</span> <span class="o">=</span> <span class="n">p</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span>
 
 <div class="viewcode-block" id="MarkovChain.stationary_distribution">
 <a class="viewcode-back" href="../../../../api/probability.html#mathematicskit.probability.MarkovChain.stationary_distribution">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">stationary_distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Stationary distribution :math:`\pi` with :math:`\pi P = \pi`, :math:`\sum_i \pi_i = 1`.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Stationary distribution :math:`\pi` with :math:`\pi P = \pi`, :math:`\sum_i \pi_i = 1`.</span>
 
 <span class="sd">        :math:`\pi` is the left eigenvector of ``P`` for eigenvalue 1,</span>
 <span class="sd">        equivalently the right eigenvector of :math:`P^T` -- computed via</span>
@@ -481,25 +481,33 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        ndarray, shape (n,)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">eigenvalues</span><span class="p">,</span> <span class="n">eigenvectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
         <span class="n">idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">eigenvalues</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)))</span>
         <span class="n">vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">eigenvectors</span><span class="p">[:,</span> <span class="n">idx</span><span class="p">])</span>
-        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">vec</span> <span class="o">=</span> <span class="o">-</span><span class="n">vec</span>
-        <span class="k">return</span> <span class="n">vec</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span></div>
+        <span class="n">total</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">vec</span><span class="p">))</span>
+        <span class="c1"># Dividing by the sum both normalizes and fixes the sign, since a</span>
+        <span class="c1"># stationary eigenvector's entries all share one sign. A sum of</span>
+        <span class="c1"># (near) zero means the chosen eigenvector is not a distribution at</span>
+        <span class="c1"># all -- the chain is reducible or periodic, so no unique stationary</span>
+        <span class="c1"># distribution exists -- and normalizing would silently return noise.</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">total</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-12</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">(</span>
+                <span class="s2">"no unique stationary distribution: the eigenvector for eigenvalue 1 sums to zero, which means the chain is reducible or periodic"</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">vec</span> <span class="o">/</span> <span class="n">total</span></div>
 
 
 <div class="viewcode-block" id="MarkovChain.stationary_distribution_power_iteration">
 <a class="viewcode-back" href="../../../../api/probability.html#mathematicskit.probability.MarkovChain.stationary_distribution_power_iteration">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">stationary_distribution_power_iteration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_iter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">,</span> <span class="n">tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-14</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Stationary distribution via power iteration: :math:`\pi_{k+1} = \pi_k P`.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Stationary distribution via power iteration: :math:`\pi_{k+1} = \pi_k P`.</span>
 
 <span class="sd">        Starting from the uniform distribution, repeatedly applies the</span>
-<span class="sd">        transition matrix; for an irreducible, aperiodic (&quot;ergodic&quot;)</span>
+<span class="sd">        transition matrix; for an irreducible, aperiodic ("ergodic")</span>
 <span class="sd">        chain this converges to the same stationary :math:`\pi` found by</span>
 <span class="sd">        :meth:`stationary_distribution`, illustrating the chain</span>
-<span class="sd">        &quot;forgetting&quot; its start. See Grinstead &amp; Snell, *Introduction to</span>
+<span class="sd">        "forgetting" its start. See Grinstead &amp; Snell, *Introduction to</span>
 <span class="sd">        Probability*, 2nd ed., Theorem 11.7.</span>
 
 <span class="sd">        Parameters</span>
@@ -520,7 +528,7 @@
 <span class="sd">        &gt;&gt;&gt; pi = chain.stationary_distribution_power_iteration()</span>
 <span class="sd">        &gt;&gt;&gt; np.allclose(pi, [5.0 / 6.0, 1.0 / 6.0], atol=1e-6)</span>
 <span class="sd">        True</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">pi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span>
         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_iter</span><span class="p">):</span>
             <span class="n">pi_new</span> <span class="o">=</span> <span class="n">pi</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">p</span>
@@ -534,7 +542,7 @@
 <div class="viewcode-block" id="MarkovChain.absorption_probabilities">
 <a class="viewcode-back" href="../../../../api/probability.html#mathematicskit.probability.MarkovChain.absorption_probabilities">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">absorption_probabilities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transient</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">absorbing</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Probability of ending in each absorbing state, from each transient state.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Probability of ending in each absorbing state, from each transient state.</span>
 
 <span class="sd">        Partitioning ``P`` (after reordering) into transient-to-transient</span>
 <span class="sd">        block :math:`Q` and transient-to-absorbing block :math:`R`, the</span>
@@ -560,7 +568,7 @@
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
 <span class="sd">        &gt;&gt;&gt; import numpy as np</span>
-<span class="sd">        &gt;&gt;&gt; # Gambler&#39;s ruin, capital 1..3, absorbing at 0 and 4, fair coin (p=0.5).</span>
+<span class="sd">        &gt;&gt;&gt; # Gambler's ruin, capital 1..3, absorbing at 0 and 4, fair coin (p=0.5).</span>
 <span class="sd">        &gt;&gt;&gt; P = np.array([</span>
 <span class="sd">        ...     [1.0, 0.0, 0.0, 0.0, 0.0],</span>
 <span class="sd">        ...     [0.5, 0.0, 0.5, 0.0, 0.0],</span>
@@ -572,7 +580,7 @@
 <span class="sd">        &gt;&gt;&gt; B = chain.absorption_probabilities(transient=[1, 2, 3], absorbing=[0, 4])</span>
 <span class="sd">        &gt;&gt;&gt; np.allclose(B[:, 1], [0.25, 0.5, 0.75], atol=1e-8)  # P(reach 4 | start at i) = i/4</span>
 <span class="sd">        True</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">transient</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">transient</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
         <span class="n">absorbing</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">absorbing</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
         <span class="n">q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ix_</span><span class="p">(</span><span class="n">transient</span><span class="p">,</span> <span class="n">transient</span><span class="p">)]</span>
@@ -583,7 +591,7 @@
 <div class="viewcode-block" id="MarkovChain.expected_steps_to_absorption">
 <a class="viewcode-back" href="../../../../api/probability.html#mathematicskit.probability.MarkovChain.expected_steps_to_absorption">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">expected_steps_to_absorption</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transient</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Expected number of steps before absorption, from each transient state.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Expected number of steps before absorption, from each transient state.</span>
 
 <span class="sd">        :math:`t = (I-Q)^{-1}\mathbf{1}`, via :func:`numpy.linalg.solve`.</span>
 <span class="sd">        See Grinstead &amp; Snell, *Introduction to Probability*, 2nd ed.,</span>
@@ -612,7 +620,7 @@
 <span class="sd">        &gt;&gt;&gt; t = chain.expected_steps_to_absorption(transient=[1, 2, 3])</span>
 <span class="sd">        &gt;&gt;&gt; np.allclose(t, [3.0, 4.0, 3.0], atol=1e-8)  # i * (4 - i) for i=1,2,3</span>
 <span class="sd">        True</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">transient</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">transient</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
         <span class="n">q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ix_</span><span class="p">(</span><span class="n">transient</span><span class="p">,</span> <span class="n">transient</span><span class="p">)]</span>
         <span class="n">ones</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">transient</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>

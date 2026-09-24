@@ -455,178 +455,571 @@
 </div>
 <blockquote class="epigraph">
 <div><p>“I have had my results for a long time, but I do not yet know how I
-am to arrive at them.” – Carl Friedrich Gauss, on withholding
-publication of results he could not yet prove rigorously, as recorded
-by Wolfgang Sartorius von Waltershausen</p>
+am to arrive at them.”
+– attributed to Carl Friedrich Gauss</p>
 </div></blockquote>
 <p>The “special functions” – gamma, Bessel, the orthogonal polynomial
-families – are special precisely because they recur, unbidden, as the
-exact solutions to an enormous range of unrelated differential
-equations, from vibrating drumheads to quantum wavefunctions. This
-chronology traces the ideas behind <a class="reference internal" href="../api/special_functions.html#module-mathematicskit.special_functions" title="mathematicskit.special_functions"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.special_functions</span></code></a>, from
-Euler’s extension of the factorial to the algorithm, rediscovered from a
-much older idea, that made digital signal processing computationally
-feasible at all.</p>
+families – are special because they keep recurring, unbidden, as exact
+solutions of a huge range of unrelated differential equations, from
+vibrating drumheads to quantum wavefunctions. This chronology traces the
+ideas behind <a class="reference internal" href="../api/special_functions.html#module-mathematicskit.special_functions" title="mathematicskit.special_functions"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.special_functions</span></code></a>, from Leonhard
+Euler’s extension of the factorial to the fast Fourier transform, an
+algorithm rediscovered from a much older idea that made digital signal
+processing computationally feasible.</p>
 <nav class="contents local" id="timeline">
 <p class="topic-title">Timeline</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#euler-s-gamma-function" id="id1">1729 – Euler’s Gamma Function</a></p></li>
-<li><p><a class="reference internal" href="#bessel-functions" id="id2">1817 – 1824 – Bessel Functions</a></p></li>
-<li><p><a class="reference internal" href="#legendre-and-chebyshev-polynomials" id="id3">1782 – 1859 – Legendre and Chebyshev Polynomials</a></p></li>
-<li><p><a class="reference internal" href="#s-1879-hermite-and-laguerre-polynomials" id="id4">1810s – 1879 – Hermite and Laguerre Polynomials</a></p></li>
-<li><p><a class="reference internal" href="#fourier-s-theorem-and-the-fast-fourier-transform" id="id5">1822 – 1965 – Fourier’s Theorem and the Fast Fourier Transform</a></p></li>
-<li><p><a class="reference internal" href="#see-also" id="id6">See Also</a></p></li>
+<li><p><a class="reference internal" href="#stirling-s-formula" id="id2">1730 – Stirling’s Formula</a></p></li>
+<li><p><a class="reference internal" href="#the-lambert-w-function" id="id3">1758-1996 – The Lambert W Function</a></p></li>
+<li><p><a class="reference internal" href="#legendre-and-chebyshev-polynomials" id="id4">1782-1854 – Legendre and Chebyshev Polynomials</a></p></li>
+<li><p><a class="reference internal" href="#gauss-s-arithmetic-geometric-mean" id="id5">1799 – Gauss’s Arithmetic-Geometric Mean</a></p></li>
+<li><p><a class="reference internal" href="#hermite-and-laguerre-polynomials" id="id6">1810-1879 – Hermite and Laguerre Polynomials</a></p></li>
+<li><p><a class="reference internal" href="#gauss-s-hypergeometric-series" id="id7">1812 – Gauss’s Hypergeometric Series</a></p></li>
+<li><p><a class="reference internal" href="#fresnel-integrals-and-the-diffraction-of-light" id="id8">1818 – Fresnel Integrals and the Diffraction of Light</a></p></li>
+<li><p><a class="reference internal" href="#fourier-s-theorem-and-the-fast-fourier-transform" id="id9">1822-1965 – Fourier’s Theorem and the Fast Fourier Transform</a></p></li>
+<li><p><a class="reference internal" href="#bessel-functions" id="id10">1824 – Bessel Functions</a></p></li>
+<li><p><a class="reference internal" href="#jacobi-s-elliptic-functions" id="id11">1829 – Jacobi’s Elliptic Functions</a></p></li>
+<li><p><a class="reference internal" href="#kummer-s-confluent-hypergeometric-function" id="id12">1837 – Kummer’s Confluent Hypergeometric Function</a></p></li>
+<li><p><a class="reference internal" href="#the-airy-function" id="id13">1838 – The Airy Function</a></p></li>
+<li><p><a class="reference internal" href="#riemann-s-zeta-function" id="id14">1859 – Riemann’s Zeta Function</a></p></li>
+<li><p><a class="reference internal" href="#mathieu-functions" id="id15">1868 – Mathieu Functions</a></p></li>
+<li><p><a class="reference internal" href="#the-error-function" id="id16">1871 – The Error Function</a></p></li>
+<li><p><a class="reference internal" href="#see-also" id="id17">See Also</a></p></li>
 </ul>
 </nav>
 <section id="euler-s-gamma-function">
 <h2><a class="toc-backref" href="#id1" role="doc-backlink">1729 – Euler’s Gamma Function</a><a class="headerlink" href="#euler-s-gamma-function" title="Link to this heading">#</a></h2>
-<p>Leonhard Euler, answering a question posed by Christian Goldbach about
-interpolating the factorial to non-integer values, gave in an October
-1729 letter an infinite-product formula for exactly such an
-interpolation – the function later named <span class="math notranslate nohighlight">\(\Gamma\)</span> by Adrien-Marie
-Legendre, satisfying <span class="math notranslate nohighlight">\(\Gamma(n) = (n-1)!\)</span> at positive integers and
-extending smoothly (and, at negative integers, with poles) everywhere
-else. Legendre’s 1811 companion function <span class="math notranslate nohighlight">\(B(a,b)\)</span>, expressible
-directly in terms of <span class="math notranslate nohighlight">\(\Gamma\)</span>, arose from his own studies of
-elliptic integrals.</p>
+<p>Christian Goldbach asked how the factorial could be extended to
+non-integer values. Leonhard Euler answered in an October 1729 letter
+with an infinite-product formula for such an interpolation, and gave the
+integral form early the next year. Adrien-Marie Legendre later named the
+function <span class="math notranslate nohighlight">\(\Gamma\)</span>. It satisfies <span class="math notranslate nohighlight">\(\Gamma(n) = (n-1)!\)</span> at
+positive integers and extends smoothly everywhere else, with poles at
+zero and the negative integers. The closely related beta integral
+<span class="math notranslate nohighlight">\(B(a,b)\)</span>, which Euler also studied and Jacques Binet named in
+1839, can be written directly in terms of <span class="math notranslate nohighlight">\(\Gamma\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[\Gamma(x) = \int_0^\infty t^{x-1}e^{-t}\,dt, \qquad
 B(a,b) = \frac{\Gamma(a)\Gamma(b)}{\Gamma(a+b)}\]</div>
 <p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.special_functions.systems.gamma_beta.gamma_function()</span></code>
 and <code class="xref py py-func docutils literal notranslate"><span class="pre">beta_function()</span></code>
-wrap <code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.gamma()</span></code>/<code class="xref py py-func docutils literal notranslate"><span class="pre">beta()</span></code> directly;
+wrap <code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.gamma()</span></code>/<code class="xref py py-func docutils literal notranslate"><span class="pre">beta()</span></code> directly.
 <code class="xref py py-func docutils literal notranslate"><span class="pre">log_gamma_function()</span></code>
-wraps the numerically stable <code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.gammaln()</span></code> for
-arguments large enough that <span class="math notranslate nohighlight">\(\Gamma\)</span> itself would overflow.</p>
+wraps the numerically stable <code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.gammaln()</span></code> for arguments
+large enough that <span class="math notranslate nohighlight">\(\Gamma\)</span> itself would overflow.</p>
 <p><em>References:</em> L. Euler, letter to C. Goldbach, 13 October 1729, in P.-H.
-Fuss, ed., <em>Correspondance Mathematique et Physique de Quelques Celebres
-Geometres du XVIIIeme Siecle</em>, vol. 1 (St. Petersburg, 1843), 56-60.</p>
+Fuss, ed., <em>Correspondance mathématique et physique de quelques célèbres
+géomètres du XVIIIème siècle</em>, vol. 1 (St. Petersburg, 1843), 56-60.</p>
 <div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Confirms Gamma(n) = (n-1)! at integers, Gamma(1/2) = sqrt(pi), and the beta function&#x27;s relationship to gamma."><img alt="" src="../_images/sphx_glr_plot_01_gamma_extends_factorial_thumb.png" />
 <p><a class="reference internal" href="../api/gallery/special_functions/gamma_beta/plot_01_gamma_extends_factorial.html"><span class="doc">The gamma function extends the factorial</span></a></p>
   <div class="sphx-glr-thumbnail-title">The gamma function extends the factorial</div>
 </div></div></section>
-<section id="bessel-functions">
-<h2><a class="toc-backref" href="#id2" role="doc-backlink">1817 – 1824 – Bessel Functions</a><a class="headerlink" href="#bessel-functions" title="Link to this heading">#</a></h2>
-<p>Daniel Bernoulli had already encountered, in his 1730s studies of a
-hanging chain’s oscillation, solutions of what is now recognized as a
-special case of Bessel’s equation; Friedrich Wilhelm Bessel’s 1824
-memoir on planetary perturbations gave the general family of solutions
-its first systematic treatment and tabulation, motivated by exactly the
-kind of periodic, cylindrically symmetric problem (here, Kepler’s
-equation) where these functions arise naturally. <span class="math notranslate nohighlight">\(J_\nu\)</span>, regular
-at the origin, and <span class="math notranslate nohighlight">\(Y_\nu\)</span>, singular there, are the two linearly
-independent solutions of the same second-order equation, and now appear
-throughout physics and engineering wherever a problem has cylindrical
-symmetry: vibrating drumheads, waveguides, heat conduction in a
-cylinder.</p>
+<section id="stirling-s-formula">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">1730 – Stirling’s Formula</a><a class="headerlink" href="#stirling-s-formula" title="Link to this heading">#</a></h2>
+<p>Abraham de Moivre, studying the binomial distribution, found in 1730
+that <span class="math notranslate nohighlight">\(n!\)</span> grows like <span class="math notranslate nohighlight">\(C\,n^{n+1/2}e^{-n}\)</span> for some
+constant <span class="math notranslate nohighlight">\(C\)</span>. In the same year James Stirling’s <em>Methodus
+Differentialis</em> identified the constant as <span class="math notranslate nohighlight">\(\sqrt{2\pi}\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[x^2 y'' + xy' + (x^2 - \nu^2)y = 0\]</div>
-<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.special_functions.systems.bessel.bessel_first_kind()</span></code>
-and <code class="xref py py-func docutils literal notranslate"><span class="pre">bessel_second_kind()</span></code>
-wrap <code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.jv()</span></code>/<code class="xref py py-func docutils literal notranslate"><span class="pre">yv()</span></code> directly, and
-are checked in this domain’s tests against the defining differential
-equation itself via finite differences.</p>
-<p><em>References:</em> F. W. Bessel, “Untersuchung des Theils der planetarischen
-Storungen, welcher aus der Bewegung der Sonne entsteht,” Abhandlungen
-der Koniglichen Akademie der Wissenschaften zu Berlin (1824), 1-52.</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Plots J_0, J_1 (regular at the origin) and Y_0 (singular at the origin) over a range of x, and finds J_0&#x27;s first zero."><img alt="" src="../_images/sphx_glr_plot_01_bessel_functions_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/special_functions/bessel/plot_01_bessel_functions.html"><span class="doc">Bessel functions of the first and second kind</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Bessel functions of the first and second kind</div>
+\[n! \sim \sqrt{2\pi n}\left(\frac{n}{e}\right)^n .\]</div>
+<p>The approximation is already good to 1% at <span class="math notranslate nohighlight">\(n = 10\)</span>, and its
+relative error shrinks like <span class="math notranslate nohighlight">\(1/(12n)\)</span>. Adding correction terms
+built from the Bernoulli numbers gives Stirling’s series for
+<span class="math notranslate nohighlight">\(\ln\Gamma(x)\)</span>. That series never converges. For each fixed
+<span class="math notranslate nohighlight">\(x\)</span> its terms first shrink and then grow without bound. It was one
+of the first <em>asymptotic</em> series: truncated at the right point, it is
+extremely accurate, and it is still how <span class="math notranslate nohighlight">\(\ln\Gamma\)</span> is computed
+for large arguments.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.special_functions.systems.gamma_beta.stirling_factorial()</span></code>
+evaluates the leading formula, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">stirling_log_gamma()</span></code> sums the series with a
+chosen number of Bernoulli terms from <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.bernoulli.html#scipy.special.bernoulli" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.bernoulli()</span></code></a>.
+The tests check the <span class="math notranslate nohighlight">\(1/(12n)\)</span> error and show that at small
+<span class="math notranslate nohighlight">\(x\)</span> the error eventually grows again as terms are added.</p>
+<p><em>References:</em> J. Stirling, <em>Methodus Differentialis: sive Tractatus de
+Summatione et Interpolatione Serierum Infinitarum</em> (London, 1730),
+Proposition 28; A. de Moivre, <em>Miscellanea Analytica de Seriebus et
+Quadraturis</em> (London, 1730); NIST <em>Digital Library of Mathematical
+Functions</em>, Sec. 5.11.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Shows that sqrt(2 pi n) (n/e)^n approximates n! with relative error about 1/(12n), and that Stirling&#x27;s full series for log Gamma(x) is asymptotic: at small x, adding terms first helps and then hurts."><img alt="" src="../_images/sphx_glr_plot_02_stirling_formula_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/special_functions/gamma_beta/plot_02_stirling_formula.html"><span class="doc">Stirling’s formula and its asymptotic series</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Stirling's formula and its asymptotic series</div>
+</div></div></section>
+<section id="the-lambert-w-function">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">1758-1996 – The Lambert W Function</a><a class="headerlink" href="#the-lambert-w-function" title="Link to this heading">#</a></h2>
+<p>In 1758 Johann Heinrich Lambert gave a series solution of the trinomial
+equation <span class="math notranslate nohighlight">\(x = q + x^m\)</span>, and in 1783 Leonhard Euler recast it in a
+more symmetric form. Hidden inside their work is the function
+<span class="math notranslate nohighlight">\(W(z)\)</span> that solves</p>
+<div class="math notranslate nohighlight">
+\[W(z)\,e^{W(z)} = z .\]</div>
+<p>For two centuries it had no name, even though it kept turning up in
+delay equations, enzyme kinetics, and combinatorial counting of trees.
+In 1996 Robert Corless, Gaston Gonnet, David Hare, David Jeffrey, and
+Donald Knuth collected these scattered appearances into one paper,
+fixed the notation <span class="math notranslate nohighlight">\(W\)</span>, and defined its infinitely many complex
+branches. For real <span class="math notranslate nohighlight">\(-1/e \le z &lt; 0\)</span> there are two real
+solutions, the principal branch <span class="math notranslate nohighlight">\(W_0\)</span> and the lower branch
+<span class="math notranslate nohighlight">\(W_{-1}\)</span>, which meet at <span class="math notranslate nohighlight">\(z = -1/e\)</span>. Many equations that
+mix exponentials and powers can be solved with <span class="math notranslate nohighlight">\(W\)</span>. For example,
+<span class="math notranslate nohighlight">\(x^x = y\)</span> has the solution <span class="math notranslate nohighlight">\(x = \ln y / W(\ln y)\)</span>.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.special_functions.systems.lambert_w.lambert_w()</span></code> wraps
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.lambertw.html#scipy.special.lambertw" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.lambertw()</span></code></a> and returns a real result on the real
+branches. The tests check <span class="math notranslate nohighlight">\(we^w = z\)</span>, the omega constant
+<span class="math notranslate nohighlight">\(W(1) = e^{-W(1)}\)</span>, and both branches at
+<span class="math notranslate nohighlight">\(z = -\tfrac12\ln 2\)</span>.</p>
+<p><em>References:</em> J. H. Lambert, “Observationes variae in mathesin puram,”
+Acta Helvetica 3 (1758), 128-168; L. Euler, “De serie Lambertina
+plurimisque eius insignibus proprietatibus,” Acta Academiae Scientiarum
+Imperialis Petropolitanae 1779:2 (1783), 29-51; R. M. Corless, G. H.
+Gonnet, D. E. G. Hare, D. J. Jeffrey, and D. E. Knuth, “On the Lambert
+W function,” Advances in Computational Mathematics 5 (1996), 329-359.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Plots W_0 and W_{-1}, the two real inverses of w e^w, which meet at the branch point z = -1/e, and uses W to solve x^x = 27."><img alt="" src="../_images/sphx_glr_plot_01_lambert_w_branches_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/special_functions/lambert_w/plot_01_lambert_w_branches.html"><span class="doc">The two real branches of the Lambert W function</span></a></p>
+  <div class="sphx-glr-thumbnail-title">The two real branches of the Lambert W function</div>
 </div></div></section>
 <section id="legendre-and-chebyshev-polynomials">
-<h2><a class="toc-backref" href="#id3" role="doc-backlink">1782 – 1859 – Legendre and Chebyshev Polynomials</a><a class="headerlink" href="#legendre-and-chebyshev-polynomials" title="Link to this heading">#</a></h2>
-<p>Adrien-Marie Legendre’s 1782 work on the attraction of spheroids
-introduced the polynomial family that solves Laplace’s equation in
-spherical coordinates and now bears his name, orthogonal on
-<span class="math notranslate nohighlight">\([-1,1]\)</span> with the plainest possible weight, 1. Pafnuty Chebyshev’s
-1854 memoirs on least-deviation approximation (see the
-numerical-analysis chronology) introduced a second family, orthogonal
-with respect to the weight <span class="math notranslate nohighlight">\(1/\sqrt{1-x^2}\)</span> and expressible in
-closed form as <span class="math notranslate nohighlight">\(T_n(x) = \cos(n\arccos x)\)</span> – the family whose
-minimal-oscillation property is exactly what makes Chebyshev <em>nodes</em> the
-cure for Runge’s phenomenon.</p>
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">1782-1854 – Legendre and Chebyshev Polynomials</a><a class="headerlink" href="#legendre-and-chebyshev-polynomials" title="Link to this heading">#</a></h2>
+<p>Adrien-Marie Legendre’s 1782 work on the gravitational attraction of
+spheroids introduced the polynomial family that now bears his name. The
+polynomials solve Laplace’s equation in spherical coordinates and are
+orthogonal on <span class="math notranslate nohighlight">\([-1,1]\)</span> with the simplest possible weight, 1.
+Pafnuty Chebyshev’s 1854 memoir on least-deviation approximation (see
+the numerical-analysis chronology) introduced a second family,
+orthogonal with respect to the weight <span class="math notranslate nohighlight">\(1/\sqrt{1-x^2}\)</span> and given
+in closed form by <span class="math notranslate nohighlight">\(T_n(x) = \cos(n\arccos x)\)</span>. Its
+minimal-oscillation property is exactly what makes Chebyshev <em>nodes</em>
+the cure for Runge’s phenomenon.</p>
 <p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.special_functions.systems.orthogonal_polynomials.legendre_polynomial()</span></code>
 and <code class="xref py py-func docutils literal notranslate"><span class="pre">chebyshev_polynomial()</span></code>
 wrap <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.polynomial.legendre.legval.html#numpy.polynomial.legendre.legval" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.polynomial.legendre.legval()</span></code></a>/<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.polynomial.chebyshev.chebval.html#numpy.polynomial.chebyshev.chebval" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">chebval()</span></code></a>
-directly, with orthogonality verified numerically via
+directly, and their orthogonality is verified numerically with
 <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.special_functions.utils.orthogonality.inner_product()</span></code>.</p>
 <p><em>References:</em> A.-M. Legendre, “Recherches sur l’attraction des
-spheroides homogenes,” Memoires de Mathematique et de Physique,
-presentes a l’Academie Royale des Sciences 10 (1785), 411-434
+sphéroïdes homogènes,” Mémoires de Mathématique et de Physique,
+présentés à l’Académie Royale des Sciences 10 (1785), 411-434
 (presented 1782).</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Plots the first few Legendre, Chebyshev, Hermite, and Laguerre polynomials, and numerically verifies each family&#x27;s orthogonality against its own weight function."><img alt="" src="../_images/sphx_glr_plot_01_four_families_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/special_functions/orthogonal_polynomials/plot_01_four_families.html"><span class="doc">Four orthogonal polynomial families</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Four orthogonal polynomial families</div>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Plots the first Legendre polynomials P_n (weight 1) beside the first Chebyshev polynomials T_n (weight 1/sqrt(1 - x^2)), checks each family&#x27;s orthogonality, and confirms Chebyshev&#x27;s closed form T_n(cos t) = cos(nt), whose equal ripples between -1 and 1 are its minimal-oscillation property."><img alt="" src="../_images/sphx_glr_plot_01_legendre_chebyshev_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/special_functions/orthogonal_polynomials/plot_01_legendre_chebyshev.html"><span class="doc">Legendre and Chebyshev polynomials on [-1, 1]</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Legendre and Chebyshev polynomials on [-1, 1]</div>
 </div></div></section>
-<section id="s-1879-hermite-and-laguerre-polynomials">
-<h2><a class="toc-backref" href="#id4" role="doc-backlink">1810s – 1879 – Hermite and Laguerre Polynomials</a><a class="headerlink" href="#s-1879-hermite-and-laguerre-polynomials" title="Link to this heading">#</a></h2>
-<p>Pierre-Simon Laplace and, independently and more systematically,
-Pafnuty Chebyshev studied polynomials orthogonal with respect to the
-Gaussian weight <span class="math notranslate nohighlight">\(e^{-x^2}\)</span> in the 1810s-1850s; Charles Hermite’s
-1864 memoir gave them their definitive treatment and the name they carry
-today. Edmond Laguerre’s 1879 paper introduced the complementary family
-orthogonal on the half-line <span class="math notranslate nohighlight">\([0,\infty)\)</span> with weight
-<span class="math notranslate nohighlight">\(e^{-x}\)</span>. Both families would turn out, half a century later, to be
-exactly the eigenfunctions quantum mechanics needed: Hermite polynomials
-for the quantum harmonic oscillator, Laguerre polynomials for the radial
-part of the hydrogen atom’s wavefunctions.</p>
+<section id="gauss-s-arithmetic-geometric-mean">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">1799 – Gauss’s Arithmetic-Geometric Mean</a><a class="headerlink" href="#gauss-s-arithmetic-geometric-mean" title="Link to this heading">#</a></h2>
+<p>Start with two positive numbers and repeatedly replace them by their
+arithmetic and geometric means:</p>
+<div class="math notranslate nohighlight">
+\[a_{n+1} = \frac{a_n + b_n}{2}, \qquad b_{n+1} = \sqrt{a_n b_n}.\]</div>
+<p>The two sequences converge to a common limit, the arithmetic-geometric
+mean <span class="math notranslate nohighlight">\(\mathrm{AGM}(a, b)\)</span>, and the number of correct digits
+roughly doubles at every step. On 30 May 1799 the 21-year-old Carl
+Friedrich Gauss noted in his diary that <span class="math notranslate nohighlight">\(1/\mathrm{AGM}(1,\sqrt2)\)</span>
+agreed to eleven decimals with a constant from the arc length of the
+lemniscate, and predicted that this would open “an entirely new field of
+analysis.” The explanation is an identity for the complete elliptic
+integral of the first kind:</p>
+<div class="math notranslate nohighlight">
+\[K(m) = \int_0^{\pi/2}\frac{d\theta}{\sqrt{1 - m\sin^2\theta}}
+     = \frac{\pi}{2\,\mathrm{AGM}\bigl(1, \sqrt{1-m}\bigr)} .\]</div>
+<p>Elliptic integrals had been studied since the early eighteenth century
+because they give the arc length of an ellipse and the period of a
+pendulum, but no one could evaluate them quickly. Gauss’s identity
+turns them into a few square roots. The same quadratic convergence
+drives the Brent-Salamin algorithm of 1976, which has been used to
+compute <span class="math notranslate nohighlight">\(\pi\)</span> to billions of digits.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.special_functions.systems.elliptic.arithmetic_geometric_mean()</span></code>,
+<code class="xref py py-func docutils literal notranslate"><span class="pre">complete_elliptic_integral_first_kind()</span></code>, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">complete_elliptic_integral_second_kind()</span></code> wrap
+<code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.agm()</span></code>, <code class="xref py py-func docutils literal notranslate"><span class="pre">ellipk()</span></code>, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">ellipe()</span></code>. The tests check Gauss’s identity,
+compare both integrals with direct quadrature, and verify Legendre’s
+relation <span class="math notranslate nohighlight">\(EK' + E'K - KK' = \pi/2\)</span>.</p>
+<p><em>References:</em> C. F. Gauss, <em>Werke</em>, vol. 3 (Göttingen, 1866), 361-403;
+D. A. Cox, “The Arithmetic-Geometric Mean of Gauss,” L’Enseignement
+Mathématique 30 (1984), 275-330; J. M. Borwein and P. B. Borwein, <em>Pi
+and the AGM</em> (New York: Wiley, 1987).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Iterates the AGM by hand to show its quadratic convergence, then checks Gauss&#x27;s 1799 identity K(m) = pi / (2 AGM(1, sqrt(1 - m))) and uses E(m) for the perimeter of an ellipse."><img alt="" src="../_images/sphx_glr_plot_01_agm_elliptic_integrals_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/special_functions/elliptic/plot_01_agm_elliptic_integrals.html"><span class="doc">Gauss’s arithmetic-geometric mean and the elliptic integral K</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Gauss's arithmetic-geometric mean and the elliptic integral K</div>
+</div></div></section>
+<section id="hermite-and-laguerre-polynomials">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">1810-1879 – Hermite and Laguerre Polynomials</a><a class="headerlink" href="#hermite-and-laguerre-polynomials" title="Link to this heading">#</a></h2>
+<p>Pierre-Simon Laplace in 1810, and Pafnuty Chebyshev more systematically
+in 1859, studied polynomials orthogonal with respect to the Gaussian
+weight <span class="math notranslate nohighlight">\(e^{-x^2}\)</span>. Charles Hermite’s 1864 memoir gave them their
+definitive treatment and the name they carry today. Edmond Laguerre’s
+1879 paper introduced the complementary family, orthogonal on the
+half-line <span class="math notranslate nohighlight">\([0,\infty)\)</span> with weight <span class="math notranslate nohighlight">\(e^{-x}\)</span>. Nearly half a
+century later, both families turned out to be exactly the eigenfunctions
+quantum mechanics needed: Hermite polynomials for the quantum harmonic
+oscillator, and Laguerre polynomials for the radial part of the
+hydrogen atom’s wavefunctions.</p>
 <p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.special_functions.systems.orthogonal_polynomials.hermite_polynomial()</span></code>
 and <code class="xref py py-func docutils literal notranslate"><span class="pre">laguerre_polynomial()</span></code>
-wrap <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.polynomial.hermite.hermval.html#numpy.polynomial.hermite.hermval" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.polynomial.hermite.hermval()</span></code></a>/<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.polynomial.laguerre.lagval.html#numpy.polynomial.laguerre.lagval" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">lagval()</span></code></a>,
-with orthogonality against each family’s own weight verified numerically
-via <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.quad.html#scipy.integrate.quad" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.integrate.quad()</span></code></a> over an infinite domain.</p>
-<p><em>References:</em> C. Hermite, “Sur un nouveau developpement en serie des
-fonctions,” Comptes Rendus de l’Academie des Sciences 58 (1864), 93-100,
-266-273; E. Laguerre, “Sur l’integrale
-<span class="math notranslate nohighlight">\(\int_x^\infty e^{-x}x^{-1}dx\)</span>,” Bulletin de la Societe
-Mathematique de France 7 (1879), 72-81.</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Plots the first few Legendre, Chebyshev, Hermite, and Laguerre polynomials, and numerically verifies each family&#x27;s orthogonality against its own weight function."><img alt="" src="../_images/sphx_glr_plot_01_four_families_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/special_functions/orthogonal_polynomials/plot_01_four_families.html"><span class="doc">Four orthogonal polynomial families</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Four orthogonal polynomial families</div>
+wrap <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.polynomial.hermite.hermval.html#numpy.polynomial.hermite.hermval" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.polynomial.hermite.hermval()</span></code></a>/<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.polynomial.laguerre.lagval.html#numpy.polynomial.laguerre.lagval" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">lagval()</span></code></a>.
+Their orthogonality against each family’s weight is verified
+numerically with <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.quad.html#scipy.integrate.quad" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.integrate.quad()</span></code></a> over an infinite domain.</p>
+<p><em>References:</em> C. Hermite, “Sur un nouveau développement en série des
+fonctions,” Comptes Rendus de l’Académie des Sciences 58 (1864), 93-100,
+266-273; E. Laguerre, “Sur l’intégrale
+<span class="math notranslate nohighlight">\(\int_x^\infty e^{-x}x^{-1}dx\)</span>,” Bulletin de la Société
+Mathématique de France 7 (1879), 72-81.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Plots the first Hermite polynomials H_n (weight e^{-x^2} on the whole line) and Laguerre polynomials L_n (weight e^{-x} on the half-line), checks their orthogonality over infinite intervals, and draws the quantum harmonic oscillator states H_n(x) e^{-x^2/2} they describe."><img alt="" src="../_images/sphx_glr_plot_02_hermite_laguerre_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/special_functions/orthogonal_polynomials/plot_02_hermite_laguerre.html"><span class="doc">Hermite and Laguerre polynomials on infinite domains</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Hermite and Laguerre polynomials on infinite domains</div>
+</div></div></section>
+<section id="gauss-s-hypergeometric-series">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">1812 – Gauss’s Hypergeometric Series</a><a class="headerlink" href="#gauss-s-hypergeometric-series" title="Link to this heading">#</a></h2>
+<p>Leonhard Euler had already studied the series</p>
+<div class="math notranslate nohighlight">
+\[{}_2F_1(a, b; c; z) = \sum_{n=0}^{\infty}
+\frac{(a)_n (b)_n}{(c)_n}\,\frac{z^n}{n!}, \qquad
+(q)_n = q(q+1)\cdots(q+n-1),\]</div>
+<p>and the second-order differential equation it satisfies. Carl Friedrich
+Gauss’s memoir, presented to the Göttingen Society in January 1812,
+made it a unified object of study. He showed that the one family
+contains the logarithm, the inverse trigonometric functions, and many
+other functions of analysis as special cases, for example
+<span class="math notranslate nohighlight">\(\ln(1+z) = z\,{}_2F_1(1,1;2;-z)\)</span>. He gave one of the first
+rigorous convergence proofs for an infinite series, and he found the
+value at <span class="math notranslate nohighlight">\(z = 1\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[{}_2F_1(a, b; c; 1) = \frac{\Gamma(c)\,\Gamma(c-a-b)}{\Gamma(c-a)\,\Gamma(c-b)},
+\qquad \operatorname{Re}(c - a - b) &gt; 0 .\]</div>
+<p>When <span class="math notranslate nohighlight">\(a\)</span> is a negative integer the series stops after finitely
+many terms, and every classical orthogonal polynomial family on a finite
+interval is a special case. Ernst Kummer and Bernhard Riemann later
+studied the function through its differential equation, which has
+exactly three singular points, at <span class="math notranslate nohighlight">\(0\)</span>, <span class="math notranslate nohighlight">\(1\)</span>, and
+<span class="math notranslate nohighlight">\(\infty\)</span>.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.special_functions.systems.hypergeometric.hypergeometric_2f1()</span></code>
+wraps <code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.hyp2f1()</span></code>. The tests recover
+<span class="math notranslate nohighlight">\(\ln(1+z)\)</span>, <span class="math notranslate nohighlight">\((1+z)^{2.5}\)</span>, <span class="math notranslate nohighlight">\(\arcsin z\)</span>, and the
+Chebyshev polynomial <span class="math notranslate nohighlight">\(T_4\)</span> from it, and check Gauss’s summation
+theorem against <code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.gamma()</span></code>.</p>
+<p><em>References:</em> C. F. Gauss, “Disquisitiones generales circa seriem
+infinitam <span class="math notranslate nohighlight">\(1 + \frac{\alpha\beta}{1\cdot\gamma}x + \cdots\)</span>,”
+Commentationes Societatis Regiae Scientiarum Gottingensis Recentiores 2
+(1813); NIST <em>Digital Library of Mathematical Functions</em>, Ch. 15.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Recovers log(1 + z), arcsin z, and a Chebyshev polynomial from 2F1 with special parameters, and checks Gauss&#x27;s summation theorem at z = 1."><img alt="" src="../_images/sphx_glr_plot_01_gauss_hypergeometric_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/special_functions/hypergeometric/plot_01_gauss_hypergeometric.html"><span class="doc">Gauss’s hypergeometric function contains the elementary functions</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Gauss's hypergeometric function contains the elementary functions</div>
+</div></div></section>
+<section id="fresnel-integrals-and-the-diffraction-of-light">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">1818 – Fresnel Integrals and the Diffraction of Light</a><a class="headerlink" href="#fresnel-integrals-and-the-diffraction-of-light" title="Link to this heading">#</a></h2>
+<p>Augustin-Jean Fresnel’s 1818 prize memoir for the French Academy
+explained diffraction by treating light as a wave. The light reaching a
+point past an obstacle is the sum of wavelets from every point of the
+unobstructed wavefront. For a straight edge that sum reduces to the
+integrals</p>
+<div class="math notranslate nohighlight">
+\[C(t) = \int_0^t \cos\!\left(\frac{\pi\tau^2}{2}\right)d\tau, \qquad
+S(t) = \int_0^t \sin\!\left(\frac{\pi\tau^2}{2}\right)d\tau .\]</div>
+<p>Fresnel tabulated them by hand, and his predicted fringe patterns
+matched experiment. The judge Siméon Denis Poisson objected that the
+theory implied a bright spot at the centre of a circular shadow.
+François Arago looked for the spot and found it, and the prize went to
+Fresnel. In 1874 Alfred Cornu plotted <span class="math notranslate nohighlight">\((C(t), S(t))\)</span> as a curve,
+a spiral that winds into the points <span class="math notranslate nohighlight">\(\pm(\tfrac12, \tfrac12)\)</span>.
+Its curvature grows in proportion to arc length. For that reason the
+same curve, often called the Euler or clothoid spiral, is used as the
+transition curve in road and railway design.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.special_functions.systems.error_functions.fresnel_integrals()</span></code>
+wraps <code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.fresnel()</span></code> and returns a
+<a class="reference internal" href="../api/special_functions.html#mathematicskit.special_functions.FresnelResult" title="mathematicskit.special_functions.core.base.FresnelResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">FresnelResult</span></code></a>.
+The tests check the limits <span class="math notranslate nohighlight">\(\pm\tfrac12\)</span>, the derivatives, and
+that the spiral has unit speed and curvature <span class="math notranslate nohighlight">\(\pi t\)</span>.</p>
+<p><em>References:</em> A. Fresnel, “Mémoire sur la diffraction de la lumière,”
+Mémoires de l’Académie Royale des Sciences de l’Institut de France 5
+(1826), 339-475; A. Cornu, “Méthode nouvelle pour la discussion des
+problèmes de diffraction dans le cas d’une onde cylindrique,” Journal de
+Physique Théorique et Appliquée 3 (1874), 5-15, 44-52.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Draws the Euler-Cornu spiral (C(t), S(t)), which winds into the points (1/2, 1/2) and (-1/2, -1/2), and the knife-edge diffraction intensity that Fresnel computed from it."><img alt="" src="../_images/sphx_glr_plot_01_fresnel_cornu_spiral_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/special_functions/error_functions/plot_01_fresnel_cornu_spiral.html"><span class="doc">Fresnel integrals and the Cornu spiral</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Fresnel integrals and the Cornu spiral</div>
 </div></div></section>
 <section id="fourier-s-theorem-and-the-fast-fourier-transform">
-<h2><a class="toc-backref" href="#id5" role="doc-backlink">1822 – 1965 – Fourier’s Theorem and the Fast Fourier Transform</a><a class="headerlink" href="#fourier-s-theorem-and-the-fast-fourier-transform" title="Link to this heading">#</a></h2>
-<p>Joseph Fourier’s 1822 treatise on heat conduction claimed, controversially
-for its time, that essentially any periodic function can be represented
-as a sum of sines and cosines – a claim rigorously justified only
-gradually over the following century, but one that gave the discrete
-Fourier transform its entire conceptual foundation once digital
-computation made it something to actually <em>compute</em>. James Cooley and
-John Tukey’s 1965 paper – rediscovering, largely independently, an
-algorithm Carl Friedrich Gauss had sketched already in an unpublished
-1805 manuscript on interpolating asteroid orbits – showed how to
-compute the length-<span class="math notranslate nohighlight">\(N\)</span> discrete Fourier transform recursively from
-two length-<span class="math notranslate nohighlight">\(N/2\)</span> transforms, reducing the cost from
-<span class="math notranslate nohighlight">\(O(N^2)\)</span> to <span class="math notranslate nohighlight">\(O(N\log N)\)</span>: an algorithmic speedup so large
-for the signal lengths radar and telecommunications needed that it is
-routinely credited with making digital signal processing practical at
-all.</p>
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">1822-1965 – Fourier’s Theorem and the Fast Fourier Transform</a><a class="headerlink" href="#fourier-s-theorem-and-the-fast-fourier-transform" title="Link to this heading">#</a></h2>
+<p>Joseph Fourier’s 1822 treatise on heat conduction claimed,
+controversially at the time, that essentially any periodic function can
+be written as a sum of sines and cosines. The claim, first presented to
+the Paris Academy in 1807, was made rigorous only gradually over the
+following century, but it became the conceptual foundation of the
+discrete Fourier transform once digital computers made the transform
+something to actually <em>compute</em>. James Cooley and John Tukey’s 1965
+paper showed how to compute a length-<span class="math notranslate nohighlight">\(N\)</span> discrete Fourier
+transform recursively from two length-<span class="math notranslate nohighlight">\(N/2\)</span> transforms, cutting
+the cost from <span class="math notranslate nohighlight">\(O(N^2)\)</span> to <span class="math notranslate nohighlight">\(O(N\log N)\)</span>. They had largely
+independently rediscovered an algorithm that Carl Friedrich Gauss
+sketched in an unpublished 1805 manuscript on interpolating asteroid
+orbits. For the signal lengths that radar and telecommunications
+needed, the speedup was so large that the algorithm is routinely
+credited with making digital signal processing practical.</p>
 <div class="math notranslate nohighlight">
 \[X_k = \sum_{n=0}^{N-1} x_n e^{-2\pi ikn/N}\]</div>
 <p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.special_functions.systems.fourier_transform.fft_numpy()</span></code>
-wraps <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.fft.fft.html#numpy.fft.fft" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.fft.fft()</span></code></a> as the primary API;
+wraps <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.fft.fft.html#numpy.fft.fft" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.fft.fft()</span></code></a> as the primary API.
 <code class="xref py py-func docutils literal notranslate"><span class="pre">dft_naive()</span></code>
 and <code class="xref py py-func docutils literal notranslate"><span class="pre">fft_radix2()</span></code>
-implement, hand-rolled, exactly the naive <span class="math notranslate nohighlight">\(O(N^2)\)</span> sum and
-Cooley-Tukey’s radix-2 recursive halving respectively, with
-<code class="xref py py-func docutils literal notranslate"><span class="pre">compare_fft_methods()</span></code>
-timing all three directly against each other to make the
-<span class="math notranslate nohighlight">\(O(N^2)\)</span> vs. <span class="math notranslate nohighlight">\(O(N\log N)\)</span> gap concretely visible – the one
-sub-module in this domain where hand-rolling, rather than a direct
-library call, is the point.</p>
-<p><em>References:</em> J. Fourier, <em>Theorie Analytique de la Chaleur</em> (Paris:
+hand-roll the naive <span class="math notranslate nohighlight">\(O(N^2)\)</span> sum and the Cooley-Tukey radix-2
+recursion. <code class="xref py py-func docutils literal notranslate"><span class="pre">compare_fft_methods()</span></code>
+times all three against each other to make the <span class="math notranslate nohighlight">\(O(N^2)\)</span> versus
+<span class="math notranslate nohighlight">\(O(N\log N)\)</span> gap visible. This is the one submodule in this
+domain where hand-rolling, rather than a direct library call, is the
+point.</p>
+<p><em>References:</em> J. Fourier, <em>Théorie analytique de la chaleur</em> (Paris:
 Firmin Didot, 1822); J. W. Cooley and J. W. Tukey, “An Algorithm for the
 Machine Calculation of Complex Fourier Series,” Mathematics of
 Computation 19(90) (1965), 297-301; M. T. Heideman, D. H. Johnson, and
 C. S. Burrus, “Gauss and the History of the Fast Fourier Transform,”
-Archive for History of Exact Sciences 34(3) (1985), 265-277 (documenting
-Gauss’s unpublished 1805 anticipation).</p>
+Archive for History of Exact Sciences 34(3) (1985), 265-277
+(documenting Gauss’s unpublished 1805 anticipation).</p>
 <div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Cross-checks all three methods for correctness, then times them across a range of signal lengths to make the algorithmic speedup visible directly."><img alt="" src="../_images/sphx_glr_plot_01_naive_vs_radix2_vs_numpy_thumb.png" />
 <p><a class="reference internal" href="../api/gallery/special_functions/fourier_transform/plot_01_naive_vs_radix2_vs_numpy.html"><span class="doc">O(n^2) vs. O(n log n): naive DFT vs. radix-2 FFT vs. numpy.fft</span></a></p>
   <div class="sphx-glr-thumbnail-title">O(n^2) vs. O(n log n): naive DFT vs. radix-2 FFT vs. numpy.fft</div>
 </div></div></section>
+<section id="bessel-functions">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">1824 – Bessel Functions</a><a class="headerlink" href="#bessel-functions" title="Link to this heading">#</a></h2>
+<p>In the 1730s, Daniel Bernoulli’s study of the oscillations of a hanging
+chain had already produced solutions of what is now recognized as a
+special case of Bessel’s equation. Friedrich Wilhelm Bessel’s 1824
+memoir on planetary perturbations gave the family its first systematic
+treatment and tabulation. His motivation was the periodic problem of
+Kepler’s equation for planetary orbits. <span class="math notranslate nohighlight">\(J_\nu\)</span>, regular at the
+origin, and <span class="math notranslate nohighlight">\(Y_\nu\)</span>, singular there and introduced later by Carl
+Neumann and Heinrich Weber, are two linearly independent solutions of
+the same second-order equation. They appear throughout physics and
+engineering wherever a problem has cylindrical symmetry: vibrating
+drumheads, waveguides, heat conduction in a cylinder.</p>
+<div class="math notranslate nohighlight">
+\[x^2 y'' + xy' + (x^2 - \nu^2)y = 0\]</div>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.special_functions.systems.bessel.bessel_first_kind()</span></code>
+and <code class="xref py py-func docutils literal notranslate"><span class="pre">bessel_second_kind()</span></code>
+wrap <code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.jv()</span></code>/<code class="xref py py-func docutils literal notranslate"><span class="pre">yv()</span></code> directly. This
+domain’s tests check them against the defining differential equation
+itself, using finite differences.</p>
+<p><em>References:</em> F. W. Bessel, “Untersuchung des Theils der planetarischen
+Störungen, welcher aus der Bewegung der Sonne entsteht,” Abhandlungen
+der Königlichen Akademie der Wissenschaften zu Berlin (1824), 1-52.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Plots J_0, J_1 (regular at the origin) and Y_0 (singular at the origin) over a range of x, and finds J_0&#x27;s first zero."><img alt="" src="../_images/sphx_glr_plot_01_bessel_functions_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/special_functions/bessel/plot_01_bessel_functions.html"><span class="doc">Bessel functions of the first and second kind</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Bessel functions of the first and second kind</div>
+</div></div></section>
+<section id="jacobi-s-elliptic-functions">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">1829 – Jacobi’s Elliptic Functions</a><a class="headerlink" href="#jacobi-s-elliptic-functions" title="Link to this heading">#</a></h2>
+<p>Niels Henrik Abel and Carl Gustav Jacobi, working independently in
+1827-1829, had the idea of inverting the elliptic integral. The sine
+can be defined as the inverse of <span class="math notranslate nohighlight">\(\int_0^x dt/\sqrt{1-t^2}\)</span>. In
+the same way, if</p>
+<div class="math notranslate nohighlight">
+\[u = \int_0^{\varphi}\frac{d\theta}{\sqrt{1 - m\sin^2\theta}},\]</div>
+<p>then Jacobi defined <span class="math notranslate nohighlight">\(\operatorname{sn} u = \sin\varphi\)</span>,
+<span class="math notranslate nohighlight">\(\operatorname{cn} u = \cos\varphi\)</span>, and
+<span class="math notranslate nohighlight">\(\operatorname{dn} u = \sqrt{1 - m\sin^2\varphi}\)</span>. The new
+functions are <em>doubly periodic</em>: they repeat along two independent
+directions in the complex plane. On the real line
+<span class="math notranslate nohighlight">\(\operatorname{sn}\)</span> and <span class="math notranslate nohighlight">\(\operatorname{cn}\)</span> have period
+<span class="math notranslate nohighlight">\(4K(m)\)</span>. At <span class="math notranslate nohighlight">\(m = 0\)</span> they reduce to <span class="math notranslate nohighlight">\(\sin\)</span> and
+<span class="math notranslate nohighlight">\(\cos\)</span>, and at <span class="math notranslate nohighlight">\(m = 1\)</span> to hyperbolic functions. Jacobi’s
+1829 <em>Fundamenta nova</em> developed the theory in full. The functions
+give exact solutions of the large-amplitude pendulum, of the rigid body
+spinning freely, and of the soliton waves of the Korteweg-de Vries
+equation.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.special_functions.systems.elliptic.jacobi_elliptic_functions()</span></code>
+wraps <code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.ellipj()</span></code> and returns a
+<a class="reference internal" href="../api/special_functions.html#mathematicskit.special_functions.JacobiEllipticResult" title="mathematicskit.special_functions.core.base.JacobiEllipticResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">JacobiEllipticResult</span></code></a>.
+The tests check <span class="math notranslate nohighlight">\(\operatorname{sn}^2 + \operatorname{cn}^2 = 1\)</span>,
+<span class="math notranslate nohighlight">\(\operatorname{dn}^2 + m\operatorname{sn}^2 = 1\)</span>, the
+trigonometric and hyperbolic limits, and the period <span class="math notranslate nohighlight">\(4K(m)\)</span>.</p>
+<p><em>References:</em> N. H. Abel, “Recherches sur les fonctions elliptiques,”
+Journal für die reine und angewandte Mathematik 2 (1827), 101-181;
+C. G. J. Jacobi, <em>Fundamenta nova theoriae functionum ellipticarum</em>
+(Königsberg: Bornträger, 1829).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Plots sn, cn, dn for m = 0.9, showing their real period 4K(m), and uses them to write the exact motion of a large-amplitude pendulum."><img alt="" src="../_images/sphx_glr_plot_02_jacobi_elliptic_functions_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/special_functions/elliptic/plot_02_jacobi_elliptic_functions.html"><span class="doc">Jacobi elliptic functions and the pendulum</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Jacobi elliptic functions and the pendulum</div>
+</div></div></section>
+<section id="kummer-s-confluent-hypergeometric-function">
+<h2><a class="toc-backref" href="#id12" role="doc-backlink">1837 – Kummer’s Confluent Hypergeometric Function</a><a class="headerlink" href="#kummer-s-confluent-hypergeometric-function" title="Link to this heading">#</a></h2>
+<p>Ernst Kummer’s work of 1836-1837 studied Gauss’s hypergeometric series
+through its differential equation. In the same work he introduced the
+simpler series</p>
+<div class="math notranslate nohighlight">
+\[M(a, b, z) = {}_1F_1(a; b; z) = \sum_{n=0}^{\infty}\frac{(a)_n}{(b)_n}\frac{z^n}{n!},\]</div>
+<p>which solves <span class="math notranslate nohighlight">\(zw'' + (b - z)w' - aw = 0\)</span>. It arises from
+<span class="math notranslate nohighlight">\({}_2F_1\)</span> when two of the three singular points are merged, or
+made <em>confluent</em>:
+<span class="math notranslate nohighlight">\({}_1F_1(a; b; z) = \lim_{c\to\infty}{}_2F_1(a, c; b; z/c)\)</span>.
+Kummer proved the transformation <span class="math notranslate nohighlight">\(M(a, b, z) = e^z M(b - a, b, -z)\)</span>.
+The confluent function contains the exponential, the error function,
+the incomplete gamma function, and the Laguerre and Hermite polynomials.
+It later gave the exact solution for the hydrogen atom and for Coulomb
+scattering. Edmund Whittaker’s 1904 normalization, the Whittaker
+functions, is the standard form in quantum mechanics.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.special_functions.systems.hypergeometric.confluent_hypergeometric_1f1()</span></code>
+wraps <code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.hyp1f1()</span></code>. The tests check
+<span class="math notranslate nohighlight">\({}_1F_1(a; a; z) = e^z\)</span>, Kummer’s transformation, the error
+function as a special case, the differential equation, and the
+<span class="math notranslate nohighlight">\(O(1/c)\)</span> rate of the confluent limit.</p>
+<p><em>References:</em> E. E. Kummer, “Über die hypergeometrische Reihe,”
+Journal für die reine und angewandte Mathematik 15 (1836), 39-83,
+127-172; E. E. Kummer, “De integralibus quibusdam definitis et seriebus
+infinitis,” Journal für die reine und angewandte Mathematik 17 (1837),
+228-242; E. T. Whittaker, “An expression of certain known functions as
+generalized hypergeometric functions,” Bulletin of the American
+Mathematical Society 10 (1904), 125-134.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Checks Kummer&#x27;s transformation M(a, b, z) = e^z M(b - a, b, -z) and shows 2F1(a, c; b; z/c) merging into 1F1(a; b; z) as c grows."><img alt="" src="../_images/sphx_glr_plot_02_kummer_confluent_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/special_functions/hypergeometric/plot_02_kummer_confluent.html"><span class="doc">Kummer’s confluent hypergeometric function</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Kummer's confluent hypergeometric function</div>
+</div></div></section>
+<section id="the-airy-function">
+<h2><a class="toc-backref" href="#id13" role="doc-backlink">1838 – The Airy Function</a><a class="headerlink" href="#the-airy-function" title="Link to this heading">#</a></h2>
+<p>The Astronomer Royal George Biddell Airy wanted to explain the
+supernumerary bows, the faint extra bands just inside a rainbow. Near a
+caustic, where light rays bunch together, simple ray optics predicts
+infinite brightness. Airy’s 1838 wave calculation replaced that
+infinity with the integral</p>
+<div class="math notranslate nohighlight">
+\[\operatorname{Ai}(x) = \frac{1}{\pi}\int_0^\infty \cos\!\left(\frac{t^3}{3} + xt\right)dt,\]</div>
+<p>which solves the simplest equation whose solutions change character,
+<span class="math notranslate nohighlight">\(y'' = xy\)</span>. For <span class="math notranslate nohighlight">\(x &lt; 0\)</span> it oscillates, and for
+<span class="math notranslate nohighlight">\(x &gt; 0\)</span> it decays exponentially. Airy computed the integral
+numerically by hand. George Gabriel Stokes’s 1850 asymptotic expansions
+made it practical to evaluate, and in studying them Stokes found the
+<em>Stokes phenomenon</em>. A second solution <span class="math notranslate nohighlight">\(\operatorname{Bi}\)</span>, which
+grows for <span class="math notranslate nohighlight">\(x &gt; 0\)</span>, completes the pair. Every smooth turning point
+looks locally like Airy’s equation: in quantum mechanics this is the
+point where a particle’s energy equals the potential. For this reason
+the Airy functions are the connecting pieces of the WKB approximation.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.special_functions.systems.airy.airy_functions()</span></code> wraps
+<code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.airy()</span></code> and returns an
+<a class="reference internal" href="../api/special_functions.html#mathematicskit.special_functions.AiryResult" title="mathematicskit.special_functions.core.base.AiryResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">AiryResult</span></code></a>. The
+tests check the exact values at <span class="math notranslate nohighlight">\(x = 0\)</span> in terms of
+<span class="math notranslate nohighlight">\(\Gamma(1/3)\)</span> and <span class="math notranslate nohighlight">\(\Gamma(2/3)\)</span>, the differential equation,
+the Wronskian <span class="math notranslate nohighlight">\(\operatorname{Ai}\operatorname{Bi}' -
+\operatorname{Ai}'\operatorname{Bi} = 1/\pi\)</span>, and the decay rate for
+large <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p><em>References:</em> G. B. Airy, “On the intensity of light in the
+neighbourhood of a caustic,” Transactions of the Cambridge
+Philosophical Society 6 (1838), 379-402; G. G. Stokes, “On the
+numerical calculation of a class of definite integrals and infinite
+series,” Transactions of the Cambridge Philosophical Society 9 (1850),
+166-187.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Plots Ai and Bi across the turning point x = 0 where y&#x27;&#x27; = xy switches from oscillation to exponential behaviour, and checks the Wronskian Ai Bi&#x27; - Ai&#x27; Bi = 1/pi."><img alt="" src="../_images/sphx_glr_plot_01_airy_functions_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/special_functions/airy/plot_01_airy_functions.html"><span class="doc">The Airy functions Ai and Bi</span></a></p>
+  <div class="sphx-glr-thumbnail-title">The Airy functions Ai and Bi</div>
+</div></div></section>
+<section id="riemann-s-zeta-function">
+<h2><a class="toc-backref" href="#id14" role="doc-backlink">1859 – Riemann’s Zeta Function</a><a class="headerlink" href="#riemann-s-zeta-function" title="Link to this heading">#</a></h2>
+<p>In 1735 Leonhard Euler solved the Basel problem, showing that
+<span class="math notranslate nohighlight">\(\sum 1/n^2 = \pi^2/6\)</span>. Two years later he found the link
+between such sums and the primes:</p>
+<div class="math notranslate nohighlight">
+\[\zeta(s) = \sum_{n=1}^{\infty}\frac{1}{n^s} = \prod_{p\ \text{prime}}\frac{1}{1 - p^{-s}},
+\qquad s &gt; 1,\]</div>
+<p>a restatement of unique prime factorization. Bernhard Riemann’s only
+paper on number theory, in 1859, treated <span class="math notranslate nohighlight">\(\zeta\)</span> as a function of
+a <em>complex</em> variable. He extended it to the whole plane except
+<span class="math notranslate nohighlight">\(s = 1\)</span> and proved the functional equation relating
+<span class="math notranslate nohighlight">\(\zeta(s)\)</span> to <span class="math notranslate nohighlight">\(\zeta(1-s)\)</span>. He then gave an explicit
+formula for the number of primes below <span class="math notranslate nohighlight">\(x\)</span> in terms of the zeros
+of <span class="math notranslate nohighlight">\(\zeta\)</span>. The extension gives finite values to divergent sums,
+such as <span class="math notranslate nohighlight">\(\zeta(-1) = -1/12\)</span>, and has “trivial” zeros at
+<span class="math notranslate nohighlight">\(s = -2, -4, \ldots\)</span>. Riemann conjectured that all the other
+zeros lie on the line <span class="math notranslate nohighlight">\(\operatorname{Re} s = \tfrac12\)</span>. That
+conjecture, the Riemann hypothesis, is still unproved.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.special_functions.systems.zeta.riemann_zeta()</span></code> wraps
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.zeta.html#scipy.special.zeta" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.zeta()</span></code></a> on the real line, including its analytic
+continuation to <span class="math notranslate nohighlight">\(s &lt; 1\)</span>. <code class="xref py py-func docutils literal notranslate"><span class="pre">euler_product()</span></code>
+hand-rolls the truncated product over primes from a sieve of
+Eratosthenes. The tests check <span class="math notranslate nohighlight">\(\zeta(2)\)</span>, <span class="math notranslate nohighlight">\(\zeta(4)\)</span>, and
+<span class="math notranslate nohighlight">\(\zeta(6)\)</span>, the values <span class="math notranslate nohighlight">\(\zeta(0) = -\tfrac12\)</span> and
+<span class="math notranslate nohighlight">\(\zeta(-1) = -\tfrac1{12}\)</span>, the trivial zeros, the functional
+equation, and the convergence of the product.</p>
+<p><em>References:</em> L. Euler, “De summis serierum reciprocarum,” Commentarii
+Academiae Scientiarum Petropolitanae 7 (1740), 123-134; L. Euler,
+“Variae observationes circa series infinitas,” Commentarii Academiae
+Scientiarum Petropolitanae 9 (1744), 160-188; B. Riemann, “Ueber die
+Anzahl der Primzahlen unter einer gegebenen Grösse,” Monatsberichte der
+Königlichen Preußischen Akademie der Wissenschaften zu Berlin (1859),
+671-680.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Plots zeta(s) on the real line, including its analytic continuation to s &lt; 1 with trivial zeros at the negative even integers, and shows Euler&#x27;s product over primes converging to zeta(2) = pi^2/6."><img alt="" src="../_images/sphx_glr_plot_01_riemann_zeta_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/special_functions/zeta/plot_01_riemann_zeta.html"><span class="doc">The Riemann zeta function and Euler’s product</span></a></p>
+  <div class="sphx-glr-thumbnail-title">The Riemann zeta function and Euler's product</div>
+</div></div></section>
+<section id="mathieu-functions">
+<h2><a class="toc-backref" href="#id15" role="doc-backlink">1868 – Mathieu Functions</a><a class="headerlink" href="#mathieu-functions" title="Link to this heading">#</a></h2>
+<p>Émile Mathieu’s 1868 study of a vibrating drumhead of <em>elliptical</em>
+shape separated the wave equation in elliptic coordinates. It produced
+an equation with a periodic coefficient:</p>
+<div class="math notranslate nohighlight">
+\[y'' + (a - 2q\cos 2x)\,y = 0 .\]</div>
+<p>Unlike Bessel’s equation, this one has periodic solutions only for
+special <em>characteristic values</em> <span class="math notranslate nohighlight">\(a = a_m(q)\)</span> (even solutions
+<span class="math notranslate nohighlight">\(\operatorname{ce}_m\)</span>) and <span class="math notranslate nohighlight">\(a = b_m(q)\)</span> (odd solutions
+<span class="math notranslate nohighlight">\(\operatorname{se}_m\)</span>). As <span class="math notranslate nohighlight">\(q \to 0\)</span> these reduce to
+<span class="math notranslate nohighlight">\(m^2\)</span>, <span class="math notranslate nohighlight">\(\cos mx\)</span>, and <span class="math notranslate nohighlight">\(\sin mx\)</span>. Gaston Floquet’s
+1883 theory of equations with periodic coefficients and George William
+Hill’s 1886 work on the motion of the Moon placed Mathieu’s equation in
+a larger setting. Its stability chart, which shows the values of
+<span class="math notranslate nohighlight">\((a, q)\)</span> for which solutions stay bounded, explains parametric
+resonance: a swing pumped at twice its natural frequency. The same
+chart is the design principle of the Paul ion trap, for which Wolfgang
+Paul shared the 1989 Nobel Prize in Physics.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.special_functions.systems.mathieu.mathieu_characteristic_a()</span></code>,
+<code class="xref py py-func docutils literal notranslate"><span class="pre">mathieu_characteristic_b()</span></code>,
+<code class="xref py py-func docutils literal notranslate"><span class="pre">mathieu_even()</span></code>, and <code class="xref py py-func docutils literal notranslate"><span class="pre">mathieu_odd()</span></code>
+wrap <code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.mathieu_a()</span></code>, <code class="xref py py-func docutils literal notranslate"><span class="pre">mathieu_b()</span></code>,
+<code class="xref py py-func docutils literal notranslate"><span class="pre">mathieu_cem()</span></code>, and <code class="xref py py-func docutils literal notranslate"><span class="pre">mathieu_sem()</span></code>,
+taking angles in radians rather than scipy’s degrees. The tests check
+the <span class="math notranslate nohighlight">\(q = 0\)</span> limit, the small-<span class="math notranslate nohighlight">\(q\)</span> expansion of <span class="math notranslate nohighlight">\(a_1\)</span>,
+the interlacing of characteristic values, and the differential equation.</p>
+<p><em>References:</em> É. Mathieu, “Mémoire sur le mouvement vibratoire d’une
+membrane de forme elliptique,” Journal de Mathématiques Pures et
+Appliquées (2) 13 (1868), 137-203; G. Floquet, “Sur les équations
+différentielles linéaires à coefficients périodiques,” Annales
+Scientifiques de l’École Normale Supérieure (2) 12 (1883), 47-88.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Plots the first even Mathieu functions ce_m(x, q) and how the characteristic values a_m(q), b_m(q) split away from m^2 as q grows -- the band structure behind the Mathieu stability chart."><img alt="" src="../_images/sphx_glr_plot_01_mathieu_functions_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/special_functions/mathieu/plot_01_mathieu_functions.html"><span class="doc">Mathieu functions and their characteristic values</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Mathieu functions and their characteristic values</div>
+</div></div></section>
+<section id="the-error-function">
+<h2><a class="toc-backref" href="#id16" role="doc-backlink">1871 – The Error Function</a><a class="headerlink" href="#the-error-function" title="Link to this heading">#</a></h2>
+<p>The integral of the Gaussian <span class="math notranslate nohighlight">\(e^{-t^2}\)</span> appears wherever the
+normal distribution does: in Abraham de Moivre’s 1733 approximation of
+the binomial, in Pierre-Simon Laplace’s probability theory, and in
+Carl Friedrich Gauss’s 1809 theory of observational errors. It has no
+elementary antiderivative, so it had to be tabulated. Christian Kramp
+did so in 1799 for work on atmospheric refraction. In 1871 James
+Whitbread Lee Glaisher named the function, coining the notation “erf”
+(for “error function”) and “erfc” for its complement. In today’s
+normalization</p>
+<div class="math notranslate nohighlight">
+\[\operatorname{erf}(x) = \frac{2}{\sqrt\pi}\int_0^x e^{-t^2}\,dt,
+\qquad \operatorname{erfc}(x) = 1 - \operatorname{erf}(x),\]</div>
+<p>so that the chance that a normal variable lies within <span class="math notranslate nohighlight">\(k\)</span>
+standard deviations of its mean is <span class="math notranslate nohighlight">\(\operatorname{erf}(k/\sqrt2)\)</span>.
+That formula gives the familiar 68-95-99.7 rule. The complementary
+function is not just a convenience. For <span class="math notranslate nohighlight">\(x\)</span> beyond about 6,
+<span class="math notranslate nohighlight">\(1 - \operatorname{erf}(x)\)</span> rounds to exactly zero in double
+precision, while <span class="math notranslate nohighlight">\(\operatorname{erfc}(x)\)</span> is still accurate.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.special_functions.systems.error_functions.error_function()</span></code> and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">complementary_error_function()</span></code> wrap
+<code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.erf()</span></code>/<code class="xref py py-func docutils literal notranslate"><span class="pre">erfc()</span></code>. The tests check
+oddness, the defining integral, the 68-95-99.7 rule, agreement with
+<code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.stats.norm()</span></code> cumulative probabilities, and the asymptotic
+tail of <span class="math notranslate nohighlight">\(\operatorname{erfc}\)</span>.</p>
+<p><em>References:</em> J. W. L. Glaisher, “On a class of definite integrals,”
+Philosophical Magazine (4) 42 (1871), 294-302; C. Kramp, <em>Analyse des
+réfractions astronomiques et terrestres</em> (Strasbourg, 1799); C. F.
+Gauss, <em>Theoria motus corporum coelestium in sectionibus conicis solem
+ambientium</em> (Hamburg, 1809).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Recovers the 68-95-99.7 rule from erf, and shows why erfc is needed in the far tail, where 1 - erf(x) rounds to zero."><img alt="" src="../_images/sphx_glr_plot_02_error_function_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/special_functions/error_functions/plot_02_error_function.html"><span class="doc">The error function and the normal distribution</span></a></p>
+  <div class="sphx-glr-thumbnail-title">The error function and the normal distribution</div>
+</div></div></section>
 <section id="see-also">
-<h2><a class="toc-backref" href="#id6" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id17" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="../api/special_functions.html"><span class="doc">mathematicskit.special_functions</span></a></p></li>
 <li><p><a class="reference internal" href="numerical_analysis_breakthroughs.html"><span class="doc">Breakthroughs in Numerical Analysis</span></a></p></li>
@@ -683,10 +1076,21 @@ Gauss’s unpublished 1805 anticipation).</p>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-s-gamma-function">1729 – Euler’s Gamma Function</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bessel-functions">1817 – 1824 – Bessel Functions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#legendre-and-chebyshev-polynomials">1782 – 1859 – Legendre and Chebyshev Polynomials</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#s-1879-hermite-and-laguerre-polynomials">1810s – 1879 – Hermite and Laguerre Polynomials</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fourier-s-theorem-and-the-fast-fourier-transform">1822 – 1965 – Fourier’s Theorem and the Fast Fourier Transform</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stirling-s-formula">1730 – Stirling’s Formula</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-lambert-w-function">1758-1996 – The Lambert W Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#legendre-and-chebyshev-polynomials">1782-1854 – Legendre and Chebyshev Polynomials</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gauss-s-arithmetic-geometric-mean">1799 – Gauss’s Arithmetic-Geometric Mean</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hermite-and-laguerre-polynomials">1810-1879 – Hermite and Laguerre Polynomials</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gauss-s-hypergeometric-series">1812 – Gauss’s Hypergeometric Series</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fresnel-integrals-and-the-diffraction-of-light">1818 – Fresnel Integrals and the Diffraction of Light</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fourier-s-theorem-and-the-fast-fourier-transform">1822-1965 – Fourier’s Theorem and the Fast Fourier Transform</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bessel-functions">1824 – Bessel Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jacobi-s-elliptic-functions">1829 – Jacobi’s Elliptic Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kummer-s-confluent-hypergeometric-function">1837 – Kummer’s Confluent Hypergeometric Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-airy-function">1838 – The Airy Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#riemann-s-zeta-function">1859 – Riemann’s Zeta Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathieu-functions">1868 – Mathieu Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-error-function">1871 – The Error Function</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#see-also">See Also</a></li>
 </ul>
   </nav></div>

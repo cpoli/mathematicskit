@@ -454,242 +454,479 @@
 <p><a class="reference internal" href="../_generated/subpackages/linalg.html"><span class="doc">mathematicskit.linalg hub</span></a> · <a class="reference internal" href="#"><span class="doc">History</span></a> · <a class="reference internal" href="../api/gallery/linalg/index.html"><span class="doc">Examples</span></a> · <a class="reference internal" href="../api/linalg.html"><span class="doc">API reference</span></a></p>
 </div>
 <blockquote class="epigraph">
-<div><p>“Linear algebra is the ultimate service subject.” – Gilbert Strang,
-as quoted widely in his own lecture courses</p>
+<div><p>“Linear algebra is the ultimate service subject.”
+– attributed to Gilbert Strang</p>
 </div></blockquote>
-<p>Solving <span class="math notranslate nohighlight">\(Ax=b\)</span> is arguably the single most-called subroutine in
-applied mathematics, and the story of how to do it <em>well</em> – not just
-correctly, but stably, in floating-point arithmetic, without needless
-loss of precision – runs from Gaussian elimination’s two-century-old
-roots through the mid-20th-century discovery that some numerically
-“obvious” reformulations are secretly disastrous. This chronology traces
-the decompositions and iterative solvers behind <a class="reference internal" href="../api/linalg.html#module-mathematicskit.linalg" title="mathematicskit.linalg"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.linalg</span></code></a>.</p>
+<p>Solving <span class="math notranslate nohighlight">\(Ax=b\)</span> is arguably the most frequently called subroutine
+in applied mathematics. The story of how to do it <em>well</em> – not just
+correctly, but stably in floating-point arithmetic, without needless
+loss of precision – runs from the ancient roots of elimination to the
+mid-20th-century discovery that some “obvious” reformulations are
+numerically disastrous. This chronology traces the decompositions and
+iterative solvers behind <a class="reference internal" href="../api/linalg.html#module-mathematicskit.linalg" title="mathematicskit.linalg"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.linalg</span></code></a>.</p>
 <nav class="contents local" id="timeline">
 <p class="topic-title">Timeline</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#c-150-ce-the-nine-chapters-and-elimination" id="id1">c. 150 CE – The Nine Chapters and Elimination</a></p></li>
-<li><p><a class="reference internal" href="#gauss-and-lu-decomposition" id="id2">1809 – Gauss and LU Decomposition</a></p></li>
-<li><p><a class="reference internal" href="#cholesky-s-decomposition" id="id3">1902 – 1924 – Cholesky’s Decomposition</a></p></li>
-<li><p><a class="reference internal" href="#gram-schmidt-householder-and-qr" id="id4">1907 – 1958 – Gram-Schmidt, Householder, and QR</a></p></li>
+<li><p><a class="reference internal" href="#c-100-ce-the-nine-chapters-and-elimination" id="id1">c. 100 CE – The Nine Chapters and Elimination</a></p></li>
+<li><p><a class="reference internal" href="#cramer-s-rule" id="id2">1750 – Cramer’s Rule</a></p></li>
+<li><p><a class="reference internal" href="#gauss-and-lu-decomposition" id="id3">1809 – Gauss and LU Decomposition</a></p></li>
+<li><p><a class="reference internal" href="#gauss-seidel-and-successive-over-relaxation" id="id4">1823-1950 – Gauss-Seidel and Successive Over-Relaxation</a></p></li>
 <li><p><a class="reference internal" href="#cauchy-and-the-eigenvalue-problem" id="id5">1829 – Cauchy and the Eigenvalue Problem</a></p></li>
-<li><p><a class="reference internal" href="#power-iteration-and-von-mises" id="id6">1929 – Power Iteration and von Mises</a></p></li>
-<li><p><a class="reference internal" href="#eckart-young-and-the-singular-value-decomposition" id="id7">1936 – Eckart, Young, and the Singular Value Decomposition</a></p></li>
-<li><p><a class="reference internal" href="#turing-von-neumann-and-the-condition-number" id="id8">1947 – 1948 – Turing, von Neumann, and the Condition Number</a></p></li>
-<li><p><a class="reference internal" href="#hestenes-stiefel-and-the-conjugate-gradient-method" id="id9">1952 – Hestenes, Stiefel, and the Conjugate Gradient Method</a></p></li>
-<li><p><a class="reference internal" href="#see-also" id="id10">See Also</a></p></li>
+<li><p><a class="reference internal" href="#cayley-and-the-cayley-hamilton-theorem" id="id6">1858 – Cayley and the Cayley-Hamilton Theorem</a></p></li>
+<li><p><a class="reference internal" href="#gram-schmidt-householder-and-qr" id="id7">1883-1958 – Gram-Schmidt, Householder, and QR</a></p></li>
+<li><p><a class="reference internal" href="#cholesky-s-decomposition" id="id8">1910-1924 – Cholesky’s Decomposition</a></p></li>
+<li><p><a class="reference internal" href="#moore-penrose-and-the-pseudoinverse" id="id9">1920-1955 – Moore, Penrose, and the Pseudoinverse</a></p></li>
+<li><p><a class="reference internal" href="#power-iteration-and-von-mises" id="id10">1929 – Power Iteration and von Mises</a></p></li>
+<li><p><a class="reference internal" href="#gershgorin-s-circle-theorem" id="id11">1931 – Gershgorin’s Circle Theorem</a></p></li>
+<li><p><a class="reference internal" href="#eckart-young-and-the-singular-value-decomposition" id="id12">1936 – Eckart, Young, and the Singular Value Decomposition</a></p></li>
+<li><p><a class="reference internal" href="#turing-von-neumann-and-the-condition-number" id="id13">1947-1948 – Turing, von Neumann, and the Condition Number</a></p></li>
+<li><p><a class="reference internal" href="#lanczos-iteration" id="id14">1950 – Lanczos Iteration</a></p></li>
+<li><p><a class="reference internal" href="#hestenes-stiefel-and-the-conjugate-gradient-method" id="id15">1952 – Hestenes, Stiefel, and the Conjugate Gradient Method</a></p></li>
+<li><p><a class="reference internal" href="#francis-kublanovskaya-and-the-qr-algorithm" id="id16">1961 – Francis, Kublanovskaya, and the QR Algorithm</a></p></li>
+<li><p><a class="reference internal" href="#see-also" id="id17">See Also</a></p></li>
 </ul>
 </nav>
-<section id="c-150-ce-the-nine-chapters-and-elimination">
-<h2><a class="toc-backref" href="#id1" role="doc-backlink">c. 150 CE – The Nine Chapters and Elimination</a><a class="headerlink" href="#c-150-ce-the-nine-chapters-and-elimination" title="Link to this heading">#</a></h2>
-<p>The Chinese mathematical classic <em>Jiuzhang Suanshu</em> (“The Nine Chapters
-on the Mathematical Art”), compiled from older material by the Han
-dynasty, describes a method for solving simultaneous linear equations
-by arranging their coefficients in a rectangular array and eliminating
-unknowns column by column – procedurally identical to what Gauss would
-rediscover, and get his name attached to, sixteen centuries later.</p>
+<section id="c-100-ce-the-nine-chapters-and-elimination">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">c. 100 CE – The Nine Chapters and Elimination</a><a class="headerlink" href="#c-100-ce-the-nine-chapters-and-elimination" title="Link to this heading">#</a></h2>
+<p>The Chinese classic <em>Jiuzhang Suanshu</em> (“The Nine Chapters on the
+Mathematical Art”) was compiled from older material and reached its
+final form by around the 1st century CE. Its eighth chapter solves
+simultaneous linear equations by arranging their coefficients in a
+rectangular array and eliminating unknowns column by column. The
+procedure is essentially the one Isaac Newton described in Europe in
+1707, and it became attached to Carl Friedrich Gauss’s name after his
+work on least squares, some seventeen centuries after the <em>Nine
+Chapters</em>.</p>
 <p><em>Implementation:</em> <a class="reference internal" href="../api/numerical_analysis.html#mathematicskit.numerical_analysis.PolynomialRegression" title="mathematicskit.numerical_analysis.systems.regression.PolynomialRegression"><code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis.systems.regression.PolynomialRegression()</span></code></a>’s
-underlying solves, and every dense linear system in this package, trace
-back to exactly this elimination idea, now delegated to LAPACK via
+underlying solves, and every dense linear system in this package, rest
+on this elimination idea, now delegated to LAPACK through
 <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu.html#scipy.linalg.lu" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.linalg.lu()</span></code></a>.</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Factors P A = L U and reuses the factorization to solve multiple right-hand sides and compute the determinant, both far cheaper than refactoring from scratch each time."><img alt="" src="../_images/sphx_glr_plot_01_lu_decomposition_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/linalg/lu/plot_01_lu_decomposition.html"><span class="doc">LU decomposition with partial pivoting</span></a></p>
-  <div class="sphx-glr-thumbnail-title">LU decomposition with partial pivoting</div>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="The first problem of Chapter 8 (Fangcheng, &quot;rectangular arrays&quot;) of the Nine Chapters on the Mathematical Art: 3 bundles of top-grade, 2 of medium-grade and 1 of low-grade grain yield 39 dou; 2, 3 and 1 bundles yield 34; 1, 2 and 3 bundles yield 26. How much does one bundle of each grade yield?"><img alt="" src="../_images/sphx_glr_plot_01_nine_chapters_elimination_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/linalg/lu/plot_01_nine_chapters_elimination.html"><span class="doc">Elimination in the Nine Chapters: the three grades of grain</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Elimination in the Nine Chapters: the three grades of grain</div>
+</div></div></section>
+<section id="cramer-s-rule">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">1750 – Cramer’s Rule</a><a class="headerlink" href="#cramer-s-rule" title="Link to this heading">#</a></h2>
+<p>Gabriel Cramer’s 1750 treatise on algebraic curves needed to find the
+curve of a given degree through a given set of points, which meant
+solving a system of linear equations. In an appendix he stated a general
+rule for writing down the solution of <span class="math notranslate nohighlight">\(n\)</span> equations in <span class="math notranslate nohighlight">\(n\)</span>
+unknowns: each unknown is a ratio whose denominator is built from the
+coefficients alone and whose numerator is the same expression with that
+unknown’s coefficients replaced by the right-hand sides. In modern terms
+these expressions are determinants. Colin Maclaurin had published the
+cases of two and three unknowns in 1748, and Cramer’s rule helped
+launch the theory of determinants, which dominated linear algebra for
+the next century. The rule is a formula, not an algorithm: evaluated
+with determinants it costs far more than elimination.</p>
+<div class="math notranslate nohighlight">
+\[x_i = \frac{\det A_i}{\det A}, \qquad
+A_i = A \text{ with column } i \text{ replaced by } b\]</div>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.linalg.systems.cramer.cramer_solve()</span></code>
+evaluates the rule with <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.slogdet.html#numpy.linalg.slogdet" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.slogdet()</span></code></a>. Each determinant
+is itself an LU factorization, so the rule costs <span class="math notranslate nohighlight">\(n+1\)</span>
+factorizations. The gallery example times it against
+<code class="xref py py-func docutils literal notranslate"><span class="pre">lu_solve_system()</span></code> to show the
+extra factor of <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p><em>References:</em> G. Cramer, <em>Introduction à l’analyse des lignes courbes
+algébriques</em> (Geneva: Frères Cramer et Cl. Philibert, 1750), Appendix
+I; C. Maclaurin, <em>A Treatise of Algebra</em> (London: A. Millar and J.
+Nourse, 1748).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Cramer&#x27;s rule gives every unknown as a ratio of two determinants, x_i = det(A_i) / det(A). It is exact in theory but needs n + 1 determinants, each an O(n^3) factorization, so its cost grows like n^4 against elimination&#x27;s n^3."><img alt="" src="../_images/sphx_glr_plot_01_cramers_rule_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/linalg/classical/plot_01_cramers_rule.html"><span class="doc">Cramer’s rule vs. elimination</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Cramer's rule vs. elimination</div>
 </div></div></section>
 <section id="gauss-and-lu-decomposition">
-<h2><a class="toc-backref" href="#id2" role="doc-backlink">1809 – Gauss and LU Decomposition</a><a class="headerlink" href="#gauss-and-lu-decomposition" title="Link to this heading">#</a></h2>
-<p>Carl Friedrich Gauss’s elimination procedure for least-squares normal
-equations (see the numerical-analysis chronology) factors as a byproduct
-into a lower-triangular and an upper-triangular matrix, <span class="math notranslate nohighlight">\(A = LU\)</span> –
-a factorization made numerically robust by choosing, at each step, the
-largest available pivot (Partial pivoting, formalized much later, in the
-1940s-50s error-analysis literature). Once factored, solving for a new
-right-hand side costs only <span class="math notranslate nohighlight">\(O(n^2)\)</span>, not the <span class="math notranslate nohighlight">\(O(n^3)\)</span> of a
-fresh elimination.</p>
-<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.linalg.systems.lu.lu_decompose()</span></code> wraps
-<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu.html#scipy.linalg.lu" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.linalg.lu()</span></code></a> for exactly this partial-pivoted factorization;
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">1809 – Gauss and LU Decomposition</a><a class="headerlink" href="#gauss-and-lu-decomposition" title="Link to this heading">#</a></h2>
+<p>Carl Friedrich Gauss’s elimination procedure for the least-squares
+normal equations (see the numerical-analysis chronology) implicitly
+factors the matrix into a lower-triangular and an upper-triangular
+matrix, <span class="math notranslate nohighlight">\(A = LU\)</span>. The factorization is made numerically robust by
+choosing the largest available pivot at each step; this partial
+pivoting was analyzed only much later, in the error-analysis literature
+of the 1940s and 1950s. Once <span class="math notranslate nohighlight">\(A\)</span> is factored, solving for a new
+right-hand side costs only <span class="math notranslate nohighlight">\(O(n^2)\)</span> operations instead of the
+<span class="math notranslate nohighlight">\(O(n^3)\)</span> of a fresh elimination.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.linalg.systems.lu.lu_decompose()</span></code>
+wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu.html#scipy.linalg.lu" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.linalg.lu()</span></code></a> for this partial-pivoted factorization;
 <code class="xref py py-func docutils literal notranslate"><span class="pre">lu_solve_system()</span></code> reuses it via
 <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu_factor.html#scipy.linalg.lu_factor" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.linalg.lu_factor()</span></code></a>/<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu_solve.html#scipy.linalg.lu_solve" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">lu_solve()</span></code></a>.</p>
-<p><em>References:</em> C. F. Gauss, <em>Theoria Motus Corporum Coelestium</em> (Hamburg,
-1809).</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Factors P A = L U and reuses the factorization to solve multiple right-hand sides and compute the determinant, both far cheaper than refactoring from scratch each time."><img alt="" src="../_images/sphx_glr_plot_01_lu_decomposition_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/linalg/lu/plot_01_lu_decomposition.html"><span class="doc">LU decomposition with partial pivoting</span></a></p>
+<p><em>References:</em> C. F. Gauss, <em>Theoria Motus Corporum Coelestium</em> (Hamburg:
+Perthes et Besser, 1809).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Gaussian elimination, with its multipliers stored in L and the eliminated rows in U, factors P A = L U. The script reuses the factorization to solve multiple right-hand sides and compute the determinant, both far cheaper than refactoring from scratch each time."><img alt="" src="../_images/sphx_glr_plot_02_lu_decomposition_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/linalg/lu/plot_02_lu_decomposition.html"><span class="doc">LU decomposition with partial pivoting</span></a></p>
   <div class="sphx-glr-thumbnail-title">LU decomposition with partial pivoting</div>
 </div></div></section>
-<section id="cholesky-s-decomposition">
-<h2><a class="toc-backref" href="#id3" role="doc-backlink">1902 – 1924 – Cholesky’s Decomposition</a><a class="headerlink" href="#cholesky-s-decomposition" title="Link to this heading">#</a></h2>
-<p>Andre-Louis Cholesky, an artillery officer and geodesist working on
-triangulation surveys for the French army’s Service Geographique,
-devised around 1902-1910 a factorization specialized for exactly the
-symmetric positive-definite systems that survey adjustment produces:
-<span class="math notranslate nohighlight">\(A = LL^T\)</span> with <span class="math notranslate nohighlight">\(L\)</span> lower triangular, at roughly half the
-arithmetic cost of a general LU factorization and without LU’s need to
-search for a pivot at all, since a symmetric positive-definite matrix’s
-own diagonal entries are always usable directly. Cholesky was killed in
-action in 1918; his method was published posthumously in 1924 by
-Commandant Benoit, from Cholesky’s own manuscripts.</p>
+<section id="gauss-seidel-and-successive-over-relaxation">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">1823-1950 – Gauss-Seidel and Successive Over-Relaxation</a><a class="headerlink" href="#gauss-seidel-and-successive-over-relaxation" title="Link to this heading">#</a></h2>
+<p>In an 1823 letter to his student Christian Ludwig Gerling, Gauss
+described solving the normal equations of a survey adjustment
+“indirectly”: correct one unknown at a time from its own equation,
+using the latest values of the others, and repeat. He remarked that he
+could do it half asleep. Carl Gustav Jacob Jacobi published a variant
+in 1845 that updates every unknown simultaneously from the previous
+iterate, and Philipp Ludwig von Seidel analyzed Gauss’s sweep in 1874.
+Writing <span class="math notranslate nohighlight">\(A = D + L + U\)</span> (diagonal, strictly lower, strictly
+upper), both are fixed-point iterations
+<span class="math notranslate nohighlight">\(x_{k+1} = G x_k + c\)</span>, and they converge from any starting point
+exactly when the spectral radius <span class="math notranslate nohighlight">\(\rho(G)\)</span> is below one.</p>
+<p>The computer era turned this into a quantitative theory. In 1950
+Stanley Frankel and David Young independently showed that
+over-correcting each update by a factor <span class="math notranslate nohighlight">\(\omega\)</span> (successive
+over-relaxation, SOR) can speed convergence enormously. For the
+“consistently ordered” matrices of discretized elliptic equations,
+Young proved that <span class="math notranslate nohighlight">\(\rho(G_{GS}) = \rho(G_J)^2\)</span> and found the best
+relaxation factor exactly:</p>
 <div class="math notranslate nohighlight">
-\[A = LL^T, \qquad A \text{ symmetric positive-definite}\]</div>
-<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.linalg.systems.cholesky.cholesky_decompose()</span></code>
-wraps <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.cholesky.html#numpy.linalg.cholesky" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.cholesky()</span></code></a> for exactly this factorization, whose
-failure (LAPACK’s <code class="docutils literal notranslate"><span class="pre">?potrf</span></code> raising when a diagonal pivot would require
-a square root of a negative number) doubles as a positive-definiteness
-certificate in <code class="xref py py-func docutils literal notranslate"><span class="pre">is_symmetric_positive_definite()</span></code>;
-<code class="xref py py-func docutils literal notranslate"><span class="pre">cholesky_solve()</span></code> reuses the
-factorization for a forward/backward triangular solve via
-<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.solve_triangular.html#scipy.linalg.solve_triangular" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.linalg.solve_triangular()</span></code></a>.</p>
-<p><em>References:</em> A.-L. Cholesky (posth.), “Sur la resolution numerique des
-systemes d’equations lineaires,” manuscript (c. 1910), transcribed and
-published by Commandant Benoit, Bulletin Geodesique 2 (1924), 67-77.</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Cholesky factors a symmetric positive-definite A = L L^T at roughly half the cost of LU, and the factorization succeeding at all (every sqrt argument staying positive) is itself a certificate of positive-definiteness."><img alt="" src="../_images/sphx_glr_plot_01_cholesky_solve_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/linalg/cholesky/plot_01_cholesky_solve.html"><span class="doc">Cholesky decomposition for SPD systems</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Cholesky decomposition for SPD systems</div>
+\[\omega^* = \frac{2}{1 + \sqrt{1 - \rho(G_J)^2}}, \qquad
+\rho(G_{SOR}(\omega^*)) = \omega^* - 1.\]</div>
+<p>For the 1-D Poisson matrix of size 40 this cuts roughly 3,100
+Gauss-Seidel sweeps to about 150.</p>
+<p><em>Implementation:</em> <a class="reference internal" href="../api/linalg.html#mathematicskit.linalg.JacobiIteration" title="mathematicskit.linalg.systems.stationary.JacobiIteration"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathematicskit.linalg.systems.stationary.JacobiIteration</span></code></a>,
+<a class="reference internal" href="../api/linalg.html#mathematicskit.linalg.GaussSeidel" title="mathematicskit.linalg.systems.stationary.GaussSeidel"><code class="xref py py-class docutils literal notranslate"><span class="pre">GaussSeidel</span></code></a>, and
+<a class="reference internal" href="../api/linalg.html#mathematicskit.linalg.SOR" title="mathematicskit.linalg.systems.stationary.SOR"><code class="xref py py-class docutils literal notranslate"><span class="pre">SOR</span></code></a> are hand-rolled,
+because scipy has no stationary-iteration solver and the sweep itself is
+the lesson. They share the
+<a class="reference internal" href="../api/linalg.html#mathematicskit.linalg.IterativeLinearSolver" title="mathematicskit.linalg.core.base.IterativeLinearSolver"><code class="xref py py-class docutils literal notranslate"><span class="pre">IterativeLinearSolver</span></code></a>
+interface and residual history of the Krylov solvers.
+<code class="xref py py-func docutils literal notranslate"><span class="pre">jacobi_spectral_radius()</span></code>
+and <code class="xref py py-func docutils literal notranslate"><span class="pre">optimal_sor_omega()</span></code>
+evaluate Young’s theory.</p>
+<p><em>References:</em> C. F. Gauss, letter to C. L. Gerling, 26 December 1823,
+in <em>Werke</em> 9 (Göttingen, 1903), 278-281; C. G. J. Jacobi, “Ueber eine
+neue Auflösungsart der bei der Methode der kleinsten Quadrate
+vorkommenden lineären Gleichungen,” Astronomische Nachrichten 22
+(1845), 297-306; P. L. von Seidel, “Über ein Verfahren, die
+Gleichungen, auf welche die Methode der kleinsten Quadrate führt, sowie
+lineäre Gleichungen überhaupt, durch successive Annäherung aufzulösen,”
+Abhandlungen der Bayerischen Akademie der Wissenschaften,
+Mathematisch-Physikalische Classe 11 (1874), 81-108; S. P. Frankel,
+“Convergence Rates of Iterative Treatments of Partial Differential
+Equations,” Mathematical Tables and Other Aids to Computation 4(30)
+(1950), 65-75; D. M. Young, “Iterative Methods for Solving Partial
+Difference Equations of Elliptic Type,” Transactions of the American
+Mathematical Society 76(1) (1954), 92-111.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="The three classical stationary iterations on the 1-D Poisson matrix tridiag(-1, 2, -1). Gauss-Seidel contracts the error about twice as fast per sweep as Jacobi, and SOR at Young&#x27;s optimal relaxation factor is faster by an order of magnitude."><img alt="" src="../_images/sphx_glr_plot_02_gauss_seidel_and_sor_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/linalg/iterative/plot_02_gauss_seidel_and_sor.html"><span class="doc">Jacobi, Gauss-Seidel, and successive over-relaxation</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Jacobi, Gauss-Seidel, and successive over-relaxation</div>
+</div></div></section>
+<section id="cauchy-and-the-eigenvalue-problem">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">1829 – Cauchy and the Eigenvalue Problem</a><a class="headerlink" href="#cauchy-and-the-eigenvalue-problem" title="Link to this heading">#</a></h2>
+<p>Augustin-Louis Cauchy’s 1829 memoir on the principal axes of quadratic
+forms proved that a real symmetric matrix has only real eigenvalues and
+an orthogonal basis of eigenvectors. This is the spectral theorem in
+essence, written decades before the word “eigenvalue” (from David
+Hilbert’s German <em>Eigenwert</em>) entered the language around 1904. Carl
+Gustav Jacob Jacobi’s 1846 rotation method aside, practical algorithms
+for <em>computing</em> eigenvalues, rather than proving they exist, had to
+wait for the computer era.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.linalg.systems.eigen.eigen_symmetric()</span></code>
+wraps <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.eigh.html#numpy.linalg.eigh" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.eigh()</span></code></a> for the symmetric case that Cauchy’s
+theorem covers; <code class="xref py py-func docutils literal notranslate"><span class="pre">eigen_general()</span></code>
+wraps <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.eig.html#numpy.linalg.eig" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.eig()</span></code></a> for the general case, whose spectrum may
+be complex.</p>
+<p><em>References:</em> A.-L. Cauchy, “Sur l’équation à l’aide de laquelle on
+détermine les inégalités séculaires des mouvements des planètes,”
+Exercices de mathématiques 4 (1829).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Cauchy&#x27;s 1829 memoir showed that a real symmetric matrix has only real eigenvalues and an orthonormal basis of eigenvectors, so A = V diag(lambda) V^T. Geometrically, the eigenvectors are the principal axes of the quadric x^T A x = 1. A non-symmetric matrix enjoys neither property."><img alt="" src="../_images/sphx_glr_plot_01_cauchy_spectral_theorem_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/linalg/eigen/plot_01_cauchy_spectral_theorem.html"><span class="doc">Cauchy’s spectral theorem: principal axes of a quadratic form</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Cauchy's spectral theorem: principal axes of a quadratic form</div>
+</div></div></section>
+<section id="cayley-and-the-cayley-hamilton-theorem">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">1858 – Cayley and the Cayley-Hamilton Theorem</a><a class="headerlink" href="#cayley-and-the-cayley-hamilton-theorem" title="Link to this heading">#</a></h2>
+<p>Arthur Cayley’s 1858 “Memoir on the Theory of Matrices” was the first
+to treat a matrix as a single algebraic object that can be added,
+multiplied, and inverted, rather than as shorthand for a system of
+equations. Its central result is that every square matrix satisfies
+its own characteristic equation. Cayley checked the 2x2 case directly,
+said he had verified the 3x3 case, and saw no need for a general
+proof. William Rowan Hamilton had proved a special case for linear
+maps of quaternions in 1853, and Ferdinand Georg Frobenius gave the
+first general proof in 1878. A useful consequence is that every power
+of <span class="math notranslate nohighlight">\(A\)</span>, and <span class="math notranslate nohighlight">\(A^{-1}\)</span> itself, is a polynomial in <span class="math notranslate nohighlight">\(A\)</span>
+of degree less than <span class="math notranslate nohighlight">\(n\)</span>. That fact underlies Krylov subspace
+methods and the theory of matrix functions.</p>
+<div class="math notranslate nohighlight">
+\[p_A(\lambda) = \det(\lambda I - A)
+\quad\Longrightarrow\quad p_A(A) = 0\]</div>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.linalg.systems.matrix_polynomial.characteristic_polynomial()</span></code>
+wraps <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.poly.html#numpy.poly" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.poly()</span></code></a>, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">matrix_polynomial()</span></code>
+evaluates a polynomial at a matrix by Horner’s rule. The tests check
+that <span class="math notranslate nohighlight">\(p_A(A)\)</span> vanishes to rounding error, and the gallery example
+rebuilds <span class="math notranslate nohighlight">\(A^{-1}\)</span> from the characteristic polynomial.</p>
+<p><em>References:</em> A. Cayley, “A Memoir on the Theory of Matrices,”
+Philosophical Transactions of the Royal Society of London 148 (1858),
+17-37; W. R. Hamilton, <em>Lectures on Quaternions</em> (Dublin: Hodges and
+Smith, 1853); F. G. Frobenius, “Über lineare Substitutionen und
+bilineare Formen,” Journal für die reine und angewandte Mathematik 84
+(1878), 1-63.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Every square matrix satisfies its own characteristic equation: if p(l) = det(l I - A), then p(A) = 0. A consequence is that A^{-1} (and every higher power of A) is a polynomial in A of degree below n."><img alt="" src="../_images/sphx_glr_plot_02_cayley_hamilton_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/linalg/classical/plot_02_cayley_hamilton.html"><span class="doc">The Cayley-Hamilton theorem</span></a></p>
+  <div class="sphx-glr-thumbnail-title">The Cayley-Hamilton theorem</div>
 </div></div></section>
 <section id="gram-schmidt-householder-and-qr">
-<h2><a class="toc-backref" href="#id4" role="doc-backlink">1907 – 1958 – Gram-Schmidt, Householder, and QR</a><a class="headerlink" href="#gram-schmidt-householder-and-qr" title="Link to this heading">#</a></h2>
-<p>Jorgen Pedersen Gram (1883) and Erhard Schmidt (1907) formalized the
-process of building an orthonormal basis one vector at a time by
-subtracting off each new vector’s projection onto the vectors already
-built – a construction that, applied to a matrix’s columns, factors it
-as <span class="math notranslate nohighlight">\(A = QR\)</span> with <span class="math notranslate nohighlight">\(Q\)</span> orthonormal and <span class="math notranslate nohighlight">\(R\)</span> upper
-triangular. Alston Householder’s 1958 paper gave a very different, far
-more numerically stable route to the same factorization: a sequence of
-elementary reflections that zero out sub-diagonal entries directly,
-without ever explicitly re-orthogonalizing anything – the textbook
-demonstration that two mathematically equivalent formulas can behave
-completely differently once floating-point rounding enters the picture.</p>
-<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.linalg.systems.qr.householder_qr()</span></code> wraps
-<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.qr.html#scipy.linalg.qr" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.linalg.qr()</span></code></a>; <code class="xref py py-func docutils literal notranslate"><span class="pre">gram_schmidt_qr()</span></code>
-keeps the classical/modified Gram-Schmidt construction hand-rolled
-specifically to demonstrate, via
-<code class="xref py py-func docutils literal notranslate"><span class="pre">orthogonality_error()</span></code>, how much
-orthogonality classical Gram-Schmidt loses for an ill-conditioned matrix
-that Householder’s reflections do not.</p>
-<p><em>References:</em> E. Schmidt, “Zur Theorie der linearen und nichtlinearen
-Integralgleichungen,” Mathematische Annalen 63 (1907), 433-476; A. S.
-Householder, “Unitary Triangularization of a Nonsymmetric Matrix,”
-Journal of the ACM 5(4) (1958), 339-342.</p>
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">1883-1958 – Gram-Schmidt, Householder, and QR</a><a class="headerlink" href="#gram-schmidt-householder-and-qr" title="Link to this heading">#</a></h2>
+<p>Jørgen Pedersen Gram (1883) and Erhard Schmidt (1907) formalized the
+process of building an orthonormal basis one vector at a time, by
+subtracting from each new vector its projections onto the vectors
+already built. Applied to a matrix’s columns, the process factors the
+matrix as <span class="math notranslate nohighlight">\(A = QR\)</span>, with <span class="math notranslate nohighlight">\(Q\)</span> orthonormal and <span class="math notranslate nohighlight">\(R\)</span>
+upper triangular. Alston Householder’s 1958 paper gave a very different
+and far more numerically stable route to the same factorization: a
+sequence of reflections that zero out the entries below the diagonal
+directly, with no re-orthogonalization at all. The pair is the textbook
+demonstration that two mathematically equivalent procedures can behave
+completely differently once floating-point rounding enters.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.linalg.systems.qr.householder_qr()</span></code>
+wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.qr.html#scipy.linalg.qr" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.linalg.qr()</span></code></a>.
+<code class="xref py py-func docutils literal notranslate"><span class="pre">gram_schmidt_qr()</span></code> keeps the
+classical and modified Gram-Schmidt constructions hand-rolled to show,
+via <code class="xref py py-func docutils literal notranslate"><span class="pre">orthogonality_error()</span></code>, how
+much orthogonality classical Gram-Schmidt loses on an ill-conditioned
+matrix compared with Householder’s reflections.</p>
+<p><em>References:</em> J. P. Gram, “Ueber die Entwickelung reeller Functionen in
+Reihen mittelst der Methode der kleinsten Quadrate,” Journal für die
+reine und angewandte Mathematik 94 (1883), 41-73; E. Schmidt, “Zur
+Theorie der linearen und nichtlinearen Integralgleichungen,”
+Mathematische Annalen 63 (1907), 433-476; A. S. Householder, “Unitary
+Triangularization of a Nonsymmetric Matrix,” Journal of the ACM 5(4)
+(1958), 339-342.</p>
 <div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Both factor A = Q R, but Householder reflections stay orthogonal to machine precision even for ill-conditioned A, while classical Gram-Schmidt can lose orthogonality badly -- modified Gram-Schmidt is a partial (but not complete) remedy. This is the textbook motivation for preferring Householder in production numerical software."><img alt="" src="../_images/sphx_glr_plot_01_householder_vs_gram_schmidt_thumb.png" />
 <p><a class="reference internal" href="../api/gallery/linalg/qr/plot_01_householder_vs_gram_schmidt.html"><span class="doc">Householder vs. Gram-Schmidt QR</span></a></p>
   <div class="sphx-glr-thumbnail-title">Householder vs. Gram-Schmidt QR</div>
 </div></div></section>
-<section id="cauchy-and-the-eigenvalue-problem">
-<h2><a class="toc-backref" href="#id5" role="doc-backlink">1829 – Cauchy and the Eigenvalue Problem</a><a class="headerlink" href="#cauchy-and-the-eigenvalue-problem" title="Link to this heading">#</a></h2>
-<p>Augustin-Louis Cauchy’s 1829 memoir on the principal-axis problem for
-quadratic forms proved that a real symmetric matrix has only real
-eigenvalues and an orthogonal basis of eigenvectors – the spectral
-theorem, in essence, decades before “eigenvalue” (from the German
-<em>Eigenwert</em>) entered the language via Hilbert at the turn of the 20th
-century. Practical, efficient algorithms for computing those eigenvalues
-– rather than merely proving they exist – would take more than a
-century longer to arrive.</p>
-<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.linalg.systems.eigen.eigen_symmetric()</span></code>
-wraps <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.eigh.html#numpy.linalg.eigh" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.eigh()</span></code></a> for exactly the symmetric case Cauchy’s
-theorem covers; <code class="xref py py-func docutils literal notranslate"><span class="pre">eigen_general()</span></code> wraps
-<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.eig.html#numpy.linalg.eig" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.eig()</span></code></a> for the general (possibly complex-spectrum)
-case.</p>
-<p><em>References:</em> A.-L. Cauchy, “Sur l’équation à l’aide de laquelle on
-détermine les inégalités séculaires des mouvements des planètes,”
-Exercices de mathématiques 4 (1829).</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="numpy.linalg.eigh finds the full spectrum directly; power iteration finds only the dominant eigenvalue; inverse iteration finds whichever eigenvalue is nearest a chosen shift. All three are compared here on the same matrix."><img alt="" src="../_images/sphx_glr_plot_01_eigenvalue_methods_compared_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/linalg/eigen/plot_01_eigenvalue_methods_compared.html"><span class="doc">Three routes to a symmetric matrix’s eigenvalues</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Three routes to a symmetric matrix's eigenvalues</div>
+<section id="cholesky-s-decomposition">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">1910-1924 – Cholesky’s Decomposition</a><a class="headerlink" href="#cholesky-s-decomposition" title="Link to this heading">#</a></h2>
+<p>André-Louis Cholesky was an artillery officer and geodesist who worked
+on triangulation surveys for the French army’s Service géographique.
+By 1910 he had devised a factorization for the symmetric
+positive-definite systems that survey adjustment produces:
+<span class="math notranslate nohighlight">\(A = LL^T\)</span>, with <span class="math notranslate nohighlight">\(L\)</span> lower triangular. It costs roughly
+half as much as a general LU factorization and needs no pivot search,
+because the diagonal entries of a symmetric positive-definite matrix
+can always be used directly. Cholesky was killed in action in 1918;
+Commandant Benoit published the method from his manuscripts in 1924.</p>
+<div class="math notranslate nohighlight">
+\[A = LL^T, \qquad A \text{ symmetric positive-definite}\]</div>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.linalg.systems.cholesky.cholesky_decompose()</span></code>
+wraps <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.cholesky.html#numpy.linalg.cholesky" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.cholesky()</span></code></a> for this factorization. Its failure
+(LAPACK’s <code class="docutils literal notranslate"><span class="pre">?potrf</span></code> raises an error when a pivot would require the
+square root of a negative number) doubles as a positive-definiteness
+test in
+<code class="xref py py-func docutils literal notranslate"><span class="pre">is_symmetric_positive_definite()</span></code>.
+<code class="xref py py-func docutils literal notranslate"><span class="pre">cholesky_solve()</span></code> reuses the
+factorization for a forward and backward triangular solve with
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.solve_triangular.html#scipy.linalg.solve_triangular" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.linalg.solve_triangular()</span></code></a>.</p>
+<p><em>References:</em> Commandant Benoit, “Note sur une méthode de résolution des
+équations normales provenant de l’application de la méthode des
+moindres carrés à un système d’équations linéaires en nombre inférieur
+à celui des inconnues (Procédé du Commandant Cholesky),” Bulletin
+Géodésique 2 (1924), 67-77; A.-L. Cholesky, “Sur la résolution
+numérique des systèmes d’équations linéaires” (manuscript dated 1910).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Cholesky factors a symmetric positive-definite A = L L^T at roughly half the cost of LU, and the factorization succeeding at all (every sqrt argument staying positive) is itself a certificate of positive-definiteness."><img alt="" src="../_images/sphx_glr_plot_01_cholesky_solve_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/linalg/cholesky/plot_01_cholesky_solve.html"><span class="doc">Cholesky decomposition for SPD systems</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Cholesky decomposition for SPD systems</div>
+</div></div></section>
+<section id="moore-penrose-and-the-pseudoinverse">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">1920-1955 – Moore, Penrose, and the Pseudoinverse</a><a class="headerlink" href="#moore-penrose-and-the-pseudoinverse" title="Link to this heading">#</a></h2>
+<p>A rectangular or singular matrix has no inverse, but E. H. Moore showed
+in 1920 that it still has a canonical “general reciprocal”. His work was
+written in an idiosyncratic notation and was largely overlooked. Arne
+Bjerhammar rediscovered the idea for geodetic adjustment in 1951, and
+Roger Penrose, then a graduate student, characterized it in 1955 as the
+unique matrix <span class="math notranslate nohighlight">\(X = A^+\)</span> satisfying four equations:</p>
+<div class="math notranslate nohighlight">
+\[AXA = A, \qquad XAX = X, \qquad (AX)^T = AX, \qquad (XA)^T = XA.\]</div>
+<p>Penrose also showed that <span class="math notranslate nohighlight">\(x = A^+ b\)</span> is the least-squares
+solution of <span class="math notranslate nohighlight">\(Ax = b\)</span> with the smallest norm. That gives every
+linear system, whether over- or underdetermined and whatever its rank,
+a single well-defined “best” answer. Through the SVD,
+<span class="math notranslate nohighlight">\(A^+ = V\Sigma^+U^T\)</span>, where <span class="math notranslate nohighlight">\(\Sigma^+\)</span> inverts the nonzero
+singular values and leaves the zeros in place.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.linalg.systems.pseudoinverse.pseudoinverse()</span></code>
+wraps the SVD-based <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.pinv.html#numpy.linalg.pinv" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.pinv()</span></code></a>, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">penrose_residuals()</span></code>
+measures how far a candidate matrix is from satisfying each of the four
+equations.</p>
+<p><em>References:</em> E. H. Moore, “On the Reciprocal of the General Algebraic
+Matrix,” Bulletin of the American Mathematical Society 26 (1920),
+394-395; A. Bjerhammar, “Application of Calculus of Matrices to Method
+of Least Squares; with Special References to Geodetic Calculations,”
+Transactions of the Royal Institute of Technology, Stockholm 49 (1951);
+R. Penrose, “A Generalized Inverse for Matrices,” Proceedings of the
+Cambridge Philosophical Society 51(3) (1955), 406-413.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="For a rectangular or rank-deficient A there is no inverse, but there is exactly one matrix A^+ satisfying Penrose&#x27;s four equations, and x = A^+ b is the shortest vector among all least-squares solutions."><img alt="" src="../_images/sphx_glr_plot_02_moore_penrose_pseudoinverse_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/linalg/svd/plot_02_moore_penrose_pseudoinverse.html"><span class="doc">The Moore-Penrose pseudoinverse</span></a></p>
+  <div class="sphx-glr-thumbnail-title">The Moore-Penrose pseudoinverse</div>
 </div></div></section>
 <section id="power-iteration-and-von-mises">
-<h2><a class="toc-backref" href="#id6" role="doc-backlink">1929 – Power Iteration and von Mises</a><a class="headerlink" href="#power-iteration-and-von-mises" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">1929 – Power Iteration and von Mises</a><a class="headerlink" href="#power-iteration-and-von-mises" title="Link to this heading">#</a></h2>
 <p>Richard von Mises and Hilda Pollaczek-Geiringer’s 1929 paper gave power
-iteration its first systematic numerical treatment: repeatedly
-multiplying a matrix into a vector and renormalizing converges to the
-eigenvector of largest-magnitude eigenvalue, with the Rayleigh quotient
-converging to the eigenvalue itself. Shifting the matrix before
-inverting (inverse iteration) instead converges to whichever eigenvalue
-sits nearest the shift – both still the conceptually simplest route to
-a single eigenpair when the full spectrum isn’t needed, and the direct
-ancestor of the shifted-QR algorithms that now compute the full spectrum
-in production libraries.</p>
+iteration its first systematic numerical treatment. Repeatedly
+multiplying a vector by a matrix and renormalizing converges to the
+eigenvector of the largest-magnitude eigenvalue, and the Rayleigh
+quotient converges to that eigenvalue. Inverse iteration, which Helmut
+Wielandt developed in 1944, applies the same idea to the inverse of a
+shifted matrix and converges to whichever eigenvalue lies nearest the
+shift. Both remain the simplest route to a single eigenpair when the
+full spectrum isn’t needed, and both are ancestors of the shifted QR
+algorithm that production libraries now use for the full spectrum.</p>
 <p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.linalg.systems.eigen.power_iteration()</span></code>
-and <code class="xref py py-func docutils literal notranslate"><span class="pre">inverse_iteration()</span></code> implement
-both exactly as originally described, the one family of algorithm in
-this domain kept hand-rolled since the <em>iteration itself</em> is the point.</p>
+and <code class="xref py py-func docutils literal notranslate"><span class="pre">inverse_iteration()</span></code>
+implement both as originally described. They are the one algorithm
+family in this domain kept hand-rolled, because the <em>iteration itself</em>
+is the point.</p>
 <p><em>References:</em> R. von Mises and H. Pollaczek-Geiringer, “Praktische
 Verfahren der Gleichungsauflösung,” Zeitschrift für Angewandte
-Mathematik und Mechanik 9 (1929), 152-164, 58-77.</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="numpy.linalg.eigh finds the full spectrum directly; power iteration finds only the dominant eigenvalue; inverse iteration finds whichever eigenvalue is nearest a chosen shift. All three are compared here on the same matrix."><img alt="" src="../_images/sphx_glr_plot_01_eigenvalue_methods_compared_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/linalg/eigen/plot_01_eigenvalue_methods_compared.html"><span class="doc">Three routes to a symmetric matrix’s eigenvalues</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Three routes to a symmetric matrix's eigenvalues</div>
+Mathematik und Mechanik 9 (1929), 58-77, 152-164.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Power iteration v_{k+1} = A v_k / ||A v_k|| converges to the dominant eigenvector at the rate |lambda_2 / lambda_1| per step (squared for the Rayleigh quotient of a symmetric matrix). Inverse iteration applies the same step to (A - mu I)^{-1} and homes in on the eigenvalue nearest the shift mu, at the much faster rate |lambda - mu| / |lambda&#x27; - mu|."><img alt="" src="../_images/sphx_glr_plot_02_power_and_inverse_iteration_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/linalg/eigen/plot_02_power_and_inverse_iteration.html"><span class="doc">Von Mises power iteration and Wielandt inverse iteration</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Von Mises power iteration and Wielandt inverse iteration</div>
+</div></div></section>
+<section id="gershgorin-s-circle-theorem">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">1931 – Gershgorin’s Circle Theorem</a><a class="headerlink" href="#gershgorin-s-circle-theorem" title="Link to this heading">#</a></h2>
+<p>Semyon Aronovich Gershgorin, working in Leningrad, published a
+short paper in 1931 showing that eigenvalues can be located without
+computing them. Every eigenvalue of <span class="math notranslate nohighlight">\(A\)</span> lies in at least one of
+the discs centered on the diagonal entries, each with radius equal to
+the sum of the absolute values of the other entries in its row:</p>
+<div class="math notranslate nohighlight">
+\[\lambda \in \bigcup_{k=1}^{n} \Big\{ z \in \mathbb{C} :
+|z - a_{kk}| \le \sum_{j \ne k} |a_{kj}| \Big\}.\]</div>
+<p>The proof takes one line: look at the largest component of an
+eigenvector. Gershgorin also showed that a connected cluster of
+<span class="math notranslate nohighlight">\(m\)</span> discs, disjoint from the rest, contains exactly <span class="math notranslate nohighlight">\(m\)</span>
+eigenvalues. An immediate corollary is that a strictly diagonally
+dominant matrix is nonsingular. That is the same condition that
+guarantees convergence of the Jacobi and Gauss-Seidel iterations, and
+the theorem is still the quickest sanity check on a computed spectrum.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.linalg.systems.gershgorin.gershgorin_discs()</span></code>
+computes the row (or column) discs into a
+<a class="reference internal" href="../api/linalg.html#mathematicskit.linalg.GershgorinResult" title="mathematicskit.linalg.core.base.GershgorinResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">GershgorinResult</span></code></a>, whose
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">contains()</span></code>
+tests membership in their union. It is hand-rolled because the discs
+are a closed-form function of the entries.</p>
+<p><em>References:</em> S. Gerschgorin, “Über die Abgrenzung der Eigenwerte einer
+Matrix,” Izvestiya Akademii Nauk SSSR, Otdelenie Matematicheskikh i
+Estestvennykh Nauk 6 (1931), 749-754; R. S. Varga, <em>Geršgorin and His
+Circles</em> (Berlin: Springer, 2004).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Without computing anything but row sums, Gershgorin&#x27;s theorem traps every eigenvalue in a union of discs centered on the diagonal entries. Shrinking the off-diagonal part shrinks the discs onto the eigenvalues."><img alt="" src="../_images/sphx_glr_plot_03_gershgorin_discs_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/linalg/eigen/plot_03_gershgorin_discs.html"><span class="doc">Gershgorin discs</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Gershgorin discs</div>
 </div></div></section>
 <section id="eckart-young-and-the-singular-value-decomposition">
-<h2><a class="toc-backref" href="#id7" role="doc-backlink">1936 – Eckart, Young, and the Singular Value Decomposition</a><a class="headerlink" href="#eckart-young-and-the-singular-value-decomposition" title="Link to this heading">#</a></h2>
-<p>Carl Eckart and Gale Young’s 1936 paper (building on earlier work by
-Beltrami, Jordan, and Sylvester on special cases) established the
-general singular value decomposition <span class="math notranslate nohighlight">\(A = U\Sigma V^T\)</span> for any
-rectangular matrix, and proved the low-rank approximation theorem that
-bears their names: truncating the SVD to its <span class="math notranslate nohighlight">\(k\)</span> largest singular
-values gives the <em>best possible</em> rank-<span class="math notranslate nohighlight">\(k\)</span> approximation to
-<span class="math notranslate nohighlight">\(A\)</span> in either the spectral or Frobenius norm – the theoretical
-foundation under everything from principal component analysis to modern
-recommender systems.</p>
-<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.linalg.systems.svd.svd_decompose()</span></code> wraps
-<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.svd.html#numpy.linalg.svd" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.svd()</span></code></a>’s numerically stable bidiagonalization-based
-algorithm, the modern production route rather than Eckart and Young’s
-own eigendecomposition-of-<span class="math notranslate nohighlight">\(A^TA\)</span> construction (which squares the
-condition number being worked with).</p>
+<h2><a class="toc-backref" href="#id12" role="doc-backlink">1936 – Eckart, Young, and the Singular Value Decomposition</a><a class="headerlink" href="#eckart-young-and-the-singular-value-decomposition" title="Link to this heading">#</a></h2>
+<p>Carl Eckart and Gale Young’s 1936 paper built on earlier special cases
+by Eugenio Beltrami, Camille Jordan, and James Joseph Sylvester. It
+applied the singular value decomposition <span class="math notranslate nohighlight">\(A = U\Sigma V^T\)</span> to
+general rectangular matrices and proved the low-rank approximation
+theorem that bears their names: truncating the SVD to its <span class="math notranslate nohighlight">\(k\)</span>
+largest singular values gives the <em>best possible</em> rank-<span class="math notranslate nohighlight">\(k\)</span>
+approximation to <span class="math notranslate nohighlight">\(A\)</span> in the Frobenius norm. Leon Mirsky extended
+the result in 1960 to every unitarily invariant norm, including the
+spectral norm. The theorem underlies everything from principal
+component analysis to modern recommender systems.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.linalg.systems.svd.svd_decompose()</span></code>
+wraps the numerically stable, bidiagonalization-based algorithm in
+<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.svd.html#numpy.linalg.svd" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.svd()</span></code></a>. This is the modern production route, not
+Eckart and Young’s construction through the eigendecomposition of
+<span class="math notranslate nohighlight">\(A^TA\)</span>, which squares the condition number.</p>
 <p><em>References:</em> C. Eckart and G. Young, “The Approximation of One Matrix
-by Another of Lower Rank,” Psychometrika 1(3) (1936), 211-218.</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Computes the SVD A = U diag(S) V^T via numpy.linalg.svd (LAPACK&#x27;s bidiagonalization-based ?gesdd), the numerically stable production route -- rather than the textbook-definition route of eigendecomposing A^T A, which squares the condition number of the problem being solved."><img alt="" src="../_images/sphx_glr_plot_01_svd_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/linalg/svd/plot_01_svd.html"><span class="doc">Singular value decomposition</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Singular value decomposition</div>
+by Another of Lower Rank,” Psychometrika 1(3) (1936), 211-218; L.
+Mirsky, “Symmetric Gauge Functions and Unitarily Invariant Norms,”
+Quarterly Journal of Mathematics 11(1) (1960), 50-59.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Truncating the SVD A = U diag(S) V^T to its k largest singular values gives the best rank-``k`` approximation of A: its error is sqrt(sigma_{k+1}^2 + ...) in the Frobenius norm and sigma_{k+1} in the spectral norm, and no other rank-``k`` matrix does better. The SVD itself comes from numpy.linalg.svd (LAPACK&#x27;s stable bidiagonalization route, not the eigendecomposition of A^T A)."><img alt="" src="../_images/sphx_glr_plot_01_svd_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/linalg/svd/plot_01_svd.html"><span class="doc">Eckart-Young: the best low-rank approximation from the SVD</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Eckart-Young: the best low-rank approximation from the SVD</div>
 </div></div></section>
 <section id="turing-von-neumann-and-the-condition-number">
-<h2><a class="toc-backref" href="#id8" role="doc-backlink">1947 – 1948 – Turing, von Neumann, and the Condition Number</a><a class="headerlink" href="#turing-von-neumann-and-the-condition-number" title="Link to this heading">#</a></h2>
-<p>Alan Turing’s 1948 paper “Rounding-Off Errors in Matrix Processes” and
-John von Neumann and Herman Goldstine’s 1947 study of Gaussian
-elimination’s numerical behavior founded rigorous backward-error
-analysis for matrix computation, introducing what Turing called a
-matrix’s “N-condition number”: a single number, built from the ratio of
-its largest to smallest singular value, quantifying how much a linear
-system’s solution can be corrupted by small perturbations in its data –
-independent of which algorithm later solves it. The same analysis
-explained, for the first time, why some numerically “obvious”
-reformulations (forming <span class="math notranslate nohighlight">\(A^TA\)</span> explicitly for least squares,
-rather than working with <span class="math notranslate nohighlight">\(A\)</span> directly through its QR
-factorization above) quietly discard accuracy that no amount of extra
-floating-point precision recovers.</p>
+<h2><a class="toc-backref" href="#id13" role="doc-backlink">1947-1948 – Turing, von Neumann, and the Condition Number</a><a class="headerlink" href="#turing-von-neumann-and-the-condition-number" title="Link to this heading">#</a></h2>
+<p>John von Neumann and Herman Goldstine’s 1947 study of Gaussian
+elimination and Alan Turing’s 1948 paper “Rounding-Off Errors in Matrix
+Processes” founded the rigorous rounding-error analysis of matrix
+computations. Turing coined the term “condition number” for a single
+number that measures how much a linear system’s solution can be
+corrupted by small perturbations in its data, whichever algorithm
+solves it. Turing’s own versions were built from matrix norms; the
+standard modern 2-norm version is the ratio of the largest to the
+smallest singular value. The same analysis explained why some
+“obvious” reformulations lose accuracy that no amount of extra
+floating-point precision recovers. A key example is forming
+<span class="math notranslate nohighlight">\(A^TA\)</span> explicitly for least squares, rather than working with
+<span class="math notranslate nohighlight">\(A\)</span> directly through its QR factorization.</p>
 <div class="math notranslate nohighlight">
 \[\kappa_2(A) = \frac{\sigma_{\max}}{\sigma_{\min}}, \qquad
 \kappa_2(A^TA) = \kappa_2(A)^2\]</div>
 <p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.linalg.systems.stability.condition_number_2norm()</span></code>
-wraps <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.cond.html#numpy.linalg.cond" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.cond()</span></code></a> for exactly this ratio;
+wraps <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.cond.html#numpy.linalg.cond" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.cond()</span></code></a> for this ratio.
 <code class="xref py py-func docutils literal notranslate"><span class="pre">least_squares_normal_equations()</span></code>
-and <code class="xref py py-func docutils literal notranslate"><span class="pre">least_squares_qr()</span></code> solve the
-same least-squares problem two different ways specifically to make the
-squared-condition-number penalty of the normal equations concrete and
-measurable side by side.</p>
-<p><em>References:</em> A. M. Turing, “Rounding-Off Errors in Matrix Processes,”
-Quarterly Journal of Mechanics and Applied Mathematics 1(1) (1948),
-287-308; J. von Neumann and H. H. Goldstine, “Numerical Inverting of
-Matrices of High Order,” Bulletin of the American Mathematical Society
-53(11) (1947), 1021-1099.</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Solving the normal equations A^T A x = A^T b is simple but squares the condition number of A; solving via A = Q R instead avoids ever forming A^T A, so the effective conditioning stays at kappa(A) rather than kappa(A)^2."><img alt="" src="../_images/sphx_glr_plot_01_normal_equations_vs_qr_thumb.png" />
-<p><a class="reference internal" href="../api/gallery/linalg/stability/plot_01_normal_equations_vs_qr.html"><span class="doc">Least squares: normal equations vs. QR</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Least squares: normal equations vs. QR</div>
+and <code class="xref py py-func docutils literal notranslate"><span class="pre">least_squares_qr()</span></code>
+solve the same least-squares problem two ways, so that the
+squared-condition-number penalty of the normal equations can be
+measured side by side.</p>
+<p><em>References:</em> J. von Neumann and H. H. Goldstine, “Numerical Inverting
+of Matrices of High Order,” Bulletin of the American Mathematical
+Society 53(11) (1947), 1021-1099; A. M. Turing, “Rounding-Off Errors in
+Matrix Processes,” Quarterly Journal of Mechanics and Applied
+Mathematics 1(1) (1948), 287-308.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="kappa_2(A) = sigma_max / sigma_min bounds how much a relative perturbation of the data can grow in the solution of A x = b, whichever algorithm solves it: expect to lose about log10(kappa) digits. The same number explains why least squares through the normal equations A^T A x = A^T b is fragile -- kappa(A^T A) = kappa(A)^2 -- while QR works with kappa(A) itself."><img alt="" src="../_images/sphx_glr_plot_01_condition_number_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/linalg/stability/plot_01_condition_number.html"><span class="doc">Turing’s condition number: how much a linear system amplifies error</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Turing's condition number: how much a linear system amplifies error</div>
+</div></div></section>
+<section id="lanczos-iteration">
+<h2><a class="toc-backref" href="#id14" role="doc-backlink">1950 – Lanczos Iteration</a><a class="headerlink" href="#lanczos-iteration" title="Link to this heading">#</a></h2>
+<p>Cornelius Lanczos, working at the Institute for Numerical Analysis at
+the National Bureau of Standards, proposed in 1950 to reduce a
+symmetric matrix to tridiagonal form using nothing but matrix-vector
+products. Starting from a vector <span class="math notranslate nohighlight">\(q_1\)</span>, a three-term recurrence</p>
+<div class="math notranslate nohighlight">
+\[\beta_{j} q_{j+1} = A q_j - \alpha_j q_j - \beta_{j-1} q_{j-1}\]</div>
+<p>builds an orthonormal basis of the Krylov subspace
+<span class="math notranslate nohighlight">\(\operatorname{span}\{q_1, Aq_1, \dots, A^{m-1}q_1\}\)</span> in which
+<span class="math notranslate nohighlight">\(A\)</span> is represented by a small tridiagonal matrix <span class="math notranslate nohighlight">\(T_m\)</span>. In
+floating point the vectors quickly lose orthogonality, and the method
+was set aside as unstable until Christopher Paige’s 1971 thesis showed
+that the loss of orthogonality goes hand in hand with convergence. The
+extreme eigenvalues of <span class="math notranslate nohighlight">\(T_m\)</span> (the Ritz values) approximate those
+of <span class="math notranslate nohighlight">\(A\)</span> long before <span class="math notranslate nohighlight">\(m\)</span> reaches <span class="math notranslate nohighlight">\(n\)</span>. Danny Sorensen’s
+1992 implicit restarting made the method robust, and it became the
+ARPACK library, the standard tool for a few eigenpairs of a matrix too
+large to store densely.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.linalg.systems.lanczos.lanczos_eigsh()</span></code>
+wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.eigsh.html#scipy.sparse.linalg.eigsh" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.sparse.linalg.eigsh()</span></code></a> (ARPACK’s implicitly restarted
+Lanczos), with an optional shift-invert mode for eigenvalues near a
+chosen value. The gallery example recovers closed-form eigenvalues of a
+sparse Laplacian with <span class="math notranslate nohighlight">\(n = 100\,000\)</span>.</p>
+<p><em>References:</em> C. Lanczos, “An Iteration Method for the Solution of the
+Eigenvalue Problem of Linear Differential and Integral Operators,”
+Journal of Research of the National Bureau of Standards 45(4) (1950),
+255-282; C. C. Paige, “The Computation of Eigenvalues and Eigenvectors
+of Very Large Sparse Matrices,” Ph.D. thesis, University of London
+(1971); D. C. Sorensen, “Implicit Application of Polynomial Filters in
+a k-Step Arnoldi Method,” SIAM Journal on Matrix Analysis and
+Applications 13(1) (1992), 357-385.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="The 1-D discrete Laplacian tridiag(-1, 2, -1) of size n has eigenvalues 2 - 2 cos(j pi / (n + 1)). Lanczos iteration (through ARPACK) finds a handful of them using only matrix-vector products. In shift-invert mode it handles a sparse n = 100 000 instance, where a dense eigensolver would need 80 GB just to store the matrix."><img alt="" src="../_images/sphx_glr_plot_04_lanczos_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/linalg/eigen/plot_04_lanczos.html"><span class="doc">Lanczos: a few eigenvalues of a very large matrix</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Lanczos: a few eigenvalues of a very large matrix</div>
 </div></div></section>
 <section id="hestenes-stiefel-and-the-conjugate-gradient-method">
-<h2><a class="toc-backref" href="#id9" role="doc-backlink">1952 – Hestenes, Stiefel, and the Conjugate Gradient Method</a><a class="headerlink" href="#hestenes-stiefel-and-the-conjugate-gradient-method" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id15" role="doc-backlink">1952 – Hestenes, Stiefel, and the Conjugate Gradient Method</a><a class="headerlink" href="#hestenes-stiefel-and-the-conjugate-gradient-method" title="Link to this heading">#</a></h2>
 <p>Magnus Hestenes and Eduard Stiefel’s 1952 paper introduced the conjugate
-gradient method for symmetric positive-definite systems: rather than
-Gaussian elimination’s direct <span class="math notranslate nohighlight">\(O(n^3)\)</span> factorization, generate a
-sequence of search directions mutually conjugate with respect to
-<span class="math notranslate nohighlight">\(A\)</span>, converging <em>exactly</em> within <span class="math notranslate nohighlight">\(n\)</span> steps in exact
-arithmetic and, in practice, far faster for well-conditioned or
-clustered-spectrum matrices – decades before “Krylov subspace methods”
-became the standard name for the whole family it inaugurated. Yousef
-Saad and Martin Schultz’s 1986 GMRES extended the same Krylov-subspace
-idea to general (non-symmetric) systems.</p>
+gradient method for symmetric positive-definite systems. Instead of
+Gaussian elimination’s direct <span class="math notranslate nohighlight">\(O(n^3)\)</span> factorization, it
+generates a sequence of search directions that are mutually conjugate
+with respect to <span class="math notranslate nohighlight">\(A\)</span>. In exact arithmetic it converges within
+<span class="math notranslate nohighlight">\(n\)</span> steps, and in practice far sooner for well-conditioned
+matrices or matrices with clustered eigenvalues. It launched the family
+now called Krylov subspace methods, decades before that name became
+standard. Yousef Saad and Martin Schultz’s 1986 GMRES extended the same
+Krylov-subspace idea to general non-symmetric systems.</p>
 <p><em>Implementation:</em> <a class="reference internal" href="../api/linalg.html#mathematicskit.linalg.ConjugateGradient" title="mathematicskit.linalg.systems.iterative.ConjugateGradient"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathematicskit.linalg.systems.iterative.ConjugateGradient</span></code></a>
 and <a class="reference internal" href="../api/linalg.html#mathematicskit.linalg.GMRES" title="mathematicskit.linalg.systems.iterative.GMRES"><code class="xref py py-class docutils literal notranslate"><span class="pre">GMRES</span></code></a> wrap
 <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.cg.html#scipy.sparse.linalg.cg" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.sparse.linalg.cg()</span></code></a>/<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.gmres.html#scipy.sparse.linalg.gmres" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">gmres()</span></code></a>
-directly, adding the residual-history tracking (via each solver’s
-callback) that a bare library call doesn’t expose.</p>
+directly. They add residual-history tracking through each solver’s
+callback, which a bare library call doesn’t expose.</p>
 <p><em>References:</em> M. R. Hestenes and E. Stiefel, “Methods of Conjugate
 Gradients for Solving Linear Systems,” Journal of Research of the
 National Bureau of Standards 49(6) (1952), 409-436; Y. Saad and M. H.
@@ -700,8 +937,50 @@ Computing 7(3) (1986), 856-869.</p>
 <p><a class="reference internal" href="../api/gallery/linalg/iterative/plot_01_cg_and_gmres_convergence.html"><span class="doc">Conjugate gradient and GMRES convergence</span></a></p>
   <div class="sphx-glr-thumbnail-title">Conjugate gradient and GMRES convergence</div>
 </div></div></section>
+<section id="francis-kublanovskaya-and-the-qr-algorithm">
+<h2><a class="toc-backref" href="#id16" role="doc-backlink">1961 – Francis, Kublanovskaya, and the QR Algorithm</a><a class="headerlink" href="#francis-kublanovskaya-and-the-qr-algorithm" title="Link to this heading">#</a></h2>
+<p>John Francis in England and Vera Kublanovskaya in Leningrad
+independently discovered the algorithm that now computes nearly every
+dense eigenvalue problem. It builds on Heinz Rutishauser’s 1958 LR
+algorithm: factor <span class="math notranslate nohighlight">\(A_k = Q_kR_k\)</span>, then multiply the factors back
+in reverse order.</p>
+<div class="math notranslate nohighlight">
+\[A_{k+1} = R_k Q_k = Q_k^T A_k Q_k\]</div>
+<p>Every iterate is orthogonally similar to <span class="math notranslate nohighlight">\(A\)</span>, and the entries
+below the diagonal shrink like <span class="math notranslate nohighlight">\(|\lambda_{i+1}/\lambda_i|^k\)</span>, so
+the iterates converge to the Schur form <span class="math notranslate nohighlight">\(A = ZTZ^T\)</span> whose
+existence Issai Schur proved in 1909, with the eigenvalues on the
+diagonal of <span class="math notranslate nohighlight">\(T\)</span>. Francis made the method practical. He first
+reduced <span class="math notranslate nohighlight">\(A\)</span> to Hessenberg form so each step costs <span class="math notranslate nohighlight">\(O(n^2)\)</span>,
+then added shifts that give quadratic or cubic convergence, and
+finally used the implicit double shift to handle complex-conjugate
+pairs in real arithmetic. The QR algorithm was later named one of the
+ten most important algorithms of the 20th century.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.linalg.systems.schur.schur_decompose()</span></code>
+wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.schur.html#scipy.linalg.schur" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.linalg.schur()</span></code></a> (LAPACK’s implicitly shifted Francis QR)
+into a <a class="reference internal" href="../api/linalg.html#mathematicskit.linalg.SchurResult" title="mathematicskit.linalg.core.base.SchurResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">SchurResult</span></code></a>, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">hessenberg_reduce()</span></code> wraps
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.hessenberg.html#scipy.linalg.hessenberg" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.linalg.hessenberg()</span></code></a>. The gallery example runs the unshifted
+iteration by hand with
+<code class="xref py py-func docutils literal notranslate"><span class="pre">householder_qr()</span></code> and checks the
+predicted subdiagonal decay rates.</p>
+<p><em>References:</em> J. G. F. Francis, “The QR Transformation: A Unitary
+Analogue to the LR Transformation – Part 1,” The Computer Journal 4(3)
+(1961), 265-271, and “Part 2,” The Computer Journal 4(4) (1962),
+332-345; V. N. Kublanovskaya, “On Some Algorithms for the Solution of
+the Complete Eigenvalue Problem,” USSR Computational Mathematics and
+Mathematical Physics 1(3) (1962), 637-657; H. Rutishauser, “Solution of
+Eigenvalue Problems with the LR-Transformation,” National Bureau of
+Standards Applied Mathematics Series 49 (1958), 47-81; I. Schur, “Über
+die charakteristischen Wurzeln einer linearen Substitution mit einer
+Anwendung auf die Theorie der Integralgleichungen,” Mathematische
+Annalen 66 (1909), 488-510.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Factor A_k = Q_k R_k and multiply back in reverse order, A_{k+1} = R_k Q_k = Q_k^T A_k Q_k. Every iterate is similar to A, and the subdiagonal entries decay like |lambda_{i+1} / lambda_i|^k, so the iterates converge to an upper triangular Schur form with the eigenvalues on the diagonal. Production codes add Hessenberg reduction and Francis&#x27;s shifts; the result is what scipy.linalg.schur returns."><img alt="" src="../_images/sphx_glr_plot_05_francis_qr_algorithm_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/linalg/eigen/plot_05_francis_qr_algorithm.html"><span class="doc">The QR algorithm and the Schur form</span></a></p>
+  <div class="sphx-glr-thumbnail-title">The QR algorithm and the Schur form</div>
+</div></div></section>
 <section id="see-also">
-<h2><a class="toc-backref" href="#id10" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id17" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="../api/linalg.html"><span class="doc">mathematicskit.linalg</span></a></p></li>
 <li><p><a class="reference internal" href="numerical_analysis_breakthroughs.html"><span class="doc">Breakthroughs in Numerical Analysis</span></a></p></li>
@@ -757,15 +1036,22 @@ Computing 7(3) (1986), 856-869.</p>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-150-ce-the-nine-chapters-and-elimination">c. 150 CE – The Nine Chapters and Elimination</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-100-ce-the-nine-chapters-and-elimination">c. 100 CE – The Nine Chapters and Elimination</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cramer-s-rule">1750 – Cramer’s Rule</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gauss-and-lu-decomposition">1809 – Gauss and LU Decomposition</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cholesky-s-decomposition">1902 – 1924 – Cholesky’s Decomposition</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gram-schmidt-householder-and-qr">1907 – 1958 – Gram-Schmidt, Householder, and QR</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gauss-seidel-and-successive-over-relaxation">1823-1950 – Gauss-Seidel and Successive Over-Relaxation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cauchy-and-the-eigenvalue-problem">1829 – Cauchy and the Eigenvalue Problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cayley-and-the-cayley-hamilton-theorem">1858 – Cayley and the Cayley-Hamilton Theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gram-schmidt-householder-and-qr">1883-1958 – Gram-Schmidt, Householder, and QR</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cholesky-s-decomposition">1910-1924 – Cholesky’s Decomposition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#moore-penrose-and-the-pseudoinverse">1920-1955 – Moore, Penrose, and the Pseudoinverse</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#power-iteration-and-von-mises">1929 – Power Iteration and von Mises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gershgorin-s-circle-theorem">1931 – Gershgorin’s Circle Theorem</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eckart-young-and-the-singular-value-decomposition">1936 – Eckart, Young, and the Singular Value Decomposition</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#turing-von-neumann-and-the-condition-number">1947 – 1948 – Turing, von Neumann, and the Condition Number</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#turing-von-neumann-and-the-condition-number">1947-1948 – Turing, von Neumann, and the Condition Number</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lanczos-iteration">1950 – Lanczos Iteration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hestenes-stiefel-and-the-conjugate-gradient-method">1952 – Hestenes, Stiefel, and the Conjugate Gradient Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#francis-kublanovskaya-and-the-qr-algorithm">1961 – Francis, Kublanovskaya, and the QR Algorithm</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#see-also">See Also</a></li>
 </ul>
   </nav></div>

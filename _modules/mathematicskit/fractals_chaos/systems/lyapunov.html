@@ -410,12 +410,12 @@
                 <article class="bd-article">
                   
   <h1>Source code for mathematicskit.fractals_chaos.systems.lyapunov</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Lyapunov exponent estimation for 1D maps and simple flows.</span>
+<span></span><span class="sa">r</span><span class="sd">"""Lyapunov exponent estimation for 1D maps and simple flows.</span>
 
 <span class="sd">See Strogatz, *Nonlinear Dynamics and Chaos*, 2nd ed., Ch. 10.5</span>
-<span class="sd">(&quot;Lyapunov Exponent&quot;), and Wolf et al. (1985), *Determining Lyapunov</span>
+<span class="sd">("Lyapunov Exponent"), and Wolf et al. (1985), *Determining Lyapunov</span>
 <span class="sd">exponents from a time series*, Physica D 16, for the flow variant.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -423,7 +423,7 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;lyapunov_exponent_1d_map&quot;</span><span class="p">,</span> <span class="s2">&quot;lyapunov_exponent_flow&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"lyapunov_exponent_1d_map"</span><span class="p">,</span> <span class="s2">"lyapunov_exponent_flow"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="lyapunov_exponent_1d_map">
@@ -431,7 +431,7 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">lyapunov_exponent_1d_map</span><span class="p">(</span>
     <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">],</span> <span class="n">fprime</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">],</span> <span class="n">x0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n_transient</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="n">n_iterations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2000</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Lyapunov exponent of a 1D map, :math:`\lambda = \lim_{n\to\infty} \tfrac1n \sum_{k=0}^{n-1} \ln|f&#39;(x_k)|`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Lyapunov exponent of a 1D map, :math:`\lambda = \lim_{n\to\infty} \tfrac1n \sum_{k=0}^{n-1} \ln|f'(x_k)|`.</span>
 
 <span class="sd">    Measures the average exponential rate of separation of nearby</span>
 <span class="sd">    orbits: :math:`\lambda &gt; 0` signals sensitive dependence on initial</span>
@@ -464,7 +464,7 @@
 <span class="sd">    &gt;&gt;&gt; lam = lyapunov_exponent_1d_map(f, fprime, x0=0.4, n_iterations=100000)</span>
 <span class="sd">    &gt;&gt;&gt; round(float(lam), 2)</span>
 <span class="sd">    0.69</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_transient</span><span class="p">):</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -476,18 +476,18 @@
             <span class="n">total</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">deriv</span><span class="p">)</span>
             <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">total</span> <span class="o">/</span> <span class="n">count</span> <span class="k">if</span> <span class="n">count</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;nan&quot;</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">total</span> <span class="o">/</span> <span class="n">count</span> <span class="k">if</span> <span class="n">count</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"nan"</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="lyapunov_exponent_flow">
 <a class="viewcode-back" href="../../../../api/fractals_chaos.html#mathematicskit.fractals_chaos.lyapunov_exponent_flow">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">lyapunov_exponent_flow</span><span class="p">(</span><span class="n">rhs</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">x0</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20000</span><span class="p">,</span> <span class="n">renorm_every</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Largest Lyapunov exponent of a flow, via a shadow-trajectory method.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Largest Lyapunov exponent of a flow, via a shadow-trajectory method.</span>
 
-<span class="sd">    Integrates the system alongside a nearby &quot;shadow&quot; trajectory,</span>
+<span class="sd">    Integrates the system alongside a nearby "shadow" trajectory,</span>
 <span class="sd">    periodically measuring and renormalizing their separation (Benettin</span>
-<span class="sd">    et al.&#39;s algorithm) -- this avoids the naive approach of just</span>
+<span class="sd">    et al.'s algorithm) -- this avoids the naive approach of just</span>
 <span class="sd">    watching two nearby trajectories diverge, which overflows once they</span>
 <span class="sd">    separate enough to leave the linear regime. Uses simple forward-Euler</span>
 <span class="sd">    stepping (adequate for an exponent estimate, where the log-average</span>
@@ -522,7 +522,7 @@
 <span class="sd">    &gt;&gt;&gt; lam = lyapunov_exponent_flow(rhs, np.array([1.0]), n_steps=5000)</span>
 <span class="sd">    &gt;&gt;&gt; bool(lam &lt; 0)</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-8</span>
     <span class="n">shadow</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">eps</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
@@ -539,7 +539,7 @@
                 <span class="n">n_renorms</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="n">shadow</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="p">(</span><span class="n">sep</span> <span class="o">/</span> <span class="n">dist</span><span class="p">)</span> <span class="o">*</span> <span class="n">eps</span>
     <span class="n">total_time</span> <span class="o">=</span> <span class="n">n_renorms</span> <span class="o">*</span> <span class="n">renorm_every</span> <span class="o">*</span> <span class="n">dt</span>
-    <span class="k">return</span> <span class="n">log_sum</span> <span class="o">/</span> <span class="n">total_time</span> <span class="k">if</span> <span class="n">total_time</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;nan&quot;</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">log_sum</span> <span class="o">/</span> <span class="n">total_time</span> <span class="k">if</span> <span class="n">total_time</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"nan"</span><span class="p">)</span></div>
 
 </pre></div>
 
