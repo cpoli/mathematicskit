@@ -1,5 +1,5 @@
 Groups
 --------
 
-Cyclic and permutation groups, Cayley tables, and group-property
-checks.
+Permutation groups of polynomial roots, dihedral and quaternion groups,
+Cayley tables, and group-property checks.

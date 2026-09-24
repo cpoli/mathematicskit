@@ -164,7 +164,7 @@ is exactly the structural feature Galois's theory turns on.
 J. Liouville, Journal de Mathématiques Pures et Appliquées 11 (1846),
 381-444.
 
-.. minigallery:: ../../examples/abstract_algebra/groups/plot_01_cyclic_vs_symmetric.py
+.. minigallery:: ../../examples/abstract_algebra/groups/plot_01_galois_permutation_groups.py
 
 1843 -- Hamilton's Quaternions
 ------------------------------
@@ -232,7 +232,7 @@ definition.
 Symbolic Equation :math:`\theta^n = 1`," Philosophical Magazine Series 4,
 7(42) (1854), 40-47.
 
-.. minigallery:: ../../examples/abstract_algebra/groups/plot_01_cyclic_vs_symmetric.py
+.. minigallery:: ../../examples/abstract_algebra/groups/plot_04_cayley_tables.py
 
 1869-1889 -- Jordan, Hölder, and Composition Series
 ---------------------------------------------------
