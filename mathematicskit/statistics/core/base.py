@@ -27,6 +27,10 @@ __all__ = [
     "ConfidenceIntervalResult",
     "RegressionResult",
     "BootstrapResult",
+    "CorrelationResult",
+    "MaximumLikelihoodResult",
+    "JackknifeResult",
+    "MultipleTestingResult",
 ]
 
 
@@ -189,3 +193,80 @@ class BootstrapResult:
     method: str = "BCa"
     """str: The bootstrap CI method (``scipy.stats.bootstrap``'s
     ``"percentile"``, ``"basic"``, or ``"BCa"``)."""
+
+
+@dataclass
+class CorrelationResult:
+    """Container for a correlation coefficient and its significance test."""
+
+    coefficient: float
+    """float: The correlation coefficient, in :math:`[-1, 1]`."""
+
+    p_value: float
+    """float: Two-sided p-value for :math:`H_0`: no association."""
+
+    n: int
+    """int: Number of paired observations."""
+
+    method: str = ""
+    """str: ``"pearson"`` or ``"spearman"``."""
+
+
+@dataclass
+class MaximumLikelihoodResult:
+    """Container for a maximum-likelihood distribution fit."""
+
+    params: tuple
+    """tuple: The fitted parameters, in ``scipy.stats`` order (shape
+    parameters first, then ``loc`` and ``scale``)."""
+
+    log_likelihood: float
+    """float: The maximized log-likelihood :math:`\\ell(\\hat\\theta)`."""
+
+    n_params: int
+    """int: Number of parameters actually estimated (fixed ones excluded)."""
+
+    distribution: str = ""
+    """str: The ``scipy.stats`` distribution name, e.g. ``"norm"``."""
+
+    def aic(self) -> float:
+        """float: Akaike's information criterion, :math:`2k - 2\\ell(\\hat\\theta)`."""
+        return 2.0 * self.n_params - 2.0 * self.log_likelihood
+
+
+@dataclass
+class JackknifeResult:
+    """Container for a jackknife bias and standard-error estimate."""
+
+    estimate: float
+    """float: The statistic computed on the full sample."""
+
+    bias: float
+    """float: Quenouille's jackknife bias estimate."""
+
+    std_error: float
+    """float: Tukey's jackknife standard-error estimate."""
+
+    bias_corrected: float
+    """float: ``estimate - bias``."""
+
+    replicates: np.ndarray
+    """ndarray, shape (n,): The leave-one-out values of the statistic."""
+
+
+@dataclass
+class MultipleTestingResult:
+    """Container for a multiple-testing correction."""
+
+    rejected: np.ndarray
+    """ndarray of bool, shape (m,): Which null hypotheses are rejected."""
+
+    adjusted_p_values: np.ndarray
+    """ndarray, shape (m,): Adjusted p-values, comparable directly with `alpha`."""
+
+    alpha: float = 0.05
+    """float: The error rate being controlled (family-wise error rate or
+    false discovery rate, depending on `method`)."""
+
+    method: str = ""
+    """str: ``"bonferroni"`` or ``"benjamini_hochberg"``."""
