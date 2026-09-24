@@ -1,4 +1,5 @@
-"""Lagrange and Newton divided-difference polynomial interpolation.
+"""Lagrange and Newton divided-difference polynomial interpolation, and
+Hermite (osculating) interpolation of values and first derivatives.
 
 Both construct *the* (unique) degree-``n`` polynomial through ``n + 1``
 nodes, so they must agree exactly (up to floating-point roundoff) at any
@@ -10,10 +11,11 @@ and Ch. 3.3 (Newton's divided differences).
 from __future__ import annotations
 
 import numpy as np
+from scipy.interpolate import KroghInterpolator
 
 from mathematicskit.numerical_analysis.core.base import Interpolant
 
-__all__ = ["LagrangeInterpolant", "NewtonDividedDifference"]
+__all__ = ["LagrangeInterpolant", "NewtonDividedDifference", "HermiteInterpolant"]
 
 
 class LagrangeInterpolant(Interpolant):
@@ -129,3 +131,66 @@ class NewtonDividedDifference(Interpolant):
         for k in range(n - 2, -1, -1):
             result = result * (x_new - self.x[k]) + self.coefficients[k]
         return float(result[0]) if scalar_input else result
+
+
+class HermiteInterpolant(Interpolant):
+    r"""Hermite interpolating polynomial matching values *and* slopes.
+
+    The unique polynomial :math:`H` of degree :math:`\le 2n + 1` with
+    :math:`H(x_i) = y_i` and :math:`H'(x_i) = y'_i` at :math:`n + 1`
+    distinct nodes. In Newton form it is the divided-difference
+    interpolant on the doubled node list
+    :math:`x_0, x_0, x_1, x_1, \ldots`, with each repeated first
+    difference :math:`f[x_i, x_i]` replaced by :math:`y'_i`. The error is
+
+    .. math::
+
+        f(x) - H(x) = \frac{f^{(2n+2)}(\xi)}{(2n+2)!} \prod_{i=0}^{n} (x - x_i)^2 .
+
+    See C. Hermite, "Sur la formule d'interpolation de Lagrange," Journal
+    für die reine und angewandte Mathematik 84 (1878), 70-79; Burden &
+    Faires, *Numerical Analysis*, 10th ed., Ch. 3.4. Built on
+    :class:`scipy.interpolate.KroghInterpolator`, which accepts repeated
+    nodes as derivative conditions (F. T. Krogh, Mathematics of
+    Computation 24 (1970), 185-190).
+
+    Parameters
+    ----------
+    x, y : array-like, shape (n + 1,)
+        Distinct interpolation nodes and values.
+    dydx : array-like, shape (n + 1,)
+        First derivatives at the nodes.
+
+    Examples
+    --------
+    >>> # Two nodes with slopes determine a cubic: recover x^3 exactly.
+    >>> H = HermiteInterpolant([0.0, 1.0], [0.0, 1.0], dydx=[0.0, 3.0])
+    >>> round(H(0.5), 12)
+    0.125
+    >>> round(float(H.derivative(1.0)), 12)
+    3.0
+    """
+
+    def __init__(self, x, y, dydx):
+        super().__init__(x, y)
+        dydx = np.asarray(dydx, dtype=np.float64)
+        if dydx.shape != self.x.shape:
+            raise ValueError(f"dydx must have shape {self.x.shape}, got {dydx.shape}")
+        if np.unique(self.x).shape[0] != self.x.shape[0]:
+            raise ValueError("nodes must be distinct")
+        self.dydx = dydx
+        order = np.argsort(self.x)
+        xi = np.repeat(self.x[order], 2)
+        yi = np.column_stack([self.y[order], dydx[order]]).ravel()
+        self._krogh = KroghInterpolator(xi, yi)
+
+    def evaluate(self, x_new):
+        x_new = np.asarray(x_new, dtype=np.float64)
+        out = np.asarray(self._krogh(x_new))
+        return float(out) if x_new.ndim == 0 else out
+
+    def derivative(self, x_new):
+        """Evaluate :math:`H'` at ``x_new``."""
+        x_new = np.asarray(x_new, dtype=np.float64)
+        out = np.asarray(self._krogh.derivative(x_new, 1))
+        return float(out) if x_new.ndim == 0 else out

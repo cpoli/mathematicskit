@@ -2,9 +2,12 @@ Examples
 ========
 
 This gallery walks through every public feature of ``mathematicskit.numerical_analysis``:
-scalar root finding with convergence-order verification, polynomial
-interpolation (Lagrange, Newton divided-difference, cubic splines,
-Chebyshev nodes), and least-squares polynomial regression.
+scalar root finding with convergence-order verification and
+acceleration, polynomial interpolation (Lagrange, Newton
+divided-difference, Hermite, cubic splines, Chebyshev nodes), function
+approximation (Bernstein, Padé, Remez minimax), polynomial evaluation and
+root conditioning, compensated summation, and least-squares polynomial
+regression.
 
 See also the narrative tutorial:
 
@@ -22,14 +25,21 @@ Sections
 
 - **root_finding** -- bisection, Newton-Raphson, secant, and fixed-point
   iteration side by side on the same problem, with each method's empirical
-  convergence order verified against its theoretical rate.
+  convergence order verified against its theoretical rate; Halley's cubic
+  method; Aitken's delta-squared process and Steffensen's method.
 - **interpolation** -- Lagrange and Newton divided-difference polynomial
   interpolation, shown to agree exactly and to reproduce any polynomial up
-  to the interpolation degree.
+  to the interpolation degree; Hermite interpolation of values and slopes.
 - **splines** -- natural and clamped cubic spline interpolation, and why a
   spline avoids the oscillation a single high-degree polynomial would show.
 - **chebyshev** -- Chebyshev interpolation nodes and the Runge phenomenon:
   why equally spaced nodes can diverge as degree grows, and Chebyshev nodes
   don't.
+- **approximation** -- Bernstein polynomials and the Weierstrass theorem,
+  Padé approximants, and Remez's best uniform (minimax) approximation.
+- **polynomials** -- Horner's scheme with deflation, and Wilkinson's
+  ill-conditioned polynomial.
+- **floating_point** -- Kahan's compensated summation against naive and
+  pairwise summation.
 - **regression** -- least-squares polynomial regression via the normal
   equations, and how the fit's condition number worsens with degree.

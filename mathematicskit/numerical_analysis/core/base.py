@@ -33,6 +33,8 @@ __all__ = [
     "IterativeRootFinder",
     "Interpolant",
     "RegressionResult",
+    "HornerResult",
+    "MinimaxResult",
 ]
 
 
@@ -152,3 +154,44 @@ class RegressionResult:
     """float, optional: Condition number of the design (Vandermonde)
     matrix used for the fit, a diagnostic for numerical stability at high
     polynomial degree (see :mod:`mathematicskit.numerical_analysis.utils.error_analysis`)."""
+
+
+@dataclass
+class HornerResult:
+    r"""Container for one step of Horner's scheme: :math:`p(x_0)` and the
+    deflated quotient :math:`q(x)` with :math:`p(x) = (x - x_0)\,q(x) + p(x_0)`."""
+
+    value: float
+    """float: :math:`p(x_0)`, the remainder of dividing by :math:`x - x_0`."""
+
+    derivative: float
+    """float: :math:`p'(x_0) = q(x_0)`."""
+
+    quotient: np.ndarray
+    """ndarray, shape (degree,): Coefficients of :math:`q`, highest power
+    first (``numpy.polyval`` convention)."""
+
+
+@dataclass
+class MinimaxResult:
+    """Container for the output of the Remez minimax approximation."""
+
+    coefficients: np.ndarray
+    """ndarray, shape (degree + 1,): Best-approximation polynomial in the
+    power basis, highest power first (``numpy.polyval`` convention)."""
+
+    max_error: float
+    r"""float: :math:`\max |f - p|` over the interval, measured on a fine grid."""
+
+    reference: np.ndarray
+    """ndarray, shape (degree + 2,): Final reference (alternation) points."""
+
+    iterations: int
+    """int: Number of exchange steps performed."""
+
+    converged: bool
+    """bool: Whether the error equioscillated to within the tolerance."""
+
+    def evaluate(self, x):
+        """Evaluate the minimax polynomial at ``x``."""
+        return np.polyval(self.coefficients, x)

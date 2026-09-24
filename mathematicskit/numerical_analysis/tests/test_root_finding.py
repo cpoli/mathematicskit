@@ -6,7 +6,7 @@ import numpy as np
 import pytest
 from scipy import optimize
 
-from mathematicskit.numerical_analysis.systems.root_finding import Bisection, FixedPointIteration, NewtonRaphson, Secant
+from mathematicskit.numerical_analysis.systems.root_finding import Bisection, FixedPointIteration, Halley, NewtonRaphson, Secant, Steffensen
 from mathematicskit.numerical_analysis.utils.error_analysis import estimate_convergence_order
 
 
@@ -86,3 +86,52 @@ def test_newton_raphson_matches_scipy_newton():
     root_mathematicskit = NewtonRaphson(f, fprime, x0=1.0, tol=1e-14).solve().root
     root_scipy = optimize.newton(f, x0=1.0, fprime=fprime, tol=1e-14)
     assert root_mathematicskit == pytest.approx(root_scipy, abs=1e-12)
+
+
+def test_halley_converges_cubically_to_cube_root_of_2():
+    f = lambda x: x**3 - 2.0
+    fp = lambda x: 3.0 * x**2
+    fpp = lambda x: 6.0 * x
+    result = Halley(f, fp, fpp, x0=3.0, tol=1e-14).solve()
+    root = 2.0 ** (1.0 / 3.0)
+    assert result.converged
+    assert result.root == pytest.approx(root, abs=1e-13)
+    order = estimate_convergence_order(result.history[:-1], root)
+    assert order == pytest.approx(3.0, abs=0.5)
+
+
+def test_halley_matches_scipy_newton_with_fprime2():
+    f, fp, fpp = np.cos, lambda x: -np.sin(x), lambda x: -np.cos(x)
+    ours = Halley(f, fp, fpp, x0=1.0, tol=1e-14).solve().root
+    theirs = optimize.newton(f, 1.0, fprime=fp, fprime2=fpp, tol=1e-14)
+    assert ours == pytest.approx(theirs, abs=1e-12)
+    assert ours == pytest.approx(np.pi / 2, abs=1e-12)
+
+
+def test_halley_needs_fewer_iterations_than_newton():
+    f, fp, fpp = (lambda x: x**2 - 2.0), (lambda x: 2.0 * x), (lambda x: 2.0)
+    n_halley = Halley(f, fp, fpp, x0=10.0, tol=1e-12).solve().iterations
+    n_newton = NewtonRaphson(f, fp, x0=10.0, tol=1e-12).solve().iterations
+    assert n_halley < n_newton
+
+
+def test_steffensen_finds_dottie_number_quadratically():
+    result = Steffensen(np.cos, x0=1.0, tol=1e-14).solve()
+    assert result.converged
+    assert result.root == pytest.approx(np.cos(result.root), abs=1e-13)
+    assert result.root == pytest.approx(optimize.fixed_point(np.cos, 1.0, method="del2"), abs=1e-10)
+    order = estimate_convergence_order(result.history[:-1], result.root)
+    assert order == pytest.approx(2.0, abs=0.4)
+
+
+def test_steffensen_beats_plain_fixed_point_iteration():
+    plain = FixedPointIteration(np.cos, x0=1.0, tol=1e-12).solve()
+    accelerated = Steffensen(np.cos, x0=1.0, tol=1e-12).solve()
+    assert accelerated.iterations < plain.iterations // 5
+
+
+def test_steffensen_converges_where_plain_iteration_diverges():
+    # g(x) = 3 - 2x has fixed point 1 but |g'| = 2 > 1; g is affine, so a
+    # single Aitken step lands on it exactly.
+    result = Steffensen(lambda x: 3.0 - 2.0 * x, x0=5.0, tol=1e-12).solve()
+    assert result.root == pytest.approx(1.0, abs=1e-12)
