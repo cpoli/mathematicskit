@@ -1,0 +1,56 @@
+r"""
+Diophantus and the linear equation ax + by = c
+===================================================
+
+Diophantus's *Arithmetica* asks for whole-number solutions of equations
+with more unknowns than constraints. For the linear case
+:math:`ax + by = c`, integer solutions exist exactly when
+:math:`\gcd(a, b)` divides :math:`c`, and then they form one infinite
+family spaced evenly along the line. This script solves
+:math:`12x + 18y = 30`, shows that :math:`12x + 18y = 31` has no
+solution, and plots the integer points on the line.
+"""
+
+# %%
+import matplotlib.pyplot as plt
+import numpy as np
+
+from mathematicskit.number_theory import solve_linear_diophantine
+
+# %%
+# Solvable: 12x + 18y = 30 (gcd 6 divides 30)
+# -----------------------------------------------------
+
+linear = solve_linear_diophantine(12, 18, 30)
+print(f"particular solution: x={linear.x0}, y={linear.y0} (gcd={linear.gcd})")
+print(f"general solution: x = {linear.x0} + {linear.x_step}k, y = {linear.y0} - {linear.y_step}k")
+for k in range(-2, 3):
+    x = linear.x0 + k * linear.x_step
+    y = linear.y0 - k * linear.y_step
+    print(f"  k={k:>2}: (x, y) = ({x:>3}, {y:>3}), 12x + 18y = {12 * x + 18 * y}")
+
+# %%
+# Unsolvable: 12x + 18y = 31 (gcd 6 does not divide 31)
+# -----------------------------------------------------
+
+print("12x + 18y = 31 solvable:", solve_linear_diophantine(12, 18, 31).has_solution)
+
+# %%
+# The integer solutions lie evenly spaced on the line
+# -----------------------------------------------------
+
+ks = np.arange(-4, 5)
+xs = linear.x0 + ks * linear.x_step
+ys = linear.y0 - ks * linear.y_step
+line_x = np.linspace(xs.min() - 2, xs.max() + 2, 2)
+
+fig, ax = plt.subplots(figsize=(6, 5))
+gx, gy = np.meshgrid(np.arange(xs.min() - 2, xs.max() + 3), np.arange(ys.min() - 2, ys.max() + 3))
+ax.plot(gx, gy, ".", color="0.8", ms=3)
+ax.plot(line_x, (30 - 12 * line_x) / 18, "-", color="tab:blue", label="12x + 18y = 30")
+ax.plot(xs, ys, "o", color="tab:red", label="integer solutions")
+ax.set_xlabel("x")
+ax.set_ylabel("y")
+ax.set_title("Diophantine solutions of 12x + 18y = 30")
+ax.legend()
+plt.show()

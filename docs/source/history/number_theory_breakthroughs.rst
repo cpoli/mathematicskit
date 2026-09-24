@@ -50,7 +50,7 @@ uses it to compute modular inverses.
 BCE), as translated in T. L. Heath, *The Thirteen Books of Euclid's
 Elements*, 2nd ed. (Cambridge: Cambridge University Press, 1926).
 
-.. minigallery:: ../../examples/number_theory/modular_arithmetic/plot_01_toy_rsa.py
+.. minigallery:: ../../examples/number_theory/modular_arithmetic/plot_01_euclidean_algorithm.py
 
 c. 250 CE -- Diophantus and Indeterminate Equations
 ---------------------------------------------------
@@ -73,7 +73,7 @@ reconstructed and translated in T. L. Heath, *Diophantus of Alexandria:
 A Study in the History of Greek Algebra*, 2nd ed. (Cambridge: Cambridge
 University Press, 1910).
 
-.. minigallery:: ../../examples/number_theory/diophantine/plot_01_pell_and_linear.py
+.. minigallery:: ../../examples/number_theory/diophantine/plot_01_linear_diophantine.py
 
 1613-1737 -- Continued Fractions and Best Rational Approximation
 ----------------------------------------------------------------
@@ -166,7 +166,7 @@ implements this continued-fraction algorithm and reproduces the
 *References:* J.-L. Lagrange, "Solution d'un problème d'arithmétique,"
 Miscellanea Taurinensia 4 (1766-69), 19-99.
 
-.. minigallery:: ../../examples/number_theory/diophantine/plot_01_pell_and_linear.py
+.. minigallery:: ../../examples/number_theory/diophantine/plot_02_pell_equation.py
 
 1735-1737 -- The Basel Problem and Euler's Product Formula
 ----------------------------------------------------------
@@ -228,7 +228,7 @@ divisor-sum function
 *References:* L. Euler, "Theoremata arithmetica nova methodo demonstrata,"
 Novi Commentarii Academiae Scientiarum Petropolitanae 8 (1763), 74-104.
 
-.. minigallery:: ../../examples/number_theory/totient/plot_01_perfect_numbers.py
+.. minigallery:: ../../examples/number_theory/totient/plot_01_euler_totient.py
 
 1770 -- Lagrange's Four-Square Theorem
 --------------------------------------
@@ -326,7 +326,7 @@ arithmetic with large moduli practical.
 Fleischer, 1801), Sections I-II, especially Articles 32-36 (Chinese
 remainder theorem).
 
-.. minigallery:: ../../examples/number_theory/crt/plot_01_sunzi_problem.py
+.. minigallery:: ../../examples/number_theory/crt/plot_02_gauss_congruences.py
 
 1837 -- Dirichlet's Theorem on Primes in Arithmetic Progressions
 ----------------------------------------------------------------
@@ -465,7 +465,7 @@ small primes are illustrative, not cryptographically secure.
 Obtaining Digital Signatures and Public-Key Cryptosystems,"
 Communications of the ACM 21(2) (1978), 120-126.
 
-.. minigallery:: ../../examples/number_theory/modular_arithmetic/plot_01_toy_rsa.py
+.. minigallery:: ../../examples/number_theory/modular_arithmetic/plot_02_toy_rsa.py
 
 1975 -- Pollard's Rho Factorization
 -----------------------------------
@@ -529,7 +529,7 @@ Primality," Journal of Computer and System Sciences 13(3) (1976),
 300-317; M. O. Rabin, "Probabilistic Algorithm for Testing Primality,"
 Journal of Number Theory 12(1) (1980), 128-138.
 
-.. minigallery:: ../../examples/number_theory/primality/plot_01_prime_counting.py
+.. minigallery:: ../../examples/number_theory/primality/plot_01_miller_rabin.py
 
 See Also
 --------
