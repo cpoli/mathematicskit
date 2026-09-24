@@ -1,4 +1,4 @@
 Special numbers
 -----------------
 
-Stirling numbers, Catalan numbers, and Bell numbers.
+Stirling numbers, Bell numbers, and Catalan numbers.

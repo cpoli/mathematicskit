@@ -217,7 +217,7 @@ second kind over every possible number of blocks.
 *References:* J. Stirling, *Methodus Differentialis* (London: Bowyer,
 1730).
 
-.. minigallery:: ../../examples/combinatorics/special_numbers/plot_01_catalan_and_stirling.py
+.. minigallery:: ../../examples/combinatorics/special_numbers/plot_01_stirling_numbers.py
 
 1751-1838 -- Euler, Catalan, and the Catalan Numbers
 ----------------------------------------------------
@@ -246,7 +246,7 @@ cross-check.
 *References:* E. Catalan, "Note sur une équation aux différences
 finies," Journal de Mathématiques Pures et Appliquées 3 (1838), 508-516.
 
-.. minigallery:: ../../examples/combinatorics/special_numbers/plot_01_catalan_and_stirling.py
+.. minigallery:: ../../examples/combinatorics/special_numbers/plot_02_catalan_numbers.py
 
 1782 -- Euler's Officers and Latin Squares
 ------------------------------------------
