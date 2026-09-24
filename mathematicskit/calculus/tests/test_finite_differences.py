@@ -45,3 +45,23 @@ def test_richardson_error_estimate_shrinks_with_more_levels():
         result = richardson_extrapolation(f, x0, h=0.2, levels=levels)
         errs.append(abs(result.value - (-np.sin(x0))))
     assert errs[-1] < errs[0]
+
+
+def test_complex_step_is_exact_to_machine_precision():
+    import numpy as np
+
+    from mathematicskit.calculus.systems.finite_differences import complex_step_derivative
+
+    for x in (0.3, 1.0, 2.5):
+        assert complex_step_derivative(np.sin, x) == pytest.approx(np.cos(x), abs=1e-15)
+        assert complex_step_derivative(lambda t: np.exp(t) / np.sqrt(t), x) == pytest.approx(np.exp(x) / np.sqrt(x) * (1 - 0.5 / x), rel=1e-14)
+
+
+def test_complex_step_has_no_cancellation_at_tiny_steps():
+    import numpy as np
+
+    from mathematicskit.calculus.systems.finite_differences import central_difference, complex_step_derivative
+
+    exact = np.cos(1.0)
+    assert abs(complex_step_derivative(np.sin, 1.0, h=1e-100) - exact) < 1e-15
+    assert abs(central_difference(np.sin, 1.0, h=1e-12) - exact) > 1e-6  # cancellation ruins the difference

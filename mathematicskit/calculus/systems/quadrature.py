@@ -20,10 +20,62 @@ from typing import Callable
 import numpy as np
 from numpy.polynomial.legendre import leggauss
 from scipy import integrate
+from scipy.special import bernoulli, factorial
 
 from mathematicskit.calculus.core.base import Quadrature, QuadratureResult
 
-__all__ = ["TrapezoidalRule", "SimpsonsRule", "GaussianQuadrature", "AdaptiveQuadrature", "legendre_nodes_and_weights"]
+__all__ = [
+    "RiemannSum",
+    "TrapezoidalRule",
+    "SimpsonsRule",
+    "GaussianQuadrature",
+    "AdaptiveQuadrature",
+    "RombergQuadrature",
+    "ClenshawCurtisQuadrature",
+    "TanhSinhQuadrature",
+    "legendre_nodes_and_weights",
+    "clenshaw_curtis_nodes_and_weights",
+    "euler_maclaurin_trapezoid",
+]
+
+
+class RiemannSum(Quadrature):
+    r"""A Riemann sum on ``n`` equal subintervals, sampling each at its left end, right end, or midpoint.
+
+    Bernhard Riemann's 1854 definition of the integral is the limit of
+    such sums as the subintervals shrink. The left and right rules are
+    :math:`O(h)` accurate; the midpoint rule is :math:`O(h^2)`.
+    Hand-rolled, since the sum is the definition being illustrated.
+
+    Parameters
+    ----------
+    n : int
+        Number of subintervals.
+    rule : {"left", "right", "midpoint"}
+
+    Examples
+    --------
+    >>> RiemannSum(n=4, rule="left").integrate(lambda x: x, 0.0, 1.0).value
+    0.375
+    >>> RiemannSum(n=4, rule="midpoint").integrate(lambda x: x, 0.0, 1.0).value
+    0.5
+    """
+
+    _OFFSETS = {"left": 0.0, "right": 1.0, "midpoint": 0.5}
+
+    def __init__(self, n: int = 100, rule: str = "midpoint"):
+        if n < 1:
+            raise ValueError("n must be >= 1")
+        if rule not in self._OFFSETS:
+            raise ValueError(f"rule must be one of {sorted(self._OFFSETS)}")
+        self.n = int(n)
+        self.rule = rule
+
+    def integrate(self, f: Callable[[float], float], a: float, b: float) -> QuadratureResult:
+        h = (b - a) / self.n
+        xs = a + h * (np.arange(self.n) + self._OFFSETS[self.rule])
+        value = h * sum(f(x) for x in xs)
+        return QuadratureResult(value=float(value), n_evaluations=self.n, method=f"riemann-{self.rule}")
 
 
 class TrapezoidalRule(Quadrature):
@@ -182,3 +234,227 @@ class AdaptiveQuadrature(Quadrature):
     def integrate(self, f: Callable[[float], float], a: float, b: float) -> QuadratureResult:
         value, abserr, infodict = integrate.quad(f, a, b, epsabs=self.tol, limit=self.max_depth, full_output=1)
         return QuadratureResult(value=float(value), error_estimate=float(abserr), n_evaluations=int(infodict["neval"]), method="adaptive")
+
+
+class RombergQuadrature(Quadrature):
+    r"""Romberg integration: Richardson extrapolation applied to repeatedly halved trapezoidal rules.
+
+    Builds the triangular table
+
+    .. math::
+
+       R_{i,0} = T_{2^i}, \qquad R_{i,j} = R_{i,j-1} + \frac{R_{i,j-1} - R_{i-1,j-1}}{4^j - 1},
+
+    where :math:`T_{2^i}` is the trapezoidal rule on :math:`2^i`
+    subintervals. Each column cancels the next even power of :math:`h`
+    in the trapezoidal error expansion. Hand-rolled because
+    ``scipy.integrate.romberg`` was removed in SciPy 1.15. See W.
+    Romberg, "Vereinfachte numerische Integration," Det Kongelige Norske
+    Videnskabers Selskabs Forhandlinger 28(7) (1955), 30-36.
+
+    Parameters
+    ----------
+    levels : int
+        Number of halvings; the finest rule uses :math:`2^{\text{levels}}` subintervals.
+
+    Examples
+    --------
+    >>> result = RombergQuadrature(levels=5).integrate(np.exp, 0.0, 1.0)
+    >>> abs(result.value - (np.e - 1)) < 1e-12
+    True
+    """
+
+    def __init__(self, levels: int = 6):
+        if levels < 1:
+            raise ValueError("levels must be >= 1")
+        self.levels = int(levels)
+
+    def integrate(self, f: Callable[[float], float], a: float, b: float) -> QuadratureResult:
+        h = b - a
+        table = [[0.5 * h * (f(a) + f(b))]]
+        n_evaluations = 2
+        for i in range(1, self.levels + 1):
+            h /= 2
+            new_points = a + h * np.arange(1, 2**i, 2)
+            n_evaluations += len(new_points)
+            row = [0.5 * table[-1][0] + h * sum(f(x) for x in new_points)]
+            for j in range(1, i + 1):
+                row.append(row[j - 1] + (row[j - 1] - table[-1][j - 1]) / (4**j - 1))
+            table.append(row)
+        value = table[-1][-1]
+        return QuadratureResult(
+            value=float(value),
+            error_estimate=float(abs(value - table[-2][-1])),
+            n_evaluations=n_evaluations,
+            method="romberg",
+            extra={"table": table},
+        )
+
+
+def clenshaw_curtis_nodes_and_weights(n: int):
+    r"""Clenshaw-Curtis nodes :math:`x_k = \cos(k\pi/n)` and weights on :math:`[-1, 1]`.
+
+    The weights integrate exactly the Chebyshev interpolant through the
+    :math:`n+1` nodes. Computed with the explicit cosine-sum formula of
+    L. N. Trefethen, *Spectral Methods in MATLAB* (Philadelphia: SIAM,
+    2000), program ``clencurt``. Hand-rolled: SciPy has no
+    Clenshaw-Curtis rule.
+
+    Parameters
+    ----------
+    n : int
+        Number of intervals; there are ``n + 1`` nodes.
+
+    Returns
+    -------
+    nodes, weights : ndarray, shape (n + 1,)
+
+    Examples
+    --------
+    >>> x, w = clenshaw_curtis_nodes_and_weights(4)
+    >>> round(float(w.sum()), 12)  # integrates 1 exactly: length of [-1, 1]
+    2.0
+    """
+    if n < 1:
+        raise ValueError("n must be >= 1")
+    theta = np.pi * np.arange(n + 1) / n
+    x = np.cos(theta)
+    w = np.zeros(n + 1)
+    inner = theta[1:-1]
+    v = np.ones(n - 1)
+    if n % 2 == 0:
+        w[0] = w[n] = 1.0 / (n**2 - 1)
+        for k in range(1, n // 2):
+            v -= 2 * np.cos(2 * k * inner) / (4 * k**2 - 1)
+        v -= np.cos(n * inner) / (n**2 - 1)
+    else:
+        w[0] = w[n] = 1.0 / n**2
+        for k in range(1, (n - 1) // 2 + 1):
+            v -= 2 * np.cos(2 * k * inner) / (4 * k**2 - 1)
+    w[1:-1] = 2 * v / n
+    return x, w
+
+
+class ClenshawCurtisQuadrature(Quadrature):
+    r"""Clenshaw-Curtis quadrature: integrate the Chebyshev interpolant at :math:`\cos(k\pi/n)`.
+
+    For smooth integrands it converges nearly as fast as Gauss-Legendre
+    quadrature with the same number of points, and its nodes nest when
+    ``n`` doubles. See C. W. Clenshaw and A. R. Curtis, "A Method for
+    Numerical Integration on an Automatic Computer," Numerische
+    Mathematik 2 (1960), 197-205.
+
+    Parameters
+    ----------
+    n : int
+        Number of intervals (``n + 1`` function evaluations).
+
+    Examples
+    --------
+    >>> result = ClenshawCurtisQuadrature(n=16).integrate(np.exp, 0.0, 1.0)
+    >>> abs(result.value - (np.e - 1)) < 1e-14
+    True
+    """
+
+    def __init__(self, n: int = 16):
+        if n < 1:
+            raise ValueError("n must be >= 1")
+        self.n = int(n)
+
+    def integrate(self, f: Callable[[float], float], a: float, b: float) -> QuadratureResult:
+        x, w = clenshaw_curtis_nodes_and_weights(self.n)
+        mid, half = 0.5 * (a + b), 0.5 * (b - a)
+        value = half * sum(wk * f(mid + half * xk) for xk, wk in zip(x, w))
+        return QuadratureResult(value=float(value), n_evaluations=self.n + 1, method="clenshaw-curtis")
+
+
+class TanhSinhQuadrature(Quadrature):
+    r"""Tanh-sinh (double-exponential) quadrature, robust to endpoint singularities.
+
+    Substitutes :math:`x = \tfrac{a+b}{2} + \tfrac{b-a}{2}\tanh(\tfrac{\pi}{2}\sinh t)`
+    and applies the trapezoidal rule in :math:`t`. The transformed
+    integrand decays double-exponentially, so the trapezoidal rule
+    converges very fast even when :math:`f` blows up at an endpoint. The
+    endpoints themselves are never evaluated. Nodes crowd toward the
+    endpoints, so accuracy is limited by how precisely ``f`` can be
+    evaluated there: an integrand such as :math:`1/\sqrt{1-x^2}` loses
+    digits once :math:`x` is rounded near :math:`\pm1`. Hand-rolled for SciPy
+    versions before 1.15, which lack ``scipy.integrate.tanhsinh``. See H.
+    Takahasi and M. Mori, "Double Exponential Formulas for Numerical
+    Integration," Publications of the Research Institute for
+    Mathematical Sciences 9(3) (1974), 721-741.
+
+    Parameters
+    ----------
+    h : float
+        Step size in the transformed variable :math:`t`.
+    t_max : float
+        The rule sums over :math:`t \in [-t_{\max}, t_{\max}]`.
+
+    Examples
+    --------
+    >>> result = TanhSinhQuadrature(h=0.1).integrate(lambda x: 1 / np.sqrt(x), 0.0, 1.0)
+    >>> abs(result.value - 2.0) < 1e-10
+    True
+    """
+
+    def __init__(self, h: float = 0.1, t_max: float = 4.0):
+        if h <= 0 or t_max <= 0:
+            raise ValueError("h and t_max must be positive")
+        self.h = float(h)
+        self.t_max = float(t_max)
+
+    def integrate(self, f: Callable[[float], float], a: float, b: float) -> QuadratureResult:
+        m = int(self.t_max / self.h)
+        t = self.h * np.arange(-m, m + 1)
+        u = 0.5 * np.pi * np.sinh(t)
+        s = 1.0 / (1.0 + np.exp(-2.0 * u))  # (1 + tanh u) / 2, without cancellation near 0 and 1
+        weights = (b - a) * np.pi * np.cosh(t) * s * (1.0 - s)
+        xs = a + (b - a) * s
+        keep = (xs > a) & (xs < b) & (weights > 0.0)  # drop nodes that round onto an endpoint
+        value = self.h * sum(wk * f(xk) for xk, wk in zip(xs[keep], weights[keep]))
+        return QuadratureResult(value=float(value), n_evaluations=int(keep.sum()), method="tanh-sinh")
+
+
+def euler_maclaurin_trapezoid(f: Callable[[float], float], a: float, b: float, n: int, odd_derivatives: list) -> QuadratureResult:
+    r"""Trapezoidal rule plus Euler-Maclaurin endpoint corrections.
+
+    .. math::
+
+       \int_a^b f\,dx \approx T_n - \sum_{k=1}^{m} \frac{B_{2k} h^{2k}}{(2k)!}
+       \left(f^{(2k-1)}(b) - f^{(2k-1)}(a)\right),
+
+    with Bernoulli numbers :math:`B_{2k}` from
+    :func:`scipy.special.bernoulli`. Each correction removes one more
+    even power of :math:`h` from the trapezoidal error. Leonhard Euler
+    (1735) and Colin Maclaurin (1742) found the formula independently.
+    See Burden & Faires, *Numerical Analysis*, 10th ed., Ch. 4.5.
+
+    Parameters
+    ----------
+    f : callable
+    a, b : float
+    n : int
+        Number of trapezoidal subintervals.
+    odd_derivatives : list of callable
+        The odd-order derivatives of ``f``, first, third, fifth and so
+        on; one correction term is applied per derivative given.
+
+    Returns
+    -------
+    QuadratureResult
+
+    Examples
+    --------
+    >>> exact = np.e - 1
+    >>> plain = euler_maclaurin_trapezoid(np.exp, 0.0, 1.0, 8, [])
+    >>> corrected = euler_maclaurin_trapezoid(np.exp, 0.0, 1.0, 8, [np.exp, np.exp])
+    >>> abs(corrected.value - exact) < 1e-3 * abs(plain.value - exact)
+    True
+    """
+    h = (b - a) / n
+    value = TrapezoidalRule(n).integrate(f, a, b).value
+    b_numbers = bernoulli(2 * len(odd_derivatives))
+    for k, derivative in enumerate(odd_derivatives, start=1):
+        value -= b_numbers[2 * k] * h ** (2 * k) / factorial(2 * k) * (derivative(b) - derivative(a))
+    return QuadratureResult(value=float(value), n_evaluations=n + 1 + 2 * len(odd_derivatives), method="euler-maclaurin")

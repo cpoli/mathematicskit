@@ -14,13 +14,62 @@ this package, yet its *numerical* side is a comparatively young,
 20th-century development: how to differentiate or integrate a function
 you can only sample, or how to differentiate a computer program
 directly. This chronology traces the ideas behind
-:mod:`mathematicskit.calculus`, from the original calculus of Isaac
-Newton and Gottfried Wilhelm Leibniz to the reverse-mode automatic
-differentiation that now trains every large neural network.
+:mod:`mathematicskit.calculus`, from Archimedes' polygons and the
+calculus of Isaac Newton and Gottfried Wilhelm Leibniz to the
+reverse-mode automatic differentiation that now trains every large
+neural network.
 
 .. contents:: Timeline
    :local:
    :depth: 1
+
+c. 250 BCE -- Archimedes and the Method of Exhaustion
+-----------------------------------------------------
+
+Archimedes' *Measurement of a Circle* trapped the circle between
+inscribed and circumscribed regular polygons. Starting from hexagons
+and doubling the number of sides four times, he reached 96-gons and
+proved :math:`3\tfrac{10}{71} < \pi < 3\tfrac{1}{7}`. The method of
+exhaustion, which approximates a curved quantity by a sequence of
+polygonal ones whose error can be made as small as desired, is the
+ancestor of the limit arguments on which integral calculus rests. Each
+doubling cuts the width of Archimedes' bracket by roughly a factor of
+four, an early example of a predictable convergence rate.
+
+*Implementation:* :func:`mathematicskit.calculus.systems.exhaustion.archimedes_pi_bounds`
+runs the side-doubling recurrence (a harmonic mean for the outer
+perimeter, a geometric mean for the inner one) and returns every bound
+in an :class:`~mathematicskit.calculus.core.base.ExhaustionResult`.
+The tests reproduce Archimedes' 96-gon bounds.
+
+*References:* Archimedes, "Measurement of a Circle," in T. L. Heath,
+*The Works of Archimedes* (Cambridge: Cambridge University Press,
+1897).
+
+.. minigallery:: ../../examples/calculus/exhaustion/plot_01_archimedes_pi.py
+
+c. 1636 -- Fermat's Adequality
+------------------------------
+
+Pierre de Fermat's method for maxima and minima, circulated in
+manuscript around 1636, compared :math:`f(x+h)` with :math:`f(x)`,
+divided the difference by :math:`h`, and then set :math:`h` to zero.
+His first example split a segment of length :math:`a` into two parts
+with the largest product, :math:`x(a-x)`, and found :math:`x = a/2`.
+The procedure is the forward difference quotient taken to its limit,
+decades before Isaac Newton and Gottfried Wilhelm Leibniz made
+derivatives systematic. At a finite step the quotient is only
+first-order accurate: its error shrinks in proportion to :math:`h`.
+
+*Implementation:* :func:`mathematicskit.calculus.systems.finite_differences.forward_difference`
+computes Fermat's difference quotient at a finite step. The example
+solves for the point where it vanishes, watches that point approach
+:math:`a/2` as :math:`h` shrinks, and measures the :math:`O(h)` error.
+
+*References:* P. de Fermat, "Methodus ad disquirendam maximam et
+minimam," in *Varia Opera Mathematica* (Toulouse, 1679).
+
+.. minigallery:: ../../examples/calculus/finite_differences/plot_02_fermat_adequality.py
 
 1665-1684 -- Newton and Leibniz Invent the Calculus
 ---------------------------------------------------
@@ -69,6 +118,58 @@ implement the series and its Lagrange remainder bound.
 
 .. minigallery:: ../../examples/calculus/taylor_series/plot_01_maclaurin_series.py
 
+1735-1742 -- The Euler-Maclaurin Formula
+----------------------------------------
+
+Leonhard Euler in 1735 and Colin Maclaurin in 1742 independently found
+the exact relation between a sum and an integral. Applied to the
+trapezoidal rule :math:`T_n` with step :math:`h`, it reads
+
+.. math::
+
+   \int_a^b f\,dx = T_n - \sum_{k=1}^{m} \frac{B_{2k} h^{2k}}{(2k)!}
+   \left(f^{(2k-1)}(b) - f^{(2k-1)}(a)\right) + R_m,
+
+where :math:`B_{2k}` are the Bernoulli numbers. The formula explains
+why the trapezoidal rule's error is an expansion in even powers of
+:math:`h`, which is what Romberg integration later exploits, and why
+the rule is spectrally accurate for smooth periodic integrands, whose
+endpoint terms cancel.
+
+*Implementation:* :func:`mathematicskit.calculus.systems.quadrature.euler_maclaurin_trapezoid`
+adds the correction terms, using Bernoulli numbers from
+:func:`scipy.special.bernoulli`, to the trapezoidal rule. The tests
+confirm that each extra term reduces the error by orders of magnitude.
+
+*References:* L. Euler, "Inventio summae cuiusque seriei ex dato
+termino generali," Commentarii Academiae Scientiarum Petropolitanae 8
+(1741), 9-22; C. Maclaurin, *A Treatise of Fluxions* (Edinburgh,
+1742).
+
+.. minigallery:: ../../examples/calculus/quadrature/plot_04_euler_maclaurin.py
+
+1743 -- Simpson's Rule
+----------------------
+
+Thomas Simpson's 1743 *Mathematical Dissertations* popularized the rule
+now named for him: fit a parabola through each pair of adjacent
+panels and integrate the parabolas exactly. Johannes Kepler had used
+the same three-point formula in 1615 to measure wine barrels, and
+Roger Cotes's 1722 *Harmonia Mensurarum* set it in the wider family of
+Newton-Cotes rules. Although it is built from parabolas, Simpson's rule
+integrates cubics exactly, and its composite form converges at fourth
+order, :math:`O(h^4)`, against the trapezoidal rule's :math:`O(h^2)`.
+
+*Implementation:* :class:`mathematicskit.calculus.systems.quadrature.SimpsonsRule`
+wraps :func:`scipy.integrate.simpson`. The tests check exactness on a
+cubic, and the example compares its convergence with the trapezoidal
+rule.
+
+*References:* T. Simpson, *Mathematical Dissertations on a Variety of
+Physical and Analytical Subjects* (London, 1743).
+
+.. minigallery:: ../../examples/calculus/quadrature/plot_02_simpson_parabolas.py
+
 1814 -- Gauss and Gaussian Quadrature
 -------------------------------------
 
@@ -94,6 +195,31 @@ Gauß' neue Methode, die Werthe der Integrale näherungsweise zu finden,"
 Journal für die reine und angewandte Mathematik 1 (1826), 301-308.
 
 .. minigallery:: ../../examples/calculus/quadrature/plot_01_rules_compared.py
+
+1854 -- Riemann's Definition of the Integral
+--------------------------------------------
+
+In his 1854 *Habilitationsschrift* on trigonometric series, Bernhard
+Riemann defined the integral as the limit of sums
+:math:`\sum f(\xi_i)\,\Delta x_i` over ever finer partitions, with each
+:math:`\xi_i` chosen anywhere in its subinterval. A function is
+integrable when every such choice gives the same limit. The definition
+made precise which functions can be integrated, and the simplest
+choices of sample point -- left end, right end, midpoint -- remain the
+first quadrature rules anyone meets. The endpoint rules are
+first-order accurate; the midpoint rule, whose errors cancel in pairs,
+is second-order.
+
+*Implementation:* :class:`mathematicskit.calculus.systems.quadrature.RiemannSum`
+computes left, right, and midpoint Riemann sums, and the tests confirm
+their first- and second-order convergence rates.
+
+*References:* B. Riemann, "Über die Darstellbarkeit einer Function
+durch eine trigonometrische Reihe" (Habilitationsschrift, Göttingen,
+1854), Abhandlungen der Königlichen Gesellschaft der Wissenschaften zu
+Göttingen 13 (1868), 87-132.
+
+.. minigallery:: ../../examples/calculus/quadrature/plot_03_riemann_sums.py
 
 1911-1927 -- Richardson Extrapolation
 -------------------------------------
@@ -121,6 +247,61 @@ Approach to the Limit," Philosophical Transactions of the Royal Society
 A 226 (1927), 299-361.
 
 .. minigallery:: ../../examples/calculus/finite_differences/plot_01_richardson_extrapolation.py
+
+1955 -- Romberg Integration
+---------------------------
+
+Werner Romberg's 1955 paper combined two older ideas. The
+Euler-Maclaurin formula shows that the trapezoidal rule's error is an
+expansion in even powers of the step :math:`h`, and Richardson
+extrapolation cancels such terms one at a time. Romberg halved the step
+repeatedly and extrapolated the resulting trapezoidal estimates into a
+triangular table,
+
+.. math::
+
+   R_{i,j} = R_{i,j-1} + \frac{R_{i,j-1} - R_{i-1,j-1}}{4^j - 1},
+
+whose diagonal converges far faster than any single column. The
+table's second column is exactly Simpson's rule.
+
+*Implementation:* :class:`mathematicskit.calculus.systems.quadrature.RombergQuadrature`
+builds the Romberg table and returns it in the result's ``extra``
+field. It is hand-rolled because SciPy removed its ``romberg`` routine
+in version 1.15. The tests check the table's first two columns against
+the trapezoidal and Simpson rules.
+
+*References:* W. Romberg, "Vereinfachte numerische Integration," Det
+Kongelige Norske Videnskabers Selskabs Forhandlinger 28(7) (1955),
+30-36.
+
+.. minigallery:: ../../examples/calculus/quadrature/plot_05_romberg.py
+
+1960 -- Clenshaw-Curtis Quadrature
+----------------------------------
+
+Charles Clenshaw and Alan Curtis's 1960 paper proposed integrating the
+polynomial that interpolates :math:`f` at the Chebyshev points
+:math:`\cos(k\pi/n)`. The weights have a closed form and are all
+positive, and the nodes of one rule are reused when :math:`n` doubles,
+which suits adaptive computation. Gauss-Legendre quadrature is exact
+for polynomials of twice the degree, yet Lloyd N. Trefethen showed in
+2008 that for most smooth integrands Clenshaw-Curtis converges almost
+as fast.
+
+*Implementation:* :func:`mathematicskit.calculus.systems.quadrature.clenshaw_curtis_nodes_and_weights`
+computes the nodes and weights, and
+:class:`~mathematicskit.calculus.systems.quadrature.ClenshawCurtisQuadrature`
+applies them on any interval. Both are hand-rolled, since SciPy has no
+Clenshaw-Curtis rule. The tests check that the weights are positive and
+integrate polynomials exactly.
+
+*References:* C. W. Clenshaw and A. R. Curtis, "A Method for Numerical
+Integration on an Automatic Computer," Numerische Mathematik 2 (1960),
+197-205; L. N. Trefethen, "Is Gauss Quadrature Better than
+Clenshaw-Curtis?" SIAM Review 50(1) (2008), 67-87.
+
+.. minigallery:: ../../examples/calculus/quadrature/plot_06_clenshaw_curtis.py
 
 1964-1970 -- Wengert, Linnainmaa, and Automatic Differentiation
 ---------------------------------------------------------------
@@ -154,6 +335,58 @@ University of Helsinki, 1970; in Finnish).
 .. minigallery:: ../../examples/calculus/dual_numbers/plot_01_forward_mode_autodiff.py
 
 .. minigallery:: ../../examples/calculus/autodiff/plot_01_reverse_mode_gradients.py
+
+1967 -- Lyness, Moler, and the Complex-Step Derivative
+------------------------------------------------------
+
+James Lyness and Cleve Moler showed in 1967 that the derivatives of an
+analytic function can be computed from its values at complex points.
+The simplest consequence, popularized by William Squire and George
+Trapp in 1998, is the complex-step formula
+:math:`f'(x) \approx \operatorname{Im} f(x+ih)/h`. A real finite
+difference subtracts two nearly equal numbers, so making :math:`h`
+small eventually destroys its accuracy. The complex step subtracts
+nothing, so :math:`h` can be as small as :math:`10^{-100}` and the
+result is exact to machine precision.
+
+*Implementation:* :func:`mathematicskit.calculus.systems.finite_differences.complex_step_derivative`
+implements the formula for any function written with complex-capable
+operations. The tests show that it stays accurate at steps where the
+central difference fails.
+
+*References:* J. N. Lyness and C. B. Moler, "Numerical Differentiation
+of Analytic Functions," SIAM Journal on Numerical Analysis 4(2)
+(1967), 202-210; W. Squire and G. Trapp, "Using Complex Variables to
+Estimate Derivatives of Real Functions," SIAM Review 40(1) (1998),
+110-112.
+
+.. minigallery:: ../../examples/calculus/finite_differences/plot_03_complex_step.py
+
+1974 -- Takahasi, Mori, and Tanh-Sinh Quadrature
+------------------------------------------------
+
+Hidetosi Takahasi and Masatake Mori's 1974 paper introduced
+double-exponential quadrature. The substitution
+:math:`x = \tanh(\tfrac{\pi}{2}\sinh t)` maps :math:`(-1, 1)` onto the
+whole real line and makes the transformed integrand decay
+double-exponentially, so the plain trapezoidal rule in :math:`t`
+converges extremely fast. Nodes cluster near the endpoints with tiny
+weights, and the endpoints themselves are never evaluated. The method
+therefore handles integrable endpoint singularities, such as
+:math:`1/\sqrt{x}` or :math:`\log x`, that defeat Gaussian rules, and
+it has become a standard tool in high-precision computation.
+
+*Implementation:* :class:`mathematicskit.calculus.systems.quadrature.TanhSinhQuadrature`
+implements the substitution and trapezoidal sum, computing the node
+positions without cancellation near the endpoints. It is hand-rolled
+because ``scipy.integrate.tanhsinh`` exists only in SciPy 1.15 and
+later.
+
+*References:* H. Takahasi and M. Mori, "Double Exponential Formulas for
+Numerical Integration," Publications of the Research Institute for
+Mathematical Sciences 9(3) (1974), 721-741.
+
+.. minigallery:: ../../examples/calculus/quadrature/plot_07_tanh_sinh.py
 
 1983 -- QUADPACK and Adaptive Quadrature
 ----------------------------------------

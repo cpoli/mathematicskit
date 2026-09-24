@@ -11,9 +11,11 @@ from __future__ import annotations
 
 from typing import Callable
 
+import numpy as np
+
 from mathematicskit.calculus.core.base import DerivativeResult
 
-__all__ = ["forward_difference", "backward_difference", "central_difference", "richardson_extrapolation"]
+__all__ = ["forward_difference", "backward_difference", "central_difference", "complex_step_derivative", "richardson_extrapolation"]
 
 
 def forward_difference(f: Callable[[float], float], x: float, h: float = 1e-5) -> float:
@@ -90,6 +92,40 @@ def central_difference(f: Callable[[float], float], x: float, h: float = 1e-5) -
     1.0
     """
     return (f(x + h) - f(x - h)) / (2.0 * h)
+
+
+def complex_step_derivative(f: Callable, x: float, h: float = 1e-20) -> float:
+    r"""Complex-step derivative estimate, :math:`O(h^2)` with no subtractive cancellation.
+
+    :math:`f'(x) \approx \operatorname{Im} f(x + ih) / h`. Because no
+    two nearly equal numbers are subtracted, ``h`` can be taken absurdly
+    small and the result is accurate to machine precision. Requires ``f``
+    to be real-analytic and implemented with complex-capable operations
+    (e.g. :mod:`numpy` ufuncs). See J. N. Lyness and C. B. Moler,
+    "Numerical Differentiation of Analytic Functions," SIAM Journal on
+    Numerical Analysis 4(2) (1967), 202-210, and W. Squire and G. Trapp,
+    "Using Complex Variables to Estimate Derivatives of Real Functions,"
+    SIAM Review 40(1) (1998), 110-112.
+
+    Parameters
+    ----------
+    f : callable
+        Accepts a complex argument.
+    x : float
+    h : float
+        Imaginary step size.
+
+    Returns
+    -------
+    float
+
+    Examples
+    --------
+    >>> import numpy as np
+    >>> abs(complex_step_derivative(np.exp, 1.0) - np.e) < 1e-15
+    True
+    """
+    return float(np.imag(f(x + 1j * h)) / h)
 
 
 def richardson_extrapolation(f: Callable[[float], float], x: float, h: float = 1e-2, levels: int = 4) -> DerivativeResult:

@@ -20,7 +20,7 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from typing import Callable
 
-__all__ = ["QuadratureResult", "Quadrature", "DerivativeResult"]
+__all__ = ["QuadratureResult", "Quadrature", "DerivativeResult", "ExhaustionResult"]
 
 
 @dataclass
@@ -78,3 +78,17 @@ class DerivativeResult:
 
     error_estimate: float = 0.0
     """float: Estimated error, when available (e.g. from Richardson extrapolation's own convergence)."""
+
+
+@dataclass
+class ExhaustionResult:
+    """Container for Archimedes' polygon bounds on :math:`\\pi`."""
+
+    sides: list
+    """list of int: Number of polygon sides at each doubling (6, 12, 24, ...)."""
+
+    lower: list
+    """list of float: Inscribed-polygon lower bounds on :math:`\\pi`."""
+
+    upper: list
+    """list of float: Circumscribed-polygon upper bounds on :math:`\\pi`."""
