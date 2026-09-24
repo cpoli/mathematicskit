@@ -18,12 +18,15 @@ Each script in this gallery is self-contained and can be run directly with
 Sections
 --------
 
-- **discrete** -- binomial, Poisson, and geometric distributions.
+- **discrete** -- the problem of points, Poisson's law of rare events,
+  and the geometric distribution.
 - **continuous** -- uniform, exponential, normal, and gamma distributions.
 - **monte_carlo** -- plain, importance-sampling, and control-variate
   Monte Carlo integration.
-- **limit_theorems** -- the Law of Large Numbers and Central Limit
-  Theorem, simulated.
+- **limit_theorems** -- the Law of Large Numbers, the Central Limit
+  Theorem, and Chebyshev's inequality, simulated.
+- **axioms** -- Kolmogorov's axioms checked on a finite sample space and
+  on the distribution classes.
 - **markov_chain** -- stationary distributions, gambler's-ruin
   absorption probabilities, and continuous-time chains.
 - **classical** -- Buffon's needle and the St. Petersburg paradox.

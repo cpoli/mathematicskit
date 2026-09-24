@@ -40,7 +40,7 @@ distribution its :math:`\binom{n}{k}` weights.
 implements the distribution that this counting problem generalizes to,
 through :class:`scipy.stats.binom`.
 
-.. minigallery:: ../../examples/probability/discrete/plot_01_binomial_poisson_geometric.py
+.. minigallery:: ../../examples/probability/discrete/plot_01_problem_of_points.py
 
 1713 -- Jacob Bernoulli's Law of Large Numbers
 ----------------------------------------------
@@ -59,7 +59,7 @@ settles toward the true mean with increasing sample size.
 *References:* J. Bernoulli, *Ars Conjectandi* (Basel: Thurneysen, 1713),
 Part IV.
 
-.. minigallery:: ../../examples/probability/limit_theorems/plot_01_lln_and_clt.py
+.. minigallery:: ../../examples/probability/limit_theorems/plot_01_law_of_large_numbers.py
 
 1733-1810 -- De Moivre, Laplace, and the Central Limit Theorem
 --------------------------------------------------------------
@@ -89,7 +89,7 @@ qui sont fonctions de très grands nombres et sur leur application aux
 probabilités," Mémoires de la Classe des Sciences Mathématiques et
 Physiques de l'Institut de France (1810).
 
-.. minigallery:: ../../examples/probability/limit_theorems/plot_01_lln_and_clt.py
+.. minigallery:: ../../examples/probability/limit_theorems/plot_02_central_limit_theorem.py
 
 1738 -- Daniel Bernoulli and the St. Petersburg Paradox
 -------------------------------------------------------
@@ -217,7 +217,7 @@ check its convergence from the binomial for large :math:`n` and small
 jugements en matière criminelle et en matière civile* (Paris: Bachelier,
 1837).
 
-.. minigallery:: ../../examples/probability/discrete/plot_01_binomial_poisson_geometric.py
+.. minigallery:: ../../examples/probability/discrete/plot_02_poisson_rare_events.py
 
 1853-1867 -- The Bienaymé-Chebyshev Inequality
 -----------------------------------------------
@@ -252,7 +252,7 @@ l'Académie des sciences 37 (1853), 309-324; P. L. Chebyshev, "Des
 valeurs moyennes," Journal de mathématiques pures et appliquées (2) 12
 (1867), 177-184.
 
-.. minigallery:: ../../examples/probability/limit_theorems/plot_02_chebyshev_inequality.py
+.. minigallery:: ../../examples/probability/limit_theorems/plot_03_chebyshev_inequality.py
 
 1873-1875 -- Galton-Watson Branching Processes
 ----------------------------------------------
@@ -479,7 +479,7 @@ non-negative ``pmf``/``pdf`` that sums or integrates to one, and a
 *References:* A. N. Kolmogorov, *Grundbegriffe der
 Wahrscheinlichkeitsrechnung* (Berlin: Springer, 1933).
 
-.. minigallery:: ../../examples/probability/continuous/plot_01_gamma_generalizes_exponential.py
+.. minigallery:: ../../examples/probability/axioms/plot_01_kolmogorov_axioms.py
 
 1946-1953 -- Monte Carlo Methods
 --------------------------------
@@ -509,7 +509,7 @@ N. Metropolis, A. W. Rosenbluth, M. N. Rosenbluth, A. H. Teller, and E.
 Teller, "Equation of State Calculations by Fast Computing Machines,"
 Journal of Chemical Physics 21(6) (1953), 1087-1092.
 
-.. minigallery:: ../../examples/probability/monte_carlo/plot_01_variance_reduction.py
+.. minigallery:: ../../examples/probability/monte_carlo/plot_01_monte_carlo_integration.py
 
 See Also
 --------

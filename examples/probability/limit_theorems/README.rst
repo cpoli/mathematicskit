@@ -1,4 +1,5 @@
-Law of Large Numbers and Central Limit Theorem
--------------------------------------------------
+Limit theorems and inequalities
+---------------------------------
 
-Simulating and verifying both foundational limit theorems.
+Bernoulli's law of large numbers, the De Moivre-Laplace central limit
+theorem, and the Bienaymé-Chebyshev inequality, simulated and verified.
