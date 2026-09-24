@@ -1,5 +1,5 @@
-r"""Primality testing (trial division, Miller-Rabin) and prime generation
-(sieve of Eratosthenes).
+r"""Primality testing (trial division, Miller-Rabin, Lucas-Lehmer for
+Mersenne numbers) and prime generation (sieve of Eratosthenes).
 
 No numpy/scipy equivalent (these are exact-integer algorithms). See
 Cormen et al., *Introduction to Algorithms*, 3rd ed., Ch. 31.8
@@ -16,7 +16,7 @@ import numpy as np
 
 from mathematicskit.number_theory.systems.modular_arithmetic import fast_mod_pow
 
-__all__ = ["is_prime_trial_division", "is_prime_miller_rabin", "sieve_of_eratosthenes"]
+__all__ = ["is_prime_trial_division", "is_prime_miller_rabin", "sieve_of_eratosthenes", "lucas_lehmer"]
 
 
 def is_prime_trial_division(n: int) -> bool:
@@ -158,3 +158,44 @@ def sieve_of_eratosthenes(limit: int) -> np.ndarray:
         if not is_composite[i]:
             is_composite[i * i :: i] = True
     return np.flatnonzero(~is_composite)
+
+
+def lucas_lehmer(p: int) -> bool:
+    r"""Lucas-Lehmer test: is the Mersenne number :math:`M_p = 2^p - 1` prime?
+
+    For an odd prime ``p``, set :math:`s_0 = 4` and :math:`s_{k+1} =
+    s_k^2 - 2 \bmod M_p`; then :math:`M_p` is prime if and only if
+    :math:`s_{p-2} \equiv 0 \pmod{M_p}` (Lucas, 1878; Lehmer, 1930).
+    Only ``p - 2`` modular squarings are needed, so the test is a
+    deterministic proof of primality far faster than any general
+    method -- it is why the largest known primes are almost all Mersenne
+    primes. See Crandall & Pomerance, *Prime Numbers: A Computational
+    Perspective*, 2nd ed., Theorem 4.2.6.
+
+    Parameters
+    ----------
+    p : int
+        Exponent, ``p >= 2``. A composite ``p`` gives a composite
+        :math:`M_p` and returns ``False`` immediately; ``p = 2`` (where
+        :math:`M_2 = 3`) is handled as a special case.
+
+    Returns
+    -------
+    bool
+
+    Examples
+    --------
+    >>> [p for p in range(2, 130) if lucas_lehmer(p)]  # exponents of Mersenne primes
+    [2, 3, 5, 7, 13, 17, 19, 31, 61, 89, 107, 127]
+    """
+    if p < 2:
+        raise ValueError("p must be >= 2")
+    if p == 2:
+        return True
+    if not is_prime_trial_division(p):
+        return False
+    m = (1 << p) - 1
+    s = 4
+    for _ in range(p - 2):
+        s = (s * s - 2) % m
+    return s == 0

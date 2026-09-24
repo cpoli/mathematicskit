@@ -17,7 +17,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Optional
 
-__all__ = ["BezoutResult", "ContinuedFractionResult", "LinearDiophantineResult", "PellResult", "CRTResult"]
+__all__ = ["BezoutResult", "ContinuedFractionResult", "LinearDiophantineResult", "PellResult", "CRTResult", "PollardRhoResult"]
 
 
 @dataclass
@@ -102,3 +102,20 @@ class CRTResult:
     modulus: int
     """int: The combined modulus (the product of the pairwise-coprime
     input moduli)."""
+
+
+@dataclass
+class PollardRhoResult:
+    """Container for a factor found by Pollard's rho method."""
+
+    factor: int
+    """int: A nontrivial factor of ``n`` (not necessarily prime)."""
+
+    cofactor: int
+    """int: ``n // factor``."""
+
+    iterations: int
+    """int: Total tortoise-and-hare steps taken, across all restarts."""
+
+    c: int
+    """int: The additive constant of :math:`x \\mapsto x^2 + c` that succeeded."""
