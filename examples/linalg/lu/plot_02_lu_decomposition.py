@@ -2,9 +2,10 @@ r"""
 LU decomposition with partial pivoting
 ==========================================
 
-Factors ``P A = L U`` and reuses the factorization to solve multiple
-right-hand sides and compute the determinant, both far cheaper than
-refactoring from scratch each time.
+Gaussian elimination, with its multipliers stored in ``L`` and the
+eliminated rows in ``U``, factors ``P A = L U``. The script reuses the
+factorization to solve multiple right-hand sides and compute the
+determinant, both far cheaper than refactoring from scratch each time.
 """
 
 # %%

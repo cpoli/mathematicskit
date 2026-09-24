@@ -1,9 +1,9 @@
 Eigenvalue algorithms
 ---------------------
 
-Eigenvalue computation via :func:`numpy.linalg.eigh`/:func:`numpy.linalg.eig`,
-alongside hand-rolled power iteration and inverse iteration -- two routes
-to a single eigenpair when the full spectrum isn't needed.
+Cauchy's spectral theorem for symmetric matrices, and hand-rolled power
+iteration and inverse iteration -- two routes to a single eigenpair when
+the full spectrum isn't needed.
 
 Also: Gershgorin discs, Lanczos iteration for a few eigenpairs of a large
 sparse matrix, and the QR algorithm converging to the Schur form.

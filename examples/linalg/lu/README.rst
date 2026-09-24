@@ -1,5 +1,6 @@
 LU decomposition
 ----------------
 
-Partial-pivoted LU decomposition, and solving systems / computing
-determinants from a single factorization.
+Elimination as the *Nine Chapters* did it, and Gauss's elimination
+recorded as a partial-pivoted LU decomposition for solving systems and
+computing determinants from a single factorization.

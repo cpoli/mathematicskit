@@ -39,7 +39,7 @@ underlying solves, and every dense linear system in this package, rest
 on this elimination idea, now delegated to LAPACK through
 :func:`scipy.linalg.lu`.
 
-.. minigallery:: ../../examples/linalg/lu/plot_01_lu_decomposition.py
+.. minigallery:: ../../examples/linalg/lu/plot_01_nine_chapters_elimination.py
 
 1750 -- Cramer's Rule
 ---------------------
@@ -97,7 +97,7 @@ wraps :func:`scipy.linalg.lu` for this partial-pivoted factorization;
 *References:* C. F. Gauss, *Theoria Motus Corporum Coelestium* (Hamburg:
 Perthes et Besser, 1809).
 
-.. minigallery:: ../../examples/linalg/lu/plot_01_lu_decomposition.py
+.. minigallery:: ../../examples/linalg/lu/plot_02_lu_decomposition.py
 
 1823-1950 -- Gauss-Seidel and Successive Over-Relaxation
 --------------------------------------------------------
@@ -180,7 +180,7 @@ be complex.
 détermine les inégalités séculaires des mouvements des planètes,"
 Exercices de mathématiques 4 (1829).
 
-.. minigallery:: ../../examples/linalg/eigen/plot_01_eigenvalue_methods_compared.py
+.. minigallery:: ../../examples/linalg/eigen/plot_01_cauchy_spectral_theorem.py
 
 1858 -- Cayley and the Cayley-Hamilton Theorem
 ----------------------------------------------
@@ -349,7 +349,7 @@ is the point.
 Verfahren der Gleichungsauflösung," Zeitschrift für Angewandte
 Mathematik und Mechanik 9 (1929), 58-77, 152-164.
 
-.. minigallery:: ../../examples/linalg/eigen/plot_01_eigenvalue_methods_compared.py
+.. minigallery:: ../../examples/linalg/eigen/plot_02_power_and_inverse_iteration.py
 
 1931 -- Gershgorin's Circle Theorem
 -----------------------------------
@@ -385,7 +385,7 @@ Matrix," Izvestiya Akademii Nauk SSSR, Otdelenie Matematicheskikh i
 Estestvennykh Nauk 6 (1931), 749-754; R. S. Varga, *Geršgorin and His
 Circles* (Berlin: Springer, 2004).
 
-.. minigallery:: ../../examples/linalg/eigen/plot_02_gershgorin_discs.py
+.. minigallery:: ../../examples/linalg/eigen/plot_03_gershgorin_discs.py
 
 1936 -- Eckart, Young, and the Singular Value Decomposition
 -----------------------------------------------------------
@@ -450,7 +450,7 @@ Society 53(11) (1947), 1021-1099; A. M. Turing, "Rounding-Off Errors in
 Matrix Processes," Quarterly Journal of Mechanics and Applied
 Mathematics 1(1) (1948), 287-308.
 
-.. minigallery:: ../../examples/linalg/stability/plot_01_normal_equations_vs_qr.py
+.. minigallery:: ../../examples/linalg/stability/plot_01_condition_number.py
 
 1950 -- Lanczos Iteration
 -------------------------
@@ -491,7 +491,7 @@ of Very Large Sparse Matrices," Ph.D. thesis, University of London
 a k-Step Arnoldi Method," SIAM Journal on Matrix Analysis and
 Applications 13(1) (1992), 357-385.
 
-.. minigallery:: ../../examples/linalg/eigen/plot_03_lanczos.py
+.. minigallery:: ../../examples/linalg/eigen/plot_04_lanczos.py
 
 1952 -- Hestenes, Stiefel, and the Conjugate Gradient Method
 ------------------------------------------------------------
@@ -567,7 +567,7 @@ die charakteristischen Wurzeln einer linearen Substitution mit einer
 Anwendung auf die Theorie der Integralgleichungen," Mathematische
 Annalen 66 (1909), 488-510.
 
-.. minigallery:: ../../examples/linalg/eigen/plot_04_francis_qr_algorithm.py
+.. minigallery:: ../../examples/linalg/eigen/plot_05_francis_qr_algorithm.py
 
 See Also
 --------

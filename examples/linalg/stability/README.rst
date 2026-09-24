@@ -1,5 +1,6 @@
 Numerical stability
 --------------------
 
-Least squares via the normal equations vs. via QR, and why the former
-squares the condition number of the design matrix.
+The condition number: how much a linear system amplifies errors in its
+data, and why least squares via the normal equations squares it while
+QR does not.
