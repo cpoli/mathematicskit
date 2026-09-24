@@ -1,11 +1,11 @@
 """Concrete dynamical-systems algorithms: stability analysis, phase
 portraits, the logistic map, bifurcation normal forms, limit cycles, and
 Poincare sections, plus population, epidemic, neuron, chemical-oscillator,
-synchronization, and chaotic-flow models.
+synchronization, and chaotic-flow (Lorenz, Rossler) models.
 """
 
 from mathematicskit.ode_dynamics.systems.bifurcations import hopf_limit_cycle_radius, pitchfork_fixed_points, saddle_node_fixed_points
-from mathematicskit.ode_dynamics.systems.chaotic_flows import RosslerSystem, rossler_fixed_points
+from mathematicskit.ode_dynamics.systems.chaotic_flows import LorenzSystem, RosslerSystem, lorenz_fixed_points, rossler_fixed_points
 from mathematicskit.ode_dynamics.systems.chemical_oscillators import Brusselator, brusselator_hopf_threshold
 from mathematicskit.ode_dynamics.systems.epidemics import SIRModel, sir_final_size, sir_peak_infected
 from mathematicskit.ode_dynamics.systems.excitable import FitzHughNagumo, fitzhugh_nagumo_fixed_point, fitzhugh_nagumo_hopf_currents
@@ -51,6 +51,8 @@ __all__ = [
     "KuramotoModel",
     "kuramoto_order_parameter",
     "kuramoto_lorentzian_order_parameter",
+    "LorenzSystem",
+    "lorenz_fixed_points",
     "RosslerSystem",
     "rossler_fixed_points",
 ]

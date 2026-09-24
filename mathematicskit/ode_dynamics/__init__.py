@@ -8,13 +8,13 @@ pitchfork, Hopf); limit cycles (Van der Pol oscillator) and Poincare
 sections for higher-dimensional (periodically driven) flows; Lyapunov's
 direct method and Bendixson's criterion; population (Verhulst logistic,
 Lotka-Volterra), epidemic (SIR), neuron (FitzHugh-Nagumo), and chemical
-(Brusselator) models; Kuramoto synchronization; and the Rossler chaotic
-flow.
+(Brusselator) models; Kuramoto synchronization; and the Lorenz and
+Rossler chaotic flows.
 """
 
 from mathematicskit.ode_dynamics.core.base import BendixsonResult, FixedPointResult, FlowSystem, LyapunovFunctionResult, OdeTrajectory
 from mathematicskit.ode_dynamics.systems.bifurcations import hopf_limit_cycle_radius, pitchfork_fixed_points, saddle_node_fixed_points
-from mathematicskit.ode_dynamics.systems.chaotic_flows import RosslerSystem, rossler_fixed_points
+from mathematicskit.ode_dynamics.systems.chaotic_flows import LorenzSystem, RosslerSystem, lorenz_fixed_points, rossler_fixed_points
 from mathematicskit.ode_dynamics.systems.chemical_oscillators import Brusselator, brusselator_hopf_threshold
 from mathematicskit.ode_dynamics.systems.epidemics import SIRModel, sir_final_size, sir_peak_infected
 from mathematicskit.ode_dynamics.systems.excitable import FitzHughNagumo, fitzhugh_nagumo_fixed_point, fitzhugh_nagumo_hopf_currents
@@ -69,6 +69,8 @@ __all__ = [
     "KuramotoModel",
     "kuramoto_order_parameter",
     "kuramoto_lorentzian_order_parameter",
+    "LorenzSystem",
+    "lorenz_fixed_points",
     "RosslerSystem",
     "rossler_fixed_points",
     "estimate_period",

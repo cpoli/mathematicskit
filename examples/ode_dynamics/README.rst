@@ -6,8 +6,8 @@ fixed-point stability classification, phase portraits, the logistic
 map's route to chaos, canonical bifurcation normal forms, the Van der
 Pol limit cycle, Poincare sections of the driven Duffing oscillator,
 Lyapunov functions and Bendixson's criterion, population, epidemic,
-neuron, and chemical models, Kuramoto synchronization, and the Rossler
-attractor.
+neuron, and chemical models, Kuramoto synchronization, and the Lorenz and
+Rossler attractors.
 
 See also the narrative tutorials:
 
@@ -39,4 +39,5 @@ Sections
   final size.
 - **excitable** -- the FitzHugh-Nagumo neuron's excitability and spiking.
 - **synchronization** -- the Kuramoto model's synchronization transition.
-- **chaotic_flows** -- the Rossler attractor and its return map.
+- **chaotic_flows** -- the Lorenz attractor and its butterfly effect, and
+  the Rossler attractor and its return map.

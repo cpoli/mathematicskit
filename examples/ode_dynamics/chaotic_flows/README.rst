@@ -1,4 +1,6 @@
 Chaotic flows
 -------------
 
-The Rossler attractor, a minimal three-dimensional chaotic flow.
+Lorenz's butterfly attractor and its sensitive dependence on initial
+conditions, and the Rossler attractor, a minimal three-dimensional
+chaotic flow.

@@ -360,7 +360,7 @@ found.
 *References:* E. N. Lorenz, "Deterministic Nonperiodic Flow," Journal of
 the Atmospheric Sciences 20(2) (1963), 130-141.
 
-.. minigallery:: ../../examples/ode_dynamics/stability/plot_01_classification_zoo.py
+.. minigallery:: ../../examples/ode_dynamics/chaotic_flows/plot_01_lorenz_butterfly_effect.py
 
 1968 -- Prigogine, Lefever, and the Brusselator
 -----------------------------------------------
@@ -466,7 +466,7 @@ attractor stays bounded, and that nearby trajectories separate.
 *References:* O. E. Rössler, "An Equation for Continuous Chaos,"
 Physics Letters A 57(5) (1976), 397-398.
 
-.. minigallery:: ../../examples/ode_dynamics/chaotic_flows/plot_01_rossler_attractor.py
+.. minigallery:: ../../examples/ode_dynamics/chaotic_flows/plot_02_rossler_attractor.py
 
 1978 -- Feigenbaum's Universality
 ---------------------------------
