@@ -9,6 +9,7 @@ beta function's relationship to gamma.
 # %%
 import math
 
+import matplotlib.pyplot as plt
 import numpy as np
 
 from mathematicskit.special_functions import beta_function, gamma_function, log_gamma_function
@@ -19,6 +20,19 @@ from mathematicskit.special_functions import beta_function, gamma_function, log_
 
 for n in range(1, 7):
     print(f"Gamma({n}) = {gamma_function(float(n)):.1f}, (n-1)! = {math.factorial(n - 1)}")
+
+x = np.linspace(-3.95, 5.0, 2000)
+g = gamma_function(x)
+g[np.abs(g) > 30] = np.nan
+fig, ax = plt.subplots()
+ax.plot(x, g, label=r"$\Gamma(x)$")
+ns = np.arange(1, 6)
+ax.plot(ns, [math.factorial(n - 1) for n in ns], "ko", label=r"$(n-1)!$")
+ax.axhline(0, color="gray", lw=0.5)
+ax.set_ylim(-10, 25)
+ax.set_xlabel("x")
+ax.set_title("The gamma function interpolates the factorial")
+ax.legend()
 
 print(f"\nGamma(0.5) = {gamma_function(0.5):.6f}, sqrt(pi) = {np.sqrt(np.pi):.6f}")
 

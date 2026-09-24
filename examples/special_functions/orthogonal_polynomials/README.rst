@@ -1,5 +1,5 @@
 Orthogonal polynomials
 ------------------------
 
-Legendre, Chebyshev, Hermite, and Laguerre polynomials, with
-numerically verified orthogonality.
+Legendre and Chebyshev polynomials on [-1, 1], and Hermite and Laguerre
+polynomials on infinite domains, with numerically verified orthogonality.

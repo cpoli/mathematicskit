@@ -153,7 +153,7 @@ sphéroïdes homogènes," Mémoires de Mathématique et de Physique,
 présentés à l'Académie Royale des Sciences 10 (1785), 411-434
 (presented 1782).
 
-.. minigallery:: ../../examples/special_functions/orthogonal_polynomials/plot_01_four_families.py
+.. minigallery:: ../../examples/special_functions/orthogonal_polynomials/plot_01_legendre_chebyshev.py
 
 1799 -- Gauss's Arithmetic-Geometric Mean
 -----------------------------------------
@@ -227,7 +227,7 @@ fonctions," Comptes Rendus de l'Académie des Sciences 58 (1864), 93-100,
 :math:`\int_x^\infty e^{-x}x^{-1}dx`," Bulletin de la Société
 Mathématique de France 7 (1879), 72-81.
 
-.. minigallery:: ../../examples/special_functions/orthogonal_polynomials/plot_01_four_families.py
+.. minigallery:: ../../examples/special_functions/orthogonal_polynomials/plot_02_hermite_laguerre.py
 
 1812 -- Gauss's Hypergeometric Series
 -------------------------------------
