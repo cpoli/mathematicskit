@@ -52,15 +52,27 @@ def lu_decompose(a: np.ndarray) -> LUResult:
     >>> result = lu_decompose(A)
     >>> np.allclose(result.P @ A, result.L @ result.U)
     True
+    >>> # Singularity is judged from U's pivots, not from det(A), which
+    >>> # underflows to 0.0 for large well-conditioned matrices.
+    >>> np.allclose(lu_decompose(0.01 * np.eye(200)).U, 0.01 * np.eye(200))
+    True
     """
     a = np.asarray(a, dtype=np.float64)
     n = a.shape[0]
     if a.shape != (n, n):
         raise ValueError("a must be square")
-    if abs(sla.det(a)) < 1e-300:
-        raise np.linalg.LinAlgError("matrix is singular to working precision")
 
     p0, L, U = sla.lu(a)
+    # Singularity is decided from the *relative* size of U's smallest pivot
+    # rather than from det(a). The determinant is a product of n pivots, so it
+    # underflows to exactly 0.0 for a large but perfectly well-conditioned
+    # matrix -- det(0.01 * I_200) = 1e-400 -- and an absolute threshold on it
+    # would reject matrices that factor and solve without any trouble.
+    pivots = np.abs(np.diag(U))
+    largest = float(pivots.max()) if n else 0.0
+    if largest == 0.0 or float(pivots.min()) <= largest * n * np.finfo(np.float64).eps:
+        raise np.linalg.LinAlgError("matrix is singular to working precision")
+
     P = p0.T
     # Parity of the row permutation encoded by P: the minimum number of
     # transpositions to realize it is n minus its number of cycles.

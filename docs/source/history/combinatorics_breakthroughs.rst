@@ -1,161 +1,79 @@
 Breakthroughs in Combinatorics
-=================================
+==============================
 
 
 .. include:: /_generated/nav/combinatorics.rst
 
 .. epigraph::
 
-   "Combinatorics is the slums of topology." -- a wry (and much disputed)
-   remark long attributed, probably apocryphally, to Gian-Carlo Rota
+   "Combinatorics is the pegboard of mathematics."
+   -- Gian-Carlo Rota
 
 Counting things exactly -- not approximately, not asymptotically, but
 exactly -- turns out to be a surprisingly deep subject, full of hidden
-bijections between problems that look nothing alike on the surface. This
-chronology traces the ideas behind :mod:`mathematicskit.combinatorics`, from
-Pascal's triangle to the partition function whose exact evaluation
-Ramanujan and Hardy needed an entirely new method of complex analysis to
-reach.
+bijections between problems that look nothing alike. This chronology
+traces the ideas behind :mod:`mathematicskit.combinatorics`, from
+Pascal's triangle to the partition function, whose growth Srinivasa
+Ramanujan and Godfrey Harold Hardy could only capture by inventing a
+new method of complex analysis.
 
 .. contents:: Timeline
    :local:
    :depth: 1
 
-1665 -- Pascal's Triangle (and Its Much Older Ancestors)
-----------------------------------------------------------------
+1654-1665 -- Pascal's Triangle (and Its Much Older Ancestors)
+-------------------------------------------------------------
 
-Blaise Pascal's 1654 treatise *Traite du triangle arithmetique*
-(published 1665) gave the triangular array of binomial coefficients its
-Western name and a thorough combinatorial treatment, but the triangle
-itself had already been independently discovered centuries earlier: in
-10th-century India (Halayudha's commentary on Pingala), 11th-century
-Persia (Al-Karaji and Omar Khayyam), and 13th-century China (Jia Xian,
-popularized by Yang Hui, whose name the triangle carries in Chinese
-mathematics today). Every version rests on the same recurrence: each
-entry is the sum of the two entries above it.
+Blaise Pascal wrote his *Traité du triangle arithmétique* in 1654, and
+it was published posthumously in 1665. It gave the triangular array of
+binomial coefficients its Western name and a thorough combinatorial
+treatment. The triangle itself had been discovered independently
+centuries earlier: in 10th-century India (Halayudha's commentary on
+Pingala), in Persia around 1000 (Al-Karaji, and later Omar Khayyam),
+and in 11th-century China (Jia Xian). Yang Hui popularized it in China
+in 1261, and it carries his name in Chinese mathematics today. Every
+version rests on the same recurrence: each entry is the sum of the two
+entries above it.
 
 .. math::
 
    \binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k}
 
 *Implementation:* :func:`mathematicskit.combinatorics.systems.pascals_triangle.pascals_triangle`
-builds exactly this triangle via the recurrence, kept hand-rolled purely
-as a pedagogical illustration alongside the primary API,
+builds the triangle from this recurrence. It is hand-rolled purely as a
+teaching illustration; the primary API is
 :func:`~mathematicskit.combinatorics.systems.counting.combinations_count`,
 which wraps :func:`scipy.special.comb`.
 
-*References:* B. Pascal, *Traite du triangle arithmetique* (Paris:
-Desprez, 1665).
+*References:* B. Pascal, *Traité du triangle arithmétique* (Paris:
+Guillaume Desprez, 1665).
 
 .. minigallery:: ../../examples/combinatorics/pascals_triangle/plot_01_triangle_and_binomials.py
 
-1713 -- Bernoulli, Montmort, and the Derangement Problem
-------------------------------------------------------------------
+1674-1918 -- Young Diagrams and Integer Partitions
+--------------------------------------------------
 
-Pierre Remond de Montmort's 1708 *Essai d'analyse sur les jeux de
-hasard* posed the "probleme des rencontres": shuffle a deck and ask how
-likely no card lands in its original position -- a permutation with no
-fixed point, later named a "derangement." Montmort and Nicolaus
-Bernoulli, corresponding between 1710 and 1713, worked out the exact
-count via what is now recognized as an early, concrete instance of the
-inclusion-exclusion principle -- alternately over- and under-counting
-permutations that fix at least one, at least two, at least three points,
-and so on.
-
-.. math::
-
-   D_n = n! \sum_{k=0}^{n} \frac{(-1)^k}{k!}
-
-*Implementation:* :func:`mathematicskit.combinatorics.systems.inclusion_exclusion.derangement_count`
-implements exactly this count via the equivalent integer recurrence
-:math:`D_n = (n-1)(D_{n-1}+D_{n-2})`, and
-:func:`~mathematicskit.combinatorics.systems.inclusion_exclusion.union_size_inclusion_exclusion`
-implements the general inclusion-exclusion principle the derangement
-count is a specific application of.
-
-*References:* P. R. de Montmort, *Essai d'analyse sur les jeux de
-hasard*, 2nd ed. (Paris: Quillau, 1713).
-
-.. minigallery:: ../../examples/combinatorics/inclusion_exclusion/plot_01_hat_check_problem.py
-
-1751 -- Euler and the Catalan Numbers
--------------------------------------------
-
-Leonhard Euler's 1751 correspondence with Christian Goldbach posed and
-solved the problem of counting the ways to dissect a convex polygon into
-triangles using non-crossing diagonals -- the first appearance of the
-sequence :math:`1, 1, 2, 5, 14, 42, \dots` now named for Eugene Charles
-Catalan, whose own 1838 paper on a closely related bracketing problem
-gave the sequence its modern name and recurrence. The same numbers count
-an enormous variety of unrelated-looking combinatorial objects: balanced
-parenthesizations, binary trees, and non-crossing lattice paths among
-them, one of the most striking examples in mathematics of a single
-integer sequence with many independent combinatorial meanings.
-
-.. math::
-
-   C_0 = 1, \qquad C_{n+1} = \sum_{i=0}^{n} C_i C_{n-i}
-
-*Implementation:* :func:`mathematicskit.combinatorics.systems.special_numbers.catalan_number`
-implements exactly Catalan's own recurrence (rather than the equivalent
-closed form :math:`\binom{2n}{n}/(n+1)`, kept as a cross-check in this
-domain's tests), and is verified directly against brute-force
-enumeration of balanced-parenthesis strings.
-
-*References:* E. Catalan, "Note sur une equation aux differences
-finies," Journal de Mathematiques Pures et Appliquees 3 (1838), 508-516.
-
-.. minigallery:: ../../examples/combinatorics/special_numbers/plot_01_catalan_and_stirling.py
-
-1730 -- Stirling's Numbers
---------------------------------
-
-James Stirling's 1730 treatise *Methodus Differentialis* introduced two
-families of numbers converting between ordinary powers and falling
-factorials -- the Stirling numbers of the first kind (counting
-permutations by their number of cycles) and second kind (counting the
-ways to partition a labeled set into a fixed number of non-empty,
-unlabeled blocks), the combinatorial machinery underlying the Bell
-numbers (the *total* number of ways to partition a set into any number
-of blocks at all), named for Eric Temple Bell's 1934 paper studying
-their generating function.
-
-*Implementation:* :func:`mathematicskit.combinatorics.systems.special_numbers.stirling_first_kind`
-and :func:`~mathematicskit.combinatorics.systems.special_numbers.stirling_second_kind`
-implement both families via their defining recurrences;
-:func:`mathematicskit.combinatorics.utils.bell_number.bell_number` sums the
-second kind over every possible number of blocks.
-
-*References:* J. Stirling, *Methodus Differentialis* (London: Bowyer,
-1730).
-
-.. minigallery:: ../../examples/combinatorics/special_numbers/plot_01_catalan_and_stirling.py
-
-1674 -- 1918 -- Young Diagrams and Integer Partitions
-------------------------------------------------------------
-
-The partition function :math:`p(n)`, counting the ways to write
-:math:`n` as a sum of positive integers regardless of order, was studied
-combinatorially at least as far back as Leibniz's 1674 correspondence,
-and Euler developed its generating function
-:math:`\prod_{k\geq1}(1-x^k)^{-1}` in the mid-18th century. Alfred
-Young's 1900-1902 diagrams -- left-justified rows of boxes, one row per
-part, in non-increasing length -- gave partitions their standard visual
-representation, whose *conjugate* (reflecting the diagram across its
-main diagonal, swapping rows and columns) reveals a beautiful hidden
-symmetry of the partition function. Srinivasa Ramanujan and G. H.
-Hardy's 1918 circle method finally gave :math:`p(n)` a genuine
-asymptotic formula, after nearly two and a half centuries of the
-function resisting any closed form at all.
+The partition function :math:`p(n)` counts the ways to write :math:`n`
+as a sum of positive integers, ignoring order. Gottfried Wilhelm Leibniz
+studied it in unpublished notes from 1674, and Leonhard Euler found its
+generating function :math:`\prod_{k\geq1}(1-x^k)^{-1}` in the 1740s.
+Alfred Young's diagrams, introduced in 1900, draw a partition as
+left-justified rows of boxes, one row per part, in non-increasing
+length. Reflecting a diagram across its main diagonal gives the
+*conjugate* partition, which reveals hidden symmetries: for example,
+the number of partitions of :math:`n` into :math:`k` parts equals the
+number whose largest part is :math:`k`. No closed form for :math:`p(n)`
+was ever found, but in 1918 Godfrey Harold Hardy and Srinivasa Ramanujan used
+their new circle method to give it a precise asymptotic formula.
 
 *Implementation:* :func:`mathematicskit.combinatorics.systems.partitions.partition_function`
-computes :math:`p(n)` exactly via Euler's own pentagonal-number-theorem
-recurrence (rather than Hardy and Ramanujan's asymptotic circle-method
-formula, which this domain does not implement);
+computes :math:`p(n)` exactly with Euler's pentagonal-number-theorem
+recurrence. This domain does not implement the Hardy-Ramanujan
+asymptotic formula.
 :func:`~mathematicskit.combinatorics.systems.partitions.integer_partitions`
-enumerates every partition explicitly, and
-:class:`mathematicskit.combinatorics.core.base.YoungDiagram` implements exactly
-Young's diagram and its conjugation.
+lists every partition explicitly, and
+:class:`mathematicskit.combinatorics.core.base.YoungDiagram` implements
+Young's diagram and its conjugate.
 
 *References:* A. Young, "On Quantitative Substitutional Analysis,"
 Proceedings of the London Mathematical Society 33(1) (1900), 97-146; G.
@@ -164,6 +82,88 @@ Analysis," Proceedings of the London Mathematical Society 17(1) (1918),
 75-115.
 
 .. minigallery:: ../../examples/combinatorics/partitions/plot_01_partitions_and_young_diagrams.py
+
+1708-1713 -- Bernoulli, Montmort, and the Derangement Problem
+-------------------------------------------------------------
+
+Pierre Rémond de Montmort's 1708 *Essay d'analyse sur les jeux de
+hazard* posed the *problème des rencontres*: shuffle a deck, and ask
+how likely it is that no card ends up in its original position. Such a
+permutation, with no fixed point, is now called a "derangement."
+Montmort and Nicolaus Bernoulli, corresponding between 1710 and 1713,
+worked out the exact count. Their method is an early instance of the
+inclusion-exclusion principle: alternately subtract and add the
+permutations that fix at least one, at least two, at least three
+points, and so on.
+
+.. math::
+
+   D_n = n! \sum_{k=0}^{n} \frac{(-1)^k}{k!}
+
+*Implementation:* :func:`mathematicskit.combinatorics.systems.inclusion_exclusion.derangement_count`
+computes this count with the equivalent integer recurrence
+:math:`D_n = (n-1)(D_{n-1}+D_{n-2})`.
+:func:`~mathematicskit.combinatorics.systems.inclusion_exclusion.union_size_inclusion_exclusion`
+implements the general inclusion-exclusion principle, of which the
+derangement count is one application.
+
+*References:* P. R. de Montmort, *Essay d'analyse sur les jeux de
+hazard*, 2nd ed. (Paris: Jacque Quillau, 1713).
+
+.. minigallery:: ../../examples/combinatorics/inclusion_exclusion/plot_01_hat_check_problem.py
+
+1730 -- Stirling's Numbers
+--------------------------
+
+James Stirling's 1730 treatise *Methodus Differentialis* introduced two
+families of numbers that convert between ordinary powers and falling
+factorials. In modern terms, Stirling numbers of the first kind count
+permutations by their number of cycles. Stirling numbers of the second
+kind count the ways to partition a labeled set into a fixed number of
+non-empty, unlabeled blocks. Summing the second kind over every
+possible number of blocks gives the Bell numbers, the *total* number of
+ways to partition a set. They are named for Eric Temple Bell, whose
+1934 papers studied them.
+
+*Implementation:* :func:`mathematicskit.combinatorics.systems.special_numbers.stirling_first_kind`
+and :func:`~mathematicskit.combinatorics.systems.special_numbers.stirling_second_kind`
+implement both families with their defining recurrences;
+:func:`mathematicskit.combinatorics.utils.bell_number.bell_number` sums the
+second kind over every possible number of blocks.
+
+*References:* J. Stirling, *Methodus Differentialis* (London: Bowyer,
+1730).
+
+.. minigallery:: ../../examples/combinatorics/special_numbers/plot_01_catalan_and_stirling.py
+
+1751-1838 -- Euler, Catalan, and the Catalan Numbers
+----------------------------------------------------
+
+In a 1751 letter to Christian Goldbach, Leonhard Euler posed and solved
+the problem of counting the ways to cut a convex polygon into triangles
+with non-crossing diagonals. This was the first appearance of the
+sequence :math:`1, 1, 2, 5, 14, 42, \dots`. Eugène Charles Catalan's
+1838 paper connected the same numbers to the problem of bracketing a
+product, and the sequence was later named after him. The same numbers
+count a remarkable variety of unrelated-looking objects, among them
+balanced parenthesizations, binary trees, and non-crossing lattice
+paths. Few integer sequences have as many independent combinatorial
+meanings.
+
+.. math::
+
+   C_0 = 1, \qquad C_{n+1} = \sum_{i=0}^{n} C_i C_{n-i}
+
+*Implementation:* :func:`mathematicskit.combinatorics.systems.special_numbers.catalan_number`
+implements this recurrence, and is checked against brute-force
+enumeration of balanced-parenthesis strings. This domain's tests keep
+the equivalent closed form :math:`\binom{2n}{n}/(n+1)` as a
+cross-check.
+
+*References:* E. Catalan, "Note sur une équation aux différences
+finies," Journal de Mathématiques Pures et Appliquées 3 (1838), 508-516.
+
+.. minigallery:: ../../examples/combinatorics/special_numbers/plot_01_catalan_and_stirling.py
 
 See Also
 --------

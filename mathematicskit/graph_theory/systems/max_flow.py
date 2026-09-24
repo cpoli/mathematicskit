@@ -54,7 +54,17 @@ def max_flow_min_cut(graph: Graph, source: int, sink: int, method: str = "dinic"
     >>> result = max_flow_min_cut(g, source=0, sink=3)
     >>> result.flow_value
     5.0
+    >>> # Fractional capacities are rejected rather than silently truncated.
+    >>> frac = Graph(2, directed=True)
+    >>> frac.add_edge(0, 1, 2.7)
+    >>> max_flow_min_cut(frac, source=0, sink=1)
+    Traceback (most recent call last):
+        ...
+    ValueError: edge capacities must be integers, but edge (0, 1) has weight 2.7
     """
+    for u, v, w in graph.edges():
+        if w != int(w):
+            raise ValueError(f"edge capacities must be integers, but edge ({u}, {v}) has weight {w}")
     capacities = graph.to_sparse().astype(np.int64)
     scipy_result = csgraph.maximum_flow(capacities, source, sink, method=method)
     flow_matrix = np.asarray(scipy_result.flow.toarray(), dtype=np.float64)

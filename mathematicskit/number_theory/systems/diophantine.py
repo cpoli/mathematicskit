@@ -45,8 +45,16 @@ def solve_linear_diophantine(a: int, b: int, c: int) -> LinearDiophantineResult:
     True
     >>> solve_linear_diophantine(2, 4, 3).has_solution  # gcd(2,4)=2 does not divide 3
     False
+    >>> solve_linear_diophantine(0, 0, 5).has_solution  # 0x + 0y = 5 is unsolvable
+    False
+    >>> solve_linear_diophantine(0, 0, 0).has_solution  # ... but 0x + 0y = 0 holds for every (x, y)
+    True
     """
     bezout = extended_gcd(a, b)
+    if bezout.gcd == 0:
+        # a == b == 0 degenerates the equation to 0 = c, with no gcd to divide
+        # by. Every (x, y) solves it when c == 0, and none does otherwise.
+        return LinearDiophantineResult(has_solution=c == 0, x0=0 if c == 0 else None, y0=0 if c == 0 else None, gcd=0)
     if c % bezout.gcd != 0:
         return LinearDiophantineResult(has_solution=False, gcd=bezout.gcd)
     scale = c // bezout.gcd

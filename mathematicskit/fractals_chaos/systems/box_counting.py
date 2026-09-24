@@ -25,10 +25,12 @@ def box_counting_dimension(points: np.ndarray, box_sizes: Optional[np.ndarray] =
     each of several sizes, and counts :math:`N(\text{size})` = the number
     of grid cells containing at least one point.
     :math:`N(\text{size}) \sim \text{size}^{-D}` defines the box-counting
-    dimension :math:`D`, estimated here as minus the slope of
-    :math:`\log N` vs. :math:`\log(1/\text{size})` (least-squares fit via
-    :func:`numpy.polyfit`). See Falconer, *Fractal Geometry*, 3rd ed.,
-    Ch. 3, equation (3.1).
+    dimension :math:`D`. Taking logs gives :math:`\log N =
+    D\log(1/\text{size}) + c`, so :math:`D` is the *slope* of
+    :math:`\log N` against :math:`\log(1/\text{size})` (least-squares fit
+    via :func:`numpy.polyfit`) -- inverting the size axis is what turns the
+    minus sign in the exponent into a positive slope. See Falconer,
+    *Fractal Geometry*, 3rd ed., Ch. 3, equation (3.1).
 
     Parameters
     ----------

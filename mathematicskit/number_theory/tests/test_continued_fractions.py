@@ -1,6 +1,9 @@
 """Tests for continued-fraction expansion and best rational
 approximation against closed-form/known results."""
 
+import math
+from fractions import Fraction
+
 import numpy as np
 import pytest
 
@@ -41,3 +44,32 @@ def test_terminates_and_reconstructs_exact_rationals(x):
     result = continued_fraction_expansion(x, max_terms=30)
     p, q = result.convergents[-1]
     assert p / q == pytest.approx(x, abs=1e-9)
+
+
+@pytest.mark.parametrize(
+    "x,max_denominator,expected",
+    [
+        (math.pi, 7, (22, 7)),
+        (math.pi, 57, (179, 57)),  # a semiconvergent, not a convergent
+        (math.pi, 99, (311, 99)),  # likewise
+        (math.pi, 113, (355, 113)),
+        (math.pi, 200, (355, 113)),
+    ],
+)
+def test_best_rational_approximation_includes_semiconvergents(x, max_denominator, expected):
+    """A convergent is only optimal up to *its own* denominator.
+
+    Between two convergents the denominator can jump far past the bound --
+    pi's convergents go 22/7 straight to 333/106 -- leaving room for a
+    semiconvergent that is genuinely closer, such as 179/57 beating 22/7."""
+    assert best_rational_approximation(x, max_denominator) == expected
+
+
+@pytest.mark.parametrize("x", [math.pi, math.e, math.sqrt(2), 0.1, -math.pi, 1.0 / 3.0])
+@pytest.mark.parametrize("max_denominator", [1, 2, 7, 15, 57, 100, 1000, 9999])
+def test_best_rational_approximation_matches_fractions_limit_denominator(x, max_denominator):
+    """Cross-check against the standard library's own optimal algorithm."""
+    p, q = best_rational_approximation(x, max_denominator)
+    reference = Fraction(x).limit_denominator(max_denominator)
+    assert q <= max_denominator
+    assert abs(p / q - x) <= abs(float(reference) - x) + 1e-15

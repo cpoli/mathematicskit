@@ -1,5 +1,7 @@
 """Tests for Maclaurin series expansion and convergence-radius estimation."""
 
+import math
+
 import numpy as np
 import pytest
 
@@ -29,18 +31,23 @@ def test_geometric_series_matches_closed_form():
     assert approx == pytest.approx(1.0 / (1.0 - x), abs=1e-8)
 
 
-def test_radius_of_convergence_for_entire_functions_grows_with_order():
-    """exp/sin/cos have infinite radius of convergence; the ratio-test
-    estimate from a finite truncation should grow (not converge to a
-    finite bound) as more terms are included."""
-    small = estimate_radius_of_convergence(maclaurin_coefficients("exp", order=10))
-    large = estimate_radius_of_convergence(maclaurin_coefficients("exp", order=30))
-    assert large > small
+@pytest.mark.parametrize("name", ["exp", "sin", "cos"])
+@pytest.mark.parametrize("order", [10, 20, 30])
+def test_radius_of_convergence_for_entire_functions_is_infinite(name, order):
+    """exp/sin/cos are entire, so their radius of convergence is infinite.
+
+    A finite truncation never shows that as a large number -- it shows it as
+    a ratio that keeps climbing with the truncation order -- so the estimate
+    has to report ``inf`` rather than whatever finite value the last two
+    retained coefficients happen to give (which would be roughly ``order``
+    itself, an artifact of the cutoff and not a property of the series)."""
+    assert estimate_radius_of_convergence(maclaurin_coefficients(name, order=order)) == math.inf
 
 
 def test_radius_of_convergence_for_log1p_and_geometric_is_one():
     assert estimate_radius_of_convergence(maclaurin_coefficients("geometric", order=50)) == pytest.approx(1.0, abs=1e-6)
     assert estimate_radius_of_convergence(maclaurin_coefficients("log1p", order=500)) == pytest.approx(1.0, abs=1e-2)
+    assert estimate_radius_of_convergence(maclaurin_coefficients("arctan", order=500)) == pytest.approx(1.0, abs=1e-2)
 
 
 def test_taylor_remainder_bound_shrinks_with_order():

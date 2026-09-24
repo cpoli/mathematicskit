@@ -69,9 +69,17 @@ class MarkovChain:
         eigenvalues, eigenvectors = np.linalg.eig(self.p.T)
         idx = int(np.argmin(np.abs(eigenvalues - 1.0)))
         vec = np.real(eigenvectors[:, idx])
-        if np.sum(vec) < 0:
-            vec = -vec
-        return vec / np.sum(vec)
+        total = float(np.sum(vec))
+        # Dividing by the sum both normalizes and fixes the sign, since a
+        # stationary eigenvector's entries all share one sign. A sum of
+        # (near) zero means the chosen eigenvector is not a distribution at
+        # all -- the chain is reducible or periodic, so no unique stationary
+        # distribution exists -- and normalizing would silently return noise.
+        if abs(total) < 1e-12:
+            raise np.linalg.LinAlgError(
+                "no unique stationary distribution: the eigenvector for eigenvalue 1 sums to zero, which means the chain is reducible or periodic"
+            )
+        return vec / total
 
     def stationary_distribution_power_iteration(self, n_iter: int = 10000, tol: float = 1e-14) -> np.ndarray:
         r"""Stationary distribution via power iteration: :math:`\pi_{k+1} = \pi_k P`.

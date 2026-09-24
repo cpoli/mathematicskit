@@ -40,10 +40,19 @@ def is_irreducible(poly: Polynomial) -> bool:
     True
     >>> is_irreducible(Polynomial([0, 1, 1], modulus=2))  # x^2+x = x(x+1): reducible
     False
+    >>> is_irreducible(Polynomial([1], modulus=2))  # the constant 1 is a unit, not irreducible
+    False
+    >>> is_irreducible(Polynomial([0], modulus=2))  # nor is the zero polynomial
+    False
     """
     p = poly.modulus
     n = poly.degree
-    if n <= 1:
+    if n < 1:
+        # Degree 0 is a nonzero constant (a unit) and degree -1 is the zero
+        # polynomial; by definition neither is irreducible, since
+        # irreducibility asks for a non-unit with no non-unit factorization.
+        return False
+    if n == 1:
         return True
     for d in range(1, n // 2 + 1):
         for candidate_coeffs in _monic_polynomials_of_degree(p, d):

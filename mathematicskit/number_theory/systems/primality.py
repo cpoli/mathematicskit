@@ -9,6 +9,9 @@ the Theory of Numbers*, 5th ed., Sec. 1.1 (sieve of Eratosthenes).
 
 from __future__ import annotations
 
+import math
+import random
+
 import numpy as np
 
 from mathematicskit.number_theory.systems.modular_arithmetic import fast_mod_pow
@@ -87,6 +90,8 @@ def is_prime_miller_rabin(n: int, k: int = 40, seed: int = 0) -> bool:
     False
     >>> is_prime_miller_rabin(2**61 - 1)  # a known Mersenne prime
     True
+    >>> is_prime_miller_rabin(2**89 - 1)  # arbitrary precision: no 64-bit ceiling
+    True
     """
     if n < 2:
         return False
@@ -101,9 +106,14 @@ def is_prime_miller_rabin(n: int, k: int = 40, seed: int = 0) -> bool:
         r += 1
         d //= 2
 
-    rng = np.random.default_rng(seed)
+    # Witnesses are drawn with Python's ``random`` rather than
+    # ``numpy.random``: ``Generator.integers`` is capped at int64, so a
+    # numpy-drawn witness raises for any n >= 2**63 -- precisely the regime
+    # where a probabilistic test beats trial division, and where Python's
+    # arbitrary-precision ints are the whole point.
+    rng = random.Random(seed)
     for _ in range(k):
-        a = int(rng.integers(2, n - 1))
+        a = rng.randrange(2, n - 1)
         x = fast_mod_pow(a, d, n)
         if x == 1 or x == n - 1:
             continue
@@ -144,7 +154,7 @@ def sieve_of_eratosthenes(limit: int) -> np.ndarray:
         return np.array([], dtype=np.int64)
     is_composite = np.zeros(limit + 1, dtype=bool)
     is_composite[:2] = True
-    for i in range(2, int(np.sqrt(limit)) + 1):
+    for i in range(2, math.isqrt(limit) + 1):
         if not is_composite[i]:
             is_composite[i * i :: i] = True
     return np.flatnonzero(~is_composite)

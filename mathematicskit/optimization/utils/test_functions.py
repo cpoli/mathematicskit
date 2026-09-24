@@ -16,6 +16,25 @@ import numpy as np
 
 __all__ = ["rosenbrock", "rosenbrock_grad", "rosenbrock_hess", "quadratic_bowl", "quadratic_bowl_grad", "quadratic_bowl_hess"]
 
+_DEFAULT_BOWL_DIAGONAL = (1.0, 10.0)
+
+
+def _bowl_matrix(n: int, matrix) -> np.ndarray:
+    """Resolve the quadratic bowl's matrix ``A``, defaulting to ``diag(1, 10)``.
+
+    The default is two-dimensional, so anything past ``n == 2`` has to supply
+    its own ``matrix``; saying so here beats letting the mismatch surface as
+    an opaque ``matmul`` shape error from deep inside the objective.
+    """
+    if matrix is not None:
+        a = np.asarray(matrix, dtype=np.float64)
+        if a.shape != (n, n):
+            raise ValueError(f"matrix must have shape ({n}, {n}) to match x, got {a.shape}")
+        return a
+    if n > len(_DEFAULT_BOWL_DIAGONAL):
+        raise ValueError(f"the default quadratic bowl is 2-dimensional; pass an explicit (matrix) of shape ({n}, {n}) for x of length {n}")
+    return np.diag(np.asarray(_DEFAULT_BOWL_DIAGONAL[:n], dtype=np.float64))
+
 
 def rosenbrock(x: np.ndarray, a: float = 1.0, b: float = 100.0) -> float:
     r"""The (generalized, n-dimensional) Rosenbrock "banana" function.
@@ -129,7 +148,7 @@ def quadratic_bowl(x: np.ndarray, matrix: Optional[np.ndarray] = None, b: Option
     0.0
     """
     x = np.asarray(x, dtype=np.float64)
-    a = np.diag([1.0, 10.0])[: x.shape[0], : x.shape[0]] if matrix is None else np.asarray(matrix, dtype=np.float64)
+    a = _bowl_matrix(x.shape[0], matrix)
     bb = np.zeros_like(x) if b is None else np.asarray(b, dtype=np.float64)
     return float(0.5 * x @ a @ x - bb @ x)
 
@@ -148,7 +167,7 @@ def quadratic_bowl_grad(x: np.ndarray, matrix: Optional[np.ndarray] = None, b: O
     ndarray, shape (n,)
     """
     x = np.asarray(x, dtype=np.float64)
-    a = np.diag([1.0, 10.0])[: x.shape[0], : x.shape[0]] if matrix is None else np.asarray(matrix, dtype=np.float64)
+    a = _bowl_matrix(x.shape[0], matrix)
     bb = np.zeros_like(x) if b is None else np.asarray(b, dtype=np.float64)
     return a @ x - bb
 
@@ -169,4 +188,4 @@ def quadratic_bowl_hess(x: np.ndarray, matrix: Optional[np.ndarray] = None, b: O
     ndarray, shape (n, n)
     """
     x = np.asarray(x, dtype=np.float64)
-    return np.diag([1.0, 10.0])[: x.shape[0], : x.shape[0]] if matrix is None else np.asarray(matrix, dtype=np.float64)
+    return _bowl_matrix(x.shape[0], matrix)

@@ -25,11 +25,13 @@ class BezoutResult:
     """Container for the extended Euclidean algorithm's output: Bezout's identity."""
 
     gcd: int
-    """int: :math:`\\gcd(a, b)`."""
+    """int: :math:`\\gcd(a, b)`, always non-negative."""
 
     x: int
+    """int: The Bezout coefficient of ``a`` in :math:`ax + by = \\gcd(a,b)`."""
+
     y: int
-    """int: Bezout coefficients with :math:`ax + by = \\gcd(a,b)`."""
+    """int: The Bezout coefficient of ``b`` in :math:`ax + by = \\gcd(a,b)`."""
 
 
 @dataclass
@@ -53,16 +55,24 @@ class LinearDiophantineResult:
     (equivalently, whether :math:`\\gcd(a,b)` divides ``c``)."""
 
     x0: Optional[int] = None
+    """int, optional: The ``x`` of one particular solution, or ``None``
+    when `has_solution` is ``False``."""
+
     y0: Optional[int] = None
-    """int, optional: A particular solution, if one exists."""
+    """int, optional: The ``y`` of that same particular solution."""
 
     gcd: int = 0
-    """int: :math:`\\gcd(a, b)`."""
+    """int: :math:`\\gcd(a, b)`, or ``0`` in the degenerate
+    ``a == b == 0`` case, where there is no gcd to speak of."""
 
     x_step: int = 0
+    """int: :math:`b/\\gcd(a,b)`, the amount ``x`` advances per step along
+    the solution family."""
+
     y_step: int = 0
-    """int: The general solution is ``(x0 + k*x_step, y0 - k*y_step)``
-    for any integer ``k``."""
+    """int: :math:`a/\\gcd(a,b)`. Together with `x_step`, the general
+    solution is ``(x0 + k*x_step, y0 - k*y_step)`` for any integer ``k``;
+    note the *minus* sign on the ``y`` component."""
 
 
 @dataclass
@@ -70,11 +80,16 @@ class PellResult:
     """Container for the fundamental solution of Pell's equation :math:`x^2 - Dy^2 = 1`."""
 
     x: int
+    """int: The ``x`` of the fundamental (smallest positive) solution."""
+
     y: int
+    """int: The ``y`` of the fundamental solution."""
+
     d: int
     """int: The ``D`` in :math:`x^2 - Dy^2 = 1`."""
 
     extra: dict = field(default_factory=dict)
+    """dict: Free-form diagnostics slot, unused by the current solver."""
 
 
 @dataclass

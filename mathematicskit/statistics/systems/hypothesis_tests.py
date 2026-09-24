@@ -192,8 +192,16 @@ def chi_square_goodness_of_fit(observed: np.ndarray, expected: np.ndarray) -> Hy
 
     :math:`\chi^2 = \sum_i (O_i - E_i)^2/E_i`, referred to
     :class:`scipy.stats.chi2` with :math:`k-1` degrees of freedom
-    (``k`` categories). See DeGroot & Schervish, *Probability and
-    Statistics*, 4th ed., Sec. 10.3.
+    (``k`` categories).
+
+    The single degree of freedom subtracted is the one used up by the
+    constraint that the counts sum to :math:`n`; this function assumes
+    `expected` is fully specified in advance. If the expected counts were
+    themselves obtained by estimating :math:`m` parameters from the same
+    data (fitting a Poisson rate, say), the correct degrees of freedom are
+    :math:`k-1-m`, and the p-value reported here will be too large --
+    conservative about rejecting :math:`H_0`. See DeGroot & Schervish,
+    *Probability and Statistics*, 4th ed., Sec. 10.3.
 
     Parameters
     ----------

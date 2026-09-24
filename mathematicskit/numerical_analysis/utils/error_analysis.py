@@ -37,10 +37,12 @@ def estimate_convergence_order(history: np.ndarray, root: float) -> float:
     Returns
     -------
     float
-        The estimated order :math:`p` (``1.0`` for linear convergence,
-        e.g. bisection/secant's theoretical rate is between 1 and the
-        golden ratio ~1.618; ``2.0`` for Newton's quadratic convergence
-        at a simple root).
+        The estimated order :math:`p`. The textbook values it should
+        reproduce are ``1.0`` for linearly convergent methods (bisection,
+        fixed-point iteration under a contraction), ``~1.618`` -- the
+        golden ratio -- for the secant method's superlinear convergence,
+        and ``2.0`` for Newton-Raphson's quadratic convergence at a simple
+        root.
 
     Examples
     --------

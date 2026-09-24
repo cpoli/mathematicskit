@@ -3,7 +3,7 @@
 import numpy as np
 import pytest
 
-from mathematicskit.linalg.systems.lu import lu_decompose, lu_det, lu_solve_system
+from mathematicskit.linalg.systems.lu import lu_decompose, lu_det, lu_solve, lu_solve_system
 from mathematicskit.linalg.utils.matrix_utils import random_spd_matrix
 
 
@@ -42,5 +42,26 @@ def test_lu_det_matches_numpy_on_random_matrices():
 
 def test_lu_rejects_singular_matrix():
     a = np.array([[1.0, 2.0], [2.0, 4.0]])
+    with pytest.raises(np.linalg.LinAlgError):
+        lu_decompose(a)
+
+
+@pytest.mark.parametrize("n,scale", [(200, 0.01), (400, 0.05), (100, 100.0)])
+def test_lu_accepts_well_conditioned_matrices_whose_determinant_underflows(n, scale):
+    """Singularity must be judged from U's pivots, not from ``det(a)``.
+
+    ``det`` is a product of n pivots, so ``det(0.01 * I_200) = 1e-400``
+    underflows to exactly 0.0 even though the matrix has condition number 1
+    and factors perfectly. An absolute threshold on the determinant rejected
+    it as "singular to working precision"."""
+    a = scale * np.eye(n)
+    result = lu_decompose(a)
+    assert np.allclose(result.P @ a, result.L @ result.U)
+    b = np.arange(1.0, n + 1.0)
+    assert np.allclose(a @ lu_solve(result, b), b)
+
+
+@pytest.mark.parametrize("a", [np.zeros((3, 3)), np.array([[1.0, 2.0], [2.0, 4.0]]), np.array([[1.0, 1.0, 1.0], [1.0, 1.0, 1.0], [0.0, 0.0, 1.0]])])
+def test_lu_still_rejects_genuinely_singular_matrices(a):
     with pytest.raises(np.linalg.LinAlgError):
         lu_decompose(a)

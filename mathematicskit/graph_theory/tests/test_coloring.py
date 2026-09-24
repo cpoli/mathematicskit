@@ -47,3 +47,12 @@ def test_empty_graph_needs_one_color():
     g = Graph(4)
     result = backtracking_coloring(g)
     assert result.num_colors == 1
+
+
+def test_greedy_and_backtracking_colorings_of_the_empty_graph():
+    """A graph with no vertices needs no colors; ``max()`` over the empty
+    coloring dict used to raise ``ValueError`` instead."""
+    empty = Graph(0)
+    assert greedy_coloring(empty).num_colors == 0
+    assert greedy_coloring(empty).coloring == {}
+    assert backtracking_coloring(empty).num_colors == 0

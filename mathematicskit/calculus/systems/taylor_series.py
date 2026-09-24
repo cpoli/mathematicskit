@@ -81,7 +81,7 @@ def maclaurin_coefficients(name: str, order: int) -> np.ndarray:
     raise ValueError(f"unknown series name {name!r}")
 
 
-def evaluate_series(coefficients: np.ndarray, x) -> float:
+def evaluate_series(coefficients: np.ndarray, x):
     r"""Evaluate a truncated power series :math:`\sum_n a_n x^n` (Horner's method).
 
     Parameters
@@ -109,44 +109,72 @@ def evaluate_series(coefficients: np.ndarray, x) -> float:
     return result
 
 
-def estimate_radius_of_convergence(coefficients: np.ndarray) -> float:
+def estimate_radius_of_convergence(coefficients: np.ndarray, growth_factor: float = 1.5) -> float:
     r"""Estimate a power series' radius of convergence via the ratio test.
 
-    :math:`R \approx \lim_{n\to\infty} |a_n / a_{n+1}|`, estimated here
-    from the last two nonzero coefficients (appropriate for series like
-    ``"sin"``/``"cos"`` whose odd or even coefficients are exactly zero).
-    See any standard calculus text's treatment of the ratio test for
-    power series (e.g. Stewart, *Calculus*, 8th ed., Ch. 11.8).
+    :math:`R = \lim_{n\to\infty}|a_n/a_{n+1}|`, estimated from the
+    spacing-adjusted ratio :math:`|a_i/a_j|^{1/(j-i)}` over consecutive
+    nonzero coefficients (the :math:`1/(j-i)` exponent is what makes series
+    like ``"sin"``/``"cos"``, whose even or odd coefficients vanish
+    identically, come out on the same footing as dense ones).
+
+    A truncated series can only ever *sample* that limit, so a series with
+    infinite radius -- ``"exp"``, ``"sin"``, ``"cos"`` -- shows up not as a
+    large number but as a ratio that keeps climbing with every term added.
+    This function detects exactly that: if the estimate from the series'
+    *last* two nonzero coefficients exceeds the estimate from its *first*
+    two by more than `growth_factor`, the ratio has not settled and ``inf``
+    is returned, rather than a number that is really just an artifact of
+    where the series happened to be cut off (a degree-20 ``"exp"`` would
+    otherwise report ``R = 20``, and a degree-30 one ``R = 30``). See any
+    standard calculus text's treatment of the ratio test for power series
+    (e.g. Stewart, *Calculus*, 8th ed., Ch. 11.8).
 
     Parameters
     ----------
     coefficients : ndarray, shape (order + 1,)
+        ``a[n]`` is the coefficient of :math:`x^n` (as from
+        :func:`maclaurin_coefficients`).
+    growth_factor : float
+        How much larger the last ratio estimate must be than the first
+        before the radius is judged unbounded. ``> 1``.
 
     Returns
     -------
     float
-        ``inf`` if the series appears to have unbounded radius (fewer
-        than 2 nonzero coefficients to compare, or a genuinely growing
-        ratio).
+        The estimated radius, or ``inf`` when fewer than two nonzero
+        coefficients are available to compare, or when the ratio is still
+        growing (an unbounded radius of convergence).
 
     Examples
     --------
     >>> coeffs = maclaurin_coefficients("geometric", 30)
     >>> round(estimate_radius_of_convergence(coeffs), 6)
     1.0
+    >>> round(estimate_radius_of_convergence(maclaurin_coefficients("log1p", 30)), 2)
+    1.03
+    >>> # exp and sin converge everywhere: their ratio never settles.
+    >>> estimate_radius_of_convergence(maclaurin_coefficients("exp", 20))
+    inf
+    >>> estimate_radius_of_convergence(maclaurin_coefficients("sin", 20))
+    inf
     """
+    if growth_factor <= 1.0:
+        raise ValueError("growth_factor must be > 1")
+
     nonzero_idx = np.flatnonzero(coefficients)
     if nonzero_idx.shape[0] < 2:
         return float("inf")
-    i, j = nonzero_idx[-2], nonzero_idx[-1]
-    a_i, a_j = coefficients[i], coefficients[j]
-    if a_j == 0.0:
-        return float("inf")
-    # Ratio test between consecutive *nonzero* terms, adjusted for the
-    # power gap (j - i) between them (relevant for sin/cos, whose
-    # nonzero terms are every other coefficient).
-    ratio = abs(a_i / a_j) ** (1.0 / (j - i))
-    return float(ratio)
+
+    def _ratio(i: int, j: int) -> float:
+        return float(abs(coefficients[i] / coefficients[j]) ** (1.0 / (j - i)))
+
+    latest = _ratio(int(nonzero_idx[-2]), int(nonzero_idx[-1]))
+    if nonzero_idx.shape[0] >= 3:
+        earliest = _ratio(int(nonzero_idx[0]), int(nonzero_idx[1]))
+        if latest > growth_factor * earliest:
+            return float("inf")
+    return latest
 
 
 def taylor_remainder_bound(max_derivative_bound: float, order: int, x: float, x0: float = 0.0) -> float:

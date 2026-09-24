@@ -44,6 +44,9 @@ class Bisection(IterativeRootFinder):
     1.414214
     >>> result.converged
     True
+    >>> # ``history`` holds exactly one midpoint per iteration performed.
+    >>> len(result.history) == result.iterations
+    True
     """
 
     def __init__(self, f: Callable[[float], float], a: float, b: float, tol: float = DEFAULT_RTOL, max_iter: int = DEFAULT_MAX_ITER):
@@ -65,7 +68,9 @@ class Bisection(IterativeRootFinder):
             return RootResult(root=self._root_immediate, converged=True, iterations=0, history=np.array([self._root_immediate]), method="bisection")
         a, b = self.a, self.b
         fa = self.f(a)
-        history = [0.5 * (a + b)]
+        # The first recorded iterate is produced by the loop below; seeding
+        # ``history`` with the same midpoint here would duplicate it.
+        history: list = []
         converged = False
         n_iter = 0
         while n_iter < self.max_iter:
@@ -73,7 +78,7 @@ class Bisection(IterativeRootFinder):
             c = 0.5 * (a + b)
             fc = self.f(c)
             history.append(c)
-            if fc == 0.0 or (b - a) / 2.0 < self.tol:
+            if fc == 0.0 or (b - a) / 2.0 < self.tol:  # noqa: SIM102
                 converged = True
                 break
             if fa * fc < 0:

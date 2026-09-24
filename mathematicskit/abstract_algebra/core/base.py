@@ -189,19 +189,29 @@ class Polynomial:
             return -1
         return len(self.coeffs) - 1
 
+    def _check_same_field(self, other: Polynomial) -> None:
+        """Reject arithmetic between polynomials over different coefficient fields."""
+        if not isinstance(other, Polynomial):
+            raise TypeError(f"expected a Polynomial, got {type(other).__name__}")
+        if self.modulus != other.modulus:
+            raise ValueError(f"cannot combine polynomials over different fields (modulus {self.modulus} vs {other.modulus})")
+
     def _pad(self, n: int) -> list:
         zero = Fraction(0) if self.modulus is None else 0
         return self.coeffs + [zero] * (n - len(self.coeffs))
 
     def __add__(self, other: Polynomial) -> Polynomial:
+        self._check_same_field(other)
         n = max(len(self.coeffs), len(other.coeffs))
         return self._wrap([self._reduce(a + b) for a, b in zip(self._pad(n), other._pad(n))])
 
     def __sub__(self, other: Polynomial) -> Polynomial:
+        self._check_same_field(other)
         n = max(len(self.coeffs), len(other.coeffs))
         return self._wrap([self._reduce(a - b) for a, b in zip(self._pad(n), other._pad(n))])
 
     def __mul__(self, other: Polynomial) -> Polynomial:
+        self._check_same_field(other)
         result = [Fraction(0) if self.modulus is None else 0] * (len(self.coeffs) + len(other.coeffs) - 1)
         for i, a in enumerate(self.coeffs):
             for j, b in enumerate(other.coeffs):
@@ -216,6 +226,7 @@ class Polynomial:
 
     def __divmod__(self, other: Polynomial):
         r"""Polynomial long division: ``self = quotient * other + remainder``, ``deg(remainder) < deg(other)``."""
+        self._check_same_field(other)
         if other.degree == -1:
             raise ZeroDivisionError("division by the zero polynomial")
         remainder = self._wrap(list(self.coeffs))

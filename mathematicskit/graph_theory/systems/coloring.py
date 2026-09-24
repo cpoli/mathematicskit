@@ -47,6 +47,8 @@ def greedy_coloring(graph, order=None) -> ColoringResult:
     >>> result = greedy_coloring(g)  # a 4-cycle is bipartite: 2 colors suffice
     >>> result.num_colors
     2
+    >>> greedy_coloring(Graph(0)).num_colors  # the empty graph needs no colors
+    0
     """
     order = list(range(graph.n_vertices)) if order is None else list(order)
     coloring = {}
@@ -56,7 +58,8 @@ def greedy_coloring(graph, order=None) -> ColoringResult:
         while color in used:
             color += 1
         coloring[v] = color
-    return ColoringResult(coloring=coloring, num_colors=max(coloring.values()) + 1, method="greedy")
+    num_colors = max(coloring.values()) + 1 if coloring else 0
+    return ColoringResult(coloring=coloring, num_colors=num_colors, method="greedy")
 
 
 def backtracking_coloring(graph, max_colors: Optional[int] = None) -> ColoringResult:
@@ -116,6 +119,8 @@ def backtracking_coloring(graph, max_colors: Optional[int] = None) -> ColoringRe
 
         return coloring if _backtrack(0) else None
 
+    if n == 0:
+        return ColoringResult(coloring={}, num_colors=0, method="backtracking")
     for k in range(1, max_colors + 1):
         result = _try_color(k)
         if result is not None:

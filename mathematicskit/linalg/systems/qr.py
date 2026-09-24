@@ -131,10 +131,16 @@ def gram_schmidt_qr(a: np.ndarray, modified: bool = True) -> QRResult:
 def orthogonality_error(q: np.ndarray) -> float:
     r"""Measure how far ``Q``'s columns are from exactly orthonormal.
 
-    :math:`\|Q^T Q - I\|_\infty`, a direct numerical demonstration of
-    which QR method loses orthogonality for ill-conditioned inputs. See
-    Trefethen & Bau, *Numerical Linear Algebra*, 1997, Lecture 9 (Figure
-    9.2's classical-vs-modified Gram-Schmidt comparison).
+    :math:`\max_{ij}\left|(Q^TQ - I)_{ij}\right|`: the largest entry of
+    ``Q``'s Gram matrix minus the identity. (This is the entrywise max
+    norm, not the induced :math:`\infty`-norm, which would be the largest
+    row *sum*.) Exactly zero for a perfectly orthonormal ``Q``, and a
+    direct numerical demonstration of which QR method loses orthogonality
+    on ill-conditioned input: on a degree-12 Vandermonde matrix, classical
+    Gram-Schmidt reaches order 1, modified Gram-Schmidt stays near 1e-10,
+    and Householder near machine epsilon. See Trefethen & Bau, *Numerical
+    Linear Algebra*, 1997, Lecture 9 (Figure 9.2's classical-vs-modified
+    comparison).
 
     Parameters
     ----------

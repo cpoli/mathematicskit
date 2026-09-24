@@ -79,25 +79,45 @@ class CholeskyResult:
 
 @dataclass
 class EigenResult:
-    """Output of a symmetric eigenvalue algorithm."""
+    """Output of an eigenvalue computation, whole-spectrum or single-pair.
+
+    The whole-spectrum solvers
+    (:func:`~mathematicskit.linalg.systems.eigen.eigen_symmetric`,
+    :func:`~mathematicskit.linalg.systems.eigen.eigen_general`) fill
+    `eigenvalues`/`eigenvectors` with the full spectrum in one shot and
+    report ``iterations=1, converged=True``, since LAPACK does not expose
+    its internal iteration count. The hand-rolled iterations
+    (:func:`~mathematicskit.linalg.systems.eigen.power_iteration`,
+    :func:`~mathematicskit.linalg.systems.eigen.inverse_iteration`) return a
+    single eigenpair and a genuine iteration count and convergence flag.
+    """
 
     eigenvalues: np.ndarray
-    """ndarray, shape (n,) or scalar-like shape (1,): Eigenvalue(s) found."""
+    """ndarray: The whole spectrum, shape (n,), for the library-backed
+    solvers; a single dominant (or shift-selected) eigenvalue, shape (1,),
+    for power/inverse iteration. Real and ascending from ``eigh``, possibly
+    complex and unordered from ``eig``."""
 
     eigenvectors: np.ndarray
-    """ndarray, shape (n, n) or (n,): Corresponding eigenvector(s), as columns."""
+    """ndarray: Shape (n, n) with eigenvectors as *columns* for the
+    whole-spectrum solvers, so ``eigenvectors[:, k]`` pairs with
+    ``eigenvalues[k]``; a single unit eigenvector of shape (n,) for
+    power/inverse iteration."""
 
     iterations: int = 0
-    """int: Number of iterations/sweeps performed."""
+    """int: Number of iterations performed (always 1 for the library-backed
+    solvers, which do not expose LAPACK's internal count)."""
 
     converged: bool = True
-    """bool: Whether the convergence tolerance was met."""
+    """bool: Whether the convergence tolerance was met (always ``True`` for
+    the direct library solvers, which do not iterate visibly)."""
 
     method: str = ""
-    """str: e.g. ``"jacobi"``, ``"qr_algorithm"``, ``"power_iteration"``, ``"inverse_iteration"``."""
+    """str: One of ``"numpy_eigh"``, ``"numpy_eig"``, ``"power_iteration"``,
+    or ``"inverse_iteration"``."""
 
     extra: dict = field(default_factory=dict)
-    """dict: Free-form diagnostics slot (e.g. Jacobi's off-diagonal norm history)."""
+    """dict: Free-form diagnostics slot, unused by the current solvers."""
 
 
 @dataclass
@@ -122,7 +142,11 @@ class IterativeSolveResult:
     """ndarray, shape (n,): Approximate solution."""
 
     residual_history: np.ndarray
-    """ndarray, shape (iterations + 1,): ``||b - A x_k||`` at each iterate."""
+    """ndarray, shape (iterations + 1,): The *relative* residual norm
+    ``||b - A x_k|| / ||b||`` at each iterate, starting from the initial
+    guess. Normalizing by ``||b||`` is what makes the history directly
+    comparable to `method`'s ``tol`` (itself a relative tolerance) and
+    comparable across right-hand sides of different magnitudes."""
 
     iterations: int = 0
     """int: Number of iterations performed."""

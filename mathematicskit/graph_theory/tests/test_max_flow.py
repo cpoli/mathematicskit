@@ -1,6 +1,7 @@
 """Tests for maximum flow / minimum cut against hand-verified/known results."""
 
 import numpy as np
+import pytest
 
 from mathematicskit.graph_theory.core.base import Graph
 from mathematicskit.graph_theory.systems.max_flow import max_flow_min_cut
@@ -62,3 +63,21 @@ def test_disconnected_source_sink_has_zero_flow():
     g.add_edge(0, 1, 5)
     result = max_flow_min_cut(g, source=0, sink=2)
     assert result.flow_value == 0.0
+
+
+@pytest.mark.parametrize("weight", [2.7, 0.5, 1.0000001])
+def test_fractional_capacities_are_rejected_rather_than_truncated(weight):
+    """``scipy.sparse.csgraph.maximum_flow`` needs integer capacities.
+
+    Casting to int64 silently floored them, so a capacity of 2.7 quietly
+    became 2 and the reported max flow was simply wrong."""
+    g = Graph(2, directed=True)
+    g.add_edge(0, 1, weight)
+    with pytest.raises(ValueError, match="capacities must be integers"):
+        max_flow_min_cut(g, source=0, sink=1)
+
+
+def test_integer_valued_float_capacities_are_still_accepted():
+    g = Graph(2, directed=True)
+    g.add_edge(0, 1, 3.0)
+    assert max_flow_min_cut(g, source=0, sink=1).flow_value == 3.0

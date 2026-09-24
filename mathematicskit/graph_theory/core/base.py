@@ -119,6 +119,10 @@ class MSTResult:
     """list of (int, int, float): The MST's edges as ``(u, v, weight)``."""
 
     total_weight: float
+    """float: Sum of the tree's edge weights -- the quantity an MST
+    minimizes, and therefore identical across any correct MST algorithm,
+    even when the trees themselves differ (as they can when weights tie)."""
+
     method: str = ""
     """str: e.g. ``"kruskal"`` (via scipy) or ``"prim"`` (hand-rolled)."""
 
@@ -128,6 +132,9 @@ class MaxFlowResult:
     """Container for a maximum-flow computation."""
 
     flow_value: float
+    """float: The maximum flow from source to sink -- equal, by the
+    max-flow min-cut theorem, to the total capacity crossing `min_cut`."""
+
     flow_matrix: np.ndarray
     """ndarray, shape (n, n): Flow assigned to each edge."""
 
@@ -141,9 +148,13 @@ class ColoringResult:
     """Container for a graph-coloring result."""
 
     coloring: dict
-    """dict: ``{vertex: color_index}``."""
+    """dict: ``{vertex: color_index}``, with colors numbered from 0."""
 
     num_colors: int
+    """int: Number of distinct colors used. This is the graph's chromatic
+    number for ``method="backtracking"``, but only an upper bound on it
+    for the ``"greedy"`` heuristic."""
+
     method: str = ""
     """str: ``"greedy"`` or ``"backtracking"``."""
 
@@ -153,10 +164,17 @@ class SpectralResult:
     """Container for a spectral graph-theory computation."""
 
     laplacian: np.ndarray
+    """ndarray, shape (n, n): The combinatorial Laplacian :math:`L = D - A`,
+    degree matrix minus adjacency."""
+
     eigenvalues: np.ndarray
-    """ndarray, shape (n,): Laplacian eigenvalues, ascending."""
+    """ndarray, shape (n,): Laplacian eigenvalues, ascending. The smallest
+    is always 0 (the all-ones eigenvector)."""
 
     eigenvectors: np.ndarray
+    """ndarray, shape (n, n): Orthonormal eigenvectors as *columns*, in the
+    same order as `eigenvalues`; column 1 is the Fiedler vector."""
+
     algebraic_connectivity: float
     """float: The second-smallest Laplacian eigenvalue (Fiedler value);
     zero iff the graph is disconnected."""

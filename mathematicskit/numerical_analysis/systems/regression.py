@@ -106,7 +106,10 @@ class PolynomialRegression:
     def predict(self, x_new) -> np.ndarray:
         """Evaluate the fitted polynomial at new points.
 
-        Requires :meth:`fit` to have been called first.
+        Fits the model on first use and caches the coefficients, so calling
+        :meth:`fit` beforehand is optional; the cache is never invalidated,
+        since a :class:`PolynomialRegression` instance's data and degree are
+        fixed at construction.
 
         Parameters
         ----------

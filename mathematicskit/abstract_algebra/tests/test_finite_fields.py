@@ -69,3 +69,20 @@ def test_gf_multiplication_stays_within_extension_degree():
         for b in elements:
             product = field.multiply(a, b)
             assert product.degree < 3
+
+
+@pytest.mark.parametrize("coeffs", [[0], [1], [2]])
+def test_units_and_the_zero_polynomial_are_not_irreducible(coeffs):
+    """Irreducibility asks for a non-unit with no non-unit factorisation.
+
+    Degree-0 polynomials are units and the zero polynomial is neither, so
+    neither qualifies -- but a bare ``degree <= 1`` shortcut reported both
+    as irreducible."""
+    assert not is_irreducible(Polynomial(coeffs, modulus=3))
+
+
+@pytest.mark.parametrize("p,n", [(2, 2), (2, 3), (2, 4), (3, 2), (5, 2)])
+def test_degree_one_polynomials_remain_irreducible(p, n):
+    """The tightened guard must not sweep up genuine degree-1 irreducibles."""
+    assert is_irreducible(Polynomial([1, 1], modulus=p))
+    assert find_irreducible_polynomial(p, n).degree == n

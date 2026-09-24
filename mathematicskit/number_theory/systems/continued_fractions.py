@@ -75,16 +75,27 @@ def continued_fraction_expansion(x: float, max_terms: int = 20, tol: float = 1e-
 def best_rational_approximation(x: float, max_denominator: int) -> tuple:
     r"""Best rational approximation to ``x`` with denominator :math:`\leq` `max_denominator`.
 
-    Expands ``x``'s continued fraction and returns the last convergent
-    whose denominator doesn't exceed `max_denominator` -- convergents
-    are provably the best rational approximations achievable at or below
-    their own denominator. See Niven, Zuckerman & Montgomery, *An
-    Introduction to the Theory of Numbers*, 5th ed., Theorem 7.13.
+    Expands ``x``'s continued fraction and takes the last convergent
+    :math:`p_k/q_k` with :math:`q_k \leq` `max_denominator`, then compares
+    it against the best *semiconvergent* (or "intermediate fraction")
+    :math:`\dfrac{p_{k-1} + t\,p_k}{q_{k-1} + t\,q_k}` that still fits
+    under the denominator bound, returning whichever is closer to ``x``.
+
+    Both candidates are needed: a convergent is only guaranteed to be the
+    best approximation among fractions with denominator at most *its own*
+    :math:`q_k`, and the next convergent's denominator can jump far past
+    `max_denominator`, leaving room for a semiconvergent in between. For
+    :math:`x=\pi` with ``max_denominator=57``, for instance, the last
+    convergent is :math:`22/7` but the semiconvergent :math:`179/57`
+    (between :math:`22/7` and :math:`333/106`) is genuinely closer. See
+    Niven, Zuckerman & Montgomery, *An Introduction to the Theory of
+    Numbers*, 5th ed., Theorem 7.13 and Sec. 7.4.
 
     Parameters
     ----------
     x : float
     max_denominator : int
+        ``>= 1``.
 
     Returns
     -------
@@ -96,12 +107,32 @@ def best_rational_approximation(x: float, max_denominator: int) -> tuple:
     >>> # The classic approximation pi ~ 355/113 (denominator <= 200).
     >>> best_rational_approximation(3.14159265358979, max_denominator=200)
     (355, 113)
+    >>> # Under 57, the best fraction is the semiconvergent 179/57, not 22/7.
+    >>> best_rational_approximation(3.14159265358979, max_denominator=57)
+    (179, 57)
+    >>> abs(179 / 57 - 3.14159265358979) < abs(22 / 7 - 3.14159265358979)
+    True
     """
+    if max_denominator < 1:
+        raise ValueError("max_denominator must be >= 1")
+
     result = continued_fraction_expansion(x, max_terms=40)
-    best = (round(x), 1)
-    for p, q in result.convergents:
-        if q <= max_denominator and q > 0:
-            best = (p, q)
-        elif q > max_denominator:
+    convergents = result.convergents
+
+    # (p_prev, q_prev) is the convergent one step behind (p_best, q_best);
+    # p_{-1}/q_{-1} = 1/0 seeds the recurrence, per the standard convention.
+    p_prev, q_prev = 1, 0
+    p_best, q_best = convergents[0]
+    for p, q in convergents[1:]:
+        if q > max_denominator:
+            # The next convergent overshoots the bound, so the best remaining
+            # candidate is the furthest semiconvergent that still fits.
+            t = (max_denominator - q_prev) // q_best
+            if t > 0:
+                p_semi, q_semi = p_prev + t * p_best, q_prev + t * q_best
+                if abs(p_semi / q_semi - x) < abs(p_best / q_best - x):
+                    return (p_semi, q_semi)
             break
-    return best
+        p_prev, q_prev = p_best, q_best
+        p_best, q_best = p, q
+    return (p_best, q_best)

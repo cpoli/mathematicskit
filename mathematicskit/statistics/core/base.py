@@ -54,12 +54,20 @@ class DescriptiveStatsResult:
     distribution has kurtosis 0 under this convention)."""
 
     minimum: float
+    """float: The smallest observation."""
+
     q1: float
     """float: First quartile (25th percentile)."""
+
     median: float
+    """float: The 50th percentile."""
+
     q3: float
     """float: Third quartile (75th percentile)."""
+
     maximum: float
+    """float: The largest observation. Together with `minimum`, `q1`,
+    `median` and `q3` this makes up the five-number summary."""
 
 
 @dataclass
@@ -103,8 +111,17 @@ class ConfidenceIntervalResult:
     """float: The point estimate (e.g. sample mean/proportion/variance)."""
 
     lower: float
+    """float: The interval's lower endpoint."""
+
     upper: float
+    """float: The interval's upper endpoint."""
+
     confidence_level: float = 0.95
+    """float: The interval's nominal coverage probability. The endpoints
+    come from the :math:`\\alpha/2` and :math:`1-\\alpha/2` quantiles of the
+    reference distribution, with :math:`\\alpha = 1 - \\text{confidence
+    level}`."""
+
     method: str = ""
     """str: e.g. ``"z"``, ``"t"``, ``"chi_square_variance"``, ``"wald_proportion"``."""
 
@@ -130,9 +147,22 @@ class RegressionResult:
     """ndarray, shape (p,): Per-coefficient two-sided p-value."""
 
     fitted_values: np.ndarray
+    """ndarray, shape (n,): :math:`X\\hat\\beta`, the model's prediction at
+    each observed predictor."""
+
     residuals: np.ndarray
+    """ndarray, shape (n,): ``y - fitted_values``."""
+
     r_squared: float
+    """float: The fraction of the response's variance the fit explains,
+    :math:`1 - SS_{\\text{res}}/SS_{\\text{tot}}`; ``1.0`` for a perfect
+    fit."""
+
     adjusted_r_squared: float
+    """float: `r_squared` penalized for the number of predictors,
+    :math:`1 - (1-R^2)(n-1)/(n-p)`. Unlike `r_squared`, it does not rise
+    automatically each time another predictor is added, so it is the
+    fairer figure when comparing models of different size."""
 
 
 @dataclass
@@ -143,9 +173,19 @@ class BootstrapResult:
     """float: The statistic computed on the original (non-resampled) data."""
 
     lower: float
+    """float: Lower endpoint of the bootstrap confidence interval."""
+
     upper: float
+    """float: Upper endpoint of the bootstrap confidence interval."""
+
     std_error: float
+    """float: The bootstrap distribution's standard deviation -- the
+    resampling estimate of `estimate`'s standard error, obtained without
+    any closed-form sampling-distribution assumption."""
+
     confidence_level: float = 0.95
+    """float: The interval's nominal coverage probability."""
+
     method: str = "BCa"
     """str: The bootstrap CI method (``scipy.stats.bootstrap``'s
     ``"percentile"``, ``"basic"``, or ``"BCa"``)."""

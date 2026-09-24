@@ -190,6 +190,8 @@ def inverse_iteration(a: np.ndarray, mu: float, tol: float = 1e-12, max_iter: in
         it += 1
         w = np.linalg.solve(shifted, v)
         w_norm = np.linalg.norm(w)
+        if w_norm < 1e-300:
+            raise np.linalg.LinAlgError("iterate collapsed to zero")
         v = w / w_norm
         lam = float(v @ a @ v)
         if abs(lam - lam_prev) < tol * max(abs(lam), 1.0):

@@ -68,9 +68,14 @@ def graham_scan(points: np.ndarray) -> ConvexHullResult:
     Returns
     -------
     ConvexHullResult
-        ``simplices`` is left empty (Graham scan only produces the
-        ordered hull vertices); ``volume`` is the enclosed area via the
-        shoelace formula on those vertices.
+        ``vertices`` holds the hull's point indices in counterclockwise
+        order. ``simplices`` is left empty, since the Graham scan produces
+        only the ordered vertex cycle, not a facet list. ``volume`` is the
+        enclosed area via the shoelace formula on those vertices --
+        matching :func:`convex_hull`, where Qhull likewise reports the
+        enclosed area as ``volume`` in 2D. ``area`` is left at ``0.0``:
+        Qhull uses it for the hull's perimeter, which this scan does not
+        compute.
 
     Examples
     --------

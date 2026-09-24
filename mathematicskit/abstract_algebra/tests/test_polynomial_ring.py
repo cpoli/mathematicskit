@@ -1,5 +1,6 @@
 """Tests for polynomial ring arithmetic against closed-form/known results."""
 
+import operator
 from fractions import Fraction
 
 import pytest
@@ -77,3 +78,15 @@ def test_rejects_division_by_zero_polynomial():
     zero = Polynomial([0])
     with pytest.raises(ZeroDivisionError):
         poly_divmod(p, zero)
+
+
+@pytest.mark.parametrize("op", [operator.add, operator.sub, operator.mul, divmod])
+def test_arithmetic_across_different_coefficient_fields_is_rejected(op):
+    """GF(2) and GF(3) coefficients do not live in a common ring.
+
+    Combining them used to succeed silently, reducing everything into the
+    *left* operand's field and quietly producing a wrong answer."""
+    with pytest.raises(ValueError, match="different fields"):
+        op(Polynomial([1, 1], modulus=2), Polynomial([1, 1], modulus=3))
+    with pytest.raises(ValueError, match="different fields"):
+        op(Polynomial([1, 1]), Polynomial([1, 1], modulus=2))

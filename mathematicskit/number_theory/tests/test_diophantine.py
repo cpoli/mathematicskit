@@ -41,3 +41,14 @@ def test_pell_solution_satisfies_equation_for_larger_d():
 def test_pell_rejects_perfect_square():
     with pytest.raises(ValueError):
         solve_pell_equation(16)
+
+
+@pytest.mark.parametrize("c,expected", [(0, True), (1, False), (-5, False)])
+def test_linear_diophantine_handles_the_all_zero_coefficient_case(c, expected):
+    """``0x + 0y = c`` has gcd 0, so the divisibility test must not divide by it.
+
+    The equation degenerates to ``0 == c``: solvable by every (x, y) when
+    c is 0, and by none otherwise."""
+    result = solve_linear_diophantine(0, 0, c)
+    assert result.has_solution is expected
+    assert result.gcd == 0

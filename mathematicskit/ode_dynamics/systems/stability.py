@@ -19,6 +19,12 @@ from mathematicskit.ode_dynamics.core.base import FixedPointResult
 
 __all__ = ["classify_fixed_point_2d", "find_fixed_point_newton", "numerical_jacobian"]
 
+_BORDERLINE_TOL = 1e-12
+"""Tolerance for the borderline cases in :func:`classify_fixed_point_2d`:
+a repeated eigenvalue (:math:`\\tau^2 = 4\\Delta`) and a pure center
+(:math:`\\tau = 0`). Both are exact-equality conditions that floating-point
+arithmetic will essentially never hit on the nose."""
+
 
 def classify_fixed_point_2d(jacobian: np.ndarray, location=None) -> FixedPointResult:
     r"""Classify a 2D linear system's fixed point from its Jacobian.
@@ -35,6 +41,13 @@ def classify_fixed_point_2d(jacobian: np.ndarray, location=None) -> FixedPointRe
       eigenvalues, real part sign = sign of :math:`\tau`).
     - :math:`\Delta > 0`, :math:`\tau = 0`: center (purely imaginary).
     - :math:`\tau^2 = 4\Delta \neq 0`: degenerate node (repeated real eigenvalue).
+
+    The last two are exact-equality conditions, tested here against a small
+    tolerance rather than against zero. A *near*-borderline system is
+    genuinely ambiguous rather than merely hard to classify numerically:
+    linearization is inconclusive for centers and degenerate nodes, since an
+    arbitrarily small nonlinear term can push the trajectory either way
+    (Strogatz, Sec. 6.3).
 
     See Strogatz, *Nonlinear Dynamics and Chaos*, 2nd ed., Ch. 5.2
     (the classification diagram in the :math:`(\tau, \Delta)` plane).
@@ -71,22 +84,26 @@ def classify_fixed_point_2d(jacobian: np.ndarray, location=None) -> FixedPointRe
         sqrt_disc = 1j * np.sqrt(-disc)
         eigenvalues = np.array([(tau + sqrt_disc) / 2.0, (tau - sqrt_disc) / 2.0], dtype=complex)
 
+    # The borderline cases -- a repeated eigenvalue (disc == 0) and a pure
+    # center (tau == 0) -- are exact-equality conditions that floating-point
+    # arithmetic essentially never reproduces, so both are tested against a
+    # small tolerance rather than against zero. Note that this makes the
+    # classification of a near-borderline system genuinely ambiguous, which
+    # is the mathematics, not a defect: an arbitrarily small perturbation
+    # turns a center into a spiral either way (Strogatz, Sec. 6.3, on why
+    # linearization is inconclusive for borderline cases).
     if delta < 0:
         classification = "saddle"
     elif delta == 0:
         classification = "non-isolated (zero eigenvalue)"
-    elif disc > 0:
-        if abs(tau * tau - 4.0 * delta) < 1e-12:
-            classification = "degenerate node"
-        else:
-            classification = "stable node" if tau < 0 else "unstable node"
-    elif disc < 0:
-        if abs(tau) < 1e-12:
-            classification = "center"
-        else:
-            classification = "stable spiral" if tau < 0 else "unstable spiral"
-    else:  # disc == 0, delta > 0
+    elif abs(disc) < _BORDERLINE_TOL:
         classification = "degenerate node"
+    elif disc > 0:
+        classification = "stable node" if tau < 0 else "unstable node"
+    elif abs(tau) < _BORDERLINE_TOL:
+        classification = "center"
+    else:
+        classification = "stable spiral" if tau < 0 else "unstable spiral"
 
     stable = bool(np.all(eigenvalues.real < 0))
     loc = np.zeros(2) if location is None else np.asarray(location, dtype=np.float64)
