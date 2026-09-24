@@ -10,7 +10,12 @@ result. :class:`KKTResult` and :class:`LagrangeResult` support the
 constrained-optimization utilities in
 :mod:`mathematicskit.optimization.systems.constrained`;
 :class:`LinearProgramResult` wraps
-:func:`~mathematicskit.optimization.systems.linear_programming.linear_program`.
+:func:`~mathematicskit.optimization.systems.linear_programming.linear_program`
+and :func:`~mathematicskit.optimization.systems.linear_programming.integer_linear_program`;
+:class:`GameResult`, :class:`LeastSquaresResult`,
+:class:`ScalarSearchResult`, and :class:`KnapsackResult` hold the outputs
+of the zero-sum-game, nonlinear-least-squares, golden-section, and
+knapsack solvers.
 """
 
 from __future__ import annotations
@@ -29,6 +34,10 @@ __all__ = [
     "KKTResult",
     "LagrangeResult",
     "LinearProgramResult",
+    "GameResult",
+    "LeastSquaresResult",
+    "ScalarSearchResult",
+    "KnapsackResult",
 ]
 
 
@@ -155,3 +164,84 @@ class LinearProgramResult:
 
     message: str = ""
     """str: The underlying solver's status message."""
+
+
+@dataclass
+class GameResult:
+    """Container for the solution of a two-player zero-sum matrix game."""
+
+    row_strategy: np.ndarray
+    """ndarray, shape (m,): The row player's optimal mixed strategy (a probability vector)."""
+
+    col_strategy: np.ndarray
+    """ndarray, shape (n,): The column player's optimal mixed strategy."""
+
+    value: float
+    """float: The value of the game -- the expected payoff to the row
+    player when both play optimally."""
+
+
+@dataclass
+class LeastSquaresResult:
+    """Container for the output of a nonlinear least-squares fit."""
+
+    x: np.ndarray
+    """ndarray, shape (n,): The fitted parameters."""
+
+    cost: float
+    """float: :math:`\\tfrac12 \\sum_i r_i(x)^2` at the solution."""
+
+    residuals: np.ndarray
+    """ndarray, shape (m,): The residual vector :math:`r(x)` at the solution."""
+
+    success: bool = True
+    """bool: Whether the solver reported convergence."""
+
+    nfev: int = 0
+    """int: Number of residual-function evaluations."""
+
+    message: str = ""
+    """str: The underlying solver's status message."""
+
+
+@dataclass
+class ScalarSearchResult:
+    """Container for a one-dimensional bracketing minimization."""
+
+    x: float
+    """float: The estimated minimizer (midpoint of the final bracket)."""
+
+    fun: float
+    """float: Objective value at ``x``."""
+
+    brackets: np.ndarray
+    """ndarray, shape (iterations + 1, 2): Every bracket ``[a, b]``,
+    starting from the initial interval."""
+
+    iterations: int = 0
+    """int: Number of bracket reductions performed."""
+
+    nfev: int = 0
+    """int: Number of objective evaluations."""
+
+    converged: bool = True
+    """bool: Whether the bracket shrank below the tolerance before `max_iter`."""
+
+
+@dataclass
+class KnapsackResult:
+    """Container for the solution of a 0/1 knapsack problem."""
+
+    value: float
+    """float: The maximum total value achievable."""
+
+    items: np.ndarray
+    """ndarray of int: Indices of the chosen items, in increasing order."""
+
+    weight: int
+    """int: Total weight of the chosen items."""
+
+    table: np.ndarray = field(default_factory=lambda: np.empty((0, 0)))
+    """ndarray, shape (n + 1, capacity + 1): Bellman's value table,
+    ``table[i, w]`` being the best value using the first ``i`` items
+    with capacity ``w``."""
