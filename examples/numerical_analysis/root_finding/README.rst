@@ -1,6 +1,6 @@
 Root finding
 ------------
 
-Bisection, Newton-Raphson, secant, and fixed-point iteration compared on
-the same problem, with empirical convergence order verified against each
-method's theoretical rate.
+The Babylonian square-root rule and bisection, Newton-Raphson's tangent
+iteration, Halley's cubically convergent method, and Aitken/Steffensen
+acceleration, each with its empirical convergence order measured.

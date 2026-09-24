@@ -44,7 +44,7 @@ below. The classic "Babylonian" square-root iteration is
 :class:`~mathematicskit.numerical_analysis.systems.root_finding.FixedPointIteration`
 applied to :math:`g(x) = \tfrac12(x + a/x)`.
 
-.. minigallery:: ../../examples/numerical_analysis/root_finding/plot_01_methods_compared.py
+.. minigallery:: ../../examples/numerical_analysis/root_finding/plot_01_babylonian_bisection.py
 
 1669-1690 -- Newton and Raphson's Method
 ----------------------------------------
@@ -74,7 +74,7 @@ test suite cross-checks it against :func:`scipy.optimize.newton`.
 1690); T. Simpson, *Essays on Several Curious and Useful Subjects in
 Speculative and Mix'd Mathematicks* (London, 1740).
 
-.. minigallery:: ../../examples/numerical_analysis/root_finding/plot_01_methods_compared.py
+.. minigallery:: ../../examples/numerical_analysis/root_finding/plot_02_newton_raphson.py
 
 1687-1795 -- Newton, Lagrange, and Polynomial Interpolation
 -----------------------------------------------------------
@@ -135,7 +135,7 @@ Philosophical Transactions of the Royal Society 18 (1694), 136-148; T.
 R. Scavo and J. B. Thoo, "On the Geometry of Halley's Method," American
 Mathematical Monthly 102 (1995), 417-426.
 
-.. minigallery:: ../../examples/numerical_analysis/root_finding/plot_02_halley_method.py
+.. minigallery:: ../../examples/numerical_analysis/root_finding/plot_03_halley_method.py
 
 1805-1809 -- Legendre, Gauss, and Least Squares
 -----------------------------------------------
@@ -228,7 +228,7 @@ l'Académie de Saint-Pétersbourg 7 (1854), 539-586. The least-deviation
 polynomials behind Chebyshev nodes were developed in this and related
 memoirs of the 1850s.
 
-.. minigallery:: ../../examples/numerical_analysis/chebyshev/plot_01_runge_phenomenon.py
+.. minigallery:: ../../examples/numerical_analysis/chebyshev/plot_02_chebyshev_nodes.py
 
 1878 -- Hermite Interpolation
 -----------------------------
@@ -390,7 +390,7 @@ algebraic equations," Proceedings of the Royal Society of Edinburgh 46
 (1926), 289-305; J. F. Steffensen, "Remarks on iteration,"
 Skandinavisk Aktuarietidskrift 16 (1933), 64-72.
 
-.. minigallery:: ../../examples/numerical_analysis/root_finding/plot_03_aitken_steffensen.py
+.. minigallery:: ../../examples/numerical_analysis/root_finding/plot_04_aitken_steffensen.py
 
 1934 -- Remez and Best Uniform Approximation
 --------------------------------------------
