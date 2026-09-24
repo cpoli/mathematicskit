@@ -47,7 +47,7 @@ pertinentis," Commentarii Academiae Scientiarum Petropolitanae 8 (1741),
 128-140 (presented to the St. Petersburg Academy in 1735; the volume is
 dated 1736 but was printed in 1741).
 
-.. minigallery:: ../../examples/graph_theory/shortest_paths/plot_01_dijkstra_vs_bellman_ford.py
+.. minigallery:: ../../examples/graph_theory/eulerian/plot_01_konigsberg_bridges.py
 
 1847 -- Kirchhoff's Matrix-Tree Theorem
 ---------------------------------------
@@ -101,7 +101,7 @@ graphs, which is the exponential cost that NP-completeness predicts.
 Colorable," Illinois Journal of Mathematics 21(3) (1977), 429-490
 (the published form of the proof announced in 1976).
 
-.. minigallery:: ../../examples/graph_theory/coloring/plot_01_greedy_vs_optimal.py
+.. minigallery:: ../../examples/graph_theory/coloring/plot_01_four_color_map.py
 
 1857 -- Hamilton's Icosian Game
 -------------------------------
