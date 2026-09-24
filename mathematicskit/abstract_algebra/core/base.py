@@ -17,7 +17,7 @@ from typing import Optional
 
 import numpy as np
 
-__all__ = ["FiniteGroup", "GroupPropertiesResult", "Polynomial"]
+__all__ = ["FiniteGroup", "GroupPropertiesResult", "SylowResult", "CompositionSeriesResult", "HomomorphismResult", "Polynomial"]
 
 
 class FiniteGroup(ABC):
@@ -122,6 +122,41 @@ class GroupPropertiesResult:
     identity: object
     element_orders: dict = field(default_factory=dict)
     """dict: ``{element: order}`` for every element."""
+
+
+@dataclass
+class SylowResult:
+    """Container for the Sylow :math:`p`-subgroups of a finite group."""
+
+    p: int
+    sylow_order: int
+    """int: :math:`p^k`, the largest power of ``p`` dividing :math:`|G|`."""
+    subgroups: list
+    """list of list: Every Sylow :math:`p`-subgroup, each as a list of elements."""
+
+    @property
+    def count(self) -> int:
+        """int: :math:`n_p`, the number of Sylow :math:`p`-subgroups."""
+        return len(self.subgroups)
+
+
+@dataclass
+class CompositionSeriesResult:
+    """Container for a composition series :math:`G = G_0 > G_1 > \\dots > G_m = \\{e\\}`."""
+
+    series: list
+    """list of list: The subgroups :math:`G_0, \\dots, G_m`, largest first."""
+    factor_orders: list
+    """list of int: The orders :math:`|G_i / G_{i+1}|` of the composition factors."""
+
+
+@dataclass
+class HomomorphismResult:
+    """Container for a group homomorphism's kernel and image."""
+
+    kernel: list
+    image: list
+    is_homomorphism: bool
 
 
 class Polynomial:

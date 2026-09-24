@@ -82,3 +82,42 @@ def test_cayley_table_shape_and_identity_row():
     assert table.shape == (4, 4)
     # Row for the identity element (index 0) should be [0, 1, 2, 3].
     np.testing.assert_array_equal(table[0], np.arange(4))
+
+
+def test_dihedral_group_has_order_2n_and_is_nonabelian():
+    from mathematicskit.abstract_algebra.systems.groups import DihedralGroup
+
+    for n in (3, 4, 5, 6):
+        d = DihedralGroup(n)
+        assert d.order == 2 * n
+        assert not d.is_abelian()
+
+
+def test_dihedral_group_satisfies_its_defining_relations():
+    from mathematicskit.abstract_algebra.systems.groups import DihedralGroup
+
+    d = DihedralGroup(6)
+    r, s = d.rotation, d.reflection
+    assert d.element_order(r) == 6
+    assert d.element_order(s) == 2
+    assert d.operate(d.operate(s, r), s) == d.inverse(r)  # s r s = r^-1
+
+
+def test_quaternion_group_satisfies_hamiltons_relations():
+    from mathematicskit.abstract_algebra.systems.groups import QuaternionGroup
+
+    q = QuaternionGroup()
+    for unit in ("i", "j", "k"):
+        assert q.operate(unit, unit) == "-1"
+    assert q.operate(q.operate("i", "j"), "k") == "-1"
+    assert q.order == 8
+    assert not q.is_abelian()
+
+
+def test_quaternion_group_inverses_and_orders():
+    from mathematicskit.abstract_algebra.systems.groups import QuaternionGroup
+
+    q = QuaternionGroup()
+    for a in q.elements:
+        assert q.operate(a, q.inverse(a)) == "1"
+    assert sorted(q.element_order(a) for a in q.elements) == [1, 2, 4, 4, 4, 4, 4, 4]
