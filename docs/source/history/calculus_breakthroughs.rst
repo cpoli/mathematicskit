@@ -285,7 +285,7 @@ polynomial that interpolates :math:`f` at the Chebyshev points
 :math:`\cos(k\pi/n)`. The weights have a closed form and are all
 positive, and the nodes of one rule are reused when :math:`n` doubles,
 which suits adaptive computation. Gauss-Legendre quadrature is exact
-for polynomials of twice the degree, yet Lloyd N. Trefethen showed in
+for polynomials of twice the degree, yet Lloyd Nicholas Trefethen showed in
 2008 that for most smooth integrands Clenshaw-Curtis converges almost
 as fast.
 
