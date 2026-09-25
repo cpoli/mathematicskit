@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-09-25
+
 ### Added
 
 - `examples/statistics/hypothesis_tests/plot_02_chi_square_tests.py` --
@@ -24,6 +26,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   axioms in `probability`; Gauss's theory of errors, Pearson's
   chi-square test, Gosset's t-distribution, and Fisher's ANOVA in
   `statistics`) previously had no associated gallery example.
+- `mathematicskit.__version__` now reports the installed release; it
+  was still `"0.1.0"` in 0.2.0.
 
 ## [0.2.0] - 2026-09-19
 
@@ -169,6 +173,7 @@ All 14 planned domain subpackages are now implemented. Docs polish
   optimizer, eigenvalues in linear algebra/graph theory/dynamical
   systems, and more).
 
-[Unreleased]: https://github.com/cpoli/mathematicskit/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/cpoli/mathematicskit/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/cpoli/mathematicskit/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/cpoli/mathematicskit/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/cpoli/mathematicskit/releases/tag/v0.1.0
