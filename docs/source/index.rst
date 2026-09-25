@@ -67,6 +67,11 @@ transform -- each one linked to the code that reproduces it.
 - :mod:`mathematicskit.statistics` -- descriptive statistics, hypothesis tests,
   confidence intervals, OLS regression, and bootstrap resampling.
 
+**mathematicskit** is part of a family of packages --
+`physicskit <https://cpoli.github.io/physicskit/>`_, **mathematicskit**
+and `chemistrykit <https://cpoli.github.io/chemistrykit/>`_ -- that share
+the same architecture, API conventions, and history-driven documentation.
+
 Conventionally imported as ``mk``:
 
 .. code-block:: python

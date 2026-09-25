@@ -28,6 +28,11 @@ history, autodiff). No hard dependency on `networkx`, `cvxpy`, or
 SageMath. Sharing common ODE integrators throughout. Conventionally
 imported as `mk`.
 
+mathematicskit is part of a family of packages --
+[physicskit](https://github.com/cpoli/physicskit), **mathematicskit**
+and [chemistrykit](https://github.com/cpoli/chemistrykit) -- that share
+the same architecture, API conventions, and history-driven documentation.
+
 All 14 domains from `mathkit-spec.md`'s build plan are implemented --
 see [Subpackages](#subpackages) for the full list, or browse the docs at
 <https://cpoli.github.io/mathematicskit/>.
