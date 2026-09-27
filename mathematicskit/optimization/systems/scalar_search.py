@@ -13,7 +13,7 @@ Society 4(3) (1953), 502-506.
 
 from __future__ import annotations
 
-from typing import Callable
+from collections.abc import Callable
 
 import numpy as np
 

@@ -7,8 +7,8 @@ Finite Order* (Cambridge: Cambridge University Press, 1897), Sec. 145.
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from fractions import Fraction
-from typing import Callable
 
 from mathematicskit.abstract_algebra.core.base import FiniteGroup
 

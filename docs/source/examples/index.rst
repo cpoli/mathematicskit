@@ -14,6 +14,7 @@ worked-through tutorial also exists, the gallery links out to it.
    mathematicskit.abstract_algebra </api/gallery/abstract_algebra/index>
    mathematicskit.calculus </api/gallery/calculus/index>
    mathematicskit.combinatorics </api/gallery/combinatorics/index>
+   mathematicskit.complex_analysis </api/gallery/complex_analysis/index>
    mathematicskit.fractals_chaos </api/gallery/fractals_chaos/index>
    mathematicskit.geometry </api/gallery/geometry/index>
    mathematicskit.graph_theory </api/gallery/graph_theory/index>
@@ -22,6 +23,7 @@ worked-through tutorial also exists, the gallery links out to it.
    mathematicskit.numerical_analysis </api/gallery/numerical_analysis/index>
    mathematicskit.ode_dynamics </api/gallery/ode_dynamics/index>
    mathematicskit.optimization </api/gallery/optimization/index>
+   mathematicskit.pde </api/gallery/pde/index>
    mathematicskit.probability </api/gallery/probability/index>
    mathematicskit.special_functions </api/gallery/special_functions/index>
    mathematicskit.statistics </api/gallery/statistics/index>

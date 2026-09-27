@@ -141,7 +141,7 @@ def lattice_point_counts(vertices) -> LatticePolygonResult:
     v = np.asarray(vertices, dtype=np.int64)
     edges = np.roll(v, -1, axis=0) - v
     on_boundary = set()  # each edge contributes gcd(|dx|, |dy|) lattice points
-    for (x0, y0), (dx, dy) in zip(v.tolist(), edges.tolist()):
+    for (x0, y0), (dx, dy) in zip(v.tolist(), edges.tolist(), strict=False):
         g = gcd(abs(dx), abs(dy))
         for k in range(g):
             on_boundary.add((x0 + k * dx // g, y0 + k * dy // g))

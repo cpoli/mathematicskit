@@ -6,7 +6,7 @@ tests, not a model in its own right.
 
 from __future__ import annotations
 
-from typing import Callable
+from collections.abc import Callable
 
 from scipy import integrate
 

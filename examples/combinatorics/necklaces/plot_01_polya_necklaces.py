@@ -31,7 +31,7 @@ n = 5
 representatives = sorted({min(w[i:] + w[:i] for i in range(n)) for w in product((0, 1), repeat=n)})
 angles = 2 * np.pi * np.arange(n) / n
 fig, axes = plt.subplots(1, len(representatives), figsize=(12, 2))
-for ax, word in zip(axes, representatives):
+for ax, word in zip(axes, representatives, strict=False):
     ax.plot(np.cos(angles), np.sin(angles), color="0.7")
     ax.scatter(np.cos(angles), np.sin(angles), c=["k" if b else "w" for b in word], edgecolors="k", s=120, zorder=3)
     ax.set_aspect("equal")

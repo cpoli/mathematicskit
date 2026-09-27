@@ -53,7 +53,7 @@ def kruskal_mst(graph: Graph) -> MSTResult:
     """
     mst_sparse = csgraph.minimum_spanning_tree(graph.to_sparse())
     coo = mst_sparse.tocoo()
-    edges = [(int(u), int(v), float(w)) for u, v, w in zip(coo.row, coo.col, coo.data)]
+    edges = [(int(u), int(v), float(w)) for u, v, w in zip(coo.row, coo.col, coo.data, strict=False)]
     return MSTResult(edges=edges, total_weight=float(coo.data.sum()), method="kruskal")
 
 

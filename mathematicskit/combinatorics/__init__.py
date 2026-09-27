@@ -17,6 +17,7 @@ theorem; and Pólya necklace counting -- all hand-rolled, with no
 scipy/numpy equivalent.
 """
 
+from mathematicskit._version import __version__
 from mathematicskit.combinatorics.core.base import HallResult, YoungDiagram
 from mathematicskit.combinatorics.systems.counting import (
     combinations_count,
@@ -41,8 +42,6 @@ from mathematicskit.combinatorics.systems.sequences import bernoulli_numbers, do
 from mathematicskit.combinatorics.systems.special_numbers import catalan_number, stirling_first_kind, stirling_second_kind
 from mathematicskit.combinatorics.systems.trees import count_labeled_trees, prufer_decode, prufer_encode
 from mathematicskit.combinatorics.utils.bell_number import bell_number
-
-__version__ = "0.1.0"
 
 __all__ = [
     "__version__",

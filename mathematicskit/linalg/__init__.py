@@ -27,6 +27,7 @@ they are thin, well-tested wrappers, not reimplementations of already-
 correct numerical primitives.
 """
 
+from mathematicskit._version import __version__
 from mathematicskit.linalg.core.base import (
     CholeskyResult,
     EigenResult,
@@ -54,8 +55,6 @@ from mathematicskit.linalg.systems.stability import condition_number_2norm, leas
 from mathematicskit.linalg.systems.stationary import SOR, GaussSeidel, JacobiIteration, jacobi_spectral_radius, optimal_sor_omega
 from mathematicskit.linalg.systems.svd import svd_decompose
 from mathematicskit.linalg.utils.matrix_utils import frobenius_norm, is_symmetric, random_spd_matrix
-
-__version__ = "0.1.0"
 
 __all__ = [
     "__version__",

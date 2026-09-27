@@ -48,13 +48,13 @@ for p in test_points:
 xs = np.linspace(-1.5, 9, 220)
 ys = np.linspace(-1, 9, 220)
 X, Y = np.meshgrid(xs, ys)
-inside_grid = np.array([point_in_polygon(np.array([x, y]), polygon) for x, y in zip(X.ravel(), Y.ravel())]).reshape(X.shape)
+inside_grid = np.array([point_in_polygon(np.array([x, y]), polygon) for x, y in zip(X.ravel(), Y.ravel(), strict=False)]).reshape(X.shape)
 
 fig, ax = plt.subplots(figsize=(7, 7))
 ax.contourf(X, Y, inside_grid, levels=[-0.5, 0.5, 1.5], colors=["white", "lightsteelblue"])
 closed = np.vstack([polygon, polygon[:1]])
 ax.plot(*closed.T, "k", lw=1.5)
-for p, hits in zip(test_points, crossings):
+for p, hits in zip(test_points, crossings, strict=False):
     color = "tab:green" if len(hits) % 2 else "tab:red"
     ax.plot([p[0], ray_end_x], [p[1], p[1]], color=color, lw=1, ls="--")
     ax.plot(*p, "o", color=color, ms=8)

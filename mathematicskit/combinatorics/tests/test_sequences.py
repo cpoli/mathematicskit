@@ -46,5 +46,5 @@ def test_gray_code_neighbours_differ_in_one_bit_and_cover_all_words():
     for n in range(1, 9):
         codes = gray_code(n)
         assert sorted(codes) == list(range(2**n))
-        for a, b in zip(codes, codes[1:] + codes[:1]):
+        for a, b in zip(codes, codes[1:] + codes[:1], strict=False):
             assert bin(a ^ b).count("1") == 1

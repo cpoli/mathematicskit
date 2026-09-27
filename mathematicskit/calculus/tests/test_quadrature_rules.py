@@ -87,4 +87,4 @@ def test_euler_maclaurin_corrections_raise_the_order():
     for m in range(4):
         result = euler_maclaurin_trapezoid(np.exp, 0.0, 1.0, 8, [np.exp] * m)
         errors.append(abs(result.value - exact))
-    assert all(a > 100 * b for a, b in zip(errors, errors[1:3]))
+    assert all(a > 100 * b for a, b in zip(errors, errors[1:3], strict=False))

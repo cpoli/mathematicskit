@@ -23,7 +23,7 @@ exact = np.e - 1
 fig, axes = plt.subplots(1, 3, figsize=(11, 3.5), sharey=True)
 grid = np.linspace(a, b, 200)
 h = (b - a) / n
-for ax, rule, offset in zip(axes, ("left", "right", "midpoint"), (0.0, 1.0, 0.5)):
+for ax, rule, offset in zip(axes, ("left", "right", "midpoint"), (0.0, 1.0, 0.5), strict=False):
     ax.plot(grid, f(grid), "k")
     left_edges = a + h * np.arange(n)
     ax.bar(left_edges, f(left_edges + offset * h), width=h, align="edge", alpha=0.4, edgecolor="k")

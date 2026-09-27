@@ -13,6 +13,7 @@ examples, and full API reference, all linked from a single page.
    /_generated/subpackages/abstract_algebra
    /_generated/subpackages/calculus
    /_generated/subpackages/combinatorics
+   /_generated/subpackages/complex_analysis
    /_generated/subpackages/fractals_chaos
    /_generated/subpackages/geometry
    /_generated/subpackages/graph_theory
@@ -21,6 +22,7 @@ examples, and full API reference, all linked from a single page.
    /_generated/subpackages/numerical_analysis
    /_generated/subpackages/ode_dynamics
    /_generated/subpackages/optimization
+   /_generated/subpackages/pde
    /_generated/subpackages/probability
    /_generated/subpackages/special_functions
    /_generated/subpackages/statistics

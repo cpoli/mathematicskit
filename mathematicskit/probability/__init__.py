@@ -15,6 +15,7 @@ random walks and Brownian motion, Erlang's loss formula, and
 continuous-time Markov chains via :func:`scipy.linalg.expm`.
 """
 
+from mathematicskit._version import __version__
 from mathematicskit.probability.core.base import (
     BranchingProcessResult,
     BrownianMotionResult,
@@ -38,8 +39,6 @@ from mathematicskit.probability.systems.queueing import erlang_b
 from mathematicskit.probability.systems.st_petersburg import st_petersburg_certainty_equivalent, st_petersburg_payoffs
 from mathematicskit.probability.systems.stochastic_processes import brownian_motion, random_walk_return_fraction, return_probability_1d, simple_random_walk
 from mathematicskit.probability.utils.diagnostics import effective_sample_size
-
-__version__ = "0.1.0"
 
 __all__ = [
     "__version__",

@@ -68,7 +68,7 @@ print("n=3:", ["".join(s) for s in itertools.product("()", repeat=6) if _is_bala
 angles = np.pi / 2 + 2 * np.pi * np.arange(6) / 6
 pts = np.column_stack([np.cos(angles), np.sin(angles)])
 fig, axes = plt.subplots(2, 7, figsize=(12, 3.8))
-for ax, diagonals in zip(axes.flat, _triangulations(list(range(6)))):
+for ax, diagonals in zip(axes.flat, _triangulations(list(range(6))), strict=False):
     ax.fill(pts[:, 0], pts[:, 1], color="C0", alpha=0.12)
     ax.plot(*np.vstack([pts, pts[:1]]).T, color="C0", lw=1.5)
     for i, j in diagonals:

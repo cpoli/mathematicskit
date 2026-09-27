@@ -19,7 +19,7 @@ from mathematicskit.fractals_chaos import box_counting_dimension, koch_curve, ko
 
 fig, axes = plt.subplots(1, 4, figsize=(12, 3.5))
 triangle_area = np.sqrt(3) / 4
-for ax, order in zip(axes, range(4)):
+for ax, order in zip(axes, range(4), strict=False):
     pts = koch_snowflake(order)
     perimeter = np.sum(np.linalg.norm(np.diff(pts, axis=0), axis=1))
     area = 0.5 * abs(np.dot(pts[:-1, 0], pts[1:, 1]) - np.dot(pts[1:, 0], pts[:-1, 1]))

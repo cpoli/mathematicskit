@@ -19,7 +19,7 @@ from mathematicskit.calculus import archimedes_pi_bounds
 # -----------------------------------------------------
 
 result = archimedes_pi_bounds(4)
-for n, lo, hi in zip(result.sides, result.lower, result.upper):
+for n, lo, hi in zip(result.sides, result.lower, result.upper, strict=False):
     print(f"{n:3d} sides: {lo:.6f} < pi < {hi:.6f}")
 print(f"Archimedes: {3 + 10 / 71:.6f} < pi < {3 + 1 / 7:.6f}")
 
@@ -28,7 +28,7 @@ print(f"Archimedes: {3 + 10 / 71:.6f} < pi < {3 + 1 / 7:.6f}")
 # -----------------------------------------------------
 
 result = archimedes_pi_bounds(15)
-gaps = [hi - lo for lo, hi in zip(result.lower, result.upper)]
+gaps = [hi - lo for lo, hi in zip(result.lower, result.upper, strict=False)]
 fig, ax = plt.subplots()
 ax.loglog(result.sides, gaps, "o-", label="upper - lower")
 ax.loglog(result.sides, [gaps[0] * (6 / n) ** 2 for n in result.sides], "--", label=r"$\propto n^{-2}$")

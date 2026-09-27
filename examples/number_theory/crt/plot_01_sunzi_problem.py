@@ -19,5 +19,5 @@ from mathematicskit.number_theory import chinese_remainder_theorem
 result = chinese_remainder_theorem(remainders=[2, 3, 2], moduli=[3, 5, 7])
 print(f"x = {result.residue} (mod {result.modulus})")
 
-for r, m in zip([2, 3, 2], [3, 5, 7]):
+for r, m in zip([2, 3, 2], [3, 5, 7], strict=False):
     print(f"  {result.residue} mod {m} = {result.residue % m} (expected {r})")

@@ -83,7 +83,7 @@ N = 8
 first = np.array([[stirling_first_kind(i, k) for k in range(N + 1)] for i in range(N + 1)], dtype=float)
 second = np.array([[stirling_second_kind(i, k) for k in range(N + 1)] for i in range(N + 1)], dtype=float)
 fig, axes = plt.subplots(1, 2, figsize=(10, 4.5))
-for ax, table, name in zip(axes, [first, second], ["first kind (cycles)", "second kind (blocks)"]):
+for ax, table, name in zip(axes, [first, second], ["first kind (cycles)", "second kind (blocks)"], strict=False):
     shown = np.where(table > 0, np.log10(np.maximum(table, 1)), np.nan)
     ax.imshow(shown, cmap="viridis")
     for i in range(N + 1):

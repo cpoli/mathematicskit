@@ -50,7 +50,7 @@ def chinese_remainder_theorem(remainders: Sequence[int], moduli: Sequence[int]) 
         raise ValueError("need at least one congruence")
 
     x, m = remainders[0] % moduli[0], moduli[0]
-    for r_i, m_i in zip(remainders[1:], moduli[1:]):
+    for r_i, m_i in zip(remainders[1:], moduli[1:], strict=False):
         bezout = extended_gcd(m, m_i)
         if bezout.gcd != 1:
             raise ValueError(f"moduli must be pairwise coprime, but gcd({m}, {m_i}) = {bezout.gcd}")

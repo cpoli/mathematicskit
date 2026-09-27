@@ -42,7 +42,7 @@ fig1.tight_layout()
 
 degrees = [5, 10, 15, 20, 25, 30]
 equal_errors, _ = runge_phenomenon_errors(degrees)
-for d, e in zip(degrees, equal_errors):
+for d, e in zip(degrees, equal_errors, strict=False):
     print(f"degree={d:2d}  equally spaced max |error| = {e:.3e}")
 
 fig2, ax2 = plt.subplots(figsize=(6, 4))

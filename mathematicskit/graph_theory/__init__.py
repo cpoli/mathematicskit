@@ -18,6 +18,7 @@ graphs and clique numbers; the assignment problem
 the Erdős-Rényi giant component; A* search; and PageRank.
 """
 
+from mathematicskit._version import __version__
 from mathematicskit.graph_theory.core.base import (
     AssignmentResult,
     BipartiteMatchingResult,
@@ -53,8 +54,6 @@ from mathematicskit.graph_theory.utils.generators import (
     path_graph,
     random_graph,
 )
-
-__version__ = "0.1.0"
 
 __all__ = [
     "__version__",

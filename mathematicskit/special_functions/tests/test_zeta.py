@@ -39,6 +39,6 @@ def test_sieve():
 
 def test_euler_product_converges_to_zeta():
     errors = [abs(euler_product(2.0, bound) - riemann_zeta(2.0)) for bound in (10, 100, 1000, 10000)]
-    assert all(later < earlier for earlier, later in zip(errors, errors[1:]))
+    assert all(later < earlier for earlier, later in zip(errors, errors[1:], strict=False))
     assert errors[-1] < 1e-4
     assert euler_product(3.0, 10000) == pytest.approx(riemann_zeta(3.0), rel=1e-8)

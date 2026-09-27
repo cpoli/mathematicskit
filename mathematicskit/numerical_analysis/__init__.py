@@ -18,6 +18,7 @@ the Lebesgue constant as an interpolation problem's condition number,
 and a general condition-number wrapper around ``numpy.linalg.cond``).
 """
 
+from mathematicskit._version import __version__
 from mathematicskit.numerical_analysis.core.base import HornerResult, Interpolant, IterativeRootFinder, MinimaxResult, RegressionResult, RootResult
 from mathematicskit.numerical_analysis.systems.acceleration import aitken_delta_squared
 from mathematicskit.numerical_analysis.systems.approximation import PadeApproximant, bernstein_polynomial, remez_minimax
@@ -29,8 +30,6 @@ from mathematicskit.numerical_analysis.systems.root_finding import Bisection, Fi
 from mathematicskit.numerical_analysis.systems.splines import CubicSpline
 from mathematicskit.numerical_analysis.systems.summation import kahan_sum
 from mathematicskit.numerical_analysis.utils.error_analysis import condition_number, estimate_convergence_order, lebesgue_constant
-
-__version__ = "0.1.0"
 
 __all__ = [
     "__version__",

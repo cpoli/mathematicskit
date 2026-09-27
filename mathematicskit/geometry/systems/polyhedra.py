@@ -48,7 +48,7 @@ def polyhedron_counts(points, decimals: int = 9) -> PolyhedronResult:
     face_ids = {}
     face_of_simplex = [face_ids.setdefault(tuple(p), len(face_ids)) for p in planes]
     edge_faces = {}
-    for simplex, face in zip(hull.simplices, face_of_simplex):
+    for simplex, face in zip(hull.simplices, face_of_simplex, strict=False):
         for i in range(3):
             edge = tuple(sorted((simplex[i], simplex[(i + 1) % 3])))
             edge_faces.setdefault(edge, set()).add(face)

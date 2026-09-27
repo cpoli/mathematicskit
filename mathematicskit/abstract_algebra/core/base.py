@@ -238,12 +238,12 @@ class Polynomial:
     def __add__(self, other: Polynomial) -> Polynomial:
         self._check_same_field(other)
         n = max(len(self.coeffs), len(other.coeffs))
-        return self._wrap([self._reduce(a + b) for a, b in zip(self._pad(n), other._pad(n))])
+        return self._wrap([self._reduce(a + b) for a, b in zip(self._pad(n), other._pad(n), strict=False)])
 
     def __sub__(self, other: Polynomial) -> Polynomial:
         self._check_same_field(other)
         n = max(len(self.coeffs), len(other.coeffs))
-        return self._wrap([self._reduce(a - b) for a, b in zip(self._pad(n), other._pad(n))])
+        return self._wrap([self._reduce(a - b) for a, b in zip(self._pad(n), other._pad(n), strict=False)])
 
     def __mul__(self, other: Polynomial) -> Polynomial:
         self._check_same_field(other)

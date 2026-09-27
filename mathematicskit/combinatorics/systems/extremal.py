@@ -64,7 +64,7 @@ def count_triangle_free_colorings(n: int) -> int:
     if n > 6:
         raise ValueError("exhaustive search is only feasible for n <= 6")
     edges = list(combinations(range(n), 2))
-    return sum(not has_monochromatic_triangle(n, dict(zip(edges, colors))) for colors in product((0, 1), repeat=len(edges)))
+    return sum(not has_monochromatic_triangle(n, dict(zip(edges, colors, strict=False))) for colors in product((0, 1), repeat=len(edges)))
 
 
 def longest_increasing_subsequence(sequence) -> list:

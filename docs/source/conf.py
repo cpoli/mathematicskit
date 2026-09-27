@@ -1,16 +1,35 @@
 """Sphinx configuration for mathematicskit."""
 
 import os
+import re
 import sys
+from importlib.metadata import PackageNotFoundError
+from importlib.metadata import version as _dist_version
 from pathlib import Path
 
 sys.path.insert(0, os.path.abspath("../.."))
 
 
+def _release():
+    """Installed distribution version, falling back to pyproject.toml.
+
+    The metadata lookup only succeeds when mathematicskit is installed (or a
+    stale, gitignored egg-info happens to sit in the repo root), so a docs
+    build from a fresh clone or a docs-only environment would otherwise die
+    with PackageNotFoundError.
+    """
+    try:
+        return _dist_version("mathematicskit")
+    except PackageNotFoundError:
+        pyproject = Path(__file__).resolve().parents[2] / "pyproject.toml"
+        return re.search(r'^version\s*=\s*"([^"]+)"', pyproject.read_text(), re.M).group(1)
+
+
 project = "mathematicskit"
 copyright = "2026, mathematicskit contributors"
 author = "mathematicskit team"
-release = "0.2.1"
+release = _release()
+del _release
 
 extensions = [
     "sphinx.ext.autodoc",
@@ -51,7 +70,7 @@ source_suffix = {
     ".md": "markdown",
 }
 
-# Single source of truth for the 14 math subpackages. Every card grid
+# Single source of truth for the math subpackages. Every card grid
 # (homepage, api/index, examples/index, history/index, and the per-subpackage
 # hub pages) and the cross-link strip atop each api/examples/history page is
 # generated from this table by _generate_subpackage_docs() below, instead of
@@ -73,6 +92,11 @@ SUBPACKAGES = [
         "name": "combinatorics",
         "category": "Foundations",
         "blurb": "Counting and generation, Pascal's triangle, integer partitions, inclusion-exclusion, and Stirling/Catalan/Bell numbers.",
+    },
+    {
+        "name": "complex_analysis",
+        "category": "Analysis",
+        "blurb": "Contour integrals, Cauchy's theorem and formula, residues and the argument principle, conformal maps, and domain coloring.",
     },
     {
         "name": "fractals_chaos",
@@ -115,6 +139,11 @@ SUBPACKAGES = [
         "blurb": "Gradient descent, nonlinear conjugate gradient, Newton/BFGS, constrained optimization, and linear programming.",
     },
     {
+        "name": "pde",
+        "category": "Analysis",
+        "blurb": "Heat, wave, advection and Poisson/Laplace problems: the method of lines, Crank-Nicolson, CFL stability, and spectral methods.",
+    },
+    {
         "name": "probability",
         "category": "Probability & Statistics",
         "blurb": "Discrete/continuous distributions, Monte Carlo integration, limit theorems, and Markov chains.",
@@ -122,7 +151,7 @@ SUBPACKAGES = [
     {
         "name": "special_functions",
         "category": "Analysis",
-        "blurb": "Gamma/beta functions, Bessel functions, orthogonal polynomial families, and the discrete Fourier transform.",
+        "blurb": "Gamma/beta functions, Bessel functions, orthogonal polynomials, the FFT, and signal transforms: convolution, filters, Z/Laplace transforms, and wavelets.",
     },
     {
         "name": "statistics",
@@ -249,7 +278,7 @@ def _generate_subpackage_docs(app):
 
     # Category-grouped grids reused by index.rst, api/index.rst,
     # examples/index.rst, and history/index.rst, so those five-plus listings
-    # of the same 14 subpackages -- and their grouping -- come from one
+    # of the same subpackages -- and their grouping -- come from one
     # place instead of being hand-copied (and drifting) independently.
     _write(out / "grid_api.rst", _grouped_grid(lambda s: f"/api/{s['name']}"))
     _write(out / "grid_examples.rst", _grouped_grid(lambda s: f"/{s['examples_doc']}"))

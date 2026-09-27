@@ -16,7 +16,7 @@ learning frameworks, in miniature. See Rumelhart, Hinton & Williams
 from __future__ import annotations
 
 import math
-from typing import Callable
+from collections.abc import Callable
 
 __all__ = ["Variable", "gradient"]
 

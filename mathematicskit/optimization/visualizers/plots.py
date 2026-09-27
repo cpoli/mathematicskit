@@ -4,7 +4,7 @@ plots, and convergence-rate comparison plots.
 
 from __future__ import annotations
 
-from typing import Callable
+from collections.abc import Callable
 
 import matplotlib.pyplot as plt
 import numpy as np

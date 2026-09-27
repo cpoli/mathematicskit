@@ -7,6 +7,86 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Signal processing and transforms in `mathematicskit.special_functions`:
+  - `convolution` -- `convolve_direct`, `convolve_fft`,
+    `circular_convolve`, `cross_correlate`, `compare_convolution_methods`
+    (`numpy.convolve`, `scipy.signal.fftconvolve`/`correlate`).
+  - `filters` -- `butterworth_filter`, `chebyshev1_filter`,
+    `fir_window_filter`, `apply_filter`, `frequency_response`
+    (`scipy.signal`).
+  - `z_transform` -- `z_transform`, `transfer_function`, `poles_zeros`,
+    `inverse_z_transform` (partial fractions via `scipy.signal.residuez`,
+    including repeated poles).
+  - `laplace_transform` -- `laplace_transform` (`scipy.integrate.quad`),
+    and hand-rolled `inverse_laplace_talbot`, `inverse_laplace_stehfest`,
+    `stehfest_coefficients`.
+  - `wavelets` -- hand-rolled `daubechies_filter`, `wavelet_filters`,
+    `discrete_wavelet_transform`, `inverse_discrete_wavelet_transform`,
+    `morlet_cwt` (scipy 1.15 removed its wavelet routines).
+  - Result containers `ConvolutionComparisonResult`, `FilterCoefficients`,
+    `FrequencyResponseResult`, `PoleZeroResult`,
+    `WaveletDecompositionResult`, `ScalogramResult`; visualizers
+    `plot_frequency_response`, `plot_pole_zero`,
+    `plot_wavelet_decomposition`, `plot_scalogram`.
+  - Nine history entries (Laplace, Haar, Butterworth, the Z-transform,
+    fast convolution, numerical Laplace inversion, Kaiser's window,
+    Morlet, Daubechies), each with its own gallery example.
+- `mathematicskit.complex_analysis` -- a new subpackage for functions of
+  a complex variable: the Cauchy-Riemann equations and complex
+  derivatives; circle and polygon contours, contour integrals
+  (`scipy.integrate.quad` with `complex_func=True`), winding numbers,
+  and Cauchy's integral formula; residues, the residue theorem, and the
+  argument principle, and Rouché's theorem; Laurent series via
+  `numpy.fft`; Möbius transformations and their classification, the
+  Joukowski map, and mapped coordinate grids; and domain coloring. Its
+  history page has 15 breakthroughs, from Euler's formula (1748) to
+  domain coloring (1998), each linked to its own gallery example.
+- `mathematicskit.pde` -- a new subpackage for partial differential
+  equations, built on `mathematicskit.integrators` and
+  `mathematicskit.linalg`: the 1D/2D heat equation by the method of lines
+  (`rk4`/`dopri5` through an `@njit` right-hand side) and by the
+  theta-method (FTCS, Crank-Nicolson, backward Euler); Fourier's
+  sine-series solution; the 1D wave equation with leapfrog stepping and
+  d'Alembert's solution; upwind/Lax-Friedrichs/Lax-Wendroff/FTCS
+  advection; 1D/2D Poisson and Laplace solvers (sparse direct, or CG,
+  Jacobi, Gauss-Seidel and SOR from `mathematicskit.linalg`); CFL and
+  diffusion-number checks and von Neumann amplification factors;
+  Fourier and Chebyshev spectral differentiation, a pseudo-spectral
+  viscous Burgers solver, and Chebyshev collocation for 1D/2D Poisson
+  problems; P1 finite elements for 1D Poisson problems on nonuniform
+  meshes; multigrid V-cycles for 2D Poisson problems; Godunov,
+  Lax-Friedrichs and Lax-Wendroff finite-volume schemes for inviscid
+  Burgers' equation with the exact Riemann solution; and the Hopf-Cole
+  exact solution of viscous Burgers' equation. It comes with its own
+  18-entry history page (d'Alembert through Chebyshev collocation), each
+  entry linked to its own gallery example.
+- Stiff ODEs and boundary-value problems in `mathematicskit.integrators`:
+  hand-rolled `implicit_euler_step`/`implicit_euler_integrate` (Newton
+  with a finite-difference Jacobian), `stiff_integrate` wrapping
+  `scipy.integrate.solve_ivp`'s Radau/BDF/LSODA in the integrators'
+  `rhs(state, t, params)` convention, and `collocation_bvp` wrapping
+  `scipy.integrate.solve_bvp` with a `BVPResult` dataclass. New
+  `integrators` API page.
+- Ten numerical-integration entries in the `ode_dynamics` history page
+  (Euler, Runge-Kutta, Stormer-Verlet, Curtiss-Hirschfelder BDF,
+  Dahlquist's A-stability, Butcher-Ehle Radau IIA, Robertson's kinetics,
+  de Boor-Swartz collocation, Dormand-Prince, Yoshida), each linked to its
+  own example in the new `integrators` and `stiffness` gallery sections.
+- `py.typed` marker, so type checkers use the package's inline type hints.
+- Direct tests for `leapfrog_integrate`, `yoshida4_step`,
+  `yoshida4_integrate`, and `dopri5_integrate`'s zero-error step growth.
+
+### Changed
+
+- `__version__` (top-level and every subpackage) is now read once from
+  the installed package metadata instead of 15 hard-coded strings.
+- Dropped unused runtime dependencies `sympy`, `plotly`, and `tqdm`.
+- CI now tests Python 3.10-3.14 (previously 3.9-3.12).
+- Package description no longer claims everything is hand-rolled; it now
+  matches the README (built on numpy/scipy).
+
 ## [0.2.1] - 2026-09-25
 
 ### Added

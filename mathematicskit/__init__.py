@@ -13,6 +13,7 @@ from mathematicskit import (
     abstract_algebra,
     calculus,
     combinatorics,
+    complex_analysis,
     constants,
     fractals_chaos,
     geometry,
@@ -23,17 +24,18 @@ from mathematicskit import (
     numerical_analysis,
     ode_dynamics,
     optimization,
+    pde,
     probability,
     special_functions,
     statistics,
 )
-
-__version__ = "0.2.1"
+from mathematicskit._version import __version__ as __version__
 
 __all__ = [
     "abstract_algebra",
     "calculus",
     "combinatorics",
+    "complex_analysis",
     "constants",
     "fractals_chaos",
     "geometry",
@@ -44,6 +46,7 @@ __all__ = [
     "numerical_analysis",
     "ode_dynamics",
     "optimization",
+    "pde",
     "probability",
     "special_functions",
     "statistics",

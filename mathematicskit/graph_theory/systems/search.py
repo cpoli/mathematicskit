@@ -10,7 +10,8 @@ IEEE Transactions on Systems Science and Cybernetics 4(2) (1968),
 from __future__ import annotations
 
 import heapq
-from typing import Callable, Optional
+from collections.abc import Callable
+from typing import Optional
 
 from mathematicskit.graph_theory.core.base import Graph, SearchResult
 

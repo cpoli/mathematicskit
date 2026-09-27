@@ -81,7 +81,7 @@ def are_orthogonal(a, b) -> bool:
     """
     a, b = np.asarray(a), np.asarray(b)
     n = a.shape[0]
-    return len(set(zip(a.ravel().tolist(), b.ravel().tolist()))) == n * n
+    return len(set(zip(a.ravel().tolist(), b.ravel().tolist(), strict=False))) == n * n
 
 
 def orthogonal_latin_square_pair(n: int):

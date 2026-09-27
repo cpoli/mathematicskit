@@ -16,7 +16,8 @@ Optimization*, 2nd ed., Ch. 6 (Newton) and Ch. 6.1 (BFGS).
 
 from __future__ import annotations
 
-from typing import Callable, Optional
+from collections.abc import Callable
+from typing import Optional
 
 import numpy as np
 from scipy import optimize as sopt

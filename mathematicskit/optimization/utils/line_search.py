@@ -11,7 +11,7 @@ Algorithm 3.1 ("Backtracking Line Search").
 
 from __future__ import annotations
 
-from typing import Callable
+from collections.abc import Callable
 
 import numpy as np
 

@@ -34,7 +34,7 @@ matrices = {
 
 fig, axes = plt.subplots(2, 3, figsize=(11, 7))
 rng = np.random.default_rng(0)
-for ax, (name, A) in zip(axes.ravel(), matrices.items()):
+for ax, (name, A) in zip(axes.ravel(), matrices.items(), strict=False):
     result = classify_fixed_point_2d(A)
     print(f"{name:>16s}: eigenvalues={np.round(result.eigenvalues, 3)}, classified as '{result.classification}'")
     for _ in range(6):

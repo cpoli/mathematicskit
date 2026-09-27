@@ -15,6 +15,7 @@ multiplication, division with remainder, gcd) over :math:`\\mathbb{Z}`,
 :math:`\\mathbb{Q}`, and finite fields.
 """
 
+from mathematicskit._version import __version__
 from mathematicskit.abstract_algebra.core.base import (
     CompositionSeriesResult,
     FiniteGroup,
@@ -44,8 +45,6 @@ from mathematicskit.abstract_algebra.systems.structure import (
 )
 from mathematicskit.abstract_algebra.systems.subgroups import all_subgroups, cyclic_subgroup, left_cosets
 from mathematicskit.abstract_algebra.utils.checks import is_cyclic
-
-__version__ = "0.1.0"
 
 __all__ = [
     "__version__",

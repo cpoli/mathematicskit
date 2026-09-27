@@ -11,7 +11,7 @@ Tibshirani, *An Introduction to the Bootstrap*, 1993, Ch. 12-14.
 
 from __future__ import annotations
 
-from typing import Callable
+from collections.abc import Callable
 
 import numpy as np
 from scipy import stats

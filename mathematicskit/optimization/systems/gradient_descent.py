@@ -9,7 +9,7 @@ Optimization*, 2nd ed., Ch. 2.2 and Ch. 3.1.
 
 from __future__ import annotations
 
-from typing import Callable
+from collections.abc import Callable
 
 import numpy as np
 

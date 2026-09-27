@@ -22,7 +22,8 @@ Naval Research Logistics Quarterly 3(1-2) (1956), 95-110.
 
 from __future__ import annotations
 
-from typing import Callable, Optional
+from collections.abc import Callable
+from typing import Optional
 
 import numpy as np
 

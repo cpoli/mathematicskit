@@ -16,11 +16,48 @@ understood without solving its equations exactly. This chronology
 traces the ideas behind :mod:`mathematicskit.ode_dynamics`: the
 classification of linear flows near a fixed point, the discovery of
 self-sustained oscillation, and the slow, then sudden, realization that
-simple deterministic systems can behave unpredictably.
+simple deterministic systems can behave unpredictably. Interleaved with
+these are the numerical methods behind :mod:`mathematicskit.integrators`
+that compute every trajectory: Euler's and Runge-Kutta methods,
+symplectic and adaptive integrators, the discovery of stiffness and the
+implicit methods that tame it, and collocation for boundary-value
+problems.
 
 .. contents:: Timeline
    :local:
    :depth: 1
+
+1768 -- Euler's Method
+----------------------
+
+In the first volume of his *Institutiones calculi integralis*, Leonhard
+Euler proposed approximating a solution of :math:`y' = f(t, y)` by
+following its tangent line for a short step :math:`h`:
+
+.. math::
+
+   y_{n+1} = y_n + h\,f(t_n, y_n).
+
+Each step makes an error of order :math:`h^2`. Over the :math:`1/h`
+steps needed to reach a fixed time these add up to a global error of
+order :math:`h`, so halving the step halves the error. Evaluating the
+slope at the end of the step instead,
+:math:`y_{n+1} = y_n + h f(t_{n+1}, y_{n+1})`, gives the *implicit*
+(backward) Euler method. It is just as accurate, but it requires solving
+an equation for :math:`y_{n+1}` at every step, a cost that pays off for
+stiff equations (see Curtiss and Hirschfelder and Dahlquist, below).
+Cauchy later used Euler's polygons to prove that solutions exist.
+
+*Implementation:* :func:`mathematicskit.integrators.implicit_euler_integrate`
+implements backward Euler, solving for each step with Newton's method and
+a finite-difference Jacobian. The tests check its closed-form step
+:math:`y/(1 + \lambda h)` on :math:`y' = -\lambda y` and that the error
+ratio for halved :math:`h` is 2.
+
+*References:* L. Euler, *Institutionum calculi integralis*, vol. 1
+(St. Petersburg, 1768).
+
+.. minigallery:: ../../examples/ode_dynamics/integrators/plot_01_euler_method.py
 
 1838 -- Verhulst's Logistic Equation
 ------------------------------------
@@ -119,6 +156,45 @@ translation by A. T. Fuller, International Journal of Control 55(3)
 
 .. minigallery:: ../../examples/ode_dynamics/stability/plot_02_lyapunov_function.py
 
+1895-1901 -- Runge, Heun, and Kutta: Runge-Kutta Methods
+--------------------------------------------------------
+
+Carl Runge asked how to get the accuracy of a high-order Taylor series
+without differentiating :math:`f`. His answer was to evaluate the slope
+at several points inside each step and combine them. Karl Heun gave
+second- and third-order schemes, and Wilhelm Kutta derived the order
+conditions systematically, including the classical fourth-order method
+
+.. math::
+
+   k_1 = f(t_n, y_n),\quad
+   k_2 = f(t_n + \tfrac h2, y_n + \tfrac h2 k_1),\quad
+   k_3 = f(t_n + \tfrac h2, y_n + \tfrac h2 k_2),\quad
+   k_4 = f(t_n + h, y_n + h k_3),
+
+.. math::
+
+   y_{n+1} = y_n + \tfrac h6 (k_1 + 2k_2 + 2k_3 + k_4).
+
+Halving :math:`h` divides the error by 16. "RK4" became the default
+integrator for well over half a century, and it is still the default
+in :mod:`mathematicskit.ode_dynamics`.
+
+*Implementation:* :func:`mathematicskit.integrators.rk4_integrate`
+(Numba-compiled, reusing one compiled right-hand side across parameter
+values). The tests check it against the harmonic oscillator's exact
+solution.
+
+*References:* C. Runge, "Über die numerische Auflösung von
+Differentialgleichungen," Mathematische Annalen 46 (1895), 167-178;
+K. Heun, "Neue Methoden zur approximativen Integration der
+Differentialgleichungen einer unabhängigen Veränderlichen," Zeitschrift
+für Mathematik und Physik 45 (1900), 23-38; W. Kutta, "Beitrag zur
+näherungsweisen Integration totaler Differentialgleichungen,"
+Zeitschrift für Mathematik und Physik 46 (1901), 435-453.
+
+.. minigallery:: ../../examples/ode_dynamics/integrators/plot_02_runge_kutta.py
+
 1901 -- Bendixson's Negative Criterion
 --------------------------------------
 
@@ -150,6 +226,44 @@ for the Van der Pol field, whose divergence changes sign at
 différentielles," Acta Mathematica 24 (1901), 1-88.
 
 .. minigallery:: ../../examples/ode_dynamics/limit_cycles/plot_02_bendixson_criterion.py
+
+1907-1967 -- Störmer, Verlet, and Symplectic Integration
+--------------------------------------------------------
+
+Carl Størmer computed the orbits of charged particles in the Earth's
+magnetic field, to explain the aurora, with a simple scheme for
+:math:`\ddot q = F(q)`. Loup Verlet rediscovered it for molecular
+dynamics in 1967. In "velocity Verlet" (leapfrog) form it reads
+
+.. math::
+
+   v_{n+1/2} = v_n + \tfrac h2 F(q_n),\quad
+   q_{n+1} = q_n + h\,v_{n+1/2},\quad
+   v_{n+1} = v_{n+1/2} + \tfrac h2 F(q_{n+1}).
+
+It is only second order, but it is time-reversible and *symplectic*: it
+preserves phase-space area exactly, and it exactly conserves a modified
+energy within :math:`O(h^2)` of the true one. As a result its energy
+error stays bounded for exponentially long times, while a
+non-symplectic method, even a higher-order one like RK4, drifts
+steadily. This explanation came later, from backward error analysis in
+the 1990s, and it is why molecular-dynamics and celestial-mechanics codes
+still use leapfrog.
+
+*Implementation:* :func:`mathematicskit.integrators.leapfrog_integrate`
+(alias ``velocity_verlet_integrate``). The tests check that the
+harmonic-oscillator energy is conserved to :math:`10^{-4}` over 20,000
+steps.
+
+*References:* C. Størmer, "Sur les trajectoires des corpuscules
+électrisés dans l'espace sous l'action du magnétisme terrestre," Archives
+des Sciences Physiques et Naturelles 24 (1907);
+L. Verlet, "Computer 'Experiments' on Classical Fluids. I," Physical
+Review 159 (1967), 98-103; E. Hairer, C. Lubich, and G. Wanner,
+"Geometric Numerical Integration Illustrated by the Störmer-Verlet
+Method," Acta Numerica 12 (2003), 399-450.
+
+.. minigallery:: ../../examples/ode_dynamics/integrators/plot_03_stormer_verlet.py
 
 1918-1961 -- Duffing, Ueda, and the Stroboscopic Poincaré Section
 -----------------------------------------------------------------
@@ -300,6 +414,43 @@ Doklady Akademii Nauk SSSR 14(5) (1937), 247-250.
 
 .. minigallery:: ../../examples/ode_dynamics/bifurcations/plot_01_normal_forms.py
 
+1952 -- Curtiss and Hirschfelder: Stiffness and BDF
+---------------------------------------------------
+
+Charles Curtiss and Joseph Hirschfelder, integrating chemical-kinetics
+equations, found that explicit methods crawled along with tiny steps
+even where the solution was perfectly smooth. They called such
+equations *stiff* and illustrated the problem with
+
+.. math::
+
+   y' = -50\,(y - \cos t).
+
+After a transient of length about :math:`1/50`, the solution follows the
+slow curve :math:`\approx \cos t`, but an explicit method's step stays
+limited by stability to about :math:`1/\lambda` for decay rate
+:math:`\lambda`. Their remedy was the *backward differentiation
+formulas*: fit a polynomial through past values and require it to
+satisfy the ODE at the *new* time point. BDF1 is backward Euler, and
+BDF2 is :math:`\tfrac32 y_{n+1} - 2y_n + \tfrac12 y_{n-1} = h f(t_{n+1}, y_{n+1})`.
+C. William Gear's 1971 variable-order, variable-step BDF code (DIFSUB)
+made them the workhorse of stiff integration. For their original
+:math:`\lambda = 50` the problem is only mildly stiff, and an explicit
+adaptive method is still competitive. By :math:`\lambda = 50{,}000`
+Dormand-Prince needs almost 200 times as many steps as BDF.
+
+*Implementation:* :func:`mathematicskit.integrators.stiff_integrate` with
+``method="BDF"`` wraps scipy's variable-order BDF (Shampine and Reichelt's
+numerical differentiation formulas, orders 1-5). The tests check it
+against the exact solution of a stiff equation with :math:`\lambda = 10^4`.
+
+*References:* C. F. Curtiss and J. O. Hirschfelder, "Integration of
+Stiff Equations," Proceedings of the National Academy of Sciences 38
+(1952), 235-243; C. W. Gear, *Numerical Initial Value Problems in
+Ordinary Differential Equations* (Prentice-Hall, 1971).
+
+.. minigallery:: ../../examples/ode_dynamics/stiffness/plot_02_curtiss_hirschfelder_bdf.py
+
 1961-1962 -- FitzHugh, Nagumo, and the Excitable Neuron
 -------------------------------------------------------
 
@@ -362,6 +513,101 @@ the Atmospheric Sciences 20(2) (1963), 130-141.
 
 .. minigallery:: ../../examples/ode_dynamics/chaotic_flows/plot_01_lorenz_butterfly_effect.py
 
+1963 -- Dahlquist's A-Stability
+-------------------------------
+
+Applied to the test equation :math:`y' = \lambda y`, one step of a method
+multiplies :math:`y` by a *stability function* :math:`R(z)`, with
+:math:`z = \lambda h`. Germund Dahlquist called a method *A-stable* if
+:math:`|R(z)| \le 1` on the entire left half-plane
+:math:`\operatorname{Re} z \le 0`. For such a method, no decaying
+component can ever be amplified, whatever the step size, so the step can
+be chosen for accuracy alone. Explicit methods are never A-stable: their
+:math:`R` is a polynomial, which is unbounded, and RK4 is stable on the
+negative real axis only down to :math:`z \approx -2.785`. Backward Euler,
+with :math:`R(z) = 1/(1 - z)`, is A-stable. Dahlquist's *second barrier*
+showed that an A-stable linear multistep method has order at most 2, and
+that the trapezoidal rule has the smallest error constant among them.
+Getting past that barrier is what implicit Runge-Kutta methods do
+(Butcher and Ehle, below).
+
+*Implementation:* :func:`mathematicskit.integrators.implicit_euler_integrate`
+alongside :func:`~mathematicskit.integrators.rk4_integrate`. The tests
+check that at :math:`\lambda h = 100` backward Euler follows the exact
+solution while RK4 blows up.
+
+*References:* G. Dahlquist, "A Special Stability Problem for Linear
+Multistep Methods," BIT 3 (1963), 27-43.
+
+.. minigallery:: ../../examples/ode_dynamics/stiffness/plot_01_dahlquist_a_stability.py
+
+1964-1969 -- Butcher, Ehle, and Radau IIA
+-----------------------------------------
+
+John Butcher developed the algebraic theory of Runge-Kutta methods and,
+in 1964, fully implicit methods whose stages sit at Gauss and Radau
+quadrature points. These reach order :math:`2s` or :math:`2s - 1` with
+:math:`s` stages. Byron Ehle showed in 1969 that their stability
+functions are Padé approximants to :math:`e^z`, and that the Radau IIA
+methods are not only A-stable but *L-stable*: :math:`R(z) \to 0` as
+:math:`z \to -\infty`, so infinitely stiff components are damped out in a
+single step. The trapezoidal rule, by contrast, has :math:`R \to -1`, so
+stiff components persist as step-to-step oscillations. The three-stage,
+order-5 Radau IIA method,
+
+.. math::
+
+   R(z) = \frac{1 + \tfrac25 z + \tfrac1{20} z^2}
+               {1 - \tfrac35 z + \tfrac3{20} z^2 - \tfrac1{60} z^3},
+
+is the engine of Hairer and Wanner's RADAU5 code. It gets past
+Dahlquist's order-2 barrier because it is not a multistep method. On the
+stiff van der Pol oscillator with :math:`\mu = 1000`, it needs about
+1,200 steps where an explicit adaptive method needs about 1.7 million.
+
+*Implementation:* :func:`mathematicskit.integrators.stiff_integrate` with
+``method="Radau"`` (the default) wraps scipy's Radau IIA implementation.
+
+*References:* J. C. Butcher, "Implicit Runge-Kutta Processes,"
+Mathematics of Computation 18 (1964), 50-64; B. L. Ehle, "On Padé
+Approximations to the Exponential Function and A-Stable Methods for the
+Numerical Solution of Initial Value Problems," Research Report CSRR 2010,
+University of Waterloo (1969); E. Hairer and G. Wanner, *Solving
+Ordinary Differential Equations II: Stiff and Differential-Algebraic
+Problems* (Springer, 2nd ed. 1996), sec. IV.5 and IV.8.
+
+.. minigallery:: ../../examples/ode_dynamics/stiffness/plot_04_radau_iia.py
+
+1966 -- Robertson's Stiff Chemical Kinetics
+-------------------------------------------
+
+H. H. Robertson modeled an autocatalytic reaction among three species
+with rate constants spanning nine orders of magnitude:
+
+.. math::
+
+   y_1' = -0.04\,y_1 + 10^4\,y_2 y_3,\quad
+   y_2' = 0.04\,y_1 - 10^4\,y_2 y_3 - 3\times10^7\,y_2^2,\quad
+   y_3' = 3\times10^7\,y_2^2.
+
+The intermediate :math:`y_2` reaches a quasi-steady value within about
+:math:`10^{-4}` time units, while :math:`y_1` and :math:`y_3` evolve
+over :math:`10^5` units and beyond. Total mass
+:math:`y_1 + y_2 + y_3 = 1` is conserved. Robertson's system became the
+standard benchmark for stiff solvers, and it shows the problem vividly:
+to reach :math:`t = 40`, explicit Dormand-Prince needs about 35,000
+steps, while an implicit method needs under 100.
+
+*Implementation:* :func:`mathematicskit.integrators.stiff_integrate`
+(Radau IIA by default) integrates the system to :math:`t = 10^5` in fewer
+than 200 steps, conserving mass to rounding error.
+
+*References:* H. H. Robertson, "The Solution of a Set of Reaction Rate
+Equations," in J. Walsh (ed.), *Numerical Analysis: An Introduction*
+(Academic Press, 1966), 178-182.
+
+.. minigallery:: ../../examples/ode_dynamics/stiffness/plot_03_robertson_stiff_kinetics.py
+
 1968 -- Prigogine, Lefever, and the Brusselator
 -----------------------------------------------
 
@@ -395,6 +641,45 @@ Instabilities in Dissipative Systems. II," Journal of Chemical Physics
 48(4) (1968), 1695-1700.
 
 .. minigallery:: ../../examples/ode_dynamics/limit_cycles/plot_03_brusselator_hopf.py
+
+1973 -- De Boor and Swartz: Collocation for Boundary-Value Problems
+-------------------------------------------------------------------
+
+A two-point boundary-value problem fixes conditions at both ends, as in
+:math:`y'' = f(x, y, y')` with :math:`y(a) = \alpha` and
+:math:`y(b) = \beta`, so there is no initial state to march forward from.
+*Shooting* guesses the missing initial slope and corrects it, but it
+inherits any instability of the initial-value problem. *Collocation*
+instead solves for the whole solution at once: a piecewise polynomial
+on a mesh is required to satisfy the ODE exactly at :math:`k`
+collocation points per interval and to meet the boundary conditions,
+which gives one nonlinear system for Newton's method. Carl de Boor and
+Blair Swartz proved that with Gauss points the error at the mesh nodes
+is :math:`O(h^{2k})`, far better than the :math:`O(h^k)` of the
+polynomial pieces themselves ("superconvergence"). That theory underlies
+Ascher, Christiansen, and Russell's COLSYS (1979) and Kierzenka and
+Shampine's residual-controlled solver behind
+:func:`scipy.integrate.solve_bvp`, which uses the related three-point
+Lobatto IIIA scheme. Because the problem is solved globally, a nonlinear
+BVP can have several solutions. Bratu's problem
+:math:`y'' + \lambda e^y = 0`, :math:`y(0) = y(1) = 0` has two for
+:math:`\lambda < 3.51`, and the initial guess decides which one Newton
+finds.
+
+*Implementation:* :func:`mathematicskit.integrators.collocation_bvp`
+wraps :func:`scipy.integrate.solve_bvp` in the integrators'
+``rhs(state, x, params)`` convention and returns a
+:class:`~mathematicskit.integrators.BVPResult`. The tests recover
+:math:`\sin x` and both of Bratu's closed-form solutions.
+
+*References:* C. de Boor and B. Swartz, "Collocation at Gaussian
+Points," SIAM Journal on Numerical Analysis 10 (1973), 582-606;
+J. Kierzenka and L. F. Shampine, "A BVP Solver Based on Residual Control
+and the MATLAB PSE," ACM Transactions on Mathematical Software 27 (2001),
+299-316; G. Bratu, "Sur les équations intégrales non linéaires,"
+Bulletin de la Société Mathématique de France 42 (1914), 113-142.
+
+.. minigallery:: ../../examples/ode_dynamics/stiffness/plot_05_de_boor_swartz_collocation.py
 
 1975 -- Kuramoto's Synchronization Transition
 ---------------------------------------------
@@ -494,9 +779,67 @@ of Nonlinear Transformations," Journal of Statistical Physics 19(1)
 
 .. minigallery:: ../../examples/ode_dynamics/logistic_map/plot_01_bifurcation_cascade.py
 
+1980 -- Dormand and Prince: Embedded Pairs and Adaptive Steps
+-------------------------------------------------------------
+
+A fixed step wastes effort where the solution is smooth and loses
+accuracy where it changes quickly. Erwin Fehlberg (1969) showed how an
+*embedded* pair, two Runge-Kutta formulas of orders :math:`p` and
+:math:`p - 1` sharing the same stages, estimates the local error almost
+for free, and a controller then adjusts :math:`h` to keep that estimate
+below a tolerance. John Dormand and Peter Prince tuned a 5(4) pair so
+that the fifth-order solution, the one actually kept, has a very small
+error constant. Its last stage is also the first stage of the next step
+("first same as last"). Their pair became the default in MATLAB's
+``ode45`` and scipy's ``RK45``. On an eccentric Kepler orbit the step
+shrinks sharply at every close approach and grows again far from the
+Sun.
+
+*Implementation:* :func:`mathematicskit.integrators.dopri5_integrate`
+(Numba-compiled, with the same ``atol + rtol * |y|`` error norm as
+scipy). The tests check it against the harmonic oscillator's exact
+solution, that tighter tolerances take more steps, and that it agrees
+with fine-step RK4.
+
+*References:* J. R. Dormand and P. J. Prince, "A Family of Embedded
+Runge-Kutta Formulae," Journal of Computational and Applied Mathematics
+6 (1980), 19-26; E. Fehlberg, "Low-Order Classical Runge-Kutta Formulas
+with Stepsize Control and Their Application to Some Heat Transfer
+Problems," NASA Technical Report R-315 (1969).
+
+.. minigallery:: ../../examples/ode_dynamics/integrators/plot_04_dormand_prince.py
+
+1990 -- Yoshida's Symplectic Composition
+----------------------------------------
+
+Haruo Yoshida showed how to raise the order of a symmetric integrator
+while keeping it symplectic, by *composing* it with itself. Three
+leapfrog substeps of lengths :math:`w_1 h, w_0 h, w_1 h`, with
+
+.. math::
+
+   w_1 = \frac{1}{2 - 2^{1/3}},\qquad
+   w_0 = -\frac{2^{1/3}}{2 - 2^{1/3}},
+
+cancel the leading :math:`h^3` error term and give a fourth-order
+symplectic method. The middle substep runs backwards in time. Repeating
+the construction reaches orders 6, 8, and beyond. Because every substep
+is symplectic, the composition keeps leapfrog's bounded long-time energy
+error while converging far faster, which made it popular in celestial
+mechanics and accelerator physics.
+
+*Implementation:* :func:`mathematicskit.integrators.yoshida4_integrate`.
+The tests check that halving :math:`h` divides the error by about 16.
+
+*References:* H. Yoshida, "Construction of Higher Order Symplectic
+Integrators," Physics Letters A 150 (1990), 262-268.
+
+.. minigallery:: ../../examples/ode_dynamics/integrators/plot_05_yoshida_composition.py
+
 See Also
 --------
 
 - :doc:`/api/ode_dynamics`
+- :doc:`/api/integrators`
 - :doc:`/history/fractals_chaos_breakthroughs`
 - :doc:`/history/calculus_breakthroughs`

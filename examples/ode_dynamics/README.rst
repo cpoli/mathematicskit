@@ -41,3 +41,8 @@ Sections
 - **synchronization** -- the Kuramoto model's synchronization transition.
 - **chaotic_flows** -- the Lorenz attractor and its butterfly effect, and
   the Rossler attractor and its return map.
+- **integrators** -- Euler's method, Runge-Kutta, Stormer-Verlet,
+  Dormand-Prince adaptive stepping, and Yoshida's symplectic composition.
+- **stiffness** -- Dahlquist's A-stability, Curtiss and Hirschfelder's
+  BDF, Robertson's stiff kinetics, Radau IIA, and collocation for
+  boundary-value problems.

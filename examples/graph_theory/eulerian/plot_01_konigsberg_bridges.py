@@ -36,7 +36,7 @@ for k, (u, v) in enumerate(bridges):
 degrees = [len(g.neighbors(v)) for v in range(len(land))]
 odd = [v for v, d in enumerate(degrees) if d % 2 == 1]
 print(f"connected: {connected_components(g).n_components == 1}")
-for name, d in zip(land, degrees):
+for name, d in zip(land, degrees, strict=False):
     print(f"  {name:20s} {d} bridges ({'odd' if d % 2 else 'even'})")
 print(f"odd land masses: {len(odd)} (an Euler walk allows at most 2)")
 

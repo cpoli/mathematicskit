@@ -15,7 +15,7 @@ implement.
 
 from __future__ import annotations
 
-from typing import Callable
+from collections.abc import Callable
 
 import numpy as np
 from numpy.polynomial.legendre import leggauss
@@ -364,7 +364,7 @@ class ClenshawCurtisQuadrature(Quadrature):
     def integrate(self, f: Callable[[float], float], a: float, b: float) -> QuadratureResult:
         x, w = clenshaw_curtis_nodes_and_weights(self.n)
         mid, half = 0.5 * (a + b), 0.5 * (b - a)
-        value = half * sum(wk * f(mid + half * xk) for xk, wk in zip(x, w))
+        value = half * sum(wk * f(mid + half * xk) for xk, wk in zip(x, w, strict=False))
         return QuadratureResult(value=float(value), n_evaluations=self.n + 1, method="clenshaw-curtis")
 
 
@@ -412,7 +412,7 @@ class TanhSinhQuadrature(Quadrature):
         weights = (b - a) * np.pi * np.cosh(t) * s * (1.0 - s)
         xs = a + (b - a) * s
         keep = (xs > a) & (xs < b) & (weights > 0.0)  # drop nodes that round onto an endpoint
-        value = self.h * sum(wk * f(xk) for xk, wk in zip(xs[keep], weights[keep]))
+        value = self.h * sum(wk * f(xk) for xk, wk in zip(xs[keep], weights[keep], strict=False))
         return QuadratureResult(value=float(value), n_evaluations=int(keep.sum()), method="tanh-sinh")
 
 

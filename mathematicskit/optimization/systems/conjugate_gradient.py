@@ -10,7 +10,7 @@ Nocedal & Wright, *Numerical Optimization*, 2nd ed., Ch. 5.2.
 
 from __future__ import annotations
 
-from typing import Callable
+from collections.abc import Callable
 
 import numpy as np
 

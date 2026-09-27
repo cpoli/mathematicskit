@@ -19,7 +19,7 @@ from mathematicskit.fractals_chaos import weierstrass_function
 # -----------------------------------------------------
 
 fig, axes = plt.subplots(1, 3, figsize=(12, 3.5))
-for ax, width in zip(axes, (2.0, 0.2, 0.02)):
+for ax, width in zip(axes, (2.0, 0.2, 0.02), strict=False):
     x = np.linspace(0.3 - width / 2, 0.3 + width / 2, 4000)
     ax.plot(x, weierstrass_function(x), lw=0.7)
     ax.set_title(f"window width {width}")

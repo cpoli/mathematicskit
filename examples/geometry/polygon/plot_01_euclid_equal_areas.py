@@ -25,7 +25,7 @@ from mathematicskit.geometry import polygon_area, polygon_centroid
 base, height = 4.0, 2.0
 shifts = [0.0, 2.5, 6.0]
 parallelograms = [np.array([[0, 0], [base, 0], [base + s, height], [s, height]]) for s in shifts]
-for s, quad in zip(shifts, parallelograms):
+for s, quad in zip(shifts, parallelograms, strict=False):
     cx, cy = polygon_centroid(quad)
     print(f"shift {s:3.1f}: area {polygon_area(quad):.6f}, centroid ({cx:.2f}, {cy:.2f})")
 print(f"base x height = {base * height:.6f}")
@@ -36,7 +36,7 @@ print(f"base x height = {base * height:.6f}")
 
 apexes = [0.0, 3.0, 7.0]
 triangles = [np.array([[0, 0], [base, 0], [a, height]]) for a in apexes]
-for a, tri in zip(apexes, triangles):
+for a, tri in zip(apexes, triangles, strict=False):
     print(f"apex at x = {a:3.1f}: area {polygon_area(tri):.6f} (half of {base * height:.1f})")
 
 # %%
@@ -50,7 +50,7 @@ colors = ["tab:blue", "tab:orange", "tab:green"]
 for ax, shapes, title in [(ax1, parallelograms, "I.35: parallelograms"), (ax2, triangles, "I.37: triangles")]:
     ax.axhline(0, color="k", lw=0.8)
     ax.axhline(height, color="k", lw=0.8, ls="--")
-    for shape, color in zip(shapes, colors):
+    for shape, color in zip(shapes, colors, strict=False):
         ax.fill(*shape.T, color=color, alpha=0.3, ec=color, lw=1.5)
         ax.plot(*polygon_centroid(shape), "o", color=color)
         ax.text(*polygon_centroid(shape), f"  {polygon_area(shape):.1f}", color=color, va="center")

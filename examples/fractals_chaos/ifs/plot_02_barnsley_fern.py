@@ -25,7 +25,7 @@ points = fern.generate(60000, seed=0)
 ax = plot_ifs_points(points, color="darkgreen")
 ax.set_title("Barnsley fern (60 000 chaos-game points)")
 
-for name, (A, _, p) in zip(["stem", "main copy", "left leaflet", "right leaflet"], fern.transforms):
+for name, (A, _, p) in zip(["stem", "main copy", "left leaflet", "right leaflet"], fern.transforms, strict=False):
     print(f"{name:14s} p = {p:.2f}, contraction |det A| = {abs(np.linalg.det(A)):.3f}")
 
 # %%
@@ -38,7 +38,7 @@ for name, (A, _, p) in zip(["stem", "main copy", "left leaflet", "right leaflet"
 
 fig, ax = plt.subplots(figsize=(5, 8))
 colors = ["saddlebrown", "darkgreen", "royalblue", "darkorange"]
-for (A, b, _), color in zip(fern.transforms, colors):
+for (A, b, _), color in zip(fern.transforms, colors, strict=False):
     image = points @ A.T + b
     ax.scatter(image[:, 0], image[:, 1], s=0.2, color=color, linewidths=0)
 ax.set_aspect("equal")

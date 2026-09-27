@@ -56,7 +56,7 @@ def test_stirling_series_error_shrinks_with_terms_at_large_x():
 
     x = 10.0
     errors = [abs(stirling_log_gamma(x, terms=k) - log_gamma_function(x)) for k in range(5)]
-    assert all(later < earlier for earlier, later in zip(errors, errors[1:]))
+    assert all(later < earlier for earlier, later in zip(errors, errors[1:], strict=False))
     assert errors[0] == pytest.approx(1 / (12 * x), rel=0.01)
 
 

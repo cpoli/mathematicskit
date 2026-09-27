@@ -7,7 +7,7 @@ exponents from a time series*, Physica D 16, for the flow variant.
 
 from __future__ import annotations
 
-from typing import Callable
+from collections.abc import Callable
 
 import numpy as np
 

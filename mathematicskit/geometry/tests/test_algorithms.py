@@ -68,7 +68,10 @@ def test_douglas_peucker_keeps_endpoints_and_respects_tolerance():
         # every original point is within eps of the simplified polyline
         seg_d = []
         for p in line:
-            d = min(np.linalg.norm(p - (a + np.clip((p - a) @ (b - a) / ((b - a) @ (b - a)), 0, 1) * (b - a))) for a, b in zip(simple[:-1], simple[1:]))
+            d = min(
+                np.linalg.norm(p - (a + np.clip((p - a) @ (b - a) / ((b - a) @ (b - a)), 0, 1) * (b - a)))
+                for a, b in zip(simple[:-1], simple[1:], strict=False)
+            )
             seg_d.append(d)
         assert max(seg_d) <= eps + 1e-12
 

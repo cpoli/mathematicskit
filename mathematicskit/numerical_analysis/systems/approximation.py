@@ -12,7 +12,7 @@ exchange loop is written out, with each levelled-error system solved by
 
 from __future__ import annotations
 
-from typing import Callable
+from collections.abc import Callable
 
 import numpy as np
 from numpy.polynomial import chebyshev as C

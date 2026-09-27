@@ -34,8 +34,8 @@ def textbook(a, b, c):
 
 widths = np.logspace(-1, -12, 40)
 exact = [w / 2 * np.sqrt(1 - w * w / 4) for w in widths]  # isosceles, legs of length 1, base w
-naive_err = [abs(textbook(1.0, 1.0, w) - e) / e for w, e in zip(widths, exact)]
-kahan_err = [max(abs(heron_area(1.0, 1.0, w) - e) / e, 1e-17) for w, e in zip(widths, exact)]
+naive_err = [abs(textbook(1.0, 1.0, w) - e) / e for w, e in zip(widths, exact, strict=False)]
+kahan_err = [max(abs(heron_area(1.0, 1.0, w) - e) / e, 1e-17) for w, e in zip(widths, exact, strict=False)]
 
 fig, ax = plt.subplots()
 ax.loglog(widths, naive_err, "o-", ms=3, label="textbook Heron")

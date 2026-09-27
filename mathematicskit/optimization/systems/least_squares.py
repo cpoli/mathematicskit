@@ -21,7 +21,8 @@ Industrial and Applied Mathematics 11(2) (1963), 431-441.
 
 from __future__ import annotations
 
-from typing import Callable, Optional
+from collections.abc import Callable
+from typing import Optional
 
 import numpy as np
 from scipy import optimize as sopt

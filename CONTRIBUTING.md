@@ -4,7 +4,7 @@ Thanks for considering a contribution. mathematicskit is organized as one
 subpackage per mathematics domain (`mathematicskit/<name>/`), each with its own
 `core/` (ABCs and shared engine machinery, plus numba-accelerated kernels
 where needed), `systems/` (concrete models/algorithms), `utils/`
-(supporting numerics), `visualizers/` (matplotlib/plotly plotting), and
+(supporting numerics), `visualizers/` (matplotlib plotting), and
 `tests/` directory. New mathematics belongs in the subpackage it fits
 best; a genuinely new domain gets its own subpackage following the same
 layout.
@@ -27,7 +27,7 @@ MPLBACKEND=Agg pytest --doctest-modules mathematicskit --ignore-glob="*/tests/*"
 ```
 
 All three run in CI (`.github/workflows/ci.yml`) on every PR, across
-Python 3.9-3.12 on Linux and macOS. `mypy` also runs in CI but is
+Python 3.10-3.14 on Linux and macOS. `mypy` also runs in CI but is
 currently advisory (non-blocking) — see "Type checking" below.
 
 If you touch anything under `docs/` or add/modify an example in

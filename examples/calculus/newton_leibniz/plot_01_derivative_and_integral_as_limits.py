@@ -66,7 +66,7 @@ fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4))
 fine = np.linspace(a, b, 400)
 ax1.plot(fine, f(fine), "k", lw=2)
 nodes = np.linspace(a, b, 5)
-for left, right in zip(nodes[:-1], nodes[1:]):
+for left, right in zip(nodes[:-1], nodes[1:], strict=False):
     ax1.fill([left, left, right, right], [0, f(left), f(right), 0], alpha=0.3, edgecolor="C0")
 ax1.set_title("the integral as a limiting sum (4 strips shown)")
 

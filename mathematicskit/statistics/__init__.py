@@ -16,6 +16,7 @@ Mann-Whitney U); James-Stein shrinkage; and Bonferroni and
 Benjamini-Hochberg multiple-testing corrections.
 """
 
+from mathematicskit._version import __version__
 from mathematicskit.statistics.core.base import (
     BootstrapResult,
     ConfidenceIntervalResult,
@@ -47,8 +48,6 @@ from mathematicskit.statistics.systems.nonparametric import fisher_exact_test, k
 from mathematicskit.statistics.systems.regression import linear_regression
 from mathematicskit.statistics.systems.shrinkage import james_stein_estimator
 from mathematicskit.statistics.utils.effect_size import cohens_d
-
-__version__ = "0.1.0"
 
 __all__ = [
     "__version__",

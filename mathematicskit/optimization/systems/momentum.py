@@ -13,7 +13,7 @@ Hand-rolled to expose the per-iterate path (neither is in
 
 from __future__ import annotations
 
-from typing import Callable
+from collections.abc import Callable
 
 import numpy as np
 

@@ -22,14 +22,14 @@ def test_96_gon_reproduces_archimedes_bounds():
 
 def test_bounds_tighten_monotonically_and_converge():
     result = archimedes_pi_bounds(20)
-    assert all(a < b for a, b in zip(result.lower, result.lower[1:]))
-    assert all(a > b for a, b in zip(result.upper, result.upper[1:]))
+    assert all(a < b for a, b in zip(result.lower, result.lower[1:], strict=False))
+    assert all(a > b for a, b in zip(result.upper, result.upper[1:], strict=False))
     assert result.upper[-1] - result.lower[-1] < 1e-10
 
 
 def test_gap_shrinks_by_about_a_factor_of_four_per_doubling():
     result = archimedes_pi_bounds(8)
-    gaps = [u - lo for u, lo in zip(result.upper, result.lower)]
+    gaps = [u - lo for u, lo in zip(result.upper, result.lower, strict=False)]
     assert gaps[-2] / gaps[-1] == pytest.approx(4.0, rel=1e-3)
 
 

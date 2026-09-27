@@ -13,6 +13,7 @@ Maclaurin series expansion and convergence-radius estimation for
 standard functions.
 """
 
+from mathematicskit._version import __version__
 from mathematicskit.calculus.core.base import DerivativeResult, ExhaustionResult, Quadrature, QuadratureResult
 from mathematicskit.calculus.systems.autodiff import Variable, gradient
 from mathematicskit.calculus.systems.dual_numbers import Dual, derivative
@@ -39,8 +40,6 @@ from mathematicskit.calculus.systems.quadrature import (
 )
 from mathematicskit.calculus.systems.taylor_series import estimate_radius_of_convergence, evaluate_series, maclaurin_coefficients, taylor_remainder_bound
 from mathematicskit.calculus.utils.series_utils import partial_sums, truncation_error
-
-__version__ = "0.1.0"
 
 __all__ = [
     "__version__",

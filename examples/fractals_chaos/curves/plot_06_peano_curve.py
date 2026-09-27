@@ -24,7 +24,7 @@ rules = {"X": "XFYFX+F+YFXFY-F-XFYFX", "Y": "YFXFY-F-XFYFX+F+YFXFY"}
 # ------------------------------
 
 fig, axes = plt.subplots(1, 3, figsize=(12, 4.2))
-for order, ax in zip((1, 2, 3), axes):
+for order, ax in zip((1, 2, 3), axes, strict=False):
     step = 1.0 / 3**order
     (path,) = turtle_path(lsystem("X", rules, order), angle=90.0, step=step, heading=90.0)
     path = path - path.min(axis=0) + step / 2

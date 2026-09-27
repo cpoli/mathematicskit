@@ -15,7 +15,7 @@ ed., Ch. 3, and Clifford (1873) for the original dual-number algebra.
 from __future__ import annotations
 
 import math
-from typing import Callable
+from collections.abc import Callable
 
 __all__ = ["Dual", "derivative"]
 

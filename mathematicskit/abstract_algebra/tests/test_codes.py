@@ -35,5 +35,5 @@ def test_rejects_non_prime_field_and_too_long_codewords():
 def test_distinct_messages_differ_in_at_least_n_minus_k_plus_1_positions():
     n, p, k = 6, 7, 2
     words = [rs_encode(list(m), n, p) for m in itertools.product(range(p), repeat=k)]
-    min_distance = min(sum(a != b for a, b in zip(u, v)) for u, v in itertools.combinations(words, 2))
+    min_distance = min(sum(a != b for a, b in zip(u, v, strict=False)) for u, v in itertools.combinations(words, 2))
     assert min_distance == n - k + 1

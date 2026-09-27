@@ -24,7 +24,7 @@ def test_pentagon_coloring_avoids_monochromatic_triangles():
 
 
 def _is_strictly_increasing(xs):
-    return all(a < b for a, b in zip(xs, xs[1:]))
+    return all(a < b for a, b in zip(xs, xs[1:], strict=False))
 
 
 def _brute_force_lis_length(seq):

@@ -12,6 +12,7 @@ Lotka-Volterra), epidemic (SIR), neuron (FitzHugh-Nagumo), and chemical
 Rossler chaotic flows.
 """
 
+from mathematicskit._version import __version__
 from mathematicskit.ode_dynamics.core.base import BendixsonResult, FixedPointResult, FlowSystem, LyapunovFunctionResult, OdeTrajectory
 from mathematicskit.ode_dynamics.systems.bifurcations import hopf_limit_cycle_radius, pitchfork_fixed_points, saddle_node_fixed_points
 from mathematicskit.ode_dynamics.systems.chaotic_flows import LorenzSystem, RosslerSystem, lorenz_fixed_points, rossler_fixed_points
@@ -26,8 +27,6 @@ from mathematicskit.ode_dynamics.systems.population import LogisticGrowth, Lotka
 from mathematicskit.ode_dynamics.systems.stability import classify_fixed_point_2d, find_fixed_point_newton, lyapunov_quadratic_form, numerical_jacobian
 from mathematicskit.ode_dynamics.systems.synchronization import KuramotoModel, kuramoto_lorentzian_order_parameter, kuramoto_order_parameter
 from mathematicskit.ode_dynamics.utils.period_estimation import estimate_period
-
-__version__ = "0.1.0"
 
 __all__ = [
     "__version__",

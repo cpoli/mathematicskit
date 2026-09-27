@@ -4,10 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mathematicskit"
-version = "0.2.1"
-description = "Unified computational mathematics toolkit: numerical analysis, linear algebra, calculus, dynamical systems, optimization, probability, statistics, number theory, combinatorics, graph theory, abstract algebra, geometry, special functions, and fractals/chaos -- all hand-rolled from first principles."
+version = "0.3.0"
+description = "Unified computational mathematics toolkit: numerical analysis, linear algebra, calculus, dynamical systems, partial differential equations, optimization, probability, statistics, number theory, combinatorics, graph theory, abstract algebra, geometry, special functions, and fractals/chaos -- built on numpy/scipy, hand-rolling algorithms only where no library equivalent exists."
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [{ name = "Charles Poli", email = "cpoli374@gmail.com" }]
 maintainers = [{ name = "Charles Poli", email = "cpoli374@gmail.com" }]
@@ -17,6 +17,7 @@ keywords = [
     "linear-algebra",
     "computational-mathematics",
     "optimization",
+    "partial-differential-equations",
     "graph-theory",
     "number-theory",
     "probability",
@@ -27,10 +28,12 @@ classifiers = [
     "Intended Audience :: Science/Research",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Typing :: Typed",
     "Topic :: Scientific/Engineering :: Mathematics",
 ]
 dependencies = [
@@ -38,9 +41,6 @@ dependencies = [
     "scipy>=1.10",
     "matplotlib>=3.6",
     "numba>=0.58",
-    "plotly>=5.15",
-    "sympy>=1.11",
-    "tqdm>=4.65",
 ]
 
 [project.optional-dependencies]
@@ -65,11 +65,15 @@ Documentation = "https://cpoli.github.io/mathematicskit/"
 where = ["."]
 include = ["mathematicskit*"]
 
+[tool.setuptools.package-data]
+mathematicskit = ["py.typed"]
+
 [tool.pytest.ini_options]
 testpaths = [
     "mathematicskit/abstract_algebra/tests",
     "mathematicskit/calculus/tests",
     "mathematicskit/combinatorics/tests",
+    "mathematicskit/complex_analysis/tests",
     "mathematicskit/fractals_chaos/tests",
     "mathematicskit/geometry/tests",
     "mathematicskit/graph_theory/tests",
@@ -79,6 +83,7 @@ testpaths = [
     "mathematicskit/numerical_analysis/tests",
     "mathematicskit/ode_dynamics/tests",
     "mathematicskit/optimization/tests",
+    "mathematicskit/pde/tests",
     "mathematicskit/probability/tests",
     "mathematicskit/special_functions/tests",
     "mathematicskit/statistics/tests",
@@ -87,7 +92,7 @@ testpaths = [
 
 [tool.ruff]
 line-length = 160
-target-version = "py39"
+target-version = "py310"
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "UP", "B", "SIM"]
@@ -108,7 +113,7 @@ ignore = [
 line-ending = "lf"
 
 [tool.mypy]
-python_version = "3.9"
+python_version = "3.10"
 ignore_missing_imports = true
 warn_redundant_casts = true
 warn_unused_ignores = true

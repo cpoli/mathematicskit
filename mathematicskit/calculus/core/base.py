@@ -17,8 +17,8 @@ family of algorithms actually needs.
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
+from collections.abc import Callable
 from dataclasses import dataclass, field
-from typing import Callable
 
 __all__ = ["QuadratureResult", "Quadrature", "DerivativeResult", "ExhaustionResult"]
 

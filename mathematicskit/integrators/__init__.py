@@ -16,6 +16,15 @@ across systems with different parameter values without recompiling (see
   RK5(4), for non-conservative or accuracy-sensitive systems (see
   :mod:`mathematicskit.integrators.adaptive` for why this isn't offered for the
   symplectic integrators).
+* :func:`implicit_euler_integrate` -- hand-rolled backward Euler (Newton
+  with a finite-difference Jacobian): first-order but A-stable, to show
+  why stiff systems need implicit methods.
+* :func:`stiff_integrate` -- adaptive implicit Radau IIA / BDF / LSODA via
+  :func:`scipy.integrate.solve_ivp`, returning the same ``(times,
+  states)`` layout as :func:`dopri5_integrate`.
+* :func:`collocation_bvp` -- two-point boundary-value problems by
+  collocation (:func:`scipy.integrate.solve_bvp`), returning a
+  :class:`BVPResult`.
 
 :mod:`mathematicskit.ode_dynamics` builds its phase portraits, bifurcation
 diagrams, and Poincare sections on top of this shared module rather than
@@ -25,6 +34,7 @@ that subpackage's njit-callback calling convention.
 """
 
 from mathematicskit.integrators.adaptive import dopri5_integrate, dopri5_step
+from mathematicskit.integrators.bvp import BVPResult, collocation_bvp
 from mathematicskit.integrators.fixed_step import (
     RHSFunc,
     leapfrog_integrate,
@@ -36,6 +46,7 @@ from mathematicskit.integrators.fixed_step import (
     yoshida4_integrate,
     yoshida4_step,
 )
+from mathematicskit.integrators.implicit import implicit_euler_integrate, implicit_euler_step, stiff_integrate
 
 __all__ = [
     "RHSFunc",
@@ -49,4 +60,9 @@ __all__ = [
     "yoshida4_integrate",
     "dopri5_step",
     "dopri5_integrate",
+    "implicit_euler_step",
+    "implicit_euler_integrate",
+    "stiff_integrate",
+    "BVPResult",
+    "collocation_bvp",
 ]

@@ -15,7 +15,7 @@ def test_solution_satisfies_every_congruence():
     remainders = [4, 7, 9]
     moduli = [11, 13, 17]
     result = chinese_remainder_theorem(remainders, moduli)
-    for r, m in zip(remainders, moduli):
+    for r, m in zip(remainders, moduli, strict=False):
         assert result.residue % m == r
 
 

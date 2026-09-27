@@ -8,7 +8,7 @@ Funktionenkörpern," Mathematische Annalen 96 (1927), 26-61.
 
 from __future__ import annotations
 
-from typing import Callable
+from collections.abc import Callable
 
 from mathematicskit.abstract_algebra.core.base import FiniteGroup, HomomorphismResult
 

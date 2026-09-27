@@ -65,16 +65,18 @@ Domain subpackages, each with runnable examples linked below:
 - [`mathematicskit.linalg`](https://cpoli.github.io/mathematicskit/api/gallery/linalg/) -- LU/QR/Cholesky decompositions and eigenvalue computation via `scipy.linalg`/`numpy.linalg`, power/inverse iteration (hand-rolled), SVD, conjugate gradient and GMRES via `scipy.sparse.linalg`, and least-squares stability (normal equations vs. QR vs. `numpy.linalg.lstsq`).
 - [`mathematicskit.calculus`](https://cpoli.github.io/mathematicskit/api/gallery/calculus/) -- finite-difference derivatives with Richardson extrapolation (hand-rolled), `scipy.integrate`-backed trapezoidal/Simpson/Gauss-Legendre/adaptive quadrature, forward-mode (dual numbers) and reverse-mode (backpropagation) automatic differentiation (hand-rolled), and Taylor/Maclaurin series.
 - [`mathematicskit.ode_dynamics`](https://cpoli.github.io/mathematicskit/api/gallery/ode_dynamics/) -- Jacobian-linearization fixed-point stability (node/saddle/spiral/center), phase portraits, the logistic map's Feigenbaum route to chaos, saddle-node/pitchfork/Hopf bifurcation normal forms, the Van der Pol limit cycle, and Poincare sections of the driven Duffing oscillator.
+- [`mathematicskit.pde`](https://cpoli.github.io/mathematicskit/api/gallery/pde/) -- the heat equation in 1D and 2D by the method of lines on `mathematicskit.integrators` and by the theta-method family (FTCS, Crank-Nicolson, backward Euler via `scipy.sparse.linalg.splu`); the wave equation with symplectic leapfrog stepping against d'Alembert's solution; upwind, Lax-Friedrichs and Lax-Wendroff advection; Poisson/Laplace problems solved with `scipy.sparse.linalg.spsolve` or `mathematicskit.linalg`'s CG/Jacobi/Gauss-Seidel/SOR; CFL checks and von Neumann amplification factors; and Fourier (`numpy.fft`) and Chebyshev spectral methods.
 - [`mathematicskit.fractals_chaos`](https://cpoli.github.io/mathematicskit/api/gallery/fractals_chaos/) -- Lyapunov exponent estimation, box-counting fractal dimension, Numba-accelerated Mandelbrot/Julia set generation, iterated function systems (Barnsley fern, Sierpinski triangle/carpet), and cellular automata (Wolfram rules, Conway's Game of Life).
 - [`mathematicskit.optimization`](https://cpoli.github.io/mathematicskit/api/gallery/optimization/) -- gradient descent and nonlinear conjugate gradient (hand-rolled, iterate-path-exposing), Newton's method and BFGS via `scipy.optimize.minimize`, Lagrange multipliers and KKT-condition verification, a quadratic-penalty method, and linear programming via `scipy.optimize.linprog`.
 - [`mathematicskit.probability`](https://cpoli.github.io/mathematicskit/api/gallery/probability/) -- binomial/Poisson/geometric/uniform/exponential/normal/gamma distributions via `scipy.stats` (plus mathematicskit's own MGFs), Monte Carlo integration with variance reduction (importance sampling, control variates), Law of Large Numbers/Central Limit Theorem simulation, and discrete-time Markov chains.
 - [`mathematicskit.statistics`](https://cpoli.github.io/mathematicskit/api/gallery/statistics/) -- descriptive statistics, z/t/chi-square hypothesis tests and one-way ANOVA, confidence intervals for means/proportions/variances, OLS linear regression with residual diagnostics, and bootstrap resampling via `scipy.stats.bootstrap`.
 - [`mathematicskit.number_theory`](https://cpoli.github.io/mathematicskit/api/gallery/number_theory/) -- the extended Euclidean algorithm and modular inverses, fast modular exponentiation, primality testing (trial division, Miller-Rabin) and prime generation, the Chinese Remainder Theorem, continued fractions and best rational approximations, Euler's totient/Mobius/divisor-sum functions, and linear/Pell Diophantine equation solvers (hand-rolled -- exact-integer number theory has no `numpy`/`scipy` equivalent).
 - [`mathematicskit.combinatorics`](https://cpoli.github.io/mathematicskit/api/gallery/combinatorics/) -- permutation/combination counting via `scipy.special.perm`/`comb` (sequence generation via `itertools`), a hand-rolled Pascal's triangle, integer partitions and Young/Ferrers diagrams, the inclusion-exclusion principle and derangements, and Stirling/Catalan/Bell numbers (hand-rolled -- no scipy/numpy equivalent).
+- [`mathematicskit.complex_analysis`](https://cpoli.github.io/mathematicskit/api/gallery/complex_analysis/) -- the Cauchy-Riemann equations, contour integrals via `scipy.integrate.quad` (`complex_func=True`), winding numbers and Cauchy's integral formula, residues (periodic trapezoidal rule), the residue theorem and the argument principle, conformal maps (Möbius transformations, Joukowski airfoils), and domain coloring.
 - [`mathematicskit.graph_theory`](https://cpoli.github.io/mathematicskit/api/gallery/graph_theory/) -- a lightweight own graph container (no `networkx`); shortest paths (Dijkstra/Bellman-Ford/Floyd-Warshall) and minimum spanning tree (Kruskal) via `scipy.sparse.csgraph`, with a hand-rolled Prim's kept for comparison; maximum flow/minimum cut via `scipy.sparse.csgraph.maximum_flow`; hand-rolled graph coloring (greedy, exact backtracking); and spectral graph theory (Laplacian via scipy, eigendecomposition via `numpy.linalg.eigh`).
 - [`mathematicskit.abstract_algebra`](https://cpoli.github.io/mathematicskit/api/gallery/abstract_algebra/) -- cyclic and permutation groups with Cayley tables and group-property checks, subgroup/coset enumeration, finite field arithmetic (`GF(p)`/`GF(p^n)` via irreducible polynomials), and polynomial ring arithmetic over Z/Q/finite fields (hand-rolled throughout -- no scipy/numpy equivalent).
 - [`mathematicskit.geometry`](https://cpoli.github.io/mathematicskit/api/gallery/geometry/) -- convex hull via `scipy.spatial.ConvexHull` (with a hand-rolled Graham scan comparison), Delaunay triangulation/Voronoi diagrams via `scipy.spatial`, hand-rolled segment intersection and point-in-polygon tests, polygon area/centroid via the shoelace formula, and curvature/arc-length/the Frenet-Serret frame for parametric curves.
-- [`mathematicskit.special_functions`](https://cpoli.github.io/mathematicskit/api/gallery/special_functions/) -- the gamma/beta functions and Bessel functions via `scipy.special`, orthogonal polynomial families (Legendre/Chebyshev/Hermite/Laguerre) via `numpy.polynomial` with numerically-verified orthogonality, and the discrete Fourier transform via `numpy.fft` alongside a hand-rolled naive-DFT-vs-radix-2-FFT pedagogical speed comparison.
+- [`mathematicskit.special_functions`](https://cpoli.github.io/mathematicskit/api/gallery/special_functions/) -- the gamma/beta functions and Bessel functions via `scipy.special`, orthogonal polynomial families (Legendre/Chebyshev/Hermite/Laguerre) via `numpy.polynomial` with numerically-verified orthogonality, the discrete Fourier transform via `numpy.fft` alongside a hand-rolled naive-DFT-vs-radix-2-FFT pedagogical speed comparison, and signal processing: direct/FFT convolution and Butterworth/Chebyshev/window-FIR filters via `scipy.signal`, the Z-transform with partial-fraction inversion, the Laplace transform with hand-rolled Talbot/Gaver-Stehfest numerical inversion, and hand-rolled Daubechies wavelets, the discrete wavelet transform, and the Morlet continuous wavelet transform (no numpy/scipy equivalent since scipy 1.15).
 
 Shared infrastructure, used across the subpackages above rather than
 standalone toolkits:
@@ -98,7 +100,7 @@ MPLBACKEND=Agg pytest --doctest-modules mathematicskit --ignore-glob="*/tests/*"
 ```
 
 Both commands, plus `ruff check`/`ruff format --check`, run in CI on
-every PR (`.github/workflows/ci.yml`) across Python 3.9-3.12 on Linux and
+every PR (`.github/workflows/ci.yml`) across Python 3.10-3.14 on Linux and
 macOS. See [CONTRIBUTING.md](CONTRIBUTING.md) before opening a PR.
 
 ### Coverage
@@ -107,26 +109,31 @@ macOS. See [CONTRIBUTING.md](CONTRIBUTING.md) before opening a PR.
 MPLBACKEND=Agg pytest -q --cov=mathematicskit --cov-report=term
 ```
 
-620 tests, 96% line coverage overall. Per-subpackage coverage:
+1329 tests, 96% line coverage overall (94% excluding the test files
+themselves). Per-subpackage coverage, excluding tests:
 
 | Subpackage | Coverage | | Subpackage | Coverage |
 |:--|--:|---|:--|--:|
-| `abstract_algebra` | 97% | | `ode_dynamics` | 92% |
-| `calculus` | 95% | | `optimization` | 99% |
-| `combinatorics` | 98% | | `probability` | 98% |
-| `fractals_chaos` | 92% | | `special_functions` | 100% |
-| `geometry` | 100% | | `statistics` | 99% |
-| `graph_theory` | 99% | | `integrators` | 50% |
-| `linalg` | 95% | | `constants` | 100% |
-| `number_theory` | 99% | | | |
-| `numerical_analysis` | 97% | | | |
+| `abstract_algebra` | 97% | | `ode_dynamics` | 85% |
+| `calculus` | 93% | | `optimization` | 100% |
+| `combinatorics` | 96% | | `probability` | 98% |
+| `fractals_chaos` | 83% | | `special_functions` | 100% |
+| `geometry` | 99% | | `statistics` | 99% |
+| `graph_theory` | 99% | | `integrators` | 31% |
+| `linalg` | 94% | | `constants` | 100% |
+| `number_theory` | 97% | | | |
+| `numerical_analysis` | 95% | | | |
 
 `visualizers/` modules are smoke-tested only (correct return type/shape,
 or that `anim.save()` succeeds) rather than covered line-by-line, per the
-testing convention in [CLAUDE.md](CLAUDE.md). `integrators` sits lower
-because several of its fixed-step/adaptive methods aren't exercised
-directly by its own tests, only indirectly through the two subpackages
-(`ode_dynamics`, `fractals_chaos`) that call into it.
+testing convention in [CLAUDE.md](CLAUDE.md). `integrators` looks low
+only because its bodies are `@njit`-compiled, and coverage cannot trace
+compiled code; every integrator is tested directly, and with the JIT
+disabled the subpackage is fully covered:
+
+```bash
+NUMBA_DISABLE_JIT=1 MPLBACKEND=Agg pytest -q mathematicskit/integrators --cov=mathematicskit.integrators
+```
 
 ## Docs
 

@@ -8,8 +8,8 @@ negative criterion for ruling limit cycles *out*.
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from functools import lru_cache
-from typing import Callable
 
 import numpy as np
 from numba import njit

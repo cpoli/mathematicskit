@@ -23,7 +23,7 @@ n = 1500
 cs = np.linspace(0.2, 3.0, 15)
 measured = [np.mean([giant_component_fraction(random_graph(n, c / n, seed=s)) for s in range(3)]) for c in cs]
 theory = [0.0 if c <= 1 else brentq(lambda s, c=c: s - 1 + np.exp(-c * s), 1e-9, 1.0) for c in cs]
-for c, m, t in zip(cs[::3], measured[::3], theory[::3]):
+for c, m, t in zip(cs[::3], measured[::3], theory[::3], strict=False):
     print(f"c = {c:.1f}: largest component {m:.3f} of the vertices (theory {t:.3f})")
 
 fig, ax = plt.subplots()

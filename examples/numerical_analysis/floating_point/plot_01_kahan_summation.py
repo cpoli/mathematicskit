@@ -41,7 +41,7 @@ for n in sizes:
         errors[name].append(max(abs(total - exact) / exact, eps / 10))
 
 fig, ax = plt.subplots(figsize=(7, 4.5))
-for name, marker in zip(errors, "os^"):
+for name, marker in zip(errors, "os^", strict=False):
     ax.loglog(sizes, errors[name], marker + "-", label=name)
 ax.loglog(sizes, sizes * eps, "--", color="gray", label=r"$n\,u$")
 ax.set_xlabel("number of terms $n$")

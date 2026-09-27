@@ -31,7 +31,7 @@ pos = {u: (0, -u) for u in range(n_left)} | {n_left + v: (2, -v - 0.5) for v in 
 fig, ax = plt.subplots(figsize=(5, 6))
 for u, v, _ in g.edges():
     matched = result.pairs.get(min(u, v)) == max(u, v)
-    ax.plot(*zip(pos[u], pos[v]), color="tab:red" if matched else "0.8", lw=3 if matched else 1)
+    ax.plot(*zip(pos[u], pos[v], strict=False), color="tab:red" if matched else "0.8", lw=3 if matched else 1)
 for v, (x, y) in pos.items():
     ax.plot(x, y, "s" if v in result.vertex_cover else "o", color="tab:blue" if v in result.vertex_cover else "k", ms=10)
 ax.axis("off")

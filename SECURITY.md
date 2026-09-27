@@ -7,8 +7,7 @@ or server would — the realistic security surface is mainly:
 
 - Deserializing untrusted data (e.g. loading a pickled/`.npy` object from
   an untrusted source and passing it into mathematicskit).
-- Vulnerabilities in dependencies (numpy, scipy, matplotlib, numba,
-  plotly, sympy).
+- Vulnerabilities in dependencies (numpy, scipy, matplotlib, numba).
 
 ## Reporting a Vulnerability
 
