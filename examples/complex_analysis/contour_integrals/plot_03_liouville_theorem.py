@@ -17,8 +17,8 @@ import numpy as np
 from mathematicskit.complex_analysis import cauchy_integral_formula, circle_contour
 
 # %%
-# Cauchy's estimate |f'(0)| <= M(R) / R
-# --------------------------------------
+# Cauchy's estimate :math:`|f'(0)| \le M(R)/R`
+# ---------------------------------------------
 
 radii = np.geomspace(0.5, 20, 12)
 functions = {r"$\sin z$": np.sin, r"$z^3 - z$": lambda z: z**3 - z, r"$e^{-z^2}$": lambda z: np.exp(-(z**2))}
@@ -36,7 +36,7 @@ ax.legend()
 # %%
 # The fundamental theorem of algebra
 # ----------------------------------
-# If p had no roots, 1/p would be entire; it also tends to 0 as |z| grows,
+# If p had no roots, 1/p would be entire; it also tends to 0 as :math:`|z|` grows,
 # so it would be bounded, hence constant -- impossible for a nonconstant p.
 
 p = lambda z: z**4 + z + 1

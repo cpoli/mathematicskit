@@ -30,7 +30,7 @@ print("a_{-k} for k = 0..6:", np.round([series.coefficient(-k).real for k in ran
 # %%
 # Hitting any target value arbitrarily close to 0
 # -----------------------------------------------
-# e^{1/z} = w has the solutions z = 1 / (log w + 2 pi i n); large n makes |z| small.
+# :math:`e^{1/z} = w` has the solutions :math:`z = 1/(\log w + 2\pi i n)`; large :math:`n` makes :math:`|z|` small.
 
 delta = 1e-3
 for w in (5.0, -2 + 1j, 1e-4j):
