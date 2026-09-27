@@ -58,7 +58,7 @@ Divergence maps
 
 
     fig, axes = plt.subplots(1, 2, figsize=(11, 4.5))
-    for ax, (name, f) in zip(axes, systems.items()):
+    for ax, (name, f) in zip(axes, systems.items(), strict=False):
         res = bendixson_criterion(f, (-3, 3), (-3, 3), n=201)
         lim = max(abs(res.divergence.min()), abs(res.divergence.max()))
         mesh = ax.pcolormesh(res.X, res.Y, res.divergence, cmap="RdBu_r", vmin=-lim, vmax=lim, shading="auto")
@@ -95,7 +95,7 @@ Divergence maps
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.104 seconds)
+   **Total running time of the script:** (0 minutes 0.299 seconds)
 
 
 .. _sphx_glr_download_api_gallery_ode_dynamics_limit_cycles_plot_02_bendixson_criterion.py:

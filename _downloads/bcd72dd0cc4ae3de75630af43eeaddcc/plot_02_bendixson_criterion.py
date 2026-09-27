@@ -24,7 +24,7 @@ systems = {
 # ---------------------
 
 fig, axes = plt.subplots(1, 2, figsize=(11, 4.5))
-for ax, (name, f) in zip(axes, systems.items()):
+for ax, (name, f) in zip(axes, systems.items(), strict=False):
     res = bendixson_criterion(f, (-3, 3), (-3, 3), n=201)
     lim = max(abs(res.divergence.min()), abs(res.divergence.max()))
     mesh = ax.pcolormesh(res.X, res.Y, res.divergence, cmap="RdBu_r", vmin=-lim, vmax=lim, shading="auto")

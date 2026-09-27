@@ -1,0 +1,87 @@
+
+
+.. _sphx_glr_api_gallery_pde_heat:
+
+The heat equation
+-----------------
+
+Fourier's series solution, the theta-method family (FTCS, Crank-Nicolson,
+backward Euler), and the method of lines on a 2D plate.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Joseph Fourier solved u_t = \alpha u_{xx} on a rod with ice-cold ends by writing the initial temperature as a sine series. Each mode \sin(k\pi x) then evolves on its own, decaying like e^{-\alpha (k\pi)^2 t}: sharp features (high k) vanish almost instantly, leaving the smooth fundamental mode. This script computes the sine coefficients of a square-wave start, watches the series smooth out, and checks it against a finite-difference solve.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/heat/images/thumb/sphx_glr_plot_01_fourier_heat_series_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/heat/plot_01_fourier_heat_series`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Fourier's heat equation: a sine series whose modes decay</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="John Crank and Phyllis Nicolson (1947) averaged the explicit and implicit heat-equation updates. The result is unconditionally stable, like backward Euler, and second-order accurate in time, unlike it. This script shows explicit FTCS blowing up just past its limit r = \alpha\Delta t/\Delta x^2 = 1/2, Crank-Nicolson staying bounded at steps 160 times larger (though not accurate there), and the time-convergence orders that separate Crank-Nicolson from backward Euler.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/heat/images/thumb/sphx_glr_plot_02_crank_nicolson_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/heat/plot_02_crank_nicolson`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Crank-Nicolson: large, stable, second-order heat steps</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The method of lines discretizes only space. On a grid, the 2D heat equation u_t = u_{xx} + u_{yy} becomes one ODE per interior point, dU/dt = L U, which any ODE integrator can then advance. Here that integrator is mathematicskit.integrators.rk4_integrate (the same one mathematicskit.ode_dynamics uses) and, for comparison, the adaptive dopri5_integrate. The ODE system is stiff, so RK4&#x27;s stable step shrinks like \Delta x^2.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/heat/images/thumb/sphx_glr_plot_03_method_of_lines_2d_heat_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/heat/plot_03_method_of_lines_2d_heat`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The method of lines: a hot plate as a system of ODEs</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /api/gallery/pde/heat/plot_01_fourier_heat_series
+   /api/gallery/pde/heat/plot_02_crank_nicolson
+   /api/gallery/pde/heat/plot_03_method_of_lines_2d_heat
+

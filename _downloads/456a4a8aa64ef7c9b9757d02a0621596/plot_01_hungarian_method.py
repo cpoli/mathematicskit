@@ -25,7 +25,7 @@ cost = rng.integers(1, 30, size=(6, 6))
 result = solve_assignment(cost)
 brute = min(sum(cost[i, p[i]] for i in range(6)) for p in permutations(range(6)))
 print(cost)
-print(f"optimal assignment: {dict(zip(result.rows.tolist(), result.cols.tolist()))}, cost {result.total_cost} (brute force {brute})")
+print(f"optimal assignment: {dict(zip(result.rows.tolist(), result.cols.tolist(), strict=False))}, cost {result.total_cost} (brute force {brute})")
 
 fig, ax = plt.subplots()
 ax.imshow(cost, cmap="Blues")

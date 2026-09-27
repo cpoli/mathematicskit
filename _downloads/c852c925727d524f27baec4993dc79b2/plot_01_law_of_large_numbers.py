@@ -41,7 +41,7 @@ ax.set_title(r"Law of large numbers: frequency $\to p = 0.3$ (dashed: $\pm 2$ s.
 # ---------------------------------------------------------------------
 
 checkpoints = [10, 100, 1000, 10000, 1000000]
-for n, freq in zip(checkpoints, law_of_large_numbers_trace(coin, checkpoints, seed=0)):
+for n, freq in zip(checkpoints, law_of_large_numbers_trace(coin, checkpoints, seed=0), strict=False):
     print(f"n={n:>8}: relative frequency = {freq:.4f} (error {abs(freq - p):.4f})")
 
 eps = 0.02

@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mathematicskit.special_functions.systems.filters &#8212; mathematicskit 0.2.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=64cc4de3f052d77215f0" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=64cc4de3f052d77215f0" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=c83e6b79" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=64cc4de3f052d77215f0"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0" />
+
+    <script src="../../../../_static/documentation_options.js?v=3ca669d2"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/mathematicskit/special_functions/systems/filters';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../../../_static/searchtools.js"></script>
+    <script src="../../../../_static/language_data.js"></script>
+    <script src="../../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/mathematicskit_logo_transparent.png" class="logo__image only-light" alt="mathematicskit logo"/>
+    <img src="../../../../_static/mathematicskit_logo_transparent.png" class="logo__image only-dark pst-js-only" alt="mathematicskit logo"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/mathematicskit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/mathematicskit/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i><span class="visually-hidden">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/mathematicskit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/mathematicskit/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i><span class="visually-hidden">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">mathematicskit.special_functions.systems.filters</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for mathematicskit.special_functions.systems.filters</h1><div class="highlight"><pre>
+<span></span><span class="sa">r</span><span class="sd">"""Digital filter design and application: Butterworth, Chebyshev, and window-method FIR filters.</span>
+
+<span class="sd">Every design routine wraps :mod:`scipy.signal` directly and returns a</span>
+<span class="sd">:class:`~mathematicskit.special_functions.core.base.FilterCoefficients`</span>
+<span class="sd">holding the transfer function :math:`H(z) = B(z)/A(z)` in powers of</span>
+<span class="sd">:math:`z^{-1}`.</span>
+
+<span class="sd">- Butterworth (IIR): maximally flat magnitude,</span>
+<span class="sd">  :math:`|H(i\Omega)|^2 = 1/(1 + (\Omega/\Omega_c)^{2N})` in the analog</span>
+<span class="sd">  prototype, mapped to discrete time by the bilinear transform</span>
+<span class="sd">  (:func:`scipy.signal.butter`). See S. Butterworth, "On the theory of</span>
+<span class="sd">  filter amplifiers," Wireless Engineer 7 (1930), 536-541.</span>
+<span class="sd">- Chebyshev type I (IIR): equiripple passband, trading ripple for a</span>
+<span class="sd">  steeper transition (:func:`scipy.signal.cheby1`).</span>
+<span class="sd">- Window-method FIR: the ideal (sinc) impulse response truncated by a</span>
+<span class="sd">  window (:func:`scipy.signal.firwin`); the Kaiser window's :math:`\beta`</span>
+<span class="sd">  trades main-lobe width against side-lobe level. See J. F. Kaiser,</span>
+<span class="sd">  "Nonrecursive digital filter design using the I0-sinh window</span>
+<span class="sd">  function," Proc. IEEE Int. Symp. Circuits and Systems (1974), 20-23.</span>
+
+<span class="sd">Cutoffs are normalized to the Nyquist frequency (``0 &lt; cutoff &lt; 1``)</span>
+<span class="sd">unless a sampling rate ``fs`` is given, in which case they are in the</span>
+<span class="sd">same units as ``fs``, exactly as in :mod:`scipy.signal`.</span>
+<span class="sd">"""</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">signal</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.special_functions.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">FilterCoefficients</span><span class="p">,</span> <span class="n">FrequencyResponseResult</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"butterworth_filter"</span><span class="p">,</span> <span class="s2">"chebyshev1_filter"</span><span class="p">,</span> <span class="s2">"fir_window_filter"</span><span class="p">,</span> <span class="s2">"apply_filter"</span><span class="p">,</span> <span class="s2">"frequency_response"</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="butterworth_filter">
+<a class="viewcode-back" href="../../../../api/special_functions.html#mathematicskit.special_functions.butterworth_filter">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">butterworth_filter</span><span class="p">(</span><span class="n">order</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">,</span> <span class="n">btype</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"lowpass"</span><span class="p">,</span> <span class="n">fs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FilterCoefficients</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Design a digital Butterworth filter via :func:`scipy.signal.butter`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    order : int</span>
+<span class="sd">        Filter order :math:`N`; the stopband rolls off at :math:`20N` dB/decade.</span>
+<span class="sd">    cutoff : float or (float, float)</span>
+<span class="sd">        -3 dB frequency (a pair for ``"bandpass"``/``"bandstop"``).</span>
+<span class="sd">    btype : {"lowpass", "highpass", "bandpass", "bandstop"}</span>
+<span class="sd">    fs : float, optional</span>
+<span class="sd">        Sampling rate; when omitted, ``cutoff`` is normalized to Nyquist.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    FilterCoefficients</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; filt = butterworth_filter(4, 0.25)</span>
+<span class="sd">    &gt;&gt;&gt; response = frequency_response(filt, worN=[0.25 * np.pi])</span>
+<span class="sd">    &gt;&gt;&gt; round(float(response.magnitude[0] ** 2), 6)  # half power at the cutoff</span>
+<span class="sd">    0.5</span>
+<span class="sd">    """</span>
+    <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">butter</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">,</span> <span class="n">btype</span><span class="o">=</span><span class="n">btype</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="n">fs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">FilterCoefficients</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="n">a</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="chebyshev1_filter">
+<a class="viewcode-back" href="../../../../api/special_functions.html#mathematicskit.special_functions.chebyshev1_filter">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">chebyshev1_filter</span><span class="p">(</span><span class="n">order</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">ripple_db</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">,</span> <span class="n">btype</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"lowpass"</span><span class="p">,</span> <span class="n">fs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FilterCoefficients</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Design a digital Chebyshev type I filter via :func:`scipy.signal.cheby1`.</span>
+
+<span class="sd">    The passband gain ripples between :math:`1` and</span>
+<span class="sd">    :math:`10^{-r/20}` (``r = ripple_db``); ``cutoff`` is the frequency</span>
+<span class="sd">    where the gain last reaches :math:`10^{-r/20}`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    order : int</span>
+<span class="sd">    ripple_db : float</span>
+<span class="sd">        Peak-to-peak passband ripple, in dB.</span>
+<span class="sd">    cutoff : float or (float, float)</span>
+<span class="sd">    btype : {"lowpass", "highpass", "bandpass", "bandstop"}</span>
+<span class="sd">    fs : float, optional</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    FilterCoefficients</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; filt = chebyshev1_filter(5, 1.0, 0.3)</span>
+<span class="sd">    &gt;&gt;&gt; gain_db = 20 * np.log10(frequency_response(filt, worN=[0.3 * np.pi]).magnitude[0])</span>
+<span class="sd">    &gt;&gt;&gt; round(float(gain_db), 6)</span>
+<span class="sd">    -1.0</span>
+<span class="sd">    """</span>
+    <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">cheby1</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="n">ripple_db</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">,</span> <span class="n">btype</span><span class="o">=</span><span class="n">btype</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="n">fs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">FilterCoefficients</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="n">a</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="fir_window_filter">
+<a class="viewcode-back" href="../../../../api/special_functions.html#mathematicskit.special_functions.fir_window_filter">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">fir_window_filter</span><span class="p">(</span>
+    <span class="n">numtaps</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">cutoff</span><span class="p">,</span>
+    <span class="n">window</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="s2">"hamming"</span><span class="p">,</span>
+    <span class="n">pass_zero</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">fs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FilterCoefficients</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Design a linear-phase FIR filter by the window method, via :func:`scipy.signal.firwin`.</span>
+
+<span class="sd">    The ideal brick-wall impulse response, a sampled sinc, is truncated to</span>
+<span class="sd">    ``numtaps`` samples and multiplied by ``window``. The result is</span>
+<span class="sd">    symmetric, so its phase is exactly linear (a pure delay of</span>
+<span class="sd">    ``(numtaps - 1) / 2`` samples).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    numtaps : int</span>
+<span class="sd">        Filter length (odd for a highpass).</span>
+<span class="sd">    cutoff : float or sequence of float</span>
+<span class="sd">    window : str or tuple</span>
+<span class="sd">        Any :func:`scipy.signal.get_window` spec, e.g. ``"hamming"`` or ``("kaiser", 8.0)``.</span>
+<span class="sd">    pass_zero : bool or str</span>
+<span class="sd">        ``True`` for lowpass-style (passes DC), ``False`` for highpass-style,</span>
+<span class="sd">        or a band type string as in :func:`scipy.signal.firwin`.</span>
+<span class="sd">    fs : float, optional</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    FilterCoefficients</span>
+<span class="sd">        With ``a == [1.0]``.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; filt = fir_window_filter(31, 0.4)</span>
+<span class="sd">    &gt;&gt;&gt; bool(np.allclose(filt.b, filt.b[::-1]))  # symmetric =&gt; linear phase</span>
+<span class="sd">    True</span>
+<span class="sd">    """</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">firwin</span><span class="p">(</span><span class="n">numtaps</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="n">window</span><span class="p">,</span> <span class="n">pass_zero</span><span class="o">=</span><span class="n">pass_zero</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="n">fs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">FilterCoefficients</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="n">a</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">]))</span></div>
+
+
+
+<div class="viewcode-block" id="apply_filter">
+<a class="viewcode-back" href="../../../../api/special_functions.html#mathematicskit.special_functions.apply_filter">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">apply_filter</span><span class="p">(</span><span class="n">filt</span><span class="p">:</span> <span class="n">FilterCoefficients</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">zero_phase</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Run a signal through a filter by its difference equation.</span>
+
+<span class="sd">    Solves :math:`\sum_k a_k\,y[n-k] = \sum_k b_k\,x[n-k]` with zero</span>
+<span class="sd">    initial conditions (:func:`scipy.signal.lfilter`), or filters forward</span>
+<span class="sd">    and then backward for zero phase distortion</span>
+<span class="sd">    (:func:`scipy.signal.filtfilt`, squaring the magnitude response).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filt : FilterCoefficients</span>
+<span class="sd">    x : ndarray</span>
+<span class="sd">    zero_phase : bool</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; moving_average = FilterCoefficients(b=np.ones(3) / 3, a=np.array([1.0]))</span>
+<span class="sd">    &gt;&gt;&gt; apply_filter(moving_average, np.array([3.0, 3.0, 3.0, 3.0]))</span>
+<span class="sd">    array([1., 2., 3., 3.])</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">zero_phase</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">signal</span><span class="o">.</span><span class="n">filtfilt</span><span class="p">(</span><span class="n">filt</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="n">filt</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">signal</span><span class="o">.</span><span class="n">lfilter</span><span class="p">(</span><span class="n">filt</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="n">filt</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="frequency_response">
+<a class="viewcode-back" href="../../../../api/special_functions.html#mathematicskit.special_functions.frequency_response">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">frequency_response</span><span class="p">(</span><span class="n">filt</span><span class="p">:</span> <span class="n">FilterCoefficients</span><span class="p">,</span> <span class="n">worN</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">fs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FrequencyResponseResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Evaluate :math:`H(e^{i\omega})` on the unit circle via :func:`scipy.signal.freqz`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filt : FilterCoefficients</span>
+<span class="sd">    worN : int or array_like</span>
+<span class="sd">        Number of equally spaced frequencies on :math:`[0, \pi)`, or the</span>
+<span class="sd">        frequencies themselves (rad/sample, or units of ``fs``).</span>
+<span class="sd">    fs : float, optional</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    FrequencyResponseResult</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; response = frequency_response(butterworth_filter(2, 0.5), worN=[0.0])</span>
+<span class="sd">    &gt;&gt;&gt; round(float(response.magnitude[0]), 12)  # unit DC gain</span>
+<span class="sd">    1.0</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">fs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">freqz</span><span class="p">(</span><span class="n">filt</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="n">filt</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">worN</span><span class="o">=</span><span class="n">worN</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">freqz</span><span class="p">(</span><span class="n">filt</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="n">filt</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">worN</span><span class="o">=</span><span class="n">worN</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="n">fs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">FrequencyResponseResult</span><span class="p">(</span><span class="n">frequencies</span><span class="o">=</span><span class="n">w</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="n">h</span><span class="p">,</span> <span class="n">magnitude</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">h</span><span class="p">),</span> <span class="n">phase</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">h</span><span class="p">)))</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, mathematicskit contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.22.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

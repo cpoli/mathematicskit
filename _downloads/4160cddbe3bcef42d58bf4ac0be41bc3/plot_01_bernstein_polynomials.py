@@ -43,7 +43,7 @@ ax2.set_title("Convergence is uniform but slow")
 ax2.legend(fontsize=8)
 fig.tight_layout()
 
-for n, e in zip(degrees, errors):
+for n, e in zip(degrees, errors, strict=False):
     print(f"n = {n:4d}: max |B_n f - f| = {e:.4f}")
 
 plt.show()

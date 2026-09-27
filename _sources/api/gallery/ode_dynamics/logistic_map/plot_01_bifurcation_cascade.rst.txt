@@ -123,7 +123,7 @@ same ratio: :math:`\delta_n = (R_{n} - R_{n-1}) / (R_{n+1} - R_n) \to
     R_log, delta_log = superstable_parameters(logistic, 2.0, (3.0, 3.44))
     R_sin, delta_sin = superstable_parameters(sine_map, 0.5, (0.72, 0.83))
     print(" n   delta_n (logistic)   delta_n (sine map)")
-    for n, (dl, ds) in enumerate(zip(delta_log, delta_sin), start=1):
+    for n, (dl, ds) in enumerate(zip(delta_log, delta_sin, strict=False), start=1):
         print(f"{n:2d}   {dl:17.5f}   {ds:17.5f}")
 
 
@@ -206,7 +206,7 @@ Two different maps, one cascade, one constant
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.163 seconds)
+   **Total running time of the script:** (0 minutes 0.128 seconds)
 
 
 .. _sphx_glr_download_api_gallery_ode_dynamics_logistic_map_plot_01_bifurcation_cascade.py:

@@ -108,7 +108,7 @@ Vandermonde normal-equations matrix more ill-conditioned.
 
     degrees = [1, 2, 4, 6, 8, 10]
     conditions = [PolynomialRegression(x, y, degree=d).fit().condition_number for d in degrees]
-    for d, c in zip(degrees, conditions):
+    for d, c in zip(degrees, conditions, strict=False):
         print(f"degree={d:2d}  condition number~{c:.3e}")
 
     fig2, ax2 = plt.subplots(figsize=(6, 4))

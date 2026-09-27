@@ -87,7 +87,7 @@ Countries sharing a border become adjacent vertices
 
 
     g = Graph(len(capitals))
-    for a, b in zip(np.concatenate([labels[:, :-1].ravel(), labels[:-1, :].ravel()]), np.concatenate([labels[:, 1:].ravel(), labels[1:, :].ravel()])):
+    for a, b in zip(np.concatenate([labels[:, :-1].ravel(), labels[:-1, :].ravel()]), np.concatenate([labels[:, 1:].ravel(), labels[1:, :].ravel()]), strict=False):
         if a != b:
             g.add_edge(int(a), int(b))
     print(f"{g.n_vertices} countries, {len(g.edges())} shared borders")
@@ -197,7 +197,7 @@ The colored maps
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.078 seconds)
+   **Total running time of the script:** (0 minutes 0.076 seconds)
 
 
 .. _sphx_glr_download_api_gallery_graph_theory_coloring_plot_01_four_color_map.py:

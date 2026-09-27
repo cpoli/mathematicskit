@@ -73,7 +73,7 @@ for dist in (Normal(mu=0.0, sigma=1.0), Gamma(shape=2.0, rate=1.5)):
 
 normal = Normal(mu=0.0, sigma=1.0)
 cuts = [-2.0, -0.5, 0.7, 1.8]
-pieces = [normal.cdf(b) - normal.cdf(a) for a, b in zip(cuts[:-1], cuts[1:])]
+pieces = [normal.cdf(b) - normal.cdf(a) for a, b in zip(cuts[:-1], cuts[1:], strict=False)]
 print(f"additivity: P((-2, 1.8]) = {normal.cdf(1.8) - normal.cdf(-2.0):.6f}, sum of disjoint pieces = {sum(pieces):.6f}")
 
 # %%
@@ -94,7 +94,7 @@ ax_dice.set_title(r"$\Omega$ = 36 outcomes; red: sum = 7, blue: first even" "\np
 
 xs = np.linspace(-3.5, 3.5, 400)
 ax_line.plot(xs, normal.pdf(xs), "k")
-for (a, b), piece, color in zip(zip(cuts[:-1], cuts[1:]), pieces, ("tab:orange", "tab:green", "tab:cyan")):
+for (a, b), piece, color in zip(zip(cuts[:-1], cuts[1:], strict=False), pieces, ("tab:orange", "tab:green", "tab:cyan"), strict=False):
     mask = (xs > a) & (xs <= b)
     ax_line.fill_between(xs[mask], normal.pdf(xs[mask]), color=color, alpha=0.6, label=f"P(({a:g}, {b:g}]) = {piece:.3f}")
 ax_line.set_xlabel("x")

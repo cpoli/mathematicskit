@@ -57,7 +57,7 @@ The construction at t = 0.4
 
     fig, ax = plt.subplots()
     ax.plot(*curve.T, "k", lw=2, label="Bézier curve")
-    for level, color in zip(levels, ("tab:gray", "tab:blue", "tab:green", "tab:red")):
+    for level, color in zip(levels, ("tab:gray", "tab:blue", "tab:green", "tab:red"), strict=False):
         ax.plot(*level.T, "o-", color=color, ms=6)
     ax.plot(*levels[-1][0], "o", color="tab:red", ms=10, label="B(0.4)")
     ax.set_aspect("equal")
@@ -111,7 +111,7 @@ The curve stays inside the convex hull of its control points
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.025 seconds)
+   **Total running time of the script:** (0 minutes 0.023 seconds)
 
 
 .. _sphx_glr_download_api_gallery_geometry_bezier_plot_01_de_casteljau.py:

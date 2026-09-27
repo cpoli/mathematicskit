@@ -26,7 +26,7 @@ print("regiments:\n", regiments)
 print(f"orthogonal: {are_orthogonal(ranks, regiments)}")
 
 fig, axes = plt.subplots(1, 2, figsize=(8, 4))
-for ax, square, title in zip(axes, (ranks, regiments), ("rank", "regiment")):
+for ax, square, title in zip(axes, (ranks, regiments), ("rank", "regiment"), strict=False):
     ax.imshow(square, cmap="tab10")
     for (i, j), v in np.ndenumerate(square):
         ax.text(j, i, str(v), ha="center", va="center", color="w")

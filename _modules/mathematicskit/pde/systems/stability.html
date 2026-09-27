@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mathematicskit.pde.systems.stability &#8212; mathematicskit 0.2.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=64cc4de3f052d77215f0" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=64cc4de3f052d77215f0" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=c83e6b79" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=64cc4de3f052d77215f0"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0" />
+
+    <script src="../../../../_static/documentation_options.js?v=3ca669d2"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/mathematicskit/pde/systems/stability';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../../../_static/searchtools.js"></script>
+    <script src="../../../../_static/language_data.js"></script>
+    <script src="../../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/mathematicskit_logo_transparent.png" class="logo__image only-light" alt="mathematicskit logo"/>
+    <img src="../../../../_static/mathematicskit_logo_transparent.png" class="logo__image only-dark pst-js-only" alt="mathematicskit logo"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/mathematicskit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/mathematicskit/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i><span class="visually-hidden">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/mathematicskit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/mathematicskit/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i><span class="visually-hidden">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">mathematicskit.pde.systems.stability</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for mathematicskit.pde.systems.stability</h1><div class="highlight"><pre>
+<span></span><span class="sa">r</span><span class="sd">"""CFL conditions, diffusion-number limits, and von Neumann stability analysis.</span>
+
+<span class="sd">Courant, Friedrichs &amp; Lewy (1928) showed that an explicit scheme for a</span>
+<span class="sd">hyperbolic equation can only converge if its numerical domain of</span>
+<span class="sd">dependence contains the true one, i.e. the Courant number</span>
+<span class="sd">:math:`\nu = |c|\,\Delta t/\Delta x` must not exceed a scheme-dependent</span>
+<span class="sd">limit (1 for upwind, Lax-Friedrichs, Lax-Wendroff and leapfrog-for-waves).</span>
+<span class="sd">For diffusion the analogous dimensionless group is the diffusion number</span>
+<span class="sd">:math:`r = \alpha\,\Delta t/\Delta x^2`, and explicit FTCS needs</span>
+<span class="sd">:math:`r \le 1/2` in 1D.</span>
+
+<span class="sd">Von Neumann's method (developed at Los Alamos in the 1940s; first</span>
+<span class="sd">published by Crank &amp; Nicolson, 1947, and Charney, Fjortoft &amp; von Neumann,</span>
+<span class="sd">1950) substitutes a single Fourier mode :math:`u_j^n = G^n e^{i j \xi}`</span>
+<span class="sd">(:math:`\xi = k\,\Delta x`) into a linear constant-coefficient scheme; the</span>
+<span class="sd">scheme is stable iff the amplification factor satisfies</span>
+<span class="sd">:math:`|G(\xi)| \le 1` for every :math:`\xi \in [0, \pi]`. See LeVeque,</span>
+<span class="sd">*Finite Difference Methods for Ordinary and Partial Differential</span>
+<span class="sd">Equations*, SIAM 2007, Ch. 9.6 and 10.5-10.7, and Strikwerda, *Finite</span>
+<span class="sd">Difference Schemes and Partial Differential Equations*, 2nd ed., Ch. 2.</span>
+<span class="sd">"""</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.pde.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">StabilityResult</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"RK4_REAL_AXIS_LIMIT"</span><span class="p">,</span>
+    <span class="s2">"RK4_IMAG_AXIS_LIMIT"</span><span class="p">,</span>
+    <span class="s2">"courant_number"</span><span class="p">,</span>
+    <span class="s2">"diffusion_number"</span><span class="p">,</span>
+    <span class="s2">"check_cfl"</span><span class="p">,</span>
+    <span class="s2">"check_diffusion_stability"</span><span class="p">,</span>
+    <span class="s2">"amplification_factor"</span><span class="p">,</span>
+    <span class="s2">"max_amplification"</span><span class="p">,</span>
+    <span class="s2">"AMPLIFICATION_SCHEMES"</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="c1">#: Where classical RK4's stability region crosses the negative real axis:</span>
+<span class="c1">#: the real root of :math:`z^3 + 4z^2 + 12z + 24 = 0`, from</span>
+<span class="c1">#: :math:`R(z) = 1 + z + z^2/2 + z^3/6 + z^4/24 = 1` (about -2.7853).</span>
+<span class="n">RK4_REAL_AXIS_LIMIT</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">roots</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mf">24.0</span><span class="p">])</span> <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">imag</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-12</span><span class="p">)))</span>
+
+<span class="c1">#: Where classical RK4's stability region crosses the imaginary axis,</span>
+<span class="c1">#: :math:`2\sqrt{2}` (the positive root of :math:`|R(iy)| = 1`).</span>
+<span class="n">RK4_IMAG_AXIS_LIMIT</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span><span class="p">))</span>
+
+<span class="c1"># Courant-number limits for the advection schemes, and diffusion-number</span>
+<span class="c1"># limits for the heat-equation schemes (1D).</span>
+<span class="n">_COURANT_LIMITS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"upwind"</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">"godunov"</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">"lax_friedrichs"</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">"lax_wendroff"</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">"leapfrog"</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">"ftcs"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">}</span>
+
+
+<div class="viewcode-block" id="courant_number">
+<a class="viewcode-back" href="../../../../api/pde.html#mathematicskit.pde.courant_number">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">courant_number</span><span class="p">(</span><span class="n">c</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">dx</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Courant number :math:`\nu = |c|\,\Delta t / \Delta x`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    c : float</span>
+<span class="sd">        Wave / advection speed.</span>
+<span class="sd">    dt, dx : float</span>
+<span class="sd">        Time step and grid spacing.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; courant_number(2.0, 0.01, 0.04)</span>
+<span class="sd">    0.5</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">/</span> <span class="n">dx</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="diffusion_number">
+<a class="viewcode-back" href="../../../../api/pde.html#mathematicskit.pde.diffusion_number">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">diffusion_number</span><span class="p">(</span><span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">dx</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Diffusion number :math:`r = \alpha\,\Delta t / \Delta x^2`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    alpha : float</span>
+<span class="sd">        Diffusivity.</span>
+<span class="sd">    dt, dx : float</span>
+<span class="sd">        Time step and grid spacing.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; round(diffusion_number(1.0, 0.001, 0.1), 12)</span>
+<span class="sd">    0.1</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">/</span> <span class="n">dx</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="check_cfl">
+<a class="viewcode-back" href="../../../../api/pde.html#mathematicskit.pde.check_cfl">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_cfl</span><span class="p">(</span><span class="n">c</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">dx</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">scheme</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"upwind"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StabilityResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Check the Courant-Friedrichs-Lewy condition for an advection/wave scheme.</span>
+
+<span class="sd">    The limits (LeVeque 2007, Ch. 10) are :math:`\nu \le 1` for</span>
+<span class="sd">    ``"upwind"``, ``"godunov"``, ``"lax_friedrichs"``, ``"lax_wendroff"`` and the</span>
+<span class="sd">    ``"leapfrog"`` (velocity-Verlet) wave scheme; forward-time</span>
+<span class="sd">    centered-space ``"ftcs"`` advection is unstable for every</span>
+<span class="sd">    :math:`\nu &gt; 0`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    c : float</span>
+<span class="sd">    dt, dx : float</span>
+<span class="sd">    scheme : {"upwind", "godunov", "lax_friedrichs", "lax_wendroff", "leapfrog", "ftcs"}</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    StabilityResult</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; check_cfl(1.0, 0.009, 0.01).stable</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; check_cfl(1.0, 0.011, 0.01).stable</span>
+<span class="sd">    False</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">scheme</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_COURANT_LIMITS</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Unknown scheme '</span><span class="si">{</span><span class="n">scheme</span><span class="si">}</span><span class="s2">'"</span><span class="p">)</span>
+    <span class="n">nu</span> <span class="o">=</span> <span class="n">courant_number</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">dx</span><span class="p">)</span>
+    <span class="n">limit</span> <span class="o">=</span> <span class="n">_COURANT_LIMITS</span><span class="p">[</span><span class="n">scheme</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">StabilityResult</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="n">nu</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="n">limit</span><span class="p">,</span> <span class="n">stable</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">nu</span> <span class="o">&lt;=</span> <span class="n">limit</span> <span class="o">+</span> <span class="mf">1e-12</span> <span class="ow">and</span> <span class="n">limit</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">),</span> <span class="n">scheme</span><span class="o">=</span><span class="n">scheme</span><span class="p">,</span> <span class="n">quantity</span><span class="o">=</span><span class="s2">"courant"</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="check_diffusion_stability">
+<a class="viewcode-back" href="../../../../api/pde.html#mathematicskit.pde.check_diffusion_stability">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_diffusion_stability</span><span class="p">(</span><span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">dx</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">theta</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">ndim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StabilityResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Check the diffusion-number limit of the theta-method for the heat equation.</span>
+
+<span class="sd">    The theta-method (:math:`\theta = 0` explicit FTCS,</span>
+<span class="sd">    :math:`\tfrac12` Crank-Nicolson, 1 backward Euler) on the standard</span>
+<span class="sd">    second-difference Laplacian in `ndim` dimensions (equal spacing) is</span>
+<span class="sd">    stable iff</span>
+
+<span class="sd">    .. math:: r \le \frac{1}{2\,\text{ndim}\,(1 - 2\theta)} \quad (\theta &lt; \tfrac12),</span>
+
+<span class="sd">    and unconditionally stable for :math:`\theta \ge \tfrac12`</span>
+<span class="sd">    (Strikwerda, Ch. 6.3; LeVeque, Ch. 9.6).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    alpha : float</span>
+<span class="sd">    dt, dx : float</span>
+<span class="sd">    theta : float</span>
+<span class="sd">        Implicitness, in ``[0, 1]``.</span>
+<span class="sd">    ndim : int</span>
+<span class="sd">        Number of space dimensions.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    StabilityResult</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; check_diffusion_stability(1.0, 0.004, 0.1).stable  # r = 0.4</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; check_diffusion_stability(1.0, 0.006, 0.1).stable  # r = 0.6</span>
+<span class="sd">    False</span>
+<span class="sd">    &gt;&gt;&gt; check_diffusion_stability(1.0, 1.0, 0.1, theta=0.5).limit</span>
+<span class="sd">    inf</span>
+<span class="sd">    """</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">diffusion_number</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">dx</span><span class="p">)</span>
+    <span class="n">limit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span> <span class="k">if</span> <span class="n">theta</span> <span class="o">&gt;=</span> <span class="mf">0.5</span> <span class="k">else</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">ndim</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">theta</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">StabilityResult</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">limit</span><span class="p">),</span> <span class="n">stable</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">r</span> <span class="o">&lt;=</span> <span class="n">limit</span> <span class="o">+</span> <span class="mf">1e-12</span><span class="p">),</span> <span class="n">scheme</span><span class="o">=</span><span class="n">_theta_name</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">quantity</span><span class="o">=</span><span class="s2">"diffusion"</span><span class="p">)</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_theta_name</span><span class="p">(</span><span class="n">theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="p">{</span><span class="mf">0.0</span><span class="p">:</span> <span class="s2">"ftcs"</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">:</span> <span class="s2">"crank_nicolson"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">:</span> <span class="s2">"backward_euler"</span><span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="sa">f</span><span class="s2">"theta=</span><span class="si">{</span><span class="n">theta</span><span class="si">:</span><span class="s2">g</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_g_ftcs_heat</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">xi</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">xi</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">0</span><span class="n">j</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_g_backward_euler_heat</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">xi</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">xi</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">0</span><span class="n">j</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_g_crank_nicolson_heat</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">xi</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">xi</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">s</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">s</span><span class="p">)</span> <span class="o">+</span> <span class="mi">0</span><span class="n">j</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_g_upwind</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">xi</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">nu</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">xi</span><span class="p">))</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_g_lax_friedrichs</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">xi</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">nu</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_g_lax_wendroff</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">xi</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">nu</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">-</span> <span class="n">nu</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xi</span><span class="p">))</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_g_ftcs_advection</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">xi</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">nu</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span>
+
+
+<span class="c1">#: Schemes understood by :func:`amplification_factor`, each mapped to the</span>
+<span class="c1">#: dimensionless number its amplification factor depends on.</span>
+<span class="n">AMPLIFICATION_SCHEMES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"ftcs_heat"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"diffusion"</span><span class="p">,</span> <span class="n">_g_ftcs_heat</span><span class="p">),</span>
+    <span class="s2">"backward_euler_heat"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"diffusion"</span><span class="p">,</span> <span class="n">_g_backward_euler_heat</span><span class="p">),</span>
+    <span class="s2">"crank_nicolson_heat"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"diffusion"</span><span class="p">,</span> <span class="n">_g_crank_nicolson_heat</span><span class="p">),</span>
+    <span class="s2">"upwind"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"courant"</span><span class="p">,</span> <span class="n">_g_upwind</span><span class="p">),</span>
+    <span class="s2">"lax_friedrichs"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"courant"</span><span class="p">,</span> <span class="n">_g_lax_friedrichs</span><span class="p">),</span>
+    <span class="s2">"lax_wendroff"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"courant"</span><span class="p">,</span> <span class="n">_g_lax_wendroff</span><span class="p">),</span>
+    <span class="s2">"ftcs_advection"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"courant"</span><span class="p">,</span> <span class="n">_g_ftcs_advection</span><span class="p">),</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="amplification_factor">
+<a class="viewcode-back" href="../../../../api/pde.html#mathematicskit.pde.amplification_factor">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">amplification_factor</span><span class="p">(</span><span class="n">scheme</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">number</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">xi</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Von Neumann amplification factor :math:`G(\xi)` of a linear scheme.</span>
+
+<span class="sd">    With :math:`r` the diffusion number and :math:`\nu` the Courant number</span>
+<span class="sd">    (advection speed :math:`c &gt; 0`), and :math:`s = \sin^2(\xi/2)`:</span>
+
+<span class="sd">    ===========================  ===============================================</span>
+<span class="sd">    ``"ftcs_heat"``              :math:`1 - 4 r s`</span>
+<span class="sd">    ``"backward_euler_heat"``    :math:`1 / (1 + 4 r s)`</span>
+<span class="sd">    ``"crank_nicolson_heat"``    :math:`(1 - 2 r s) / (1 + 2 r s)`</span>
+<span class="sd">    ``"upwind"``                 :math:`1 - \nu (1 - e^{-i\xi})`</span>
+<span class="sd">    ``"lax_friedrichs"``         :math:`\cos\xi - i \nu \sin\xi`</span>
+<span class="sd">    ``"lax_wendroff"``           :math:`1 - i \nu \sin\xi - \nu^2 (1 - \cos\xi)`</span>
+<span class="sd">    ``"ftcs_advection"``         :math:`1 - i \nu \sin\xi`</span>
+<span class="sd">    ===========================  ===============================================</span>
+
+<span class="sd">    See Strikwerda, Ch. 2.2, and LeVeque, Ch. 9.6 and 10.5.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    scheme : str</span>
+<span class="sd">        A key of :data:`AMPLIFICATION_SCHEMES`.</span>
+<span class="sd">    number : float</span>
+<span class="sd">        The scheme's diffusion number :math:`r` or Courant number :math:`\nu`.</span>
+<span class="sd">    xi : float or array-like</span>
+<span class="sd">        Phase angle(s) :math:`\xi = k\,\Delta x`, usually in ``[0, pi]``.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray of complex</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; float(abs(amplification_factor("upwind", 1.0, np.pi)))</span>
+<span class="sd">    1.0</span>
+<span class="sd">    &gt;&gt;&gt; float(abs(amplification_factor("ftcs_heat", 0.5, np.pi)))</span>
+<span class="sd">    1.0</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">scheme</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">AMPLIFICATION_SCHEMES</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Unknown scheme '</span><span class="si">{</span><span class="n">scheme</span><span class="si">}</span><span class="s2">'; expected one of </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">AMPLIFICATION_SCHEMES</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">AMPLIFICATION_SCHEMES</span><span class="p">[</span><span class="n">scheme</span><span class="p">][</span><span class="mi">1</span><span class="p">](</span><span class="nb">float</span><span class="p">(</span><span class="n">number</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)))</span></div>
+
+
+
+<div class="viewcode-block" id="max_amplification">
+<a class="viewcode-back" href="../../../../api/pde.html#mathematicskit.pde.max_amplification">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">max_amplification</span><span class="p">(</span><span class="n">scheme</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">number</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n_xi</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">721</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Largest :math:`|G(\xi)|` over :math:`\xi \in [0, \pi]`; the scheme is stable iff this is :math:`\le 1`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    scheme : str</span>
+<span class="sd">    number : float</span>
+<span class="sd">    n_xi : int</span>
+<span class="sd">        Number of sampled phase angles.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; max_amplification("lax_wendroff", 0.8) &lt;= 1.0</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; max_amplification("ftcs_advection", 0.1) &gt; 1.0</span>
+<span class="sd">    True</span>
+<span class="sd">    """</span>
+    <span class="n">xi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">n_xi</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">amplification_factor</span><span class="p">(</span><span class="n">scheme</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">xi</span><span class="p">))))</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, mathematicskit contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.22.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

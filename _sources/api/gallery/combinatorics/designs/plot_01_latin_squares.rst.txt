@@ -60,7 +60,7 @@ An orthogonal pair of order 5
     print(f"orthogonal: {are_orthogonal(ranks, regiments)}")
 
     fig, axes = plt.subplots(1, 2, figsize=(8, 4))
-    for ax, square, title in zip(axes, (ranks, regiments), ("rank", "regiment")):
+    for ax, square, title in zip(axes, (ranks, regiments), ("rank", "regiment"), strict=False):
         ax.imshow(square, cmap="tab10")
         for (i, j), v in np.ndenumerate(square):
             ax.text(j, i, str(v), ha="center", va="center", color="w")
@@ -129,7 +129,7 @@ No orthogonal pair of order 2
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.030 seconds)
+   **Total running time of the script:** (0 minutes 0.028 seconds)
 
 
 .. _sphx_glr_download_api_gallery_combinatorics_designs_plot_01_latin_squares.py:

@@ -138,7 +138,7 @@ random k-dimensional column space.
     axes[0].set_xlabel("rank k")
     axes[0].set_title("Truncation error")
     axes[0].legend(fontsize=8)
-    for ax, (label, M) in zip(axes[1:], (("A", A), ("A_1", truncate(1)), (f"A_{k}", truncate(k)))):
+    for ax, (label, M) in zip(axes[1:], (("A", A), ("A_1", truncate(1)), (f"A_{k}", truncate(k))), strict=False):
         ax.imshow(M, cmap="viridis", vmin=A.min(), vmax=A.max())
         ax.set_title(f"${label}$")
         ax.set_xticks([])
@@ -167,7 +167,7 @@ random k-dimensional column space.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.067 seconds)
+   **Total running time of the script:** (0 minutes 0.071 seconds)
 
 
 .. _sphx_glr_download_api_gallery_linalg_svd_plot_01_svd.py:

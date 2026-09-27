@@ -64,7 +64,7 @@ axes[0].semilogy(ks, S[ks], "s-", label=r"$\sigma_{k+1} = \|A - A_k\|_2$")
 axes[0].set_xlabel("rank k")
 axes[0].set_title("Truncation error")
 axes[0].legend(fontsize=8)
-for ax, (label, M) in zip(axes[1:], (("A", A), ("A_1", truncate(1)), (f"A_{k}", truncate(k)))):
+for ax, (label, M) in zip(axes[1:], (("A", A), ("A_1", truncate(1)), (f"A_{k}", truncate(k))), strict=False):
     ax.imshow(M, cmap="viridis", vmin=A.min(), vmax=A.max())
     ax.set_title(f"${label}$")
     ax.set_xticks([])

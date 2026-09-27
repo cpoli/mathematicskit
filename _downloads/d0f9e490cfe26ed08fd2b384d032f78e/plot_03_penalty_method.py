@@ -36,7 +36,7 @@ for n_outer in range(1, 7):
     minimizers.append(result.x)
 mus, minimizers = np.array(mus), np.array(minimizers)
 violation = np.abs(minimizers.sum(axis=1) - 1.0)
-for mu, x, v in zip(mus, minimizers, violation):
+for mu, x, v in zip(mus, minimizers, violation, strict=False):
     print(f"mu = {mu:>8.0f}: x = {x.round(6)}, exact {mu / (1 + 2 * mu):.6f}, |h(x)| = {v:.1e}")
 
 # %%
@@ -46,7 +46,7 @@ for mu, x, v in zip(mus, minimizers, violation):
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4.5))
 xs = np.linspace(-0.2, 1.0, 200)
 X, Y = np.meshgrid(xs, xs)
-for mu, color in zip((1.0, 100.0), ("tab:orange", "tab:green")):
+for mu, color in zip((1.0, 100.0), ("tab:orange", "tab:green"), strict=False):
     ax1.contour(X, Y, X**2 + Y**2 + mu * (X + Y - 1.0) ** 2, levels=8, colors=color, linewidths=0.6, alpha=0.7)
 ax1.plot(xs, 1.0 - xs, color="tab:red", lw=2, label=r"constraint $x + y = 1$")
 ax1.plot(*minimizers.T, "o-", color="tab:blue", ms=5, label=r"penalized minimizers $x(\mu)$")

@@ -1,0 +1,105 @@
+
+
+.. _sphx_glr_api_gallery_pde_elliptic:
+
+Poisson and Laplace equations
+-----------------------------
+
+Steady boundary-value problems: a sparse direct Poisson solve, the
+relaxation iterations that preceded it, finite elements, and multigrid.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Laplace&#x27;s equation \nabla^2 u = 0 governs a potential in empty space; Poisson added the source term, \nabla^2 u = f, for the potential inside matter. This script solves Poisson&#x27;s equation on the unit square for a pair of opposite point-like charges, then verifies the five-point finite-difference solver&#x27;s second-order accuracy against a problem with a known solution.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/elliptic/images/thumb/sphx_glr_plot_01_poisson_equation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/elliptic/plot_01_poisson_equation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Poisson's equation: a potential with sources</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Lewis Fry Richardson (1911) replaced Laplace&#x27;s equation by finite differences and solved the resulting equations by hand, sweeping over the grid and replacing each value by the average of its neighbors until nothing changed. That idea became the Jacobi iteration; updating values in place gives Gauss-Seidel, and over-relaxing each update gives SOR (Young, 1950). This script heats one side of a square plate and compares how fast the three relaxation schemes from mathematicskit.linalg, and conjugate gradient, converge.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/elliptic/images/thumb/sphx_glr_plot_02_richardson_relaxation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/elliptic/plot_02_richardson_relaxation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Richardson's relaxation: iterating toward Laplace's solution</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Richard Courant (1943) proposed piecewise-linear approximations on a triangulation, and aircraft engineers (Turner, Clough, Martin and Topp, 1956) turned the idea into the finite element method. Instead of differencing u&#x27;&#x27; = f, ask the weak form -\int u&#x27;v&#x27; = \int f v to hold for every &quot;hat&quot; function v on the mesh. The mesh can be refined exactly where the solution needs it. This script shows the hat-function basis, solves a boundary layer on a graded mesh, and shows that 1D linear elements are exact at the nodes.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/elliptic/images/thumb/sphx_glr_plot_03_finite_element_poisson_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/elliptic/plot_03_finite_element_poisson`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Finite elements: Galerkin's hat functions on an uneven mesh</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Relaxation kills wiggly error fast but smooth error slowly, so Jacobi&#x27;s iteration count grows like the number of grid points per side squared. Fedorenko (1964) and Brandt (1977) noticed that smooth error on a fine grid looks wiggly on a coarser one, where it is cheap to remove. A multigrid V-cycle smooths, corrects on successively coarser grids, and smooths again. The number of cycles needed stays flat as the grid is refined. This script shows Jacobi smoothing a random error, then compares cycle counts across grid sizes.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/elliptic/images/thumb/sphx_glr_plot_04_multigrid_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/elliptic/plot_04_multigrid`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Multigrid: a solver whose cost does not grow with the grid</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /api/gallery/pde/elliptic/plot_01_poisson_equation
+   /api/gallery/pde/elliptic/plot_02_richardson_relaxation
+   /api/gallery/pde/elliptic/plot_03_finite_element_poisson
+   /api/gallery/pde/elliptic/plot_04_multigrid
+

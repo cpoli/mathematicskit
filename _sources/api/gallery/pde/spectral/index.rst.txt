@@ -1,0 +1,88 @@
+
+
+.. _sphx_glr_api_gallery_pde_spectral:
+
+Spectral methods
+----------------
+
+Fourier pseudo-spectral time stepping for periodic problems, and
+Chebyshev collocation for boundary-value problems, checked against the
+Hopf-Cole exact solution of viscous Burgers' equation.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Steven Orszag (1969-1971) and Kreiss and Oliger (1972) made the case for differentiating with the FFT instead of finite differences. For a smooth periodic function the error falls faster than any power of the grid spacing. Nonlinear terms are simply formed pointwise on the grid (&quot;pseudo-spectral&quot;). This script first compares Fourier and finite-difference derivatives, then solves viscous Burgers&#x27; equation u_t + u u_x = \nu u_{xx} as a steepening wave, integrating the spectral ODE system with mathematicskit.integrators.rk4_integrate.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/spectral/images/thumb/sphx_glr_plot_01_fourier_pseudospectral_burgers_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/spectral/plot_01_fourier_pseudospectral_burgers`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Fourier pseudo-spectral methods: Burgers' equation</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Fourier methods need periodic problems. Gottlieb and Orszag&#x27;s 1977 monograph set out the theory of the non-periodic alternative: collocate at the Chebyshev points x_k = -\cos(k\pi/N). These points cluster at the ends and so avoid the Runge phenomenon. This script solves the boundary-value problem u&#x27;&#x27; = f with Chebyshev collocation and with second-order finite differences, and watches the Chebyshev error fall geometrically while the finite-difference error only falls like N^{-2}. It closes with a 2D Poisson problem on a square.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/spectral/images/thumb/sphx_glr_plot_02_chebyshev_collocation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/spectral/plot_02_chebyshev_collocation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Chebyshev collocation: spectral accuracy without periodicity</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="J. M. Burgers (1948) proposed viscous Burgers&#x27; equation as the simplest model of nonlinear steepening balanced by viscosity. Eberhard Hopf (1950) and Julian Cole (1951) independently found that the substitution u = -2\nu\,\varphi_x/\varphi turns the nonlinear viscous Burgers&#x27; equation u_t + u u_x = \nu u_{xx} into the linear heat equation \varphi_t = \nu\varphi_{xx}. A nonlinear PDE with shock-like fronts thus has an exact solution. This script uses it to watch a sine wave form a viscous shock whose width shrinks with \nu, and to verify the pseudo-spectral Burgers solver to near machine precision.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/spectral/images/thumb/sphx_glr_plot_03_hopf_cole_burgers_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/spectral/plot_03_hopf_cole_burgers`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Burgers' equation and the Hopf-Cole transformation</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /api/gallery/pde/spectral/plot_01_fourier_pseudospectral_burgers
+   /api/gallery/pde/spectral/plot_02_chebyshev_collocation
+   /api/gallery/pde/spectral/plot_03_hopf_cole_burgers
+

@@ -47,7 +47,7 @@ print(f"(4D(h/2) - D(h))/3 error: {abs(combined - exact):.3e}")
 
 levels = np.arange(1, 7)
 errs = [abs(richardson_extrapolation(f, x0, h=0.2, levels=int(k)).value - exact) for k in levels]
-for k, e in zip(levels, errs):
+for k, e in zip(levels, errs, strict=False):
     print(f"levels={k}: error={e:.3e}")
 
 # %%

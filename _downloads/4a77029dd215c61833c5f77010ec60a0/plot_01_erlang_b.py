@@ -23,7 +23,7 @@ fig, ax = plt.subplots()
 for load in (2.0, 5.0, 10.0, 20.0):
     blocking = [erlang_b(load, int(c)) for c in servers]
     ax.semilogy(servers, blocking, label=f"A = {load:g} erlangs")
-    needed = next(int(c) for c, b in zip(servers, blocking) if b < 0.01)
+    needed = next(int(c) for c, b in zip(servers, blocking, strict=False) if b < 0.01)
     print(f"A = {load:>4g} erlangs: {needed} lines keep blocking below 1%")
 ax.axhline(0.01, color="0.5", ls="--")
 ax.set_ylim(1e-6, 1.2)

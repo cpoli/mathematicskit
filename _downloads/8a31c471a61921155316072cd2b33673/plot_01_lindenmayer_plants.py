@@ -28,7 +28,7 @@ koch = turtle_path(lsystem("F", {"F": "F+F--F+F"}, 4), 60, heading=0)
 plant = turtle_path(lsystem("X", {"X": "F+[[X]-X]-F[-FX]+X", "F": "FF"}, 5), 25, heading=65)
 
 fig, axes = plt.subplots(1, 2, figsize=(10, 5))
-for ax, lines, title in zip(axes, (koch, plant), ("Koch curve: F -> F+F--F+F", "plant: X -> F+[[X]-X]-F[-FX]+X")):
+for ax, lines, title in zip(axes, (koch, plant), ("Koch curve: F -> F+F--F+F", "plant: X -> F+[[X]-X]-F[-FX]+X"), strict=False):
     for line in lines:
         ax.plot(*line.T, color="darkgreen" if ax is axes[1] else "tab:blue", lw=0.6)
     ax.set_aspect("equal")

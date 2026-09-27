@@ -182,7 +182,7 @@ The two triangles side by side
     first = np.array([[stirling_first_kind(i, k) for k in range(N + 1)] for i in range(N + 1)], dtype=float)
     second = np.array([[stirling_second_kind(i, k) for k in range(N + 1)] for i in range(N + 1)], dtype=float)
     fig, axes = plt.subplots(1, 2, figsize=(10, 4.5))
-    for ax, table, name in zip(axes, [first, second], ["first kind (cycles)", "second kind (blocks)"]):
+    for ax, table, name in zip(axes, [first, second], ["first kind (cycles)", "second kind (blocks)"], strict=False):
         shown = np.where(table > 0, np.log10(np.maximum(table, 1)), np.nan)
         ax.imshow(shown, cmap="viridis")
         for i in range(N + 1):
@@ -217,7 +217,7 @@ The two triangles side by side
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.090 seconds)
+   **Total running time of the script:** (0 minutes 0.087 seconds)
 
 
 .. _sphx_glr_download_api_gallery_combinatorics_special_numbers_plot_01_stirling_numbers.py:

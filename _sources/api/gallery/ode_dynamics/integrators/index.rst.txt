@@ -1,0 +1,124 @@
+
+
+.. _sphx_glr_api_gallery_ode_dynamics_integrators:
+
+Numerical integration
+---------------------
+
+The explicit integrators behind every trajectory in this gallery: Euler's
+method, Runge-Kutta, Stormer-Verlet, Dormand-Prince adaptive stepping, and
+Yoshida's symplectic composition.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Euler (1768) replaced the curve by its tangent line over a short step h: y_{n+1} = y_n + h f(t_n, y_n). Evaluating the slope at the end of the step instead gives the implicit (backward) variant y_{n+1} = y_n + h f(t_{n+1}, y_{n+1}). Both have a local error of O(h^2), which adds up to a global error of O(h): halving the step halves the error.">
+
+.. only:: html
+
+  .. image:: /api/gallery/ode_dynamics/integrators/images/thumb/sphx_glr_plot_01_euler_method_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/ode_dynamics/integrators/plot_01_euler_method`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Euler's method: first-order convergence</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Runge (1895), Heun (1900) and Kutta (1901) matched more terms of the solution&#x27;s Taylor series without computing any derivatives of f. They did it by sampling the slope at several points inside each step and combining the samples. Heun&#x27;s two-stage method is second order, and Kutta&#x27;s classical four-stage method">
+
+.. only:: html
+
+  .. image:: /api/gallery/ode_dynamics/integrators/images/thumb/sphx_glr_plot_02_runge_kutta_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/ode_dynamics/integrators/plot_02_runge_kutta`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Runge, Heun and Kutta: Runge-Kutta methods</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Stormer (1907) computed charged-particle orbits in the Earth&#x27;s magnetic field with the scheme later rediscovered by Verlet (1967) for molecular dynamics. For \ddot q = F(q):">
+
+.. only:: html
+
+  .. image:: /api/gallery/ode_dynamics/integrators/images/thumb/sphx_glr_plot_03_stormer_verlet_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/ode_dynamics/integrators/plot_03_stormer_verlet`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Stormer-Verlet: bounded energy error over long times</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="An embedded Runge-Kutta pair computes a 5th- and a 4th-order solution from the same seven stages. Their difference estimates the local error at almost no extra cost. Dormand and Prince (1980) tuned the pair so that the 5th-order result, the one actually kept, has a very small error constant. A controller then shrinks h where the error estimate is large and grows it where it is small. On a highly eccentric Kepler orbit the step collapses at each close pass (perihelion) and stretches out far from the Sun (aphelion).">
+
+.. only:: html
+
+  .. image:: /api/gallery/ode_dynamics/integrators/images/thumb/sphx_glr_plot_04_dormand_prince_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/ode_dynamics/integrators/plot_04_dormand_prince`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Dormand-Prince: embedded pairs and adaptive step size</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Yoshida (1990) raised the order of a symmetric method by composing it with itself. Three leapfrog substeps of sizes w_1 h, w_0 h, w_1 h with">
+
+.. only:: html
+
+  .. image:: /api/gallery/ode_dynamics/integrators/images/thumb/sphx_glr_plot_05_yoshida_composition_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/ode_dynamics/integrators/plot_05_yoshida_composition`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Yoshida's symplectic composition: fourth order from leapfrog</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /api/gallery/ode_dynamics/integrators/plot_01_euler_method
+   /api/gallery/ode_dynamics/integrators/plot_02_runge_kutta
+   /api/gallery/ode_dynamics/integrators/plot_03_stormer_verlet
+   /api/gallery/ode_dynamics/integrators/plot_04_dormand_prince
+   /api/gallery/ode_dynamics/integrators/plot_05_yoshida_composition
+

@@ -70,7 +70,7 @@ def superstable_parameters(f, R0, R1_bracket, n_max=8):
 R_log, delta_log = superstable_parameters(logistic, 2.0, (3.0, 3.44))
 R_sin, delta_sin = superstable_parameters(sine_map, 0.5, (0.72, 0.83))
 print(" n   delta_n (logistic)   delta_n (sine map)")
-for n, (dl, ds) in enumerate(zip(delta_log, delta_sin), start=1):
+for n, (dl, ds) in enumerate(zip(delta_log, delta_sin, strict=False), start=1):
     print(f"{n:2d}   {dl:17.5f}   {ds:17.5f}")
 
 # %%

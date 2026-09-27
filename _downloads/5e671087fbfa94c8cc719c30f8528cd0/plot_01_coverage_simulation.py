@@ -38,7 +38,7 @@ print(f"mean CI empirical coverage: {hits.mean():.4f} (target 0.95)")
 # the long-run hit rate of the procedure, visible as the few misses.
 
 fig, ax = plt.subplots(figsize=(6, 7))
-for i, ((lo, hi), hit) in enumerate(zip(intervals[:100], hits[:100])):
+for i, ((lo, hi), hit) in enumerate(zip(intervals[:100], hits[:100], strict=False)):
     ax.plot([lo, hi], [i, i], color="C0" if hit else "C3", lw=1.5)
 ax.axvline(true_mean, color="k", ls="--", label="true mean")
 ax.set_xlabel("95% confidence interval for the mean")

@@ -33,7 +33,7 @@ params = {
     "c = 0.4 + 0.4i (dust)": 0.4 + 0.4j,
 }
 fig, axes = plt.subplots(2, 2, figsize=(8, 8))
-for ax, (label, c) in zip(axes.ravel(), params.items()):
+for ax, (label, c) in zip(axes.ravel(), params.items(), strict=False):
     result = julia_set(c=c, extent=(-1.6, 1.6, -1.6, 1.6), resolution=300, max_iter=200)
     plot_escape_time(result, ax=ax, cmap="magma")
     ax.set_title(label)

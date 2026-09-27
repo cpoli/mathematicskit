@@ -70,7 +70,7 @@ then exactly the number of bridges that touch it.
     degrees = [len(g.neighbors(v)) for v in range(len(land))]
     odd = [v for v, d in enumerate(degrees) if d % 2 == 1]
     print(f"connected: {connected_components(g).n_components == 1}")
-    for name, d in zip(land, degrees):
+    for name, d in zip(land, degrees, strict=False):
         print(f"  {name:20s} {d} bridges ({'odd' if d % 2 else 'even'})")
     print(f"odd land masses: {len(odd)} (an Euler walk allows at most 2)")
 
@@ -210,7 +210,7 @@ odd land masses.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.051 seconds)
+   **Total running time of the script:** (0 minutes 0.049 seconds)
 
 
 .. _sphx_glr_download_api_gallery_graph_theory_eulerian_plot_01_konigsberg_bridges.py:

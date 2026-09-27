@@ -13,6 +13,7 @@ one linked back to the corresponding implementation in the code.
    abstract_algebra_breakthroughs
    calculus_breakthroughs
    combinatorics_breakthroughs
+   complex_analysis_breakthroughs
    fractals_chaos_breakthroughs
    geometry_breakthroughs
    graph_theory_breakthroughs
@@ -21,6 +22,7 @@ one linked back to the corresponding implementation in the code.
    numerical_analysis_breakthroughs
    ode_dynamics_breakthroughs
    optimization_breakthroughs
+   pde_breakthroughs
    probability_breakthroughs
    special_functions_breakthroughs
    statistics_breakthroughs

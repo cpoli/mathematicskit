@@ -70,7 +70,7 @@ print("agrees with pivoted LU solve:", np.allclose(x, lu_solve_system(A, b)))
 
 fig, axes = plt.subplots(1, 3, figsize=(10, 3.2))
 titles = ["initial board", "column 0 cleared", "column 1 cleared (triangular)"]
-for ax, stage, title in zip(axes, stages, titles):
+for ax, stage, title in zip(axes, stages, titles, strict=False):
     plot_matrix_heatmap(stage, ax=ax, title=title)
     for (r, c), val in np.ndenumerate(stage):
         ax.text(c, r, f"{val:.0f}", ha="center", va="center", fontsize=9)

@@ -28,7 +28,7 @@ standard_normal = Normal(mu=0.0, sigma=1.0)
 p = 0.2
 z_grid = np.linspace(-4.0, 4.0, 400)
 fig, axes = plt.subplots(1, 3, figsize=(10, 3.2), sharey=True)
-for ax, n in zip(axes, (5, 30, 300)):
+for ax, n in zip(axes, (5, 30, 300), strict=False):
     binomial = Binomial(n=n, p=p)
     ks = np.arange(n + 1)
     z = (ks - binomial.mean) / binomial.std

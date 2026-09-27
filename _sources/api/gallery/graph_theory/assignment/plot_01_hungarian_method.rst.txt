@@ -59,7 +59,7 @@ A small instance, checked by brute force
     result = solve_assignment(cost)
     brute = min(sum(cost[i, p[i]] for i in range(6)) for p in permutations(range(6)))
     print(cost)
-    print(f"optimal assignment: {dict(zip(result.rows.tolist(), result.cols.tolist()))}, cost {result.total_cost} (brute force {brute})")
+    print(f"optimal assignment: {dict(zip(result.rows.tolist(), result.cols.tolist(), strict=False))}, cost {result.total_cost} (brute force {brute})")
 
     fig, ax = plt.subplots()
     ax.imshow(cost, cmap="Blues")
@@ -118,7 +118,7 @@ Large instances are fast
 
     n =  100: optimal cost 1.721 in 0.000 s (100! assignments)
     n =  400: optimal cost 1.604 in 0.003 s (400! assignments)
-    n = 1600: optimal cost 1.651 in 0.075 s (1600! assignments)
+    n = 1600: optimal cost 1.651 in 0.074 s (1600! assignments)
 
 
 
@@ -126,7 +126,7 @@ Large instances are fast
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.108 seconds)
+   **Total running time of the script:** (0 minutes 0.106 seconds)
 
 
 .. _sphx_glr_download_api_gallery_graph_theory_assignment_plot_01_hungarian_method.py:

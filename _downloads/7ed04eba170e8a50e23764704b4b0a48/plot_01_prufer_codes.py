@@ -31,9 +31,9 @@ n = 4
 positions = {v: (np.cos(2 * np.pi * v / n), np.sin(2 * np.pi * v / n)) for v in range(n)}
 sequences = list(product(range(n), repeat=n - 2))
 fig, axes = plt.subplots(4, 4, figsize=(8, 8))
-for ax, seq in zip(axes.flat, sequences):
+for ax, seq in zip(axes.flat, sequences, strict=False):
     for u, v in prufer_decode(seq):
-        ax.plot(*zip(positions[u], positions[v]), "k-")
+        ax.plot(*zip(positions[u], positions[v], strict=False), "k-")
     for v, (x, y) in positions.items():
         ax.text(x, y, str(v), ha="center", va="center", bbox={"boxstyle": "circle", "fc": "w"})
     ax.set_title(str(list(seq)), fontsize=9)

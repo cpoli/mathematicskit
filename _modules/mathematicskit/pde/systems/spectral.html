@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mathematicskit.pde.systems.spectral &#8212; mathematicskit 0.3.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=64cc4de3f052d77215f0" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=64cc4de3f052d77215f0" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=c83e6b79" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=64cc4de3f052d77215f0"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0" />
+
+    <script src="../../../../_static/documentation_options.js?v=f129cdf0"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/mathematicskit/pde/systems/spectral';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../../../_static/searchtools.js"></script>
+    <script src="../../../../_static/language_data.js"></script>
+    <script src="../../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/mathematicskit_logo_transparent.png" class="logo__image only-light" alt="mathematicskit logo"/>
+    <img src="../../../../_static/mathematicskit_logo_transparent.png" class="logo__image only-dark pst-js-only" alt="mathematicskit logo"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/mathematicskit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/mathematicskit/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i><span class="visually-hidden">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/mathematicskit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/mathematicskit/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i><span class="visually-hidden">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">mathematicskit.pde.systems.spectral</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for mathematicskit.pde.systems.spectral</h1><div class="highlight"><pre>
+<span></span><span class="sa">r</span><span class="sd">"""Spectral methods: Fourier (periodic) and Chebyshev (non-periodic) collocation.</span>
+
+<span class="sd">Spectral methods differentiate the global interpolant through *all* grid</span>
+<span class="sd">values instead of a local stencil, so for smooth functions the error</span>
+<span class="sd">falls faster than any power of :math:`1/N` ("spectral accuracy"):</span>
+
+<span class="sd">* **Fourier** (Orszag, 1969-1971; Kreiss &amp; Oliger, 1972): on a periodic</span>
+<span class="sd">  grid, :math:`\widehat{u'}_k = i k \hat u_k`. :func:`fourier_derivative`</span>
+<span class="sd">  does this with :mod:`numpy.fft`; :func:`fourier_differentiation_matrix`</span>
+<span class="sd">  builds the equivalent dense matrix (Trefethen 2000, Ch. 3), which is</span>
+<span class="sd">  what lets :class:`BurgersEquation1D` run its pseudo-spectral right-hand</span>
+<span class="sd">  side inside an ``@njit`` callback for :mod:`mathematicskit.integrators`.</span>
+<span class="sd">* **Chebyshev** (Gottlieb &amp; Orszag, 1977): collocation at the Chebyshev</span>
+<span class="sd">  points :math:`x_k = -\cos(k\pi/N)` -- reusing</span>
+<span class="sd">  :func:`mathematicskit.numerical_analysis.chebyshev_nodes` -- where</span>
+<span class="sd">  node clustering at the ends avoids the Runge phenomenon.</span>
+<span class="sd">  :func:`chebyshev_differentiation_matrix` is Trefethen's ``cheb.m``;</span>
+<span class="sd">  :func:`chebyshev_poisson_1d` and :func:`chebyshev_poisson_2d` solve</span>
+<span class="sd">  boundary-value problems with it, via :func:`mathematicskit.linalg.lu_solve_system`.</span>
+
+<span class="sd">See Trefethen, *Spectral Methods in MATLAB*, SIAM 2000, Ch. 1-7, and</span>
+<span class="sd">Boyd, *Chebyshev and Fourier Spectral Methods*, 2nd ed., 2001.</span>
+<span class="sd">"""</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numba</span><span class="w"> </span><span class="kn">import</span> <span class="n">njit</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.linalg</span><span class="w"> </span><span class="kn">import</span> <span class="n">lu_solve_system</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.numerical_analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">chebyshev_nodes</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.pde.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">EllipticSolution</span><span class="p">,</span> <span class="n">MethodOfLinesPDE</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.pde.systems.heat</span><span class="w"> </span><span class="kn">import</span> <span class="n">InitialCondition</span><span class="p">,</span> <span class="n">_sample</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.pde.systems.stability</span><span class="w"> </span><span class="kn">import</span> <span class="n">RK4_IMAG_AXIS_LIMIT</span><span class="p">,</span> <span class="n">RK4_REAL_AXIS_LIMIT</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.pde.utils.operators</span><span class="w"> </span><span class="kn">import</span> <span class="n">uniform_grid</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"fourier_derivative"</span><span class="p">,</span>
+    <span class="s2">"fourier_differentiation_matrix"</span><span class="p">,</span>
+    <span class="s2">"chebyshev_differentiation_matrix"</span><span class="p">,</span>
+    <span class="s2">"chebyshev_poisson_1d"</span><span class="p">,</span>
+    <span class="s2">"chebyshev_poisson_2d"</span><span class="p">,</span>
+    <span class="s2">"BurgersEquation1D"</span><span class="p">,</span>
+    <span class="s2">"burgers_cole_hopf_solution"</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="fourier_derivative">
+<a class="viewcode-back" href="../../../../api/pde.html#mathematicskit.pde.fourier_derivative">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">fourier_derivative</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">order</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Spectral derivative of periodic grid values via the FFT.</span>
+
+<span class="sd">    Multiplies each Fourier coefficient by :math:`(i k)^{\text{order}}`</span>
+<span class="sd">    (:func:`numpy.fft.rfft` / :func:`~numpy.fft.irfft`). For an even</span>
+<span class="sd">    number of points the unpaired Nyquist mode is zeroed for odd orders,</span>
+<span class="sd">    so the derivative of real data stays real (Trefethen 2000, Ch. 3).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    u : array-like, shape (n,)</span>
+<span class="sd">        Samples at ``x_j = j * length / n``, ``j = 0, ..., n-1``.</span>
+<span class="sd">    length : float</span>
+<span class="sd">        Period.</span>
+<span class="sd">    order : int</span>
+<span class="sd">        Derivative order.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray, shape (n,)</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; x = np.linspace(0, 2 * np.pi, 16, endpoint=False)</span>
+<span class="sd">    &gt;&gt;&gt; bool(np.allclose(fourier_derivative(np.sin(x)), np.cos(x)))</span>
+<span class="sd">    True</span>
+<span class="sd">    """</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfftfreq</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="n">length</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">factor</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">k</span><span class="p">)</span> <span class="o">**</span> <span class="n">order</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">order</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">factor</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">irfft</span><span class="p">(</span><span class="n">factor</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfft</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="n">n</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="fourier_differentiation_matrix">
+<a class="viewcode-back" href="../../../../api/pde.html#mathematicskit.pde.fourier_differentiation_matrix">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">fourier_differentiation_matrix</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">order</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Dense Fourier spectral differentiation matrix on ``n`` periodic points (``n`` even).</span>
+
+<span class="sd">    With :math:`h = 2\pi/n` and :math:`d = i - j`,</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        D^{(1)}_{ij} = \tfrac12 (-1)^{d} \cot(d h / 2)\ (d \ne 0), \qquad</span>
+<span class="sd">        D^{(2)}_{ij} = -\frac{(-1)^{d}}{2 \sin^2(d h/2)}\ (d \ne 0), \quad</span>
+<span class="sd">        D^{(2)}_{ii} = -\frac{\pi^2}{3h^2} - \frac16,</span>
+
+<span class="sd">    rescaled by :math:`(2\pi/\text{length})^{\text{order}}` (Trefethen</span>
+<span class="sd">    2000, Ch. 3, eqs. (3.10)-(3.12)).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    n : int</span>
+<span class="sd">        Even number of grid points.</span>
+<span class="sd">    length : float</span>
+<span class="sd">        Period.</span>
+<span class="sd">    order : {1, 2}</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray, shape (n, n)</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; x = np.linspace(0, 2 * np.pi, 16, endpoint=False)</span>
+<span class="sd">    &gt;&gt;&gt; D2 = fourier_differentiation_matrix(16, order=2)</span>
+<span class="sd">    &gt;&gt;&gt; bool(np.allclose(D2 @ np.sin(3 * x), -9 * np.sin(3 * x)))</span>
+<span class="sd">    True</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"n must be a positive even integer"</span><span class="p">)</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">n</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">subtract</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">idx</span><span class="p">)</span>
+    <span class="n">off</span> <span class="o">=</span> <span class="n">d</span> <span class="o">!=</span> <span class="mi">0</span>
+    <span class="n">sign</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">d</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">order</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">D</span><span class="p">[</span><span class="n">off</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sign</span><span class="p">[</span><span class="n">off</span><span class="p">]</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">off</span><span class="p">]</span> <span class="o">*</span> <span class="n">h</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">order</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">D</span><span class="p">[</span><span class="n">off</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">sign</span><span class="p">[</span><span class="n">off</span><span class="p">]</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">off</span><span class="p">]</span> <span class="o">*</span> <span class="n">h</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="n">D</span><span class="p">[</span><span class="o">~</span><span class="n">off</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">3.0</span> <span class="o">*</span> <span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="mf">6.0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"order must be 1 or 2"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">D</span> <span class="o">*</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">length</span><span class="p">)</span> <span class="o">**</span> <span class="n">order</span></div>
+
+
+
+<div class="viewcode-block" id="chebyshev_differentiation_matrix">
+<a class="viewcode-back" href="../../../../api/pde.html#mathematicskit.pde.chebyshev_differentiation_matrix">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">chebyshev_differentiation_matrix</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Chebyshev collocation differentiation matrix on ``n`` Chebyshev points of ``[a, b]``.</span>
+
+<span class="sd">    .. math:: D_{ij} = \frac{c_i}{c_j} \frac{(-1)^{i+j}}{x_i - x_j}\ (i \ne j), \qquad D_{ii} = -\sum_{j \ne i} D_{ij},</span>
+
+<span class="sd">    with :math:`c_0 = c_{n-1} = 2` and :math:`c_i = 1` otherwise; the</span>
+<span class="sd">    "negative sum trick" for the diagonal makes :math:`D` exact on</span>
+<span class="sd">    constants and improves rounding (Trefethen 2000, Ch. 6, ``cheb.m``).</span>
+<span class="sd">    Points come from :func:`mathematicskit.numerical_analysis.chebyshev_nodes`,</span>
+<span class="sd">    in increasing order.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    n : int</span>
+<span class="sd">        Number of points (polynomial degree ``n - 1``).</span>
+<span class="sd">    a, b : float</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    D : ndarray, shape (n, n)</span>
+<span class="sd">    x : ndarray, shape (n,)</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; D, x = chebyshev_differentiation_matrix(12)</span>
+<span class="sd">    &gt;&gt;&gt; bool(np.allclose(D @ x**5, 5 * x**4))  # exact for polynomials of degree &lt; n</span>
+<span class="sd">    True</span>
+<span class="sd">    """</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">chebyshev_nodes</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2.0</span>
+    <span class="n">c</span> <span class="o">*=</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">**</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">dX</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">subtract</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">dX</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+    <span class="n">D</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">D</span><span class="p">,</span> <span class="n">x</span></div>
+
+
+
+<div class="viewcode-block" id="chebyshev_poisson_1d">
+<a class="viewcode-back" href="../../../../api/pde.html#mathematicskit.pde.chebyshev_poisson_1d">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">chebyshev_poisson_1d</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">32</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">ua</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">ub</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">EllipticSolution</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Solve :math:`u'' = f` on :math:`[a, b]` with :math:`u(a) = u_a`, :math:`u(b) = u_b` by Chebyshev collocation.</span>
+
+<span class="sd">    Collocates :math:`D^2 u = f` at the interior Chebyshev points and</span>
+<span class="sd">    moves the known boundary columns to the right-hand side (Trefethen</span>
+<span class="sd">    2000, Ch. 7). For analytic `f` the error decays geometrically in `n`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    f : float or callable</span>
+<span class="sd">    n : int</span>
+<span class="sd">    a, b, ua, ub : float</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    EllipticSolution</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; sol = chebyshev_poisson_1d(lambda x: np.exp(x), n=16, ua=np.exp(-1), ub=np.exp(1))</span>
+<span class="sd">    &gt;&gt;&gt; bool(np.max(np.abs(sol.u - np.exp(sol.x))) &lt; 1e-12)</span>
+<span class="sd">    True</span>
+<span class="sd">    """</span>
+    <span class="n">D</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">chebyshev_differentiation_matrix</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="n">D2</span> <span class="o">=</span> <span class="n">D</span> <span class="o">@</span> <span class="n">D</span>
+    <span class="n">f_int</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">D2</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">rhs</span> <span class="o">=</span> <span class="n">f_int</span> <span class="o">-</span> <span class="n">D2</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">ua</span> <span class="o">-</span> <span class="n">D2</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">ub</span>
+    <span class="n">interior</span> <span class="o">=</span> <span class="n">lu_solve_system</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([[</span><span class="n">ua</span><span class="p">],</span> <span class="n">interior</span><span class="p">,</span> <span class="p">[</span><span class="n">ub</span><span class="p">]])</span>
+    <span class="k">return</span> <span class="n">EllipticSolution</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="o">=</span><span class="n">u</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"chebyshev"</span><span class="p">,</span> <span class="n">residual_norm</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span> <span class="o">@</span> <span class="n">interior</span> <span class="o">-</span> <span class="n">rhs</span><span class="p">)))</span></div>
+
+
+
+<div class="viewcode-block" id="chebyshev_poisson_2d">
+<a class="viewcode-back" href="../../../../api/pde.html#mathematicskit.pde.chebyshev_poisson_2d">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">chebyshev_poisson_2d</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">24</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">EllipticSolution</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Solve :math:`u_{xx} + u_{yy} = f` on the square :math:`[a, b]^2` with :math:`u = 0` on the boundary.</span>
+
+<span class="sd">    Tensor-product Chebyshev collocation: the interior operator is</span>
+<span class="sd">    :math:`\tilde D^2 \otimes I + I \otimes \tilde D^2` (Trefethen 2000,</span>
+<span class="sd">    Ch. 7, program ``p16``), solved densely with</span>
+<span class="sd">    :func:`mathematicskit.linalg.lu_solve_system`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    f : float or callable</span>
+<span class="sd">        Source term, ``f(X, Y)`` on ``"ij"`` meshgrids.</span>
+<span class="sd">    n : int</span>
+<span class="sd">        Chebyshev points per direction.</span>
+<span class="sd">    a, b : float</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    EllipticSolution</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; f = lambda X, Y: -2 * np.pi**2 * np.sin(np.pi * X) * np.sin(np.pi * Y)</span>
+<span class="sd">    &gt;&gt;&gt; sol = chebyshev_poisson_2d(f, n=20)</span>
+<span class="sd">    &gt;&gt;&gt; X, Y = np.meshgrid(sol.x, sol.y, indexing="ij")</span>
+<span class="sd">    &gt;&gt;&gt; bool(np.max(np.abs(sol.u - np.sin(np.pi * X) * np.sin(np.pi * Y))) &lt; 1e-8)</span>
+<span class="sd">    True</span>
+<span class="sd">    """</span>
+    <span class="n">D</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">chebyshev_differentiation_matrix</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="n">D2</span> <span class="o">=</span> <span class="p">(</span><span class="n">D</span> <span class="o">@</span> <span class="n">D</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">identity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">D2</span><span class="p">,</span> <span class="n">identity</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">identity</span><span class="p">,</span> <span class="n">D2</span><span class="p">)</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">indexing</span><span class="o">=</span><span class="s2">"ij"</span><span class="p">)</span>
+    <span class="n">rhs</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">f</span><span class="p">)))</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+    <span class="n">interior</span> <span class="o">=</span> <span class="n">lu_solve_system</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+    <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">interior</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">EllipticSolution</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">u</span><span class="o">=</span><span class="n">u</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"chebyshev"</span><span class="p">,</span> <span class="n">residual_norm</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span> <span class="o">@</span> <span class="n">interior</span> <span class="o">-</span> <span class="n">rhs</span><span class="p">)))</span></div>
+
+
+
+<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_burgers_spectral_rhs</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="c1"># params = [nu, D1.ravel(), D2.ravel()]; pseudo-spectral: products in physical space.</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">nu</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">D1</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">1</span> <span class="p">:</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">n</span> <span class="o">*</span> <span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+    <span class="n">D2</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">1</span> <span class="o">+</span> <span class="n">n</span> <span class="o">*</span> <span class="n">n</span> <span class="p">:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">state</span> <span class="o">*</span> <span class="p">(</span><span class="n">D1</span> <span class="o">@</span> <span class="n">state</span><span class="p">)</span> <span class="o">+</span> <span class="n">nu</span> <span class="o">*</span> <span class="p">(</span><span class="n">D2</span> <span class="o">@</span> <span class="n">state</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="BurgersEquation1D">
+<a class="viewcode-back" href="../../../../api/pde.html#mathematicskit.pde.BurgersEquation1D">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">BurgersEquation1D</span><span class="p">(</span><span class="n">MethodOfLinesPDE</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Viscous Burgers' equation :math:`u_t + u\,u_x = \nu\,u_{xx}`, periodic, Fourier pseudo-spectral.</span>
+
+<span class="sd">    Derivatives come from :func:`fourier_differentiation_matrix`; the</span>
+<span class="sd">    nonlinear product :math:`u\,u_x` is formed pointwise in physical space</span>
+<span class="sd">    (the pseudo-spectral, or collocation, approach of Orszag 1969-1971 and</span>
+<span class="sd">    Kreiss &amp; Oliger 1972), without dealiasing. The resulting ODE system is</span>
+<span class="sd">    integrated by :mod:`mathematicskit.integrators` through an ``@njit``</span>
+<span class="sd">    right-hand side that receives the flattened matrices in ``params``.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    u0 : callable or ndarray, shape (n,)</span>
+<span class="sd">    length : float</span>
+<span class="sd">        Period.</span>
+<span class="sd">    n : int</span>
+<span class="sd">        Even number of grid points.</span>
+<span class="sd">    nu : float</span>
+<span class="sd">        Viscosity.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; burgers = BurgersEquation1D(lambda x: np.sin(x), n=32, nu=0.1)</span>
+<span class="sd">    &gt;&gt;&gt; sol = burgers.solve(1.0, dt=1e-3, save_every=100)</span>
+<span class="sd">    &gt;&gt;&gt; bool(abs(sol.final.mean() - sol.u[0].mean()) &lt; 1e-10)  # the mean is conserved</span>
+<span class="sd">    True</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u0</span><span class="p">:</span> <span class="n">InitialCondition</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">64</span><span class="p">,</span> <span class="n">nu</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nu</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">length</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">nu</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dx</span> <span class="o">=</span> <span class="n">uniform_grid</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">periodic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state0</span> <span class="o">=</span> <span class="n">_sample</span><span class="p">(</span><span class="n">u0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">D1</span> <span class="o">=</span> <span class="n">fourier_differentiation_matrix</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">D2</span> <span class="o">=</span> <span class="n">fourier_differentiation_matrix</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([[</span><span class="bp">self</span><span class="o">.</span><span class="n">nu</span><span class="p">],</span> <span class="n">D1</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">D2</span><span class="o">.</span><span class="n">ravel</span><span class="p">()])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rhs_njit</span> <span class="o">=</span> <span class="n">_burgers_spectral_rhs</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_to_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">states</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">states</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<div class="viewcode-block" id="BurgersEquation1D.max_stable_dt">
+<a class="viewcode-back" href="../../../../api/pde.html#mathematicskit.pde.BurgersEquation1D.max_stable_dt">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">max_stable_dt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"rk4"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Linearized RK4 estimate: the smaller of the diffusive and advective limits.</span>
+
+<span class="sd">        Diffusion contributes eigenvalues down to :math:`-\nu k_{\max}^2`</span>
+<span class="sd">        and advection (frozen at :math:`\max|u_0|`) up to</span>
+<span class="sd">        :math:`\pm i \max|u_0| k_{\max}`, with :math:`k_{\max} = \pi n / L`.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">method</span> <span class="o">!=</span> <span class="s2">"rk4"</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+        <span class="n">k_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span>
+        <span class="n">u_max</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state0</span><span class="p">)))</span>
+        <span class="n">diffusive</span> <span class="o">=</span> <span class="n">RK4_REAL_AXIS_LIMIT</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nu</span> <span class="o">*</span> <span class="n">k_max</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nu</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+        <span class="n">advective</span> <span class="o">=</span> <span class="n">RK4_IMAG_AXIS_LIMIT</span> <span class="o">/</span> <span class="p">(</span><span class="n">u_max</span> <span class="o">*</span> <span class="n">k_max</span><span class="p">)</span> <span class="k">if</span> <span class="n">u_max</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">diffusive</span><span class="p">,</span> <span class="n">advective</span><span class="p">))</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="burgers_cole_hopf_solution">
+<a class="viewcode-back" href="../../../../api/pde.html#mathematicskit.pde.burgers_cole_hopf_solution">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">burgers_cole_hopf_solution</span><span class="p">(</span><span class="n">u0</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">nu</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">256</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Exact periodic solution of viscous Burgers' equation by the Hopf-Cole transformation.</span>
+
+<span class="sd">    Hopf (1950) and Cole (1951) showed that :math:`u = -2\nu\,\varphi_x/\varphi`</span>
+<span class="sd">    turns :math:`u_t + u u_x = \nu u_{xx}` into the heat equation</span>
+<span class="sd">    :math:`\varphi_t = \nu \varphi_{xx}`, with</span>
+<span class="sd">    :math:`\varphi(x, 0) = \exp\!\big(-\tfrac{1}{2\nu}\int_0^x u_0\big)`.</span>
+<span class="sd">    Here the antiderivative, the heat evolution (each Fourier mode times</span>
+<span class="sd">    :math:`e^{-\nu k^2 t}`), and :math:`\varphi_x` are all computed</span>
+<span class="sd">    spectrally with :mod:`numpy.fft`, so the result is exact up to the</span>
+<span class="sd">    resolution of the ``n``-point grid. :math:`\varphi` spans roughly</span>
+<span class="sd">    :math:`e^{\pm \max|\int u_0| / (2\nu)}`, so very small `nu` exhausts</span>
+<span class="sd">    double precision.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    u0 : callable or ndarray, shape (n,)</span>
+<span class="sd">        Periodic initial data with zero mean (so that :math:`\varphi` is periodic).</span>
+<span class="sd">    t, nu : float</span>
+<span class="sd">    length : float</span>
+<span class="sd">        Period.</span>
+<span class="sd">    n : int</span>
+<span class="sd">        Even number of grid points.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    x : ndarray, shape (n,)</span>
+<span class="sd">    u : ndarray, shape (n,)</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; x, u = burgers_cole_hopf_solution(np.sin, t=1.0, nu=0.1, n=128)</span>
+<span class="sd">    &gt;&gt;&gt; sol = BurgersEquation1D(np.sin, n=128, nu=0.1).solve(1.0, dt=1e-3)</span>
+<span class="sd">    &gt;&gt;&gt; bool(np.max(np.abs(sol.final - u)) &lt; 1e-10)</span>
+<span class="sd">    True</span>
+<span class="sd">    """</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">uniform_grid</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">periodic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">u_init</span> <span class="o">=</span> <span class="n">_sample</span><span class="p">(</span><span class="n">u0</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">u_init</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mf">1e-10</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">u_init</span><span class="p">)))):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"u0 must have zero mean for a periodic Hopf-Cole solution"</span><span class="p">)</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfftfreq</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="n">length</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">u_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfft</span><span class="p">(</span><span class="n">u_init</span><span class="p">)</span>
+    <span class="n">U_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">u_hat</span><span class="p">)</span>
+    <span class="n">U_hat</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">u_hat</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+    <span class="n">U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">irfft</span><span class="p">(</span><span class="n">U_hat</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">exponent</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">U</span> <span class="o">-</span> <span class="n">U</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">nu</span><span class="p">)</span>
+    <span class="n">phi_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfft</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">exponent</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">nu</span> <span class="o">*</span> <span class="n">k</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">irfft</span><span class="p">(</span><span class="n">phi_hat</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">dphi_hat</span> <span class="o">=</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">k</span> <span class="o">*</span> <span class="n">phi_hat</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">dphi_hat</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">nu</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">irfft</span><span class="p">(</span><span class="n">dphi_hat</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="n">phi</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, mathematicskit contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.22.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

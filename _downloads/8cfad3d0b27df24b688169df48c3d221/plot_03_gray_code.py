@@ -39,5 +39,5 @@ ax.set_title("4-bit Gray code")
 for n in range(2, 9):
     binary_flips = sum(bin(k ^ (k + 1)).count("1") for k in range(2**n - 1))
     gray = gray_code(n)
-    gray_flips = sum(bin(a ^ b).count("1") for a, b in zip(gray, gray[1:]))
+    gray_flips = sum(bin(a ^ b).count("1") for a, b in zip(gray, gray[1:], strict=False))
     print(f"n = {n}: binary counting flips {binary_flips} bits, Gray code flips {gray_flips}")

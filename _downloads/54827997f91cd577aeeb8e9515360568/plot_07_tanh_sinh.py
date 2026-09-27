@@ -31,7 +31,7 @@ print("  " + ", ".join(f"{x:.3g}" for x in nodes))
 cases = {r"$1/\sqrt{x}$": (lambda x: 1 / np.sqrt(x), 2.0), r"$\log x$": (np.log, -1.0)}
 hs = [1.0, 0.5, 0.25, 0.125, 0.0625]
 fig, axes = plt.subplots(1, 2, figsize=(10, 4))
-for ax, (name, (f, exact)) in zip(axes, cases.items()):
+for ax, (name, (f, exact)) in zip(axes, cases.items(), strict=False):
     evals, errors = [], []
     for h in hs:
         result = TanhSinhQuadrature(h=h).integrate(f, 0.0, 1.0)

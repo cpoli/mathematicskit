@@ -23,7 +23,7 @@ levels = de_casteljau(control, 0.4)
 
 fig, ax = plt.subplots()
 ax.plot(*curve.T, "k", lw=2, label="Bézier curve")
-for level, color in zip(levels, ("tab:gray", "tab:blue", "tab:green", "tab:red")):
+for level, color in zip(levels, ("tab:gray", "tab:blue", "tab:green", "tab:red"), strict=False):
     ax.plot(*level.T, "o-", color=color, ms=6)
 ax.plot(*levels[-1][0], "o", color="tab:red", ms=10, label="B(0.4)")
 ax.set_aspect("equal")

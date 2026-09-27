@@ -43,6 +43,11 @@ Sections
 - **synchronization** -- the Kuramoto model's synchronization transition.
 - **chaotic_flows** -- the Lorenz attractor and its butterfly effect, and
   the Rossler attractor and its return map.
+- **integrators** -- Euler's method, Runge-Kutta, Stormer-Verlet,
+  Dormand-Prince adaptive stepping, and Yoshida's symplectic composition.
+- **stiffness** -- Dahlquist's A-stability, Curtiss and Hirschfelder's
+  BDF, Robertson's stiff kinetics, Radau IIA, and collocation for
+  boundary-value problems.
 
 
 .. raw:: html
@@ -232,6 +237,116 @@ The FitzHugh-Nagumo neuron: excitability and periodic spiking.
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">FitzHugh-Nagumo: excitability and spiking</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Numerical integration
+---------------------
+
+The explicit integrators behind every trajectory in this gallery: Euler's
+method, Runge-Kutta, Stormer-Verlet, Dormand-Prince adaptive stepping, and
+Yoshida's symplectic composition.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Euler (1768) replaced the curve by its tangent line over a short step h: y_{n+1} = y_n + h f(t_n, y_n). Evaluating the slope at the end of the step instead gives the implicit (backward) variant y_{n+1} = y_n + h f(t_{n+1}, y_{n+1}). Both have a local error of O(h^2), which adds up to a global error of O(h): halving the step halves the error.">
+
+.. only:: html
+
+  .. image:: /api/gallery/ode_dynamics/integrators/images/thumb/sphx_glr_plot_01_euler_method_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/ode_dynamics/integrators/plot_01_euler_method`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Euler's method: first-order convergence</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Runge (1895), Heun (1900) and Kutta (1901) matched more terms of the solution&#x27;s Taylor series without computing any derivatives of f. They did it by sampling the slope at several points inside each step and combining the samples. Heun&#x27;s two-stage method is second order, and Kutta&#x27;s classical four-stage method">
+
+.. only:: html
+
+  .. image:: /api/gallery/ode_dynamics/integrators/images/thumb/sphx_glr_plot_02_runge_kutta_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/ode_dynamics/integrators/plot_02_runge_kutta`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Runge, Heun and Kutta: Runge-Kutta methods</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Stormer (1907) computed charged-particle orbits in the Earth&#x27;s magnetic field with the scheme later rediscovered by Verlet (1967) for molecular dynamics. For \ddot q = F(q):">
+
+.. only:: html
+
+  .. image:: /api/gallery/ode_dynamics/integrators/images/thumb/sphx_glr_plot_03_stormer_verlet_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/ode_dynamics/integrators/plot_03_stormer_verlet`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Stormer-Verlet: bounded energy error over long times</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="An embedded Runge-Kutta pair computes a 5th- and a 4th-order solution from the same seven stages. Their difference estimates the local error at almost no extra cost. Dormand and Prince (1980) tuned the pair so that the 5th-order result, the one actually kept, has a very small error constant. A controller then shrinks h where the error estimate is large and grows it where it is small. On a highly eccentric Kepler orbit the step collapses at each close pass (perihelion) and stretches out far from the Sun (aphelion).">
+
+.. only:: html
+
+  .. image:: /api/gallery/ode_dynamics/integrators/images/thumb/sphx_glr_plot_04_dormand_prince_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/ode_dynamics/integrators/plot_04_dormand_prince`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Dormand-Prince: embedded pairs and adaptive step size</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Yoshida (1990) raised the order of a symmetric method by composing it with itself. Three leapfrog substeps of sizes w_1 h, w_0 h, w_1 h with">
+
+.. only:: html
+
+  .. image:: /api/gallery/ode_dynamics/integrators/images/thumb/sphx_glr_plot_05_yoshida_composition_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/ode_dynamics/integrators/plot_05_yoshida_composition`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Yoshida's symplectic composition: fourth order from leapfrog</div>
     </div>
 
 
@@ -551,6 +666,116 @@ node/saddle/spiral/center fixed points.
 
     </div>
 
+Stiffness and boundary-value problems
+-------------------------------------
+
+Why explicit integrators stall on stiff systems: Dahlquist's A-stability,
+Curtiss and Hirschfelder's BDF, Robertson's stiff kinetics, Radau IIA
+implicit Runge-Kutta, and boundary-value problems by collocation.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Applied to the test equation y&#x27; = \lambda y, a one-step method multiplies y by a stability function R(z), with z = \lambda h. Dahlquist (1963) called a method A-stable if |R(z)| \le 1 on the whole left half-plane, so that no decaying mode can ever be amplified, whatever the step size. Explicit methods never qualify, since their R is a polynomial and grows without bound. RK4&#x27;s region reaches only z \approx -2.785 on the real axis. Backward Euler&#x27;s R(z) = 1/(1 - z) is A-stable. Dahlquist also proved that no A-stable linear multistep method can exceed order 2 (his &quot;second barrier&quot;).">
+
+.. only:: html
+
+  .. image:: /api/gallery/ode_dynamics/stiffness/images/thumb/sphx_glr_plot_01_dahlquist_a_stability_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/ode_dynamics/stiffness/plot_01_dahlquist_a_stability`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Dahlquist's A-stability: backward Euler vs RK4</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Curtiss and Hirschfelder (1952) named the difficulty &quot;stiffness&quot; while integrating chemical-kinetics equations, using the model problem">
+
+.. only:: html
+
+  .. image:: /api/gallery/ode_dynamics/stiffness/images/thumb/sphx_glr_plot_02_curtiss_hirschfelder_bdf_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/ode_dynamics/stiffness/plot_02_curtiss_hirschfelder_bdf`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Curtiss and Hirschfelder: stiffness and BDF</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Robertson (1966) proposed three-species autocatalytic reactions">
+
+.. only:: html
+
+  .. image:: /api/gallery/ode_dynamics/stiffness/images/thumb/sphx_glr_plot_03_robertson_stiff_kinetics_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/ode_dynamics/stiffness/plot_03_robertson_stiff_kinetics`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Robertson's stiff chemical kinetics</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Butcher (1964) built implicit Runge-Kutta methods on Gauss and Radau quadrature nodes. Ehle (1969) showed that their stability functions are Padé approximants of e^z, and that the Radau IIA family is A-stable and, moreover, L-stable: R(z) \to 0 as z \to -\infty, so infinitely stiff modes are damped in a single step. The three-stage, order-5 method used by stiff_integrate has">
+
+.. only:: html
+
+  .. image:: /api/gallery/ode_dynamics/stiffness/images/thumb/sphx_glr_plot_04_radau_iia_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/ode_dynamics/stiffness/plot_04_radau_iia`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Butcher, Ehle and Radau IIA: L-stable implicit Runge-Kutta</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="A two-point boundary-value problem fixes conditions at both ends, so there is no initial state to march forward from. Collocation solves for the whole solution at once. It takes a piecewise polynomial on a mesh and requires it to satisfy the ODE exactly at a few collocation points per interval and to meet the boundary conditions, which gives one nonlinear system for Newton&#x27;s method. De Boor and Swartz (1973) proved that collocation with k Gauss points per interval converges with order 2k at the mesh nodes (&quot;superconvergence&quot;). This made it the basis of BVP codes such as COLSYS and scipy.integrate.solve_bvp, which uses the closely related 3-point Lobatto IIIA scheme.">
+
+.. only:: html
+
+  .. image:: /api/gallery/ode_dynamics/stiffness/images/thumb/sphx_glr_plot_05_de_boor_swartz_collocation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/ode_dynamics/stiffness/plot_05_de_boor_swartz_collocation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">De Boor and Swartz: collocation for boundary-value problems</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
 Synchronization
 ---------------
 
@@ -601,12 +826,14 @@ The Kuramoto model's transition from incoherence to collective synchrony.
    /api/gallery/ode_dynamics/chaotic_flows/index.rst
    /api/gallery/ode_dynamics/epidemics/index.rst
    /api/gallery/ode_dynamics/excitable/index.rst
+   /api/gallery/ode_dynamics/integrators/index.rst
    /api/gallery/ode_dynamics/limit_cycles/index.rst
    /api/gallery/ode_dynamics/logistic_map/index.rst
    /api/gallery/ode_dynamics/phase_portrait/index.rst
    /api/gallery/ode_dynamics/poincare/index.rst
    /api/gallery/ode_dynamics/population/index.rst
    /api/gallery/ode_dynamics/stability/index.rst
+   /api/gallery/ode_dynamics/stiffness/index.rst
    /api/gallery/ode_dynamics/synchronization/index.rst
 
 

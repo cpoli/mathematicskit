@@ -27,6 +27,21 @@ and each subpackage's :doc:`history </history/index>` page traces the
 breakthroughs behind it -- from Euclid's algorithm to the fast Fourier
 transform -- each one linked to the code that reproduces it.
 
+In short, mathematicskit is |num_subpackages| domains behind one
+consistent API, plus a history-of-mathematics narrative in which every
+milestone links to runnable gallery code. It is closest in spirit to a
+teaching resource such as *Numerical Recipes* or the
+`Scientific Python Lectures <https://lectures.scientific-python.org/>`_
+(formerly the SciPy lecture notes), but packaged as an importable library.
+
+.. important::
+
+   Each domain is a teaching-depth subset of its field, not a complete
+   implementation. mathematicskit is not a replacement for specialist
+   libraries in production work: for that, use the dedicated tools
+   (SciPy, NetworkX, CVXPY, statsmodels, SymPy, SageMath, and the like)
+   directly.
+
 - :mod:`mathematicskit.abstract_algebra` -- cyclic/permutation groups, subgroups
   and cosets, finite fields, and polynomial ring arithmetic.
 - :mod:`mathematicskit.calculus` -- numerical differentiation/integration,
@@ -34,6 +49,9 @@ transform -- each one linked to the code that reproduces it.
 - :mod:`mathematicskit.combinatorics` -- counting and generation, Pascal's
   triangle, integer partitions, inclusion-exclusion, and Stirling/
   Catalan/Bell numbers.
+- :mod:`mathematicskit.complex_analysis` -- the Cauchy-Riemann equations,
+  contour integrals, Cauchy's integral theorem and formula, residues and
+  the argument principle, conformal maps, and domain coloring.
 - :mod:`mathematicskit.fractals_chaos` -- Lyapunov exponents, box-counting
   fractal dimension, Mandelbrot/Julia sets, iterated function systems,
   and cellular automata.
@@ -55,6 +73,9 @@ transform -- each one linked to the code that reproduces it.
 - :mod:`mathematicskit.ode_dynamics` -- fixed-point stability, phase portraits,
   the logistic map, bifurcation normal forms, limit cycles, and Poincare
   sections.
+- :mod:`mathematicskit.pde` -- heat, wave, advection, and Poisson/Laplace
+  problems: the method of lines, Crank-Nicolson, CFL and von Neumann
+  stability, and Fourier/Chebyshev spectral methods.
 - :mod:`mathematicskit.optimization` -- gradient descent, nonlinear conjugate
   gradient, Newton/BFGS, Lagrange/KKT constrained optimization, the
   penalty method, and linear programming.
@@ -66,6 +87,11 @@ transform -- each one linked to the code that reproduces it.
   transform (naive DFT vs. radix-2 FFT vs. ``numpy.fft``).
 - :mod:`mathematicskit.statistics` -- descriptive statistics, hypothesis tests,
   confidence intervals, OLS regression, and bootstrap resampling.
+
+**mathematicskit** is part of a family of packages --
+`physicskit <https://cpoli.github.io/physicskit/>`_, **mathematicskit**
+and `chemistrykit <https://cpoli.github.io/chemistrykit/>`_ -- that share
+the same architecture, API conventions, and history-driven documentation.
 
 Conventionally imported as ``mk``:
 

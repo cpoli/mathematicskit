@@ -40,7 +40,7 @@ labels = np.argmin((xx[..., None] - capitals[:, 0]) ** 2 + (yy[..., None] - capi
 # -----------------------------------------------------
 
 g = Graph(len(capitals))
-for a, b in zip(np.concatenate([labels[:, :-1].ravel(), labels[:-1, :].ravel()]), np.concatenate([labels[:, 1:].ravel(), labels[1:, :].ravel()])):
+for a, b in zip(np.concatenate([labels[:, :-1].ravel(), labels[:-1, :].ravel()]), np.concatenate([labels[:, 1:].ravel(), labels[1:, :].ravel()]), strict=False):
     if a != b:
         g.add_edge(int(a), int(b))
 print(f"{g.n_vertices} countries, {len(g.edges())} shared borders")

@@ -17,7 +17,8 @@ vibrating drumheads to quantum wavefunctions. This chronology traces the
 ideas behind :mod:`mathematicskit.special_functions`, from Leonhard
 Euler's extension of the factorial to the fast Fourier transform, an
 algorithm rediscovered from a much older idea that made digital signal
-processing computationally feasible.
+processing computationally feasible, and on to the transforms, filters,
+and wavelets that signal processing is built from.
 
 .. contents:: Timeline
    :local:
@@ -273,6 +274,47 @@ Commentationes Societatis Regiae Scientiarum Gottingensis Recentiores 2
 (1813); NIST *Digital Library of Mathematical Functions*, Ch. 15.
 
 .. minigallery:: ../../examples/special_functions/hypergeometric/plot_01_gauss_hypergeometric.py
+
+1812 -- Laplace's Transform
+---------------------------
+
+Leonhard Euler had already used integrals of the form
+:math:`\int e^{-st}f(t)\,dt` in the 1740s and 1760s to solve
+differential equations. Pierre-Simon Laplace, in the 1780s and then in
+his 1812 *Théorie analytique des probabilités*, used them systematically
+as generating functions that turn a problem about :math:`f(t)` into one
+about a new function :math:`F(s)`:
+
+.. math::
+
+   F(s) = \int_0^\infty f(t)\,e^{-st}\,dt, \qquad
+   \mathcal{L}\{f'\}(s) = sF(s) - f(0).
+
+The second identity is the reason the transform matters: derivatives
+become multiplication by :math:`s`, so a linear differential equation
+with constant coefficients becomes an algebraic equation. Oliver
+Heaviside's operational calculus of the 1890s exploited exactly this for
+electrical circuits, without proofs. Thomas Bromwich's 1916 inversion
+integral along a vertical line in the complex :math:`s`-plane, and
+Gustav Doetsch's textbooks of the 1930s, gave the method a rigorous
+footing, and in that form it became the working language of control
+engineering.
+
+*Implementation:* :func:`mathematicskit.special_functions.systems.laplace_transform.laplace_transform`
+evaluates the defining integral with :func:`scipy.integrate.quad`, for
+real or complex :math:`s`. The tests check it against the table pairs
+for :math:`e^{-at}`, :math:`t^2`, :math:`te^{-t}`, :math:`1-e^{-t}`, and
+:math:`\sin t`.
+
+*References:* P.-S. Laplace, *Théorie analytique des probabilités*
+(Paris: Courcier, 1812); T. J. I'A. Bromwich, "Normal coordinates in
+dynamical systems," Proceedings of the London Mathematical Society (2)
+15 (1916), 401-448; G. Doetsch, *Theorie und Anwendung der
+Laplace-Transformation* (Berlin: Springer, 1937); M. A. B. Deakin, "The
+development of the Laplace transform, 1737-1937," Archive for History
+of Exact Sciences 25 (1981), 343-390.
+
+.. minigallery:: ../../examples/special_functions/laplace_transform/plot_01_laplace_transform_pairs.py
 
 1818 -- Fresnel Integrals and the Diffraction of Light
 ------------------------------------------------------
@@ -629,6 +671,319 @@ Gauss, *Theoria motus corporum coelestium in sectionibus conicis solem
 ambientium* (Hamburg, 1809).
 
 .. minigallery:: ../../examples/special_functions/error_functions/plot_02_error_function.py
+
+1910 -- Haar's Orthonormal System
+---------------------------------
+
+David Hilbert asked whether every continuous function could be expanded
+in *some* orthonormal system whose series always converged uniformly,
+something Fourier series famously fail to do. His student Alfréd Haar
+answered in his 1909 dissertation, published in 1910, with a system of
+step functions: a constant, then functions equal to :math:`+1` on one
+half of a dyadic interval and :math:`-1` on the other, rescaled and
+shifted to every scale.
+
+.. math::
+
+   \psi(x) = \begin{cases} 1, & 0 \le x < \tfrac12 \\ -1, & \tfrac12 \le x < 1 \end{cases},
+   \qquad \psi_{j,k}(x) = 2^{j/2}\psi(2^j x - k).
+
+Its coefficients are local averages and differences, so a jump in the
+signal affects only one coefficient per scale. Seventy years later the
+Haar system was recognized as the first and simplest wavelet basis.
+
+*Implementation:* :func:`mathematicskit.special_functions.systems.wavelets.discrete_wavelet_transform`
+with ``wavelet="haar"`` computes pairwise sums and differences over
+:math:`\sqrt2` level by level, and
+:func:`~mathematicskit.special_functions.systems.wavelets.inverse_discrete_wavelet_transform`
+inverts it. Neither numpy nor scipy (since scipy 1.15) has wavelet
+routines, so both are hand-rolled. The tests check the pairwise formula,
+energy preservation, and exact reconstruction.
+
+*References:* A. Haar, "Zur Theorie der orthogonalen
+Funktionensysteme," Mathematische Annalen 69 (1910), 331-371.
+
+.. minigallery:: ../../examples/special_functions/wavelets/plot_01_haar_wavelet.py
+
+1930 -- Butterworth's Maximally Flat Filter
+-------------------------------------------
+
+Radio engineers of the 1920s built filters by trial and error, and the
+passbands rippled. Stephen Butterworth, a British physicist, asked for
+the filter whose gain is as flat as possible at zero frequency, and
+found that the squared magnitude
+
+.. math::
+
+   |H(i\Omega)|^2 = \frac{1}{1 + (\Omega/\Omega_c)^{2N}}
+
+has its first :math:`2N - 1` derivatives zero at :math:`\Omega = 0`.
+Its poles are equally spaced on a circle of radius :math:`\Omega_c` in
+the left half-plane, it passes through half power at the cutoff for
+every order, and it falls off at :math:`20N` dB per decade. Butterworth
+also showed how to build it from identical amplifier stages. The
+Chebyshev and elliptic (Cauer) filters of the following decades trade
+some ripple for a sharper cutoff. For digital filters, the bilinear
+transform :math:`s = 2(1 - z^{-1})/(1 + z^{-1})` maps the analog design
+to discrete time.
+
+*Implementation:* :func:`mathematicskit.special_functions.systems.filters.butterworth_filter`
+and :func:`~mathematicskit.special_functions.systems.filters.chebyshev1_filter`
+wrap :func:`scipy.signal.butter`/:func:`~scipy.signal.cheby1`;
+:func:`~mathematicskit.special_functions.systems.filters.frequency_response`
+wraps :func:`scipy.signal.freqz` and
+:func:`~mathematicskit.special_functions.systems.filters.apply_filter`
+wraps :func:`scipy.signal.lfilter`/:func:`~scipy.signal.filtfilt`. The
+tests check the Butterworth magnitude against the bilinear-transformed
+closed form for several orders, and the Chebyshev passband ripple bounds.
+
+*References:* S. Butterworth, "On the theory of filter amplifiers,"
+Experimental Wireless and the Wireless Engineer 7 (1930), 536-541.
+
+.. minigallery:: ../../examples/special_functions/filters/plot_01_butterworth_maximally_flat.py
+
+1947-1952 -- The Z-Transform
+----------------------------
+
+Radar fire-control systems of the Second World War sampled their inputs
+at discrete times, and the Laplace transform no longer fit. Witold
+Hurewicz, working on servomechanisms at the MIT Radiation Laboratory,
+described in 1947 how to treat sequences with a generating function in
+a complex variable. John Ragazzini and Lotfi Zadeh at Columbia named it
+the *z-transform* in 1952:
+
+.. math::
+
+   X(z) = \sum_{n=0}^{\infty} x[n]\,z^{-n}, \qquad
+   \mathcal{Z}\{x[n-1]\} = z^{-1}X(z).
+
+A delay becomes multiplication by :math:`z^{-1}`, so a linear difference
+equation becomes a rational function :math:`H(z) = B(z)/A(z)`. Each
+pole :math:`p` contributes a mode :math:`p^n` to the impulse response,
+so the system is stable exactly when every pole lies inside the unit
+circle. On the circle itself, :math:`z = e^{i\omega}`, the transform is
+the discrete-time Fourier transform. The idea is the discrete
+counterpart of Laplace's, and ultimately of de Moivre's generating
+functions.
+
+*Implementation:* :func:`mathematicskit.special_functions.systems.z_transform.z_transform`
+and :func:`~mathematicskit.special_functions.systems.z_transform.transfer_function`
+evaluate the defining sums by Horner's rule;
+:func:`~mathematicskit.special_functions.systems.z_transform.poles_zeros`
+wraps :func:`scipy.signal.tf2zpk` and reports stability; and
+:func:`~mathematicskit.special_functions.systems.z_transform.inverse_z_transform`
+expands :math:`H(z)` in partial fractions with :func:`scipy.signal.residuez`
+and inverts each term, including repeated poles. The tests check the
+geometric-series pair, the DFT on the unit circle, the double-pole pair
+:math:`(n+1)p^n`, and the damped cosine from a complex pole pair.
+
+*References:* W. Hurewicz, "Filters and servo systems with pulsed
+data," in H. M. James, N. B. Nichols, and R. S. Phillips, eds., *Theory
+of Servomechanisms*, MIT Radiation Laboratory Series 25 (New York:
+McGraw-Hill, 1947), Ch. 5; J. R. Ragazzini and L. A. Zadeh, "The
+analysis of sampled-data systems," Transactions of the AIEE 71, Part II
+(1952), 225-234; E. I. Jury, *Theory and Application of the z-Transform
+Method* (New York: Wiley, 1964).
+
+.. minigallery:: ../../examples/special_functions/z_transform/plot_01_poles_zeros_inverse.py
+
+1966 -- Fast Convolution
+------------------------
+
+Convolution, :math:`(x * h)[n] = \sum_k x[k]\,h[n-k]`, is how every
+linear time-invariant system acts on its input, and evaluated directly
+it costs :math:`O(NM)` operations. The convolution theorem,
+:math:`\mathcal{F}\{x * h\} = \mathcal{F}\{x\}\,\mathcal{F}\{h\}`, had
+been known since the nineteenth century, but computing Fourier
+transforms was itself too slow for it to help. A year after Cooley and
+Tukey's FFT, Thomas Stockham at MIT showed that zero-padding both
+sequences to length :math:`N + M - 1`, multiplying their FFTs, and
+transforming back gives the linear convolution in
+:math:`O((N+M)\log(N+M))` time. Without the padding, the product gives
+the *circular* convolution instead. Stockham went on to use FFT-based
+deconvolution in 1975 to restore Enrico Caruso's acoustic recordings,
+and FFT convolution is now how long filters, reverberation, and
+cross-correlation are computed.
+
+*Implementation:* :func:`mathematicskit.special_functions.systems.convolution.convolve_direct`
+and :func:`~mathematicskit.special_functions.systems.convolution.convolve_fft`
+wrap :func:`numpy.convolve` and :func:`scipy.signal.fftconvolve`;
+:func:`~mathematicskit.special_functions.systems.convolution.circular_convolve`
+applies the DFT convolution theorem directly;
+:func:`~mathematicskit.special_functions.systems.convolution.cross_correlate`
+wraps :func:`scipy.signal.correlate`; and
+:func:`~mathematicskit.special_functions.systems.convolution.compare_convolution_methods`
+times the direct and FFT methods against each other. The tests check
+polynomial multiplication, agreement of the two methods, circular
+convolution as wrapped linear convolution, and recovery of a known shift
+from a correlation peak.
+
+*References:* T. G. Stockham Jr., "High-speed convolution and
+correlation," AFIPS Conference Proceedings 28, Spring Joint Computer
+Conference (1966), 229-233; A. V. Oppenheim and R. W. Schafer,
+*Discrete-Time Signal Processing*, 3rd ed. (Upper Saddle River:
+Pearson, 2010), Sec. 8.7.
+
+.. minigallery:: ../../examples/special_functions/convolution/plot_01_fast_convolution.py
+
+1970-1979 -- Numerical Inversion of the Laplace Transform
+---------------------------------------------------------
+
+When :math:`F(s)` is known only numerically, or has no table entry,
+Bromwich's inversion integral must be computed, and along a vertical
+line it oscillates without decaying. Harald Stehfest's 1970 algorithm,
+refining Donald Gaver's 1966 probabilistic method, avoids complex
+arithmetic entirely:
+
+.. math::
+
+   f(t) \approx \frac{\ln 2}{t}\sum_{k=1}^{n} V_k\,F\!\left(\frac{k\ln 2}{t}\right),
+
+with alternating integer weights :math:`V_k` that grow like
+:math:`10^{n/2}`, so each extra term costs digits to cancellation and
+oscillating :math:`f` cannot be resolved. Alan Talbot's 1979 method
+instead deforms the Bromwich line into a contour that wraps around the
+negative real axis, where :math:`e^{st}` decays rapidly, so the
+trapezoidal rule on it converges geometrically. Joseph Abate and Peter
+Valkó's 2004 *fixed Talbot* choice of contour needs a single parameter,
+the number of nodes :math:`m`, and reaches close to machine precision.
+
+*Implementation:* :func:`mathematicskit.special_functions.systems.laplace_transform.inverse_laplace_stehfest`
+(with :func:`~mathematicskit.special_functions.systems.laplace_transform.stehfest_coefficients`,
+computed in exact rational arithmetic) and
+:func:`~mathematicskit.special_functions.systems.laplace_transform.inverse_laplace_talbot`
+are hand-rolled, since neither numpy nor scipy offers a numerical
+inverse Laplace transform. The tests invert closed-form pairs, the
+oscillating :math:`\sin t`, and the non-rational
+:math:`e^{-\sqrt s}/s`, check the Stehfest weights' identities, and
+show that Talbot's contour must enclose oscillating poles.
+
+*References:* D. P. Gaver Jr., "Observing stochastic processes, and
+approximate transform inversion," Operations Research 14 (1966),
+444-459; H. Stehfest, "Algorithm 368: Numerical inversion of Laplace
+transforms," Communications of the ACM 13 (1970), 47-49; A. Talbot,
+"The accurate numerical inversion of Laplace transforms," IMA Journal
+of Applied Mathematics 23 (1979), 97-120; J. Abate and P. P. Valkó,
+"Multi-precision Laplace transform inversion," International Journal
+for Numerical Methods in Engineering 60 (2004), 979-993.
+
+.. minigallery:: ../../examples/special_functions/laplace_transform/plot_02_talbot_stehfest_inversion.py
+
+1974 -- Kaiser's Window and FIR Filter Design
+---------------------------------------------
+
+The ideal lowpass filter has a sinc-shaped impulse response that never
+ends. Truncating it to :math:`N` taps gives a finite impulse response
+(FIR) filter with exactly linear phase, but the abrupt truncation leaves
+Gibbs ripple in the stopband of about :math:`-21` dB, however long the
+filter. Tapering the truncation with a smooth *window* reduces the
+ripple at the cost of a wider transition band. James Kaiser at Bell
+Labs looked for the best window of a given length and found a
+near-optimal family built from the modified Bessel function
+:math:`I_0`:
+
+.. math::
+
+   w[n] = \frac{I_0\!\left(\beta\sqrt{1 - \left(\frac{2n}{N-1} - 1\right)^2}\right)}{I_0(\beta)},
+   \qquad 0 \le n \le N - 1.
+
+The single parameter :math:`\beta` trades main-lobe width against
+stopband attenuation, and Kaiser gave empirical formulas for the
+:math:`\beta` and :math:`N` that meet a given specification.
+
+*Implementation:* :func:`mathematicskit.special_functions.systems.filters.fir_window_filter`
+wraps :func:`scipy.signal.firwin` with any window, including
+``("kaiser", beta)``. The tests check that the filter is symmetric
+(linear phase), has unit DC gain, and has the phase of a pure delay of
+:math:`(N-1)/2` samples.
+
+*References:* J. F. Kaiser, "Nonrecursive digital filter design using
+the :math:`I_0`-sinh window function," Proceedings of the IEEE
+International Symposium on Circuits and Systems (1974), 20-23.
+
+.. minigallery:: ../../examples/special_functions/filters/plot_02_kaiser_window_fir.py
+
+1982-1984 -- Morlet's Continuous Wavelet Transform
+--------------------------------------------------
+
+Jean Morlet, a geophysicist at Elf Aquitaine, analysed seismic echoes
+whose high frequencies last only briefly while low frequencies persist.
+Dennis Gabor's 1946 windowed Fourier transform uses one window width
+for every frequency and so cannot follow both. Morlet instead correlated
+the signal with shifted *and dilated* copies of one Gaussian-windowed
+oscillation, so the window shrinks as the frequency rises:
+
+.. math::
+
+   W(s, \tau) = \frac{1}{\sqrt{s}}\int x(t)\,\overline{\psi\!\left(\frac{t-\tau}{s}\right)}\,dt,
+   \qquad \psi(\eta) = \pi^{-1/4}e^{i\omega_0\eta}e^{-\eta^2/2}.
+
+His 1982 papers with colleagues introduced the method; his 1984 paper
+with the physicist Alex Grossmann proved that the signal can be
+reconstructed from :math:`W`, and gave the name *wavelet* its
+mathematical meaning. The squared modulus, the *scalogram*, shows which
+frequencies are present when.
+
+*Implementation:* :func:`mathematicskit.special_functions.systems.wavelets.morlet_cwt`
+computes the transform scale by scale as a product of FFTs, following
+Torrence and Compo's normalization, and returns a
+:class:`~mathematicskit.special_functions.core.base.ScalogramResult`
+with the Fourier frequency of each scale. It is hand-rolled because
+scipy 1.15 removed ``scipy.signal.cwt``. The tests check that a pure
+tone peaks at its own frequency and that a frequency switch is located
+in time.
+
+*References:* J. Morlet, G. Arens, E. Fourgeau, and D. Giard, "Wave
+propagation and sampling theory," Geophysics 47 (1982), 203-236; A.
+Grossmann and J. Morlet, "Decomposition of Hardy functions into square
+integrable wavelets of constant shape," SIAM Journal on Mathematical
+Analysis 15 (1984), 723-736; C. Torrence and G. P. Compo, "A practical
+guide to wavelet analysis," Bulletin of the American Meteorological
+Society 79 (1998), 61-78.
+
+.. minigallery:: ../../examples/special_functions/wavelets/plot_02_morlet_scalogram.py
+
+1988 -- Daubechies Wavelets
+---------------------------
+
+Haar's wavelet is compactly supported but discontinuous, and the smooth
+orthonormal wavelets Yves Meyer built in 1985-1986 had infinite
+support. Ingrid Daubechies found wavelets that have both properties.
+The wavelet with :math:`p` *vanishing moments*, orthogonal to every
+polynomial of degree below :math:`p`, comes from a lowpass filter
+:math:`h` of only :math:`2p` taps, obtained by factorizing a polynomial
+:math:`P` that she wrote down explicitly:
+
+.. math::
+
+   |H(\omega)|^2 = 2\cos^{2p}(\omega/2)\,P\!\left(\sin^2\tfrac{\omega}{2}\right),
+   \qquad P(y) = \sum_{k=0}^{p-1}\binom{p-1+k}{k}y^k .
+
+For :math:`p = 2` the filter is
+:math:`(1+\sqrt3,\,3+\sqrt3,\,3-\sqrt3,\,1-\sqrt3)/(4\sqrt2)`. Stéphane
+Mallat's 1989 multiresolution analysis showed that the whole transform
+is a cascade of these filters followed by downsampling, costing only
+:math:`O(N)`. Because smooth pieces of a signal produce near-zero
+detail coefficients, discarding small coefficients compresses it; the
+JPEG 2000 image standard is built on the same idea.
+
+*Implementation:* :func:`mathematicskit.special_functions.systems.wavelets.daubechies_filter`
+computes the filter by spectral factorization of :math:`P`, and
+:func:`~mathematicskit.special_functions.systems.wavelets.discrete_wavelet_transform`
+implements Mallat's pyramid with periodic boundaries. Both are
+hand-rolled, since scipy 1.15 removed ``scipy.signal.daub``. The tests
+check the closed-form :math:`p = 2` filter, orthonormality and
+vanishing moments up to :math:`p = 8`, and vanishing detail
+coefficients on a linear signal.
+
+*References:* I. Daubechies, "Orthonormal bases of compactly supported
+wavelets," Communications on Pure and Applied Mathematics 41 (1988),
+909-996; S. G. Mallat, "A theory for multiresolution signal
+decomposition: the wavelet representation," IEEE Transactions on
+Pattern Analysis and Machine Intelligence 11 (1989), 674-693; I.
+Daubechies, *Ten Lectures on Wavelets* (Philadelphia: SIAM, 1992).
+
+.. minigallery:: ../../examples/special_functions/wavelets/plot_03_daubechies_compression.py
 
 See Also
 --------

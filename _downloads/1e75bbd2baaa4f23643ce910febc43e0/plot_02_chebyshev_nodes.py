@@ -32,7 +32,7 @@ theta = np.linspace(0.0, np.pi, 200)
 fig1, (ax_nodes, ax_fit) = plt.subplots(2, 1, figsize=(7, 7), gridspec_kw={"height_ratios": [1, 1.4]})
 ax_nodes.plot(np.cos(theta), np.sin(theta), color="lightgray")
 angles = np.arccos(np.clip(nodes, -1.0, 1.0))
-for xk, tk in zip(nodes, angles):
+for xk, tk in zip(nodes, angles, strict=False):
     ax_nodes.plot([xk, xk], [0.0, np.sin(tk)], ":", color="steelblue", lw=0.8)
 ax_nodes.plot(nodes, np.sin(angles), "o", ms=3, color="steelblue")
 ax_nodes.plot(nodes, np.zeros_like(nodes), "|", ms=12, color="steelblue")
@@ -56,7 +56,7 @@ fig1.tight_layout()
 
 degrees = [5, 10, 20, 30, 40, 60]
 _, chebyshev_errors = runge_phenomenon_errors(degrees)
-for d, e in zip(degrees, chebyshev_errors):
+for d, e in zip(degrees, chebyshev_errors, strict=False):
     print(f"degree={d:2d}  Chebyshev max |error| = {e:.3e}")
 
 fig2, ax2 = plt.subplots(figsize=(6, 4))

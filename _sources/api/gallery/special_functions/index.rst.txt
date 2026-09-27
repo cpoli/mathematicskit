@@ -7,9 +7,10 @@ This gallery walks through every public feature of ``mathematicskit.special_func
 the gamma/beta functions and Stirling's series, Bessel, Airy, and
 Mathieu functions, elliptic functions, hypergeometric functions, the
 error function and Fresnel integrals, the Riemann zeta function, the
-Lambert W function, orthogonal polynomial families, and the discrete
+Lambert W function, orthogonal polynomial families, the discrete
 Fourier transform (naive DFT vs. hand-rolled radix-2 FFT vs.
-``numpy.fft``).
+``numpy.fft``), and signal processing: convolution, digital filters,
+the Z- and Laplace transforms, and wavelets.
 
 Each script in this gallery is self-contained and can be run directly with
 ``python examples/special_functions/<section>/<script>.py``.
@@ -31,6 +32,15 @@ Sections
 - **orthogonal_polynomials** -- Legendre, Chebyshev, Hermite, and
   Laguerre polynomials, with numerically verified orthogonality.
 - **fourier_transform** -- naive DFT vs. radix-2 FFT vs. ``numpy.fft``.
+- **convolution** -- direct vs. FFT convolution, circular convolution,
+  and cross-correlation.
+- **filters** -- Butterworth and Kaiser-window FIR filter design.
+- **z_transform** -- poles, zeros, stability, and inversion by partial
+  fractions.
+- **laplace_transform** -- the Laplace transform and its Talbot and
+  Stehfest numerical inversions.
+- **wavelets** -- the Haar and Daubechies wavelets and the Morlet
+  scalogram.
 
 
 .. raw:: html
@@ -121,6 +131,46 @@ Bessel functions of the first and second kind.
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">Bessel functions of the first and second kind</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Convolution
+-----------
+
+Direct vs. FFT convolution, circular convolution, and cross-correlation.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Stockham&#x27;s 1966 fast convolution: multiplying zero-padded FFT spectra gives the same linear convolution as the direct O(nm) sum, at O((n+m) log(n+m)) cost. Without the zero padding the product gives the circular convolution instead.">
+
+.. only:: html
+
+  .. image:: /api/gallery/special_functions/convolution/images/thumb/sphx_glr_plot_01_fast_convolution_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/special_functions/convolution/plot_01_fast_convolution`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Fast convolution: the convolution theorem and the FFT</div>
     </div>
 
 
@@ -235,6 +285,63 @@ Gaussian integrals along the real axis and along the diagonal of the complex pla
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">The error function and the normal distribution</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Digital filters
+---------------
+
+Butterworth and window-method FIR filter design and frequency responses.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Butterworth&#x27;s 1930 filter has the flattest possible passband: its squared magnitude 1 / (1 + (w/wc)^(2N)) has its first 2N - 1 derivatives zero at w = 0, and falls off at 20N dB per decade. Higher order buys a sharper transition with no ripple anywhere.">
+
+.. only:: html
+
+  .. image:: /api/gallery/special_functions/filters/images/thumb/sphx_glr_plot_01_butterworth_maximally_flat_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/special_functions/filters/plot_01_butterworth_maximally_flat`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Butterworth's maximally flat filter</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The window method truncates the ideal sinc impulse response. A rectangular truncation leaves Gibbs ripple of about -21 dB however long the filter; Kaiser&#x27;s 1974 window, built from the Bessel function I0, trades transition width for stopband attenuation through a single parameter beta.">
+
+.. only:: html
+
+  .. image:: /api/gallery/special_functions/filters/images/thumb/sphx_glr_plot_02_kaiser_window_fir_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/special_functions/filters/plot_02_kaiser_window_fir`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Kaiser's window and FIR filter design</div>
     </div>
 
 
@@ -438,6 +545,63 @@ The inverse of w e^w and its two real branches.
 
     </div>
 
+Laplace transform
+-----------------
+
+The Laplace transform by quadrature, and its numerical inversion.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Laplace&#x27;s integral F(s) = int_0^inf f(t) e^{-st} dt turns differentiation into multiplication by s. This example computes the transform numerically for a few classical pairs, and uses the derivative rule to solve a damped oscillator algebraically.">
+
+.. only:: html
+
+  .. image:: /api/gallery/special_functions/laplace_transform/images/thumb/sphx_glr_plot_01_laplace_transform_pairs_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/special_functions/laplace_transform/plot_01_laplace_transform_pairs`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Laplace's transform: from functions of t to functions of s</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Stehfest&#x27;s 1970 algorithm inverts F(s) from real samples only, with alternating weights that cost digits to cancellation. Talbot&#x27;s 1979 contour winds the Bromwich integral around the negative real axis, where e^{st} decays, and reaches near machine precision, even for oscillating f(t) that Stehfest cannot resolve.">
+
+.. only:: html
+
+  .. image:: /api/gallery/special_functions/laplace_transform/images/thumb/sphx_glr_plot_02_talbot_stehfest_inversion_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/special_functions/laplace_transform/plot_02_talbot_stehfest_inversion`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Numerical Laplace inversion: Stehfest and Talbot</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
 Mathieu functions
 -----------------
 
@@ -536,6 +700,120 @@ polynomials on infinite domains, with numerically verified orthogonality.
 
     </div>
 
+Wavelets
+--------
+
+The Haar and Daubechies wavelets, and the Morlet continuous wavelet transform.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Haar&#x27;s 1910 orthonormal system of step functions splits a signal into a coarse average plus details at each scale: pairwise sums and differences over sqrt 2, repeated on the sums. A jump shows up as a single large coefficient per level, exactly where it happens.">
+
+.. only:: html
+
+  .. image:: /api/gallery/special_functions/wavelets/images/thumb/sphx_glr_plot_01_haar_wavelet_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/special_functions/wavelets/plot_01_haar_wavelet`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Haar's wavelet: averages and differences at every scale</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Morlet, analysing seismic echoes, correlated the signal with shifted and dilated copies of a Gaussian-windowed complex exponential, and with Grossmann made the transform rigorous in 1984. The scalogram |W(s, t)|^2 shows which frequencies are present when, which the Fourier transform alone cannot.">
+
+.. only:: html
+
+  .. image:: /api/gallery/special_functions/wavelets/images/thumb/sphx_glr_plot_02_morlet_scalogram_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/special_functions/wavelets/plot_02_morlet_scalogram`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Grossmann and Morlet's continuous wavelet transform</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Daubechies&#x27; 1988 compactly supported orthonormal wavelets have p vanishing moments with a filter of only 2p taps, so polynomial pieces of degree below p produce near-zero detail coefficients. Keeping only the largest coefficients then compresses a smooth signal far better than Haar (p = 1) can.">
+
+.. only:: html
+
+  .. image:: /api/gallery/special_functions/wavelets/images/thumb/sphx_glr_plot_03_daubechies_compression_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/special_functions/wavelets/plot_03_daubechies_compression`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Daubechies wavelets: vanishing moments and compression</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Z-transform
+-----------
+
+Poles, zeros, stability, and inversion by partial fractions.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Ragazzini and Zadeh&#x27;s 1952 Z-transform turns a difference equation into a rational function H(z). Each pole p contributes a mode p^n to the impulse response, so poles inside the unit circle decay and a pole outside grows without bound. Partial fractions invert H(z) term by term.">
+
+.. only:: html
+
+  .. image:: /api/gallery/special_functions/z_transform/images/thumb/sphx_glr_plot_01_poles_zeros_inverse_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/special_functions/z_transform/plot_01_poles_zeros_inverse`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Z-transform: poles, stability, and partial fractions</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
 Riemann zeta function
 ---------------------
 
@@ -584,14 +862,19 @@ The zeta function, its analytic continuation, and Euler's product over primes.
 
    /api/gallery/special_functions/airy/index.rst
    /api/gallery/special_functions/bessel/index.rst
+   /api/gallery/special_functions/convolution/index.rst
    /api/gallery/special_functions/elliptic/index.rst
    /api/gallery/special_functions/error_functions/index.rst
+   /api/gallery/special_functions/filters/index.rst
    /api/gallery/special_functions/fourier_transform/index.rst
    /api/gallery/special_functions/gamma_beta/index.rst
    /api/gallery/special_functions/hypergeometric/index.rst
    /api/gallery/special_functions/lambert_w/index.rst
+   /api/gallery/special_functions/laplace_transform/index.rst
    /api/gallery/special_functions/mathieu/index.rst
    /api/gallery/special_functions/orthogonal_polynomials/index.rst
+   /api/gallery/special_functions/wavelets/index.rst
+   /api/gallery/special_functions/z_transform/index.rst
    /api/gallery/special_functions/zeta/index.rst
 
 

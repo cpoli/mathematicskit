@@ -17,7 +17,7 @@ from mathematicskit.fractals_chaos import hilbert_curve
 # -----------------------------------------------------
 
 fig, axes = plt.subplots(1, 5, figsize=(14, 3))
-for ax, order in zip(axes, range(1, 6)):
+for ax, order in zip(axes, range(1, 6), strict=False):
     pts = hilbert_curve(order)
     n = 2**order
     ax.plot((pts[:, 0] + 0.5) / n, (pts[:, 1] + 0.5) / n, lw=1.2 if order < 4 else 0.6)

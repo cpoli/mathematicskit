@@ -19,7 +19,7 @@ from mathematicskit.calculus import ClenshawCurtisQuadrature, GaussianQuadrature
 
 x, w = clenshaw_curtis_nodes_and_weights(8)
 print("Clenshaw-Curtis n = 8")
-for xk, wk in zip(x, w):
+for xk, wk in zip(x, w, strict=False):
     print(f"  x = {xk:+.6f}, w = {wk:.6f}")
 
 # %%
@@ -29,7 +29,7 @@ for xk, wk in zip(x, w):
 cases = {r"$e^x$": (np.exp, np.e - 1 / np.e), r"$1/(1+16x^2)$": (lambda t: 1 / (1 + 16 * t**2), np.arctan(4) / 2)}
 points = np.arange(2, 40, 2)
 fig, axes = plt.subplots(1, 2, figsize=(10, 4))
-for ax, (name, (f, exact)) in zip(axes, cases.items()):
+for ax, (name, (f, exact)) in zip(axes, cases.items(), strict=False):
     cc = [max(abs(ClenshawCurtisQuadrature(n - 1).integrate(f, -1.0, 1.0).value - exact), 1e-17) for n in points]
     gl = [max(abs(GaussianQuadrature(n).integrate(f, -1.0, 1.0).value - exact), 1e-17) for n in points]
     ax.semilogy(points, cc, "o-", label="Clenshaw-Curtis")

@@ -29,7 +29,7 @@ ks = np.arange(0, 15)
 
 fig, ax = plt.subplots()
 width = 0.25
-for offset, n in zip((-width, 0.0, width), (8, 20, 200)):
+for offset, n in zip((-width, 0.0, width), (8, 20, 200), strict=False):
     ax.bar(ks + offset, Binomial(n=n, p=mu / n).pmf(ks), width=width, alpha=0.8, label=f"Binomial(n={n}, p={mu / n:.3g})")
 ax.plot(ks, poisson.pmf(ks), "ko-", label=rf"Poisson($\mu$={mu:g})")
 ax.set_xlabel("number of events $k$")
@@ -43,7 +43,7 @@ ax.legend()
 
 ns = np.array([10, 30, 100, 300, 1000, 3000, 10000])
 gaps = np.array([np.max(np.abs(Binomial(n=int(n), p=mu / n).pmf(ks) - poisson.pmf(ks))) for n in ns])
-for n, gap in zip(ns, gaps):
+for n, gap in zip(ns, gaps, strict=False):
     print(f"n={n:>6}: max |binomial - poisson| = {gap:.2e}")
 
 fig, ax = plt.subplots()

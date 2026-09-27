@@ -31,7 +31,7 @@ def exact(j, n):
 
 n = 2000
 result = lanczos_eigsh(laplacian_1d(n), k=4, which="LA")
-for lam, ex in zip(result.eigenvalues, exact(np.arange(n - 3, n + 1), n)):
+for lam, ex in zip(result.eigenvalues, exact(np.arange(n - 3, n + 1), n), strict=False):
     print(f"Lanczos {lam:.14f}   exact {ex:.14f}   |diff| {abs(lam - ex):.1e}")
 
 # %%
@@ -40,7 +40,7 @@ for lam, ex in zip(result.eigenvalues, exact(np.arange(n - 3, n + 1), n)):
 
 n = 100_000
 result = lanczos_eigsh(laplacian_1d(n), k=4, sigma=0.0, which="LM")
-for lam, ex in zip(result.eigenvalues, exact(np.arange(1, 5), n)):
+for lam, ex in zip(result.eigenvalues, exact(np.arange(1, 5), n), strict=False):
     print(f"Lanczos {lam:.6e}   exact {ex:.6e}   rel. error {abs(lam - ex) / ex:.1e}")
 
 fig, ax = plt.subplots(figsize=(6, 4))

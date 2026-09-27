@@ -95,7 +95,7 @@ left turns.
 
     fig, ax = plt.subplots(figsize=(6, 6))
     cmap = plt.get_cmap("viridis")
-    for p, a in zip(points, angles):
+    for p, a in zip(points, angles, strict=False):
         ax.plot([pivot[0], p[0]], [pivot[1], p[1]], color=cmap(a / np.pi), lw=0.6, alpha=0.7)
     plot_convex_hull(graham_result, ax=ax)
     ax.plot(*pivot, "*", color="k", ms=14, zorder=3, label="pivot")

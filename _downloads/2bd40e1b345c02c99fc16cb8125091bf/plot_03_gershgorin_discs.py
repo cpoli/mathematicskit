@@ -22,11 +22,11 @@ D = np.diag([-4.0, 1.0, 3.0 + 2.0j, 3.0 - 2.0j, 7.0])
 E = rng.normal(size=(5, 5)) * 0.6
 
 fig, axes = plt.subplots(1, 2, figsize=(9, 4), sharex=True, sharey=True)
-for ax, eps in zip(axes, (1.0, 0.3)):
+for ax, eps in zip(axes, (1.0, 0.3), strict=False):
     A = D + eps * E
     discs = gershgorin_discs(A)
     eigs = np.linalg.eigvals(A)
-    for c, r in zip(discs.centers, discs.radii):
+    for c, r in zip(discs.centers, discs.radii, strict=False):
         ax.add_patch(plt.Circle((c.real, c.imag), r, alpha=0.2))
         ax.add_patch(plt.Circle((c.real, c.imag), r, fill=False))
     ax.plot(eigs.real, eigs.imag, "k*", ms=9, label="eigenvalues")

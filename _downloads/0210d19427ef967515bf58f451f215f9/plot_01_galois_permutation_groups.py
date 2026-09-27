@@ -47,7 +47,7 @@ print(f"abelian: {group_properties(galois).is_abelian}")
 
 fig, axes = plt.subplots(2, 3, figsize=(10, 6.5))
 circle = np.exp(1j * np.linspace(0, 2 * np.pi, 200)) * np.cbrt(2.0)
-for ax, perm in zip(axes.flat, galois.elements):
+for ax, perm in zip(axes.flat, galois.elements, strict=False):
     ax.plot(circle.real, circle.imag, color="0.85", lw=1)
     ax.scatter(roots.real, roots.imag, s=60, color="C0", zorder=3)
     for k, z in enumerate(roots):

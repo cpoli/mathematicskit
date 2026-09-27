@@ -42,7 +42,7 @@ transient = list(range(1, n_capital))
 b = chain.absorption_probabilities(transient, absorbing=[0, n_capital])
 t = chain.expected_steps_to_absorption(transient)
 
-for i, (row, steps) in zip(transient, zip(b, t)):
+for i, (row, steps) in zip(transient, zip(b, t, strict=False), strict=False):
     print(
         f"start at {i}: P(ruin)={row[0]:.4f}, P(reach {n_capital})={row[1]:.4f} "
         f"(closed form {i / n_capital:.4f}), E[steps]={steps:.2f} (closed form {i * (n_capital - i)})"

@@ -30,7 +30,7 @@ print(f"s r s = r^-1: {d4.operate(d4.operate(s, r), s) == d4.inverse(r)}")
 
 corners = np.array([[1, 0], [0, 1], [-1, 0], [0, -1]])
 fig, axes = plt.subplots(2, 4, figsize=(10, 5))
-for ax, g in zip(axes.flat, d4.elements):
+for ax, g in zip(axes.flat, d4.elements, strict=False):
     ax.fill(*corners.T, color="0.9", edgecolor="0.3")
     for vertex, image in enumerate(g):
         ax.annotate(str(vertex), corners[image] * 1.2, ha="center", va="center")

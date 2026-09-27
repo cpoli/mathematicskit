@@ -102,7 +102,7 @@ floating-point round-off takes over.
 
     levels = np.arange(1, 7)
     errs = [abs(richardson_extrapolation(f, x0, h=0.2, levels=int(k)).value - exact) for k in levels]
-    for k, e in zip(levels, errs):
+    for k, e in zip(levels, errs, strict=False):
         print(f"levels={k}: error={e:.3e}")
 
 
@@ -166,7 +166,7 @@ accuracy while its smallest step is still large.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.089 seconds)
+   **Total running time of the script:** (0 minutes 0.100 seconds)
 
 
 .. _sphx_glr_download_api_gallery_calculus_finite_differences_plot_01_richardson_extrapolation.py:

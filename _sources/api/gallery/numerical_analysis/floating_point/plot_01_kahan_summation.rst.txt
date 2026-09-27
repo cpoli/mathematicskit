@@ -75,7 +75,7 @@ Relative error against the number of terms
             errors[name].append(max(abs(total - exact) / exact, eps / 10))
 
     fig, ax = plt.subplots(figsize=(7, 4.5))
-    for name, marker in zip(errors, "os^"):
+    for name, marker in zip(errors, "os^", strict=False):
         ax.loglog(sizes, errors[name], marker + "-", label=name)
     ax.loglog(sizes, sizes * eps, "--", color="gray", label=r"$n\,u$")
     ax.set_xlabel("number of terms $n$")
@@ -111,7 +111,7 @@ Relative error against the number of terms
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.247 seconds)
+   **Total running time of the script:** (0 minutes 0.238 seconds)
 
 
 .. _sphx_glr_download_api_gallery_numerical_analysis_floating_point_plot_01_kahan_summation.py:

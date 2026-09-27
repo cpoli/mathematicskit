@@ -1,0 +1,86 @@
+
+
+.. _sphx_glr_api_gallery_pde_advection:
+
+Advection schemes
+-----------------
+
+Upwind, Lax-Friedrichs, and Lax-Wendroff schemes for linear advection.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Courant, Isaacson and Rees (1952) differenced u_x on the side the information comes from: for c &gt; 0, u_j^{n+1} = u_j^n - \nu(u_j^n - u_{j-1}^n). The scheme is stable for \nu \le 1, exact at \nu = 1, and otherwise first-order accurate, with numerical diffusion \tfrac12 c\,\Delta x(1-\nu)\,u_{xx} that smears the pulse. Differencing on the wrong side is unstable at every step size.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/advection/images/thumb/sphx_glr_plot_01_upwind_scheme_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/advection/plot_01_upwind_scheme`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Courant-Isaacson-Rees upwind scheme</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The centered FTCS scheme u_j^{n+1} = u_j^n - \tfrac{\nu}{2}(u_{j+1}^n - u_{j-1}^n) is unconditionally unstable for advection. Peter Lax (1954), following Friedrichs, replaced u_j^n by the neighbour average \tfrac12(u_{j+1}^n + u_{j-1}^n). That one change makes the scheme stable for \nu \le 1, and its conservation form carries over to nonlinear conservation laws and shocks -- at the price of heavy numerical diffusion.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/advection/images/thumb/sphx_glr_plot_02_lax_friedrichs_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/advection/plot_02_lax_friedrichs`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Lax-Friedrichs scheme: stabilizing centered differences</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Lax and Wendroff (1960) used the PDE itself to replace time derivatives in a Taylor expansion, u_{tt} = c^2 u_{xx}, giving u_j^{n+1} = u_j^n - \tfrac{\nu}{2}(u_{j+1}^n - u_{j-1}^n) + \tfrac{\nu^2}{2}(u_{j+1}^n - 2u_j^n + u_{j-1}^n). It is second-order accurate and far less diffusive than upwind on smooth waves, but, as Godunov later proved every linear second-order scheme must, it oscillates near discontinuities.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/advection/images/thumb/sphx_glr_plot_03_lax_wendroff_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/advection/plot_03_lax_wendroff`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Lax-Wendroff scheme: second order, and dispersive wiggles</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /api/gallery/pde/advection/plot_01_upwind_scheme
+   /api/gallery/pde/advection/plot_02_lax_friedrichs
+   /api/gallery/pde/advection/plot_03_lax_wendroff
+

@@ -62,7 +62,7 @@ De Moivre: standardized binomial PMFs approach the normal density
     p = 0.2
     z_grid = np.linspace(-4.0, 4.0, 400)
     fig, axes = plt.subplots(1, 3, figsize=(10, 3.2), sharey=True)
-    for ax, n in zip(axes, (5, 30, 300)):
+    for ax, n in zip(axes, (5, 30, 300), strict=False):
         binomial = Binomial(n=n, p=p)
         ks = np.arange(n + 1)
         z = (ks - binomial.mean) / binomial.std
@@ -142,7 +142,7 @@ Laplace: sample means of a skewed distribution become normal too
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.177 seconds)
+   **Total running time of the script:** (0 minutes 0.181 seconds)
 
 
 .. _sphx_glr_download_api_gallery_probability_limit_theorems_plot_02_central_limit_theorem.py:

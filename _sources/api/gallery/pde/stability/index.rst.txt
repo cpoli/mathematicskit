@@ -1,0 +1,88 @@
+
+
+.. _sphx_glr_api_gallery_pde_stability:
+
+Stability: CFL and von Neumann
+------------------------------
+
+Why explicit schemes need small time steps: the Courant-Friedrichs-Lewy
+condition, von Neumann's Fourier-mode analysis, and the Lax
+equivalence theorem.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Courant, Friedrichs and Lewy (1928) observed that an explicit scheme for u_t + c\,u_x = 0 computes each new value from a few neighbors, so information can travel at most one cell per step. If the true wave moves farther than that -- Courant number \nu = c\,\Delta t/\Delta x &gt; 1 -- the scheme cannot possibly see where the solution came from, and it diverges. This script advects a pulse with the upwind scheme below and above \nu = 1, and with Lax-Wendroff, whose limit is the same.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/stability/images/thumb/sphx_glr_plot_01_cfl_condition_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/stability/plot_01_cfl_condition`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Courant-Friedrichs-Lewy condition</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="John von Neumann&#x27;s method substitutes a single Fourier mode u_j^n = G^n e^{ij\xi} into a linear scheme. Each step multiplies the mode by the amplification factor G(\xi), so the scheme is stable exactly when |G(\xi)| \le 1 for every wavenumber. This script plots |G| for heat and advection schemes, recovers the FTCS limit r \le 1/2 numerically, and shows why FTCS advection is unstable for every time step.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/stability/images/thumb/sphx_glr_plot_02_von_neumann_analysis_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/stability/plot_02_von_neumann_analysis`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Von Neumann stability analysis: one Fourier mode at a time</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Peter Lax and Robert Richtmyer (1956) proved that a consistent linear difference scheme for a well-posed linear problem converges as the grid is refined if and only if it is stable. Consistency alone is not enough. This script refines the grid, at a fixed Courant number, for three schemes for u_t + u_x = 0 that are all consistent. Stable Lax-Friedrichs converges at first order, and Lax-Wendroff at second. Unstable FTCS looks convergent on coarse grids, then explodes: finer grids take more steps, and its growing modes, seeded by round-off, eventually swamp the solution even though each step approximates the PDE more accurately.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/stability/images/thumb/sphx_glr_plot_03_lax_equivalence_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/stability/plot_03_lax_equivalence`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Lax equivalence theorem: consistency + stability = convergence</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /api/gallery/pde/stability/plot_01_cfl_condition
+   /api/gallery/pde/stability/plot_02_von_neumann_analysis
+   /api/gallery/pde/stability/plot_03_lax_equivalence
+

@@ -94,7 +94,7 @@ The maximum error diverges with degree
 
     degrees = [5, 10, 15, 20, 25, 30]
     equal_errors, _ = runge_phenomenon_errors(degrees)
-    for d, e in zip(degrees, equal_errors):
+    for d, e in zip(degrees, equal_errors, strict=False):
         print(f"degree={d:2d}  equally spaced max |error| = {e:.3e}")
 
     fig2, ax2 = plt.subplots(figsize=(6, 4))
@@ -160,7 +160,7 @@ The cause: an exponentially growing Lebesgue constant
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.150 seconds)
+   **Total running time of the script:** (0 minutes 0.151 seconds)
 
 
 .. _sphx_glr_download_api_gallery_numerical_analysis_chebyshev_plot_01_runge_phenomenon.py:

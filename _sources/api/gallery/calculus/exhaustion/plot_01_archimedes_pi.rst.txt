@@ -53,7 +53,7 @@ The 96-gon bounds
 
 
     result = archimedes_pi_bounds(4)
-    for n, lo, hi in zip(result.sides, result.lower, result.upper):
+    for n, lo, hi in zip(result.sides, result.lower, result.upper, strict=False):
         print(f"{n:3d} sides: {lo:.6f} < pi < {hi:.6f}")
     print(f"Archimedes: {3 + 10 / 71:.6f} < pi < {3 + 1 / 7:.6f}")
 
@@ -86,7 +86,7 @@ Convergence of the gap
 
 
     result = archimedes_pi_bounds(15)
-    gaps = [hi - lo for lo, hi in zip(result.lower, result.upper)]
+    gaps = [hi - lo for lo, hi in zip(result.lower, result.upper, strict=False)]
     fig, ax = plt.subplots()
     ax.loglog(result.sides, gaps, "o-", label="upper - lower")
     ax.loglog(result.sides, [gaps[0] * (6 / n) ** 2 for n in result.sides], "--", label=r"$\propto n^{-2}$")
@@ -116,7 +116,7 @@ Convergence of the gap
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.055 seconds)
+   **Total running time of the script:** (0 minutes 0.048 seconds)
 
 
 .. _sphx_glr_download_api_gallery_calculus_exhaustion_plot_01_archimedes_pi.py:

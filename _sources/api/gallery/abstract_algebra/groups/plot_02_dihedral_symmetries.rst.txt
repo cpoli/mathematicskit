@@ -86,7 +86,7 @@ Where each symmetry sends the labelled corners
 
     corners = np.array([[1, 0], [0, 1], [-1, 0], [0, -1]])
     fig, axes = plt.subplots(2, 4, figsize=(10, 5))
-    for ax, g in zip(axes.flat, d4.elements):
+    for ax, g in zip(axes.flat, d4.elements, strict=False):
         ax.fill(*corners.T, color="0.9", edgecolor="0.3")
         for vertex, image in enumerate(g):
             ax.annotate(str(vertex), corners[image] * 1.2, ha="center", va="center")
@@ -145,7 +145,7 @@ Cayley table
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.085 seconds)
+   **Total running time of the script:** (0 minutes 0.073 seconds)
 
 
 .. _sphx_glr_download_api_gallery_abstract_algebra_groups_plot_02_dihedral_symmetries.py:

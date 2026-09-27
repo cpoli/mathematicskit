@@ -1,0 +1,551 @@
+:orphan:
+
+Examples
+========
+
+This gallery walks through every public feature of ``mathematicskit.pde``:
+Fourier's series solution of the heat equation, Crank-Nicolson and the
+theta-method family, the method of lines in 2D, d'Alembert's traveling
+waves, Poisson's and Laplace's equations with direct and relaxation
+solvers, the Courant-Friedrichs-Lewy condition, von Neumann stability
+analysis, the Lax equivalence theorem, finite elements, multigrid,
+Godunov's method for shocks, the Hopf-Cole transformation, and Fourier
+and Chebyshev spectral methods.
+
+Each script in this gallery is self-contained and can be run directly with
+``python examples/pde/<section>/<script>.py``.
+
+Sections
+--------
+
+- **heat** -- Fourier's sine-series solution, Crank-Nicolson against
+  explicit FTCS and backward Euler, and the method of lines on a 2D plate.
+- **wave** -- d'Alembert's traveling-wave solution against a leapfrog
+  finite-difference string.
+- **advection** -- the Courant-Isaacson-Rees upwind, Lax-Friedrichs, and
+  Lax-Wendroff schemes for linear advection.
+- **conservation_laws** -- shocks in inviscid Burgers' equation and
+  Godunov's method.
+- **elliptic** -- Poisson's equation on a square, Richardson-style
+  relaxation (Jacobi, Gauss-Seidel, SOR) for Laplace's equation, finite
+  elements, and multigrid.
+- **stability** -- the CFL condition for advection schemes, von Neumann
+  amplification factors, and the Lax equivalence theorem.
+- **spectral** -- Fourier pseudo-spectral Burgers' equation, Chebyshev
+  collocation for boundary-value problems, and the Hopf-Cole exact
+  solution of viscous Burgers' equation.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Advection schemes
+-----------------
+
+Upwind, Lax-Friedrichs, and Lax-Wendroff schemes for linear advection.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Courant, Isaacson and Rees (1952) differenced u_x on the side the information comes from: for c &gt; 0, u_j^{n+1} = u_j^n - \nu(u_j^n - u_{j-1}^n). The scheme is stable for \nu \le 1, exact at \nu = 1, and otherwise first-order accurate, with numerical diffusion \tfrac12 c\,\Delta x(1-\nu)\,u_{xx} that smears the pulse. Differencing on the wrong side is unstable at every step size.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/advection/images/thumb/sphx_glr_plot_01_upwind_scheme_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/advection/plot_01_upwind_scheme`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Courant-Isaacson-Rees upwind scheme</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The centered FTCS scheme u_j^{n+1} = u_j^n - \tfrac{\nu}{2}(u_{j+1}^n - u_{j-1}^n) is unconditionally unstable for advection. Peter Lax (1954), following Friedrichs, replaced u_j^n by the neighbour average \tfrac12(u_{j+1}^n + u_{j-1}^n). That one change makes the scheme stable for \nu \le 1, and its conservation form carries over to nonlinear conservation laws and shocks -- at the price of heavy numerical diffusion.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/advection/images/thumb/sphx_glr_plot_02_lax_friedrichs_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/advection/plot_02_lax_friedrichs`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Lax-Friedrichs scheme: stabilizing centered differences</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Lax and Wendroff (1960) used the PDE itself to replace time derivatives in a Taylor expansion, u_{tt} = c^2 u_{xx}, giving u_j^{n+1} = u_j^n - \tfrac{\nu}{2}(u_{j+1}^n - u_{j-1}^n) + \tfrac{\nu^2}{2}(u_{j+1}^n - 2u_j^n + u_{j-1}^n). It is second-order accurate and far less diffusive than upwind on smooth waves, but, as Godunov later proved every linear second-order scheme must, it oscillates near discontinuities.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/advection/images/thumb/sphx_glr_plot_03_lax_wendroff_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/advection/plot_03_lax_wendroff`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Lax-Wendroff scheme: second order, and dispersive wiggles</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Conservation laws and shocks
+----------------------------
+
+Inviscid Burgers' equation: shocks, rarefactions, and Godunov's
+finite-volume method against oscillating second-order schemes.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="In inviscid Burgers&#x27; equation u_t + (u^2/2)_x = 0, faster fluid overtakes slower fluid and smooth data steepens into a shock. Sergei Godunov (1959) computed the flux between neighboring cells from the exact solution of the Riemann problem they pose. The result is a conservative, monotone scheme that moves shocks at the right speed without spurious wiggles. He also proved that no linear scheme can be both monotone and better than first order, which is why second-order Lax-Wendroff oscillates. This script shows a sine wave breaking into a shock, then compares three schemes on a Riemann problem.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/conservation_laws/images/thumb/sphx_glr_plot_01_godunov_shocks_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/conservation_laws/plot_01_godunov_shocks`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Godunov's method: capturing shocks without oscillations</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Poisson and Laplace equations
+-----------------------------
+
+Steady boundary-value problems: a sparse direct Poisson solve, the
+relaxation iterations that preceded it, finite elements, and multigrid.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Laplace&#x27;s equation \nabla^2 u = 0 governs a potential in empty space; Poisson added the source term, \nabla^2 u = f, for the potential inside matter. This script solves Poisson&#x27;s equation on the unit square for a pair of opposite point-like charges, then verifies the five-point finite-difference solver&#x27;s second-order accuracy against a problem with a known solution.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/elliptic/images/thumb/sphx_glr_plot_01_poisson_equation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/elliptic/plot_01_poisson_equation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Poisson's equation: a potential with sources</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Lewis Fry Richardson (1911) replaced Laplace&#x27;s equation by finite differences and solved the resulting equations by hand, sweeping over the grid and replacing each value by the average of its neighbors until nothing changed. That idea became the Jacobi iteration; updating values in place gives Gauss-Seidel, and over-relaxing each update gives SOR (Young, 1950). This script heats one side of a square plate and compares how fast the three relaxation schemes from mathematicskit.linalg, and conjugate gradient, converge.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/elliptic/images/thumb/sphx_glr_plot_02_richardson_relaxation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/elliptic/plot_02_richardson_relaxation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Richardson's relaxation: iterating toward Laplace's solution</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Richard Courant (1943) proposed piecewise-linear approximations on a triangulation, and aircraft engineers (Turner, Clough, Martin and Topp, 1956) turned the idea into the finite element method. Instead of differencing u&#x27;&#x27; = f, ask the weak form -\int u&#x27;v&#x27; = \int f v to hold for every &quot;hat&quot; function v on the mesh. The mesh can be refined exactly where the solution needs it. This script shows the hat-function basis, solves a boundary layer on a graded mesh, and shows that 1D linear elements are exact at the nodes.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/elliptic/images/thumb/sphx_glr_plot_03_finite_element_poisson_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/elliptic/plot_03_finite_element_poisson`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Finite elements: Galerkin's hat functions on an uneven mesh</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Relaxation kills wiggly error fast but smooth error slowly, so Jacobi&#x27;s iteration count grows like the number of grid points per side squared. Fedorenko (1964) and Brandt (1977) noticed that smooth error on a fine grid looks wiggly on a coarser one, where it is cheap to remove. A multigrid V-cycle smooths, corrects on successively coarser grids, and smooths again. The number of cycles needed stays flat as the grid is refined. This script shows Jacobi smoothing a random error, then compares cycle counts across grid sizes.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/elliptic/images/thumb/sphx_glr_plot_04_multigrid_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/elliptic/plot_04_multigrid`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Multigrid: a solver whose cost does not grow with the grid</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+The heat equation
+-----------------
+
+Fourier's series solution, the theta-method family (FTCS, Crank-Nicolson,
+backward Euler), and the method of lines on a 2D plate.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Joseph Fourier solved u_t = \alpha u_{xx} on a rod with ice-cold ends by writing the initial temperature as a sine series. Each mode \sin(k\pi x) then evolves on its own, decaying like e^{-\alpha (k\pi)^2 t}: sharp features (high k) vanish almost instantly, leaving the smooth fundamental mode. This script computes the sine coefficients of a square-wave start, watches the series smooth out, and checks it against a finite-difference solve.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/heat/images/thumb/sphx_glr_plot_01_fourier_heat_series_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/heat/plot_01_fourier_heat_series`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Fourier's heat equation: a sine series whose modes decay</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="John Crank and Phyllis Nicolson (1947) averaged the explicit and implicit heat-equation updates. The result is unconditionally stable, like backward Euler, and second-order accurate in time, unlike it. This script shows explicit FTCS blowing up just past its limit r = \alpha\Delta t/\Delta x^2 = 1/2, Crank-Nicolson staying bounded at steps 160 times larger (though not accurate there), and the time-convergence orders that separate Crank-Nicolson from backward Euler.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/heat/images/thumb/sphx_glr_plot_02_crank_nicolson_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/heat/plot_02_crank_nicolson`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Crank-Nicolson: large, stable, second-order heat steps</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The method of lines discretizes only space. On a grid, the 2D heat equation u_t = u_{xx} + u_{yy} becomes one ODE per interior point, dU/dt = L U, which any ODE integrator can then advance. Here that integrator is mathematicskit.integrators.rk4_integrate (the same one mathematicskit.ode_dynamics uses) and, for comparison, the adaptive dopri5_integrate. The ODE system is stiff, so RK4&#x27;s stable step shrinks like \Delta x^2.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/heat/images/thumb/sphx_glr_plot_03_method_of_lines_2d_heat_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/heat/plot_03_method_of_lines_2d_heat`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The method of lines: a hot plate as a system of ODEs</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Spectral methods
+----------------
+
+Fourier pseudo-spectral time stepping for periodic problems, and
+Chebyshev collocation for boundary-value problems, checked against the
+Hopf-Cole exact solution of viscous Burgers' equation.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Steven Orszag (1969-1971) and Kreiss and Oliger (1972) made the case for differentiating with the FFT instead of finite differences. For a smooth periodic function the error falls faster than any power of the grid spacing. Nonlinear terms are simply formed pointwise on the grid (&quot;pseudo-spectral&quot;). This script first compares Fourier and finite-difference derivatives, then solves viscous Burgers&#x27; equation u_t + u u_x = \nu u_{xx} as a steepening wave, integrating the spectral ODE system with mathematicskit.integrators.rk4_integrate.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/spectral/images/thumb/sphx_glr_plot_01_fourier_pseudospectral_burgers_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/spectral/plot_01_fourier_pseudospectral_burgers`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Fourier pseudo-spectral methods: Burgers' equation</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Fourier methods need periodic problems. Gottlieb and Orszag&#x27;s 1977 monograph set out the theory of the non-periodic alternative: collocate at the Chebyshev points x_k = -\cos(k\pi/N). These points cluster at the ends and so avoid the Runge phenomenon. This script solves the boundary-value problem u&#x27;&#x27; = f with Chebyshev collocation and with second-order finite differences, and watches the Chebyshev error fall geometrically while the finite-difference error only falls like N^{-2}. It closes with a 2D Poisson problem on a square.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/spectral/images/thumb/sphx_glr_plot_02_chebyshev_collocation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/spectral/plot_02_chebyshev_collocation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Chebyshev collocation: spectral accuracy without periodicity</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="J. M. Burgers (1948) proposed viscous Burgers&#x27; equation as the simplest model of nonlinear steepening balanced by viscosity. Eberhard Hopf (1950) and Julian Cole (1951) independently found that the substitution u = -2\nu\,\varphi_x/\varphi turns the nonlinear viscous Burgers&#x27; equation u_t + u u_x = \nu u_{xx} into the linear heat equation \varphi_t = \nu\varphi_{xx}. A nonlinear PDE with shock-like fronts thus has an exact solution. This script uses it to watch a sine wave form a viscous shock whose width shrinks with \nu, and to verify the pseudo-spectral Burgers solver to near machine precision.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/spectral/images/thumb/sphx_glr_plot_03_hopf_cole_burgers_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/spectral/plot_03_hopf_cole_burgers`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Burgers' equation and the Hopf-Cole transformation</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Stability: CFL and von Neumann
+------------------------------
+
+Why explicit schemes need small time steps: the Courant-Friedrichs-Lewy
+condition, von Neumann's Fourier-mode analysis, and the Lax
+equivalence theorem.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Courant, Friedrichs and Lewy (1928) observed that an explicit scheme for u_t + c\,u_x = 0 computes each new value from a few neighbors, so information can travel at most one cell per step. If the true wave moves farther than that -- Courant number \nu = c\,\Delta t/\Delta x &gt; 1 -- the scheme cannot possibly see where the solution came from, and it diverges. This script advects a pulse with the upwind scheme below and above \nu = 1, and with Lax-Wendroff, whose limit is the same.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/stability/images/thumb/sphx_glr_plot_01_cfl_condition_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/stability/plot_01_cfl_condition`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Courant-Friedrichs-Lewy condition</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="John von Neumann&#x27;s method substitutes a single Fourier mode u_j^n = G^n e^{ij\xi} into a linear scheme. Each step multiplies the mode by the amplification factor G(\xi), so the scheme is stable exactly when |G(\xi)| \le 1 for every wavenumber. This script plots |G| for heat and advection schemes, recovers the FTCS limit r \le 1/2 numerically, and shows why FTCS advection is unstable for every time step.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/stability/images/thumb/sphx_glr_plot_02_von_neumann_analysis_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/stability/plot_02_von_neumann_analysis`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Von Neumann stability analysis: one Fourier mode at a time</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Peter Lax and Robert Richtmyer (1956) proved that a consistent linear difference scheme for a well-posed linear problem converges as the grid is refined if and only if it is stable. Consistency alone is not enough. This script refines the grid, at a fixed Courant number, for three schemes for u_t + u_x = 0 that are all consistent. Stable Lax-Friedrichs converges at first order, and Lax-Wendroff at second. Unstable FTCS looks convergent on coarse grids, then explodes: finer grids take more steps, and its growing modes, seeded by round-off, eventually swamp the solution even though each step approximates the PDE more accurately.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/stability/images/thumb/sphx_glr_plot_03_lax_equivalence_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/stability/plot_03_lax_equivalence`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Lax equivalence theorem: consistency + stability = convergence</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+The wave equation
+-----------------
+
+A plucked string: d'Alembert's traveling-wave solution against a
+symplectic leapfrog finite-difference solve.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Jean le Rond d&#x27;Alembert (1747) showed that every solution of u_{tt} = c^2 u_{xx} is a sum of two waves moving in opposite directions, u = F(x - ct) + G(x + ct). A plucked string&#x27;s triangular bump therefore splits into two half-height copies that run apart, reflect upside down at the fixed ends, and recombine. This script compares d&#x27;Alembert&#x27;s formula with a leapfrog finite-difference string (mathematicskit.integrators.leapfrog_integrate) run at Courant number 1, where the scheme reproduces d&#x27;Alembert&#x27;s solution exactly at the grid points.">
+
+.. only:: html
+
+  .. image:: /api/gallery/pde/wave/images/thumb/sphx_glr_plot_01_dalembert_wave_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/pde/wave/plot_01_dalembert_wave`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">D'Alembert's traveling waves on a plucked string</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+   :includehidden:
+
+
+   /api/gallery/pde/advection/index.rst
+   /api/gallery/pde/conservation_laws/index.rst
+   /api/gallery/pde/elliptic/index.rst
+   /api/gallery/pde/heat/index.rst
+   /api/gallery/pde/spectral/index.rst
+   /api/gallery/pde/stability/index.rst
+   /api/gallery/pde/wave/index.rst
+
+
+
+.. only:: html
+
+ .. rst-class:: sphx-glr-signature
+
+    `Gallery generated by Sphinx-Gallery <https://sphinx-gallery.github.io>`_
