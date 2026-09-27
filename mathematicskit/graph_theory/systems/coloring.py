@@ -51,7 +51,7 @@ def greedy_coloring(graph, order=None) -> ColoringResult:
     0
     """
     order = list(range(graph.n_vertices)) if order is None else list(order)
-    coloring = {}
+    coloring: dict[int, int] = {}
     for v in order:
         used = {coloring[u] for u in graph.neighbors(v) if u in coloring}
         color = 0

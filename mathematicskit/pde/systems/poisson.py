@@ -25,7 +25,7 @@ import numpy as np
 import scipy.sparse.linalg as sla
 
 from mathematicskit.constants import DEFAULT_RTOL
-from mathematicskit.linalg import SOR, ConjugateGradient, GaussSeidel, JacobiIteration, optimal_sor_omega
+from mathematicskit.linalg import SOR, ConjugateGradient, GaussSeidel, IterativeLinearSolver, JacobiIteration, optimal_sor_omega
 from mathematicskit.pde.core.base import EllipticSolution
 from mathematicskit.pde.utils.operators import laplacian_1d, laplacian_2d, uniform_grid
 
@@ -150,6 +150,7 @@ def solve_poisson_2d(
         interior = sla.spsolve(A.tocsc(), rhs)
     else:
         dense = A.toarray()
+        solver: IterativeLinearSolver
         if method == "cg":
             solver = ConjugateGradient(tol=tol, max_iter=max_iter)
         elif method == "jacobi":

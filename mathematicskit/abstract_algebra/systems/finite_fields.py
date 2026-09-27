@@ -54,6 +54,8 @@ def is_irreducible(poly: Polynomial) -> bool:
         return False
     if n == 1:
         return True
+    if p is None:
+        raise TypeError("poly must have a modulus (coefficients in GF(p))")
     for d in range(1, n // 2 + 1):
         for candidate_coeffs in _monic_polynomials_of_degree(p, d):
             candidate = Polynomial(candidate_coeffs, modulus=p)

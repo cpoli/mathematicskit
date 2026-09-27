@@ -66,7 +66,7 @@ def bipartite_matching(graph: Graph, left) -> BipartiteMatchingResult:
     pairs = {left[i]: right[j] for i, j in enumerate(match) if j >= 0}
     partner_of_right = {v: u for u, v in pairs.items()}
 
-    reached = set()
+    reached: set = set()
     queue = deque(u for u in left if u not in pairs)
     reached.update(queue)
     while queue:

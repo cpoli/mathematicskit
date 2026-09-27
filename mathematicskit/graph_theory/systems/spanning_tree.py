@@ -93,7 +93,7 @@ def prim_mst(graph: Graph, start: int = 0) -> MSTResult:
     """
     in_tree = [False] * graph.n_vertices
     in_tree[start] = True
-    edges = []
+    edges: list[tuple[int, int, float]] = []
     total_weight = 0.0
     heap = [(w, start, v) for v, w in graph.neighbors(start).items()]
     heapq.heapify(heap)

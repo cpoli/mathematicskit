@@ -89,7 +89,7 @@ def pitchfork_fixed_points(r, kind: str = "supercritical") -> np.ndarray:
     return np.stack([zeros, -sq, sq], axis=-1)
 
 
-def hopf_limit_cycle_radius(r, kind: str = "supercritical") -> np.ndarray:
+def hopf_limit_cycle_radius(r, kind: str = "supercritical") -> float | np.ndarray:
     r"""Limit-cycle radius of the Hopf normal form (polar-coordinate ODE).
 
     Supercritical Hopf: :math:`\dot \rho = r\rho - \rho^3`,
@@ -107,7 +107,7 @@ def hopf_limit_cycle_radius(r, kind: str = "supercritical") -> np.ndarray:
 
     Returns
     -------
-    ndarray
+    float or ndarray
         ``sqrt(r)`` where ``r > 0``, else ``0`` (no limit cycle).
 
     Examples

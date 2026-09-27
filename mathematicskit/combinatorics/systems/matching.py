@@ -36,7 +36,7 @@ def maximum_matching(adjacency: dict) -> dict:
     >>> sorted(maximum_matching({"a": [1, 2], "b": [1], "c": [2, 3]}).items())
     [('a', 2), ('b', 1), ('c', 3)]
     """
-    match_of_right = {}
+    match_of_right: dict = {}
 
     def augment(u, visited) -> bool:
         for v in adjacency[u]:

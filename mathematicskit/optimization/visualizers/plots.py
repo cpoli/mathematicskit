@@ -9,6 +9,8 @@ from collections.abc import Callable
 import matplotlib.pyplot as plt
 import numpy as np
 
+from mathematicskit.optimization.core.base import OptimizeResult
+
 __all__ = ["plot_contour_path", "plot_convergence_comparison"]
 
 
@@ -37,8 +39,8 @@ def plot_contour_path(f: Callable[[np.ndarray], float], result, ax=None, x_range
     """
     if ax is None:
         _, ax = plt.subplots()
-    xs = np.linspace(*x_range, n_grid)
-    ys = np.linspace(*y_range, n_grid)
+    xs = np.linspace(x_range[0], x_range[1], n_grid)
+    ys = np.linspace(y_range[0], y_range[1], n_grid)
     X, Y = np.meshgrid(xs, ys)
     Z = np.empty_like(X)
     for i in range(n_grid):
@@ -54,7 +56,7 @@ def plot_contour_path(f: Callable[[np.ndarray], float], result, ax=None, x_range
     return ax
 
 
-def plot_convergence_comparison(results: dict[str, object], f: Callable[[np.ndarray], float], f_star: float, ax=None):
+def plot_convergence_comparison(results: dict[str, OptimizeResult], f: Callable[[np.ndarray], float], f_star: float, ax=None):
     """Semilog plot of ``f(x_k) - f*`` vs. iteration, across several methods.
 
     Parameters

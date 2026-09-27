@@ -23,7 +23,7 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
-from typing import Optional
+from typing import Any, Optional
 
 import numpy as np
 
@@ -145,7 +145,7 @@ class MethodOfLinesPDE(ABC):
     (re-attaching boundary points, reshaping 2D grids).
     """
 
-    _rhs_njit = None
+    _rhs_njit: Any = None  # set by subclasses to an @njit dispatcher
     params: np.ndarray = np.empty(0)
     state0: np.ndarray = np.empty(0)
     x: np.ndarray = np.empty(0)

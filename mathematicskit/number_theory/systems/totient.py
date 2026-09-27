@@ -29,7 +29,7 @@ def prime_factorization(n: int) -> dict:
     """
     if n < 1:
         raise ValueError("n must be >= 1")
-    factors = {}
+    factors: dict[int, int] = {}
     d = 2
     while d * d <= n:
         while n % d == 0:

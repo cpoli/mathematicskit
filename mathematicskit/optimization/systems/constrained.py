@@ -152,11 +152,15 @@ def verify_kkt(
     complementary = True
 
     if h is not None:
+        if grad_h is None:
+            raise TypeError("grad_h is required when h is given")
         lam = np.zeros(np.atleast_1d(h(x)).shape[0]) if eq_multipliers is None else np.asarray(eq_multipliers, dtype=np.float64)
         stationarity = stationarity + grad_h(x).T @ lam
         primal_feasible = primal_feasible and bool(np.allclose(h(x), 0.0, atol=tol))
 
     if g is not None:
+        if grad_g is None:
+            raise TypeError("grad_g is required when g is given")
         mu = np.zeros(np.atleast_1d(g(x)).shape[0]) if ineq_multipliers is None else np.asarray(ineq_multipliers, dtype=np.float64)
         stationarity = stationarity + grad_g(x).T @ mu
         g_vals = np.atleast_1d(g(x))

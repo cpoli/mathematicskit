@@ -193,7 +193,7 @@ class QuotientGroup(FiniteGroup):
             raise ValueError("the quotient G/N requires N to be a normal subgroup of G")
         self.group = group
         self.normal_subgroup = list(normal_subgroup)
-        self._coset_of = {}
+        self._coset_of: dict = {}
         self._elements = []
         for g in group.elements:
             if g in self._coset_of:

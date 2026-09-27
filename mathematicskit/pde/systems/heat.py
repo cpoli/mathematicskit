@@ -254,6 +254,8 @@ class HeatEquation2D(MethodOfLinesPDE):
     True
     """
 
+    y: np.ndarray
+
     def __init__(self, u0: InitialCondition, lengths=(1.0, 1.0), n=(41, 41), alpha: float = 1.0, boundary_value: float = 0.0):
         self.alpha, self.boundary_value = float(alpha), float(boundary_value)
         self.x, self.dx = uniform_grid(0.0, float(lengths[0]), int(n[0]))

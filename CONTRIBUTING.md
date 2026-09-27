@@ -27,8 +27,8 @@ MPLBACKEND=Agg pytest --doctest-modules mathematicskit --ignore-glob="*/tests/*"
 ```
 
 All three run in CI (`.github/workflows/ci.yml`) on every PR, across
-Python 3.10-3.14 on Linux and macOS. `mypy` also runs in CI but is
-currently advisory (non-blocking) — see "Type checking" below.
+Python 3.10-3.14 on Linux and macOS. `mypy` also runs in CI and must
+pass — see "Type checking" below.
 
 If you touch anything under `docs/` or add/modify an example in
 `examples/`, also build the docs locally before opening a PR (this
@@ -80,12 +80,10 @@ cd docs && make html
 
 ## Type checking
 
-`mypy` is configured in `pyproject.toml` but not yet fully clean across
-the codebase (mostly matplotlib/numpy stub gaps around animation objects
-and array-typed arguments) — it currently runs in CI as an advisory,
-non-blocking job. New code should type-check cleanly where practical;
-fixing pre-existing errors in code you're not otherwise touching is
-welcome but not required.
+`mypy` is configured in `pyproject.toml` and `mypy mathematicskit` is
+clean; CI fails on any new type error. Function bodies without
+annotations are not checked (`check_untyped_defs = false`), so annotate
+new public functions to get them checked.
 
 ## Tests
 

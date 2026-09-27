@@ -40,7 +40,7 @@ def prufer_encode(edges, n: int) -> list:
     edges = list(edges)
     if n < 2 or len(edges) != n - 1:
         raise ValueError("a tree on n >= 2 vertices has exactly n - 1 edges")
-    neighbors = {v: set() for v in range(n)}
+    neighbors: dict[int, set[int]] = {v: set() for v in range(n)}
     for u, v in edges:
         neighbors[u].add(v)
         neighbors[v].add(u)

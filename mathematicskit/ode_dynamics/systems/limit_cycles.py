@@ -101,7 +101,7 @@ def estimate_limit_cycle_amplitude(mu: float, t_transient: float = 200.0, t_obse
     return float(np.max(np.abs(result.y[:, 0])))
 
 
-def bendixson_criterion(f: Callable[[float, float], tuple], x_range, y_range, n: int = 101, h: float = 1e-6) -> BendixsonResult:
+def bendixson_criterion(f: Callable[[np.ndarray, np.ndarray], tuple], x_range, y_range, n: int = 101, h: float = 1e-6) -> BendixsonResult:
     r"""Bendixson's negative criterion on a rectangle.
 
     For a planar system :math:`\dot x = f(x, y)`, :math:`\dot y = g(x,

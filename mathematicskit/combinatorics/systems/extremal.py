@@ -87,7 +87,9 @@ def longest_increasing_subsequence(sequence) -> list:
     >>> longest_increasing_subsequence([3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5])
     [1, 2, 3, 5]
     """
-    tails, tail_index, parent = [], [], [None] * len(sequence)
+    tails: list = []
+    tail_index: list[int] = []
+    parent: list[int | None] = [None] * len(sequence)
     for i, x in enumerate(sequence):
         k = bisect.bisect_left(tails, x)
         if k == len(tails):
@@ -98,10 +100,10 @@ def longest_increasing_subsequence(sequence) -> list:
             tail_index[k] = i
         parent[i] = tail_index[k - 1] if k > 0 else None
     result = []
-    i = tail_index[-1] if tail_index else None
-    while i is not None:
-        result.append(sequence[i])
-        i = parent[i]
+    j: int | None = tail_index[-1] if tail_index else None
+    while j is not None:
+        result.append(sequence[j])
+        j = parent[j]
     return result[::-1]
 
 

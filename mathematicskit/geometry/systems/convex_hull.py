@@ -107,7 +107,7 @@ def graham_scan(points: np.ndarray) -> ConvexHullResult:
     def cross(o, a, b):
         return (points[a, 0] - points[o, 0]) * (points[b, 1] - points[o, 1]) - (points[a, 1] - points[o, 1]) * (points[b, 0] - points[o, 0])
 
-    stack = []
+    stack: list[int] = []
     for i in order:
         while len(stack) >= 2 and cross(stack[-2], stack[-1], i) <= 0:
             stack.pop()

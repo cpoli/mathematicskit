@@ -44,7 +44,7 @@ def convolve_direct(x: np.ndarray, h: np.ndarray, mode: str = "full") -> np.ndar
     >>> convolve_direct([1.0, 2.0, 3.0], [0.0, 1.0, 0.5])
     array([0. , 1. , 2.5, 4. , 1.5])
     """
-    return np.convolve(x, h, mode=mode)
+    return np.convolve(x, h, mode=mode)  # type: ignore[call-overload]  # numpy stubs want Literal mode
 
 
 def convolve_fft(x: np.ndarray, h: np.ndarray, mode: str = "full") -> np.ndarray:

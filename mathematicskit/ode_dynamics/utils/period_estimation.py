@@ -46,5 +46,4 @@ def estimate_period(t: np.ndarray, x: np.ndarray) -> float:
             crossings.append(t[i] + frac * (t[i + 1] - t[i]))
     if len(crossings) < 2:
         return float("nan")
-    crossings = np.array(crossings)
-    return float(np.mean(np.diff(crossings)))
+    return float(np.mean(np.diff(np.array(crossings))))

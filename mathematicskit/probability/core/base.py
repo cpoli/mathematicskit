@@ -17,7 +17,7 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import Optional
+from typing import Any, Optional
 
 import numpy as np
 
@@ -35,7 +35,7 @@ __all__ = [
 class DiscreteDistribution(ABC):
     """Common base for scipy.stats-backed discrete distribution wrappers."""
 
-    _frozen = None  # set by subclass __init__ to a scipy.stats frozen distribution
+    _frozen: Any = None  # set by subclass __init__ to a scipy.stats frozen distribution
 
     @abstractmethod
     def pmf(self, k):
@@ -86,7 +86,7 @@ class DiscreteDistribution(ABC):
 class ContinuousDistribution(ABC):
     """Common base for scipy.stats-backed continuous distribution wrappers."""
 
-    _frozen = None  # set by subclass __init__ to a scipy.stats frozen distribution
+    _frozen: Any = None  # set by subclass __init__ to a scipy.stats frozen distribution
 
     @abstractmethod
     def pdf(self, x):

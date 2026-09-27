@@ -43,7 +43,7 @@ class Variable:
 
     __slots__ = ("value", "grad", "_parents")
 
-    def __init__(self, value: float, _parents: list[tuple[Variable, float]] = None):
+    def __init__(self, value: float, _parents: list[tuple[Variable, float]] | None = None):
         self.value = float(value)
         self.grad = 0.0
         self._parents = _parents or []

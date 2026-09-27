@@ -51,7 +51,7 @@ def astar_shortest_path(graph: Graph, source: int, target: int, heuristic: Optio
     """
     h = heuristic or (lambda v: 0.0)
     best = {source: 0.0}
-    parent = {source: None}
+    parent: dict[int, int | None] = {source: None}
     queue = [(h(source), 0.0, source)]
     closed = set()
     expanded = 0
@@ -63,9 +63,10 @@ def astar_shortest_path(graph: Graph, source: int, target: int, heuristic: Optio
         expanded += 1
         if u == target:
             path = []
-            while u is not None:
-                path.append(u)
-                u = parent[u]
+            node: int | None = u
+            while node is not None:
+                path.append(node)
+                node = parent[node]
             return SearchResult(path=path[::-1], distance=g_u, n_expanded=expanded)
         for v, w in graph.neighbors(u).items():
             candidate = g_u + w

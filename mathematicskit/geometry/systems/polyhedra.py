@@ -45,9 +45,9 @@ def polyhedron_counts(points, decimals: int = 9) -> PolyhedronResult:
     """
     hull = ConvexHull(np.asarray(points, dtype=float))
     planes = np.round(hull.equations, decimals)
-    face_ids = {}
+    face_ids: dict[tuple, int] = {}
     face_of_simplex = [face_ids.setdefault(tuple(p), len(face_ids)) for p in planes]
-    edge_faces = {}
+    edge_faces: dict[tuple, set[int]] = {}
     for simplex, face in zip(hull.simplices, face_of_simplex, strict=False):
         for i in range(3):
             edge = tuple(sorted((simplex[i], simplex[(i + 1) % 3])))

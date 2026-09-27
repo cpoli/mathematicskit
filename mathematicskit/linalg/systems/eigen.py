@@ -124,7 +124,7 @@ def power_iteration(a: np.ndarray, tol: float = 1e-12, max_iter: int = DEFAULT_M
     """
     a = np.asarray(a, dtype=np.float64)
     n = a.shape[0]
-    v = np.random.default_rng(0).normal(size=n) if v0 is None else np.asarray(v0, dtype=np.float64)
+    v: np.ndarray = np.random.default_rng(0).normal(size=(n,)) if v0 is None else np.asarray(v0, dtype=np.float64)
     v = v / np.linalg.norm(v)
     lam_prev = 0.0
     converged = False
@@ -181,7 +181,7 @@ def inverse_iteration(a: np.ndarray, mu: float, tol: float = 1e-12, max_iter: in
     a = np.asarray(a, dtype=np.float64)
     n = a.shape[0]
     shifted = a - mu * np.eye(n)
-    v = np.random.default_rng(0).normal(size=n) if v0 is None else np.asarray(v0, dtype=np.float64)
+    v: np.ndarray = np.random.default_rng(0).normal(size=(n,)) if v0 is None else np.asarray(v0, dtype=np.float64)
     v = v / np.linalg.norm(v)
     lam_prev = 0.0
     converged = False

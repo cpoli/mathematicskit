@@ -45,9 +45,8 @@ jobs:
       - run: MPLBACKEND=Agg pytest --doctest-modules mathematicskit --ignore-glob="*/tests/*" -q
 
   typecheck:
-    name: Type check (mypy, advisory)
+    name: Type check (mypy)
     runs-on: ubuntu-latest
-    continue-on-error: true # mypy adoption is incremental; see CONTRIBUTING.md
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

@@ -193,6 +193,7 @@ class Polynomial:
 
     def __init__(self, coeffs, modulus: Optional[int] = None):
         self.modulus = modulus
+        raw: list[Fraction] | list[int]
         if modulus is None:
             raw = [Fraction(c) for c in coeffs]
         else:

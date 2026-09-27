@@ -28,7 +28,7 @@ pytest mathematicskit/numerical_analysis/tests/test_interpolation.py::test_lagra
 # docstring examples (every subpackage's doctests)
 MPLBACKEND=Agg pytest --doctest-modules mathematicskit --ignore-glob="*/tests/*"
 
-# type check (advisory only in CI, not blocking -- see below)
+# type check (blocking in CI)
 mypy mathematicskit
 
 # docs (re-executes examples/*/plot_*.py via sphinx-gallery -- the only way
@@ -37,7 +37,7 @@ pip install -e ".[docs]"
 cd docs && make html
 ```
 
-All of lint, unit tests, doctests, and (advisory) mypy run in CI (`.github/workflows/ci.yml`) across Python 3.10-3.14 on Linux and macOS. Unlike physicskit, `pytest-xdist` is not a test dependency here, so there's no `-n auto` parallel flag -- just `pytest -q`.
+All of lint, unit tests, doctests, and mypy run in CI (`.github/workflows/ci.yml`) across Python 3.10-3.14 on Linux and macOS. Unlike physicskit, `pytest-xdist` is not a test dependency here, so there's no `-n auto` parallel flag -- just `pytest -q`.
 
 ## Architecture
 
@@ -59,7 +59,7 @@ Where subpackages share base classes, the common flow is: `core/base.py` defines
 - Every public function/class needs a NumPy-style docstring (`Parameters`, `Returns`, and an `Examples` section with a runnable doctest where it adds real value). Doctests are checked in CI — an example that doesn't actually execute correctly is worse than no example.
 - New algorithms should cite their source formula/theorem (docstring or comment) so they can be independently verified.
 - Tests prefer closed-form/analytically-verifiable assertions (`pytest.approx` against a known result, e.g. interpolation exactness on polynomials up to the interpolation degree) over snapshot-testing plot output; a visualizer needs only a smoke test (right return type/shape; for animations, that `anim.save()` to a temp file succeeds).
-- `mypy` is configured but not yet fully clean and runs advisory/non-blocking in CI. New code should type-check where practical; fixing unrelated pre-existing errors is not required.
+- `mypy mathematicskit` is clean and blocking in CI; new code must keep it that way (`check_untyped_defs = false`, so unannotated bodies are skipped).
 - `docs/source/history/` documents each subpackage's foundational mathematical results linked to the corresponding implementation — worth checking when adding a major new model to understand the expected historical framing.
 - Every breakthrough in `docs/source/history/` links to one or more gallery examples via `.. minigallery::`, and no example is linked from two breakthroughs. Each example's title and content must show that breakthrough's subject, so a reader can tell at a glance why it illustrates that entry. Split an example that covers several breakthroughs into focused ones, one per breakthrough, and delete the combined file. When the match is unclear, change the example, not the breakthrough's title or text.
 

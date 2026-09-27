@@ -86,7 +86,7 @@ def bernoulli_numbers(n: int) -> list:
     """
     if n < 0:
         raise ValueError("n must be >= 0")
-    numbers = []
+    numbers: list[Fraction] = []
     for m in range(n + 1):
         partial = sum(comb(m + 1, j) * numbers[j] for j in range(m))
         numbers.append(Fraction(m + 1 - partial, m + 1))

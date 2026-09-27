@@ -16,6 +16,7 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
+from typing import Any
 
 import numpy as np
 
@@ -50,7 +51,7 @@ class FlowSystem(ABC):
     in ``__init__``, and call ``super().__init__(state0)``.
     """
 
-    _rhs_njit = None
+    _rhs_njit: Any = None  # set by subclasses to an @njit dispatcher
     params: np.ndarray = np.empty(0)
 
     def __init__(self, state0):

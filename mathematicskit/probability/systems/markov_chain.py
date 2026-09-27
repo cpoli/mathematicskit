@@ -159,11 +159,11 @@ class MarkovChain:
         >>> np.allclose(B[:, 1], [0.25, 0.5, 0.75], atol=1e-8)  # P(reach 4 | start at i) = i/4
         True
         """
-        transient = np.asarray(transient, dtype=np.int64)
-        absorbing = np.asarray(absorbing, dtype=np.int64)
-        q = self.p[np.ix_(transient, transient)]
-        r = self.p[np.ix_(transient, absorbing)]
-        return np.linalg.solve(np.eye(transient.shape[0]) - q, r)
+        t_idx = np.asarray(transient, dtype=np.int64)
+        a_idx = np.asarray(absorbing, dtype=np.int64)
+        q = self.p[np.ix_(t_idx, t_idx)]
+        r = self.p[np.ix_(t_idx, a_idx)]
+        return np.linalg.solve(np.eye(t_idx.shape[0]) - q, r)
 
     def expected_steps_to_absorption(self, transient: Sequence[int]) -> np.ndarray:
         r"""Expected number of steps before absorption, from each transient state.
@@ -196,7 +196,7 @@ class MarkovChain:
         >>> np.allclose(t, [3.0, 4.0, 3.0], atol=1e-8)  # i * (4 - i) for i=1,2,3
         True
         """
-        transient = np.asarray(transient, dtype=np.int64)
-        q = self.p[np.ix_(transient, transient)]
-        ones = np.ones(transient.shape[0])
-        return np.linalg.solve(np.eye(transient.shape[0]) - q, ones)
+        t_idx = np.asarray(transient, dtype=np.int64)
+        q = self.p[np.ix_(t_idx, t_idx)]
+        ones = np.ones(t_idx.shape[0])
+        return np.linalg.solve(np.eye(t_idx.shape[0]) - q, ones)
