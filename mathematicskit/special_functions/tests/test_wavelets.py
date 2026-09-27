@@ -55,7 +55,7 @@ def test_haar_one_level_is_pairwise_sums_and_differences():
     x = np.array([4.0, 2.0, 5.0, 5.0])
     result = discrete_wavelet_transform(x, "haar", level=1)
     np.testing.assert_allclose(result.approximation, np.array([6.0, 10.0]) / np.sqrt(2))
-    np.testing.assert_allclose(result.details[0], np.array([2.0, 0.0]) / np.sqrt(2))
+    np.testing.assert_allclose(result.details[0], np.array([2.0, 0.0]) / np.sqrt(2), atol=1e-12)
 
 
 def test_db2_details_vanish_on_linear_signal_interior():
