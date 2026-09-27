@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-09-27
+
 ### Added
 
 - Signal processing and transforms in `mathematicskit.special_functions`:
@@ -86,6 +88,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CI now tests Python 3.10-3.14 (previously 3.9-3.12).
 - Package description no longer claims everything is hand-rolled; it now
   matches the README (built on numpy/scipy).
+- `verify_kkt` raises a descriptive `TypeError` when `h`/`g` is given
+  without `grad_h`/`grad_g`, and `is_irreducible` does the same for a
+  polynomial without a modulus (both previously failed with an
+  unexplained `TypeError`).
+- `hopf_limit_cycle_radius` is annotated as returning `float | ndarray`,
+  matching its behaviour for scalar input.
+- `mypy mathematicskit` is clean and now blocking in CI; Ruff targets
+  Python 3.10.
 
 ## [0.2.1] - 2026-09-25
 
@@ -253,7 +263,8 @@ All 14 planned domain subpackages are now implemented. Docs polish
   optimizer, eigenvalues in linear algebra/graph theory/dynamical
   systems, and more).
 
-[Unreleased]: https://github.com/cpoli/mathematicskit/compare/v0.2.1...HEAD
+[Unreleased]: https://github.com/cpoli/mathematicskit/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/cpoli/mathematicskit/compare/v0.2.1...v0.3.0
 [0.2.1]: https://github.com/cpoli/mathematicskit/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/cpoli/mathematicskit/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/cpoli/mathematicskit/releases/tag/v0.1.0
