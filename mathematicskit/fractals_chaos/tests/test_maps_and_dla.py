@@ -3,6 +3,7 @@
 import numpy as np
 import pytest
 
+from mathematicskit._jit import HAS_NUMBA
 from mathematicskit.fractals_chaos.systems.box_counting import box_counting_dimension
 from mathematicskit.fractals_chaos.systems.dla import dla_cluster
 from mathematicskit.fractals_chaos.systems.maps import henon_map
@@ -36,6 +37,7 @@ def test_dla_cluster_is_connected_and_unique():
         assert any((x + dx, y + dy) in cells for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)))
 
 
+@pytest.mark.skipif(not HAS_NUMBA, reason="8000 random walkers take many minutes without numba")
 def test_dla_mass_radius_dimension_near_1_7():
     cluster = dla_cluster(8000, seed=0)
     r = np.sqrt((cluster**2).sum(axis=1))

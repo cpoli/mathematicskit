@@ -10,7 +10,8 @@ Critical Phenomenon," Physical Review Letters 47(19) (1981), 1400-1403.
 from __future__ import annotations
 
 import numpy as np
-from numba import njit
+
+from mathematicskit._jit import njit
 
 __all__ = ["dla_cluster"]
 

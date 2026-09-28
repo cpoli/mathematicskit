@@ -33,7 +33,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           cache: pip
-      - run: pip install -e ".[test]"
+      - run: pip install -e ".[fast,test]"
       - run: MPLBACKEND=Agg pytest -q --cov=mathematicskit --cov-report=xml
       - name: Upload coverage to Codecov
         if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.14'
@@ -43,6 +43,37 @@ jobs:
           files: ./coverage.xml
           fail_ci_if_error: false
       - run: MPLBACKEND=Agg pytest --doctest-modules mathematicskit --ignore-glob="*/tests/*" -q
+
+  test-no-numba:
+    # numba is optional (the `fast` extra); without it every @njit kernel
+    # runs as plain Python via mathematicskit/_jit.py. This is the install
+    # JupyterLite/Pyodide users get.
+    name: Test without numba (py3.12)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -e ".[test]"
+      - run: python -c "import mathematicskit.integrators as i; assert not i.HAS_NUMBA"
+      - run: MPLBACKEND=Agg pytest -q
+      - run: MPLBACKEND=Agg pytest --doctest-modules mathematicskit --ignore-glob="*/tests/*" -q
+
+  package:
+    name: Build and check distributions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install build twine
+      - run: python -m build
+      - run: twine check --strict dist/*
+      - name: No test modules in the wheel
+        run: "! unzip -l dist/*.whl | grep -q '/tests/'"
 
   typecheck:
     name: Type check (mypy)

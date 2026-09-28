@@ -11,8 +11,8 @@ are periodic (toroidal).
 from __future__ import annotations
 
 import numpy as np
-from numba import njit
 
+from mathematicskit._jit import njit
 from mathematicskit.fractals_chaos.core.base import CellularAutomaton
 
 __all__ = ["ElementaryCA", "GameOfLife"]

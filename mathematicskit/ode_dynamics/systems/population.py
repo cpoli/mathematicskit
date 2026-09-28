@@ -11,8 +11,8 @@ from __future__ import annotations
 from functools import lru_cache
 
 import numpy as np
-from numba import njit
 
+from mathematicskit._jit import njit
 from mathematicskit.ode_dynamics.core.base import FlowSystem
 
 __all__ = ["LogisticGrowth", "logistic_growth_solution", "LotkaVolterra", "lotka_volterra_invariant"]

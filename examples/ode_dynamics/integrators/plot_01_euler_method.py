@@ -13,9 +13,8 @@ the step halves the error.
 # %%
 import matplotlib.pyplot as plt
 import numpy as np
-from numba import njit
 
-from mathematicskit.integrators import implicit_euler_integrate
+from mathematicskit.integrators import implicit_euler_integrate, njit
 
 
 @njit

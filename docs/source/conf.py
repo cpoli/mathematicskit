@@ -42,6 +42,7 @@ extensions = [
     "myst_parser",
     "sphinx_gallery.gen_gallery",
     "sphinx_design",
+    "jupyterlite_sphinx",
 ]
 
 templates_path = ["_templates"]
@@ -183,11 +184,28 @@ _CATEGORY_ORDER = [
 # Subpackages with a sphinx-gallery-formatted examples/<name>/ directory.
 _GALLERY_SUBPACKAGES = [s["name"] for s in SUBPACKAGES]
 
+
+def _jupyterlite_install_cell(notebook_content, notebook_filename):
+    """Prepend a ``%pip install`` cell so the Pyodide kernel fetches mathematicskit from PyPI."""
+    notebook_content["cells"].insert(
+        0,
+        {
+            "cell_type": "code",
+            "execution_count": None,
+            "metadata": {},
+            "outputs": [],
+            "source": ["%pip install mathematicskit"],
+        },
+    )
+
+
 sphinx_gallery_conf = {
     "examples_dirs": [f"../../examples/{name}" for name in _GALLERY_SUBPACKAGES],
     "gallery_dirs": [f"api/gallery/{name}" for name in _GALLERY_SUBPACKAGES],
     "filename_pattern": r"/plot_",
-    "download_all_examples": False,
+    # Zip downloads of each gallery's .py/.ipynb files, so a course can take a
+    # whole domain's examples at once.
+    "download_all_examples": True,
     "within_subsection_order": "FileNameSortKey",
     "remove_config_comments": True,
     # Lets ".. minigallery::" (used throughout docs/source/history/) resolve
@@ -196,6 +214,25 @@ sphinx_gallery_conf = {
     # back to file-path resolution on every single invocation.
     "backreferences_dir": "gen_modules/backreferences",
     "doc_module": ("mathematicskit",),
+    # "Launch Binder" button on every example: runs the generated notebook
+    # from the built site on the gh-pages branch (served from its root), in
+    # an environment installed from binder/requirements.txt.
+    "binder": {
+        "org": "cpoli",
+        "repo": "mathematicskit",
+        "branch": "gh-pages",
+        "binderhub_url": "https://mybinder.org",
+        "dependencies": ["./binder/requirements.txt"],
+        "notebooks_dir": "notebooks",
+        "use_jupyter_lab": True,
+    },
+    # "Launch JupyterLite" button: runs the notebook in the browser on
+    # Pyodide, with no server. Numba cannot run there, so this relies on
+    # numba being optional (mathematicskit/_jit.py).
+    "jupyterlite": {
+        "use_jupyter_lab": True,
+        "notebook_modification_function": _jupyterlite_install_cell,
+    },
 }
 
 # Many domains share common attribute names (e.g. "x", "n") across unrelated

@@ -28,10 +28,10 @@ from __future__ import annotations
 from collections.abc import Callable
 
 import numpy as np
-from numba import njit
 from numpy.typing import ArrayLike, NDArray
 from scipy.integrate import solve_ivp
 
+from mathematicskit._jit import njit
 from mathematicskit.integrators.fixed_step import RHSFunc
 
 __all__ = ["implicit_euler_step", "implicit_euler_integrate", "stiff_integrate"]

@@ -2,8 +2,8 @@
 
 Thanks for considering a contribution. mathematicskit is organized as one
 subpackage per mathematics domain (`mathematicskit/<name>/`), each with its own
-`core/` (ABCs and shared engine machinery, plus numba-accelerated kernels
-where needed), `systems/` (concrete models/algorithms), `utils/`
+`core/` (ABCs and shared engine machinery, plus kernels JIT-compiled
+by numba, when it is installed, where needed), `systems/` (concrete models/algorithms), `utils/`
 (supporting numerics), `visualizers/` (matplotlib plotting), and
 `tests/` directory. New mathematics belongs in the subpackage it fits
 best; a genuinely new domain gets its own subpackage following the same
@@ -94,6 +94,49 @@ top-level `tests/` directory. A new system/model needs:
   result, not just "it runs without crashing."
 - A visualizer needs only a smoke test (it returns the right type/shape,
   and — for animations — that `anim.save()` to a temp file succeeds).
+- numba is optional (the `fast` extra). Import `njit` from
+  `mathematicskit._jit`, never from `numba` directly, so the kernel still
+  runs as plain Python without numba, and CI's no-numba job still passes.
+  A test that is only practical with the JIT (minutes of pure-Python
+  loops) may be marked
+  `@pytest.mark.skipif(not HAS_NUMBA, reason=...)`.
+
+## API stability and deprecation policy
+
+mathematicskit is in **beta** (`Development Status :: 4 - Beta`) and
+follows [Semantic Versioning](https://semver.org/). The public API is
+every name listed in a subpackage's `__all__`, reached as
+`mk.<subpackage>.<name>` or `mathematicskit.<subpackage>.<name>`,
+including the fields of result dataclasses. Modules and names whose
+path contains a leading underscore (for example
+`mathematicskit._jit`), and anything under `core/`, `systems/`, or
+`utils/` that isn't re-exported by its subpackage, are internal.
+
+- **Patch releases (0.x.Y)** fix bugs only. They never change a public
+  signature or a result field.
+- **Minor releases (0.X.0)** may add to the public API. A public name,
+  parameter, or result field is removed or renamed only after a
+  deprecation period: for at least one minor release it keeps working
+  and emits a `DeprecationWarning` that names its replacement, and the
+  change is listed under "Deprecated" in `CHANGELOG.md`.
+- **Numerical results** may change within tolerance in any release when
+  an algorithm is made more accurate or robust. Changes beyond round-off
+  are noted in the changelog.
+- **1.0** will freeze the public API. After that, removals happen only in
+  major releases.
+
+## Releasing
+
+1. Bump `version` in `pyproject.toml` and move the `CHANGELOG.md`
+   "Unreleased" entries under the new version.
+2. Merge to `main`, then publish a GitHub release tagged `vX.Y.Z`.
+   `.github/workflows/release.yml` builds the distributions, checks that
+   the tag matches `pyproject.toml`, and uploads to PyPI through trusted
+   publishing (no API token). It requires a one-time PyPI publisher setup,
+   described in the workflow's header comment.
+3. Rebuild and push the docs to `gh-pages`
+   (`python docs/make_readme_figure.py` first if the hero figure's code
+   changed).
 
 ## History entries
 

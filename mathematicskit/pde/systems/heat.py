@@ -32,8 +32,8 @@ import numpy as np
 import scipy.integrate as si
 import scipy.sparse as sp
 import scipy.sparse.linalg as sla
-from numba import njit
 
+from mathematicskit._jit import njit
 from mathematicskit.pde.core.base import MethodOfLinesPDE, PDESolution, _step_count, _thinned_indices
 from mathematicskit.pde.systems.stability import RK4_REAL_AXIS_LIMIT, _theta_name, check_diffusion_stability
 from mathematicskit.pde.utils.operators import laplacian_1d, laplacian_2d, uniform_grid

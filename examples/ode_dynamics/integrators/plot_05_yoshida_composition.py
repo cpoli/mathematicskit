@@ -18,9 +18,8 @@ built from symplectic steps, still symplectic. The middle substep runs
 # %%
 import matplotlib.pyplot as plt
 import numpy as np
-from numba import njit
 
-from mathematicskit.integrators import leapfrog_integrate, yoshida4_integrate
+from mathematicskit.integrators import leapfrog_integrate, njit, yoshida4_integrate
 
 
 @njit

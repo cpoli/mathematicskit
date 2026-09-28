@@ -18,9 +18,9 @@ Hamiltonian-style evolution.
 from __future__ import annotations
 
 import numpy as np
-from numba import njit
 from numpy.typing import NDArray
 
+from mathematicskit._jit import njit
 from mathematicskit.integrators.fixed_step import RHSFunc
 
 __all__ = ["dopri5_step", "dopri5_integrate"]

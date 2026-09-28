@@ -21,8 +21,9 @@ from __future__ import annotations
 from collections.abc import Callable
 
 import numpy as np
-from numba import njit
 from numpy.typing import NDArray
+
+from mathematicskit._jit import njit
 
 __all__ = [
     "RHSFunc",

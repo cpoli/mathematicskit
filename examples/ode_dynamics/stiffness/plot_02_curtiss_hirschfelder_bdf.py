@@ -24,9 +24,8 @@ is a descendant.
 # %%
 import matplotlib.pyplot as plt
 import numpy as np
-from numba import njit
 
-from mathematicskit.integrators import dopri5_integrate, stiff_integrate
+from mathematicskit.integrators import dopri5_integrate, njit, stiff_integrate
 
 
 @njit

@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- numba is now optional, via the new `fast` extra
+  (`pip install "mathematicskit[fast]"`). Without it, every `@njit` kernel
+  in `ode_dynamics`, `fractals_chaos`, `pde`, and `integrators` runs as
+  plain Python with the same results, only slower, so mathematicskit
+  installs and runs on Pyodide/JupyterLite. Existing environments that
+  already have numba installed are unaffected.
+- Development status raised from Alpha to Beta. The public API now
+  follows the stability and deprecation policy in `CONTRIBUTING.md`.
+- The wheel no longer ships the `tests/` packages (about 190 files). The
+  sdist still includes them, for downstream packagers.
+- README rewritten around learning and teaching, with a hero figure
+  (`docs/make_readme_figure.py`) and try-online badges.
+
+### Added
+
+- `mathematicskit.integrators.njit` and `HAS_NUMBA`: `numba.njit` when
+  numba is installed, a no-op decorator otherwise, for writing integrator
+  callbacks that work either way.
+- `notebooks/quickstart.ipynb`, with Colab and Binder launch links.
+- Gallery "Launch Binder" and "JupyterLite" buttons, and download-all zips
+  of each gallery's scripts and notebooks.
+- CI jobs that run the test suite and doctests without numba, and that
+  build the distributions and check them with `twine check`; a release
+  workflow that publishes to PyPI through trusted publishing.
+
 ## [0.3.0] - 2026-09-27
 
 ### Added

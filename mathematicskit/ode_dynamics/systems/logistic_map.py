@@ -9,7 +9,8 @@ universality for a class of nonlinear transformations*, J. Stat. Phys.
 from __future__ import annotations
 
 import numpy as np
-from numba import njit
+
+from mathematicskit._jit import njit
 
 __all__ = ["LogisticMap", "bifurcation_diagram", "estimate_feigenbaum_delta"]
 

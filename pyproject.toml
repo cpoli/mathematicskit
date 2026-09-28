@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "mathematicskit"
 version = "0.3.0"
-description = "Unified computational mathematics toolkit: numerical analysis, linear algebra, calculus, dynamical systems, partial differential equations, optimization, probability, statistics, number theory, combinatorics, graph theory, abstract algebra, geometry, special functions, and fractals/chaos -- built on numpy/scipy, hand-rolling algorithms only where no library equivalent exists."
+description = "Unified computational mathematics toolkit: numerical analysis, linear algebra, calculus, dynamical systems, partial differential equations, optimization, probability, statistics, number theory, combinatorics, complex analysis, graph theory, abstract algebra, geometry, special functions, and fractals/chaos -- built on numpy/scipy, hand-rolling algorithms only where no library equivalent exists."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
@@ -22,10 +22,16 @@ keywords = [
     "number-theory",
     "probability",
     "statistics",
+    "education",
+    "numerical-methods",
+    "dynamical-systems",
+    "fractals",
 ]
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Education",
     "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
@@ -34,16 +40,19 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
     "Typing :: Typed",
+    "Topic :: Education",
     "Topic :: Scientific/Engineering :: Mathematics",
 ]
 dependencies = [
     "numpy>=1.24",
     "scipy>=1.10",
     "matplotlib>=3.6",
-    "numba>=0.58",
 ]
 
 [project.optional-dependencies]
+# Numba JIT-compiles the ode_dynamics/fractals_chaos/pde/integrators kernels;
+# without it they run as plain Python (same results, slower). See mathematicskit/_jit.py.
+fast = ["numba>=0.58"]
 test = ["pytest>=7.0", "pytest-cov", "hypothesis>=6.90", "pillow>=9.0"]
 docs = [
     "sphinx>=7.0",
@@ -52,8 +61,10 @@ docs = [
     "myst-parser>=2.0",
     "sphinx-gallery>=0.15",
     "sphinx-design>=0.6",
+    "jupyterlite-sphinx>=0.17",
+    "jupyterlite-pyodide-kernel>=0.4",
 ]
-dev = ["mathematicskit[test,docs]", "ruff>=0.6", "mypy>=1.10", "pre-commit>=3.7"]
+dev = ["mathematicskit[fast,test,docs]", "ruff>=0.6", "mypy>=1.10", "pre-commit>=3.7"]
 
 [project.urls]
 Homepage = "https://github.com/cpoli/mathematicskit"
@@ -64,9 +75,16 @@ Documentation = "https://cpoli.github.io/mathematicskit/"
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["mathematicskit*"]
+# Tests live beside each subpackage; they stay in the sdist but not the wheel.
+exclude = ["mathematicskit.tests", "mathematicskit.*.tests"]
 
 [tool.setuptools.package-data]
 mathematicskit = ["py.typed"]
+
+# include-package-data (on by default) would otherwise re-add each
+# subpackage's tests/ directory as package data of its parent.
+[tool.setuptools.exclude-package-data]
+"*" = ["tests/*", "tests/**/*"]
 
 [tool.pytest.ini_options]
 testpaths = [

@@ -8,54 +8,67 @@
 | Code style | [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff) |
 | Downloads | [![Downloads](https://static.pepy.tech/badge/mathematicskit)](https://pepy.tech/project/mathematicskit) [![Downloads/Month](https://static.pepy.tech/badge/mathematicskit/month)](https://pepy.tech/project/mathematicskit) |
 | Community | [![GitHub Stars](https://img.shields.io/github/stars/cpoli/mathematicskit?style=social)](https://github.com/cpoli/mathematicskit) [![GitHub Forks](https://img.shields.io/github/forks/cpoli/mathematicskit?style=social)](https://github.com/cpoli/mathematicskit) [![Contributors](https://img.shields.io/github/contributors/cpoli/mathematicskit)](https://github.com/cpoli/mathematicskit/graphs/contributors) [![Last Commit](https://img.shields.io/github/last-commit/cpoli/mathematicskit)](https://github.com/cpoli/mathematicskit/commits/main) |
+| Try it online | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/cpoli/mathematicskit/blob/main/notebooks/quickstart.ipynb) [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/cpoli/mathematicskit/main?labpath=notebooks%2Fquickstart.ipynb) [![JupyterLite](https://jupyterlite.rtfd.io/en/latest/_static/badge.svg)](https://cpoli.github.io/mathematicskit/lite/lab/) |
 
-A unified toolkit for computational mathematics, spanning the field end
-to end: Newton's method chasing roots and Poincare sections of the
-driven Duffing oscillator, Mandelbrot sets and the Feigenbaum route to
-chaos, Dijkstra's shortest paths and finite-field arithmetic, the
-Central Limit Theorem in action and Bessel functions in closed form --
-with each domain's docs tracing the field's own foundational
-breakthroughs in chronological, pedagogical order, every historical
-milestone linked directly to the runnable code that reproduces it. 14
-domain subpackages, one consistent NumPy-based API -- built directly on
-`numpy`/`scipy` for anything they already implement (decompositions,
-eigensolvers, quadrature, statistical distributions, optimization
-routines, and more), hand-rolling an algorithm from scratch only where
-no `numpy`/`scipy` equivalent exists (e.g. graph algorithms, the simplex
-method, modular arithmetic) or where the algorithm's own iterate
-behavior is the pedagogical subject (e.g. root-finder convergence
-history, autodiff). No hard dependency on `networkx`, `cvxpy`, or
-SageMath. Sharing common ODE integrators throughout. Conventionally
-imported as `mk`.
+**See how the algorithms of computational mathematics actually work.**
+mathematicskit is a Python toolkit for learning and teaching numerical
+methods, dynamical systems, and discrete mathematics. Every iterative method
+keeps its iterates, every result is an inspectable dataclass, every domain
+ships plotting helpers, and each domain's docs walk through the field's
+breakthroughs in historical order, each one linked to runnable code that
+reproduces it.
+
+![Mandelbrot set, Newton vs. bisection convergence, and the logistic-map bifurcation diagram, all drawn with mathematicskit](https://raw.githubusercontent.com/cpoli/mathematicskit/main/docs/source/_static/images/readme_hero.png)
+
+- **For students:** watch Newton's method converge quadratically while
+  bisection converges linearly, see the Runge phenomenon appear, trace the
+  Feigenbaum route to chaos, all in a few lines each.
+- **For instructors:** 16 domains, one consistent API, and hundreds of
+  gallery examples, each downloadable as a notebook or runnable in the
+  browser, ready to hand out as course material.
+- **Built on numpy/scipy:** production-grade library routines under the
+  hood, with algorithms hand-rolled only where the steps themselves are
+  what you're learning (see [Design](#design)).
 
 mathematicskit is part of a family of packages --
 [physicskit](https://github.com/cpoli/physicskit), **mathematicskit**
 and [chemistrykit](https://github.com/cpoli/chemistrykit) -- that share
 the same architecture, API conventions, and history-driven documentation.
 
-All 14 domains from `mathkit-spec.md`'s build plan are implemented --
-see [Subpackages](#subpackages) for the full list, or browse the docs at
-<https://cpoli.github.io/mathematicskit/>.
-
 ## Install
 
 ```bash
-python -m venv .venv && source .venv/bin/activate
-pip install -e ".[dev]"
+pip install "mathematicskit[fast]"   # with numba JIT acceleration (recommended)
+pip install mathematicskit           # pure numpy/scipy/matplotlib, e.g. for Pyodide/JupyterLite
 ```
 
-Published on PyPI as `mathematicskit` (the shorter name `mathkit` was
-already taken by an unrelated package) -- `pip install mathematicskit`,
-then `import mathematicskit as mk` as usual.
+Then `import mathematicskit as mk`. (The shorter name `mathkit` was
+already taken on PyPI by an unrelated package.) The `fast` extra adds
+[numba](https://numba.pydata.org/), which compiles the inner loops of
+`ode_dynamics`, `fractals_chaos`, `pde`, and `integrators`. Without it
+those kernels run as plain Python: same results, slower.
+
+For development: `pip install -e ".[dev]"` (see [CONTRIBUTING.md](CONTRIBUTING.md)).
 
 ## Quick start
 
 ```python
+import numpy as np
 import mathematicskit as mk
+from mathematicskit.numerical_analysis.visualizers import plot_convergence_history
 
-spline = mk.numerical_analysis.CubicSpline(x=[0, 1, 2, 3], y=[0, 1, 0, 1], boundary="natural")
-print(spline.evaluate(1.5))
+f, fprime = (lambda x: x**2 - 2.0), (lambda x: 2.0 * x)
+newton = mk.numerical_analysis.NewtonRaphson(f, fprime, x0=3.0, tol=1e-14).solve()
+bisection = mk.numerical_analysis.Bisection(f, 0.0, 3.0, tol=1e-14).solve()
+print(len(newton.history), len(bisection.history))  # 8 iterates vs. 49
+
+ax = plot_convergence_history(bisection, root_exact=np.sqrt(2))
+plot_convergence_history(newton, root_exact=np.sqrt(2), ax=ax)
+ax.legend()
 ```
+
+The [quickstart notebook](https://github.com/cpoli/mathematicskit/blob/main/notebooks/quickstart.ipynb) tours six domains in
+ten minutes. Open it in Colab or Binder using the badges above.
 
 ## Subpackages
 
@@ -87,6 +100,20 @@ standalone toolkits:
   leapfrog, Yoshida4, adaptive Dormand-Prince), used by
   `mathematicskit.ode_dynamics`.
 
+## Design
+
+mathematicskit calls `numpy`/`scipy` directly for anything they already
+implement (decompositions, eigensolvers, quadrature, statistical
+distributions, optimization routines, and more), and hand-rolls an
+algorithm only where no `numpy`/`scipy` equivalent exists (e.g. graph
+algorithms, finite fields, modular arithmetic) or where the
+algorithm's own iterate behavior is the pedagogical subject (e.g.
+root-finder convergence history, autodiff). No hard dependency on
+`networkx`, `cvxpy`, or SageMath. The ODE integrators are shared across
+domains.
+
+The public API follows the [stability and deprecation policy](CONTRIBUTING.md#api-stability-and-deprecation-policy).
+
 ## Test
 
 Tests live alongside each subpackage, at `mathematicskit/<name>/tests/`.
@@ -109,20 +136,20 @@ macOS. See [CONTRIBUTING.md](CONTRIBUTING.md) before opening a PR.
 MPLBACKEND=Agg pytest -q --cov=mathematicskit --cov-report=term
 ```
 
-1329 tests, 96% line coverage overall (94% excluding the test files
+1568 tests, 96% line coverage overall (94% excluding the test files
 themselves). Per-subpackage coverage, excluding tests:
 
 | Subpackage | Coverage | | Subpackage | Coverage |
 |:--|--:|---|:--|--:|
-| `abstract_algebra` | 97% | | `ode_dynamics` | 85% |
-| `calculus` | 93% | | `optimization` | 100% |
-| `combinatorics` | 96% | | `probability` | 98% |
-| `fractals_chaos` | 83% | | `special_functions` | 100% |
-| `geometry` | 99% | | `statistics` | 99% |
-| `graph_theory` | 99% | | `integrators` | 31% |
-| `linalg` | 94% | | `constants` | 100% |
-| `number_theory` | 97% | | | |
-| `numerical_analysis` | 95% | | | |
+| `abstract_algebra` | 97% | | `numerical_analysis` | 95% |
+| `calculus` | 93% | | `ode_dynamics` | 85% |
+| `combinatorics` | 96% | | `optimization` | 99% |
+| `complex_analysis` | 99% | | `pde` | 94% |
+| `fractals_chaos` | 83% | | `probability` | 98% |
+| `geometry` | 99% | | `special_functions` | 99% |
+| `graph_theory` | 99% | | `statistics` | 99% |
+| `linalg` | 94% | | `integrators` | 41% |
+| `number_theory` | 97% | | `constants` | 100% |
 
 `visualizers/` modules are smoke-tested only (correct return type/shape,
 or that `anim.save()` succeeds) rather than covered line-by-line, per the

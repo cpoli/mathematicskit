@@ -14,8 +14,8 @@ Set"), and Peitgen & Richter, *The Beauty of Fractals*, 1986.
 from __future__ import annotations
 
 import numpy as np
-from numba import njit
 
+from mathematicskit._jit import njit
 from mathematicskit.fractals_chaos.core.base import EscapeTimeResult
 
 __all__ = ["mandelbrot_set", "julia_set"]

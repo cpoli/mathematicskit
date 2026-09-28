@@ -1,4 +1,4 @@
-"""Numba-accelerated ODE integrators shared across mathematicskit subpackages.
+"""Numba-accelerated (when Numba is installed) ODE integrators shared across mathematicskit subpackages.
 
 Right-hand-side / force callbacks use the ``f(state_or_pos, t, params) ->
 ndarray`` convention throughout, so a single compiled callback can be reused
@@ -31,8 +31,14 @@ diagrams, and Poincare sections on top of this shared module rather than
 reimplementing per-domain integrators, exactly as physicskit's
 ``classical/core/integrators.py`` wraps its own shared integrators for
 that subpackage's njit-callback calling convention.
+
+:func:`njit` is re-exported here for writing those callbacks: it is
+:func:`numba.njit` when Numba is installed (``pip install
+mathematicskit[fast]``) and a no-op decorator otherwise, with
+:data:`HAS_NUMBA` reporting which.
 """
 
+from mathematicskit._jit import HAS_NUMBA, njit
 from mathematicskit.integrators.adaptive import dopri5_integrate, dopri5_step
 from mathematicskit.integrators.bvp import BVPResult, collocation_bvp
 from mathematicskit.integrators.fixed_step import (
@@ -49,6 +55,8 @@ from mathematicskit.integrators.fixed_step import (
 from mathematicskit.integrators.implicit import implicit_euler_integrate, implicit_euler_step, stiff_integrate
 
 __all__ = [
+    "HAS_NUMBA",
+    "njit",
     "RHSFunc",
     "rk4_step",
     "rk4_integrate",

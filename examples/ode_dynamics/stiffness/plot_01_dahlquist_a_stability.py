@@ -17,9 +17,8 @@ also proved that no A-stable linear multistep method can exceed order 2
 # %%
 import matplotlib.pyplot as plt
 import numpy as np
-from numba import njit
 
-from mathematicskit.integrators import implicit_euler_integrate, rk4_integrate
+from mathematicskit.integrators import implicit_euler_integrate, njit, rk4_integrate
 
 # %%
 # Stability regions in the complex z-plane

@@ -27,8 +27,8 @@ from __future__ import annotations
 from collections.abc import Callable
 
 import numpy as np
-from numba import njit
 
+from mathematicskit._jit import njit
 from mathematicskit.linalg import lu_solve_system
 from mathematicskit.numerical_analysis import chebyshev_nodes
 from mathematicskit.pde.core.base import EllipticSolution, MethodOfLinesPDE

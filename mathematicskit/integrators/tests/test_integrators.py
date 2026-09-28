@@ -2,9 +2,9 @@
 
 import numpy as np
 import pytest
-from numba import njit
 from scipy.optimize import fsolve
 
+from mathematicskit._jit import njit
 from mathematicskit.integrators import (
     BVPResult,
     collocation_bvp,

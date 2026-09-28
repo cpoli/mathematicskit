@@ -26,8 +26,8 @@ from collections.abc import Callable
 from typing import Optional
 
 import numpy as np
-from numba import njit
 
+from mathematicskit._jit import njit
 from mathematicskit.integrators import leapfrog_integrate
 from mathematicskit.pde.core.base import MethodOfLinesPDE, PDESolution, _step_count
 from mathematicskit.pde.systems.heat import InitialCondition, _sample
