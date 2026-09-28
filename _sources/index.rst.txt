@@ -39,8 +39,13 @@ teaching resource such as *Numerical Recipes* or the
    Each domain is a teaching-depth subset of its field, not a complete
    implementation. mathematicskit is not a replacement for specialist
    libraries in production work: for that, use the dedicated tools
-   (SciPy, NetworkX, CVXPY, statsmodels, SymPy, SageMath, and the like)
-   directly.
+   (`SciPy <https://scipy.org/>`__,
+   `NetworkX <https://networkx.org/>`__,
+   `CVXPY <https://www.cvxpy.org/>`__,
+   `statsmodels <https://www.statsmodels.org/>`__,
+   `SymPy <https://www.sympy.org/>`__,
+   `SageMath <https://www.sagemath.org/>`__,
+   and the like) directly.
 
 - :mod:`mathematicskit.abstract_algebra` -- cyclic/permutation groups, subgroups
   and cosets, finite fields, and polynomial ring arithmetic.

@@ -464,7 +464,7 @@
 <span class="sd">    """</span>
     <span class="n">h</span> <span class="o">=</span> <span class="n">heuristic</span> <span class="ow">or</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">)</span>
     <span class="n">best</span> <span class="o">=</span> <span class="p">{</span><span class="n">source</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">}</span>
-    <span class="n">parent</span> <span class="o">=</span> <span class="p">{</span><span class="n">source</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
+    <span class="n">parent</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">source</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
     <span class="n">queue</span> <span class="o">=</span> <span class="p">[(</span><span class="n">h</span><span class="p">(</span><span class="n">source</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">source</span><span class="p">)]</span>
     <span class="n">closed</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
     <span class="n">expanded</span> <span class="o">=</span> <span class="mi">0</span>
@@ -476,9 +476,10 @@
         <span class="n">expanded</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">if</span> <span class="n">u</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
             <span class="n">path</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">while</span> <span class="n">u</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
-                <span class="n">u</span> <span class="o">=</span> <span class="n">parent</span><span class="p">[</span><span class="n">u</span><span class="p">]</span>
+            <span class="n">node</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">u</span>
+            <span class="k">while</span> <span class="n">node</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+                <span class="n">node</span> <span class="o">=</span> <span class="n">parent</span><span class="p">[</span><span class="n">node</span><span class="p">]</span>
             <span class="k">return</span> <span class="n">SearchResult</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">distance</span><span class="o">=</span><span class="n">g_u</span><span class="p">,</span> <span class="n">n_expanded</span><span class="o">=</span><span class="n">expanded</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">u</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">candidate</span> <span class="o">=</span> <span class="n">g_u</span> <span class="o">+</span> <span class="n">w</span>
