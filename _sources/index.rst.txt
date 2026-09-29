@@ -113,7 +113,7 @@ results, only slower.
 
 To try it without installing anything, open the
 `quickstart notebook <https://colab.research.google.com/github/cpoli/mathematicskit/blob/main/notebooks/quickstart.ipynb>`__
-in Colab, or use the **Launch Binder** / **JupyterLite** buttons at the top of
+in Colab, or use the **JupyterLite** button at the top of
 every gallery example. Every gallery also has a download-all button for its
 scripts and notebooks. The public API follows a documented
 `stability and deprecation policy <https://github.com/cpoli/mathematicskit/blob/main/CONTRIBUTING.md#api-stability-and-deprecation-policy>`__.
