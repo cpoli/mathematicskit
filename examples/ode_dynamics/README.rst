@@ -42,7 +42,8 @@ Sections
 - **chaotic_flows** -- the Lorenz attractor and its butterfly effect, and
   the Rossler attractor and its return map.
 - **integrators** -- Euler's method, Runge-Kutta, Stormer-Verlet,
-  Dormand-Prince adaptive stepping, and Yoshida's symplectic composition.
+  Dormand-Prince adaptive stepping, Yoshida's symplectic composition, and
+  Adams-Bashforth multistep methods.
 - **stiffness** -- Dahlquist's A-stability, Curtiss and Hirschfelder's
   BDF, Robertson's stiff kinetics, Radau IIA, and collocation for
   boundary-value problems.

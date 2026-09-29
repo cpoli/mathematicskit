@@ -45,6 +45,17 @@ def test_elementary_ca_rejects_invalid_rule():
         ElementaryCA(rule=-1, width=5)
 
 
+def test_elementary_ca_custom_initial_state_is_copied_and_validated():
+    """Rule 184 ("traffic") moves each 1 right into an empty cell."""
+    initial = np.array([1, 0, 1, 1, 0, 0])
+    ca = ElementaryCA(rule=184, width=6, initial=initial)
+    ca.step()
+    np.testing.assert_array_equal(ca.state, [0, 1, 1, 0, 1, 0])
+    np.testing.assert_array_equal(initial, [1, 0, 1, 1, 0, 0])
+    with pytest.raises(ValueError, match="shape"):
+        ElementaryCA(rule=90, width=5, initial=[0, 1, 0])
+
+
 def test_game_of_life_block_is_a_still_life():
     grid = np.zeros((6, 6), dtype=np.int64)
     grid[2:4, 2:4] = 1  # 2x2 block

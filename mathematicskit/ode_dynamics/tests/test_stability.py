@@ -104,3 +104,25 @@ def test_lyapunov_quadratic_form_detects_instability():
     assert not lyapunov_quadratic_form([[0.1, 1.0], [-1.0, 0.1]]).positive_definite
     with pytest.raises(ValueError):
         lyapunov_quadratic_form([[1.0, 2.0, 3.0]])
+    with pytest.raises(ValueError, match="same shape"):
+        lyapunov_quadratic_form(np.eye(2), Q=np.eye(3))
+
+
+def test_zero_determinant_is_non_isolated():
+    """det J = 0 gives a zero eigenvalue: a line of fixed points, not an isolated one."""
+    result = classify_fixed_point_2d(np.array([[1.0, 2.0], [2.0, 4.0]]))
+    assert result.classification == "non-isolated (zero eigenvalue)"
+    np.testing.assert_allclose(sorted(result.eigenvalues.real), [0.0, 5.0], atol=1e-12)
+
+
+def test_find_fixed_point_newton_reports_singular_jacobian():
+    """f = (x + y, x + y) has a singular Jacobian everywhere."""
+    x, converged = find_fixed_point_newton(lambda v: np.array([v[0] + v[1] - 1.0, v[0] + v[1] - 1.0]), np.array([0.2, 0.3]))
+    assert not converged
+    np.testing.assert_array_equal(x, [0.2, 0.3])
+
+
+def test_ode_dynamics_reexports_the_numerical_analysis_jacobian():
+    from mathematicskit.numerical_analysis import numerical_jacobian as na_jacobian
+
+    assert numerical_jacobian is na_jacobian

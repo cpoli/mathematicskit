@@ -18,7 +18,7 @@ classification of linear flows near a fixed point, the discovery of
 self-sustained oscillation, and the slow, then sudden, realization that
 simple deterministic systems can behave unpredictably. Interleaved with
 these are the numerical methods behind :mod:`mathematicskit.integrators`
-that compute every trajectory: Euler's and Runge-Kutta methods,
+that compute every trajectory: Euler's, Adams-Bashforth and Runge-Kutta methods,
 symplectic and adaptive integrators, the discovery of stiffness and the
 implicit methods that tame it, and collocation for boundary-value
 problems.
@@ -48,11 +48,14 @@ an equation for :math:`y_{n+1}` at every step, a cost that pays off for
 stiff equations (see Curtiss and Hirschfelder and Dahlquist, below).
 Cauchy later used Euler's polygons to prove that solutions exist.
 
-*Implementation:* :func:`mathematicskit.integrators.implicit_euler_integrate`
-implements backward Euler, solving for each step with Newton's method and
-a finite-difference Jacobian. The tests check its closed-form step
-:math:`y/(1 + \lambda h)` on :math:`y' = -\lambda y` and that the error
-ratio for halved :math:`h` is 2.
+*Implementation:* :func:`mathematicskit.integrators.euler_integrate`
+implements the explicit method, and
+:func:`~mathematicskit.integrators.implicit_euler_integrate` implements
+backward Euler, solving for each step with Newton's method and a
+finite-difference Jacobian. The tests check the closed forms
+:math:`(1 - \lambda h)^n` and :math:`y/(1 + \lambda h)` on
+:math:`y' = -\lambda y`, and that for both methods the error ratio for
+halved :math:`h` is 2.
 
 *References:* L. Euler, *Institutionum calculi integralis*, vol. 1
 (St. Petersburg, 1768).
@@ -120,6 +123,48 @@ installments (1881-1886).
 .. minigallery:: ../../examples/ode_dynamics/stability/plot_01_classification_zoo.py
 
 .. minigallery:: ../../examples/ode_dynamics/phase_portrait/plot_01_vector_fields.py
+
+1883 -- Bashforth and Adams: Linear Multistep Methods
+-----------------------------------------------------
+
+Francis Bashforth needed accurate profiles of liquid drops to test the
+theory of capillarity, and John Couch Adams, codiscoverer of Neptune,
+supplied the numerical method in their 1883 book. Every step of a
+one-step method computes fresh slopes and then discards them. Adams
+kept the last :math:`k` of them, fitted a polynomial through them, and
+integrated it across the next step:
+
+.. math::
+
+   y_{n+1} = y_n + h \sum_{j=0}^{k-1} \beta_j f_{n-j},
+   \qquad \text{e.g.}\quad
+   y_{n+1} = y_n + h\left(\tfrac32 f_n - \tfrac12 f_{n-1}\right).
+
+The result has order :math:`k` but needs only one new evaluation of
+:math:`f` per step. Forest Ray Moulton added the implicit companion
+formulas in 1926 for ballistics tables, and Adams-Bashforth-Moulton
+predictor-corrector pairs were the standard ODE solvers of the early
+computer era. Reusing old information has a cost: the method needs
+:math:`k - 1` starting values, and its stability region shrinks as the
+order grows, to a real interval of only :math:`[-0.3, 0]` for order 4.
+
+*Implementation:* :func:`mathematicskit.integrators.adams_bashforth_integrate`
+implements orders 1 to 4, starting with RK4 steps, and
+:func:`~mathematicskit.integrators.adams_bashforth_boundary_locus` and
+:func:`~mathematicskit.integrators.is_absolutely_stable` compute the
+stability regions. The tests check that halving :math:`h` divides the
+error by :math:`2^k`, that order 3 is exact for quadratic slopes, and
+that the regions' real intervals are :math:`[-2, 0]`, :math:`[-1, 0]`,
+:math:`[-6/11, 0]` and :math:`[-3/10, 0]`.
+
+*References:* F. Bashforth and J. C. Adams, *An Attempt to Test the
+Theories of Capillary Action by Comparing the Theoretical and Measured
+Forms of Drops of Fluid* (Cambridge University Press, 1883); F. R.
+Moulton, *New Methods in Exterior Ballistics* (University of Chicago
+Press, 1926); E. Hairer, S. P. Nørsett, and G. Wanner, *Solving Ordinary
+Differential Equations I*, 2nd ed. (Springer, 1993), sec. III.1.
+
+.. minigallery:: ../../examples/ode_dynamics/integrators/plot_06_adams_bashforth.py
 
 1892 -- Lyapunov's Direct Method
 --------------------------------
@@ -532,9 +577,13 @@ Getting past that barrier is what implicit Runge-Kutta methods do
 (Butcher and Ehle, below).
 
 *Implementation:* :func:`mathematicskit.integrators.implicit_euler_integrate`
-alongside :func:`~mathematicskit.integrators.rk4_integrate`. The tests
-check that at :math:`\lambda h = 100` backward Euler follows the exact
-solution while RK4 blows up.
+alongside :func:`~mathematicskit.integrators.rk4_integrate`, with each
+method's :math:`R(z)` in
+:func:`~mathematicskit.integrators.stability_function` and its region
+drawn by :func:`mathematicskit.ode_dynamics.visualizers.plot_stability_regions`.
+The tests check that at :math:`\lambda h = 100` backward Euler follows
+the exact solution while RK4 blows up, and that backward Euler's region
+contains the whole sampled left half-plane.
 
 *References:* G. Dahlquist, "A Special Stability Problem for Linear
 Multistep Methods," BIT 3 (1963), 27-43.

@@ -10,7 +10,21 @@ import numpy as np
 from mathematicskit.ode_dynamics.systems.logistic_map import bifurcation_diagram
 from mathematicskit.ode_dynamics.systems.phase_portrait import Linear2D, vector_field_grid
 from mathematicskit.ode_dynamics.systems.poincare import DuffingOscillator, stroboscopic_poincare_section
-from mathematicskit.ode_dynamics.visualizers.plots import plot_bifurcation_diagram, plot_phase_portrait, plot_poincare_points, plot_vector_field
+from mathematicskit.ode_dynamics.visualizers.plots import (
+    plot_bifurcation_diagram,
+    plot_phase_portrait,
+    plot_poincare_points,
+    plot_stability_regions,
+    plot_vector_field,
+)
+
+
+def test_plot_stability_regions_returns_axes_with_one_legend_entry_per_method():
+    ax = plot_stability_regions(["euler", "rk4", "adams_bashforth2"], n_grid=60)
+    assert isinstance(ax, matplotlib.axes.Axes)
+    assert [t.get_text() for t in ax.get_legend().get_texts()] == ["euler", "rk4", "adams_bashforth2"]
+    ax2 = plot_stability_regions("implicit_euler", n_grid=40, labels=["backward Euler"])
+    assert ax2.get_legend().get_texts()[0].get_text() == "backward Euler"
 
 
 def test_plot_phase_portrait_returns_axes():

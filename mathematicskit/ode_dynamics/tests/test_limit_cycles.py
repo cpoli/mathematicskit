@@ -38,6 +38,12 @@ def test_period_estimation_matches_known_sine_period():
     assert estimate_period(t, x) == pytest.approx(3.0, abs=0.02)
 
 
+def test_period_estimation_returns_nan_without_two_upward_crossings():
+    t = np.linspace(0.0, 1.0, 100)
+    assert np.isnan(estimate_period(t, np.sin(2.0 * np.pi * t)))  # one crossing, at t = 1
+    assert np.isnan(estimate_period(t, np.exp(t)))
+
+
 def test_bendixson_divergence_matches_closed_form():
     res = bendixson_criterion(lambda x, y: (y, 2.0 * (1.0 - x**2) * y - x), (-2, 2), (-2, 2), n=21)
     np.testing.assert_allclose(res.divergence, 2.0 * (1.0 - res.X**2), atol=1e-6)

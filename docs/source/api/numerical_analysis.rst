@@ -12,7 +12,9 @@ Lagrange and Newton divided-difference polynomial interpolation
 interpolation via ``scipy.interpolate.CubicSpline``; Chebyshev
 interpolation nodes (``numpy.polynomial.chebyshev.chebpts2``) and the
 Runge phenomenon; least-squares polynomial regression via
-``numpy.linalg.lstsq``; and shared error/stability-analysis utilities
+``numpy.linalg.lstsq``; floating-point arithmetic (IEEE 754 bit fields,
+machine epsilon, catastrophic cancellation); Newton's and Broyden's
+methods for nonlinear systems; and shared error/stability-analysis utilities
 (``numpy.linalg.cond``-based condition number, the hand-rolled Lebesgue
 constant and empirical convergence order).
 

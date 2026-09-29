@@ -14,7 +14,7 @@ the step halves the error.
 import matplotlib.pyplot as plt
 import numpy as np
 
-from mathematicskit.integrators import implicit_euler_integrate, njit
+from mathematicskit.integrators import euler_integrate, implicit_euler_integrate, njit
 
 
 @njit
@@ -23,10 +23,7 @@ def decay(state, t, params):
 
 
 def forward_euler(y0, h, n_steps):
-    ys = [y0]
-    for _ in range(n_steps):
-        ys.append(ys[-1] + h * decay(np.array([ys[-1]]), 0.0, None)[0])
-    return np.array(ys)
+    return euler_integrate(decay, np.array([y0]), 0.0, h, n_steps, np.zeros(1))[1][:, 0]
 
 
 # %%

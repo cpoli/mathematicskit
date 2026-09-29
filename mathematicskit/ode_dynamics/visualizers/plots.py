@@ -1,12 +1,15 @@
 """Plotting helpers for mathematicskit.ode_dynamics: phase portraits, bifurcation
-diagrams, and Poincare sections."""
+diagrams, Poincare sections, and integrator stability regions."""
 
 from __future__ import annotations
 
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.patches import Patch
 
-__all__ = ["plot_phase_portrait", "plot_vector_field", "plot_bifurcation_diagram", "plot_poincare_points"]
+from mathematicskit.integrators.stability import is_absolutely_stable
+
+__all__ = ["plot_phase_portrait", "plot_vector_field", "plot_bifurcation_diagram", "plot_poincare_points", "plot_stability_regions"]
 
 
 def plot_phase_portrait(trajectories, ax=None, **kwargs):
@@ -104,4 +107,48 @@ def plot_poincare_points(xs, ys, ax=None):
     ax.set_xlabel("x")
     ax.set_ylabel("y")
     ax.set_title("Poincare section")
+    return ax
+
+
+def plot_stability_regions(methods, ax=None, re_range=(-4.0, 1.5), im_range=(-3.5, 3.5), n_grid: int = 400, labels=None):
+    r"""Shade the absolute-stability regions of integrators in the :math:`z = \lambda h` plane.
+
+    Parameters
+    ----------
+    methods : str or list of str
+        Names accepted by :func:`mathematicskit.integrators.is_absolutely_stable`
+        (e.g. ``"euler"``, ``"rk4"``, ``"adams_bashforth3"``).
+    ax : matplotlib.axes.Axes, optional
+        Axes to draw on; a new figure is created if omitted.
+    re_range, im_range : tuple of float
+        Extent of the sampled grid.
+    n_grid : int
+        Grid points per axis.
+    labels : list of str, optional
+        Legend labels; defaults to the method names.
+
+    Returns
+    -------
+    matplotlib.axes.Axes
+    """
+    if ax is None:
+        _, ax = plt.subplots()
+    if isinstance(methods, str):
+        methods = [methods]
+    labels = list(methods) if labels is None else list(labels)
+    x, y = np.meshgrid(np.linspace(re_range[0], re_range[1], n_grid), np.linspace(im_range[0], im_range[1], n_grid))
+    handles = []
+    for k, (method, label) in enumerate(zip(methods, labels, strict=True)):
+        color = f"C{k}"
+        stable = is_absolutely_stable(method, x + 1j * y).astype(float)
+        ax.contourf(x, y, stable, levels=[0.5, 1.5], colors=[color], alpha=0.25)
+        ax.contour(x, y, stable, levels=[0.5], colors=[color], linewidths=1.5)
+        handles.append(Patch(facecolor=color, edgecolor=color, alpha=0.5, label=label))
+    ax.axhline(0.0, color="k", lw=0.8)
+    ax.axvline(0.0, color="k", lw=0.8)
+    ax.set_aspect("equal")
+    ax.set_xlabel(r"Re $\lambda h$")
+    ax.set_ylabel(r"Im $\lambda h$")
+    ax.set_title("Absolute stability regions")
+    ax.legend(handles=handles, loc="upper left", fontsize=8)
     return ax

@@ -137,6 +137,45 @@ Mathematical Monthly 102 (1995), 417-426.
 
 .. minigallery:: ../../examples/numerical_analysis/root_finding/plot_03_halley_method.py
 
+1740 -- Simpson: Newton's Method for Systems
+--------------------------------------------
+
+Newton and Raphson applied their iteration to single polynomial
+equations. Thomas Simpson's 1740 *Essays* restated it with fluxions,
+which made it apply to any differentiable function, and showed how to
+use it on two simultaneous equations in two unknowns. In modern notation,
+linearize :math:`F: \mathbb R^n \to \mathbb R^n` at the current guess and
+solve a linear system for the step:
+
+.. math::
+
+   J(\mathbf x_k)\,\mathbf s_k = -F(\mathbf x_k), \qquad
+   \mathbf x_{k+1} = \mathbf x_k + \mathbf s_k,
+
+where :math:`J` is the Jacobian matrix of partial derivatives. The
+one-variable picture carries over: near a root with nonsingular
+:math:`J`, the error is roughly squared at each step. Each step,
+however, costs a Jacobian and a linear solve, and the starting guess
+decides which root is found. Newton's method for systems now sits
+inside nearly every implicit ODE and PDE solver and nonlinear optimizer.
+
+*Implementation:* :class:`mathematicskit.numerical_analysis.systems.nonlinear_systems.NewtonSystem`
+records every iterate and residual, and uses a supplied Jacobian or a
+central-difference
+:func:`~mathematicskit.numerical_analysis.systems.nonlinear_systems.numerical_jacobian`.
+:func:`mathematicskit.ode_dynamics.systems.stability.find_fixed_point_newton`
+uses it to locate fixed points. The tests recover both intersections of
+a parabola and a line and the root :math:`(0.5, 0, -\pi/6)` of Burden
+and Faires' three-equation example, agreeing with
+:func:`scipy.optimize.root`, and check quadratic convergence.
+
+*References:* T. Simpson, *Essays on Several Curious and Useful
+Subjects in Speculative and Mix'd Mathematicks* (London, 1740); T. J.
+Ypma, "Historical Development of the Newton-Raphson Method," SIAM Review
+37 (1995), 531-551.
+
+.. minigallery:: ../../examples/numerical_analysis/root_finding/plot_05_newton_systems.py
+
 1805-1809 -- Legendre, Gauss, and Least Squares
 -----------------------------------------------
 
@@ -524,6 +563,121 @@ Higham, "The accuracy of floating point summation," SIAM Journal on
 Scientific Computing 14 (1993), 783-799.
 
 .. minigallery:: ../../examples/numerical_analysis/floating_point/plot_01_kahan_summation.py
+
+1965 -- Broyden's Quasi-Newton Method
+-------------------------------------
+
+For :math:`n` equations, Newton's method needs a new :math:`n \times n`
+Jacobian at every step. When it is approximated by differences, that
+costs :math:`n` or :math:`2n` extra evaluations of :math:`F`. Charles
+Broyden, working on nonlinear problems at the English Electric Company,
+proposed computing the Jacobian only once and then *updating* the
+approximation :math:`B_k` after every step. The update is the smallest
+correction that makes it reproduce the step just taken:
+
+.. math::
+
+   B_{k+1} = B_k + \frac{(\mathbf y_k - B_k \mathbf s_k)\,\mathbf s_k^T}{\mathbf s_k^T \mathbf s_k},
+   \qquad \mathbf y_k = F(\mathbf x_{k+1}) - F(\mathbf x_k),
+
+so that :math:`B_{k+1}\mathbf s_k = \mathbf y_k` (the *secant
+condition*). Each iteration then costs a single evaluation of
+:math:`F`. Convergence falls from quadratic to superlinear, which Broyden,
+Dennis and Moré proved in 1973. This is the multidimensional secant
+method, and its idea of low-rank secant updates led directly to the
+BFGS method of optimization.
+
+*Implementation:* :class:`mathematicskit.numerical_analysis.systems.nonlinear_systems.Broyden`
+records every iterate, residual, and function evaluation. The tests
+check that it reaches the same root as
+:class:`~mathematicskit.numerical_analysis.systems.nonlinear_systems.NewtonSystem`
+and ``scipy.optimize.root(method="broyden1")`` with fewer evaluations of
+:math:`F`, and that the final :math:`B` satisfies the secant condition.
+
+*References:* C. G. Broyden, "A Class of Methods for Solving Nonlinear
+Simultaneous Equations," Mathematics of Computation 19 (1965), 577-593;
+C. G. Broyden, J. E. Dennis, and J. J. Moré, "On the Local and
+Superlinear Convergence of Quasi-Newton Methods," Journal of the
+Institute of Mathematics and Its Applications 12 (1973), 223-245.
+
+.. minigallery:: ../../examples/numerical_analysis/root_finding/plot_06_broyden_method.py
+
+1966 -- Forsythe and Catastrophic Cancellation
+----------------------------------------------
+
+In a 1966 Stanford report, George Forsythe, founder of Stanford's
+computer science department, asked "How do you solve a quadratic
+equation?" The formula every student learns,
+:math:`x = (-b \pm \sqrt{b^2 - 4ac})/(2a)`, fails in floating point
+when :math:`b^2 \gg |4ac|`. For the root of smaller magnitude,
+:math:`-b` and :math:`\sqrt{b^2 - 4ac}` are nearly equal. Subtracting
+them is exact, but it leaves only the rounding error that the square
+root already carried, so most of the significant digits cancel. The
+loss-of-precision theorem quantifies this: if
+:math:`2^{-q} \le |1 - y/x| \le 2^{-p}`, then computing :math:`x - y`
+loses between :math:`p` and :math:`q` significant bits. The cure is to
+compute only the root without cancellation,
+:math:`x_1 = q/a` with :math:`q = -\tfrac12\bigl(b + \operatorname{sign}(b)\sqrt{b^2-4ac}\bigr)`,
+and to take the other from the product of the roots,
+:math:`x_2 = c/q`. Forsythe's 1970 essay "Pitfalls in computation"
+made the example a fixture of numerical-analysis teaching.
+
+*Implementation:* :func:`mathematicskit.numerical_analysis.systems.floating_point.quadratic_roots`
+offers both formulas, and
+:func:`~mathematicskit.numerical_analysis.systems.floating_point.cancellation_bits_lost`
+evaluates the theorem's estimate. The tests check that for
+:math:`x^2 + 10^8 x + 1` the textbook formula's small root is more than
+10% wrong, while the stable one is correct to the last digit.
+
+*References:* G. E. Forsythe, "How Do You Solve a Quadratic Equation?"
+Technical Report CS40, Computer Science Department, Stanford University
+(1966); G. E. Forsythe, "Pitfalls in Computation, or Why a Math Book
+Isn't Enough," American Mathematical Monthly 77 (1970), 931-956; N. J.
+Higham, *Accuracy and Stability of Numerical Algorithms*, 2nd ed.
+(SIAM, 2002), sec. 1.8.
+
+.. minigallery:: ../../examples/numerical_analysis/floating_point/plot_03_catastrophic_cancellation.py
+
+1985 -- The IEEE 754 Floating-Point Standard
+--------------------------------------------
+
+Before 1985 every computer maker had its own floating-point arithmetic,
+with different word layouts, rounding rules, and behavior on overflow.
+A program could give different answers on different machines, or fail
+outright. A committee led by William Kahan, drawing on the design of
+Intel's 8087 coprocessor, wrote the standard that nearly every processor
+now follows. A binary64 ("double") number has a sign bit, an 11-bit
+exponent stored with a bias of 1023, and a 52-bit fraction behind an
+implicit leading 1, with value :math:`(-1)^s (1.f)_2 \cdot 2^{e}`. The
+standard requires every basic operation to be *correctly rounded*,
+exact up to one rounding to nearest (ties to even). Every operation
+therefore obeys :math:`\mathrm{fl}(x \circ y) = (x \circ y)(1 + \delta)`
+with :math:`|\delta| \le u = 2^{-53}`, the model on which all rounding
+error analysis rests. Gradual underflow through subnormal numbers,
+signed zeros, infinities, and NaN handle the exceptional cases
+predictably. Machine epsilon, the gap between 1 and the next float, is
+:math:`2^{-52} \approx 2.2 \times 10^{-16}`. Kahan received the 1989
+Turing Award for this work.
+
+*Implementation:* :func:`mathematicskit.numerical_analysis.systems.floating_point.float_bits`
+decodes the sign, exponent, and fraction fields of binary16, binary32,
+and binary64 numbers.
+:func:`~mathematicskit.numerical_analysis.systems.floating_point.machine_epsilon`
+finds :math:`\varepsilon` with the classic halving loop,
+:func:`~mathematicskit.numerical_analysis.systems.floating_point.ulp`
+measures the gap between neighboring floats, and
+:func:`~mathematicskit.numerical_analysis.systems.floating_point.toy_float_system`
+lists every number of a small system. The tests check the decoded fields
+against the raw bytes from :mod:`struct`, and :math:`\varepsilon`
+against :class:`numpy.finfo` for all three formats.
+
+*References:* IEEE Standard for Binary Floating-Point Arithmetic,
+ANSI/IEEE Std 754-1985; D. Goldberg, "What Every Computer Scientist
+Should Know About Floating-Point Arithmetic," ACM Computing Surveys 23
+(1991), 5-48; N. J. Higham, *Accuracy and Stability of Numerical
+Algorithms*, 2nd ed. (SIAM, 2002), Ch. 2.
+
+.. minigallery:: ../../examples/numerical_analysis/floating_point/plot_02_ieee754_machine_epsilon.py
 
 See Also
 --------

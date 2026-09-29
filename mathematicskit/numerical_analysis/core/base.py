@@ -30,11 +30,13 @@ from mathematicskit.constants import DEFAULT_MAX_ITER, DEFAULT_RTOL
 
 __all__ = [
     "RootResult",
+    "SystemRootResult",
     "IterativeRootFinder",
     "Interpolant",
     "RegressionResult",
     "HornerResult",
     "MinimaxResult",
+    "FloatBits",
 ]
 
 
@@ -62,6 +64,40 @@ class RootResult:
     extra: dict = field(default_factory=dict)
     """dict: Free-form slot for method-specific diagnostics (e.g. the
     final bracket for bisection)."""
+
+
+@dataclass
+class SystemRootResult:
+    """Container for the output of a nonlinear-system solver
+    (:class:`~mathematicskit.numerical_analysis.systems.nonlinear_systems.NewtonSystem`,
+    :class:`~mathematicskit.numerical_analysis.systems.nonlinear_systems.Broyden`),
+    the vector analogue of :class:`RootResult`."""
+
+    root: np.ndarray
+    """ndarray, shape (n,): The final estimate of the solution of ``F(x) = 0``."""
+
+    converged: bool
+    """bool: Whether the stopping tolerance was met before `max_iter`."""
+
+    iterations: int
+    """int: Number of iterations actually performed."""
+
+    history: np.ndarray
+    """ndarray, shape (iterations + 1, n): The iterates, starting from the
+    initial guess."""
+
+    residual_norms: np.ndarray
+    """ndarray, shape (iterations + 1,): :math:`\\|F(x_k)\\|_2` at each iterate."""
+
+    function_evaluations: int
+    """int: Total evaluations of ``F``, including those spent on
+    finite-difference Jacobians -- the cost Broyden's method saves."""
+
+    method: str = ""
+    """str: Name of the method used (e.g. ``"newton"``)."""
+
+    extra: dict = field(default_factory=dict)
+    """dict: Free-form slot for method-specific diagnostics."""
 
 
 class IterativeRootFinder(ABC):
@@ -195,3 +231,38 @@ class MinimaxResult:
     def evaluate(self, x):
         """Evaluate the minimax polynomial at ``x``."""
         return np.polyval(self.coefficients, x)
+
+
+@dataclass
+class FloatBits:
+    """The IEEE 754 binary encoding of one floating-point number,
+    from :func:`~mathematicskit.numerical_analysis.systems.floating_point.float_bits`.
+
+    For finite values, ``value == (-1)**sign * significand * 2.0**exponent``
+    exactly."""
+
+    value: float
+    """float: The number that was decoded."""
+
+    format: str
+    """str: ``"binary16"``, ``"binary32"`` or ``"binary64"``."""
+
+    sign: int
+    """int: The sign bit, 0 or 1."""
+
+    exponent_bits: str
+    """str: The biased exponent field, most significant bit first."""
+
+    fraction_bits: str
+    """str: The stored fraction (trailing significand) field."""
+
+    exponent: int
+    """int: The unbiased exponent; for subnormals and zero, the minimum
+    normal exponent, since those have no implicit leading 1."""
+
+    significand: float
+    """float: ``1.fraction`` for normal numbers, ``0.fraction`` for
+    subnormals and zero (``nan`` for infinities and NaNs)."""
+
+    category: str
+    """str: ``"zero"``, ``"subnormal"``, ``"normal"``, ``"infinity"`` or ``"nan"``."""

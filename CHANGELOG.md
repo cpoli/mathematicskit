@@ -7,6 +7,68 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Explicit Euler and Adams-Bashforth integrators in `mathematicskit.integrators`:
+  `euler_step`/`euler_integrate`, and `adams_bashforth_integrate` for
+  orders 1-4 (RK4 start-up, one right-hand-side evaluation per step) with
+  its `ADAMS_BASHFORTH_COEFFICIENTS`.
+- Linear stability regions (`mathematicskit.integrators.stability`):
+  `stability_function` (the one-step methods' `R(z)`), `is_absolutely_stable`
+  (for Euler, backward Euler, RK4 and Adams-Bashforth 2-4), and
+  `adams_bashforth_boundary_locus`, plus
+  `mathematicskit.ode_dynamics.visualizers.plot_stability_regions`.
+- Floating-point arithmetic in `mathematicskit.numerical_analysis`:
+  `float_bits` (IEEE 754 binary16/32/64 fields, returned as a `FloatBits`
+  dataclass), `machine_epsilon`, `ulp`, `toy_float_system`,
+  `quadratic_roots` (textbook vs. cancellation-free formula), and
+  `cancellation_bits_lost`.
+- Nonlinear systems in `mathematicskit.numerical_analysis`: `NewtonSystem`
+  (Newton's method with an analytic or finite-difference Jacobian),
+  `Broyden` (quasi-Newton rank-one updates), and `numerical_jacobian`, all
+  returning a `SystemRootResult` with the iterate and residual history and
+  the number of function evaluations.
+- History breakthroughs, each with its own gallery example: Bashforth and
+  Adams' multistep methods (1883) in dynamical systems; Simpson's Newton
+  method for systems (1740), Broyden's method (1965), Forsythe and
+  catastrophic cancellation (1966), and the IEEE 754 standard (1985) in
+  numerical analysis.
+- A docs workflow (`.github/workflows/docs.yml`) that builds the Sphinx
+  site on every push and pull request, re-running every gallery example.
+- Per-subpackage teaser figures in the README.
+
+### Changed
+
+- `mathematicskit.ode_dynamics.find_fixed_point_newton` is now a thin
+  wrapper around `NewtonSystem`, and `numerical_jacobian` has moved to
+  `mathematicskit.numerical_analysis` (still importable from
+  `mathematicskit.ode_dynamics`). A singular Jacobian now stops the
+  iteration with `converged=False` at the last finite iterate, instead of
+  continuing on NaNs until `max_iter`.
+- The no-numba CI job now uploads coverage too, so Codecov counts the
+  `@njit` kernel bodies, which coverage cannot trace when numba compiles
+  them.
+- The Euler's-method and Dahlquist A-stability gallery examples use
+  `euler_integrate` and `plot_stability_regions` instead of hand-written
+  code.
+
+### Fixed
+
+- The integrators in `mathematicskit.integrators` no longer use Numba's
+  on-disk cache (`cache=True`). Each one takes the right-hand-side
+  function as an argument, and once the cache held an entry for one
+  process's callback, the next script to use a different callback crashed
+  with `ReferenceError: underlying object has vanished`. They now compile
+  once per process instead. Kernels that take only arrays and scalars
+  stay cached.
+
+### Removed
+
+- The Binder launch links (notebook badge and gallery buttons). Colab and
+  JupyterLite remain the try-online options.
+
+## [0.4.0] - 2026-09-29
+
 ### Changed
 
 - The version is now set directly as `__version__` in
@@ -30,8 +92,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `mathematicskit.integrators.njit` and `HAS_NUMBA`: `numba.njit` when
   numba is installed, a no-op decorator otherwise, for writing integrator
   callbacks that work either way.
-- `notebooks/quickstart.ipynb`, with a Colab launch link.
-- Gallery "JupyterLite" buttons, and download-all zips
+- `notebooks/quickstart.ipynb`, with Colab and Binder launch links.
+- Gallery "Launch Binder" and "JupyterLite" buttons, and download-all zips
   of each gallery's scripts and notebooks.
 - CI jobs that run the test suite and doctests without numba, and that
   build the distributions and check them with `twine check`; a release
@@ -293,7 +355,8 @@ All 14 planned domain subpackages are now implemented. Docs polish
   optimizer, eigenvalues in linear algebra/graph theory/dynamical
   systems, and more).
 
-[Unreleased]: https://github.com/cpoli/mathematicskit/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/cpoli/mathematicskit/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/cpoli/mathematicskit/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/cpoli/mathematicskit/compare/v0.2.1...v0.3.0
 [0.2.1]: https://github.com/cpoli/mathematicskit/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/cpoli/mathematicskit/compare/v0.1.0...v0.2.0

@@ -39,7 +39,7 @@ __all__ = ["implicit_euler_step", "implicit_euler_integrate", "stiff_integrate"]
 _SQRT_EPS = 1.4901161193847656e-08  # sqrt(float64 machine epsilon)
 
 
-@njit(cache=True)
+@njit
 def _fd_jacobian(
     rhs: RHSFunc,
     state: NDArray[np.float64],
@@ -58,7 +58,7 @@ def _fd_jacobian(
     return jac
 
 
-@njit(cache=True)
+@njit
 def implicit_euler_step(
     rhs: RHSFunc,
     state: NDArray[np.float64],
@@ -115,7 +115,7 @@ def implicit_euler_step(
     raise RuntimeError("implicit_euler_step: Newton iteration did not converge")
 
 
-@njit(cache=True)
+@njit
 def implicit_euler_integrate(
     rhs: RHSFunc,
     state0: NDArray[np.float64],

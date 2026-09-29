@@ -3,7 +3,7 @@
 | | |
 |:--|:-:|
 | Package | [![PyPI version](https://img.shields.io/pypi/v/mathematicskit)](https://pypi.org/project/mathematicskit/) [![Python versions](https://img.shields.io/pypi/pyversions/mathematicskit)](https://pypi.org/project/mathematicskit/) |
-| Quality | [![License](https://img.shields.io/github/license/cpoli/mathematicskit)](https://github.com/cpoli/mathematicskit/blob/main/LICENSE) [![CI](https://github.com/cpoli/mathematicskit/actions/workflows/ci.yml/badge.svg)](https://github.com/cpoli/mathematicskit/actions/workflows/ci.yml) [![Coverage](https://img.shields.io/codecov/c/github/cpoli/mathematicskit)](https://codecov.io/gh/cpoli/mathematicskit) [![Coverage (manual)](https://img.shields.io/badge/coverage-96%25-brightgreen)](#coverage) |
+| Quality | [![License](https://img.shields.io/github/license/cpoli/mathematicskit)](https://github.com/cpoli/mathematicskit/blob/main/LICENSE) [![CI](https://github.com/cpoli/mathematicskit/actions/workflows/ci.yml/badge.svg)](https://github.com/cpoli/mathematicskit/actions/workflows/ci.yml) [![Coverage](https://img.shields.io/codecov/c/github/cpoli/mathematicskit)](https://codecov.io/gh/cpoli/mathematicskit) [![Coverage (manual)](https://img.shields.io/badge/coverage-99%25-brightgreen)](#coverage) |
 | Documentation | [![Docs](https://img.shields.io/badge/docs-cpoli.github.io%2Fmathematicskit-blue)](https://cpoli.github.io/mathematicskit/) |
 | Code style | [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff) |
 | Downloads | [![Downloads](https://static.pepy.tech/badge/mathematicskit)](https://pepy.tech/project/mathematicskit) [![Downloads/Month](https://static.pepy.tech/badge/mathematicskit/month)](https://pepy.tech/project/mathematicskit) |
@@ -74,7 +74,7 @@ ten minutes. Open it in Colab using the badge above.
 
 Domain subpackages, each with runnable examples linked below:
 
-- [`mathematicskit.numerical_analysis`](https://cpoli.github.io/mathematicskit/api/gallery/numerical_analysis/) -- root finding (bisection, Newton-Raphson, secant, fixed-point, hand-rolled for their convergence history), Lagrange/Newton (hand-rolled) plus scipy-backed cubic-spline interpolation, numpy-backed Chebyshev nodes, `numpy.linalg.lstsq`-based polynomial regression, and `numpy.linalg.cond`-based error/condition-number analysis.
+- [`mathematicskit.numerical_analysis`](https://cpoli.github.io/mathematicskit/api/gallery/numerical_analysis/) -- root finding (bisection, Newton-Raphson, secant, fixed-point, hand-rolled for their convergence history), Newton's and Broyden's methods for nonlinear systems, Lagrange/Newton (hand-rolled) plus scipy-backed cubic-spline interpolation, numpy-backed Chebyshev nodes, `numpy.linalg.lstsq`-based polynomial regression, floating-point arithmetic (IEEE 754 bit fields, machine epsilon, catastrophic cancellation), and `numpy.linalg.cond`-based error/condition-number analysis.
 
   ![Runge's phenomenon, its Chebyshev-node cure, and Bernstein polynomial approximation](https://raw.githubusercontent.com/cpoli/mathematicskit/main/docs/source/_static/images/readme_numerical_analysis.png)
 
@@ -144,8 +144,9 @@ standalone toolkits:
 
 - `mathematicskit.constants` -- mathematical constants and default numerical
   tolerances shared across subpackages.
-- `mathematicskit.integrators` -- shared numerical ODE integrators (RK4,
-  leapfrog, Yoshida4, adaptive Dormand-Prince), used by
+- `mathematicskit.integrators` -- shared numerical ODE integrators (explicit
+  Euler, RK4, Adams-Bashforth, leapfrog, Yoshida4, adaptive
+  Dormand-Prince, backward Euler) and their linear stability regions, used by
   `mathematicskit.ode_dynamics`.
 
 ## Design
@@ -181,34 +182,33 @@ macOS. See [CONTRIBUTING.md](CONTRIBUTING.md) before opening a PR.
 ### Coverage
 
 ```bash
-MPLBACKEND=Agg pytest -q --cov=mathematicskit --cov-report=term
+MPLBACKEND=Agg pytest -q --cov=mathematicskit --cov-report=
+NUMBA_DISABLE_JIT=1 MPLBACKEND=Agg pytest -q --cov=mathematicskit --cov-append --cov-report=term
 ```
 
-1568 tests, 96% line coverage overall (94% excluding the test files
-themselves). Per-subpackage coverage, excluding tests:
+Coverage cannot trace `@njit`-compiled code, so the kernel bodies in
+`ode_dynamics`, `fractals_chaos`, `pde` and `integrators` are only
+covered by the second run, where they execute as plain Python. CI does
+the same: the numba and no-numba jobs both upload to Codecov, which
+merges them. Combined: 1672 tests, 99% line coverage overall (98%
+excluding the test files themselves). Per-subpackage coverage,
+excluding tests:
 
 | Subpackage | Coverage | | Subpackage | Coverage |
 |:--|--:|---|:--|--:|
-| `abstract_algebra` | 97% | | `numerical_analysis` | 95% |
-| `calculus` | 93% | | `ode_dynamics` | 85% |
+| `abstract_algebra` | 97% | | `numerical_analysis` | 96% |
+| `calculus` | 93% | | `ode_dynamics` | 100% |
 | `combinatorics` | 96% | | `optimization` | 99% |
-| `complex_analysis` | 99% | | `pde` | 94% |
-| `fractals_chaos` | 83% | | `probability` | 98% |
+| `complex_analysis` | 99% | | `pde` | 99% |
+| `fractals_chaos` | 100% | | `probability` | 98% |
 | `geometry` | 99% | | `special_functions` | 99% |
 | `graph_theory` | 99% | | `statistics` | 99% |
-| `linalg` | 94% | | `integrators` | 41% |
-| `number_theory` | 97% | | `constants` | 100% |
+| `linalg` | 94% | | `integrators` | 100% |
+| `number_theory` | 98% | | `constants` | 100% |
 
 `visualizers/` modules are smoke-tested only (correct return type/shape,
 or that `anim.save()` succeeds) rather than covered line-by-line, per the
-testing convention in [CLAUDE.md](CLAUDE.md). `integrators` looks low
-only because its bodies are `@njit`-compiled, and coverage cannot trace
-compiled code; every integrator is tested directly, and with the JIT
-disabled the subpackage is fully covered:
-
-```bash
-NUMBA_DISABLE_JIT=1 MPLBACKEND=Agg pytest -q mathematicskit/integrators --cov=mathematicskit.integrators
-```
+testing convention in [CLAUDE.md](CLAUDE.md).
 
 ## Docs
 

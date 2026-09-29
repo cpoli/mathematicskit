@@ -1,7 +1,9 @@
 r"""Fixed-point stability analysis for 2D autonomous systems via Jacobian
 linearization: the trace-determinant classification of node/saddle/
-spiral/center, and a multivariate Newton solver (built on
-:mod:`mathematicskit.linalg`) to locate fixed points numerically.
+spiral/center, and fixed-point location by the multivariate Newton
+solver of :mod:`mathematicskit.numerical_analysis` (whose
+:func:`~mathematicskit.numerical_analysis.systems.nonlinear_systems.numerical_jacobian`
+is re-exported here).
 
 See Strogatz, *Nonlinear Dynamics and Chaos*, 2nd ed., Ch. 5
 ("Linear Systems") and Ch. 6.3 ("Linearization"), and Burden & Faires,
@@ -17,7 +19,7 @@ from collections.abc import Callable
 import numpy as np
 from scipy.linalg import solve_continuous_lyapunov
 
-from mathematicskit.linalg.systems.lu import lu_solve_system
+from mathematicskit.numerical_analysis.systems.nonlinear_systems import NewtonSystem, numerical_jacobian
 from mathematicskit.ode_dynamics.core.base import FixedPointResult, LyapunovFunctionResult
 
 __all__ = ["classify_fixed_point_2d", "find_fixed_point_newton", "numerical_jacobian", "lyapunov_quadratic_form"]
@@ -113,46 +115,15 @@ def classify_fixed_point_2d(jacobian: np.ndarray, location=None) -> FixedPointRe
     return FixedPointResult(location=loc, jacobian=j, eigenvalues=eigenvalues, classification=classification, stable=stable)
 
 
-def numerical_jacobian(f: Callable[[np.ndarray], np.ndarray], x: np.ndarray, h: float = 1e-6) -> np.ndarray:
-    """Central-difference Jacobian of a vector field ``f: R^n -> R^n``.
-
-    Parameters
-    ----------
-    f : callable
-    x : ndarray, shape (n,)
-    h : float
-        Step size.
-
-    Returns
-    -------
-    ndarray, shape (n, n)
-
-    Examples
-    --------
-    >>> import numpy as np
-    >>> f = lambda x: np.array([x[1], -x[0]])
-    >>> np.round(numerical_jacobian(f, np.array([0.0, 0.0])), 6)
-    array([[ 0.,  1.],
-           [-1.,  0.]])
-    """
-    x = np.asarray(x, dtype=np.float64)
-    n = x.shape[0]
-    jac = np.zeros((n, n))
-    for j in range(n):
-        dx = np.zeros(n)
-        dx[j] = h
-        jac[:, j] = (f(x + dx) - f(x - dx)) / (2.0 * h)
-    return jac
-
-
 def find_fixed_point_newton(f: Callable[[np.ndarray], np.ndarray], x0: np.ndarray, tol: float = 1e-10, max_iter: int = 100):
     r"""Locate a fixed point of ``f(x) = 0`` via multivariate Newton's method.
 
-    :math:`x_{k+1} = x_k - J(x_k)^{-1} f(x_k)`, with the linear solve at
-    each step done via :func:`mathematicskit.linalg.systems.lu.lu_solve_system`
-    (never an explicit matrix inverse) and the Jacobian obtained from
-    :func:`numerical_jacobian`. See Burden & Faires, *Numerical
-    Analysis*, 10th ed., Ch. 10.2.
+    :math:`x_{k+1} = x_k - J(x_k)^{-1} f(x_k)`, with a central-difference
+    Jacobian and an LU solve (never an explicit matrix inverse). A thin
+    wrapper around
+    :class:`mathematicskit.numerical_analysis.systems.nonlinear_systems.NewtonSystem`,
+    which also records the iterate history. See Burden & Faires,
+    *Numerical Analysis*, 10th ed., Ch. 10.2.
 
     Parameters
     ----------
@@ -169,6 +140,7 @@ def find_fixed_point_newton(f: Callable[[np.ndarray], np.ndarray], x0: np.ndarra
     x : ndarray
         The fixed point found.
     converged : bool
+        False if `max_iter` ran out or the Jacobian became singular.
 
     Examples
     --------
@@ -180,22 +152,8 @@ def find_fixed_point_newton(f: Callable[[np.ndarray], np.ndarray], x0: np.ndarra
     >>> np.allclose(f(x), 0.0, atol=1e-8)
     True
     """
-    x = np.asarray(x0, dtype=np.float64).copy()
-    converged = False
-    for _ in range(max_iter):
-        fx = f(x)
-        jac = numerical_jacobian(f, x)
-        try:
-            delta = lu_solve_system(jac, fx)
-        except np.linalg.LinAlgError:
-            break
-        x_new = x - delta
-        if np.linalg.norm(x_new - x) < tol:
-            x = x_new
-            converged = True
-            break
-        x = x_new
-    return x, converged
+    result = NewtonSystem(f, x0, tol=tol, max_iter=max_iter).solve()
+    return result.root, result.converged
 
 
 def lyapunov_quadratic_form(A, Q=None) -> LyapunovFunctionResult:

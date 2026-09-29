@@ -26,7 +26,8 @@ Sections
 - **root_finding** -- bisection, Newton-Raphson, secant, and fixed-point
   iteration side by side on the same problem, with each method's empirical
   convergence order verified against its theoretical rate; Halley's cubic
-  method; Aitken's delta-squared process and Steffensen's method.
+  method; Aitken's delta-squared process and Steffensen's method; Newton's
+  method for nonlinear systems and Broyden's quasi-Newton method.
 - **interpolation** -- Lagrange and Newton divided-difference polynomial
   interpolation, shown to agree exactly and to reproduce any polynomial up
   to the interpolation degree; Hermite interpolation of values and slopes.
@@ -39,7 +40,8 @@ Sections
   Padé approximants, and Remez's best uniform (minimax) approximation.
 - **polynomials** -- Horner's scheme with deflation, and Wilkinson's
   ill-conditioned polynomial.
-- **floating_point** -- Kahan's compensated summation against naive and
-  pairwise summation.
+- **floating_point** -- IEEE 754 bit fields, machine epsilon and the
+  spacing of floats, catastrophic cancellation in the quadratic formula,
+  and Kahan's compensated summation against naive and pairwise summation.
 - **regression** -- least-squares polynomial regression via the normal
   equations, and how the fit's condition number worsens with degree.

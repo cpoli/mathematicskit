@@ -27,6 +27,8 @@ from mathematicskit._jit import njit
 
 __all__ = [
     "RHSFunc",
+    "euler_step",
+    "euler_integrate",
     "rk4_step",
     "rk4_integrate",
     "leapfrog_step",
@@ -42,7 +44,95 @@ __all__ = [
 RHSFunc = Callable[[NDArray[np.float64], float, NDArray[np.float64]], NDArray[np.float64]]
 
 
-@njit(cache=True)
+@njit
+def euler_step(
+    rhs: RHSFunc,
+    state: NDArray[np.float64],
+    t: float,
+    dt: float,
+    params: NDArray[np.float64],
+) -> NDArray[np.float64]:
+    """Single explicit (forward) Euler step: ``state + dt * rhs(state, t)``.
+
+    Follows the tangent line for one step (Euler 1768). The local error is
+    :math:`O(dt^2)`, so the global error over a fixed interval is
+    :math:`O(dt)`. For ``y' = lam * y`` one step multiplies ``y`` by
+    :math:`R(z) = 1 + z` with :math:`z = lam \\cdot dt`, so the method is
+    stable only inside the disc :math:`|1 + z| \\le 1` (see
+    :mod:`mathematicskit.integrators.stability`).
+
+    Parameters
+    ----------
+    rhs : callable
+        Numba-jitted right-hand-side function ``rhs(state, t, params) ->
+        ndarray``.
+    state : ndarray of float, shape (dim,)
+        Current state vector.
+    t : float
+        Current time.
+    dt : float
+        Step size.
+    params : ndarray of float
+        Parameter vector passed through to `rhs`.
+
+    Returns
+    -------
+    ndarray of float, shape (dim,)
+        The state advanced by one step of size `dt`.
+    """
+    return state + dt * rhs(state, t, params)
+
+
+@njit
+def euler_integrate(
+    rhs: RHSFunc,
+    state0: NDArray[np.float64],
+    t0: float,
+    dt: float,
+    n_steps: int,
+    params: NDArray[np.float64],
+) -> tuple[NDArray[np.float64], NDArray[np.float64]]:
+    """Integrate ``n_steps`` of explicit Euler starting from ``state0``.
+
+    Parameters
+    ----------
+    rhs : callable
+        Numba-jitted right-hand-side function ``rhs(state, t, params) ->
+        ndarray``.
+    state0 : ndarray of float, shape (dim,)
+        Initial state vector.
+    t0 : float
+        Initial time.
+    dt : float
+        Step size.
+    n_steps : int
+        Number of integration steps.
+    params : ndarray of float
+        Parameter vector passed through to `rhs`.
+
+    Returns
+    -------
+    times : ndarray of float, shape (n_steps + 1,)
+        Time at each step, starting at `t0`.
+    states : ndarray of float, shape (n_steps + 1, dim)
+        State at each step, starting at `state0`.
+    """
+    dim = state0.shape[0]
+    states = np.empty((n_steps + 1, dim))
+    times = np.empty(n_steps + 1)
+    states[0] = state0
+    times[0] = t0
+    state = state0.copy()
+    t = t0
+    for i in range(n_steps):
+        state = euler_step(rhs, state, t, dt, params)
+        t = t0 + (i + 1) * dt
+        states[i + 1] = state
+        times[i + 1] = t
+    return times, states
+
+
+@njit
 def rk4_step(
     rhs: RHSFunc,
     state: NDArray[np.float64],
@@ -78,7 +168,7 @@ def rk4_step(
     return state + (dt / 6.0) * (k1 + 2.0 * k2 + 2.0 * k3 + k4)
 
 
-@njit(cache=True)
+@njit
 def rk4_integrate(
     rhs: RHSFunc,
     state0: NDArray[np.float64],
@@ -127,7 +217,7 @@ def rk4_integrate(
     return times, states
 
 
-@njit(cache=True)
+@njit
 def leapfrog_step(
     force: RHSFunc,
     pos: NDArray[np.float64],
@@ -168,7 +258,7 @@ def leapfrog_step(
     return pos_new, vel_new
 
 
-@njit(cache=True)
+@njit
 def leapfrog_integrate(
     force: RHSFunc,
     pos0: NDArray[np.float64],
@@ -241,7 +331,7 @@ _YOSHIDA_W0 = -_YOSHIDA_CBRT2 / (2.0 - _YOSHIDA_CBRT2)
 _YOSHIDA_W1 = 1.0 / (2.0 - _YOSHIDA_CBRT2)
 
 
-@njit(cache=True)
+@njit
 def yoshida4_step(
     force: RHSFunc,
     pos: NDArray[np.float64],
@@ -292,7 +382,7 @@ def yoshida4_step(
     return pos, vel
 
 
-@njit(cache=True)
+@njit
 def yoshida4_integrate(
     force: RHSFunc,
     pos0: NDArray[np.float64],

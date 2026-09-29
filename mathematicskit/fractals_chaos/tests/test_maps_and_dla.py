@@ -49,3 +49,9 @@ def test_dla_mass_radius_dimension_near_1_7():
 
 def test_dla_is_reproducible():
     assert np.array_equal(dla_cluster(300, seed=5), dla_cluster(300, seed=5))
+
+
+def test_dla_stops_early_when_the_cluster_nears_the_lattice_edge():
+    cluster = dla_cluster(5000, seed=2, size=41)
+    assert 1 <= len(cluster) < 5000
+    assert np.abs(cluster).max() < 41 // 2

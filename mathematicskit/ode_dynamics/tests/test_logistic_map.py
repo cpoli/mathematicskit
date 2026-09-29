@@ -43,3 +43,12 @@ def test_bifurcation_diagram_shape():
 def test_feigenbaum_delta_estimate_is_roughly_right():
     delta = estimate_feigenbaum_delta()
     assert 3.5 < delta < 6.0
+
+
+def test_period_doubling_scan_finds_r_equals_3_and_falls_back_to_upper_end():
+    """The period-2 cycle is born at r = 3; below it the scan finds nothing
+    and returns the upper end of its range."""
+    from mathematicskit.ode_dynamics.systems.logistic_map import _period_doubling_thresholds
+
+    assert _period_doubling_thresholds(2.9, 3.2, 31, period=2) == pytest.approx(3.01, abs=0.011)
+    assert _period_doubling_thresholds(2.5, 2.9, 5, period=2) == 2.9

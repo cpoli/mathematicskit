@@ -53,7 +53,7 @@ _E6 = _B6 - _B6S
 _E7 = -_B7S
 
 
-@njit(cache=True)
+@njit
 def dopri5_step(
     rhs: RHSFunc,
     state: NDArray[np.float64],
@@ -97,7 +97,7 @@ def dopri5_step(
     return state_new, error
 
 
-@njit(cache=True)
+@njit
 def dopri5_integrate(
     rhs: RHSFunc,
     state0: NDArray[np.float64],

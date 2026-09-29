@@ -52,3 +52,11 @@ def test_different_seeds_give_different_orbits():
 def test_sierpinski_triangle_rejects_bad_vertex_shape():
     with pytest.raises(ValueError):
         SierpinskiTriangle(vertices=np.zeros((4, 2)))
+
+
+def test_chaos_game_rejects_probabilities_not_summing_to_one():
+    from mathematicskit.fractals_chaos import chaos_game
+
+    halve = (0.5 * np.eye(2), np.zeros(2), 0.4)
+    with pytest.raises(ValueError, match="sum to 1"):
+        chaos_game([halve, halve], n_points=10)
