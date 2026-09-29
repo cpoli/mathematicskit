@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Butcher, Ehle and Radau IIA: L-stable implicit Runge-Kutta &#8212; mathematicskit 0.3.0 documentation</title>
+    <title>Butcher, Ehle and Radau IIA: L-stable implicit Runge-Kutta &#8212; mathematicskit 0.4.0 documentation</title>
   
   
   
@@ -30,6 +30,8 @@
 <link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=64cc4de3f052d77215f0" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Vibur" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/jupyterlite_sphinx.css?v=f676e775" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=c83e6b79" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
@@ -42,10 +44,11 @@
   <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0" />
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0" />
 
-    <script src="../../../../_static/documentation_options.js?v=f129cdf0"></script>
+    <script src="../../../../_static/documentation_options.js?v=1437fa6d"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../../../../_static/jupyterlite_sphinx.js?v=96e329c5"></script>
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/gallery/ode_dynamics/stiffness/plot_04_radau_iia';</script>
@@ -653,7 +656,7 @@
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
 <p><a class="reference internal" href="#sphx-glr-download-api-gallery-ode-dynamics-stiffness-plot-04-radau-iia-py"><span class="std std-ref">Go to the end</span></a>
-to download the full example code.</p>
+to download the full example code or to run this example in your browser via JupyterLite or Binder.</p>
 </div>
 <section class="sphx-glr-example-title" id="butcher-ehle-and-radau-iia-l-stable-implicit-runge-kutta">
 <span id="sphx-glr-api-gallery-ode-dynamics-stiffness-plot-04-radau-iia-py"></span><h1>Butcher, Ehle and Radau IIA: L-stable implicit Runge-Kutta<a class="headerlink" href="#butcher-ehle-and-radau-iia-l-stable-implicit-runge-kutta" title="Link to this heading">#</a></h1>
@@ -671,9 +674,8 @@ step. The three-stage, order-5 method used by
 <span class="math notranslate nohighlight">\(R(z) \to -1\)</span>: stiff components flip sign each step instead of dying.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="nn">.</span><span class="nn">pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span><span class="w">
 </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span><span class="w">
-</span><span class="kn">from</span><span class="w"> </span><span class="nn">numba</span><span class="w"> </span><span class="kn">import</span> <span class="n">njit</span><span class="w">
 </span><span class="w">
-</span><span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit</span><span class="nn">.</span><span class="nn">integrators</span><span class="w"> </span><span class="kn">import</span> <a class="sphx-glr-backref-module-mathematicskit-integrators sphx-glr-backref-type-py-function reference internal" href="../../../integrators.html#mathematicskit.integrators.stiff_integrate" title="mathematicskit.integrators.stiff_integrate"><span class="n">stiff_integrate</span></a><span class="w">
+</span><span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit</span><span class="nn">.</span><span class="nn">integrators</span><span class="w"> </span><span class="kn">import</span> <a class="sphx-glr-backref-module-mathematicskit-integrators sphx-glr-backref-type-py-function reference internal" href="../../../integrators.html#mathematicskit.integrators.njit" title="mathematicskit.integrators.njit"><span class="n">njit</span></a><span class="p">,</span> <a class="sphx-glr-backref-module-mathematicskit-integrators sphx-glr-backref-type-py-function reference internal" href="../../../integrators.html#mathematicskit.integrators.stiff_integrate" title="mathematicskit.integrators.stiff_integrate"><span class="n">stiff_integrate</span></a><span class="w">
 </span></pre></div></div>
 <section id="damping-of-stiff-modes">
 <h2>Damping of stiff modes<a class="headerlink" href="#damping-of-stiff-modes" title="Link to this heading">#</a></h2>
@@ -691,7 +693,7 @@ step. The three-stage, order-5 method used by
 </span><span class="n">ax0</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;</span><span class="s2">L-stability: R(z) -&gt; 0 as z -&gt; -infinity</span><span class="s2">&quot;</span><span class="p">)</span><span class="w">
 </span><span class="n">ax0</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="p">)</span><span class="w">
 </span></pre></div></div>
-<img src="../../../../_images/sphx_glr_plot_04_radau_iia_001.png" srcset="../../../../_images/sphx_glr_plot_04_radau_iia_001.png" alt="L-stability: R(z) -> 0 as z -> -infinity" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x1192c9e80&gt;
+<img src="../../../../_images/sphx_glr_plot_04_radau_iia_001.png" srcset="../../../../_images/sphx_glr_plot_04_radau_iia_001.png" alt="L-stability: R(z) -> 0 as z -> -infinity" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x119916120&gt;
 </pre></div>
 </div>
 </section>
@@ -722,8 +724,16 @@ explicit <code class="docutils literal notranslate"><span class="pre">RK45</span
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Radau IIA: 1187 steps; smallest step 3.9e-05, largest 1.1e+02
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.300 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.257 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-api-gallery-ode-dynamics-stiffness-plot-04-radau-iia-py">
+<div class="binder-badge docutils container">
+<a class="reference external image-reference" href="https://mybinder.org/v2/gh/cpoli/mathematicskit/gh-pages?urlpath=lab/tree/notebooks/api/gallery/ode_dynamics/stiffness/plot_04_radau_iia.ipynb"><img alt="Launch binder" src="../../../../_images/binder_badge_logo111.svg" style="width: 150px;" />
+</a>
+</div>
+<div class="lite-badge docutils container">
+<a class="reference external image-reference" href="../../../../lite/lab/index.html?path=api/gallery/ode_dynamics/stiffness/plot_04_radau_iia.ipynb"><img alt="Launch JupyterLite" src="../../../../_images/jupyterlite_badge_logo111.svg" style="width: 150px;" />
+</a>
+</div>
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../../../_downloads/7f8280d74784f37432ee9bf7ca584529/plot_04_radau_iia.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_04_radau_iia.ipynb</span></code></a></p>
 </div>

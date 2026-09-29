@@ -24,10 +24,9 @@ with :math:`\theta = \sqrt{2\lambda}\cosh(\theta/4)`.
 # %%
 import matplotlib.pyplot as plt
 import numpy as np
-from numba import njit
 from scipy.optimize import fsolve
 
-from mathematicskit.integrators import collocation_bvp
+from mathematicskit.integrators import collocation_bvp, njit
 
 
 @njit

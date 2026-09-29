@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>mathematicskit &#8212; mathematicskit 0.3.0 documentation</title>
+    <title>mathematicskit &#8212; mathematicskit 0.4.0 documentation</title>
   
   
   
@@ -30,6 +30,8 @@
 <link href="_static/styles/pydata-sphinx-theme.css?digest=64cc4de3f052d77215f0" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Vibur" />
+    <link rel="stylesheet" type="text/css" href="_static/jupyterlite_sphinx.css?v=f676e775" />
     <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=c83e6b79" />
     <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
@@ -42,10 +44,11 @@
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0" />
 
-    <script src="_static/documentation_options.js?v=f129cdf0"></script>
+    <script src="_static/documentation_options.js?v=1437fa6d"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="_static/jupyterlite_sphinx.js?v=96e329c5"></script>
     <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
@@ -401,8 +404,8 @@ value-add is its own dataclass-result API, docstrings, visualizers,
 tests, and examples wrapped around those calls, not reinventing
 numerical primitives that are already correct and well-tested upstream.
 Algorithms are hand-rolled from first principles only where no
-<cite>numpy</cite>/<cite>scipy</cite> equivalent exists (e.g. Dijkstra/Kruskal, the simplex
-method, modular arithmetic), or where the algorithm’s own iterate
+<cite>numpy</cite>/<cite>scipy</cite> equivalent exists (e.g. Dijkstra/Kruskal, finite
+fields, modular arithmetic), or where the algorithm’s own iterate
 behavior is itself the pedagogical subject (e.g. Newton’s method’s
 convergence history, forward/reverse-mode autodiff). No hard dependency
 on <cite>networkx</cite>, <cite>cvxpy</cite>, or SageMath.</p>
@@ -481,8 +484,28 @@ confidence intervals, OLS regression, and bootstrap resampling.</p></li>
 <a class="reference external" href="https://cpoli.github.io/physicskit/">physicskit</a>, <strong>mathematicskit</strong>
 and <a class="reference external" href="https://cpoli.github.io/chemistrykit/">chemistrykit</a> – that share
 the same architecture, API conventions, and history-driven documentation.</p>
+<section id="install-and-try-it">
+<h2>Install and try it<a class="headerlink" href="#install-and-try-it" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">"mathematicskit[fast]"</span><span class="w">   </span><span class="c1"># with numba JIT acceleration (recommended)</span>
+pip<span class="w"> </span>install<span class="w"> </span>mathematicskit<span class="w">           </span><span class="c1"># pure numpy/scipy/matplotlib, e.g. for Pyodide</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">fast</span></code> extra adds <a class="reference external" href="https://numba.pydata.org/">numba</a>, which compiles
+the inner loops of <code class="docutils literal notranslate"><span class="pre">ode_dynamics</span></code>, <code class="docutils literal notranslate"><span class="pre">fractals_chaos</span></code>, <code class="docutils literal notranslate"><span class="pre">pde</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">integrators</span></code>. Without it, those kernels run as plain Python with the same
+results, only slower.</p>
+<p>To try it without installing anything, open the
+<a class="reference external" href="https://colab.research.google.com/github/cpoli/mathematicskit/blob/main/notebooks/quickstart.ipynb">quickstart notebook</a>
+in Colab, or use the <strong>Launch Binder</strong> / <strong>JupyterLite</strong> buttons at the top of
+every gallery example. Every gallery also has a download-all button for its
+scripts and notebooks. The public API follows a documented
+<a class="reference external" href="https://github.com/cpoli/mathematicskit/blob/main/CONTRIBUTING.md#api-stability-and-deprecation-policy">stability and deprecation policy</a>.</p>
 <p>Conventionally imported as <code class="docutils literal notranslate"><span class="pre">mk</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">mathematicskit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mk</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">mathematicskit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mk</span>
+
+<span class="n">newton</span> <span class="o">=</span> <span class="n">mk</span><span class="o">.</span><span class="n">numerical_analysis</span><span class="o">.</span><span class="n">NewtonRaphson</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">)</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">newton</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">newton</span><span class="o">.</span><span class="n">history</span><span class="p">))</span>  <span class="c1"># every iterate is kept</span>
 
 <span class="n">spline</span> <span class="o">=</span> <span class="n">mk</span><span class="o">.</span><span class="n">numerical_analysis</span><span class="o">.</span><span class="n">CubicSpline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">boundary</span><span class="o">=</span><span class="s2">"natural"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">spline</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="mf">1.5</span><span class="p">))</span>
@@ -496,6 +519,7 @@ the same architecture, API conventions, and history-driven documentation.</p>
 </div>
 <div class="toctree-wrapper compound">
 </div>
+</section>
 </section>
 
 
@@ -527,6 +551,20 @@ the same architecture, API conventions, and history-driven documentation.</p>
                 <dialog id="pst-secondary-sidebar-modal"></dialog>
                 <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-and-try-it">Install and try it</a><ul class="pst-show_toc_level nav section-nav flex-column">
+</ul>
+</li>
+</ul>
+  </nav></div>
 
   <div class="sidebar-secondary-item">
 

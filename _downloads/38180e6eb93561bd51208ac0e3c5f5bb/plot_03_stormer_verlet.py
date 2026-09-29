@@ -21,9 +21,8 @@ error drifts steadily.
 # %%
 import matplotlib.pyplot as plt
 import numpy as np
-from numba import njit
 
-from mathematicskit.integrators import leapfrog_integrate, rk4_integrate
+from mathematicskit.integrators import leapfrog_integrate, njit, rk4_integrate
 
 
 @njit

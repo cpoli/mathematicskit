@@ -11,7 +11,7 @@
         :class: sphx-glr-download-link-note
 
         :ref:`Go to the end <sphx_glr_download_api_gallery_ode_dynamics_stiffness_plot_01_dahlquist_a_stability.py>`
-        to download the full example code.
+        to download the full example code or to run this example in your browser via JupyterLite or Binder.
 
 .. rst-class:: sphx-glr-example-title
 
@@ -32,16 +32,14 @@ axis. Backward Euler's :math:`R(z) = 1/(1 - z)` is A-stable. Dahlquist
 also proved that no A-stable linear multistep method can exceed order 2
 (his "second barrier").
 
-.. GENERATED FROM PYTHON SOURCE LINES 18-24
+.. GENERATED FROM PYTHON SOURCE LINES 18-23
 
 .. code-block:: Python
 
     import matplotlib.pyplot as plt
     import numpy as np
-    from numba import njit
 
-    from mathematicskit.integrators import implicit_euler_integrate, rk4_integrate
-
+    from mathematicskit.integrators import implicit_euler_integrate, njit, rk4_integrate
 
 
 
@@ -49,12 +47,13 @@ also proved that no A-stable linear multistep method can exceed order 2
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 25-27
+
+.. GENERATED FROM PYTHON SOURCE LINES 24-26
 
 Stability regions in the complex z-plane
 ----------------------------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 27-47
+.. GENERATED FROM PYTHON SOURCE LINES 26-46
 
 .. code-block:: Python
 
@@ -90,7 +89,7 @@ Stability regions in the complex z-plane
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 48-54
+.. GENERATED FROM PYTHON SOURCE LINES 47-53
 
 Consequence on a stiff equation, lambda * h = 30
 ------------------------------------------------
@@ -99,7 +98,7 @@ The Prothero-Robinson equation :math:`y' = -\lambda(y - \cos t) - \sin t`
 has the smooth solution :math:`y = \cos t`, but with :math:`\lambda = 3000`
 and :math:`h = 0.01`, :math:`z = -30` lies far outside RK4's region.
 
-.. GENERATED FROM PYTHON SOURCE LINES 54-75
+.. GENERATED FROM PYTHON SOURCE LINES 53-74
 
 .. code-block:: Python
 
@@ -140,7 +139,7 @@ and :math:`h = 0.01`, :math:`z = -30` lies far outside RK4's region.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.535 seconds)
+   **Total running time of the script:** (0 minutes 0.988 seconds)
 
 
 .. _sphx_glr_download_api_gallery_ode_dynamics_stiffness_plot_01_dahlquist_a_stability.py:
@@ -148,6 +147,20 @@ and :math:`h = 0.01`, :math:`z = -30` lies far outside RK4's region.
 .. only:: html
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
+
+    .. container:: binder-badge
+
+      .. image:: images/binder_badge_logo.svg
+        :target: https://mybinder.org/v2/gh/cpoli/mathematicskit/gh-pages?urlpath=lab/tree/notebooks/api/gallery/ode_dynamics/stiffness/plot_01_dahlquist_a_stability.ipynb
+        :alt: Launch binder
+        :width: 150 px
+
+    .. container:: lite-badge
+
+      .. image:: images/jupyterlite_badge_logo.svg
+        :target: ../../../../lite/lab/index.html?path=api/gallery/ode_dynamics/stiffness/plot_01_dahlquist_a_stability.ipynb
+        :alt: Launch JupyterLite
+        :width: 150 px
 
     .. container:: sphx-glr-download sphx-glr-download-jupyter
 

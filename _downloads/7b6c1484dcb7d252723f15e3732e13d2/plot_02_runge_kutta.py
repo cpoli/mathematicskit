@@ -18,9 +18,8 @@ is fourth order: halving :math:`h` divides the error by 16.
 # %%
 import matplotlib.pyplot as plt
 import numpy as np
-from numba import njit
 
-from mathematicskit.integrators import rk4_integrate
+from mathematicskit.integrators import njit, rk4_integrate
 
 
 @njit

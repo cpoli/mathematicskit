@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Dahlquist’s A-stability: backward Euler vs RK4 &#8212; mathematicskit 0.3.0 documentation</title>
+    <title>Dahlquist’s A-stability: backward Euler vs RK4 &#8212; mathematicskit 0.4.0 documentation</title>
   
   
   
@@ -30,6 +30,8 @@
 <link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=64cc4de3f052d77215f0" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Vibur" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/jupyterlite_sphinx.css?v=f676e775" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=c83e6b79" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
@@ -42,10 +44,11 @@
   <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0" />
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0" />
 
-    <script src="../../../../_static/documentation_options.js?v=f129cdf0"></script>
+    <script src="../../../../_static/documentation_options.js?v=1437fa6d"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../../../../_static/jupyterlite_sphinx.js?v=96e329c5"></script>
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/gallery/ode_dynamics/stiffness/plot_01_dahlquist_a_stability';</script>
@@ -653,7 +656,7 @@
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
 <p><a class="reference internal" href="#sphx-glr-download-api-gallery-ode-dynamics-stiffness-plot-01-dahlquist-a-stability-py"><span class="std std-ref">Go to the end</span></a>
-to download the full example code.</p>
+to download the full example code or to run this example in your browser via JupyterLite or Binder.</p>
 </div>
 <section class="sphx-glr-example-title" id="dahlquist-s-a-stability-backward-euler-vs-rk4">
 <span id="sphx-glr-api-gallery-ode-dynamics-stiffness-plot-01-dahlquist-a-stability-py"></span><h1>Dahlquist’s A-stability: backward Euler vs RK4<a class="headerlink" href="#dahlquist-s-a-stability-backward-euler-vs-rk4" title="Link to this heading">#</a></h1>
@@ -669,9 +672,8 @@ also proved that no A-stable linear multistep method can exceed order 2
 (his “second barrier”).</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="nn">.</span><span class="nn">pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span><span class="w">
 </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span><span class="w">
-</span><span class="kn">from</span><span class="w"> </span><span class="nn">numba</span><span class="w"> </span><span class="kn">import</span> <span class="n">njit</span><span class="w">
 </span><span class="w">
-</span><span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit</span><span class="nn">.</span><span class="nn">integrators</span><span class="w"> </span><span class="kn">import</span> <a class="sphx-glr-backref-module-mathematicskit-integrators sphx-glr-backref-type-py-function reference internal" href="../../../integrators.html#mathematicskit.integrators.implicit_euler_integrate" title="mathematicskit.integrators.implicit_euler_integrate"><span class="n">implicit_euler_integrate</span></a><span class="p">,</span> <a class="sphx-glr-backref-module-mathematicskit-integrators sphx-glr-backref-type-py-function reference internal" href="../../../integrators.html#mathematicskit.integrators.rk4_integrate" title="mathematicskit.integrators.rk4_integrate"><span class="n">rk4_integrate</span></a><span class="w">
+</span><span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit</span><span class="nn">.</span><span class="nn">integrators</span><span class="w"> </span><span class="kn">import</span> <a class="sphx-glr-backref-module-mathematicskit-integrators sphx-glr-backref-type-py-function reference internal" href="../../../integrators.html#mathematicskit.integrators.implicit_euler_integrate" title="mathematicskit.integrators.implicit_euler_integrate"><span class="n">implicit_euler_integrate</span></a><span class="p">,</span> <a class="sphx-glr-backref-module-mathematicskit-integrators sphx-glr-backref-type-py-function reference internal" href="../../../integrators.html#mathematicskit.integrators.njit" title="mathematicskit.integrators.njit"><span class="n">njit</span></a><span class="p">,</span> <a class="sphx-glr-backref-module-mathematicskit-integrators sphx-glr-backref-type-py-function reference internal" href="../../../integrators.html#mathematicskit.integrators.rk4_integrate" title="mathematicskit.integrators.rk4_integrate"><span class="n">rk4_integrate</span></a><span class="w">
 </span></pre></div></div>
 <section id="stability-regions-in-the-complex-z-plane">
 <h2>Stability regions in the complex z-plane<a class="headerlink" href="#stability-regions-in-the-complex-z-plane" title="Link to this heading">#</a></h2>
@@ -722,8 +724,16 @@ and <span class="math notranslate nohighlight">\(h = 0.01\)</span>, <span class=
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>final error: RK4 7.41e+172, backward Euler 1.54e-06
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.535 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.988 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-api-gallery-ode-dynamics-stiffness-plot-01-dahlquist-a-stability-py">
+<div class="binder-badge docutils container">
+<a class="reference external image-reference" href="https://mybinder.org/v2/gh/cpoli/mathematicskit/gh-pages?urlpath=lab/tree/notebooks/api/gallery/ode_dynamics/stiffness/plot_01_dahlquist_a_stability.ipynb"><img alt="Launch binder" src="../../../../_images/binder_badge_logo111.svg" style="width: 150px;" />
+</a>
+</div>
+<div class="lite-badge docutils container">
+<a class="reference external image-reference" href="../../../../lite/lab/index.html?path=api/gallery/ode_dynamics/stiffness/plot_01_dahlquist_a_stability.ipynb"><img alt="Launch JupyterLite" src="../../../../_images/jupyterlite_badge_logo111.svg" style="width: 150px;" />
+</a>
+</div>
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../../../_downloads/8e09c64a20d88fffb0dd0c12525615ba/plot_01_dahlquist_a_stability.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_01_dahlquist_a_stability.ipynb</span></code></a></p>
 </div>

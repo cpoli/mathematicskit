@@ -15,9 +15,8 @@ from the Sun (aphelion).
 # %%
 import matplotlib.pyplot as plt
 import numpy as np
-from numba import njit
 
-from mathematicskit.integrators import dopri5_integrate
+from mathematicskit.integrators import dopri5_integrate, njit
 
 
 @njit

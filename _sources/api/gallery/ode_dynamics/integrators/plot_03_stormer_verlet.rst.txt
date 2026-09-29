@@ -11,7 +11,7 @@
         :class: sphx-glr-download-link-note
 
         :ref:`Go to the end <sphx_glr_download_api_gallery_ode_dynamics_integrators_plot_03_stormer_verlet.py>`
-        to download the full example code.
+        to download the full example code or to run this example in your browser via JupyterLite or Binder.
 
 .. rst-class:: sphx-glr-example-title
 
@@ -36,15 +36,14 @@ slightly perturbed energy. So its energy error stays bounded over
 arbitrarily long runs. RK4 is more accurate per step, but its energy
 error drifts steadily.
 
-.. GENERATED FROM PYTHON SOURCE LINES 22-43
+.. GENERATED FROM PYTHON SOURCE LINES 22-42
 
 .. code-block:: Python
 
     import matplotlib.pyplot as plt
     import numpy as np
-    from numba import njit
 
-    from mathematicskit.integrators import leapfrog_integrate, rk4_integrate
+    from mathematicskit.integrators import leapfrog_integrate, njit, rk4_integrate
 
 
     @njit
@@ -68,12 +67,12 @@ error drifts steadily.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 44-46
+.. GENERATED FROM PYTHON SOURCE LINES 43-45
 
 A pendulum released at 2.5 rad, integrated for about 1000 swings
 ----------------------------------------------------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 46-65
+.. GENERATED FROM PYTHON SOURCE LINES 45-64
 
 .. code-block:: Python
 
@@ -117,7 +116,7 @@ A pendulum released at 2.5 rad, integrated for about 1000 swings
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.672 seconds)
+   **Total running time of the script:** (0 minutes 0.549 seconds)
 
 
 .. _sphx_glr_download_api_gallery_ode_dynamics_integrators_plot_03_stormer_verlet.py:
@@ -125,6 +124,20 @@ A pendulum released at 2.5 rad, integrated for about 1000 swings
 .. only:: html
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
+
+    .. container:: binder-badge
+
+      .. image:: images/binder_badge_logo.svg
+        :target: https://mybinder.org/v2/gh/cpoli/mathematicskit/gh-pages?urlpath=lab/tree/notebooks/api/gallery/ode_dynamics/integrators/plot_03_stormer_verlet.ipynb
+        :alt: Launch binder
+        :width: 150 px
+
+    .. container:: lite-badge
+
+      .. image:: images/jupyterlite_badge_logo.svg
+        :target: ../../../../lite/lab/index.html?path=api/gallery/ode_dynamics/integrators/plot_03_stormer_verlet.ipynb
+        :alt: Launch JupyterLite
+        :width: 150 px
 
     .. container:: sphx-glr-download sphx-glr-download-jupyter
 

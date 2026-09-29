@@ -22,9 +22,8 @@ The trapezoidal rule is A-stable but not L-stable, since
 # %%
 import matplotlib.pyplot as plt
 import numpy as np
-from numba import njit
 
-from mathematicskit.integrators import stiff_integrate
+from mathematicskit.integrators import njit, stiff_integrate
 
 # %%
 # Damping of stiff modes

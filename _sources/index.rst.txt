@@ -15,8 +15,8 @@ value-add is its own dataclass-result API, docstrings, visualizers,
 tests, and examples wrapped around those calls, not reinventing
 numerical primitives that are already correct and well-tested upstream.
 Algorithms are hand-rolled from first principles only where no
-`numpy`/`scipy` equivalent exists (e.g. Dijkstra/Kruskal, the simplex
-method, modular arithmetic), or where the algorithm's own iterate
+`numpy`/`scipy` equivalent exists (e.g. Dijkstra/Kruskal, finite
+fields, modular arithmetic), or where the algorithm's own iterate
 behavior is itself the pedagogical subject (e.g. Newton's method's
 convergence history, forward/reverse-mode autodiff). No hard dependency
 on `networkx`, `cvxpy`, or SageMath.
@@ -98,11 +98,35 @@ teaching resource such as *Numerical Recipes* or the
 and `chemistrykit <https://cpoli.github.io/chemistrykit/>`_ -- that share
 the same architecture, API conventions, and history-driven documentation.
 
+Install and try it
+------------------
+
+.. code-block:: bash
+
+   pip install "mathematicskit[fast]"   # with numba JIT acceleration (recommended)
+   pip install mathematicskit           # pure numpy/scipy/matplotlib, e.g. for Pyodide
+
+The ``fast`` extra adds `numba <https://numba.pydata.org/>`_, which compiles
+the inner loops of ``ode_dynamics``, ``fractals_chaos``, ``pde``, and
+``integrators``. Without it, those kernels run as plain Python with the same
+results, only slower.
+
+To try it without installing anything, open the
+`quickstart notebook <https://colab.research.google.com/github/cpoli/mathematicskit/blob/main/notebooks/quickstart.ipynb>`__
+in Colab, or use the **Launch Binder** / **JupyterLite** buttons at the top of
+every gallery example. Every gallery also has a download-all button for its
+scripts and notebooks. The public API follows a documented
+`stability and deprecation policy <https://github.com/cpoli/mathematicskit/blob/main/CONTRIBUTING.md#api-stability-and-deprecation-policy>`__.
+
 Conventionally imported as ``mk``:
 
 .. code-block:: python
 
+   import numpy as np
    import mathematicskit as mk
+
+   newton = mk.numerical_analysis.NewtonRaphson(lambda x: x**2 - 2, lambda x: 2 * x, x0=3.0, tol=1e-14).solve()
+   print(newton.root, len(newton.history))  # every iterate is kept
 
    spline = mk.numerical_analysis.CubicSpline(x=[0, 1, 2, 3], y=[0, 1, 0, 1], boundary="natural")
    print(spline.evaluate(1.5))

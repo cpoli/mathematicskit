@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>O(n^2) vs. O(n log n): naive DFT vs. radix-2 FFT vs. numpy.fft &#8212; mathematicskit 0.3.0 documentation</title>
+    <title>O(n^2) vs. O(n log n): naive DFT vs. radix-2 FFT vs. numpy.fft &#8212; mathematicskit 0.4.0 documentation</title>
   
   
   
@@ -30,6 +30,8 @@
 <link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=64cc4de3f052d77215f0" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Vibur" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/jupyterlite_sphinx.css?v=f676e775" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=c83e6b79" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
@@ -42,10 +44,11 @@
   <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0" />
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0" />
 
-    <script src="../../../../_static/documentation_options.js?v=f129cdf0"></script>
+    <script src="../../../../_static/documentation_options.js?v=1437fa6d"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../../../../_static/jupyterlite_sphinx.js?v=96e329c5"></script>
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/gallery/special_functions/fourier_transform/plot_01_naive_vs_radix2_vs_numpy';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
@@ -652,7 +655,7 @@
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
 <p><a class="reference internal" href="#sphx-glr-download-api-gallery-special-functions-fourier-transform-plot-01-naive-vs-radix2-vs-numpy-py"><span class="std std-ref">Go to the end</span></a>
-to download the full example code.</p>
+to download the full example code or to run this example in your browser via JupyterLite or Binder.</p>
 </div>
 <section class="sphx-glr-example-title" id="o-n-2-vs-o-n-log-n-naive-dft-vs-radix-2-fft-vs-numpy-fft">
 <span id="sphx-glr-api-gallery-special-functions-fourier-transform-plot-01-naive-vs-radix2-vs-numpy-py"></span><h1>O(n^2) vs. O(n log n): naive DFT vs. radix-2 FFT vs. numpy.fft<a class="headerlink" href="#o-n-2-vs-o-n-log-n-naive-dft-vs-radix-2-fft-vs-numpy-fft" title="Link to this heading">#</a></h1>
@@ -682,19 +685,27 @@ max |radix2 - numpy| = 5.73e-14
 </span><span class="w">
 </span><span class="n">plot_fft_timing_comparison</span><span class="p">(</span><a class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="list"><span class="n">sizes</span></a><span class="p">)</span><span class="w">
 </span></pre></div></div>
-<img src="../../../../_images/sphx_glr_plot_01_naive_vs_radix2_vs_numpy_001.png" srcset="../../../../_images/sphx_glr_plot_01_naive_vs_radix2_vs_numpy_001.png" alt="FFT method timing comparison" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>n=   64: naive=   0.066 ms, radix2=   0.161 ms, numpy=  0.0108 ms
-n=  128: naive=   0.183 ms, radix2=   0.302 ms, numpy=  0.0069 ms
-n=  256: naive=   0.670 ms, radix2=   0.587 ms, numpy=  0.0065 ms
-n=  512: naive=   2.766 ms, radix2=   1.169 ms, numpy=  0.0075 ms
-n= 1024: naive=  10.946 ms, radix2=   2.362 ms, numpy=  0.0172 ms
-n= 2048: naive=  53.118 ms, radix2=   4.681 ms, numpy=  0.0292 ms
-n= 4096: naive= 224.408 ms, radix2=   9.217 ms, numpy=  0.0470 ms
+<img src="../../../../_images/sphx_glr_plot_01_naive_vs_radix2_vs_numpy_001.png" srcset="../../../../_images/sphx_glr_plot_01_naive_vs_radix2_vs_numpy_001.png" alt="FFT method timing comparison" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>n=   64: naive=   0.059 ms, radix2=   0.152 ms, numpy=  0.0091 ms
+n=  128: naive=   0.191 ms, radix2=   0.288 ms, numpy=  0.0064 ms
+n=  256: naive=   0.691 ms, radix2=   0.601 ms, numpy=  0.0069 ms
+n=  512: naive=   2.748 ms, radix2=   1.126 ms, numpy=  0.0075 ms
+n= 1024: naive=  11.128 ms, radix2=   2.329 ms, numpy=  0.0246 ms
+n= 2048: naive=  50.362 ms, radix2=   4.545 ms, numpy=  0.0285 ms
+n= 4096: naive= 200.286 ms, radix2=   9.115 ms, numpy=  0.0418 ms
 
 &lt;Axes: title={'center': 'FFT method timing comparison'}, xlabel='n', ylabel='time (s)'&gt;
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.639 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.600 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-api-gallery-special-functions-fourier-transform-plot-01-naive-vs-radix2-vs-numpy-py">
+<div class="binder-badge docutils container">
+<a class="reference external image-reference" href="https://mybinder.org/v2/gh/cpoli/mathematicskit/gh-pages?urlpath=lab/tree/notebooks/api/gallery/special_functions/fourier_transform/plot_01_naive_vs_radix2_vs_numpy.ipynb"><img alt="Launch binder" src="../../../../_images/binder_badge_logo66.svg" style="width: 150px;" />
+</a>
+</div>
+<div class="lite-badge docutils container">
+<a class="reference external image-reference" href="../../../../lite/lab/index.html?path=api/gallery/special_functions/fourier_transform/plot_01_naive_vs_radix2_vs_numpy.ipynb"><img alt="Launch JupyterLite" src="../../../../_images/jupyterlite_badge_logo66.svg" style="width: 150px;" />
+</a>
+</div>
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../../../_downloads/5124c36815365e72f51788928a2ff986/plot_01_naive_vs_radix2_vs_numpy.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_01_naive_vs_radix2_vs_numpy.ipynb</span></code></a></p>
 </div>

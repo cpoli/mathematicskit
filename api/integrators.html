@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>mathematicskit.integrators &#8212; mathematicskit 0.3.0 documentation</title>
+    <title>mathematicskit.integrators &#8212; mathematicskit 0.4.0 documentation</title>
   
   
   
@@ -30,6 +30,8 @@
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=64cc4de3f052d77215f0" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Vibur" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyterlite_sphinx.css?v=f676e775" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=c83e6b79" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
@@ -42,10 +44,11 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0" />
 
-    <script src="../_static/documentation_options.js?v=f129cdf0"></script>
+    <script src="../_static/documentation_options.js?v=1437fa6d"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../_static/jupyterlite_sphinx.js?v=96e329c5"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/integrators';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
@@ -459,7 +462,7 @@ for two-point boundary-value problems. The “Numerical integration” and
 <a class="reference internal" href="gallery/ode_dynamics/index.html"><span class="doc">ode_dynamics gallery</span></a> demonstrate
 each one, and <a class="reference internal" href="../history/ode_dynamics_breakthroughs.html"><span class="doc">Breakthroughs in Dynamical Systems</span></a> covers their
 history.</p>
-<p id="module-mathematicskit.integrators">Numba-accelerated ODE integrators shared across mathematicskit subpackages.</p>
+<p id="module-mathematicskit.integrators">Numba-accelerated (when Numba is installed) ODE integrators shared across mathematicskit subpackages.</p>
 <p>Right-hand-side / force callbacks use the <code class="docutils literal notranslate"><span class="pre">f(state_or_pos,</span> <span class="pre">t,</span> <span class="pre">params)</span> <span class="pre">-&gt;</span>
 <span class="pre">ndarray</span></code> convention throughout, so a single compiled callback can be reused
 across systems with different parameter values without recompiling (see
@@ -491,6 +494,10 @@ diagrams, and Poincare sections on top of this shared module rather than
 reimplementing per-domain integrators, exactly as physicskit’s
 <code class="docutils literal notranslate"><span class="pre">classical/core/integrators.py</span></code> wraps its own shared integrators for
 that subpackage’s njit-callback calling convention.</p>
+<p><a class="reference internal" href="#mathematicskit.integrators.njit" title="mathematicskit.integrators.njit"><code class="xref py py-func docutils literal notranslate"><span class="pre">njit()</span></code></a> is re-exported here for writing those callbacks: it is
+<code class="xref py py-func docutils literal notranslate"><span class="pre">numba.njit()</span></code> when Numba is installed (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span>
+<span class="pre">mathematicskit[fast]</span></code>) and a no-op decorator otherwise, with
+<code class="xref py py-data docutils literal notranslate"><span class="pre">HAS_NUMBA</span></code> reporting which.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="mathematicskit.integrators.BVPResult">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">mathematicskit.integrators.</span></span><span class="sig-name descname"><span class="pre">BVPResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">success</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_rms_residual</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/integrators/bvp.html#BVPResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.integrators.BVPResult" title="Link to this definition">#</a></dt>
@@ -818,6 +825,18 @@ forward-difference Jacobian of <cite>rhs</cite> re-evaluated every iteration.</p
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.integrators.njit">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.integrators.</span></span><span class="sig-name descname"><span class="pre">njit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kws</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/numba/core/decorators.html#njit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.integrators.njit" title="Link to this definition">#</a></dt>
+<dd><p>Legacy decorator that is equivalent to the preferred API: jit().</p>
+<p>See documentation for jit function/decorator for full description.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">_JITWrapper</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.integrators.rk4_integrate">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.integrators.</span></span><span class="sig-name descname"><span class="pre">rk4_integrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rhs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/integrators/fixed_step.html#rk4_integrate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.integrators.rk4_integrate" title="Link to this definition">#</a></dt>
 <dd><p>Integrate <code class="docutils literal notranslate"><span class="pre">n_steps</span></code> of RK4 starting from <code class="docutils literal notranslate"><span class="pre">state0</span></code>.</p>
@@ -1116,6 +1135,7 @@ truncation error too.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.integrators.implicit_euler_step"><code class="docutils literal notranslate"><span class="pre">implicit_euler_step()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.integrators.leapfrog_integrate"><code class="docutils literal notranslate"><span class="pre">leapfrog_integrate()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.integrators.leapfrog_step"><code class="docutils literal notranslate"><span class="pre">leapfrog_step()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.integrators.njit"><code class="docutils literal notranslate"><span class="pre">njit()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.integrators.rk4_integrate"><code class="docutils literal notranslate"><span class="pre">rk4_integrate()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.integrators.rk4_step"><code class="docutils literal notranslate"><span class="pre">rk4_step()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.integrators.stiff_integrate"><code class="docutils literal notranslate"><span class="pre">stiff_integrate()</span></code></a></li>
