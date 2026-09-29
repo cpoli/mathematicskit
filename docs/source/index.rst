@@ -21,6 +21,10 @@ behavior is itself the pedagogical subject (e.g. Newton's method's
 convergence history, forward/reverse-mode autodiff). No hard dependency
 on `networkx`, `cvxpy`, or SageMath.
 
+.. image:: _static/images/readme_hero.png
+   :alt: Mandelbrot set, Newton vs. bisection convergence, and the logistic-map bifurcation diagram, all drawn with mathematicskit
+   :width: 100%
+
 Every subpackage is grounded in the mathematics it implements, not just
 coded against it: public functions carry runnable, CI-checked examples,
 and each subpackage's :doc:`history </history/index>` page traces the
@@ -49,49 +53,130 @@ teaching resource such as *Numerical Recipes* or the
 
 - :mod:`mathematicskit.abstract_algebra` -- cyclic/permutation groups, subgroups
   and cosets, finite fields, and polynomial ring arithmetic.
+
+  .. image:: _static/images/readme_abstract_algebra.png
+     :alt: Cayley tables of D4 and S4 and the multiplication table of GF(16)
+     :width: 100%
+
 - :mod:`mathematicskit.calculus` -- numerical differentiation/integration,
   forward- and reverse-mode automatic differentiation, and Taylor series.
+
+  .. image:: _static/images/readme_calculus.png
+     :alt: A midpoint Riemann sum, Taylor polynomials of sin, and adaptive quadrature sample points
+     :width: 100%
+
 - :mod:`mathematicskit.combinatorics` -- counting and generation, Pascal's
   triangle, integer partitions, inclusion-exclusion, and Stirling/
   Catalan/Bell numbers.
+
+  .. image:: _static/images/readme_combinatorics.png
+     :alt: Pascal's triangle, Pascal's triangle mod 2, and the partition function
+     :width: 100%
+
 - :mod:`mathematicskit.complex_analysis` -- the Cauchy-Riemann equations,
   contour integrals, Cauchy's integral theorem and formula, residues and
   the argument principle, conformal maps, and domain coloring.
+
+  .. image:: _static/images/readme_complex_analysis.png
+     :alt: Domain coloring, Joukowski airfoils, and residue-theorem contours
+     :width: 100%
+
 - :mod:`mathematicskit.fractals_chaos` -- Lyapunov exponents, box-counting
   fractal dimension, Mandelbrot/Julia sets, iterated function systems,
   and cellular automata.
+
+  .. image:: _static/images/readme_fractals_chaos.png
+     :alt: Barnsley's fern, a Julia set, and Wolfram's rule 30
+     :width: 100%
+
 - :mod:`mathematicskit.geometry` -- convex hull, Delaunay triangulation/Voronoi
   diagrams, segment intersection/point-in-polygon, polygon area/
   centroid, and the Frenet-Serret frame.
+
+  .. image:: _static/images/readme_geometry.png
+     :alt: Voronoi diagram, Delaunay triangulation, and a Bézier curve by de Casteljau
+     :width: 100%
+
 - :mod:`mathematicskit.graph_theory` -- shortest paths, minimum spanning trees,
   maximum flow/minimum cut, graph coloring, and spectral graph theory.
+
+  .. image:: _static/images/readme_graph_theory.png
+     :alt: Spectral bipartition, A* search, and a four-colored map
+     :width: 100%
+
 - :mod:`mathematicskit.linalg` -- LU/QR/Cholesky decompositions, symmetric
   eigenvalue algorithms, SVD, iterative Krylov solvers, and least-squares
   numerical stability.
+
+  .. image:: _static/images/readme_linalg.png
+     :alt: SVD low-rank approximations, Gershgorin discs, and conjugate-gradient vs. GMRES residuals
+     :width: 100%
+
 - :mod:`mathematicskit.number_theory` -- modular arithmetic, primality testing,
   the Chinese Remainder Theorem, continued fractions, multiplicative
   functions, and Diophantine equation solvers.
+
+  .. image:: _static/images/readme_number_theory.png
+     :alt: Prime-counting function, continued-fraction convergents of pi, and Fermat's two-squares primes
+     :width: 100%
+
 - :mod:`mathematicskit.numerical_analysis` -- root finding with convergence-order
   verification, polynomial interpolation (Lagrange, Newton
-  divided-difference, cubic splines, Chebyshev nodes), and least-squares
-  polynomial regression.
+  divided-difference, cubic splines, Chebyshev nodes), least-squares
+  polynomial regression, floating-point arithmetic, and Newton/Broyden for
+  nonlinear systems.
+
+  .. image:: _static/images/readme_numerical_analysis.png
+     :alt: Runge's phenomenon, its Chebyshev-node cure, and Bernstein polynomial approximation
+     :width: 100%
+
 - :mod:`mathematicskit.ode_dynamics` -- fixed-point stability, phase portraits,
   the logistic map, bifurcation normal forms, limit cycles, and Poincare
   sections.
+
+  .. image:: _static/images/readme_ode_dynamics.png
+     :alt: Pendulum phase portrait, the Lorenz attractor, and a Poincaré section of the Duffing oscillator
+     :width: 100%
+
 - :mod:`mathematicskit.pde` -- heat, wave, advection, and Poisson/Laplace
   problems: the method of lines, Crank-Nicolson, CFL and von Neumann
   stability, and Fourier/Chebyshev spectral methods.
+
+  .. image:: _static/images/readme_pde.png
+     :alt: 2D heat equation, wave-equation space-time diagram, and a Burgers shock
+     :width: 100%
+
 - :mod:`mathematicskit.optimization` -- gradient descent, nonlinear conjugate
   gradient, Newton/BFGS, Lagrange/KKT constrained optimization, the
   penalty method, and linear programming.
+
+  .. image:: _static/images/readme_optimization.png
+     :alt: Optimizer paths on Rosenbrock's function, CG vs. gradient descent convergence, and a linear program
+     :width: 100%
+
 - :mod:`mathematicskit.probability` -- discrete/continuous distributions, Monte
   Carlo integration with variance reduction, the Law of Large Numbers and
   Central Limit Theorem, and discrete-time Markov chains.
+
+  .. image:: _static/images/readme_probability.png
+     :alt: Central limit theorem histogram, Brownian motion paths, and Monte Carlo integration
+     :width: 100%
+
 - :mod:`mathematicskit.special_functions` -- gamma/beta functions, Bessel
   functions, orthogonal polynomial families, and the discrete Fourier
   transform (naive DFT vs. radix-2 FFT vs. ``numpy.fft``).
+
+  .. image:: _static/images/readme_special_functions.png
+     :alt: Bessel functions, a Morlet wavelet scalogram, and the Cornu spiral
+     :width: 100%
+
 - :mod:`mathematicskit.statistics` -- descriptive statistics, hypothesis tests,
   confidence intervals, OLS regression, and bootstrap resampling.
+
+  .. image:: _static/images/readme_statistics.png
+     :alt: Regression fit, OLS residuals, and group box plots
+     :width: 100%
+
 
 **mathematicskit** is part of a family of packages --
 `physicskit <https://cpoli.github.io/physicskit/>`_, **mathematicskit**
