@@ -12,11 +12,11 @@
 
 **See how the algorithms of computational mathematics actually work.**
 mathematicskit is a Python toolkit for learning and teaching numerical
-methods, dynamical systems, and discrete mathematics. Every iterative method
-keeps its iterates, every result is an inspectable dataclass, every domain
-ships plotting helpers, and each domain's docs walk through the field's
-breakthroughs in historical order, each one linked to runnable code that
-reproduces it.
+methods, dynamical systems, and discrete mathematics. No black boxes: every
+iterative method shows its work, every result is an inspectable dataclass,
+every domain ships plotting helpers, and each domain's docs walk through the
+field's breakthroughs in historical order, each one linked to runnable code
+that reproduces it.
 
 ![Mandelbrot set, Newton vs. bisection convergence, and the logistic-map bifurcation diagram, all drawn with mathematicskit](https://raw.githubusercontent.com/cpoli/mathematicskit/main/docs/source/_static/images/readme_hero.png)
 
