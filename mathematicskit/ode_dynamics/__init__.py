@@ -12,7 +12,7 @@ Lotka-Volterra), epidemic (SIR), neuron (FitzHugh-Nagumo), and chemical
 Rossler chaotic flows.
 """
 
-from mathematicskit._version import __version__
+from mathematicskit import __version__
 from mathematicskit.ode_dynamics.core.base import BendixsonResult, FixedPointResult, FlowSystem, LyapunovFunctionResult, OdeTrajectory
 from mathematicskit.ode_dynamics.systems.bifurcations import hopf_limit_cycle_radius, pitchfork_fixed_points, saddle_node_fixed_points
 from mathematicskit.ode_dynamics.systems.chaotic_flows import LorenzSystem, RosslerSystem, lorenz_fixed_points, rossler_fixed_points

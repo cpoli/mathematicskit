@@ -16,7 +16,7 @@ Mann-Whitney U); James-Stein shrinkage; and Bonferroni and
 Benjamini-Hochberg multiple-testing corrections.
 """
 
-from mathematicskit._version import __version__
+from mathematicskit import __version__
 from mathematicskit.statistics.core.base import (
     BootstrapResult,
     ConfidenceIntervalResult,

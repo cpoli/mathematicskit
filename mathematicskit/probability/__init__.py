@@ -15,7 +15,7 @@ random walks and Brownian motion, Erlang's loss formula, and
 continuous-time Markov chains via :func:`scipy.linalg.expm`.
 """
 
-from mathematicskit._version import __version__
+from mathematicskit import __version__
 from mathematicskit.probability.core.base import (
     BranchingProcessResult,
     BrownianMotionResult,

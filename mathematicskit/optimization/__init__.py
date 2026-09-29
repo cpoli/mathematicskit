@@ -15,7 +15,7 @@ simplex search, Nesterov acceleration, and Adam; and convergence-rate comparison
 methods on a shared set of test functions (Rosenbrock, a quadratic bowl).
 """
 
-from mathematicskit._version import __version__
+from mathematicskit import __version__
 from mathematicskit.optimization.core.base import (
     GameResult,
     KKTResult,

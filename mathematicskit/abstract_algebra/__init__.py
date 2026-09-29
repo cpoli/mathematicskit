@@ -15,7 +15,7 @@ multiplication, division with remainder, gcd) over :math:`\\mathbb{Z}`,
 :math:`\\mathbb{Q}`, and finite fields.
 """
 
-from mathematicskit._version import __version__
+from mathematicskit import __version__
 from mathematicskit.abstract_algebra.core.base import (
     CompositionSeriesResult,
     FiniteGroup,

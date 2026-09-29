@@ -16,7 +16,7 @@ function, logarithmic integral (``scipy.special.expi``), and primes in
 arithmetic progressions.
 """
 
-from mathematicskit._version import __version__
+from mathematicskit import __version__
 from mathematicskit.number_theory.core.base import BezoutResult, ContinuedFractionResult, CRTResult, LinearDiophantineResult, PellResult, PollardRhoResult
 from mathematicskit.number_theory.systems.continued_fractions import best_rational_approximation, continued_fraction_expansion
 from mathematicskit.number_theory.systems.crt import chinese_remainder_theorem

@@ -14,7 +14,7 @@ diffusion-limited aggregation; and elementary (Wolfram-numbered)
 cellular automata plus Conway's Game of Life.
 """
 
-from mathematicskit._version import __version__
+from mathematicskit import __version__
 from mathematicskit.fractals_chaos.core.base import BoxCountingResult, CellularAutomaton, EscapeTimeResult, IteratedFunctionSystem
 from mathematicskit.fractals_chaos.systems.box_counting import box_counting_dimension
 from mathematicskit.fractals_chaos.systems.cellular_automata import ElementaryCA, GameOfLife

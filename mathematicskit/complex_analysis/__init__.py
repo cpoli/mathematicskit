@@ -10,7 +10,7 @@ and their classification, the Joukowski map) and their action on coordinate
 grids; and domain coloring (phase portraits) of complex functions.
 """
 
-from mathematicskit._version import __version__
+from mathematicskit import __version__
 from mathematicskit.complex_analysis.core.base import (
     CauchyRiemannResult,
     Contour,

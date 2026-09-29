@@ -19,7 +19,7 @@ Chebyshev collocation for boundary-value problems built on
 :func:`mathematicskit.numerical_analysis.chebyshev_nodes`.
 """
 
-from mathematicskit._version import __version__
+from mathematicskit import __version__
 from mathematicskit.pde.core.base import EllipticSolution, MethodOfLinesPDE, PDESolution, StabilityResult
 from mathematicskit.pde.systems.advection import AdvectionEquation1D
 from mathematicskit.pde.systems.conservation_laws import BurgersConservationLaw1D, burgers_riemann_solution, total_variation

@@ -9,7 +9,11 @@ Domains are added incrementally; see ``__all__`` for what's currently
 implemented, and CHANGELOG.md for the full roadmap.
 """
 
-from mathematicskit import (
+# Defined before the subpackage imports: each subpackage re-exports it via
+# ``from mathematicskit import __version__`` while this module is still loading.
+__version__ = "0.4.0"
+
+from mathematicskit import (  # noqa: E402
     abstract_algebra,
     calculus,
     combinatorics,
@@ -29,7 +33,6 @@ from mathematicskit import (
     special_functions,
     statistics,
 )
-from mathematicskit._version import __version__ as __version__
 
 __all__ = [
     "abstract_algebra",

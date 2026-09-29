@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- The version is now set directly as `__version__` in
+  `mathematicskit/__init__.py` (the single source; `pyproject.toml` reads it
+  at build time). `mathematicskit/_version.py` is removed.
 - numba is now optional, via the new `fast` extra
   (`pip install "mathematicskit[fast]"`). Without it, every `@njit` kernel
   in `ode_dynamics`, `fractals_chaos`, `pde`, and `integrators` runs as

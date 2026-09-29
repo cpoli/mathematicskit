@@ -11,7 +11,7 @@ sys.path.insert(0, os.path.abspath("../.."))
 
 
 def _release():
-    """Installed distribution version, falling back to pyproject.toml.
+    """Installed distribution version, falling back to mathematicskit/__init__.py.
 
     The metadata lookup only succeeds when mathematicskit is installed (or a
     stale, gitignored egg-info happens to sit in the repo root), so a docs
@@ -21,8 +21,8 @@ def _release():
     try:
         return _dist_version("mathematicskit")
     except PackageNotFoundError:
-        pyproject = Path(__file__).resolve().parents[2] / "pyproject.toml"
-        return re.search(r'^version\s*=\s*"([^"]+)"', pyproject.read_text(), re.M).group(1)
+        init = Path(__file__).resolve().parents[2] / "mathematicskit" / "__init__.py"
+        return re.search(r'^__version__\s*=\s*"([^"]+)"', init.read_text(), re.M).group(1)
 
 
 project = "mathematicskit"

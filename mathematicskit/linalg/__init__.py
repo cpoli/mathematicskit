@@ -27,7 +27,7 @@ they are thin, well-tested wrappers, not reimplementations of already-
 correct numerical primitives.
 """
 
-from mathematicskit._version import __version__
+from mathematicskit import __version__
 from mathematicskit.linalg.core.base import (
     CholeskyResult,
     EigenResult,

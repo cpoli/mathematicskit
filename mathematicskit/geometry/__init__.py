@@ -16,7 +16,7 @@ Casteljau; Douglas-Peucker line simplification; and the closest pair of
 points by divide and conquer.
 """
 
-from mathematicskit._version import __version__
+from mathematicskit import __version__
 from mathematicskit.geometry.core.base import (
     CircleResult,
     ClosestPairResult,

@@ -25,7 +25,7 @@ transform (no numpy/scipy equivalent since scipy 1.15 removed its
 wavelet routines).
 """
 
-from mathematicskit._version import __version__
+from mathematicskit import __version__
 from mathematicskit.special_functions.core.base import (
     AiryResult,
     ConvolutionComparisonResult,
