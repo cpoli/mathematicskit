@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Euler’s method: first-order convergence &#8212; mathematicskit 0.4.0 documentation</title>
+    <title>Euler’s method: first-order convergence &#8212; mathematicskit 0.5.0 documentation</title>
   
   
   
@@ -44,7 +44,7 @@
   <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0" />
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0" />
 
-    <script src="../../../../_static/documentation_options.js?v=1437fa6d"></script>
+    <script src="../../../../_static/documentation_options.js?v=70f82a29"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../../_static/sg-tags.js?v=d80f6fa4"></script>
@@ -669,7 +669,7 @@ the step halves the error.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="nn">.</span><span class="nn">pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span><span class="w">
 </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span><span class="w">
 </span><span class="w">
-</span><span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit</span><span class="nn">.</span><span class="nn">integrators</span><span class="w"> </span><span class="kn">import</span> <a class="sphx-glr-backref-module-mathematicskit-integrators sphx-glr-backref-type-py-function reference internal" href="../../../integrators.html#mathematicskit.integrators.implicit_euler_integrate" title="mathematicskit.integrators.implicit_euler_integrate"><span class="n">implicit_euler_integrate</span></a><span class="p">,</span> <a class="sphx-glr-backref-module-mathematicskit-integrators sphx-glr-backref-type-py-function reference internal" href="../../../integrators.html#mathematicskit.integrators.njit" title="mathematicskit.integrators.njit"><span class="n">njit</span></a><span class="w">
+</span><span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit</span><span class="nn">.</span><span class="nn">integrators</span><span class="w"> </span><span class="kn">import</span> <a class="sphx-glr-backref-module-mathematicskit-integrators sphx-glr-backref-type-py-function reference internal" href="../../../integrators.html#mathematicskit.integrators.euler_integrate" title="mathematicskit.integrators.euler_integrate"><span class="n">euler_integrate</span></a><span class="p">,</span> <a class="sphx-glr-backref-module-mathematicskit-integrators sphx-glr-backref-type-py-function reference internal" href="../../../integrators.html#mathematicskit.integrators.implicit_euler_integrate" title="mathematicskit.integrators.implicit_euler_integrate"><span class="n">implicit_euler_integrate</span></a><span class="p">,</span> <a class="sphx-glr-backref-module-mathematicskit-integrators sphx-glr-backref-type-py-function reference internal" href="../../../integrators.html#mathematicskit.integrators.njit" title="mathematicskit.integrators.njit"><span class="n">njit</span></a><span class="w">
 </span><span class="w">
 </span><span class="w">
 </span><span class="nd">&#64;njit</span><span class="w">
@@ -678,10 +678,7 @@ the step halves the error.</p>
 </span><span class="w">
 </span><span class="w">
 </span><span class="k">def</span><span class="w"> </span><span class="nf">forward_euler</span><span class="p">(</span><span class="n">y0</span><span class="p">,</span> <a class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="float"><span class="n">h</span></a><span class="p">,</span> <span class="n">n_steps</span><span class="p">)</span><span class="p">:</span><span class="w">
-</span>    <span class="n">ys</span> <span class="o">=</span> <span class="p">[</span><span class="n">y0</span><span class="p">]</span><span class="w">
-</span>    <span class="k">for</span> <a class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><span class="n">_</span></a> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">)</span><span class="p">:</span><span class="w">
-</span>        <span class="n">ys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ys</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <a class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="float"><span class="n">h</span></a> <span class="o">*</span> <span class="n">decay</span><span class="p">(</span><a class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.array.html#numpy.array" title="numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">(</span><span class="p">[</span><span class="n">ys</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="p">]</span><span class="p">)</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">)</span><span class="w">
-</span>    <span class="k">return</span> <a class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.array.html#numpy.array" title="numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">(</span><span class="n">ys</span><span class="p">)</span><span class="w">
+</span>    <span class="k">return</span> <a class="sphx-glr-backref-module-mathematicskit-integrators sphx-glr-backref-type-py-function reference internal" href="../../../integrators.html#mathematicskit.integrators.euler_integrate" title="mathematicskit.integrators.euler_integrate"><span class="n">euler_integrate</span></a><span class="p">(</span><span class="n">decay</span><span class="p">,</span> <a class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.array.html#numpy.array" title="numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">(</span><span class="p">[</span><span class="n">y0</span><span class="p">]</span><span class="p">)</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <a class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="float"><span class="n">h</span></a><span class="p">,</span> <span class="n">n_steps</span><span class="p">,</span> <a class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros.html#numpy.zeros" title="numpy.zeros"><span class="n">np</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="p">)</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="p">[</span><span class="p">:</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="w">
 </span></pre></div></div>
 <section id="tangent-line-steps">
 <h2>Tangent-line steps<a class="headerlink" href="#tangent-line-steps" title="Link to this heading">#</a></h2>
@@ -698,7 +695,7 @@ the step halves the error.</p>
 </span><span class="n">ax0</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="s2">y</span><span class="s2">'</span><span class="s2"> = -y with step h = </span><span class="si">{</span><a class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="float"><span class="n">h</span></a><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="w">
 </span><span class="n">ax0</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="p">)</span><span class="w">
 </span></pre></div></div>
-<img src="../../../../_images/sphx_glr_plot_01_euler_method_001.png" srcset="../../../../_images/sphx_glr_plot_01_euler_method_001.png" alt="y' = -y with step h = 0.5" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x119e93770&gt;
+<img src="../../../../_images/sphx_glr_plot_01_euler_method_001.png" srcset="../../../../_images/sphx_glr_plot_01_euler_method_001.png" alt="y' = -y with step h = 0.5" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x1141617f0&gt;
 </pre></div>
 </div>
 </section>
@@ -723,7 +720,7 @@ the step halves the error.</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>error ratio for halved h: forward 2.001, backward 1.999
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.470 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.457 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-api-gallery-ode-dynamics-integrators-plot-01-euler-method-py">
 <div class="lite-badge docutils container">
 <a class="reference external image-reference" href="../../../../lite/lab/index.html?path=api/gallery/ode_dynamics/integrators/plot_01_euler_method.ipynb"><img alt="Launch JupyterLite" src="../../../../_images/jupyterlite_badge_logo97.svg" style="width: 150px;" />

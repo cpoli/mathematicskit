@@ -5,8 +5,9 @@
 Floating-point arithmetic
 -------------------------
 
-Rounding error in floating-point computation, and algorithms that
-compensate for it.
+How IEEE 754 stores numbers, machine epsilon and the spacing of
+floats, catastrophic cancellation, and algorithms that compensate for
+rounding error.
 
 
 .. raw:: html
@@ -37,6 +38,40 @@ compensate for it.
     </div>
 
 
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The IEEE 754 standard of 1985 fixed how a binary floating-point number is stored: a sign bit, a biased exponent, and a fraction, with value (-1)^s (1.f)_2 \cdot 2^{e}. It also fixed the rounding rule (round to nearest, ties to even) and the special values (signed zeros, subnormals, infinities, NaN). Machine epsilon, the gap between 1 and the next float, is 2^{-52} in double precision. Floats are equally spaced within each binade [2^e, 2^{e+1}), and the spacing doubles from one binade to the next, so their relative spacing stays roughly constant.">
+
+.. only:: html
+
+  .. image:: /api/gallery/numerical_analysis/floating_point/images/thumb/sphx_glr_plot_02_ieee754_machine_epsilon_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/numerical_analysis/floating_point/plot_02_ieee754_machine_epsilon`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">IEEE 754: bit layouts, machine epsilon, and the spacing of floats</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="George Forsythe asked in 1966, &quot;How do you solve a quadratic equation?&quot; The school formula x = (-b \pm \sqrt{b^2 - 4ac})/(2a) fails in floating point when b^2 \gg |4ac|: for the root with the smaller magnitude, -b and \sqrt{b^2 - 4ac} nearly cancel. The subtraction itself is exact, but it exposes the rounding error that \sqrt{b^2 - 4ac} already carries. By the loss-of-precision theorem, about -\log_2|1 - y/x| of the 53 significant bits are lost when computing x - y. The cure is to compute only the root that involves no cancellation and get the other from x_1 x_2 = c/a.">
+
+.. only:: html
+
+  .. image:: /api/gallery/numerical_analysis/floating_point/images/thumb/sphx_glr_plot_03_catastrophic_cancellation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/numerical_analysis/floating_point/plot_03_catastrophic_cancellation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Forsythe's quadratic formula: catastrophic cancellation</div>
+    </div>
+
+
 .. thumbnail-parent-div-close
 
 .. raw:: html
@@ -48,4 +83,6 @@ compensate for it.
    :hidden:
 
    /api/gallery/numerical_analysis/floating_point/plot_01_kahan_summation
+   /api/gallery/numerical_analysis/floating_point/plot_02_ieee754_machine_epsilon
+   /api/gallery/numerical_analysis/floating_point/plot_03_catastrophic_cancellation
 

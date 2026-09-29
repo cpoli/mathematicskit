@@ -32,14 +32,15 @@ axis. Backward Euler's :math:`R(z) = 1/(1 - z)` is A-stable. Dahlquist
 also proved that no A-stable linear multistep method can exceed order 2
 (his "second barrier").
 
-.. GENERATED FROM PYTHON SOURCE LINES 18-23
+.. GENERATED FROM PYTHON SOURCE LINES 18-24
 
 .. code-block:: Python
 
     import matplotlib.pyplot as plt
     import numpy as np
 
-    from mathematicskit.integrators import implicit_euler_integrate, njit, rk4_integrate
+    from mathematicskit.integrators import implicit_euler_integrate, is_absolutely_stable, njit, rk4_integrate
+    from mathematicskit.ode_dynamics.visualizers import plot_stability_regions
 
 
 
@@ -48,33 +49,25 @@ also proved that no A-stable linear multistep method can exceed order 2
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 24-26
+.. GENERATED FROM PYTHON SOURCE LINES 25-27
 
 Stability regions in the complex z-plane
 ----------------------------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 26-46
+.. GENERATED FROM PYTHON SOURCE LINES 27-39
 
 .. code-block:: Python
 
 
-    x, y = np.meshgrid(np.linspace(-5, 3, 400), np.linspace(-4, 4, 400))
-    z = x + 1j * y
-    regions = {
-        "RK4": np.abs(1 + z + z**2 / 2 + z**3 / 6 + z**4 / 24),
-        "backward Euler": np.abs(1 / (1 - z)),
-    }
-
     fig, axes = plt.subplots(1, 3, figsize=(14, 4.2))
-    for ax, (name, amp) in zip(axes[:2], regions.items(), strict=False):
-        ax.contourf(x, y, amp <= 1, levels=[0.5, 1.5], colors=["tab:blue"], alpha=0.35)
-        ax.contour(x, y, amp, levels=[1.0], colors="tab:blue")
-        ax.axvline(0, color="k", lw=0.8)
-        ax.axhline(0, color="k", lw=0.8)
-        ax.set_aspect("equal")
-        ax.set_xlabel("Re z")
-        ax.set_ylabel("Im z")
+    for ax, (method, name) in zip(axes[:2], [("rk4", "RK4"), ("implicit_euler", "backward Euler")], strict=True):
+        plot_stability_regions(method, ax=ax, re_range=(-5, 3), im_range=(-4, 4), labels=[name])
         ax.set_title(f"{name}: shaded where |R(z)| <= 1")
+
+    x, y = np.meshgrid(np.linspace(-50, 0, 201), np.linspace(-50, 50, 401))
+    left_half_plane = x + 1j * y
+    for method in ("rk4", "implicit_euler"):
+        print(f"{method}: stable on the whole sampled left half-plane? {is_absolutely_stable(method, left_half_plane).all()}")
 
 
 
@@ -86,10 +79,17 @@ Stability regions in the complex z-plane
    :class: sphx-glr-single-img
 
 
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    rk4: stable on the whole sampled left half-plane? False
+    implicit_euler: stable on the whole sampled left half-plane? True
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 47-53
+
+.. GENERATED FROM PYTHON SOURCE LINES 40-46
 
 Consequence on a stiff equation, lambda * h = 30
 ------------------------------------------------
@@ -98,7 +98,7 @@ The Prothero-Robinson equation :math:`y' = -\lambda(y - \cos t) - \sin t`
 has the smooth solution :math:`y = \cos t`, but with :math:`\lambda = 3000`
 and :math:`h = 0.01`, :math:`z = -30` lies far outside RK4's region.
 
-.. GENERATED FROM PYTHON SOURCE LINES 53-74
+.. GENERATED FROM PYTHON SOURCE LINES 46-67
 
 .. code-block:: Python
 
@@ -139,7 +139,7 @@ and :math:`h = 0.01`, :math:`z = -30` lies far outside RK4's region.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.982 seconds)
+   **Total running time of the script:** (0 minutes 1.011 seconds)
 
 
 .. _sphx_glr_download_api_gallery_ode_dynamics_stiffness_plot_01_dahlquist_a_stability.py:

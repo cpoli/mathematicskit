@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Examples &#8212; mathematicskit 0.4.0 documentation</title>
+    <title>Examples &#8212; mathematicskit 0.5.0 documentation</title>
   
   
   
@@ -44,7 +44,7 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0" />
 
-    <script src="../../../_static/documentation_options.js?v=1437fa6d"></script>
+    <script src="../../../_static/documentation_options.js?v=70f82a29"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/sg-tags.js?v=d80f6fa4"></script>
@@ -687,7 +687,8 @@ final size.</p></li>
 <li><p><strong>chaotic_flows</strong> – the Lorenz attractor and its butterfly effect, and
 the Rossler attractor and its return map.</p></li>
 <li><p><strong>integrators</strong> – Euler’s method, Runge-Kutta, Stormer-Verlet,
-Dormand-Prince adaptive stepping, and Yoshida’s symplectic composition.</p></li>
+Dormand-Prince adaptive stepping, Yoshida’s symplectic composition, and
+Adams-Bashforth multistep methods.</p></li>
 <li><p><strong>stiffness</strong> – Dahlquist’s A-stability, Curtiss and Hirschfelder’s
 BDF, Robertson’s stiff kinetics, Radau IIA, and collocation for
 boundary-value problems.</p></li>
@@ -729,8 +730,9 @@ chaotic flow.</p>
 <section id="numerical-integration">
 <h2>Numerical integration<a class="headerlink" href="#numerical-integration" title="Link to this heading">#</a></h2>
 <p>The explicit integrators behind every trajectory in this gallery: Euler’s
-method, Runge-Kutta, Stormer-Verlet, Dormand-Prince adaptive stepping, and
-Yoshida’s symplectic composition.</p>
+method, Runge-Kutta, Stormer-Verlet, Dormand-Prince adaptive stepping,
+Yoshida’s symplectic composition, and the Adams-Bashforth multistep
+methods and their stability regions.</p>
 <div id='sg-tag-list' class='sphx-glr-tag-list'></div><div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Euler (1768) replaced the curve by its tangent line over a short step h: y_{n+1} = y_n + h f(t_n, y_n). Evaluating the slope at the end of the step instead gives the implicit (backward) variant y_{n+1} = y_n + h f(t_{n+1}, y_{n+1}). Both have a local error of O(h^2), which adds up to a global error of O(h): halving the step halves the error."><img alt="" src="../../../_images/sphx_glr_plot_01_euler_method_thumb.png" />
 <p><a class="reference internal" href="integrators/plot_01_euler_method.html"><span class="doc">Euler’s method: first-order convergence</span></a></p>
   <div class="sphx-glr-thumbnail-title">Euler's method: first-order convergence</div>
@@ -746,6 +748,9 @@ Yoshida’s symplectic composition.</p>
 </div><div class="sphx-glr-thumbcontainer" tooltip="Yoshida (1990) raised the order of a symmetric method by composing it with itself. Three leapfrog substeps of sizes w_1 h, w_0 h, w_1 h with"><img alt="" src="../../../_images/sphx_glr_plot_05_yoshida_composition_thumb.png" />
 <p><a class="reference internal" href="integrators/plot_05_yoshida_composition.html"><span class="doc">Yoshida’s symplectic composition: fourth order from leapfrog</span></a></p>
   <div class="sphx-glr-thumbnail-title">Yoshida's symplectic composition: fourth order from leapfrog</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="John Couch Adams, computing drop shapes for Francis Bashforth&#x27;s 1883 study of capillarity, reused the slopes already computed at earlier steps instead of throwing them away. Integrating the polynomial through the last k slopes gives the order-k Adams-Bashforth formula,"><img alt="" src="../../../_images/sphx_glr_plot_06_adams_bashforth_thumb.png" />
+<p><a class="reference internal" href="integrators/plot_06_adams_bashforth.html"><span class="doc">Bashforth and Adams: linear multistep methods</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Bashforth and Adams: linear multistep methods</div>
 </div></div></section>
 <section id="limit-cycles">
 <h2>Limit cycles<a class="headerlink" href="#limit-cycles" title="Link to this heading">#</a></h2>

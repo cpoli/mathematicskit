@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>mathematicskit.integrators.fixed_step &#8212; mathematicskit 0.4.0 documentation</title>
+    <title>mathematicskit.integrators.fixed_step &#8212; mathematicskit 0.5.0 documentation</title>
   
   
   
@@ -43,7 +43,7 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0" />
 
-    <script src="../../../_static/documentation_options.js?v=1437fa6d"></script>
+    <script src="../../../_static/documentation_options.js?v=70f82a29"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/sg-tags.js?v=d80f6fa4"></script>
@@ -441,6 +441,8 @@
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">"RHSFunc"</span><span class="p">,</span>
+    <span class="s2">"euler_step"</span><span class="p">,</span>
+    <span class="s2">"euler_integrate"</span><span class="p">,</span>
     <span class="s2">"rk4_step"</span><span class="p">,</span>
     <span class="s2">"rk4_integrate"</span><span class="p">,</span>
     <span class="s2">"leapfrog_step"</span><span class="p">,</span>
@@ -456,9 +458,103 @@
 <span class="n">RHSFunc</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="nb">float</span><span class="p">,</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]],</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]]</span>
 
 
+<div class="viewcode-block" id="euler_step">
+<a class="viewcode-back" href="../../../api/integrators.html#mathematicskit.integrators.euler_step">[docs]</a>
+<span class="nd">@njit</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">euler_step</span><span class="p">(</span>
+    <span class="n">rhs</span><span class="p">:</span> <span class="n">RHSFunc</span><span class="p">,</span>
+    <span class="n">state</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
+    <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">params</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Single explicit (forward) Euler step: ``state + dt * rhs(state, t)``.</span>
+
+<span class="sd">    Follows the tangent line for one step (Euler 1768). The local error is</span>
+<span class="sd">    :math:`O(dt^2)`, so the global error over a fixed interval is</span>
+<span class="sd">    :math:`O(dt)`. For ``y' = lam * y`` one step multiplies ``y`` by</span>
+<span class="sd">    :math:`R(z) = 1 + z` with :math:`z = lam \\cdot dt`, so the method is</span>
+<span class="sd">    stable only inside the disc :math:`|1 + z| \\le 1` (see</span>
+<span class="sd">    :mod:`mathematicskit.integrators.stability`).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    rhs : callable</span>
+<span class="sd">        Numba-jitted right-hand-side function ``rhs(state, t, params) -&gt;</span>
+<span class="sd">        ndarray``.</span>
+<span class="sd">    state : ndarray of float, shape (dim,)</span>
+<span class="sd">        Current state vector.</span>
+<span class="sd">    t : float</span>
+<span class="sd">        Current time.</span>
+<span class="sd">    dt : float</span>
+<span class="sd">        Step size.</span>
+<span class="sd">    params : ndarray of float</span>
+<span class="sd">        Parameter vector passed through to `rhs`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray of float, shape (dim,)</span>
+<span class="sd">        The state advanced by one step of size `dt`.</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">state</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">rhs</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="euler_integrate">
+<a class="viewcode-back" href="../../../api/integrators.html#mathematicskit.integrators.euler_integrate">[docs]</a>
+<span class="nd">@njit</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">euler_integrate</span><span class="p">(</span>
+    <span class="n">rhs</span><span class="p">:</span> <span class="n">RHSFunc</span><span class="p">,</span>
+    <span class="n">state0</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
+    <span class="n">t0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">n_steps</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">params</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">"""Integrate ``n_steps`` of explicit Euler starting from ``state0``.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    rhs : callable</span>
+<span class="sd">        Numba-jitted right-hand-side function ``rhs(state, t, params) -&gt;</span>
+<span class="sd">        ndarray``.</span>
+<span class="sd">    state0 : ndarray of float, shape (dim,)</span>
+<span class="sd">        Initial state vector.</span>
+<span class="sd">    t0 : float</span>
+<span class="sd">        Initial time.</span>
+<span class="sd">    dt : float</span>
+<span class="sd">        Step size.</span>
+<span class="sd">    n_steps : int</span>
+<span class="sd">        Number of integration steps.</span>
+<span class="sd">    params : ndarray of float</span>
+<span class="sd">        Parameter vector passed through to `rhs`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    times : ndarray of float, shape (n_steps + 1,)</span>
+<span class="sd">        Time at each step, starting at `t0`.</span>
+<span class="sd">    states : ndarray of float, shape (n_steps + 1, dim)</span>
+<span class="sd">        State at each step, starting at `state0`.</span>
+<span class="sd">    """</span>
+    <span class="n">dim</span> <span class="o">=</span> <span class="n">state0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">states</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">n_steps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dim</span><span class="p">))</span>
+    <span class="n">times</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">n_steps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">states</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">state0</span>
+    <span class="n">times</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">t0</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">state0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">t0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">euler_step</span><span class="p">(</span><span class="n">rhs</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">t0</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">dt</span>
+        <span class="n">states</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">state</span>
+        <span class="n">times</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span>
+    <span class="k">return</span> <span class="n">times</span><span class="p">,</span> <span class="n">states</span></div>
+
+
+
 <div class="viewcode-block" id="rk4_step">
 <a class="viewcode-back" href="../../../api/integrators.html#mathematicskit.integrators.rk4_step">[docs]</a>
-<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nd">@njit</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">rk4_step</span><span class="p">(</span>
     <span class="n">rhs</span><span class="p">:</span> <span class="n">RHSFunc</span><span class="p">,</span>
     <span class="n">state</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
@@ -497,7 +593,7 @@
 
 <div class="viewcode-block" id="rk4_integrate">
 <a class="viewcode-back" href="../../../api/integrators.html#mathematicskit.integrators.rk4_integrate">[docs]</a>
-<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nd">@njit</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">rk4_integrate</span><span class="p">(</span>
     <span class="n">rhs</span><span class="p">:</span> <span class="n">RHSFunc</span><span class="p">,</span>
     <span class="n">state0</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
@@ -549,7 +645,7 @@
 
 <div class="viewcode-block" id="leapfrog_step">
 <a class="viewcode-back" href="../../../api/integrators.html#mathematicskit.integrators.leapfrog_step">[docs]</a>
-<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nd">@njit</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">leapfrog_step</span><span class="p">(</span>
     <span class="n">force</span><span class="p">:</span> <span class="n">RHSFunc</span><span class="p">,</span>
     <span class="n">pos</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
@@ -593,7 +689,7 @@
 
 <div class="viewcode-block" id="leapfrog_integrate">
 <a class="viewcode-back" href="../../../api/integrators.html#mathematicskit.integrators.leapfrog_integrate">[docs]</a>
-<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nd">@njit</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">leapfrog_integrate</span><span class="p">(</span>
     <span class="n">force</span><span class="p">:</span> <span class="n">RHSFunc</span><span class="p">,</span>
     <span class="n">pos0</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
@@ -669,7 +765,7 @@
 
 <div class="viewcode-block" id="yoshida4_step">
 <a class="viewcode-back" href="../../../api/integrators.html#mathematicskit.integrators.yoshida4_step">[docs]</a>
-<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nd">@njit</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">yoshida4_step</span><span class="p">(</span>
     <span class="n">force</span><span class="p">:</span> <span class="n">RHSFunc</span><span class="p">,</span>
     <span class="n">pos</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
@@ -723,7 +819,7 @@
 
 <div class="viewcode-block" id="yoshida4_integrate">
 <a class="viewcode-back" href="../../../api/integrators.html#mathematicskit.integrators.yoshida4_integrate">[docs]</a>
-<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nd">@njit</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">yoshida4_integrate</span><span class="p">(</span>
     <span class="n">force</span><span class="p">:</span> <span class="n">RHSFunc</span><span class="p">,</span>
     <span class="n">pos0</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>

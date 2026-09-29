@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>mathematicskit.integrators.implicit &#8212; mathematicskit 0.4.0 documentation</title>
+    <title>mathematicskit.integrators.implicit &#8212; mathematicskit 0.5.0 documentation</title>
   
   
   
@@ -43,7 +43,7 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0" />
 
-    <script src="../../../_static/documentation_options.js?v=1437fa6d"></script>
+    <script src="../../../_static/documentation_options.js?v=70f82a29"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/sg-tags.js?v=d80f6fa4"></script>
@@ -453,7 +453,7 @@
 <span class="n">_SQRT_EPS</span> <span class="o">=</span> <span class="mf">1.4901161193847656e-08</span>  <span class="c1"># sqrt(float64 machine epsilon)</span>
 
 
-<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nd">@njit</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">_fd_jacobian</span><span class="p">(</span>
     <span class="n">rhs</span><span class="p">:</span> <span class="n">RHSFunc</span><span class="p">,</span>
     <span class="n">state</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
@@ -474,7 +474,7 @@
 
 <div class="viewcode-block" id="implicit_euler_step">
 <a class="viewcode-back" href="../../../api/integrators.html#mathematicskit.integrators.implicit_euler_step">[docs]</a>
-<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nd">@njit</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">implicit_euler_step</span><span class="p">(</span>
     <span class="n">rhs</span><span class="p">:</span> <span class="n">RHSFunc</span><span class="p">,</span>
     <span class="n">state</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
@@ -534,7 +534,7 @@
 
 <div class="viewcode-block" id="implicit_euler_integrate">
 <a class="viewcode-back" href="../../../api/integrators.html#mathematicskit.integrators.implicit_euler_integrate">[docs]</a>
-<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nd">@njit</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">implicit_euler_integrate</span><span class="p">(</span>
     <span class="n">rhs</span><span class="p">:</span> <span class="n">RHSFunc</span><span class="p">,</span>
     <span class="n">state0</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>

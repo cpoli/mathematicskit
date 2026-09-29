@@ -28,14 +28,14 @@ the *end* of the step instead gives the implicit (backward) variant
 :math:`O(h^2)`, which adds up to a global error of :math:`O(h)`: halving
 the step halves the error.
 
-.. GENERATED FROM PYTHON SOURCE LINES 14-32
+.. GENERATED FROM PYTHON SOURCE LINES 14-29
 
 .. code-block:: Python
 
     import matplotlib.pyplot as plt
     import numpy as np
 
-    from mathematicskit.integrators import implicit_euler_integrate, njit
+    from mathematicskit.integrators import euler_integrate, implicit_euler_integrate, njit
 
 
     @njit
@@ -44,10 +44,7 @@ the step halves the error.
 
 
     def forward_euler(y0, h, n_steps):
-        ys = [y0]
-        for _ in range(n_steps):
-            ys.append(ys[-1] + h * decay(np.array([ys[-1]]), 0.0, None)[0])
-        return np.array(ys)
+        return euler_integrate(decay, np.array([y0]), 0.0, h, n_steps, np.zeros(1))[1][:, 0]
 
 
 
@@ -57,12 +54,12 @@ the step halves the error.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 33-35
+.. GENERATED FROM PYTHON SOURCE LINES 30-32
 
 Tangent-line steps
 ------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 35-49
+.. GENERATED FROM PYTHON SOURCE LINES 32-46
 
 .. code-block:: Python
 
@@ -94,16 +91,16 @@ Tangent-line steps
  .. code-block:: none
 
 
-    <matplotlib.legend.Legend object at 0x119e93770>
+    <matplotlib.legend.Legend object at 0x1141617f0>
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 50-52
+.. GENERATED FROM PYTHON SOURCE LINES 47-49
 
 Global error is proportional to h
 ---------------------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 52-68
+.. GENERATED FROM PYTHON SOURCE LINES 49-65
 
 .. code-block:: Python
 
@@ -139,7 +136,7 @@ Global error is proportional to h
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.470 seconds)
+   **Total running time of the script:** (0 minutes 1.457 seconds)
 
 
 .. _sphx_glr_download_api_gallery_ode_dynamics_integrators_plot_01_euler_method.py:

@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>mathematicskit.ode_dynamics &#8212; mathematicskit 0.4.0 documentation</title>
+    <title>mathematicskit.ode_dynamics &#8212; mathematicskit 0.5.0 documentation</title>
   
   
   
@@ -44,7 +44,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0" />
 
-    <script src="../_static/documentation_options.js?v=1437fa6d"></script>
+    <script src="../_static/documentation_options.js?v=70f82a29"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/sg-tags.js?v=d80f6fa4"></script>
@@ -1696,11 +1696,12 @@ crossings.</p>
 <dt class="sig sig-object py" id="mathematicskit.ode_dynamics.find_fixed_point_newton">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.ode_dynamics.</span></span><span class="sig-name descname"><span class="pre">find_fixed_point_newton</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/stability.html#find_fixed_point_newton"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.find_fixed_point_newton" title="Link to this definition">#</a></dt>
 <dd><p>Locate a fixed point of <code class="docutils literal notranslate"><span class="pre">f(x)</span> <span class="pre">=</span> <span class="pre">0</span></code> via multivariate Newton’s method.</p>
-<p><span class="math notranslate nohighlight">\(x_{k+1} = x_k - J(x_k)^{-1} f(x_k)\)</span>, with the linear solve at
-each step done via <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.linalg.systems.lu.lu_solve_system()</span></code>
-(never an explicit matrix inverse) and the Jacobian obtained from
-<a class="reference internal" href="#mathematicskit.ode_dynamics.numerical_jacobian" title="mathematicskit.ode_dynamics.numerical_jacobian"><code class="xref py py-func docutils literal notranslate"><span class="pre">numerical_jacobian()</span></code></a>. See Burden &amp; Faires, <em>Numerical
-Analysis</em>, 10th ed., Ch. 10.2.</p>
+<p><span class="math notranslate nohighlight">\(x_{k+1} = x_k - J(x_k)^{-1} f(x_k)\)</span>, with a central-difference
+Jacobian and an LU solve (never an explicit matrix inverse). A thin
+wrapper around
+<a class="reference internal" href="numerical_analysis.html#mathematicskit.numerical_analysis.NewtonSystem" title="mathematicskit.numerical_analysis.systems.nonlinear_systems.NewtonSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis.systems.nonlinear_systems.NewtonSystem</span></code></a>,
+which also records the iterate history. See Burden &amp; Faires,
+<em>Numerical Analysis</em>, 10th ed., Ch. 10.2.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -1713,7 +1714,7 @@ Analysis</em>, 10th ed., Ch. 10.2.</p>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p><strong>x</strong> (<em>ndarray</em>) – The fixed point found.</p></li>
-<li><p><strong>converged</strong> (<em>bool</em>)</p></li>
+<li><p><strong>converged</strong> (<em>bool</em>) – False if <cite>max_iter</cite> ran out or the Jacobian became singular.</p></li>
 </ul>
 </p>
 </dd>
@@ -2037,8 +2038,10 @@ See Khalil, <em>Nonlinear Systems</em>, 3rd ed., Thm. 4.6.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.ode_dynamics.numerical_jacobian">
-<span class="sig-prename descclassname"><span class="pre">mathematicskit.ode_dynamics.</span></span><span class="sig-name descname"><span class="pre">numerical_jacobian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/ode_dynamics/systems/stability.html#numerical_jacobian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.numerical_jacobian" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.ode_dynamics.</span></span><span class="sig-name descname"><span class="pre">numerical_jacobian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/numerical_analysis/systems/nonlinear_systems.html#numerical_jacobian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.ode_dynamics.numerical_jacobian" title="Link to this definition">#</a></dt>
 <dd><p>Central-difference Jacobian of a vector field <code class="docutils literal notranslate"><span class="pre">f:</span> <span class="pre">R^n</span> <span class="pre">-&gt;</span> <span class="pre">R^n</span></code>.</p>
+<p>Column <code class="docutils literal notranslate"><span class="pre">j</span></code> is <code class="docutils literal notranslate"><span class="pre">(f(x</span> <span class="pre">+</span> <span class="pre">h</span> <span class="pre">e_j)</span> <span class="pre">-</span> <span class="pre">f(x</span> <span class="pre">-</span> <span class="pre">h</span> <span class="pre">e_j))</span> <span class="pre">/</span> <span class="pre">(2</span> <span class="pre">h)</span></code>, accurate to
+<span class="math notranslate nohighlight">\(O(h^2)\)</span>, at the cost of <span class="math notranslate nohighlight">\(2n\)</span> evaluations of <code class="docutils literal notranslate"><span class="pre">f</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">

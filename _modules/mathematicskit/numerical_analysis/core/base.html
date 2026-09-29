@@ -444,11 +444,13 @@
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">"RootResult"</span><span class="p">,</span>
+    <span class="s2">"SystemRootResult"</span><span class="p">,</span>
     <span class="s2">"IterativeRootFinder"</span><span class="p">,</span>
     <span class="s2">"Interpolant"</span><span class="p">,</span>
     <span class="s2">"RegressionResult"</span><span class="p">,</span>
     <span class="s2">"HornerResult"</span><span class="p">,</span>
     <span class="s2">"MinimaxResult"</span><span class="p">,</span>
+    <span class="s2">"FloatBits"</span><span class="p">,</span>
 <span class="p">]</span>
 
 
@@ -478,6 +480,43 @@
     <span class="n">extra</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
 <span class="w">    </span><span class="sd">"""dict: Free-form slot for method-specific diagnostics (e.g. the</span>
 <span class="sd">    final bracket for bisection)."""</span></div>
+
+
+
+<div class="viewcode-block" id="SystemRootResult">
+<a class="viewcode-back" href="../../../../api/numerical_analysis.html#mathematicskit.numerical_analysis.SystemRootResult">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SystemRootResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Container for the output of a nonlinear-system solver</span>
+<span class="sd">    (:class:`~mathematicskit.numerical_analysis.systems.nonlinear_systems.NewtonSystem`,</span>
+<span class="sd">    :class:`~mathematicskit.numerical_analysis.systems.nonlinear_systems.Broyden`),</span>
+<span class="sd">    the vector analogue of :class:`RootResult`."""</span>
+
+    <span class="n">root</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sd">"""ndarray, shape (n,): The final estimate of the solution of ``F(x) = 0``."""</span>
+
+    <span class="n">converged</span><span class="p">:</span> <span class="nb">bool</span>
+<span class="w">    </span><span class="sd">"""bool: Whether the stopping tolerance was met before `max_iter`."""</span>
+
+    <span class="n">iterations</span><span class="p">:</span> <span class="nb">int</span>
+<span class="w">    </span><span class="sd">"""int: Number of iterations actually performed."""</span>
+
+    <span class="n">history</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sd">"""ndarray, shape (iterations + 1, n): The iterates, starting from the</span>
+<span class="sd">    initial guess."""</span>
+
+    <span class="n">residual_norms</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sd">"""ndarray, shape (iterations + 1,): :math:`\\|F(x_k)\\|_2` at each iterate."""</span>
+
+    <span class="n">function_evaluations</span><span class="p">:</span> <span class="nb">int</span>
+<span class="w">    </span><span class="sd">"""int: Total evaluations of ``F``, including those spent on</span>
+<span class="sd">    finite-difference Jacobians -- the cost Broyden's method saves."""</span>
+
+    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
+<span class="w">    </span><span class="sd">"""str: Name of the method used (e.g. ``"newton"``)."""</span>
+
+    <span class="n">extra</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">"""dict: Free-form slot for method-specific diagnostics."""</span></div>
 
 
 
@@ -635,6 +674,44 @@
 <span class="w">        </span><span class="sd">"""Evaluate the minimax polynomial at ``x``."""</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coefficients</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span></div>
 </div>
+
+
+
+<div class="viewcode-block" id="FloatBits">
+<a class="viewcode-back" href="../../../../api/numerical_analysis.html#mathematicskit.numerical_analysis.FloatBits">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">FloatBits</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""The IEEE 754 binary encoding of one floating-point number,</span>
+<span class="sd">    from :func:`~mathematicskit.numerical_analysis.systems.floating_point.float_bits`.</span>
+
+<span class="sd">    For finite values, ``value == (-1)**sign * significand * 2.0**exponent``</span>
+<span class="sd">    exactly."""</span>
+
+    <span class="n">value</span><span class="p">:</span> <span class="nb">float</span>
+<span class="w">    </span><span class="sd">"""float: The number that was decoded."""</span>
+
+    <span class="nb">format</span><span class="p">:</span> <span class="nb">str</span>
+<span class="w">    </span><span class="sd">"""str: ``"binary16"``, ``"binary32"`` or ``"binary64"``."""</span>
+
+    <span class="n">sign</span><span class="p">:</span> <span class="nb">int</span>
+<span class="w">    </span><span class="sd">"""int: The sign bit, 0 or 1."""</span>
+
+    <span class="n">exponent_bits</span><span class="p">:</span> <span class="nb">str</span>
+<span class="w">    </span><span class="sd">"""str: The biased exponent field, most significant bit first."""</span>
+
+    <span class="n">fraction_bits</span><span class="p">:</span> <span class="nb">str</span>
+<span class="w">    </span><span class="sd">"""str: The stored fraction (trailing significand) field."""</span>
+
+    <span class="n">exponent</span><span class="p">:</span> <span class="nb">int</span>
+<span class="w">    </span><span class="sd">"""int: The unbiased exponent; for subnormals and zero, the minimum</span>
+<span class="sd">    normal exponent, since those have no implicit leading 1."""</span>
+
+    <span class="n">significand</span><span class="p">:</span> <span class="nb">float</span>
+<span class="w">    </span><span class="sd">"""float: ``1.fraction`` for normal numbers, ``0.fraction`` for</span>
+<span class="sd">    subnormals and zero (``nan`` for infinities and NaNs)."""</span>
+
+    <span class="n">category</span><span class="p">:</span> <span class="nb">str</span>
+<span class="w">    </span><span class="sd">"""str: ``"zero"``, ``"subnormal"``, ``"normal"``, ``"infinity"`` or ``"nan"``."""</span></div>
 
 </pre></div>
 

@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Breakthroughs in Numerical Analysis &#8212; mathematicskit 0.4.0 documentation</title>
+    <title>Breakthroughs in Numerical Analysis &#8212; mathematicskit 0.5.0 documentation</title>
   
   
   
@@ -44,7 +44,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0" />
 
-    <script src="../_static/documentation_options.js?v=1437fa6d"></script>
+    <script src="../_static/documentation_options.js?v=70f82a29"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/sg-tags.js?v=d80f6fa4"></script>
@@ -479,19 +479,23 @@ accurately.</p>
 <li><p><a class="reference internal" href="#newton-and-raphson-s-method" id="id2">1669-1690 – Newton and Raphson’s Method</a></p></li>
 <li><p><a class="reference internal" href="#newton-lagrange-and-polynomial-interpolation" id="id3">1687-1795 – Newton, Lagrange, and Polynomial Interpolation</a></p></li>
 <li><p><a class="reference internal" href="#halley-s-method" id="id4">1694 – Halley’s Method</a></p></li>
-<li><p><a class="reference internal" href="#legendre-gauss-and-least-squares" id="id5">1805-1809 – Legendre, Gauss, and Least Squares</a></p></li>
-<li><p><a class="reference internal" href="#horner-s-method" id="id6">1819 – Horner’s Method</a></p></li>
-<li><p><a class="reference internal" href="#chebyshev-and-the-cure-for-runge-s-phenomenon" id="id7">1854 – Chebyshev and the Cure for Runge’s Phenomenon</a></p></li>
-<li><p><a class="reference internal" href="#hermite-interpolation" id="id8">1878 – Hermite Interpolation</a></p></li>
-<li><p><a class="reference internal" href="#weierstrass-bernstein-and-uniform-approximation" id="id9">1885-1912 – Weierstrass, Bernstein, and Uniform Approximation</a></p></li>
-<li><p><a class="reference internal" href="#pade-approximants" id="id10">1892 – Padé Approximants</a></p></li>
-<li><p><a class="reference internal" href="#runge-s-phenomenon" id="id11">1901 – Runge’s Phenomenon</a></p></li>
-<li><p><a class="reference internal" href="#aitken-steffensen-and-accelerating-convergence" id="id12">1926-1933 – Aitken, Steffensen, and Accelerating Convergence</a></p></li>
-<li><p><a class="reference internal" href="#remez-and-best-uniform-approximation" id="id13">1934 – Remez and Best Uniform Approximation</a></p></li>
-<li><p><a class="reference internal" href="#schoenberg-and-spline-interpolation" id="id14">1946 – Schoenberg and Spline Interpolation</a></p></li>
-<li><p><a class="reference internal" href="#wilkinson-s-perfidious-polynomial" id="id15">1959-1963 – Wilkinson’s Perfidious Polynomial</a></p></li>
-<li><p><a class="reference internal" href="#kahan-s-compensated-summation" id="id16">1965 – Kahan’s Compensated Summation</a></p></li>
-<li><p><a class="reference internal" href="#see-also" id="id17">See Also</a></p></li>
+<li><p><a class="reference internal" href="#simpson-newton-s-method-for-systems" id="id5">1740 – Simpson: Newton’s Method for Systems</a></p></li>
+<li><p><a class="reference internal" href="#legendre-gauss-and-least-squares" id="id6">1805-1809 – Legendre, Gauss, and Least Squares</a></p></li>
+<li><p><a class="reference internal" href="#horner-s-method" id="id7">1819 – Horner’s Method</a></p></li>
+<li><p><a class="reference internal" href="#chebyshev-and-the-cure-for-runge-s-phenomenon" id="id8">1854 – Chebyshev and the Cure for Runge’s Phenomenon</a></p></li>
+<li><p><a class="reference internal" href="#hermite-interpolation" id="id9">1878 – Hermite Interpolation</a></p></li>
+<li><p><a class="reference internal" href="#weierstrass-bernstein-and-uniform-approximation" id="id10">1885-1912 – Weierstrass, Bernstein, and Uniform Approximation</a></p></li>
+<li><p><a class="reference internal" href="#pade-approximants" id="id11">1892 – Padé Approximants</a></p></li>
+<li><p><a class="reference internal" href="#runge-s-phenomenon" id="id12">1901 – Runge’s Phenomenon</a></p></li>
+<li><p><a class="reference internal" href="#aitken-steffensen-and-accelerating-convergence" id="id13">1926-1933 – Aitken, Steffensen, and Accelerating Convergence</a></p></li>
+<li><p><a class="reference internal" href="#remez-and-best-uniform-approximation" id="id14">1934 – Remez and Best Uniform Approximation</a></p></li>
+<li><p><a class="reference internal" href="#schoenberg-and-spline-interpolation" id="id15">1946 – Schoenberg and Spline Interpolation</a></p></li>
+<li><p><a class="reference internal" href="#wilkinson-s-perfidious-polynomial" id="id16">1959-1963 – Wilkinson’s Perfidious Polynomial</a></p></li>
+<li><p><a class="reference internal" href="#kahan-s-compensated-summation" id="id17">1965 – Kahan’s Compensated Summation</a></p></li>
+<li><p><a class="reference internal" href="#broyden-s-quasi-newton-method" id="id18">1965 – Broyden’s Quasi-Newton Method</a></p></li>
+<li><p><a class="reference internal" href="#forsythe-and-catastrophic-cancellation" id="id19">1966 – Forsythe and Catastrophic Cancellation</a></p></li>
+<li><p><a class="reference internal" href="#the-ieee-754-floating-point-standard" id="id20">1985 – The IEEE 754 Floating-Point Standard</a></p></li>
+<li><p><a class="reference internal" href="#see-also" id="id21">See Also</a></p></li>
 </ul>
 </nav>
 <section id="c-1800-bce-the-babylonian-method-and-bisection">
@@ -594,8 +598,42 @@ Mathematical Monthly 102 (1995), 417-426.</p>
 <p><a class="reference internal" href="../api/gallery/numerical_analysis/root_finding/plot_03_halley_method.html"><span class="doc">Halley’s method: cubic convergence</span></a></p>
   <div class="sphx-glr-thumbnail-title">Halley's method: cubic convergence</div>
 </div></div></section>
+<section id="simpson-newton-s-method-for-systems">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">1740 – Simpson: Newton’s Method for Systems</a><a class="headerlink" href="#simpson-newton-s-method-for-systems" title="Link to this heading">#</a></h2>
+<p>Newton and Raphson applied their iteration to single polynomial
+equations. Thomas Simpson’s 1740 <em>Essays</em> restated it with fluxions,
+which made it apply to any differentiable function, and showed how to
+use it on two simultaneous equations in two unknowns. In modern notation,
+linearize <span class="math notranslate nohighlight">\(F: \mathbb R^n \to \mathbb R^n\)</span> at the current guess and
+solve a linear system for the step:</p>
+<div class="math notranslate nohighlight">
+\[J(\mathbf x_k)\,\mathbf s_k = -F(\mathbf x_k), \qquad
+\mathbf x_{k+1} = \mathbf x_k + \mathbf s_k,\]</div>
+<p>where <span class="math notranslate nohighlight">\(J\)</span> is the Jacobian matrix of partial derivatives. The
+one-variable picture carries over: near a root with nonsingular
+<span class="math notranslate nohighlight">\(J\)</span>, the error is roughly squared at each step. Each step,
+however, costs a Jacobian and a linear solve, and the starting guess
+decides which root is found. Newton’s method for systems now sits
+inside nearly every implicit ODE and PDE solver and nonlinear optimizer.</p>
+<p><em>Implementation:</em> <a class="reference internal" href="../api/numerical_analysis.html#mathematicskit.numerical_analysis.NewtonSystem" title="mathematicskit.numerical_analysis.systems.nonlinear_systems.NewtonSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis.systems.nonlinear_systems.NewtonSystem</span></code></a>
+records every iterate and residual, and uses a supplied Jacobian or a
+central-difference
+<code class="xref py py-func docutils literal notranslate"><span class="pre">numerical_jacobian()</span></code>.
+<code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.ode_dynamics.systems.stability.find_fixed_point_newton()</span></code>
+uses it to locate fixed points. The tests recover both intersections of
+a parabola and a line and the root <span class="math notranslate nohighlight">\((0.5, 0, -\pi/6)\)</span> of Burden
+and Faires’ three-equation example, agreeing with
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.root.html#scipy.optimize.root" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.optimize.root()</span></code></a>, and check quadratic convergence.</p>
+<p><em>References:</em> T. Simpson, <em>Essays on Several Curious and Useful
+Subjects in Speculative and Mix’d Mathematicks</em> (London, 1740); T. J.
+Ypma, “Historical Development of the Newton-Raphson Method,” SIAM Review
+37 (1995), 531-551.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Thomas Simpson&#x27;s 1740 Essays stated Newton&#x27;s method in terms of fluxions and applied it to two equations in two unknowns. In matrix form, linearize F: \mathbb R^n \to \mathbb R^n at the current guess and solve for the step:"><img alt="" src="../_images/sphx_glr_plot_05_newton_systems_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/numerical_analysis/root_finding/plot_05_newton_systems.html"><span class="doc">Simpson’s Newton method for systems of equations</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Simpson's Newton method for systems of equations</div>
+</div></div></section>
 <section id="legendre-gauss-and-least-squares">
-<h2><a class="toc-backref" href="#id5" role="doc-backlink">1805-1809 – Legendre, Gauss, and Least Squares</a><a class="headerlink" href="#legendre-gauss-and-least-squares" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">1805-1809 – Legendre, Gauss, and Least Squares</a><a class="headerlink" href="#legendre-gauss-and-least-squares" title="Link to this heading">#</a></h2>
 <p>Adrien-Marie Legendre published the method of least squares in 1805 as
 a practical rule for combining more measurements than there are
 unknowns. Carl Friedrich Gauss said he had used the idea privately
@@ -620,7 +658,7 @@ des orbites des comètes</em> (Paris: Courcier, 1805), Appendix; C. F. Gauss,
   <div class="sphx-glr-thumbnail-title">Least-squares polynomial regression and its conditioning</div>
 </div></div></section>
 <section id="horner-s-method">
-<h2><a class="toc-backref" href="#id6" role="doc-backlink">1819 – Horner’s Method</a><a class="headerlink" href="#horner-s-method" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">1819 – Horner’s Method</a><a class="headerlink" href="#horner-s-method" title="Link to this heading">#</a></h2>
 <p>William George Horner’s 1819 paper on solving numerical equations
 popularized a way to evaluate a polynomial by nested multiplication:</p>
 <div class="math notranslate nohighlight">
@@ -653,7 +691,7 @@ Mathematical Surveys 21 (1966), 105-136.</p>
   <div class="sphx-glr-thumbnail-title">Horner's method: evaluation, derivative, and deflation</div>
 </div></div></section>
 <section id="chebyshev-and-the-cure-for-runge-s-phenomenon">
-<h2><a class="toc-backref" href="#id7" role="doc-backlink">1854 – Chebyshev and the Cure for Runge’s Phenomenon</a><a class="headerlink" href="#chebyshev-and-the-cure-for-runge-s-phenomenon" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">1854 – Chebyshev and the Cure for Runge’s Phenomenon</a><a class="headerlink" href="#chebyshev-and-the-cure-for-runge-s-phenomenon" title="Link to this heading">#</a></h2>
 <p>Pafnuty Chebyshev studied the polynomials that deviate least from zero
 on <span class="math notranslate nohighlight">\([-1,1]\)</span>, nearly half a century before Carl Runge’s example
 (below) showed why they matter. They point to the node placement that
@@ -679,7 +717,7 @@ memoirs of the 1850s.</p>
   <div class="sphx-glr-thumbnail-title">Chebyshev nodes: the cure for Runge's phenomenon</div>
 </div></div></section>
 <section id="hermite-interpolation">
-<h2><a class="toc-backref" href="#id8" role="doc-backlink">1878 – Hermite Interpolation</a><a class="headerlink" href="#hermite-interpolation" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">1878 – Hermite Interpolation</a><a class="headerlink" href="#hermite-interpolation" title="Link to this heading">#</a></h2>
 <p>Charles Hermite asked for a polynomial that matches not only a
 function’s values at the nodes but also its derivatives there. With
 values and slopes at <span class="math notranslate nohighlight">\(n+1\)</span> distinct nodes there are
@@ -708,7 +746,7 @@ and numerical differentiation,” Mathematics of Computation 24 (1970),
   <div class="sphx-glr-thumbnail-title">Hermite interpolation: matching slopes as well as values</div>
 </div></div></section>
 <section id="weierstrass-bernstein-and-uniform-approximation">
-<h2><a class="toc-backref" href="#id9" role="doc-backlink">1885-1912 – Weierstrass, Bernstein, and Uniform Approximation</a><a class="headerlink" href="#weierstrass-bernstein-and-uniform-approximation" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">1885-1912 – Weierstrass, Bernstein, and Uniform Approximation</a><a class="headerlink" href="#weierstrass-bernstein-and-uniform-approximation" title="Link to this heading">#</a></h2>
 <p>In 1885 Karl Weierstrass proved that every continuous
 function on a closed interval can be approximated <em>uniformly</em>, to any
 accuracy, by a polynomial. The theorem justifies polynomial
@@ -740,7 +778,7 @@ Communications de la Société Mathématique de Kharkov (2) 13 (1912),
   <div class="sphx-glr-thumbnail-title">Bernstein polynomials and the Weierstrass theorem</div>
 </div></div></section>
 <section id="pade-approximants">
-<h2><a class="toc-backref" href="#id10" role="doc-backlink">1892 – Padé Approximants</a><a class="headerlink" href="#pade-approximants" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">1892 – Padé Approximants</a><a class="headerlink" href="#pade-approximants" title="Link to this heading">#</a></h2>
 <p>A Taylor polynomial is useless beyond its radius of convergence, and
 it cannot mimic a pole. Henri Padé’s 1892 thesis, building on earlier
 work by Jacobi and Frobenius, organized the rational alternatives. The
@@ -771,7 +809,7 @@ Press, 1996).</p>
   <div class="sphx-glr-thumbnail-title">Padé approximants beyond the radius of convergence</div>
 </div></div></section>
 <section id="runge-s-phenomenon">
-<h2><a class="toc-backref" href="#id11" role="doc-backlink">1901 – Runge’s Phenomenon</a><a class="headerlink" href="#runge-s-phenomenon" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id12" role="doc-backlink">1901 – Runge’s Phenomenon</a><a class="headerlink" href="#runge-s-phenomenon" title="Link to this heading">#</a></h2>
 <p>Carl Runge found something unsettling about polynomial interpolation.
 For the innocent-looking function <span class="math notranslate nohighlight">\(f(x) = 1/(1+25x^2)\)</span> on
 <span class="math notranslate nohighlight">\([-1,1]\)</span>, interpolating at <em>more</em> equally spaced points makes the
@@ -792,7 +830,7 @@ Mathematik und Physik 46 (1901), 224-243.</p>
   <div class="sphx-glr-thumbnail-title">Runge's phenomenon: equally spaced interpolation diverges</div>
 </div></div></section>
 <section id="aitken-steffensen-and-accelerating-convergence">
-<h2><a class="toc-backref" href="#id12" role="doc-backlink">1926-1933 – Aitken, Steffensen, and Accelerating Convergence</a><a class="headerlink" href="#aitken-steffensen-and-accelerating-convergence" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id13" role="doc-backlink">1926-1933 – Aitken, Steffensen, and Accelerating Convergence</a><a class="headerlink" href="#aitken-steffensen-and-accelerating-convergence" title="Link to this heading">#</a></h2>
 <p>Many sequences converge linearly: the error shrinks by a roughly
 constant factor at each step. Alexander Aitken observed in 1926 that
 three consecutive terms are then enough to estimate the limit:</p>
@@ -822,7 +860,7 @@ Skandinavisk Aktuarietidskrift 16 (1933), 64-72.</p>
   <div class="sphx-glr-thumbnail-title">Aitken's delta-squared process and Steffensen's method</div>
 </div></div></section>
 <section id="remez-and-best-uniform-approximation">
-<h2><a class="toc-backref" href="#id13" role="doc-backlink">1934 – Remez and Best Uniform Approximation</a><a class="headerlink" href="#remez-and-best-uniform-approximation" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id14" role="doc-backlink">1934 – Remez and Best Uniform Approximation</a><a class="headerlink" href="#remez-and-best-uniform-approximation" title="Link to this heading">#</a></h2>
 <p>Weierstrass guarantees that good polynomial approximations exist, and
 Chebyshev had characterized the <em>best</em> one in the maximum norm. A
 polynomial <span class="math notranslate nohighlight">\(p^*\)</span> of degree <span class="math notranslate nohighlight">\(n\)</span> minimizes
@@ -857,7 +895,7 @@ Approximation Practice</em> (Philadelphia: SIAM, 2013), Ch. 10.</p>
   <div class="sphx-glr-thumbnail-title">Remez's algorithm and best uniform approximation</div>
 </div></div></section>
 <section id="schoenberg-and-spline-interpolation">
-<h2><a class="toc-backref" href="#id14" role="doc-backlink">1946 – Schoenberg and Spline Interpolation</a><a class="headerlink" href="#schoenberg-and-spline-interpolation" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id15" role="doc-backlink">1946 – Schoenberg and Spline Interpolation</a><a class="headerlink" href="#schoenberg-and-spline-interpolation" title="Link to this heading">#</a></h2>
 <p>A cubic spline is a piecewise-cubic curve whose value, first
 derivative, and second derivative all match at every shared node. It
 takes its name from the draftsman’s spline, a thin flexible strip of
@@ -879,7 +917,7 @@ Applied Mathematics 4 (1946), 45-99, 112-141.</p>
   <div class="sphx-glr-thumbnail-title">Natural and clamped cubic splines</div>
 </div></div></section>
 <section id="wilkinson-s-perfidious-polynomial">
-<h2><a class="toc-backref" href="#id15" role="doc-backlink">1959-1963 – Wilkinson’s Perfidious Polynomial</a><a class="headerlink" href="#wilkinson-s-perfidious-polynomial" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id16" role="doc-backlink">1959-1963 – Wilkinson’s Perfidious Polynomial</a><a class="headerlink" href="#wilkinson-s-perfidious-polynomial" title="Link to this heading">#</a></h2>
 <p>While testing root-finding programs on the Pilot ACE computer, James
 Wilkinson tried the polynomial with roots <span class="math notranslate nohighlight">\(1, 2, \ldots, 20\)</span>,</p>
 <div class="math notranslate nohighlight">
@@ -914,7 +952,7 @@ Golub (Mathematical Association of America, 1984), 1-28.</p>
   <div class="sphx-glr-thumbnail-title">Wilkinson's perfidious polynomial</div>
 </div></div></section>
 <section id="kahan-s-compensated-summation">
-<h2><a class="toc-backref" href="#id16" role="doc-backlink">1965 – Kahan’s Compensated Summation</a><a class="headerlink" href="#kahan-s-compensated-summation" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id17" role="doc-backlink">1965 – Kahan’s Compensated Summation</a><a class="headerlink" href="#kahan-s-compensated-summation" title="Link to this heading">#</a></h2>
 <p>Adding <span class="math notranslate nohighlight">\(n\)</span> floating-point numbers left to right can lose
 accuracy in proportion to <span class="math notranslate nohighlight">\(n\)</span>. Each addition rounds away the
 low-order bits of the smaller operand, and the losses pile up. William
@@ -940,8 +978,114 @@ Scientific Computing 14 (1993), 783-799.</p>
 <p><a class="reference internal" href="../api/gallery/numerical_analysis/floating_point/plot_01_kahan_summation.html"><span class="doc">Kahan’s compensated summation</span></a></p>
   <div class="sphx-glr-thumbnail-title">Kahan's compensated summation</div>
 </div></div></section>
+<section id="broyden-s-quasi-newton-method">
+<h2><a class="toc-backref" href="#id18" role="doc-backlink">1965 – Broyden’s Quasi-Newton Method</a><a class="headerlink" href="#broyden-s-quasi-newton-method" title="Link to this heading">#</a></h2>
+<p>For <span class="math notranslate nohighlight">\(n\)</span> equations, Newton’s method needs a new <span class="math notranslate nohighlight">\(n \times n\)</span>
+Jacobian at every step. When it is approximated by differences, that
+costs <span class="math notranslate nohighlight">\(n\)</span> or <span class="math notranslate nohighlight">\(2n\)</span> extra evaluations of <span class="math notranslate nohighlight">\(F\)</span>. Charles
+Broyden, working on nonlinear problems at the English Electric Company,
+proposed computing the Jacobian only once and then <em>updating</em> the
+approximation <span class="math notranslate nohighlight">\(B_k\)</span> after every step. The update is the smallest
+correction that makes it reproduce the step just taken:</p>
+<div class="math notranslate nohighlight">
+\[B_{k+1} = B_k + \frac{(\mathbf y_k - B_k \mathbf s_k)\,\mathbf s_k^T}{\mathbf s_k^T \mathbf s_k},
+\qquad \mathbf y_k = F(\mathbf x_{k+1}) - F(\mathbf x_k),\]</div>
+<p>so that <span class="math notranslate nohighlight">\(B_{k+1}\mathbf s_k = \mathbf y_k\)</span> (the <em>secant
+condition</em>). Each iteration then costs a single evaluation of
+<span class="math notranslate nohighlight">\(F\)</span>. Convergence falls from quadratic to superlinear, which Broyden,
+Dennis and Moré proved in 1973. This is the multidimensional secant
+method, and its idea of low-rank secant updates led directly to the
+BFGS method of optimization.</p>
+<p><em>Implementation:</em> <a class="reference internal" href="../api/numerical_analysis.html#mathematicskit.numerical_analysis.Broyden" title="mathematicskit.numerical_analysis.systems.nonlinear_systems.Broyden"><code class="xref py py-class docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis.systems.nonlinear_systems.Broyden</span></code></a>
+records every iterate, residual, and function evaluation. The tests
+check that it reaches the same root as
+<a class="reference internal" href="../api/numerical_analysis.html#mathematicskit.numerical_analysis.NewtonSystem" title="mathematicskit.numerical_analysis.systems.nonlinear_systems.NewtonSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">NewtonSystem</span></code></a>
+and <code class="docutils literal notranslate"><span class="pre">scipy.optimize.root(method=&quot;broyden1&quot;)</span></code> with fewer evaluations of
+<span class="math notranslate nohighlight">\(F\)</span>, and that the final <span class="math notranslate nohighlight">\(B\)</span> satisfies the secant condition.</p>
+<p><em>References:</em> C. G. Broyden, “A Class of Methods for Solving Nonlinear
+Simultaneous Equations,” Mathematics of Computation 19 (1965), 577-593;
+C. G. Broyden, J. E. Dennis, and J. J. Moré, “On the Local and
+Superlinear Convergence of Quasi-Newton Methods,” Journal of the
+Institute of Mathematics and Its Applications 12 (1973), 223-245.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Newton&#x27;s method for n equations needs a fresh Jacobian at every step: 2n extra evaluations of F by central differences. Charles Broyden&#x27;s 1965 method computes the Jacobian once, then corrects its approximation B_k by the rank-one update"><img alt="" src="../_images/sphx_glr_plot_06_broyden_method_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/numerical_analysis/root_finding/plot_06_broyden_method.html"><span class="doc">Broyden’s quasi-Newton method</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Broyden's quasi-Newton method</div>
+</div></div></section>
+<section id="forsythe-and-catastrophic-cancellation">
+<h2><a class="toc-backref" href="#id19" role="doc-backlink">1966 – Forsythe and Catastrophic Cancellation</a><a class="headerlink" href="#forsythe-and-catastrophic-cancellation" title="Link to this heading">#</a></h2>
+<p>In a 1966 Stanford report, George Forsythe, founder of Stanford’s
+computer science department, asked “How do you solve a quadratic
+equation?” The formula every student learns,
+<span class="math notranslate nohighlight">\(x = (-b \pm \sqrt{b^2 - 4ac})/(2a)\)</span>, fails in floating point
+when <span class="math notranslate nohighlight">\(b^2 \gg |4ac|\)</span>. For the root of smaller magnitude,
+<span class="math notranslate nohighlight">\(-b\)</span> and <span class="math notranslate nohighlight">\(\sqrt{b^2 - 4ac}\)</span> are nearly equal. Subtracting
+them is exact, but it leaves only the rounding error that the square
+root already carried, so most of the significant digits cancel. The
+loss-of-precision theorem quantifies this: if
+<span class="math notranslate nohighlight">\(2^{-q} \le |1 - y/x| \le 2^{-p}\)</span>, then computing <span class="math notranslate nohighlight">\(x - y\)</span>
+loses between <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q\)</span> significant bits. The cure is to
+compute only the root without cancellation,
+<span class="math notranslate nohighlight">\(x_1 = q/a\)</span> with <span class="math notranslate nohighlight">\(q = -\tfrac12\bigl(b + \operatorname{sign}(b)\sqrt{b^2-4ac}\bigr)\)</span>,
+and to take the other from the product of the roots,
+<span class="math notranslate nohighlight">\(x_2 = c/q\)</span>. Forsythe’s 1970 essay “Pitfalls in computation”
+made the example a fixture of numerical-analysis teaching.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis.systems.floating_point.quadratic_roots()</span></code>
+offers both formulas, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">cancellation_bits_lost()</span></code>
+evaluates the theorem’s estimate. The tests check that for
+<span class="math notranslate nohighlight">\(x^2 + 10^8 x + 1\)</span> the textbook formula’s small root is more than
+10% wrong, while the stable one is correct to the last digit.</p>
+<p><em>References:</em> G. E. Forsythe, “How Do You Solve a Quadratic Equation?”
+Technical Report CS40, Computer Science Department, Stanford University
+(1966); G. E. Forsythe, “Pitfalls in Computation, or Why a Math Book
+Isn’t Enough,” American Mathematical Monthly 77 (1970), 931-956; N. J.
+Higham, <em>Accuracy and Stability of Numerical Algorithms</em>, 2nd ed.
+(SIAM, 2002), sec. 1.8.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="George Forsythe asked in 1966, &quot;How do you solve a quadratic equation?&quot; The school formula x = (-b \pm \sqrt{b^2 - 4ac})/(2a) fails in floating point when b^2 \gg |4ac|: for the root with the smaller magnitude, -b and \sqrt{b^2 - 4ac} nearly cancel. The subtraction itself is exact, but it exposes the rounding error that \sqrt{b^2 - 4ac} already carries. By the loss-of-precision theorem, about -\log_2|1 - y/x| of the 53 significant bits are lost when computing x - y. The cure is to compute only the root that involves no cancellation and get the other from x_1 x_2 = c/a."><img alt="" src="../_images/sphx_glr_plot_03_catastrophic_cancellation_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/numerical_analysis/floating_point/plot_03_catastrophic_cancellation.html"><span class="doc">Forsythe’s quadratic formula: catastrophic cancellation</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Forsythe's quadratic formula: catastrophic cancellation</div>
+</div></div></section>
+<section id="the-ieee-754-floating-point-standard">
+<h2><a class="toc-backref" href="#id20" role="doc-backlink">1985 – The IEEE 754 Floating-Point Standard</a><a class="headerlink" href="#the-ieee-754-floating-point-standard" title="Link to this heading">#</a></h2>
+<p>Before 1985 every computer maker had its own floating-point arithmetic,
+with different word layouts, rounding rules, and behavior on overflow.
+A program could give different answers on different machines, or fail
+outright. A committee led by William Kahan, drawing on the design of
+Intel’s 8087 coprocessor, wrote the standard that nearly every processor
+now follows. A binary64 (“double”) number has a sign bit, an 11-bit
+exponent stored with a bias of 1023, and a 52-bit fraction behind an
+implicit leading 1, with value <span class="math notranslate nohighlight">\((-1)^s (1.f)_2 \cdot 2^{e}\)</span>. The
+standard requires every basic operation to be <em>correctly rounded</em>,
+exact up to one rounding to nearest (ties to even). Every operation
+therefore obeys <span class="math notranslate nohighlight">\(\mathrm{fl}(x \circ y) = (x \circ y)(1 + \delta)\)</span>
+with <span class="math notranslate nohighlight">\(|\delta| \le u = 2^{-53}\)</span>, the model on which all rounding
+error analysis rests. Gradual underflow through subnormal numbers,
+signed zeros, infinities, and NaN handle the exceptional cases
+predictably. Machine epsilon, the gap between 1 and the next float, is
+<span class="math notranslate nohighlight">\(2^{-52} \approx 2.2 \times 10^{-16}\)</span>. Kahan received the 1989
+Turing Award for this work.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.numerical_analysis.systems.floating_point.float_bits()</span></code>
+decodes the sign, exponent, and fraction fields of binary16, binary32,
+and binary64 numbers.
+<code class="xref py py-func docutils literal notranslate"><span class="pre">machine_epsilon()</span></code>
+finds <span class="math notranslate nohighlight">\(\varepsilon\)</span> with the classic halving loop,
+<code class="xref py py-func docutils literal notranslate"><span class="pre">ulp()</span></code>
+measures the gap between neighboring floats, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">toy_float_system()</span></code>
+lists every number of a small system. The tests check the decoded fields
+against the raw bytes from <a class="reference external" href="https://docs.python.org/3/library/struct.html#module-struct" title="(in Python v3.14)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">struct</span></code></a>, and <span class="math notranslate nohighlight">\(\varepsilon\)</span>
+against <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.finfo.html#numpy.finfo" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.finfo</span></code></a> for all three formats.</p>
+<p><em>References:</em> IEEE Standard for Binary Floating-Point Arithmetic,
+ANSI/IEEE Std 754-1985; D. Goldberg, “What Every Computer Scientist
+Should Know About Floating-Point Arithmetic,” ACM Computing Surveys 23
+(1991), 5-48; N. J. Higham, <em>Accuracy and Stability of Numerical
+Algorithms</em>, 2nd ed. (SIAM, 2002), Ch. 2.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="The IEEE 754 standard of 1985 fixed how a binary floating-point number is stored: a sign bit, a biased exponent, and a fraction, with value (-1)^s (1.f)_2 \cdot 2^{e}. It also fixed the rounding rule (round to nearest, ties to even) and the special values (signed zeros, subnormals, infinities, NaN). Machine epsilon, the gap between 1 and the next float, is 2^{-52} in double precision. Floats are equally spaced within each binade [2^e, 2^{e+1}), and the spacing doubles from one binade to the next, so their relative spacing stays roughly constant."><img alt="" src="../_images/sphx_glr_plot_02_ieee754_machine_epsilon_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/numerical_analysis/floating_point/plot_02_ieee754_machine_epsilon.html"><span class="doc">IEEE 754: bit layouts, machine epsilon, and the spacing of floats</span></a></p>
+  <div class="sphx-glr-thumbnail-title">IEEE 754: bit layouts, machine epsilon, and the spacing of floats</div>
+</div></div></section>
 <section id="see-also">
-<h2><a class="toc-backref" href="#id17" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id21" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="../api/numerical_analysis.html"><span class="doc">mathematicskit.numerical_analysis</span></a></p></li>
 <li><p><a class="reference internal" href="linalg_breakthroughs.html"><span class="doc">Breakthroughs in Numerical Linear Algebra</span></a></p></li>
@@ -1001,6 +1145,7 @@ Scientific Computing 14 (1993), 783-799.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#newton-and-raphson-s-method">1669-1690 – Newton and Raphson’s Method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#newton-lagrange-and-polynomial-interpolation">1687-1795 – Newton, Lagrange, and Polynomial Interpolation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#halley-s-method">1694 – Halley’s Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simpson-newton-s-method-for-systems">1740 – Simpson: Newton’s Method for Systems</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#legendre-gauss-and-least-squares">1805-1809 – Legendre, Gauss, and Least Squares</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#horner-s-method">1819 – Horner’s Method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chebyshev-and-the-cure-for-runge-s-phenomenon">1854 – Chebyshev and the Cure for Runge’s Phenomenon</a></li>
@@ -1013,6 +1158,9 @@ Scientific Computing 14 (1993), 783-799.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schoenberg-and-spline-interpolation">1946 – Schoenberg and Spline Interpolation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wilkinson-s-perfidious-polynomial">1959-1963 – Wilkinson’s Perfidious Polynomial</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kahan-s-compensated-summation">1965 – Kahan’s Compensated Summation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broyden-s-quasi-newton-method">1965 – Broyden’s Quasi-Newton Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forsythe-and-catastrophic-cancellation">1966 – Forsythe and Catastrophic Cancellation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ieee-754-floating-point-standard">1985 – The IEEE 754 Floating-Point Standard</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#see-also">See Also</a></li>
 </ul>
   </nav></div>

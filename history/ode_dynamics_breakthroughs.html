@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Breakthroughs in Dynamical Systems &#8212; mathematicskit 0.4.0 documentation</title>
+    <title>Breakthroughs in Dynamical Systems &#8212; mathematicskit 0.5.0 documentation</title>
   
   
   
@@ -44,7 +44,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0" />
 
-    <script src="../_static/documentation_options.js?v=1437fa6d"></script>
+    <script src="../_static/documentation_options.js?v=70f82a29"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/sg-tags.js?v=d80f6fa4"></script>
@@ -470,7 +470,7 @@ classification of linear flows near a fixed point, the discovery of
 self-sustained oscillation, and the slow, then sudden, realization that
 simple deterministic systems can behave unpredictably. Interleaved with
 these are the numerical methods behind <a class="reference internal" href="../api/integrators.html#module-mathematicskit.integrators" title="mathematicskit.integrators"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.integrators</span></code></a>
-that compute every trajectory: Euler’s and Runge-Kutta methods,
+that compute every trajectory: Euler’s, Adams-Bashforth and Runge-Kutta methods,
 symplectic and adaptive integrators, the discovery of stiffness and the
 implicit methods that tame it, and collocation for boundary-value
 problems.</p>
@@ -480,29 +480,30 @@ problems.</p>
 <li><p><a class="reference internal" href="#euler-s-method" id="id1">1768 – Euler’s Method</a></p></li>
 <li><p><a class="reference internal" href="#verhulst-s-logistic-equation" id="id2">1838 – Verhulst’s Logistic Equation</a></p></li>
 <li><p><a class="reference internal" href="#poincare-s-qualitative-theory-of-odes" id="id3">1881-1886 – Poincaré’s Qualitative Theory of ODEs</a></p></li>
-<li><p><a class="reference internal" href="#lyapunov-s-direct-method" id="id4">1892 – Lyapunov’s Direct Method</a></p></li>
-<li><p><a class="reference internal" href="#runge-heun-and-kutta-runge-kutta-methods" id="id5">1895-1901 – Runge, Heun, and Kutta: Runge-Kutta Methods</a></p></li>
-<li><p><a class="reference internal" href="#bendixson-s-negative-criterion" id="id6">1901 – Bendixson’s Negative Criterion</a></p></li>
-<li><p><a class="reference internal" href="#stormer-verlet-and-symplectic-integration" id="id7">1907-1967 – Störmer, Verlet, and Symplectic Integration</a></p></li>
-<li><p><a class="reference internal" href="#duffing-ueda-and-the-stroboscopic-poincare-section" id="id8">1918-1961 – Duffing, Ueda, and the Stroboscopic Poincaré Section</a></p></li>
-<li><p><a class="reference internal" href="#lotka-volterra-and-predator-prey-cycles" id="id9">1920-1926 – Lotka, Volterra, and Predator-Prey Cycles</a></p></li>
-<li><p><a class="reference internal" href="#van-der-pol-and-the-relaxation-oscillator" id="id10">1926 – van der Pol and the Relaxation Oscillator</a></p></li>
-<li><p><a class="reference internal" href="#kermack-and-mckendrick-s-epidemic-threshold" id="id11">1927 – Kermack and McKendrick’s Epidemic Threshold</a></p></li>
-<li><p><a class="reference internal" href="#andronov-and-bifurcation-theory" id="id12">1929-1937 – Andronov and Bifurcation Theory</a></p></li>
-<li><p><a class="reference internal" href="#curtiss-and-hirschfelder-stiffness-and-bdf" id="id13">1952 – Curtiss and Hirschfelder: Stiffness and BDF</a></p></li>
-<li><p><a class="reference internal" href="#fitzhugh-nagumo-and-the-excitable-neuron" id="id14">1961-1962 – FitzHugh, Nagumo, and the Excitable Neuron</a></p></li>
-<li><p><a class="reference internal" href="#lorenz-and-deterministic-chaos" id="id15">1963 – Lorenz and Deterministic Chaos</a></p></li>
-<li><p><a class="reference internal" href="#dahlquist-s-a-stability" id="id16">1963 – Dahlquist’s A-Stability</a></p></li>
-<li><p><a class="reference internal" href="#butcher-ehle-and-radau-iia" id="id17">1964-1969 – Butcher, Ehle, and Radau IIA</a></p></li>
-<li><p><a class="reference internal" href="#robertson-s-stiff-chemical-kinetics" id="id18">1966 – Robertson’s Stiff Chemical Kinetics</a></p></li>
-<li><p><a class="reference internal" href="#prigogine-lefever-and-the-brusselator" id="id19">1968 – Prigogine, Lefever, and the Brusselator</a></p></li>
-<li><p><a class="reference internal" href="#de-boor-and-swartz-collocation-for-boundary-value-problems" id="id20">1973 – De Boor and Swartz: Collocation for Boundary-Value Problems</a></p></li>
-<li><p><a class="reference internal" href="#kuramoto-s-synchronization-transition" id="id21">1975 – Kuramoto’s Synchronization Transition</a></p></li>
-<li><p><a class="reference internal" href="#rossler-s-minimal-chaotic-flow" id="id22">1976 – Rössler’s Minimal Chaotic Flow</a></p></li>
-<li><p><a class="reference internal" href="#feigenbaum-s-universality" id="id23">1978 – Feigenbaum’s Universality</a></p></li>
-<li><p><a class="reference internal" href="#dormand-and-prince-embedded-pairs-and-adaptive-steps" id="id24">1980 – Dormand and Prince: Embedded Pairs and Adaptive Steps</a></p></li>
-<li><p><a class="reference internal" href="#yoshida-s-symplectic-composition" id="id25">1990 – Yoshida’s Symplectic Composition</a></p></li>
-<li><p><a class="reference internal" href="#see-also" id="id26">See Also</a></p></li>
+<li><p><a class="reference internal" href="#bashforth-and-adams-linear-multistep-methods" id="id4">1883 – Bashforth and Adams: Linear Multistep Methods</a></p></li>
+<li><p><a class="reference internal" href="#lyapunov-s-direct-method" id="id5">1892 – Lyapunov’s Direct Method</a></p></li>
+<li><p><a class="reference internal" href="#runge-heun-and-kutta-runge-kutta-methods" id="id6">1895-1901 – Runge, Heun, and Kutta: Runge-Kutta Methods</a></p></li>
+<li><p><a class="reference internal" href="#bendixson-s-negative-criterion" id="id7">1901 – Bendixson’s Negative Criterion</a></p></li>
+<li><p><a class="reference internal" href="#stormer-verlet-and-symplectic-integration" id="id8">1907-1967 – Störmer, Verlet, and Symplectic Integration</a></p></li>
+<li><p><a class="reference internal" href="#duffing-ueda-and-the-stroboscopic-poincare-section" id="id9">1918-1961 – Duffing, Ueda, and the Stroboscopic Poincaré Section</a></p></li>
+<li><p><a class="reference internal" href="#lotka-volterra-and-predator-prey-cycles" id="id10">1920-1926 – Lotka, Volterra, and Predator-Prey Cycles</a></p></li>
+<li><p><a class="reference internal" href="#van-der-pol-and-the-relaxation-oscillator" id="id11">1926 – van der Pol and the Relaxation Oscillator</a></p></li>
+<li><p><a class="reference internal" href="#kermack-and-mckendrick-s-epidemic-threshold" id="id12">1927 – Kermack and McKendrick’s Epidemic Threshold</a></p></li>
+<li><p><a class="reference internal" href="#andronov-and-bifurcation-theory" id="id13">1929-1937 – Andronov and Bifurcation Theory</a></p></li>
+<li><p><a class="reference internal" href="#curtiss-and-hirschfelder-stiffness-and-bdf" id="id14">1952 – Curtiss and Hirschfelder: Stiffness and BDF</a></p></li>
+<li><p><a class="reference internal" href="#fitzhugh-nagumo-and-the-excitable-neuron" id="id15">1961-1962 – FitzHugh, Nagumo, and the Excitable Neuron</a></p></li>
+<li><p><a class="reference internal" href="#lorenz-and-deterministic-chaos" id="id16">1963 – Lorenz and Deterministic Chaos</a></p></li>
+<li><p><a class="reference internal" href="#dahlquist-s-a-stability" id="id17">1963 – Dahlquist’s A-Stability</a></p></li>
+<li><p><a class="reference internal" href="#butcher-ehle-and-radau-iia" id="id18">1964-1969 – Butcher, Ehle, and Radau IIA</a></p></li>
+<li><p><a class="reference internal" href="#robertson-s-stiff-chemical-kinetics" id="id19">1966 – Robertson’s Stiff Chemical Kinetics</a></p></li>
+<li><p><a class="reference internal" href="#prigogine-lefever-and-the-brusselator" id="id20">1968 – Prigogine, Lefever, and the Brusselator</a></p></li>
+<li><p><a class="reference internal" href="#de-boor-and-swartz-collocation-for-boundary-value-problems" id="id21">1973 – De Boor and Swartz: Collocation for Boundary-Value Problems</a></p></li>
+<li><p><a class="reference internal" href="#kuramoto-s-synchronization-transition" id="id22">1975 – Kuramoto’s Synchronization Transition</a></p></li>
+<li><p><a class="reference internal" href="#rossler-s-minimal-chaotic-flow" id="id23">1976 – Rössler’s Minimal Chaotic Flow</a></p></li>
+<li><p><a class="reference internal" href="#feigenbaum-s-universality" id="id24">1978 – Feigenbaum’s Universality</a></p></li>
+<li><p><a class="reference internal" href="#dormand-and-prince-embedded-pairs-and-adaptive-steps" id="id25">1980 – Dormand and Prince: Embedded Pairs and Adaptive Steps</a></p></li>
+<li><p><a class="reference internal" href="#yoshida-s-symplectic-composition" id="id26">1990 – Yoshida’s Symplectic Composition</a></p></li>
+<li><p><a class="reference internal" href="#see-also" id="id27">See Also</a></p></li>
 </ul>
 </nav>
 <section id="euler-s-method">
@@ -521,11 +522,14 @@ slope at the end of the step instead,
 an equation for <span class="math notranslate nohighlight">\(y_{n+1}\)</span> at every step, a cost that pays off for
 stiff equations (see Curtiss and Hirschfelder and Dahlquist, below).
 Cauchy later used Euler’s polygons to prove that solutions exist.</p>
-<p><em>Implementation:</em> <a class="reference internal" href="../api/integrators.html#mathematicskit.integrators.implicit_euler_integrate" title="mathematicskit.integrators.implicit_euler_integrate"><code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.integrators.implicit_euler_integrate()</span></code></a>
-implements backward Euler, solving for each step with Newton’s method and
-a finite-difference Jacobian. The tests check its closed-form step
-<span class="math notranslate nohighlight">\(y/(1 + \lambda h)\)</span> on <span class="math notranslate nohighlight">\(y' = -\lambda y\)</span> and that the error
-ratio for halved <span class="math notranslate nohighlight">\(h\)</span> is 2.</p>
+<p><em>Implementation:</em> <a class="reference internal" href="../api/integrators.html#mathematicskit.integrators.euler_integrate" title="mathematicskit.integrators.euler_integrate"><code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.integrators.euler_integrate()</span></code></a>
+implements the explicit method, and
+<a class="reference internal" href="../api/integrators.html#mathematicskit.integrators.implicit_euler_integrate" title="mathematicskit.integrators.implicit_euler_integrate"><code class="xref py py-func docutils literal notranslate"><span class="pre">implicit_euler_integrate()</span></code></a> implements
+backward Euler, solving for each step with Newton’s method and a
+finite-difference Jacobian. The tests check the closed forms
+<span class="math notranslate nohighlight">\((1 - \lambda h)^n\)</span> and <span class="math notranslate nohighlight">\(y/(1 + \lambda h)\)</span> on
+<span class="math notranslate nohighlight">\(y' = -\lambda y\)</span>, and that for both methods the error ratio for
+halved <span class="math notranslate nohighlight">\(h\)</span> is 2.</p>
 <p><em>References:</em> L. Euler, <em>Institutionum calculi integralis</em>, vol. 1
 (St. Petersburg, 1768).</p>
 <div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Euler (1768) replaced the curve by its tangent line over a short step h: y_{n+1} = y_n + h f(t_n, y_n). Evaluating the slope at the end of the step instead gives the implicit (backward) variant y_{n+1} = y_n + h f(t_{n+1}, y_{n+1}). Both have a local error of O(h^2), which adds up to a global error of O(h): halving the step halves the error."><img alt="" src="../_images/sphx_glr_plot_01_euler_method_thumb.png" />
@@ -586,8 +590,45 @@ installments (1881-1886).</p>
 <p><a class="reference internal" href="../api/gallery/ode_dynamics/phase_portrait/plot_01_vector_fields.html"><span class="doc">Poincaré’s qualitative method: the pendulum’s phase portrait</span></a></p>
   <div class="sphx-glr-thumbnail-title">Poincaré's qualitative method: the pendulum's phase portrait</div>
 </div></div></section>
+<section id="bashforth-and-adams-linear-multistep-methods">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">1883 – Bashforth and Adams: Linear Multistep Methods</a><a class="headerlink" href="#bashforth-and-adams-linear-multistep-methods" title="Link to this heading">#</a></h2>
+<p>Francis Bashforth needed accurate profiles of liquid drops to test the
+theory of capillarity, and John Couch Adams, codiscoverer of Neptune,
+supplied the numerical method in their 1883 book. Every step of a
+one-step method computes fresh slopes and then discards them. Adams
+kept the last <span class="math notranslate nohighlight">\(k\)</span> of them, fitted a polynomial through them, and
+integrated it across the next step:</p>
+<div class="math notranslate nohighlight">
+\[y_{n+1} = y_n + h \sum_{j=0}^{k-1} \beta_j f_{n-j},
+\qquad \text{e.g.}\quad
+y_{n+1} = y_n + h\left(\tfrac32 f_n - \tfrac12 f_{n-1}\right).\]</div>
+<p>The result has order <span class="math notranslate nohighlight">\(k\)</span> but needs only one new evaluation of
+<span class="math notranslate nohighlight">\(f\)</span> per step. Forest Ray Moulton added the implicit companion
+formulas in 1926 for ballistics tables, and Adams-Bashforth-Moulton
+predictor-corrector pairs were the standard ODE solvers of the early
+computer era. Reusing old information has a cost: the method needs
+<span class="math notranslate nohighlight">\(k - 1\)</span> starting values, and its stability region shrinks as the
+order grows, to a real interval of only <span class="math notranslate nohighlight">\([-0.3, 0]\)</span> for order 4.</p>
+<p><em>Implementation:</em> <a class="reference internal" href="../api/integrators.html#mathematicskit.integrators.adams_bashforth_integrate" title="mathematicskit.integrators.adams_bashforth_integrate"><code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.integrators.adams_bashforth_integrate()</span></code></a>
+implements orders 1 to 4, starting with RK4 steps, and
+<a class="reference internal" href="../api/integrators.html#mathematicskit.integrators.adams_bashforth_boundary_locus" title="mathematicskit.integrators.adams_bashforth_boundary_locus"><code class="xref py py-func docutils literal notranslate"><span class="pre">adams_bashforth_boundary_locus()</span></code></a> and
+<a class="reference internal" href="../api/integrators.html#mathematicskit.integrators.is_absolutely_stable" title="mathematicskit.integrators.is_absolutely_stable"><code class="xref py py-func docutils literal notranslate"><span class="pre">is_absolutely_stable()</span></code></a> compute the
+stability regions. The tests check that halving <span class="math notranslate nohighlight">\(h\)</span> divides the
+error by <span class="math notranslate nohighlight">\(2^k\)</span>, that order 3 is exact for quadratic slopes, and
+that the regions’ real intervals are <span class="math notranslate nohighlight">\([-2, 0]\)</span>, <span class="math notranslate nohighlight">\([-1, 0]\)</span>,
+<span class="math notranslate nohighlight">\([-6/11, 0]\)</span> and <span class="math notranslate nohighlight">\([-3/10, 0]\)</span>.</p>
+<p><em>References:</em> F. Bashforth and J. C. Adams, <em>An Attempt to Test the
+Theories of Capillary Action by Comparing the Theoretical and Measured
+Forms of Drops of Fluid</em> (Cambridge University Press, 1883); F. R.
+Moulton, <em>New Methods in Exterior Ballistics</em> (University of Chicago
+Press, 1926); E. Hairer, S. P. Nørsett, and G. Wanner, <em>Solving Ordinary
+Differential Equations I</em>, 2nd ed. (Springer, 1993), sec. III.1.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="John Couch Adams, computing drop shapes for Francis Bashforth&#x27;s 1883 study of capillarity, reused the slopes already computed at earlier steps instead of throwing them away. Integrating the polynomial through the last k slopes gives the order-k Adams-Bashforth formula,"><img alt="" src="../_images/sphx_glr_plot_06_adams_bashforth_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/ode_dynamics/integrators/plot_06_adams_bashforth.html"><span class="doc">Bashforth and Adams: linear multistep methods</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Bashforth and Adams: linear multistep methods</div>
+</div></div></section>
 <section id="lyapunov-s-direct-method">
-<h2><a class="toc-backref" href="#id4" role="doc-backlink">1892 – Lyapunov’s Direct Method</a><a class="headerlink" href="#lyapunov-s-direct-method" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">1892 – Lyapunov’s Direct Method</a><a class="headerlink" href="#lyapunov-s-direct-method" title="Link to this heading">#</a></h2>
 <p>In his doctoral thesis <em>The General Problem of the Stability of
 Motion</em>, Aleksandr Lyapunov proved stability without solving the
 equations of motion. He generalized the idea of energy. Suppose a
@@ -617,7 +658,7 @@ translation by A. T. Fuller, International Journal of Control 55(3)
   <div class="sphx-glr-thumbnail-title">Lyapunov's direct method</div>
 </div></div></section>
 <section id="runge-heun-and-kutta-runge-kutta-methods">
-<h2><a class="toc-backref" href="#id5" role="doc-backlink">1895-1901 – Runge, Heun, and Kutta: Runge-Kutta Methods</a><a class="headerlink" href="#runge-heun-and-kutta-runge-kutta-methods" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">1895-1901 – Runge, Heun, and Kutta: Runge-Kutta Methods</a><a class="headerlink" href="#runge-heun-and-kutta-runge-kutta-methods" title="Link to this heading">#</a></h2>
 <p>Carl Runge asked how to get the accuracy of a high-order Taylor series
 without differentiating <span class="math notranslate nohighlight">\(f\)</span>. His answer was to evaluate the slope
 at several points inside each step and combine them. Karl Heun gave
@@ -649,7 +690,7 @@ Zeitschrift für Mathematik und Physik 46 (1901), 435-453.</p>
   <div class="sphx-glr-thumbnail-title">Runge, Heun and Kutta: Runge-Kutta methods</div>
 </div></div></section>
 <section id="bendixson-s-negative-criterion">
-<h2><a class="toc-backref" href="#id6" role="doc-backlink">1901 – Bendixson’s Negative Criterion</a><a class="headerlink" href="#bendixson-s-negative-criterion" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">1901 – Bendixson’s Negative Criterion</a><a class="headerlink" href="#bendixson-s-negative-criterion" title="Link to this heading">#</a></h2>
 <p>Ivar Bendixson’s long memoir in <em>Acta Mathematica</em> completed
 Poincaré’s picture of planar flows. Its best-known result is the
 Poincaré-Bendixson theorem: a bounded planar trajectory that avoids
@@ -676,7 +717,7 @@ différentielles,” Acta Mathematica 24 (1901), 1-88.</p>
   <div class="sphx-glr-thumbnail-title">Bendixson's negative criterion</div>
 </div></div></section>
 <section id="stormer-verlet-and-symplectic-integration">
-<h2><a class="toc-backref" href="#id7" role="doc-backlink">1907-1967 – Störmer, Verlet, and Symplectic Integration</a><a class="headerlink" href="#stormer-verlet-and-symplectic-integration" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">1907-1967 – Störmer, Verlet, and Symplectic Integration</a><a class="headerlink" href="#stormer-verlet-and-symplectic-integration" title="Link to this heading">#</a></h2>
 <p>Carl Størmer computed the orbits of charged particles in the Earth’s
 magnetic field, to explain the aurora, with a simple scheme for
 <span class="math notranslate nohighlight">\(\ddot q = F(q)\)</span>. Loup Verlet rediscovered it for molecular
@@ -709,7 +750,7 @@ Method,” Acta Numerica 12 (2003), 399-450.</p>
   <div class="sphx-glr-thumbnail-title">Stormer-Verlet: bounded energy error over long times</div>
 </div></div></section>
 <section id="duffing-ueda-and-the-stroboscopic-poincare-section">
-<h2><a class="toc-backref" href="#id8" role="doc-backlink">1918-1961 – Duffing, Ueda, and the Stroboscopic Poincaré Section</a><a class="headerlink" href="#duffing-ueda-and-the-stroboscopic-poincare-section" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">1918-1961 – Duffing, Ueda, and the Stroboscopic Poincaré Section</a><a class="headerlink" href="#duffing-ueda-and-the-stroboscopic-poincare-section" title="Link to this heading">#</a></h2>
 <p>Georg Duffing’s 1918 monograph analyzed the forced, damped oscillator
 with a cubic nonlinearity that now bears his name. Its chaotic regime
 was first revealed by Yoshisuke Ueda’s numerical experiments in 1961,
@@ -734,7 +775,7 @@ simulations first found in 1961).</p>
   <div class="sphx-glr-thumbnail-title">Poincare sections of the driven Duffing oscillator</div>
 </div></div></section>
 <section id="lotka-volterra-and-predator-prey-cycles">
-<h2><a class="toc-backref" href="#id9" role="doc-backlink">1920-1926 – Lotka, Volterra, and Predator-Prey Cycles</a><a class="headerlink" href="#lotka-volterra-and-predator-prey-cycles" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">1920-1926 – Lotka, Volterra, and Predator-Prey Cycles</a><a class="headerlink" href="#lotka-volterra-and-predator-prey-cycles" title="Link to this heading">#</a></h2>
 <p>Alfred Lotka found sustained oscillations in a model of coupled
 chemical and biological processes. Independently, Vito Volterra was
 asked by the marine biologist Umberto D’Ancona why the share of
@@ -764,7 +805,7 @@ Abundance of a Species considered Mathematically,” Nature 118 (1926),
   <div class="sphx-glr-thumbnail-title">Lotka-Volterra predator-prey cycles</div>
 </div></div></section>
 <section id="van-der-pol-and-the-relaxation-oscillator">
-<h2><a class="toc-backref" href="#id10" role="doc-backlink">1926 – van der Pol and the Relaxation Oscillator</a><a class="headerlink" href="#van-der-pol-and-the-relaxation-oscillator" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">1926 – van der Pol and the Relaxation Oscillator</a><a class="headerlink" href="#van-der-pol-and-the-relaxation-oscillator" title="Link to this heading">#</a></h2>
 <p>Balthasar van der Pol studied the vacuum-tube circuits of early radio.
 He found that a particular nonlinear damping term – one that <em>removes</em>
 energy from large oscillations but <em>adds</em> energy to small ones –
@@ -788,7 +829,7 @@ Series 7, 2(11) (1926), 978-992.</p>
   <div class="sphx-glr-thumbnail-title">The Van der Pol limit cycle</div>
 </div></div></section>
 <section id="kermack-and-mckendrick-s-epidemic-threshold">
-<h2><a class="toc-backref" href="#id11" role="doc-backlink">1927 – Kermack and McKendrick’s Epidemic Threshold</a><a class="headerlink" href="#kermack-and-mckendrick-s-epidemic-threshold" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id12" role="doc-backlink">1927 – Kermack and McKendrick’s Epidemic Threshold</a><a class="headerlink" href="#kermack-and-mckendrick-s-epidemic-threshold" title="Link to this heading">#</a></h2>
 <p>William Kermack and Anderson McKendrick divided a population into
 susceptible, infected, and removed classes. They showed that an
 epidemic can burn out long before everyone has been infected:</p>
@@ -816,7 +857,7 @@ London, Series A 115(772) (1927), 700-721.</p>
   <div class="sphx-glr-thumbnail-title">The Kermack-McKendrick SIR model</div>
 </div></div></section>
 <section id="andronov-and-bifurcation-theory">
-<h2><a class="toc-backref" href="#id12" role="doc-backlink">1929-1937 – Andronov and Bifurcation Theory</a><a class="headerlink" href="#andronov-and-bifurcation-theory" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id13" role="doc-backlink">1929-1937 – Andronov and Bifurcation Theory</a><a class="headerlink" href="#andronov-and-bifurcation-theory" title="Link to this heading">#</a></h2>
 <p>Henri Poincaré’s qualitative program (above) raised a natural next
 question: how does a fixed point’s classification <em>change</em> as a
 parameter varies? Aleksandr Andronov’s work on nonlinear oscillations,
@@ -840,7 +881,7 @@ Doklady Akademii Nauk SSSR 14(5) (1937), 247-250.</p>
   <div class="sphx-glr-thumbnail-title">Saddle-node, pitchfork, and Hopf bifurcation diagrams</div>
 </div></div></section>
 <section id="curtiss-and-hirschfelder-stiffness-and-bdf">
-<h2><a class="toc-backref" href="#id13" role="doc-backlink">1952 – Curtiss and Hirschfelder: Stiffness and BDF</a><a class="headerlink" href="#curtiss-and-hirschfelder-stiffness-and-bdf" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id14" role="doc-backlink">1952 – Curtiss and Hirschfelder: Stiffness and BDF</a><a class="headerlink" href="#curtiss-and-hirschfelder-stiffness-and-bdf" title="Link to this heading">#</a></h2>
 <p>Charles Curtiss and Joseph Hirschfelder, integrating chemical-kinetics
 equations, found that explicit methods crawled along with tiny steps
 even where the solution was perfectly smooth. They called such
@@ -872,7 +913,7 @@ Ordinary Differential Equations</em> (Prentice-Hall, 1971).</p>
   <div class="sphx-glr-thumbnail-title">Curtiss and Hirschfelder: stiffness and BDF</div>
 </div></div></section>
 <section id="fitzhugh-nagumo-and-the-excitable-neuron">
-<h2><a class="toc-backref" href="#id14" role="doc-backlink">1961-1962 – FitzHugh, Nagumo, and the Excitable Neuron</a><a class="headerlink" href="#fitzhugh-nagumo-and-the-excitable-neuron" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id15" role="doc-backlink">1961-1962 – FitzHugh, Nagumo, and the Excitable Neuron</a><a class="headerlink" href="#fitzhugh-nagumo-and-the-excitable-neuron" title="Link to this heading">#</a></h2>
 <p>Hodgkin and Huxley’s 1952 model of the squid giant axon uses four
 coupled nonlinear equations. Richard FitzHugh reduced its essential
 behavior to two. The first is a fast voltage-like variable <span class="math notranslate nohighlight">\(v\)</span>
@@ -905,7 +946,7 @@ Transmission Line Simulating Nerve Axon,” Proceedings of the IRE 50(10)
   <div class="sphx-glr-thumbnail-title">FitzHugh-Nagumo: excitability and spiking</div>
 </div></div></section>
 <section id="lorenz-and-deterministic-chaos">
-<h2><a class="toc-backref" href="#id15" role="doc-backlink">1963 – Lorenz and Deterministic Chaos</a><a class="headerlink" href="#lorenz-and-deterministic-chaos" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id16" role="doc-backlink">1963 – Lorenz and Deterministic Chaos</a><a class="headerlink" href="#lorenz-and-deterministic-chaos" title="Link to this heading">#</a></h2>
 <p>In 1961 Edward Lorenz was running a simplified 12-variable weather
 model on an early computer. He restarted a simulation midway, typing in
 values from a printout rounded to three decimal places instead of the
@@ -927,7 +968,7 @@ the Atmospheric Sciences 20(2) (1963), 130-141.</p>
   <div class="sphx-glr-thumbnail-title">Lorenz's butterfly effect: deterministic chaos</div>
 </div></div></section>
 <section id="dahlquist-s-a-stability">
-<h2><a class="toc-backref" href="#id16" role="doc-backlink">1963 – Dahlquist’s A-Stability</a><a class="headerlink" href="#dahlquist-s-a-stability" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id17" role="doc-backlink">1963 – Dahlquist’s A-Stability</a><a class="headerlink" href="#dahlquist-s-a-stability" title="Link to this heading">#</a></h2>
 <p>Applied to the test equation <span class="math notranslate nohighlight">\(y' = \lambda y\)</span>, one step of a method
 multiplies <span class="math notranslate nohighlight">\(y\)</span> by a <em>stability function</em> <span class="math notranslate nohighlight">\(R(z)\)</span>, with
 <span class="math notranslate nohighlight">\(z = \lambda h\)</span>. Germund Dahlquist called a method <em>A-stable</em> if
@@ -943,9 +984,13 @@ that the trapezoidal rule has the smallest error constant among them.
 Getting past that barrier is what implicit Runge-Kutta methods do
 (Butcher and Ehle, below).</p>
 <p><em>Implementation:</em> <a class="reference internal" href="../api/integrators.html#mathematicskit.integrators.implicit_euler_integrate" title="mathematicskit.integrators.implicit_euler_integrate"><code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.integrators.implicit_euler_integrate()</span></code></a>
-alongside <a class="reference internal" href="../api/integrators.html#mathematicskit.integrators.rk4_integrate" title="mathematicskit.integrators.rk4_integrate"><code class="xref py py-func docutils literal notranslate"><span class="pre">rk4_integrate()</span></code></a>. The tests
-check that at <span class="math notranslate nohighlight">\(\lambda h = 100\)</span> backward Euler follows the exact
-solution while RK4 blows up.</p>
+alongside <a class="reference internal" href="../api/integrators.html#mathematicskit.integrators.rk4_integrate" title="mathematicskit.integrators.rk4_integrate"><code class="xref py py-func docutils literal notranslate"><span class="pre">rk4_integrate()</span></code></a>, with each
+method’s <span class="math notranslate nohighlight">\(R(z)\)</span> in
+<a class="reference internal" href="../api/integrators.html#mathematicskit.integrators.stability_function" title="mathematicskit.integrators.stability_function"><code class="xref py py-func docutils literal notranslate"><span class="pre">stability_function()</span></code></a> and its region
+drawn by <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.ode_dynamics.visualizers.plot_stability_regions()</span></code>.
+The tests check that at <span class="math notranslate nohighlight">\(\lambda h = 100\)</span> backward Euler follows
+the exact solution while RK4 blows up, and that backward Euler’s region
+contains the whole sampled left half-plane.</p>
 <p><em>References:</em> G. Dahlquist, “A Special Stability Problem for Linear
 Multistep Methods,” BIT 3 (1963), 27-43.</p>
 <div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Applied to the test equation y&#x27; = \lambda y, a one-step method multiplies y by a stability function R(z), with z = \lambda h. Dahlquist (1963) called a method A-stable if |R(z)| \le 1 on the whole left half-plane, so that no decaying mode can ever be amplified, whatever the step size. Explicit methods never qualify, since their R is a polynomial and grows without bound. RK4&#x27;s region reaches only z \approx -2.785 on the real axis. Backward Euler&#x27;s R(z) = 1/(1 - z) is A-stable. Dahlquist also proved that no A-stable linear multistep method can exceed order 2 (his &quot;second barrier&quot;)."><img alt="" src="../_images/sphx_glr_plot_01_dahlquist_a_stability_thumb.png" />
@@ -953,7 +998,7 @@ Multistep Methods,” BIT 3 (1963), 27-43.</p>
   <div class="sphx-glr-thumbnail-title">Dahlquist's A-stability: backward Euler vs RK4</div>
 </div></div></section>
 <section id="butcher-ehle-and-radau-iia">
-<h2><a class="toc-backref" href="#id17" role="doc-backlink">1964-1969 – Butcher, Ehle, and Radau IIA</a><a class="headerlink" href="#butcher-ehle-and-radau-iia" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id18" role="doc-backlink">1964-1969 – Butcher, Ehle, and Radau IIA</a><a class="headerlink" href="#butcher-ehle-and-radau-iia" title="Link to this heading">#</a></h2>
 <p>John Butcher developed the algebraic theory of Runge-Kutta methods and,
 in 1964, fully implicit methods whose stages sit at Gauss and Radau
 quadrature points. These reach order <span class="math notranslate nohighlight">\(2s\)</span> or <span class="math notranslate nohighlight">\(2s - 1\)</span> with
@@ -985,7 +1030,7 @@ Problems</em> (Springer, 2nd ed. 1996), sec. IV.5 and IV.8.</p>
   <div class="sphx-glr-thumbnail-title">Butcher, Ehle and Radau IIA: L-stable implicit Runge-Kutta</div>
 </div></div></section>
 <section id="robertson-s-stiff-chemical-kinetics">
-<h2><a class="toc-backref" href="#id18" role="doc-backlink">1966 – Robertson’s Stiff Chemical Kinetics</a><a class="headerlink" href="#robertson-s-stiff-chemical-kinetics" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id19" role="doc-backlink">1966 – Robertson’s Stiff Chemical Kinetics</a><a class="headerlink" href="#robertson-s-stiff-chemical-kinetics" title="Link to this heading">#</a></h2>
 <p>H. H. Robertson modeled an autocatalytic reaction among three species
 with rate constants spanning nine orders of magnitude:</p>
 <div class="math notranslate nohighlight">
@@ -1010,7 +1055,7 @@ Equations,” in J. Walsh (ed.), <em>Numerical Analysis: An Introduction</em>
   <div class="sphx-glr-thumbnail-title">Robertson's stiff chemical kinetics</div>
 </div></div></section>
 <section id="prigogine-lefever-and-the-brusselator">
-<h2><a class="toc-backref" href="#id19" role="doc-backlink">1968 – Prigogine, Lefever, and the Brusselator</a><a class="headerlink" href="#prigogine-lefever-and-the-brusselator" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id20" role="doc-backlink">1968 – Prigogine, Lefever, and the Brusselator</a><a class="headerlink" href="#prigogine-lefever-and-the-brusselator" title="Link to this heading">#</a></h2>
 <p>Chemists long doubted that a homogeneous chemical reaction could
 oscillate. It seemed to conflict with the approach to equilibrium that
 thermodynamics requires. Ilya Prigogine and René Lefever showed that a
@@ -1039,7 +1084,7 @@ Instabilities in Dissipative Systems. II,” Journal of Chemical Physics
   <div class="sphx-glr-thumbnail-title">The Brusselator's Hopf bifurcation</div>
 </div></div></section>
 <section id="de-boor-and-swartz-collocation-for-boundary-value-problems">
-<h2><a class="toc-backref" href="#id20" role="doc-backlink">1973 – De Boor and Swartz: Collocation for Boundary-Value Problems</a><a class="headerlink" href="#de-boor-and-swartz-collocation-for-boundary-value-problems" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id21" role="doc-backlink">1973 – De Boor and Swartz: Collocation for Boundary-Value Problems</a><a class="headerlink" href="#de-boor-and-swartz-collocation-for-boundary-value-problems" title="Link to this heading">#</a></h2>
 <p>A two-point boundary-value problem fixes conditions at both ends, as in
 <span class="math notranslate nohighlight">\(y'' = f(x, y, y')\)</span> with <span class="math notranslate nohighlight">\(y(a) = \alpha\)</span> and
 <span class="math notranslate nohighlight">\(y(b) = \beta\)</span>, so there is no initial state to march forward from.
@@ -1076,7 +1121,7 @@ Bulletin de la Société Mathématique de France 42 (1914), 113-142.</p>
   <div class="sphx-glr-thumbnail-title">De Boor and Swartz: collocation for boundary-value problems</div>
 </div></div></section>
 <section id="kuramoto-s-synchronization-transition">
-<h2><a class="toc-backref" href="#id21" role="doc-backlink">1975 – Kuramoto’s Synchronization Transition</a><a class="headerlink" href="#kuramoto-s-synchronization-transition" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id22" role="doc-backlink">1975 – Kuramoto’s Synchronization Transition</a><a class="headerlink" href="#kuramoto-s-synchronization-transition" title="Link to this heading">#</a></h2>
 <p>Fireflies flash in unison, heart pacemaker cells fire together, and
 applause can fall into a common rhythm. Arthur Winfree had modeled such
 collective synchrony in 1967. Yoshiki Kuramoto found a version simple
@@ -1111,7 +1156,7 @@ oscillators,” Physica D 143 (2000), 1-20.</p>
   <div class="sphx-glr-thumbnail-title">The Kuramoto synchronization transition</div>
 </div></div></section>
 <section id="rossler-s-minimal-chaotic-flow">
-<h2><a class="toc-backref" href="#id22" role="doc-backlink">1976 – Rössler’s Minimal Chaotic Flow</a><a class="headerlink" href="#rossler-s-minimal-chaotic-flow" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id23" role="doc-backlink">1976 – Rössler’s Minimal Chaotic Flow</a><a class="headerlink" href="#rossler-s-minimal-chaotic-flow" title="Link to this heading">#</a></h2>
 <p>Otto Rössler looked for a chaotic flow even simpler than Lorenz’s,
 one whose mechanism could be seen directly. He built it around a
 geometric picture of how chaos arises: stretch, then fold, like
@@ -1138,7 +1183,7 @@ Physics Letters A 57(5) (1976), 397-398.</p>
   <div class="sphx-glr-thumbnail-title">The Rossler attractor</div>
 </div></div></section>
 <section id="feigenbaum-s-universality">
-<h2><a class="toc-backref" href="#id23" role="doc-backlink">1978 – Feigenbaum’s Universality</a><a class="headerlink" href="#feigenbaum-s-universality" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id24" role="doc-backlink">1978 – Feigenbaum’s Universality</a><a class="headerlink" href="#feigenbaum-s-universality" title="Link to this heading">#</a></h2>
 <p>Mitchell Feigenbaum studied the logistic map’s period-doubling route to
 chaos numerically, on a programmable calculator. He noticed that the
 parameter intervals between successive period doublings shrink by a
@@ -1162,7 +1207,7 @@ of Nonlinear Transformations,” Journal of Statistical Physics 19(1)
   <div class="sphx-glr-thumbnail-title">Feigenbaum's universal constant in the period-doubling cascade</div>
 </div></div></section>
 <section id="dormand-and-prince-embedded-pairs-and-adaptive-steps">
-<h2><a class="toc-backref" href="#id24" role="doc-backlink">1980 – Dormand and Prince: Embedded Pairs and Adaptive Steps</a><a class="headerlink" href="#dormand-and-prince-embedded-pairs-and-adaptive-steps" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id25" role="doc-backlink">1980 – Dormand and Prince: Embedded Pairs and Adaptive Steps</a><a class="headerlink" href="#dormand-and-prince-embedded-pairs-and-adaptive-steps" title="Link to this heading">#</a></h2>
 <p>A fixed step wastes effort where the solution is smooth and loses
 accuracy where it changes quickly. Erwin Fehlberg (1969) showed how an
 <em>embedded</em> pair, two Runge-Kutta formulas of orders <span class="math notranslate nohighlight">\(p\)</span> and
@@ -1190,7 +1235,7 @@ Problems,” NASA Technical Report R-315 (1969).</p>
   <div class="sphx-glr-thumbnail-title">Dormand-Prince: embedded pairs and adaptive step size</div>
 </div></div></section>
 <section id="yoshida-s-symplectic-composition">
-<h2><a class="toc-backref" href="#id25" role="doc-backlink">1990 – Yoshida’s Symplectic Composition</a><a class="headerlink" href="#yoshida-s-symplectic-composition" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id26" role="doc-backlink">1990 – Yoshida’s Symplectic Composition</a><a class="headerlink" href="#yoshida-s-symplectic-composition" title="Link to this heading">#</a></h2>
 <p>Haruo Yoshida showed how to raise the order of a symmetric integrator
 while keeping it symplectic, by <em>composing</em> it with itself. Three
 leapfrog substeps of lengths <span class="math notranslate nohighlight">\(w_1 h, w_0 h, w_1 h\)</span>, with</p>
@@ -1212,7 +1257,7 @@ Integrators,” Physics Letters A 150 (1990), 262-268.</p>
   <div class="sphx-glr-thumbnail-title">Yoshida's symplectic composition: fourth order from leapfrog</div>
 </div></div></section>
 <section id="see-also">
-<h2><a class="toc-backref" href="#id26" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id27" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="../api/ode_dynamics.html"><span class="doc">mathematicskit.ode_dynamics</span></a></p></li>
 <li><p><a class="reference internal" href="../api/integrators.html"><span class="doc">mathematicskit.integrators</span></a></p></li>
@@ -1272,6 +1317,7 @@ Integrators,” Physics Letters A 150 (1990), 262-268.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-s-method">1768 – Euler’s Method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verhulst-s-logistic-equation">1838 – Verhulst’s Logistic Equation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#poincare-s-qualitative-theory-of-odes">1881-1886 – Poincaré’s Qualitative Theory of ODEs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bashforth-and-adams-linear-multistep-methods">1883 – Bashforth and Adams: Linear Multistep Methods</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lyapunov-s-direct-method">1892 – Lyapunov’s Direct Method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#runge-heun-and-kutta-runge-kutta-methods">1895-1901 – Runge, Heun, and Kutta: Runge-Kutta Methods</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bendixson-s-negative-criterion">1901 – Bendixson’s Negative Criterion</a></li>

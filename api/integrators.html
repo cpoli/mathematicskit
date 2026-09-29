@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>mathematicskit.integrators &#8212; mathematicskit 0.4.0 documentation</title>
+    <title>mathematicskit.integrators &#8212; mathematicskit 0.5.0 documentation</title>
   
   
   
@@ -44,12 +44,13 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0" />
 
-    <script src="../_static/documentation_options.js?v=1437fa6d"></script>
+    <script src="../_static/documentation_options.js?v=70f82a29"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/sg-tags.js?v=d80f6fa4"></script>
     <script src="../_static/jupyterlite_sphinx.js?v=96e329c5"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/integrators';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -454,10 +455,11 @@
                   
   <section id="mathematicskit-integrators">
 <h1>mathematicskit.integrators<a class="headerlink" href="#mathematicskit-integrators" title="Link to this heading">#</a></h1>
-<p>Shared ODE integrators used by <code class="docutils literal notranslate"><span class="pre">ode_dynamics</span></code> and <code class="docutils literal notranslate"><span class="pre">pde</span></code>: fixed-step RK4,
-symplectic leapfrog and Yoshida, adaptive Dormand-Prince, hand-rolled
-backward Euler and scipy’s Radau/BDF for stiff systems, and collocation
-for two-point boundary-value problems. The “Numerical integration” and
+<p>Shared ODE integrators used by <code class="docutils literal notranslate"><span class="pre">ode_dynamics</span></code> and <code class="docutils literal notranslate"><span class="pre">pde</span></code>: fixed-step
+explicit Euler and RK4, Adams-Bashforth multistep methods, symplectic
+leapfrog and Yoshida, adaptive Dormand-Prince, hand-rolled backward Euler
+and scipy’s Radau/BDF for stiff systems, collocation for two-point
+boundary-value problems, and each method’s linear stability region. The “Numerical integration” and
 “Stiffness and boundary-value problems” sections of the
 <a class="reference internal" href="gallery/ode_dynamics/index.html"><span class="doc">ode_dynamics gallery</span></a> demonstrate
 each one, and <a class="reference internal" href="../history/ode_dynamics_breakthroughs.html"><span class="doc">Breakthroughs in Dynamical Systems</span></a> covers their
@@ -468,8 +470,13 @@ history.</p>
 across systems with different parameter values without recompiling (see
 <code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.integrators.fixed_step</span></code>).</p>
 <ul class="simple">
+<li><p><a class="reference internal" href="#mathematicskit.integrators.euler_integrate" title="mathematicskit.integrators.euler_integrate"><code class="xref py py-func docutils literal notranslate"><span class="pre">euler_integrate()</span></code></a> – explicit (forward) Euler, first order: the
+baseline every other method improves on.</p></li>
 <li><p><a class="reference internal" href="#mathematicskit.integrators.rk4_integrate" title="mathematicskit.integrators.rk4_integrate"><code class="xref py py-func docutils literal notranslate"><span class="pre">rk4_integrate()</span></code></a> – classical 4th-order Runge-Kutta (not
 energy-preserving).</p></li>
+<li><p><a class="reference internal" href="#mathematicskit.integrators.adams_bashforth_integrate" title="mathematicskit.integrators.adams_bashforth_integrate"><code class="xref py py-func docutils literal notranslate"><span class="pre">adams_bashforth_integrate()</span></code></a> – explicit Adams-Bashforth linear
+multistep methods of orders 1-4 (RK4 start-up), one right-hand-side
+evaluation per step.</p></li>
 <li><p><a class="reference internal" href="#mathematicskit.integrators.leapfrog_integrate" title="mathematicskit.integrators.leapfrog_integrate"><code class="xref py py-func docutils literal notranslate"><span class="pre">leapfrog_integrate()</span></code></a> (alias <a class="reference internal" href="#mathematicskit.integrators.velocity_verlet_integrate" title="mathematicskit.integrators.velocity_verlet_integrate"><code class="xref py py-func docutils literal notranslate"><span class="pre">velocity_verlet_integrate()</span></code></a>) –
 2nd-order symplectic Stormer-Verlet, for separable systems
 <code class="docutils literal notranslate"><span class="pre">pos''</span> <span class="pre">=</span> <span class="pre">force(pos,</span> <span class="pre">t)</span></code>.</p></li>
@@ -489,11 +496,24 @@ why stiff systems need implicit methods.</p></li>
 collocation (<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_bvp.html#scipy.integrate.solve_bvp" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.integrate.solve_bvp()</span></code></a>), returning a
 <a class="reference internal" href="#mathematicskit.integrators.BVPResult" title="mathematicskit.integrators.BVPResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">BVPResult</span></code></a>.</p></li>
 </ul>
+<p><a class="reference internal" href="#mathematicskit.integrators.stability_function" title="mathematicskit.integrators.stability_function"><code class="xref py py-func docutils literal notranslate"><span class="pre">stability_function()</span></code></a>, <a class="reference internal" href="#mathematicskit.integrators.is_absolutely_stable" title="mathematicskit.integrators.is_absolutely_stable"><code class="xref py py-func docutils literal notranslate"><span class="pre">is_absolutely_stable()</span></code></a> and
+<a class="reference internal" href="#mathematicskit.integrators.adams_bashforth_boundary_locus" title="mathematicskit.integrators.adams_bashforth_boundary_locus"><code class="xref py py-func docutils literal notranslate"><span class="pre">adams_bashforth_boundary_locus()</span></code></a> describe each explicit and
+implicit method’s linear stability region in the <code class="docutils literal notranslate"><span class="pre">z</span> <span class="pre">=</span> <span class="pre">lam</span> <span class="pre">*</span> <span class="pre">dt</span></code> plane
+(see <code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.integrators.stability</span></code>).</p>
 <p><a class="reference internal" href="ode_dynamics.html#module-mathematicskit.ode_dynamics" title="mathematicskit.ode_dynamics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.ode_dynamics</span></code></a> builds its phase portraits, bifurcation
 diagrams, and Poincare sections on top of this shared module rather than
 reimplementing per-domain integrators, exactly as physicskit’s
 <code class="docutils literal notranslate"><span class="pre">classical/core/integrators.py</span></code> wraps its own shared integrators for
 that subpackage’s njit-callback calling convention.</p>
+<p>The integrator kernels are compiled per process and deliberately not
+cached to disk (no <code class="docutils literal notranslate"><span class="pre">cache=True</span></code>). Each one takes the callback itself as
+an argument, so a cache entry is keyed on that callback’s dispatcher.
+Numba cannot re-save an index holding keys whose dispatchers belonged to
+an earlier process, so the second script to use a new callback would
+crash with <code class="docutils literal notranslate"><span class="pre">ReferenceError:</span> <span class="pre">underlying</span> <span class="pre">object</span> <span class="pre">has</span> <span class="pre">vanished</span></code>. The
+kernels that take only arrays and scalars (e.g. the <code class="docutils literal notranslate"><span class="pre">rhs</span></code> functions in
+<a class="reference internal" href="ode_dynamics.html#module-mathematicskit.ode_dynamics" title="mathematicskit.ode_dynamics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.ode_dynamics</span></code></a> and <a class="reference internal" href="pde.html#module-mathematicskit.pde" title="mathematicskit.pde"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.pde</span></code></a>) stay
+cached.</p>
 <p><a class="reference internal" href="#mathematicskit.integrators.njit" title="mathematicskit.integrators.njit"><code class="xref py py-func docutils literal notranslate"><span class="pre">njit()</span></code></a> is re-exported here for writing those callbacks: it is
 <code class="xref py py-func docutils literal notranslate"><span class="pre">numba.njit()</span></code> when Numba is installed (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span>
 <span class="pre">mathematicskit[fast]</span></code>) and a no-op decorator otherwise, with
@@ -582,6 +602,75 @@ cubic-spline solution evaluated anywhere in the interval.</p>
 </dl>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.integrators.adams_bashforth_boundary_locus">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.integrators.</span></span><span class="sig-name descname"><span class="pre">adams_bashforth_boundary_locus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">721</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/integrators/stability.html#adams_bashforth_boundary_locus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.integrators.adams_bashforth_boundary_locus" title="Link to this definition">#</a></dt>
+<dd><p>Boundary locus <span class="math notranslate nohighlight">\(z(\theta) = \rho(e^{i\theta})/\sigma(e^{i\theta})\)</span> of Adams-Bashforth.</p>
+<p>Every point where the characteristic polynomial has a root on the
+unit circle lies on this curve, so the stability region’s boundary
+is part of it (for orders 1 and 2 it is all of it).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>order</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – 1 to 4 (order 1 is explicit Euler).</p></li>
+<li><p><strong>n_points</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of <span class="math notranslate nohighlight">\(\theta\)</span> samples on <span class="math notranslate nohighlight">\([0, 2\pi]\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray of complex, shape (n_points,)</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">locus</span> <span class="o">=</span> <span class="n">adams_bashforth_boundary_locus</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_points</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">locus</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># AB2's locus crosses the negative real axis at z = -1 (theta = pi).</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">adams_bashforth_boundary_locus</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_points</span><span class="o">=</span><span class="mi">3</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="p">),</span> <span class="mi">12</span><span class="p">)</span>
+<span class="go">-1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.integrators.adams_bashforth_integrate">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.integrators.</span></span><span class="sig-name descname"><span class="pre">adams_bashforth_integrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rhs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/integrators/multistep.html#adams_bashforth_integrate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.integrators.adams_bashforth_integrate" title="Link to this definition">#</a></dt>
+<dd><p>Integrate <code class="docutils literal notranslate"><span class="pre">n_steps</span></code> of the order-<cite>order</cite> Adams-Bashforth method.</p>
+<p>The first <code class="docutils literal notranslate"><span class="pre">order</span> <span class="pre">-</span> <span class="pre">1</span></code> steps are RK4 steps, which supply the past
+slopes the multistep formula needs. Order 1 is explicit Euler.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rhs</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray" title="(in NumPy v2.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NDArray</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.double" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">double</span></code></a>], <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray" title="(in NumPy v2.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NDArray</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.double" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">double</span></code></a>]], <a class="reference external" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray" title="(in NumPy v2.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NDArray</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.double" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">double</span></code></a>]]</span>) – Numba-jitted right-hand-side function <code class="docutils literal notranslate"><span class="pre">rhs(state,</span> <span class="pre">t,</span> <span class="pre">params)</span> <span class="pre">-&gt;</span>
+<span class="pre">ndarray</span></code>.</p></li>
+<li><p><strong>state0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray" title="(in NumPy v2.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NDArray</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.double" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">double</span></code></a>]</span>) – Initial state vector.</p></li>
+<li><p><strong>t0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial time.</p></li>
+<li><p><strong>dt</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Step size.</p></li>
+<li><p><strong>n_steps</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of integration steps.</p></li>
+<li><p><strong>params</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray" title="(in NumPy v2.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NDArray</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.double" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">double</span></code></a>]</span>) – Parameter vector passed through to <cite>rhs</cite>.</p></li>
+<li><p><strong>order</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of past slopes used, 1 to 4; also the method’s order of
+accuracy.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray" title="(in NumPy v2.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NDArray</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.double" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">double</span></code></a>], <a class="reference external" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray" title="(in NumPy v2.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NDArray</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.double" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">double</span></code></a>]]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>times</strong> (<em>ndarray of float, shape (n_steps + 1,)</em>) – Time at each step, starting at <cite>t0</cite>.</p></li>
+<li><p><strong>states</strong> (<em>ndarray of float, shape (n_steps + 1, dim)</em>) – State at each step, starting at <cite>state0</cite>.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If <cite>order</cite> is not 1, 2, 3 or 4.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -698,6 +787,65 @@ step-size control (see <a class="reference internal" href="#mathematicskit.integ
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.integrators.euler_integrate">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.integrators.</span></span><span class="sig-name descname"><span class="pre">euler_integrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rhs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/integrators/fixed_step.html#euler_integrate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.integrators.euler_integrate" title="Link to this definition">#</a></dt>
+<dd><p>Integrate <code class="docutils literal notranslate"><span class="pre">n_steps</span></code> of explicit Euler starting from <code class="docutils literal notranslate"><span class="pre">state0</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rhs</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray" title="(in NumPy v2.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NDArray</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.double" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">double</span></code></a>], <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray" title="(in NumPy v2.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NDArray</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.double" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">double</span></code></a>]], <a class="reference external" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray" title="(in NumPy v2.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NDArray</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.double" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">double</span></code></a>]]</span>) – Numba-jitted right-hand-side function <code class="docutils literal notranslate"><span class="pre">rhs(state,</span> <span class="pre">t,</span> <span class="pre">params)</span> <span class="pre">-&gt;</span>
+<span class="pre">ndarray</span></code>.</p></li>
+<li><p><strong>state0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray" title="(in NumPy v2.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NDArray</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.double" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">double</span></code></a>]</span>) – Initial state vector.</p></li>
+<li><p><strong>t0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial time.</p></li>
+<li><p><strong>dt</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Step size.</p></li>
+<li><p><strong>n_steps</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of integration steps.</p></li>
+<li><p><strong>params</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray" title="(in NumPy v2.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NDArray</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.double" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">double</span></code></a>]</span>) – Parameter vector passed through to <cite>rhs</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray" title="(in NumPy v2.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NDArray</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.double" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">double</span></code></a>], <a class="reference external" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray" title="(in NumPy v2.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NDArray</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.double" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">double</span></code></a>]]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>times</strong> (<em>ndarray of float, shape (n_steps + 1,)</em>) – Time at each step, starting at <cite>t0</cite>.</p></li>
+<li><p><strong>states</strong> (<em>ndarray of float, shape (n_steps + 1, dim)</em>) – State at each step, starting at <cite>state0</cite>.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.integrators.euler_step">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.integrators.</span></span><span class="sig-name descname"><span class="pre">euler_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rhs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/integrators/fixed_step.html#euler_step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.integrators.euler_step" title="Link to this definition">#</a></dt>
+<dd><p>Single explicit (forward) Euler step: <code class="docutils literal notranslate"><span class="pre">state</span> <span class="pre">+</span> <span class="pre">dt</span> <span class="pre">*</span> <span class="pre">rhs(state,</span> <span class="pre">t)</span></code>.</p>
+<p>Follows the tangent line for one step (Euler 1768). The local error is
+<span class="math notranslate nohighlight">\(O(dt^2)\)</span>, so the global error over a fixed interval is
+<span class="math notranslate nohighlight">\(O(dt)\)</span>. For <code class="docutils literal notranslate"><span class="pre">y'</span> <span class="pre">=</span> <span class="pre">lam</span> <span class="pre">*</span> <span class="pre">y</span></code> one step multiplies <code class="docutils literal notranslate"><span class="pre">y</span></code> by
+<span class="math notranslate nohighlight">\(R(z) = 1 + z\)</span> with <span class="math notranslate nohighlight">\(z = lam \cdot dt\)</span>, so the method is
+stable only inside the disc <span class="math notranslate nohighlight">\(|1 + z| \le 1\)</span> (see
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.integrators.stability</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rhs</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray" title="(in NumPy v2.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NDArray</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.double" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">double</span></code></a>], <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray" title="(in NumPy v2.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NDArray</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.double" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">double</span></code></a>]], <a class="reference external" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray" title="(in NumPy v2.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NDArray</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.double" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">double</span></code></a>]]</span>) – Numba-jitted right-hand-side function <code class="docutils literal notranslate"><span class="pre">rhs(state,</span> <span class="pre">t,</span> <span class="pre">params)</span> <span class="pre">-&gt;</span>
+<span class="pre">ndarray</span></code>.</p></li>
+<li><p><strong>state</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray" title="(in NumPy v2.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NDArray</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.double" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">double</span></code></a>]</span>) – Current state vector.</p></li>
+<li><p><strong>t</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Current time.</p></li>
+<li><p><strong>dt</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Step size.</p></li>
+<li><p><strong>params</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray" title="(in NumPy v2.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NDArray</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.double" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">double</span></code></a>]</span>) – Parameter vector passed through to <cite>rhs</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray" title="(in NumPy v2.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NDArray</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.double" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">double</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray of float, shape (dim,)</em> – The state advanced by one step of size <cite>dt</cite>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="mathematicskit.integrators.implicit_euler_integrate">
 <span class="sig-prename descclassname"><span class="pre">mathematicskit.integrators.</span></span><span class="sig-name descname"><span class="pre">implicit_euler_integrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rhs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/integrators/implicit.html#implicit_euler_integrate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.integrators.implicit_euler_integrate" title="Link to this definition">#</a></dt>
 <dd><p>Integrate <code class="docutils literal notranslate"><span class="pre">n_steps</span></code> of backward Euler starting from <code class="docutils literal notranslate"><span class="pre">state0</span></code>.</p>
@@ -762,6 +910,37 @@ forward-difference Jacobian of <cite>rhs</cite> re-evaluated every iteration.</p
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#RuntimeError" title="(in Python v3.14)"><strong>RuntimeError</strong></a> – If Newton’s method does not converge within <cite>max_iter</cite> iterations.</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.integrators.is_absolutely_stable">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.integrators.</span></span><span class="sig-name descname"><span class="pre">is_absolutely_stable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/integrators/stability.html#is_absolutely_stable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.integrators.is_absolutely_stable" title="Link to this definition">#</a></dt>
+<dd><p>Whether <code class="docutils literal notranslate"><span class="pre">method</span></code> is absolutely stable at each <span class="math notranslate nohighlight">\(z = \lambda h\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>method</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – One of <code class="xref py py-data docutils literal notranslate"><span class="pre">STABILITY_METHODS</span></code>: <code class="docutils literal notranslate"><span class="pre">&quot;euler&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;implicit_euler&quot;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&quot;rk4&quot;</span></code>, or <code class="docutils literal notranslate"><span class="pre">&quot;adams_bashforth2&quot;</span></code> to <code class="docutils literal notranslate"><span class="pre">&quot;adams_bashforth4&quot;</span></code>.</p></li>
+<li><p><strong>z</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#complex" title="(in Python v3.14)"><em>complex</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#complex" title="(in Python v3.14)"><em>complex</em></a>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray of bool, same shape as <cite>z</cite> – True inside the stability region (boundary included).</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_absolutely_stable</span><span class="p">(</span><span class="s2">"euler"</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.5</span><span class="p">])</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="go">[True, False]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># AB2's real stability interval is [-1, 0], half of Euler's.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_absolutely_stable</span><span class="p">(</span><span class="s2">"adams_bashforth2"</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.9</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.1</span><span class="p">])</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="go">[True, False]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">is_absolutely_stable</span><span class="p">(</span><span class="s2">"implicit_euler"</span><span class="p">,</span> <span class="o">-</span><span class="mf">1e6</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -887,6 +1066,36 @@ forward-difference Jacobian of <cite>rhs</cite> re-evaluated every iteration.</p
 <dd class="field-odd"><p><em>ndarray of float, shape (dim,)</em> – The state advanced by one step of size <cite>dt</cite>.</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mathematicskit.integrators.stability_function">
+<span class="sig-prename descclassname"><span class="pre">mathematicskit.integrators.</span></span><span class="sig-name descname"><span class="pre">stability_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mathematicskit/integrators/stability.html#stability_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mathematicskit.integrators.stability_function" title="Link to this definition">#</a></dt>
+<dd><p>Stability function <span class="math notranslate nohighlight">\(R(z)\)</span> of a one-step method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>method</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>)</p></li>
+<li><p><strong>z</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#complex" title="(in Python v3.14)"><em>complex</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#complex" title="(in Python v3.14)"><em>complex</em></a>) – <span class="math notranslate nohighlight">\(\lambda h\)</span> values.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray of complex</em> – <span class="math notranslate nohighlight">\(R(z)\)</span>, the factor one step multiplies <span class="math notranslate nohighlight">\(y\)</span> by on
+<span class="math notranslate nohighlight">\(y' = \lambda y\)</span>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">complex</span><span class="p">(</span><span class="n">stability_function</span><span class="p">(</span><span class="s2">"euler"</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">))</span>
+<span class="go">(0.5+0j)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># RK4 reproduces e^z to fourth order.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">stability_function</span><span class="p">(</span><span class="s2">"rk4"</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">1e-7</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -1128,16 +1337,22 @@ truncation error too.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.integrators.BVPResult.y"><code class="docutils literal notranslate"><span class="pre">BVPResult.y</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.integrators.adams_bashforth_boundary_locus"><code class="docutils literal notranslate"><span class="pre">adams_bashforth_boundary_locus()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.integrators.adams_bashforth_integrate"><code class="docutils literal notranslate"><span class="pre">adams_bashforth_integrate()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.integrators.collocation_bvp"><code class="docutils literal notranslate"><span class="pre">collocation_bvp()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.integrators.dopri5_integrate"><code class="docutils literal notranslate"><span class="pre">dopri5_integrate()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.integrators.dopri5_step"><code class="docutils literal notranslate"><span class="pre">dopri5_step()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.integrators.euler_integrate"><code class="docutils literal notranslate"><span class="pre">euler_integrate()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.integrators.euler_step"><code class="docutils literal notranslate"><span class="pre">euler_step()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.integrators.implicit_euler_integrate"><code class="docutils literal notranslate"><span class="pre">implicit_euler_integrate()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.integrators.implicit_euler_step"><code class="docutils literal notranslate"><span class="pre">implicit_euler_step()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.integrators.is_absolutely_stable"><code class="docutils literal notranslate"><span class="pre">is_absolutely_stable()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.integrators.leapfrog_integrate"><code class="docutils literal notranslate"><span class="pre">leapfrog_integrate()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.integrators.leapfrog_step"><code class="docutils literal notranslate"><span class="pre">leapfrog_step()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.integrators.njit"><code class="docutils literal notranslate"><span class="pre">njit()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.integrators.rk4_integrate"><code class="docutils literal notranslate"><span class="pre">rk4_integrate()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.integrators.rk4_step"><code class="docutils literal notranslate"><span class="pre">rk4_step()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.integrators.stability_function"><code class="docutils literal notranslate"><span class="pre">stability_function()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.integrators.stiff_integrate"><code class="docutils literal notranslate"><span class="pre">stiff_integrate()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.integrators.velocity_verlet_integrate"><code class="docutils literal notranslate"><span class="pre">velocity_verlet_integrate()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematicskit.integrators.velocity_verlet_step"><code class="docutils literal notranslate"><span class="pre">velocity_verlet_step()</span></code></a></li>
