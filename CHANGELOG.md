@@ -30,8 +30,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `mathematicskit.integrators.njit` and `HAS_NUMBA`: `numba.njit` when
   numba is installed, a no-op decorator otherwise, for writing integrator
   callbacks that work either way.
-- `notebooks/quickstart.ipynb`, with Colab and Binder launch links.
-- Gallery "Launch Binder" and "JupyterLite" buttons, and download-all zips
+- `notebooks/quickstart.ipynb`, with a Colab launch link.
+- Gallery "JupyterLite" buttons, and download-all zips
   of each gallery's scripts and notebooks.
 - CI jobs that run the test suite and doctests without numba, and that
   build the distributions and check them with `twine check`; a release

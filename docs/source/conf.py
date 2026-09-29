@@ -214,18 +214,6 @@ sphinx_gallery_conf = {
     # back to file-path resolution on every single invocation.
     "backreferences_dir": "gen_modules/backreferences",
     "doc_module": ("mathematicskit",),
-    # "Launch Binder" button on every example: runs the generated notebook
-    # from the built site on the gh-pages branch (served from its root), in
-    # an environment installed from binder/requirements.txt.
-    "binder": {
-        "org": "cpoli",
-        "repo": "mathematicskit",
-        "branch": "gh-pages",
-        "binderhub_url": "https://mybinder.org",
-        "dependencies": ["./binder/requirements.txt"],
-        "notebooks_dir": "notebooks",
-        "use_jupyter_lab": True,
-    },
     # "Launch JupyterLite" button: runs the notebook in the browser on
     # Pyodide, with no server. Numba cannot run there, so this relies on
     # numba being optional (mathematicskit/_jit.py).

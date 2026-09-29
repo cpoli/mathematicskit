@@ -8,7 +8,7 @@
 | Code style | [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff) |
 | Downloads | [![Downloads](https://static.pepy.tech/badge/mathematicskit)](https://pepy.tech/project/mathematicskit) [![Downloads/Month](https://static.pepy.tech/badge/mathematicskit/month)](https://pepy.tech/project/mathematicskit) |
 | Community | [![GitHub Stars](https://img.shields.io/github/stars/cpoli/mathematicskit?style=social)](https://github.com/cpoli/mathematicskit) [![GitHub Forks](https://img.shields.io/github/forks/cpoli/mathematicskit?style=social)](https://github.com/cpoli/mathematicskit) [![Contributors](https://img.shields.io/github/contributors/cpoli/mathematicskit)](https://github.com/cpoli/mathematicskit/graphs/contributors) [![Last Commit](https://img.shields.io/github/last-commit/cpoli/mathematicskit)](https://github.com/cpoli/mathematicskit/commits/main) |
-| Try it online | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/cpoli/mathematicskit/blob/main/notebooks/quickstart.ipynb) [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/cpoli/mathematicskit/main?labpath=notebooks%2Fquickstart.ipynb) [![JupyterLite](https://jupyterlite.rtfd.io/en/latest/_static/badge.svg)](https://cpoli.github.io/mathematicskit/lite/lab/) |
+| Try it online | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/cpoli/mathematicskit/blob/main/notebooks/quickstart.ipynb) [![JupyterLite](https://jupyterlite.rtfd.io/en/latest/_static/badge.svg)](https://cpoli.github.io/mathematicskit/lite/lab/) |
 
 **See how the algorithms of computational mathematics actually work.**
 mathematicskit is a Python toolkit for learning and teaching numerical
@@ -68,7 +68,7 @@ ax.legend()
 ```
 
 The [quickstart notebook](https://github.com/cpoli/mathematicskit/blob/main/notebooks/quickstart.ipynb) tours six domains in
-ten minutes. Open it in Colab or Binder using the badges above.
+ten minutes. Open it in Colab using the badge above.
 
 ## Subpackages
 
