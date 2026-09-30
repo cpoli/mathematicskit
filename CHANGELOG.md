@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- The sdist now includes the test suite (each subpackage's `tests/` and
+  the root `conftest.py`), via a new `MANIFEST.in`. The 0.4.0 and 0.5.0
+  sdists had none, although the 0.4.0 notes said they did; the wheel is
+  unchanged and still ships no tests.
+
 ## [0.5.0] - 2026-09-29
 
 ### Added
