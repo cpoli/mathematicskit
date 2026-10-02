@@ -11,7 +11,7 @@ implemented, and CHANGELOG.md for the full roadmap.
 
 # Defined before the subpackage imports: each subpackage re-exports it via
 # ``from mathematicskit import __version__`` while this module is still loading.
-__version__ = "0.5.0"
+__version__ = "0.5.1"
 
 from mathematicskit import (  # noqa: E402
     abstract_algebra,
