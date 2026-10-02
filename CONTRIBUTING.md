@@ -127,16 +127,25 @@ path contains a leading underscore (for example
 
 ## Releasing
 
-1. Bump `version` in `pyproject.toml` and move the `CHANGELOG.md`
-   "Unreleased" entries under the new version.
-2. Merge to `main`, then publish a GitHub release tagged `vX.Y.Z`.
-   `.github/workflows/release.yml` builds the distributions, checks that
-   the tag matches `pyproject.toml`, and uploads to PyPI through trusted
-   publishing (no API token). It requires a one-time PyPI publisher setup,
-   described in the workflow's header comment.
-3. Rebuild and push the docs to `gh-pages`
-   (`python docs/make_readme_figure.py` first if the hero figure's code
-   changed).
+1. Bump `__version__` in `mathematicskit/__init__.py` (`pyproject.toml`
+   reads the version from there) and `version`/`date-released` in
+   `CITATION.cff`, and move the `CHANGELOG.md` "Unreleased" entries under
+   a new `## [X.Y.Z] - YYYY-MM-DD` section. Regenerate the README figures
+   (`python docs/make_readme_figure.py`,
+   `python docs/make_readme_subpackage_figures.py`) if their code changed.
+2. Merge to `main`, then push a tag `vX.Y.Z` on that commit:
+
+   ```bash
+   git tag vX.Y.Z && git push origin vX.Y.Z
+   ```
+
+   That is the only manual step. `.github/workflows/release.yml` checks
+   that the tag matches the built distributions, `CITATION.cff` and a
+   CHANGELOG section; uploads to PyPI through trusted publishing (no API
+   token); creates the GitHub Release with the CHANGELOG section as its
+   notes (Zenodo then archives it with a DOI); and deploys the docs to
+   `gh-pages`. The one-time setup on PyPI, GitHub and Zenodo is described
+   in the workflow's header comment.
 
 ## History entries
 

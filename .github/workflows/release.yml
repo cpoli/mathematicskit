@@ -1,13 +1,23 @@
 name: Release
 
-# Publishes to PyPI when a GitHub release is published (tag vX.Y.Z), using
-# PyPI trusted publishing -- no API token stored in the repo. One-time setup
-# on PyPI: project mathematicskit -> Publishing -> add a GitHub publisher
-# (owner cpoli, repo mathematicskit, workflow release.yml, environment pypi).
+# Push a tag vX.Y.Z to release. The tag must match
+# `mathematicskit.__version__` (the version is dynamic, read from
+# mathematicskit/__init__.py), CITATION.cff's `version`, and a
+# "## [X.Y.Z] - date" section in CHANGELOG.md. The workflow then publishes
+# to PyPI, creates the GitHub Release with that CHANGELOG section as its
+# notes, and deploys the docs to gh-pages.
+#
+# One-time setup on the services:
+# - PyPI: project mathematicskit -> Publishing -> add a GitHub trusted
+#   publisher (owner cpoli, repository mathematicskit, workflow release.yml,
+#   environment pypi). No API token is stored in the repository.
+# - GitHub: the environment "pypi" in the repository settings.
+# - Zenodo: enable the repository at zenodo.org/account/settings/github;
+#   every GitHub Release is then archived with its own DOI.
 
 on:
-  release:
-    types: [published]
+  push:
+    tags: ["v*"]
 
 jobs:
   build:
@@ -21,14 +31,33 @@ jobs:
       - run: pip install build twine
       - run: python -m build
       - run: twine check --strict dist/*
+      # The built file names carry the version setuptools read from
+      # mathematicskit.__version__.
       - name: Tag matches package version
         run: |
-          version=$(python -c "import tomllib; print(tomllib.load(open('pyproject.toml','rb'))['project']['version'])")
-          test "${GITHUB_REF_NAME#v}" = "$version"
+          version=${GITHUB_REF_NAME#v}
+          test -f "dist/mathematicskit-$version.tar.gz"
+          test -f "dist/mathematicskit-$version-py3-none-any.whl"
+      - name: Tag matches CITATION.cff
+        run: |
+          grep -qx "version: ${GITHUB_REF_NAME#v}" CITATION.cff
+      # Checked before publishing, so a missing section cannot leave a
+      # release on PyPI without its GitHub Release.
+      - name: Release notes from the CHANGELOG section
+        run: |
+          version=${GITHUB_REF_NAME#v}
+          awk -v v="$version" '
+            /^## / { if (found) exit; if (index($0, "## [" v "] ") == 1) { found = 1; next } }
+            found' CHANGELOG.md > notes.md
+          test -s notes.md
       - uses: actions/upload-artifact@v4
         with:
           name: dist
           path: dist/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: notes
+          path: notes.md
 
   publish:
     name: Publish to PyPI
@@ -45,3 +74,46 @@ jobs:
           name: dist
           path: dist/
       - uses: pypa/gh-action-pypi-publish@release/v1
+
+  github-release:
+    name: Create the GitHub Release
+    needs: publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - uses: actions/download-artifact@v4
+        with:
+          name: notes
+      - run: >-
+          gh release create "$GITHUB_REF_NAME" dist/*
+          --repo "$GITHUB_REPOSITORY"
+          --title "mathematicskit ${GITHUB_REF_NAME#v}"
+          --notes-file notes.md
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+  docs:
+    name: Deploy the docs
+    needs: publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -e ".[fast,docs]"
+      - run: cd docs && MPLBACKEND=Agg make html
+      - run: touch docs/build/html/.nojekyll
+      - uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ github.token }}
+          publish_dir: docs/build/html
+          commit_message: "Rebuild docs for ${{ github.ref_name }}"
