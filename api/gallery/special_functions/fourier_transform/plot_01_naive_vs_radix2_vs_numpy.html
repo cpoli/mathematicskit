@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>O(n^2) vs. O(n log n): naive DFT vs. radix-2 FFT vs. numpy.fft &#8212; mathematicskit 0.5.0 documentation</title>
+    <title>O(n^2) vs. O(n log n): naive DFT vs. radix-2 FFT vs. numpy.fft &#8212; mathematicskit 0.5.1 documentation</title>
   
   
   
@@ -44,7 +44,7 @@
   <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0" />
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0" />
 
-    <script src="../../../../_static/documentation_options.js?v=70f82a29"></script>
+    <script src="../../../../_static/documentation_options.js?v=d9b85e4f"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../../_static/sg-tags.js?v=d80f6fa4"></script>
@@ -672,7 +672,7 @@ directly.</p>
 </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="s2">max |radix2 - numpy| = </span><span class="si">{</span><a class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="float"><span class="n">result</span><span class="o">.</span><span class="n">max_error_radix2_vs_numpy</span></a><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="w">
 </span></pre></div></div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>max |naive - numpy|  = 2.70e-11
-max |radix2 - numpy| = 5.73e-14
+max |radix2 - numpy| = 4.83e-14
 </pre></div>
 </div>
 </section>
@@ -685,18 +685,18 @@ max |radix2 - numpy| = 5.73e-14
 </span><span class="w">
 </span><span class="n">plot_fft_timing_comparison</span><span class="p">(</span><a class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="list"><span class="n">sizes</span></a><span class="p">)</span><span class="w">
 </span></pre></div></div>
-<img src="../../../../_images/sphx_glr_plot_01_naive_vs_radix2_vs_numpy_001.png" srcset="../../../../_images/sphx_glr_plot_01_naive_vs_radix2_vs_numpy_001.png" alt="FFT method timing comparison" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>n=   64: naive=   0.062 ms, radix2=   0.153 ms, numpy=  0.0086 ms
-n=  128: naive=   0.185 ms, radix2=   0.288 ms, numpy=  0.0058 ms
-n=  256: naive=   0.695 ms, radix2=   0.577 ms, numpy=  0.0059 ms
-n=  512: naive=   3.042 ms, radix2=   1.145 ms, numpy=  0.0070 ms
-n= 1024: naive=  11.055 ms, radix2=   2.291 ms, numpy=  0.0144 ms
-n= 2048: naive=  51.286 ms, radix2=   4.607 ms, numpy=  0.0225 ms
-n= 4096: naive= 252.637 ms, radix2=   9.396 ms, numpy=  0.0416 ms
+<img src="../../../../_images/sphx_glr_plot_01_naive_vs_radix2_vs_numpy_001.png" srcset="../../../../_images/sphx_glr_plot_01_naive_vs_radix2_vs_numpy_001.png" alt="FFT method timing comparison" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>n=   64: naive=   0.243 ms, radix2=   0.639 ms, numpy=  0.0231 ms
+n=  128: naive=   0.786 ms, radix2=   1.299 ms, numpy=  0.0219 ms
+n=  256: naive=   2.932 ms, radix2=   2.570 ms, numpy=  0.0251 ms
+n=  512: naive=  11.461 ms, radix2=   5.183 ms, numpy=  0.0455 ms
+n= 1024: naive=  45.792 ms, radix2=  10.321 ms, numpy=  0.0637 ms
+n= 2048: naive= 157.546 ms, radix2=  21.618 ms, numpy=  0.0925 ms
+n= 4096: naive= 530.991 ms, radix2=  41.171 ms, numpy=  0.1285 ms
 
 &lt;Axes: title={'center': 'FFT method timing comparison'}, xlabel='n', ylabel='time (s)'&gt;
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.659 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.870 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-api-gallery-special-functions-fourier-transform-plot-01-naive-vs-radix2-vs-numpy-py">
 <div class="lite-badge docutils container">
 <a class="reference external image-reference" href="../../../../lite/lab/index.html?path=api/gallery/special_functions/fourier_transform/plot_01_naive_vs_radix2_vs_numpy.ipynb"><img alt="Launch JupyterLite" src="../../../../_images/jupyterlite_badge_logo143.svg" style="width: 150px;" />

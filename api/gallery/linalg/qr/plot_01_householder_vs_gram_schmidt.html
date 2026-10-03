@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Householder vs. Gram-Schmidt QR &#8212; mathematicskit 0.5.0 documentation</title>
+    <title>Householder vs. Gram-Schmidt QR &#8212; mathematicskit 0.5.1 documentation</title>
   
   
   
@@ -44,7 +44,7 @@
   <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0" />
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0" />
 
-    <script src="../../../../_static/documentation_options.js?v=70f82a29"></script>
+    <script src="../../../../_static/documentation_options.js?v=d9b85e4f"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../../_static/sg-tags.js?v=d80f6fa4"></script>
@@ -680,9 +680,9 @@ preferring Householder in production numerical software.</p>
 </span><span class="p">)</span><span class="p">:</span><span class="w">
 </span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><a class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="str"><span class="n">label</span></a><span class="si">:</span><span class="s2">&gt;28s</span><span class="si">}</span><span class="s2">: ||QR - A|| = </span><span class="si">{</span><a class="sphx-glr-backref-module-numpy-linalg sphx-glr-backref-type-py-function reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.norm.html#numpy.linalg.norm" title="numpy.linalg.norm"><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><a class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><span class="n">result</span><span class="o">.</span><span class="n">Q</span></a><span class="w"> </span><span class="o">&#64;</span><span class="w"> </span><a class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><span class="n">result</span><span class="o">.</span><span class="n">R</span></a><span class="w"> </span><span class="o">-</span><span class="w"> </span><a class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><span class="n">A</span></a><span class="p">)</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">, orthogonality error = </span><span class="si">{</span><a class="sphx-glr-backref-module-mathematicskit-linalg sphx-glr-backref-type-py-function reference internal" href="../../../linalg.html#mathematicskit.linalg.orthogonality_error" title="mathematicskit.linalg.orthogonality_error"><span class="n">orthogonality_error</span></a><span class="p">(</span><a class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><span class="n">result</span><span class="o">.</span><span class="n">Q</span></a><span class="p">)</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="w">
 </span></pre></div></div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>             householder: ||QR - A|| = 2.36e-15, orthogonality error = 4.44e-16
- gram_schmidt (modified): ||QR - A|| = 3.38e-16, orthogonality error = 2.22e-16
-gram_schmidt (classical): ||QR - A|| = 5.12e-16, orthogonality error = 2.22e-16
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>             householder: ||QR - A|| = 2.09e-15, orthogonality error = 5.55e-16
+ gram_schmidt (modified): ||QR - A|| = 6.50e-16, orthogonality error = 2.22e-16
+gram_schmidt (classical): ||QR - A|| = 5.24e-16, orthogonality error = 2.22e-16
 </pre></div>
 </div>
 </section>
@@ -699,12 +699,12 @@ gap between the three methods.</p>
 </span><span class="p">)</span><span class="p">:</span><span class="w">
 </span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><a class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="str"><span class="n">label</span></a><span class="si">:</span><span class="s2">&gt;28s</span><span class="si">}</span><span class="s2">: orthogonality error = </span><span class="si">{</span><a class="sphx-glr-backref-module-mathematicskit-linalg sphx-glr-backref-type-py-function reference internal" href="../../../linalg.html#mathematicskit.linalg.orthogonality_error" title="mathematicskit.linalg.orthogonality_error"><span class="n">orthogonality_error</span></a><span class="p">(</span><a class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><span class="n">result</span><span class="o">.</span><span class="n">Q</span></a><span class="p">)</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="w">
 </span></pre></div></div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>             householder: orthogonality error = 6.661e-16
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>             householder: orthogonality error = 2.220e-16
  gram_schmidt (modified): orthogonality error = 7.071e-09
 gram_schmidt (classical): orthogonality error = 5.000e-01
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.001 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.002 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-api-gallery-linalg-qr-plot-01-householder-vs-gram-schmidt-py">
 <div class="lite-badge docutils container">
 <a class="reference external image-reference" href="../../../../lite/lab/index.html?path=api/gallery/linalg/qr/plot_01_householder_vs_gram_schmidt.ipynb"><img alt="Launch JupyterLite" src="../../../../_images/jupyterlite_badge_logo71.svg" style="width: 150px;" />

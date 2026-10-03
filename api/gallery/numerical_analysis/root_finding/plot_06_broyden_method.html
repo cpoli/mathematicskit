@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Broyden’s quasi-Newton method &#8212; mathematicskit 0.5.0 documentation</title>
+    <title>Broyden’s quasi-Newton method &#8212; mathematicskit 0.5.1 documentation</title>
   
   
   
@@ -44,7 +44,7 @@
   <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0" />
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0" />
 
-    <script src="../../../../_static/documentation_options.js?v=70f82a29"></script>
+    <script src="../../../../_static/documentation_options.js?v=d9b85e4f"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../../_static/sg-tags.js?v=d80f6fa4"></script>
@@ -695,9 +695,9 @@ differences at <span class="math notranslate nohighlight">\(n = 40\)</span> inte
 </span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><a class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="str"><span class="n">result</span><span class="o">.</span><span class="n">method</span></a><span class="si">:</span><span class="s2">8s</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><a class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="int"><span class="n">result</span><span class="o">.</span><span class="n">iterations</span></a><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2"> iterations, </span><span class="si">{</span><a class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="int"><span class="n">n_eval</span></a><span class="si">:</span><span class="s2">4d</span><span class="si">}</span><span class="s2"> evaluations of F, final residual </span><span class="si">{</span><a class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64"><span class="n">residual</span></a><span class="si">:</span><span class="s2">.1e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="w">
 </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="s2">max |u_newton - u_broyden| = </span><span class="si">{</span><a class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc"><span class="n">np</span><span class="o">.</span><span class="n">abs</span></a><span class="p">(</span><a class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><span class="n">newton</span><span class="o">.</span><span class="n">root</span></a><span class="w"> </span><span class="o">-</span><span class="w"> </span><a class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><span class="n">broyden</span><span class="o">.</span><span class="n">root</span></a><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="p">)</span><span class="si">:</span><span class="s2">.1e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="w">
 </span></pre></div></div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>newton  :  4 iterations,  325 evaluations of F, final residual 1.5e-13
-broyden :  5 iterations,   86 evaluations of F, final residual 1.3e-13
-max |u_newton - u_broyden| = 2.2e-16
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>newton  :  4 iterations,  325 evaluations of F, final residual 1.7e-13
+broyden :  5 iterations,   86 evaluations of F, final residual 1.6e-13
+max |u_newton - u_broyden| = 1.1e-16
 </pre></div>
 </div>
 <section id="residual-against-iterations-and-against-cost">
@@ -728,7 +728,7 @@ max |u_newton - u_broyden| = 2.2e-16
 </span><span class="w">
 </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="p">)</span><span class="w">
 </span></pre></div></div>
-<img src="../../../../_images/sphx_glr_plot_06_broyden_method_001.png" srcset="../../../../_images/sphx_glr_plot_06_broyden_method_001.png" alt="Solution of the discretized Bratu problem, Newton needs fewer iterations..., ...but Broyden needs fewer evaluations" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.113 seconds)</p>
+<img src="../../../../_images/sphx_glr_plot_06_broyden_method_001.png" srcset="../../../../_images/sphx_glr_plot_06_broyden_method_001.png" alt="Solution of the discretized Bratu problem, Newton needs fewer iterations..., ...but Broyden needs fewer evaluations" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.347 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-api-gallery-numerical-analysis-root-finding-plot-06-broyden-method-py">
 <div class="lite-badge docutils container">
 <a class="reference external image-reference" href="../../../../lite/lab/index.html?path=api/gallery/numerical_analysis/root_finding/plot_06_broyden_method.ipynb"><img alt="Launch JupyterLite" src="../../../../_images/jupyterlite_badge_logo91.svg" style="width: 150px;" />
