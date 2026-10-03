@@ -3,10 +3,10 @@
 What mathematicskit does not do yet, in priority order.
 
 mathematicskit already covers 18 domains, with 15 to 27 history
-breakthroughs per domain, each with its own gallery example. Its weak
-points are elsewhere. The release pipeline has never run (item 1), and
-there is no material shaped for the instructors the README addresses
-(item 2). Item 3 collects the work before 1.0.
+breakthroughs per domain, each with its own gallery example, and a
+release is a tag push. Its weak point is elsewhere: there is no
+material shaped for the instructors the README addresses (item 1).
+Item 2 collects the work before 1.0.
 
 Each item lists why it matters, the current state, and a sketch of the
 approach. The project conventions apply to all of them: call
@@ -15,40 +15,7 @@ they don't, NumPy-style docstrings citing the source, tests against
 closed-form results, `mypy` clean, working without numba, and a history
 breakthrough with its own gallery example for every new classic result.
 
-## 1. A release pipeline that works
-
-**Why.** A release today is a manual sequence, and the automated one
-would fail on its first run.
-
-**Now.**
-- `.github/workflows/release.yml` has never run, and the repository has
-  no GitHub Releases: 0.3.0 to 0.5.0 were tagged and uploaded by hand.
-- Its "Tag matches package version" step reads
-  `pyproject.toml`'s `[project] version`, which no longer exists: since
-  0.4.0 the version is dynamic, read from
-  `mathematicskit/__init__.py`. The step would fail with a `KeyError`.
-- `CONTRIBUTING.md` ("Releasing", step 1) still says to bump the version
-  in `pyproject.toml`.
-- `docs.yml` builds the site but does not deploy it; `gh-pages` is
-  pushed by hand.
-- The sdist fix in "Unreleased" (the test suite was missing from the
-  0.4.0 and 0.5.0 sdists) is waiting for a 0.5.1.
-
-**Approach.**
-- Check the tag against `mathematicskit.__version__` (or the built
-  wheel's metadata) instead of `pyproject.toml`, and fix the
-  CONTRIBUTING step.
-- Register `release.yml` as a PyPI trusted publisher and create the
-  `pypi` environment on GitHub (the workflow header lists the settings).
-- Deploy the docs from CI: on a release, the docs job pushes the built
-  site to `gh-pages`, as tbkit's release workflow does.
-- Create the GitHub Release from the CHANGELOG section, so a tag is the
-  only manual step.
-- Connect the repository to Zenodo so each release gets a citable DOI,
-  and add it to `CITATION.cff` and the README.
-- Ship 0.5.1 through the new pipeline as its first run.
-
-## 2. Course material for instructors
+## 1. Course material for instructors
 
 **Why.** The README offers instructors "ready to hand out" material, but
 a gallery example is a worked answer, not an exercise.
@@ -68,7 +35,7 @@ about 310 gallery examples, downloadable as notebooks. No exercises.
   FFT, spectral PDE methods, filters, convolution) and "Fixed points
   everywhere" (root finding, maps, Markov chains, PageRank).
 
-## 3. On the way to 1.0
+## 2. On the way to 1.0
 
 1.0 freezes the public API (see `CONTRIBUTING.md`), so the review comes
 before it.
@@ -179,6 +146,19 @@ were missing, despite the plan: `Bisection` now records its brackets
 a result, since the logistic map has no result dataclass, and
 `animate_life` takes the history array that `CellularAutomaton.run`
 returns.
+
+### 0.5.1
+
+**A release pipeline that works** (formerly item 1). Pushing a tag
+`vX.Y.Z` is now the only manual step. `release.yml` checks the tag
+against the built distributions (whose version comes from
+`mathematicskit.__version__`), `CITATION.cff` and a CHANGELOG section,
+then publishes to PyPI through trusted publishing, creates the GitHub
+Release from that CHANGELOG section, and deploys the docs to
+`gh-pages`. Zenodo archives each GitHub Release; the concept DOI
+[10.5281/zenodo.23116267](https://doi.org/10.5281/zenodo.23116267) is
+in `CITATION.cff` and the README. 0.5.1, which restores the test suite
+to the sdist, was the pipeline's first run.
 
 ## Where mathematicskit stands
 
