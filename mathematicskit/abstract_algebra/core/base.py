@@ -17,7 +17,17 @@ from typing import Optional
 
 import numpy as np
 
-__all__ = ["FiniteGroup", "GroupPropertiesResult", "SylowResult", "CompositionSeriesResult", "HomomorphismResult", "Polynomial"]
+__all__ = [
+    "FiniteGroup",
+    "GroupPropertiesResult",
+    "SylowResult",
+    "CompositionSeriesResult",
+    "HomomorphismResult",
+    "CharacterTableResult",
+    "Polynomial",
+    "MultivariatePolynomial",
+    "GroebnerResult",
+]
 
 
 class FiniteGroup(ABC):
@@ -159,6 +169,29 @@ class HomomorphismResult:
     is_homomorphism: bool
 
 
+@dataclass
+class CharacterTableResult:
+    """Container for the complex character table of a finite group."""
+
+    classes: list
+    """list of list: The conjugacy classes, identity class first."""
+
+    table: np.ndarray
+    """ndarray, complex, shape (r, r): ``table[i, j]`` is the :math:`i`-th
+    irreducible character on class ``j``; the trivial character is row 0,
+    and rows are sorted by degree."""
+
+    @property
+    def class_sizes(self) -> list:
+        """list of int: Size of each conjugacy class."""
+        return [len(c) for c in self.classes]
+
+    @property
+    def degrees(self) -> list:
+        """list of int: The irreducible degrees :math:`\\chi_i(1)`, whose squares sum to :math:`|G|`."""
+        return [int(round(d.real)) for d in self.table[:, 0]]
+
+
 class Polynomial:
     r"""A polynomial with coefficients over :math:`\mathbb{Q}` (``modulus=None``,
     stored as exact :class:`fractions.Fraction`) or :math:`\mathrm{GF}(p)`
@@ -298,3 +331,186 @@ class Polynomial:
     def __repr__(self) -> str:
         terms = [f"{c}*x^{k}" for k, c in enumerate(self.coeffs) if c != (Fraction(0) if self.modulus is None else 0)]
         return " + ".join(terms) if terms else "0"
+
+
+_MONOMIAL_ORDERS = {
+    "lex": lambda e: e,
+    "grlex": lambda e: (sum(e), e),
+    "grevlex": lambda e: (sum(e), tuple(-x for x in reversed(e))),
+}
+
+
+class MultivariatePolynomial:
+    r"""A polynomial in :math:`n` variables over :math:`\mathbb{Q}` or :math:`\mathrm{GF}(p)`.
+
+    Stored sparsely as ``{exponent tuple: coefficient}``, with exact
+    :class:`fractions.Fraction` coefficients (``modulus=None``) or
+    residues mod a prime ``p``, as for the univariate :class:`Polynomial`.
+    Supports ``+``, ``-``, ``*``, integer powers and scalar arithmetic, so
+    polynomials can be written naturally from :meth:`variables`. Monomials
+    are compared by one of the orders ``"lex"`` (:math:`x_1 > x_2 > \dots`),
+    ``"grlex"`` (total degree, then lex) or ``"grevlex"`` (total degree,
+    then reverse lex). See Cox, Little & O'Shea, *Ideals, Varieties, and
+    Algorithms*, 4th ed. (2015), Ch. 2.
+
+    Parameters
+    ----------
+    terms : dict
+        ``{(e_1, ..., e_n): coefficient}``.
+    n_vars : int
+    modulus : int, optional
+
+    Examples
+    --------
+    >>> x, y = MultivariatePolynomial.variables(2)
+    >>> f = (x + y) ** 2 - 1
+    >>> f
+    x0^2 + 2*x0*x1 + x1^2 - 1
+    >>> f.leading_term("lex"), f.leading_term("grevlex")
+    (((2, 0), Fraction(1, 1)), ((2, 0), Fraction(1, 1)))
+    >>> f.evaluate([1, 2])
+    Fraction(8, 1)
+    """
+
+    def __init__(self, terms: dict, n_vars: int, modulus: Optional[int] = None):
+        self.n_vars = int(n_vars)
+        self.modulus = modulus
+        self.terms: dict = {}
+        for exponent, c in terms.items():
+            c = Fraction(c) if modulus is None else int(c) % modulus
+            if c != 0:
+                key = tuple(int(e) for e in exponent)
+                if len(key) != self.n_vars:
+                    raise ValueError(f"exponent {key} does not have {self.n_vars} entries")
+                self.terms[key] = c
+
+    @classmethod
+    def variables(cls, n_vars: int, modulus: Optional[int] = None) -> list:
+        """list of MultivariatePolynomial: The variables :math:`x_0, \\dots, x_{n-1}`."""
+        return [cls({tuple(int(i == j) for j in range(n_vars)): 1}, n_vars, modulus) for i in range(n_vars)]
+
+    def _coerce(self, other) -> MultivariatePolynomial:
+        if isinstance(other, MultivariatePolynomial):
+            if other.n_vars != self.n_vars or other.modulus != self.modulus:
+                raise ValueError("cannot combine polynomials in different rings")
+            return other
+        return MultivariatePolynomial({(0,) * self.n_vars: other}, self.n_vars, self.modulus)
+
+    def __add__(self, other) -> MultivariatePolynomial:
+        other = self._coerce(other)
+        terms = dict(self.terms)
+        for e, c in other.terms.items():
+            terms[e] = terms.get(e, 0) + c
+        return MultivariatePolynomial(terms, self.n_vars, self.modulus)
+
+    __radd__ = __add__
+
+    def __neg__(self) -> MultivariatePolynomial:
+        return MultivariatePolynomial({e: -c for e, c in self.terms.items()}, self.n_vars, self.modulus)
+
+    def __sub__(self, other) -> MultivariatePolynomial:
+        return self + (-self._coerce(other))
+
+    def __rsub__(self, other) -> MultivariatePolynomial:
+        return self._coerce(other) - self
+
+    def __mul__(self, other) -> MultivariatePolynomial:
+        other = self._coerce(other)
+        terms: dict = {}
+        for e1, c1 in self.terms.items():
+            for e2, c2 in other.terms.items():
+                e = tuple(a + b for a, b in zip(e1, e2, strict=True))
+                terms[e] = terms.get(e, 0) + c1 * c2
+        return MultivariatePolynomial(terms, self.n_vars, self.modulus)
+
+    __rmul__ = __mul__
+
+    def __pow__(self, k: int) -> MultivariatePolynomial:
+        result = self._coerce(1)
+        for _ in range(int(k)):
+            result = result * self
+        return result
+
+    def __eq__(self, other) -> bool:
+        if not isinstance(other, MultivariatePolynomial):
+            other = self._coerce(other)
+        return self.n_vars == other.n_vars and self.modulus == other.modulus and self.terms == other.terms
+
+    def __hash__(self) -> int:
+        return hash((self.n_vars, self.modulus, frozenset(self.terms.items())))
+
+    def is_zero(self) -> bool:
+        """bool: Whether every coefficient is zero."""
+        return not self.terms
+
+    @property
+    def total_degree(self) -> int:
+        """int: The largest total degree of a term (``-1`` for zero)."""
+        return max((sum(e) for e in self.terms), default=-1)
+
+    def leading_term(self, order: str = "lex") -> tuple:
+        """``(exponent, coefficient)`` of the largest monomial under ``order``.
+
+        Parameters
+        ----------
+        order : {"lex", "grlex", "grevlex"}
+
+        Returns
+        -------
+        tuple
+        """
+        if not self.terms:
+            raise ValueError("the zero polynomial has no leading term")
+        e = max(self.terms, key=_MONOMIAL_ORDERS[order])
+        return e, self.terms[e]
+
+    def _inverse(self, c):
+        return 1 / c if self.modulus is None else pow(int(c), -1, self.modulus)
+
+    def monic(self, order: str = "lex") -> MultivariatePolynomial:
+        """The polynomial scaled so its leading coefficient is 1."""
+        inv = self._inverse(self.leading_term(order)[1])
+        return MultivariatePolynomial({e: c * inv for e, c in self.terms.items()}, self.n_vars, self.modulus)
+
+    def evaluate(self, point):
+        """Evaluate at ``point``, a sequence of ``n_vars`` values."""
+        total = Fraction(0) if self.modulus is None else 0
+        for e, c in self.terms.items():
+            term = c
+            for v, k in zip(point, e, strict=True):
+                term = term * v**k
+            total = total + term
+        return total if self.modulus is None else total % self.modulus
+
+    def __repr__(self) -> str:
+        if not self.terms:
+            return "0"
+        parts = []
+        for e in sorted(self.terms, key=_MONOMIAL_ORDERS["grlex"], reverse=True):
+            c = self.terms[e]
+            monomial = "*".join(f"x{i}" + (f"^{k}" if k > 1 else "") for i, k in enumerate(e) if k)
+            sign = "-" if c < 0 and self.modulus is None else "+"
+            magnitude = abs(c) if self.modulus is None else c
+            text = monomial if magnitude == 1 and monomial else (f"{magnitude}*{monomial}" if monomial else f"{magnitude}")
+            parts.append((sign, text))
+        first_sign, first = parts[0]
+        return ("-" if first_sign == "-" else "") + first + "".join(f" {s} {t}" for s, t in parts[1:])
+
+
+@dataclass
+class GroebnerResult:
+    """Container for a reduced Gröbner basis."""
+
+    basis: list
+    """list of MultivariatePolynomial: The reduced Gröbner basis: monic, and
+    no term of any element divisible by another element's leading monomial.
+    Unique for the ideal and monomial order."""
+
+    order: str
+    """str: The monomial order, ``"lex"``, ``"grlex"`` or ``"grevlex"``."""
+
+    s_pairs: int = 0
+    """int: Number of S-polynomials reduced by Buchberger's algorithm."""
+
+    zero_reductions: int = 0
+    """int: How many of those reduced to zero, i.e. wasted work."""

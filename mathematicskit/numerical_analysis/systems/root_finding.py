@@ -48,6 +48,9 @@ class Bisection(IterativeRootFinder):
     >>> # ``history`` holds exactly one midpoint per iteration performed.
     >>> len(result.history) == result.iterations
     True
+    >>> # ``extra["brackets"][k]`` is the bracket that ``history[k]`` bisected.
+    >>> result.extra["brackets"][0].tolist()
+    [0.0, 2.0]
     """
 
     def __init__(self, f: Callable[[float], float], a: float, b: float, tol: float = DEFAULT_RTOL, max_iter: int = DEFAULT_MAX_ITER):
@@ -72,10 +75,12 @@ class Bisection(IterativeRootFinder):
         # The first recorded iterate is produced by the loop below; seeding
         # ``history`` with the same midpoint here would duplicate it.
         history: list = []
+        brackets: list = []
         converged = False
         n_iter = 0
         while n_iter < self.max_iter:
             n_iter += 1
+            brackets.append((a, b))
             c = 0.5 * (a + b)
             fc = self.f(c)
             history.append(c)
@@ -86,7 +91,8 @@ class Bisection(IterativeRootFinder):
                 b = c
             else:
                 a, fa = c, fc
-        return RootResult(root=history[-1], converged=converged, iterations=n_iter, history=np.array(history), method="bisection", extra={"bracket": (a, b)})
+        extra = {"bracket": (a, b), "brackets": np.array(brackets)}
+        return RootResult(root=history[-1], converged=converged, iterations=n_iter, history=np.array(history), method="bisection", extra=extra)
 
 
 class NewtonRaphson(IterativeRootFinder):

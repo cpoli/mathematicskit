@@ -1,5 +1,6 @@
 """Concrete probability distributions, Monte Carlo methods, limit
-theorems, and Markov chains."""
+theorems, Markov chains, Markov chain Monte Carlo, and stochastic
+differential equations."""
 
 from mathematicskit.probability.systems.bayes import beta_binomial_posterior, rule_of_succession
 from mathematicskit.probability.systems.branching import galton_watson_extinction_probability, galton_watson_simulate
@@ -10,8 +11,10 @@ from mathematicskit.probability.systems.discrete import Binomial, Geometric, Poi
 from mathematicskit.probability.systems.inequalities import chebyshev_tail
 from mathematicskit.probability.systems.limit_theorems import central_limit_theorem_sample_means, law_of_large_numbers_trace
 from mathematicskit.probability.systems.markov_chain import MarkovChain
+from mathematicskit.probability.systems.mcmc import gibbs_sampler, metropolis_hastings
 from mathematicskit.probability.systems.monte_carlo import control_variates_integrate, importance_sampling_integrate, monte_carlo_integrate
 from mathematicskit.probability.systems.queueing import erlang_b
+from mathematicskit.probability.systems.sde import euler_maruyama, geometric_brownian_motion, ornstein_uhlenbeck
 from mathematicskit.probability.systems.st_petersburg import st_petersburg_certainty_equivalent, st_petersburg_payoffs
 from mathematicskit.probability.systems.stochastic_processes import brownian_motion, random_walk_return_fraction, return_probability_1d, simple_random_walk
 
@@ -45,4 +48,9 @@ __all__ = [
     "erlang_b",
     "ctmc_transition_matrix",
     "ctmc_stationary_distribution",
+    "metropolis_hastings",
+    "gibbs_sampler",
+    "euler_maruyama",
+    "geometric_brownian_motion",
+    "ornstein_uhlenbeck",
 ]

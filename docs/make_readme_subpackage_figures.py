@@ -502,6 +502,67 @@ def special_functions(axes):
     ax3.set_title("Fresnel integrals: the Cornu spiral")
 
 
+def information_theory(axes):
+    from mathematicskit.information_theory import bsc_transmit, convolutional_encode, hamming_decode, hamming_encode, huffman_code, viterbi_decode
+    from mathematicskit.information_theory.visualizers import plot_code_tree, plot_information_diagram
+
+    ax1, ax2, ax3 = axes
+    plot_code_tree(huffman_code({"A": 0.35, "B": 0.17, "C": 0.17, "D": 0.16, "E": 0.15}), ax=ax1)
+    ax1.set_title("A Huffman code tree")
+
+    p = 0.1
+    plot_information_diagram(0.5 * np.array([[1 - p, p], [p, 1 - p]]), ax=ax2)
+    ax2.set_title("Mutual information across a BSC(0.1)")
+
+    rng = np.random.default_rng(0)
+    ps = np.logspace(-2.3, -0.9, 8)
+    bits = rng.integers(0, 2, 40000)
+    hamming = np.array([np.mean(hamming_decode(bsc_transmit(hamming_encode(bits), q, seed=rng)) != bits) for q in ps])
+    viterbi = np.array([np.mean(viterbi_decode(bsc_transmit(convolutional_encode(bits), q, seed=rng)) != bits) for q in ps])
+    ax3.loglog(ps, ps, "k--", label="uncoded")
+    ax3.loglog(ps[hamming > 0], hamming[hamming > 0], "o-", label="Hamming (7,4)")
+    ax3.loglog(ps[viterbi > 0], viterbi[viterbi > 0], "s-", label="(7,5) code, Viterbi")
+    ax3.set_xlabel("crossover probability")
+    ax3.set_ylabel("bit error rate")
+    ax3.legend(fontsize=8)
+    ax3.set_title("Error-correcting codes on a binary symmetric channel")
+
+
+def topology(axes):
+    from mathematicskit.topology import (
+        critical_points,
+        persistent_homology,
+        torus,
+        vietoris_rips_complex,
+        vietoris_rips_filtration,
+    )
+    from mathematicskit.topology.visualizers import plot_complex, plot_persistence_diagram
+
+    ax1, ax2, ax3 = axes
+    fig = ax1.figure
+    ax1.remove()
+    ax1 = fig.add_subplot(1, 3, 1, projection="3d", computed_zorder=False)
+    T = torus(16, 10)
+    height = T.coordinates[:, 0] + 1e-3 * T.coordinates[:, 2]
+    plot_complex(T, ax=ax1, face_values=[height[list(t)].mean() for t in T.simplices(2)], alpha=0.6, vertex_size=0)
+    crit = critical_points(T, height)
+    for vertices, color in ((crit.minima, "tab:blue"), (crit.saddles, "tab:red"), (crit.maxima, "gold")):
+        ax1.scatter(*T.coordinates[vertices].T, s=60, color=color, edgecolors="k", depthshade=False, zorder=5)
+    ax1.view_init(elev=25, azim=-90)
+    ax1.set_box_aspect((1, 1, 1), zoom=1.3)
+    ax1.set_axis_off()
+    ax1.set_title("Critical points of a height function on a torus")
+
+    rng = np.random.default_rng(1)
+    t = rng.uniform(0, 2 * np.pi, 60)
+    points = np.column_stack([np.cos(t), np.sin(t)]) + rng.normal(0, 0.06, (60, 2))
+    plot_complex(vietoris_rips_complex(points, 0.25), ax=ax2)
+    ax2.set_title("Vietoris-Rips complex of a noisy circle")
+
+    plot_persistence_diagram(persistent_homology(vietoris_rips_filtration(points, max_dim=2), max_dim=1), ax=ax3)
+    ax3.set_title("Its persistence diagram: one long-lived loop")
+
+
 FIGURES = {
     f.__name__: f
     for f in (
@@ -521,6 +582,8 @@ FIGURES = {
         abstract_algebra,
         geometry,
         special_functions,
+        information_theory,
+        topology,
     )
 }
 

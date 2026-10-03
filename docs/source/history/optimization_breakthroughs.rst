@@ -357,6 +357,38 @@ to Linear Programs," Bulletin of the American Mathematical Society
 
 .. minigallery:: ../../examples/optimization/linear_programming/plot_02_branch_and_bound.py
 
+1962 -- Held, Karp, and the Travelling Salesman Problem
+-------------------------------------------------------
+
+The travelling salesman problem asks for the shortest round trip
+through :math:`n` cities. Checking all :math:`(n-1)!/2` tours is
+hopeless beyond a dozen cities. Michael Held and Richard Karp (and,
+independently, Richard Bellman) solved it in 1962 by dynamic
+programming over subsets: the cheapest path that starts at the first
+city, visits a set :math:`S`, and ends at :math:`j` depends only on
+:math:`(S, j)`. This takes :math:`O(n^2 2^n)` steps, still the best
+worst-case bound known for the exact problem. Heuristics trade
+optimality for speed, such as greedy nearest-neighbour tours improved
+by Croes's 1958 2-opt move, which reverses a segment whenever that
+removes a crossing.
+
+*Implementation:* :func:`mathematicskit.optimization.systems.tsp.tsp_held_karp`
+runs the dynamic program on bitmasks, one vectorized minimum per table
+row. :func:`~mathematicskit.optimization.systems.tsp.tsp_nearest_neighbor`
+and :func:`~mathematicskit.optimization.systems.tsp.tsp_two_opt`
+implement the heuristics. All three return a
+:class:`~mathematicskit.optimization.core.base.TourResult`, and the
+tests check Held-Karp against brute-force enumeration.
+
+*References:* M. Held and R. M. Karp, "A Dynamic Programming Approach
+to Sequencing Problems," Journal of the Society for Industrial and
+Applied Mathematics 10(1) (1962), 196-210; R. Bellman, "Dynamic
+Programming Treatment of the Travelling Salesman Problem," Journal of
+the ACM 9(1) (1962), 61-63; G. A. Croes, "A Method for Solving
+Traveling-Salesman Problems," Operations Research 6(6) (1958), 791-812.
+
+.. minigallery:: ../../examples/optimization/tsp/plot_01_held_karp_travelling_salesman.py
+
 1964-1969 -- Conjugate Gradients as Nonlinear Optimization
 ----------------------------------------------------------
 
@@ -502,6 +534,61 @@ Iterative Shrinkage-Thresholding Algorithm for Linear Inverse
 Problems," SIAM Journal on Imaging Sciences 2(1) (2009), 183-202.
 
 .. minigallery:: ../../examples/optimization/momentum/plot_01_nesterov_acceleration.py
+
+1983 -- Kirkpatrick, Gelatt, Vecchi, and Simulated Annealing
+------------------------------------------------------------
+
+Scott Kirkpatrick, Daniel Gelatt and Mario Vecchi, working on chip
+layout at IBM, noticed that finding a low-cost configuration resembles
+cooling a material into a low-energy crystal. They ran the Metropolis
+algorithm of statistical physics on the objective, accepting an uphill
+move of size :math:`\Delta f` with probability :math:`e^{-\Delta f/T}`,
+and lowered the temperature :math:`T` slowly. Early on the search
+crosses barriers between valleys freely; as it cools, it settles into
+a deep one. Vladimir Černý published the same idea for the travelling
+salesman problem in 1985. Simulated annealing became a general-purpose
+method for combinatorial problems with no exploitable structure.
+
+*Implementation:* :func:`mathematicskit.optimization.systems.annealing.simulated_annealing`
+anneals a real vector or any user-defined state, with a geometric or
+custom cooling schedule, and records the temperatures and energies. The
+tests check the result against :func:`scipy.optimize.dual_annealing`.
+
+*References:* S. Kirkpatrick, C. D. Gelatt, and M. P. Vecchi,
+"Optimization by Simulated Annealing," Science 220(4598) (1983),
+671-680; V. Černý, "Thermodynamical Approach to the Traveling Salesman
+Problem," Journal of Optimization Theory and Applications 45 (1985),
+41-51.
+
+.. minigallery:: ../../examples/optimization/annealing/plot_01_simulated_annealing.py
+
+1984 -- Karmarkar's Interior-Point Method
+-----------------------------------------
+
+Leonid Khachiyan's 1979 ellipsoid method proved that linear
+programming can be solved in polynomial time, but it was far slower in
+practice than the simplex method. Narendra Karmarkar's 1984 algorithm
+was both polynomial and fast. Instead of walking along the edges of the
+feasible polytope, it moves through its interior. Its modern
+descendants, the primal-dual path-following methods of Kojima, Mizuno
+and Yoshise (1989) and Mehrotra (1992), follow the *central path*, on
+which every product of a primal variable and its dual slack equals the
+same :math:`\mu`, and drive :math:`\mu` to zero with Newton steps.
+Interior-point methods now share large-scale linear programming with
+the simplex method.
+
+*Implementation:* :func:`mathematicskit.optimization.systems.interior_point.interior_point_lp`
+is a primal-dual path-following method that records every interior
+iterate and the duality measure. The tests check it against
+:func:`~mathematicskit.optimization.systems.linear_programming.linear_program`
+with ``method="highs-ipm"`` (HiGHS's interior-point solver) and
+``method="highs-ds"`` (its dual simplex).
+
+*References:* N. Karmarkar, "A New Polynomial-Time Algorithm for Linear
+Programming," Combinatorica 4(4) (1984), 373-395; S. J. Wright,
+*Primal-Dual Interior-Point Methods* (Philadelphia: SIAM, 1997).
+
+.. minigallery:: ../../examples/optimization/linear_programming/plot_03_interior_point_central_path.py
 
 2014 -- Kingma, Ba, and Adam
 ----------------------------

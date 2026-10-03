@@ -18,3 +18,5 @@ Sections
 - **finite_fields** -- ``GF(p)`` and ``GF(p^n)`` arithmetic.
 - **polynomial_ring** -- polynomial addition, multiplication, division,
   and gcd.
+- **characters** -- conjugacy classes and character tables.
+- **groebner** -- multivariate division and Buchberger's Gröbner bases.

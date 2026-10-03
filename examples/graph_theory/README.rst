@@ -15,7 +15,8 @@ Each script in this gallery is self-contained and can be run directly with
 Sections
 --------
 
-- **eulerian** -- Euler's Seven Bridges of Königsberg and the odd-degree criterion.
+- **eulerian** -- Euler's Seven Bridges of Königsberg, the odd-degree
+  criterion, and Hierholzer's construction of Eulerian circuits.
 - **shortest_paths** -- Dijkstra, Bellman-Ford, and Floyd-Warshall.
 - **spanning_tree** -- Kruskal's (scipy) vs. Prim's (hand-rolled) MST.
 - **max_flow** -- maximum flow and the corresponding minimum cut.

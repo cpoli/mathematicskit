@@ -6,11 +6,14 @@ matplotlib.use("Agg")
 
 import matplotlib.axes
 import numpy as np
+from matplotlib.animation import FuncAnimation, PillowWriter
 
 from mathematicskit.ode_dynamics.systems.logistic_map import bifurcation_diagram
 from mathematicskit.ode_dynamics.systems.phase_portrait import Linear2D, vector_field_grid
 from mathematicskit.ode_dynamics.systems.poincare import DuffingOscillator, stroboscopic_poincare_section
 from mathematicskit.ode_dynamics.visualizers.plots import (
+    _cobweb,
+    animate_logistic_cobweb,
     plot_bifurcation_diagram,
     plot_phase_portrait,
     plot_poincare_points,
@@ -53,3 +56,17 @@ def test_plot_poincare_points_returns_axes():
     xs, ys = stroboscopic_poincare_section(system, n_periods=4, n_transient_periods=2, dt=1e-2)
     ax = plot_poincare_points(xs, ys)
     assert isinstance(ax, matplotlib.axes.Axes)
+
+
+def test_cobweb_vertices_alternate_vertical_and_horizontal_moves():
+    x, y = _cobweb(np.array([0.1, 0.5, 0.3]))
+    assert x.tolist() == [0.1, 0.1, 0.5, 0.5, 0.3]
+    assert y.tolist() == [0.1, 0.5, 0.5, 0.3, 0.3]
+
+
+def test_animate_logistic_cobweb_saves(tmp_path):
+    anim = animate_logistic_cobweb([2.8, 3.3, 3.9], n_transient=5, n_keep=5, n_bifurcation=20)
+    assert isinstance(anim, FuncAnimation)
+    out = tmp_path / "cobweb.gif"
+    anim.save(out, writer=PillowWriter(fps=5), dpi=40)
+    assert out.stat().st_size > 0

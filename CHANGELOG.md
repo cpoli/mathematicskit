@@ -7,6 +7,119 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `mathematicskit.topology`, an 18th domain:
+  - `SimplicialComplex`, with signed boundary matrices, links, skeleta,
+    induced subcomplexes, unions and intersections.
+  - Triangulations: `simplex`, `sphere`, `circle`, `torus`,
+    `klein_bottle`, `mobius_strip` and `projective_plane`.
+  - Constructions: `barycentric_subdivision` and `simplicial_product`.
+  - Homology: `smith_normal_form` (`SmithNormalFormResult`),
+    `betti_numbers` over Q or Z/p, `homology` with torsion
+    (`HomologyResult`), and `mayer_vietoris` (`MayerVietorisResult`).
+  - The fundamental group: `fundamental_group`
+    (`FundamentalGroupPresentation`) and `abelianization`.
+  - Surfaces: `is_orientable`, `boundary_components`, `classify_surface`
+    (`SurfaceClassification`), and `critical_points`
+    (`CriticalPointsResult`).
+  - Fixed points: `triangle_grid`, `random_sperner_labeling`,
+    `is_sperner_labeling`, `fully_labeled_triangles`,
+    `brouwer_fixed_point` (`FixedPointResult`), `vector_field_index`,
+    and `lefschetz_number`.
+  - Curves: `linking_number` and `turning_number`.
+  - Point clouds: `vietoris_rips_complex`, `vietoris_rips_filtration`,
+    `cech_complex`, `lower_star_filtration` (`Filtration`), and
+    `mapper_graph` (`MapperResult`).
+  - Persistence: `persistent_homology` (`PersistenceDiagram`) and
+    `bottleneck_distance`.
+  - Utilities: `clique_simplices`, `rank_mod_p` and
+    `planar_betti_numbers`.
+  - Visualizers: `plot_complex`, `plot_persistence_diagram`,
+    `plot_barcode` and `plot_mapper_graph`.
+
+  Its history page has 22 breakthroughs, from Gauss's linking number
+  (1833) to Mapper (2007), each with its own gallery example.
+- `mathematicskit.information_theory`, a 17th domain: `entropy`,
+  `binary_entropy`, `joint_entropy`, `conditional_entropy`,
+  `mutual_information`, `kl_divergence` and `hartley_information` (via
+  `scipy.stats.entropy`); source coding with `typical_set`,
+  `kraft_sum`, `canonical_code`, `shannon_fano_code`, `huffman_code`
+  (returning a `PrefixCode`), `elias_gamma_encode`/`elias_gamma_decode`,
+  `arithmetic_encode`/`arithmetic_decode`/`arithmetic_intervals` and
+  `lz78_encode`/`lz78_decode`/`lz78_compressed_bits`; channels with
+  `bsc_capacity`, `bec_capacity`, `awgn_capacity`, `minimum_ebn0`,
+  `blahut_arimoto` (`ChannelCapacityResult`), `random_code_error_rate`,
+  `rate_distortion_binary` and `rate_distortion_gaussian`; channel codes
+  with `hamming_encode`/`hamming_decode`, `convolutional_encode`,
+  `viterbi_decode`, `gallager_ldpc_matrix` and `bit_flip_decode`
+  (`BitFlipResult`); `bsc_transmit` and `hamming_distance`; and the
+  `plot_code_tree` and `plot_information_diagram` visualizers. Its
+  history page has 20 breakthroughs, from Hartley (1928) to Lempel-Ziv
+  (1977-1978), each with its own gallery example.
+- Markov chain Monte Carlo in `mathematicskit.probability`:
+  `metropolis_hastings` (random-walk or general asymmetric proposals with
+  the Hastings correction) and `gibbs_sampler`, returning an
+  `MCMCResult`, plus `integrated_autocorrelation_time` and
+  `chain_effective_sample_size` for correlated chains.
+- Stochastic differential equations in `mathematicskit.probability`:
+  `euler_maruyama`, `geometric_brownian_motion` (exact Itô solution or
+  Euler-Maruyama on the same Brownian path) and `ornstein_uhlenbeck`,
+  returning an `SDEResult`.
+- `mathematicskit.statistics.principal_component_analysis` via
+  `numpy.linalg.svd` (`PCAResult`), and time series: `autocorrelation`,
+  `yule_walker` (AR(p) fitting by `scipy.linalg.solve_toeplitz`,
+  `ARModelResult`), `simulate_ar` and `ar_autocorrelation`.
+- `mathematicskit.graph_theory.eulerian_circuit`, `eulerian_trail` and
+  `odd_degree_vertices`: Hierholzer's algorithm, for undirected and
+  directed graphs.
+- In `mathematicskit.optimization`: `simulated_annealing`; the travelling
+  salesman problem (`tsp_nearest_neighbor`, `tsp_two_opt`, the exact
+  `tsp_held_karp`, `distance_matrix`, `tour_length`, `TourResult`); and
+  `interior_point_lp`, a primal-dual path-following LP solver that
+  records the central path. `linear_program` takes a new `method`
+  argument (default `"highs"`, unchanged) to select HiGHS's simplex or
+  interior-point solver.
+- In `mathematicskit.number_theory`: `EllipticCurve` (group law, point
+  multiplication and counting over GF(p)) and Lenstra's `lenstra_ecm`
+  (`ECMResult`); `lll_reduce` (exact-rational LLL, `LLLResult`) and
+  `integer_relation`.
+- In `mathematicskit.abstract_algebra`: `conjugacy_classes` and
+  `character_table` (Burnside's algorithm, `CharacterTableResult`);
+  `MultivariatePolynomial` over Q or GF(p) with lex/grlex/grevlex
+  orders, `multivariate_divide`, `s_polynomial`, `groebner_basis`
+  (Buchberger's algorithm, reduced basis, `GroebnerResult`) and
+  `in_ideal`.
+- History breakthroughs, each with its own gallery example: Itô and
+  Maruyama's stochastic differential equations (1944-1955) and
+  Metropolis-Hastings and the Gibbs sampler (1970-1984) in probability;
+  Pearson and Hotelling's principal components (1901-1933) and Yule's
+  autoregressive model (1927) in statistics; Hierholzer's Eulerian
+  circuits (1873) in graph theory; Held and Karp's travelling salesman
+  algorithm (1962), simulated annealing (1983) and Karmarkar's
+  interior-point method (1984) in optimization; LLL lattice reduction
+  (1982) and Lenstra's elliptic-curve factorization (1987) in number
+  theory; and Frobenius's group characters (1896) and Buchberger's
+  Gröbner bases (1965) in abstract algebra.
+- Animations of the algorithms at work, each an `animate_*` visualizer
+  that takes a result and returns a `matplotlib.animation.FuncAnimation`:
+  `numerical_analysis.visualizers.animate_root_finding` (Newton's
+  tangents against bisection's bracket, with the errors side by side),
+  `optimization.visualizers.animate_optimizer_paths` (iterate paths over
+  the contours, frames spaced geometrically in the iteration count),
+  `linalg.visualizers.animate_power_iteration`,
+  `pde.visualizers.animate_solution` (1D curves or 2D fields, with an
+  optional exact-solution overlay),
+  `fractals_chaos.visualizers.animate_life`, and
+  `ode_dynamics.visualizers.animate_logistic_cobweb` (the cobweb as r
+  grows, beside the bifurcation diagram). Seven new gallery examples
+  play them, and the gallery now embeds animations as JavaScript
+  players (`to_jshtml`), so neither the docs build nor JupyterLite needs
+  ffmpeg.
+- `Bisection` records the bracket behind each midpoint in
+  `extra["brackets"]`, and `power_iteration` records every iterate in
+  `extra["vectors"]`.
+
 ## [0.5.1] - 2026-10-02
 
 ### Fixed

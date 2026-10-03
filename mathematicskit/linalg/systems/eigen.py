@@ -112,7 +112,9 @@ def power_iteration(a: np.ndarray, tol: float = 1e-12, max_iter: int = DEFAULT_M
     Returns
     -------
     EigenResult
-        ``eigenvalues`` a length-1 array, ``eigenvectors`` shape (n,).
+        ``eigenvalues`` a length-1 array, ``eigenvectors`` shape (n,), and
+        ``extra["vectors"]`` every unit iterate :math:`v_0, \dots, v_k`,
+        shape (iterations + 1, n).
 
     Examples
     --------
@@ -121,11 +123,14 @@ def power_iteration(a: np.ndarray, tol: float = 1e-12, max_iter: int = DEFAULT_M
     >>> result = power_iteration(A)
     >>> round(float(result.eigenvalues[0]), 6)
     5.0
+    >>> result.extra["vectors"].shape == (result.iterations + 1, 2)
+    True
     """
     a = np.asarray(a, dtype=np.float64)
     n = a.shape[0]
     v: np.ndarray = np.random.default_rng(0).normal(size=(n,)) if v0 is None else np.asarray(v0, dtype=np.float64)
     v = v / np.linalg.norm(v)
+    vectors = [v]
     lam_prev = 0.0
     converged = False
     it = 0
@@ -136,12 +141,15 @@ def power_iteration(a: np.ndarray, tol: float = 1e-12, max_iter: int = DEFAULT_M
         if w_norm < 1e-300:
             raise np.linalg.LinAlgError("iterate collapsed to zero")
         v = w / w_norm
+        vectors.append(v)
         lam = float(v @ a @ v)
         if abs(lam - lam_prev) < tol * max(abs(lam), 1.0):
             converged = True
             break
         lam_prev = lam
-    return EigenResult(eigenvalues=np.array([lam]), eigenvectors=v, iterations=it, converged=converged, method="power_iteration")
+    return EigenResult(
+        eigenvalues=np.array([lam]), eigenvectors=v, iterations=it, converged=converged, method="power_iteration", extra={"vectors": np.array(vectors)}
+    )
 
 
 def inverse_iteration(a: np.ndarray, mu: float, tol: float = 1e-12, max_iter: int = DEFAULT_MAX_ITER, v0: Optional[np.ndarray] = None) -> EigenResult:

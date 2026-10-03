@@ -5,7 +5,8 @@ This gallery walks through every public feature of ``mathematicskit.probability`
 discrete and continuous distributions, Monte Carlo integration with
 variance reduction, the Law of Large Numbers and Central Limit Theorem,
 Markov chains, classical problems, Bayesian updating, branching
-processes, random walks and Brownian motion, and queueing.
+processes, random walks and Brownian motion, queueing, Markov chain
+Monte Carlo, and stochastic differential equations.
 
 See also the narrative tutorials:
 
@@ -34,3 +35,7 @@ Sections
 - **branching** -- Galton-Watson extinction probabilities.
 - **stochastic_processes** -- random walks and Brownian motion.
 - **queueing** -- Erlang's loss formula.
+- **mcmc** -- Markov chain Monte Carlo: Metropolis-Hastings and the
+  Gibbs sampler.
+- **sde** -- stochastic differential equations: Euler-Maruyama,
+  geometric Brownian motion, and the Ornstein-Uhlenbeck process.

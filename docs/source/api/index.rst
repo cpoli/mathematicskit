@@ -19,6 +19,7 @@ boundary-value problems, are documented in :doc:`integrators`.
    fractals_chaos
    geometry
    graph_theory
+   information_theory
    integrators
    linalg
    number_theory
@@ -29,3 +30,4 @@ boundary-value problems, are documented in :doc:`integrators`.
    probability
    special_functions
    statistics
+   topology

@@ -115,6 +115,11 @@ SUBPACKAGES = [
         "blurb": "Shortest paths, minimum spanning trees, maximum flow/minimum cut, graph coloring, and spectral graph theory.",
     },
     {
+        "name": "information_theory",
+        "category": "Probability & Statistics",
+        "blurb": "Entropy and mutual information, Huffman and arithmetic coding, channel capacity, and Hamming, convolutional and LDPC codes.",
+    },
+    {
         "name": "linalg",
         "category": "Linear Algebra & Optimization",
         "blurb": "LU/QR/Cholesky decompositions, eigenvalue algorithms, SVD, iterative Krylov solvers, and least-squares stability.",
@@ -158,6 +163,11 @@ SUBPACKAGES = [
         "name": "statistics",
         "category": "Probability & Statistics",
         "blurb": "Descriptive statistics, hypothesis tests, confidence intervals, OLS regression, and bootstrap resampling.",
+    },
+    {
+        "name": "topology",
+        "category": "Geometry & Graphs",
+        "blurb": "Simplicial homology and torsion, the fundamental group, classification of surfaces, fixed-point theorems, and persistent homology.",
     },
 ]
 
@@ -214,6 +224,14 @@ sphinx_gallery_conf = {
     # back to file-path resolution on every single invocation.
     "backreferences_dir": "gen_modules/backreferences",
     "doc_module": ("mathematicskit",),
+    # Embed each FuncAnimation as matplotlib's HTML/JavaScript player
+    # (to_jshtml): PNG frames, no ffmpeg, the same player Jupyter and
+    # JupyterLite show for `plt.rcParams["animation.html"] = "jshtml"`.
+    "matplotlib_animations": (True, "jshtml"),
+    # The examples end a cell with a bare `anim` so that notebooks display
+    # the player; the scraper above already embeds it in the gallery page,
+    # so don't also capture its repr.
+    "ignore_repr_types": r"matplotlib\.animation\.",
     # "Launch JupyterLite" button: runs the notebook in the browser on
     # Pyodide, with no server. Numba cannot run there, so this relies on
     # numba being optional (mathematicskit/_jit.py).

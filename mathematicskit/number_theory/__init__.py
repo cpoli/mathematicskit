@@ -13,15 +13,28 @@ Legendre and Jacobi symbols and Tonelli-Shanks modular square roots;
 sums of two and four squares; Euler's product for the zeta function
 (checked against ``scipy.special.zeta``); and the prime-counting
 function, logarithmic integral (``scipy.special.expi``), and primes in
-arithmetic progressions.
+arithmetic progressions; elliptic curves over GF(p) and Lenstra's
+elliptic-curve factorization; and LLL lattice reduction with integer
+relation finding.
 """
 
 from mathematicskit import __version__
-from mathematicskit.number_theory.core.base import BezoutResult, ContinuedFractionResult, CRTResult, LinearDiophantineResult, PellResult, PollardRhoResult
+from mathematicskit.number_theory.core.base import (
+    BezoutResult,
+    ContinuedFractionResult,
+    CRTResult,
+    ECMResult,
+    LinearDiophantineResult,
+    LLLResult,
+    PellResult,
+    PollardRhoResult,
+)
 from mathematicskit.number_theory.systems.continued_fractions import best_rational_approximation, continued_fraction_expansion
 from mathematicskit.number_theory.systems.crt import chinese_remainder_theorem
 from mathematicskit.number_theory.systems.diophantine import solve_linear_diophantine, solve_pell_equation
+from mathematicskit.number_theory.systems.elliptic_curves import EllipticCurve, lenstra_ecm
 from mathematicskit.number_theory.systems.factorization import pollard_rho
+from mathematicskit.number_theory.systems.lattice import integer_relation, lll_reduce
 from mathematicskit.number_theory.systems.modular_arithmetic import extended_gcd, fast_mod_pow, mod_inverse
 from mathematicskit.number_theory.systems.primality import is_prime_miller_rabin, is_prime_trial_division, lucas_lehmer, sieve_of_eratosthenes
 from mathematicskit.number_theory.systems.prime_distribution import logarithmic_integral, prime_counting, primes_in_progression
@@ -39,6 +52,8 @@ __all__ = [
     "PellResult",
     "CRTResult",
     "PollardRhoResult",
+    "ECMResult",
+    "LLLResult",
     "extended_gcd",
     "mod_inverse",
     "fast_mod_pow",
@@ -67,4 +82,8 @@ __all__ = [
     "primes_in_progression",
     "gcd",
     "lcm",
+    "EllipticCurve",
+    "lenstra_ecm",
+    "lll_reduce",
+    "integer_relation",
 ]

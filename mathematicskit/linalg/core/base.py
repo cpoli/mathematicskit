@@ -119,7 +119,8 @@ class EigenResult:
     or ``"inverse_iteration"``."""
 
     extra: dict = field(default_factory=dict)
-    """dict: Free-form diagnostics slot, unused by the current solvers."""
+    """dict: Free-form diagnostics slot; :func:`~mathematicskit.linalg.systems.eigen.power_iteration`
+    stores its iterate history under ``"vectors"``."""
 
 
 @dataclass

@@ -31,6 +31,8 @@ __all__ = [
     "MaximumLikelihoodResult",
     "JackknifeResult",
     "MultipleTestingResult",
+    "PCAResult",
+    "ARModelResult",
 ]
 
 
@@ -270,3 +272,47 @@ class MultipleTestingResult:
 
     method: str = ""
     """str: ``"bonferroni"`` or ``"benjamini_hochberg"``."""
+
+
+@dataclass
+class PCAResult:
+    """Container for a principal component analysis."""
+
+    components: np.ndarray
+    """ndarray, shape (k, p): The principal axes as *rows*, unit vectors in
+    order of decreasing variance (the right singular vectors of the
+    centered data)."""
+
+    explained_variance: np.ndarray
+    """ndarray, shape (k,): Variance of the data along each component
+    (eigenvalues of the sample covariance matrix, ``ddof=1``)."""
+
+    explained_variance_ratio: np.ndarray
+    """ndarray, shape (k,): `explained_variance` as a fraction of the total variance."""
+
+    scores: np.ndarray
+    """ndarray, shape (n, k): Coordinates of each observation along the components."""
+
+    mean: np.ndarray
+    """ndarray, shape (p,): Column means subtracted before the decomposition."""
+
+    singular_values: np.ndarray
+    """ndarray, shape (k,): Singular values of the centered data matrix."""
+
+
+@dataclass
+class ARModelResult:
+    """Container for an autoregressive model fitted by the Yule-Walker equations."""
+
+    coefficients: np.ndarray
+    """ndarray, shape (p,): :math:`\\phi_1, \\dots, \\phi_p` in
+    :math:`X_t = \\mu + \\sum_k \\phi_k (X_{t-k} - \\mu) + \\varepsilon_t`."""
+
+    noise_variance: float
+    """float: Estimated innovation variance :math:`\\sigma^2`."""
+
+    mean: float
+    """float: Sample mean :math:`\\mu`, subtracted before fitting."""
+
+    autocorrelation: np.ndarray
+    """ndarray, shape (p + 1,): Sample autocorrelations at lags ``0..p`` used in the fit."""

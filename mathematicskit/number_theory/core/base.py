@@ -17,7 +17,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Optional
 
-__all__ = ["BezoutResult", "ContinuedFractionResult", "LinearDiophantineResult", "PellResult", "CRTResult", "PollardRhoResult"]
+__all__ = ["BezoutResult", "ContinuedFractionResult", "LinearDiophantineResult", "PellResult", "CRTResult", "PollardRhoResult", "ECMResult", "LLLResult"]
 
 
 @dataclass
@@ -119,3 +119,36 @@ class PollardRhoResult:
 
     c: int
     """int: The additive constant of :math:`x \\mapsto x^2 + c` that succeeded."""
+
+
+@dataclass
+class ECMResult:
+    """Container for a factor found by Lenstra's elliptic-curve method."""
+
+    factor: int
+    """int: A nontrivial factor of ``n`` (not necessarily prime)."""
+
+    cofactor: int
+    """int: ``n // factor``."""
+
+    curves: int
+    """int: Number of random curves tried, including the successful one."""
+
+    curve: tuple
+    """tuple of int: ``(a, b, x0, y0)``, the successful curve
+    :math:`y^2 = x^3 + ax + b` and starting point, modulo ``n``."""
+
+
+@dataclass
+class LLLResult:
+    """Container for an LLL-reduced lattice basis."""
+
+    basis: list
+    """list of list of int: The reduced basis vectors (rows), spanning the same lattice."""
+
+    swaps: int
+    """int: Number of Lovász-condition swaps performed."""
+
+    gram_schmidt_norms: list = field(default_factory=list)
+    """list of float: Squared lengths :math:`\\|b_i^*\\|^2` of the reduced basis's
+    Gram-Schmidt vectors, which LLL keeps from decreasing too quickly."""

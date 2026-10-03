@@ -57,3 +57,14 @@ def test_inverse_iteration_finds_eigenvalue_nearest_shift():
     assert result.eigenvalues[0] == pytest.approx(5.0, abs=1e-6)
     result2 = inverse_iteration(a, mu=8.0)
     assert result2.eigenvalues[0] == pytest.approx(9.0, abs=1e-6)
+
+
+def test_power_iteration_records_unit_iterates():
+    a = np.array([[2.0, 1.0], [1.0, 3.0]])
+    v0 = np.array([1.0, 0.0])
+    result = power_iteration(a, v0=v0)
+    vectors = result.extra["vectors"]
+    assert vectors.shape == (result.iterations + 1, 2)
+    assert np.allclose(vectors[0], v0)
+    assert np.allclose(np.linalg.norm(vectors, axis=1), 1.0)
+    assert np.allclose(vectors[-1], result.eigenvectors)

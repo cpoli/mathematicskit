@@ -10,23 +10,30 @@ series and solvability, Sylow subgroups, composition series); group
 actions and Burnside orbit counting; homomorphisms and their kernels
 and images; Reed-Solomon codes over ``GF(p)``; finite
 field arithmetic (``GF(p)`` and ``GF(p^n)`` via irreducible polynomials
-over ``GF(p)``); and polynomial ring arithmetic (addition,
+over ``GF(p)``); polynomial ring arithmetic (addition,
 multiplication, division with remainder, gcd) over :math:`\\mathbb{Z}`,
-:math:`\\mathbb{Q}`, and finite fields.
+:math:`\\mathbb{Q}`, and finite fields; conjugacy classes and character
+tables (Burnside's algorithm); and Gröbner bases of multivariate
+polynomial ideals (Buchberger's algorithm).
 """
 
 from mathematicskit import __version__
 from mathematicskit.abstract_algebra.core.base import (
+    CharacterTableResult,
     CompositionSeriesResult,
     FiniteGroup,
+    GroebnerResult,
     GroupPropertiesResult,
     HomomorphismResult,
+    MultivariatePolynomial,
     Polynomial,
     SylowResult,
 )
 from mathematicskit.abstract_algebra.systems.actions import count_orbits, orbits
+from mathematicskit.abstract_algebra.systems.characters import character_table, conjugacy_classes
 from mathematicskit.abstract_algebra.systems.codes import rs_decode_erasures, rs_encode
 from mathematicskit.abstract_algebra.systems.finite_fields import GF, find_irreducible_polynomial, is_irreducible
+from mathematicskit.abstract_algebra.systems.groebner import groebner_basis, in_ideal, multivariate_divide, s_polynomial
 from mathematicskit.abstract_algebra.systems.groups import CyclicGroup, DihedralGroup, PermutationGroup, QuaternionGroup, group_properties
 from mathematicskit.abstract_algebra.systems.homomorphisms import analyze_homomorphism, homomorphism_image, homomorphism_kernel, is_homomorphism
 from mathematicskit.abstract_algebra.systems.polynomial_ring import poly_add, poly_divmod, poly_gcd, poly_mul, poly_sub
@@ -90,4 +97,13 @@ __all__ = [
     "analyze_homomorphism",
     "rs_encode",
     "rs_decode_erasures",
+    "CharacterTableResult",
+    "MultivariatePolynomial",
+    "GroebnerResult",
+    "conjugacy_classes",
+    "character_table",
+    "groebner_basis",
+    "multivariate_divide",
+    "s_polynomial",
+    "in_ideal",
 ]

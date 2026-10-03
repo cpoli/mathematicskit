@@ -4,6 +4,7 @@ from mathematicskit.graph_theory.systems.assignment import solve_assignment
 from mathematicskit.graph_theory.systems.coloring import backtracking_coloring, greedy_coloring
 from mathematicskit.graph_theory.systems.components import connected_components, giant_component_fraction
 from mathematicskit.graph_theory.systems.enumeration import count_spanning_trees
+from mathematicskit.graph_theory.systems.eulerian import eulerian_circuit, eulerian_trail, odd_degree_vertices
 from mathematicskit.graph_theory.systems.extremal import clique_number, turan_graph, turan_number
 from mathematicskit.graph_theory.systems.hamiltonian import hamiltonian_cycle
 from mathematicskit.graph_theory.systems.matching import bipartite_matching
@@ -35,4 +36,7 @@ __all__ = [
     "bipartite_matching",
     "pagerank",
     "astar_shortest_path",
+    "eulerian_circuit",
+    "eulerian_trail",
+    "odd_degree_vertices",
 ]

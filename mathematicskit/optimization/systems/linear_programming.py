@@ -31,6 +31,7 @@ def linear_program(
     a_eq: Optional[np.ndarray] = None,
     b_eq: Optional[np.ndarray] = None,
     bounds=None,
+    method: str = "highs",
 ) -> LinearProgramResult:
     r"""Solve a linear program :math:`\min_x c^T x` subject to :math:`A_{ub}x \leq b_{ub}`, :math:`A_{eq}x = b_{eq}`.
 
@@ -52,6 +53,9 @@ def linear_program(
     bounds : sequence of (float, float), optional
         Per-variable bounds; defaults to ``(0, None)`` for every
         variable (scipy's convention, matching the standard-form LP).
+    method : {"highs", "highs-ds", "highs-ipm"}
+        ``linprog``'s solver: HiGHS's automatic choice, its dual simplex,
+        or its interior-point method.
 
     Returns
     -------
@@ -69,7 +73,7 @@ def linear_program(
     >>> round(result.fun, 6)
     -8.0
     """
-    res = sopt.linprog(c, A_ub=a_ub, b_ub=b_ub, A_eq=a_eq, b_eq=b_eq, bounds=bounds, method="highs")
+    res = sopt.linprog(c, A_ub=a_ub, b_ub=b_ub, A_eq=a_eq, b_eq=b_eq, bounds=bounds, method=method)
     return LinearProgramResult(x=res.x, fun=float(res.fun) if res.fun is not None else float("nan"), success=bool(res.success), message=res.message)
 
 

@@ -39,6 +39,7 @@ __all__ = [
     "LeastSquaresResult",
     "ScalarSearchResult",
     "KnapsackResult",
+    "TourResult",
 ]
 
 
@@ -246,3 +247,20 @@ class KnapsackResult:
     """ndarray, shape (n + 1, capacity + 1): Bellman's value table,
     ``table[i, w]`` being the best value using the first ``i`` items
     with capacity ``w``."""
+
+
+@dataclass
+class TourResult:
+    """Container for a travelling-salesman tour."""
+
+    tour: list
+    """list of int: The cities in visiting order, each once; the return to ``tour[0]`` is implied."""
+
+    length: float
+    """float: Total length of the closed tour."""
+
+    method: str = ""
+    """str: ``"nearest_neighbor"``, ``"two_opt"``, or ``"held_karp"`` (exact)."""
+
+    history: list = field(default_factory=list)
+    """list of float: Tour length after each improving move (``"two_opt"`` only)."""

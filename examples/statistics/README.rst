@@ -33,3 +33,6 @@ Sections
   ``scipy.stats.bootstrap``, and the jackknife.
 - **shrinkage** -- the James-Stein estimator.
 - **multiple_testing** -- Bonferroni and Benjamini-Hochberg corrections.
+- **pca** -- Pearson's lines of closest fit and Hotelling's principal
+  components.
+- **time_series** -- autocorrelation and Yule's autoregressive models.

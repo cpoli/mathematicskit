@@ -11,8 +11,11 @@ distribution via ``numpy.linalg.eig``/power iteration, absorption
 probabilities and expected absorption time via ``numpy.linalg.solve``).
 Also: Buffon's needle, the St. Petersburg game, Beta-binomial Bayesian
 updating, Chebyshev's inequality, Galton-Watson branching processes,
-random walks and Brownian motion, Erlang's loss formula, and
-continuous-time Markov chains via :func:`scipy.linalg.expm`.
+random walks and Brownian motion, Erlang's loss formula,
+continuous-time Markov chains via :func:`scipy.linalg.expm`, Markov
+chain Monte Carlo (Metropolis-Hastings and the Gibbs sampler), and
+stochastic differential equations (Euler-Maruyama, geometric Brownian
+motion, Ornstein-Uhlenbeck).
 """
 
 from mathematicskit import __version__
@@ -22,7 +25,9 @@ from mathematicskit.probability.core.base import (
     BuffonNeedleResult,
     ContinuousDistribution,
     DiscreteDistribution,
+    MCMCResult,
     MonteCarloResult,
+    SDEResult,
     TailBoundResult,
 )
 from mathematicskit.probability.systems.bayes import beta_binomial_posterior, rule_of_succession
@@ -34,11 +39,13 @@ from mathematicskit.probability.systems.discrete import Binomial, Geometric, Poi
 from mathematicskit.probability.systems.inequalities import chebyshev_tail
 from mathematicskit.probability.systems.limit_theorems import central_limit_theorem_sample_means, law_of_large_numbers_trace
 from mathematicskit.probability.systems.markov_chain import MarkovChain
+from mathematicskit.probability.systems.mcmc import gibbs_sampler, metropolis_hastings
 from mathematicskit.probability.systems.monte_carlo import control_variates_integrate, importance_sampling_integrate, monte_carlo_integrate
 from mathematicskit.probability.systems.queueing import erlang_b
+from mathematicskit.probability.systems.sde import euler_maruyama, geometric_brownian_motion, ornstein_uhlenbeck
 from mathematicskit.probability.systems.st_petersburg import st_petersburg_certainty_equivalent, st_petersburg_payoffs
 from mathematicskit.probability.systems.stochastic_processes import brownian_motion, random_walk_return_fraction, return_probability_1d, simple_random_walk
-from mathematicskit.probability.utils.diagnostics import effective_sample_size
+from mathematicskit.probability.utils.diagnostics import chain_effective_sample_size, effective_sample_size, integrated_autocorrelation_time
 
 __all__ = [
     "__version__",
@@ -49,6 +56,8 @@ __all__ = [
     "TailBoundResult",
     "BranchingProcessResult",
     "BrownianMotionResult",
+    "MCMCResult",
+    "SDEResult",
     "Binomial",
     "Poisson",
     "Geometric",
@@ -60,6 +69,8 @@ __all__ = [
     "importance_sampling_integrate",
     "control_variates_integrate",
     "effective_sample_size",
+    "integrated_autocorrelation_time",
+    "chain_effective_sample_size",
     "law_of_large_numbers_trace",
     "central_limit_theorem_sample_means",
     "MarkovChain",
@@ -79,4 +90,9 @@ __all__ = [
     "erlang_b",
     "ctmc_transition_matrix",
     "ctmc_stationary_distribution",
+    "metropolis_hastings",
+    "gibbs_sampler",
+    "euler_maruyama",
+    "geometric_brownian_motion",
+    "ornstein_uhlenbeck",
 ]

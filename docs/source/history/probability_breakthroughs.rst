@@ -481,6 +481,42 @@ Wahrscheinlichkeitsrechnung* (Berlin: Springer, 1933).
 
 .. minigallery:: ../../examples/probability/axioms/plot_01_kolmogorov_axioms.py
 
+1944-1955 -- Itô, Maruyama, and Stochastic Differential Equations
+-----------------------------------------------------------------
+
+Brownian paths are continuous but nowhere differentiable, so an
+equation like :math:`dX = a(X)\,dt + b(X)\,dW` cannot be read with
+ordinary calculus. Kiyosi Itô's 1944 stochastic integral gave it a
+meaning, and his change-of-variables formula, Itô's lemma, carries an
+extra second-order term: geometric Brownian motion
+:math:`dX = \mu X\,dt + \sigma X\,dW` grows like
+:math:`e^{(\mu - \sigma^2/2)t + \sigma W_t}`, not :math:`e^{\mu t + \sigma W_t}`.
+Gisiro Maruyama proved in 1955 that the obvious Euler step, with a
+Gaussian increment :math:`\Delta W \sim \mathcal N(0, \Delta t)`,
+converges to the solution. The Euler-Maruyama scheme is still the
+workhorse of SDE simulation, from the Black-Scholes model of finance to
+the Langevin equations of physics.
+
+*Implementation:* :func:`mathematicskit.probability.systems.sde.euler_maruyama`
+integrates a scalar SDE path by path and returns the driving Brownian
+paths with the solution, so a numerical path can be compared with the
+exact one.
+:func:`~mathematicskit.probability.systems.sde.geometric_brownian_motion`
+samples the exact Itô solution or the Euler-Maruyama approximation from
+the same noise, and
+:func:`~mathematicskit.probability.systems.sde.ornstein_uhlenbeck`
+simulates mean reversion. The tests measure the strong order 1/2 and
+check the closed-form moments.
+
+*References:* K. Itô, "Stochastic Integral," Proceedings of the Imperial
+Academy 20(8) (1944), 519-524; G. Maruyama, "Continuous Markov Processes
+and Stochastic Equations," Rendiconti del Circolo Matematico di Palermo
+4 (1955), 48-90; D. J. Higham, "An Algorithmic Introduction to Numerical
+Simulation of Stochastic Differential Equations," SIAM Review 43(3)
+(2001), 525-546.
+
+.. minigallery:: ../../examples/probability/sde/plot_01_ito_euler_maruyama.py
+
 1946-1953 -- Monte Carlo Methods
 --------------------------------
 
@@ -510,6 +546,46 @@ Teller, "Equation of State Calculations by Fast Computing Machines,"
 Journal of Chemical Physics 21(6) (1953), 1087-1092.
 
 .. minigallery:: ../../examples/probability/monte_carlo/plot_01_monte_carlo_integration.py
+
+1970-1984 -- Metropolis-Hastings and the Gibbs Sampler
+------------------------------------------------------
+
+The 1953 Metropolis algorithm sampled the Boltzmann distribution with
+a symmetric random walk. W. Keith Hastings saw in 1970 that it works for
+any target density known only up to a constant, and for any proposal,
+if the acceptance probability includes the proposal's asymmetry:
+
+.. math::
+
+   \alpha(x, y) = \min\left(1, \frac{\pi(y)\,q(x \mid y)}{\pi(x)\,q(y \mid x)}\right).
+
+Stuart and Donald Geman's 1984 restoration of noisy images updated one
+pixel at a time from its conditional distribution given the others, a
+move that is never rejected: the Gibbs sampler. Once Alan Gelfand and
+Adrian Smith showed in 1990 how both algorithms compute Bayesian
+posteriors, Markov chain Monte Carlo became the standard way to fit
+statistical models with many parameters.
+
+*Implementation:* :func:`mathematicskit.probability.systems.mcmc.metropolis_hastings`
+runs a random-walk or a general Hastings chain from a log-density, and
+:func:`~mathematicskit.probability.systems.mcmc.gibbs_sampler` sweeps
+user-supplied full conditionals; both return an
+:class:`~mathematicskit.probability.core.base.MCMCResult`.
+:func:`~mathematicskit.probability.utils.diagnostics.chain_effective_sample_size`
+measures what a chain's autocorrelation costs. The tests check the
+Hastings correction on an asymmetric proposal and a Beta-binomial Gibbs
+sampler against :mod:`scipy.stats`.
+
+*References:* W. K. Hastings, "Monte Carlo Sampling Methods Using
+Markov Chains and Their Applications," Biometrika 57(1) (1970), 97-109;
+S. Geman and D. Geman, "Stochastic Relaxation, Gibbs Distributions, and
+the Bayesian Restoration of Images," IEEE Transactions on Pattern
+Analysis and Machine Intelligence 6(6) (1984), 721-741; A. E. Gelfand
+and A. F. M. Smith, "Sampling-Based Approaches to Calculating Marginal
+Densities," Journal of the American Statistical Association 85(410)
+(1990), 398-409.
+
+.. minigallery:: ../../examples/probability/mcmc/plot_01_metropolis_hastings_gibbs.py
 
 See Also
 --------

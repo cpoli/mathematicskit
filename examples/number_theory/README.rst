@@ -33,3 +33,6 @@ Sections
 - **prime_distribution** -- the prime number theorem and Dirichlet's
   primes in arithmetic progressions.
 - **factorization** -- Pollard's rho method.
+- **elliptic_curves** -- the group law over GF(p) and Lenstra's
+  elliptic-curve factorization.
+- **lattice** -- LLL lattice reduction and integer relations.

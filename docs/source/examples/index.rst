@@ -18,6 +18,7 @@ worked-through tutorial also exists, the gallery links out to it.
    mathematicskit.fractals_chaos </api/gallery/fractals_chaos/index>
    mathematicskit.geometry </api/gallery/geometry/index>
    mathematicskit.graph_theory </api/gallery/graph_theory/index>
+   mathematicskit.information_theory </api/gallery/information_theory/index>
    mathematicskit.linalg </api/gallery/linalg/index>
    mathematicskit.number_theory </api/gallery/number_theory/index>
    mathematicskit.numerical_analysis </api/gallery/numerical_analysis/index>
@@ -27,3 +28,4 @@ worked-through tutorial also exists, the gallery links out to it.
    mathematicskit.probability </api/gallery/probability/index>
    mathematicskit.special_functions </api/gallery/special_functions/index>
    mathematicskit.statistics </api/gallery/statistics/index>
+   mathematicskit.topology </api/gallery/topology/index>

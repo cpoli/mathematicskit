@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "mathematicskit"
 dynamic = ["version"]
-description = "Unified computational mathematics toolkit: numerical analysis, linear algebra, calculus, dynamical systems, partial differential equations, optimization, probability, statistics, number theory, combinatorics, complex analysis, graph theory, abstract algebra, geometry, special functions, and fractals/chaos -- built on numpy/scipy, hand-rolling algorithms only where no library equivalent exists."
+description = "Unified computational mathematics toolkit: numerical analysis, linear algebra, calculus, dynamical systems, partial differential equations, optimization, probability, statistics, number theory, combinatorics, complex analysis, graph theory, information theory, abstract algebra, geometry, topology, special functions, and fractals/chaos -- built on numpy/scipy, hand-rolling algorithms only where no library equivalent exists."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
@@ -26,6 +26,8 @@ keywords = [
     "numerical-methods",
     "dynamical-systems",
     "fractals",
+    "topology",
+    "topological-data-analysis",
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -98,6 +100,7 @@ testpaths = [
     "mathematicskit/fractals_chaos/tests",
     "mathematicskit/geometry/tests",
     "mathematicskit/graph_theory/tests",
+    "mathematicskit/information_theory/tests",
     "mathematicskit/integrators/tests",
     "mathematicskit/linalg/tests",
     "mathematicskit/number_theory/tests",
@@ -108,6 +111,7 @@ testpaths = [
     "mathematicskit/probability/tests",
     "mathematicskit/special_functions/tests",
     "mathematicskit/statistics/tests",
+    "mathematicskit/topology/tests",
     "mathematicskit/tests",
 ]
 
@@ -129,6 +133,7 @@ ignore = [
 [tool.ruff.lint.per-file-ignores]
 "mathematicskit/*/tests/*" = ["E501", "E402"] # E402: pytest.importorskip(...) before imports, for optional-dependency tests
 "docs/*" = ["E501", "I001", "E402"]
+"examples/*" = ["B018"] # a bare `anim` at the end of a cell displays the animation in Jupyter/JupyterLite
 
 [tool.ruff.format]
 line-ending = "lf"

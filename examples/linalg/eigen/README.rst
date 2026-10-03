@@ -6,4 +6,6 @@ iteration and inverse iteration -- two routes to a single eigenpair when
 the full spectrum isn't needed.
 
 Also: Gershgorin discs, Lanczos iteration for a few eigenpairs of a large
-sparse matrix, and the QR algorithm converging to the Schur form.
+sparse matrix, and the QR algorithm converging to the Schur form. An
+animation shows power iteration turning a vector onto the dominant
+eigenvector.

@@ -357,6 +357,35 @@ Gleichung auf eine Kette von Gleichungen," Mathematische Annalen 34
 
 .. minigallery:: ../../examples/abstract_algebra/structure/plot_04_quotient_groups.py
 
+1896 -- Frobenius and Group Characters
+--------------------------------------
+
+Prompted by a question of Richard Dedekind about factoring the group
+determinant, Ferdinand Georg Frobenius introduced characters of
+non-abelian groups in 1896. A character is a function constant on
+conjugacy classes, and the irreducible ones are as many as the classes
+and orthonormal. Frobenius soon recognized them as the traces of
+matrix representations, which founded representation theory.
+Burnside's algorithm computes the whole character table from the
+multiplication of class sums alone, as the common eigenvectors of a
+few small matrices. Character tables became a basic tool of group
+theory, from Burnside's :math:`p^a q^b` theorem to the classification
+of finite simple groups, and of quantum chemistry.
+
+*Implementation:* :func:`mathematicskit.abstract_algebra.systems.characters.conjugacy_classes`
+partitions a group into classes, and
+:func:`~mathematicskit.abstract_algebra.systems.characters.character_table`
+computes the irreducible characters by Burnside's algorithm, using
+:func:`numpy.linalg.eig` for the eigenvectors. The tests check both
+orthogonality relations on groups up to :math:`A_5`.
+
+*References:* F. G. Frobenius, "Über Gruppencharaktere,"
+Sitzungsberichte der Königlich Preußischen Akademie der Wissenschaften
+zu Berlin (1896), 985-1021; J. D. Dixon, "High Speed Computation of
+Group Characters," Numerische Mathematik 10 (1967), 446-450.
+
+.. minigallery:: ../../examples/abstract_algebra/characters/plot_01_frobenius_character_tables.py
+
 1927 -- Noether's Isomorphism Theorems
 --------------------------------------
 
@@ -405,6 +434,39 @@ Finite Fields," Journal of the Society for Industrial and Applied
 Mathematics 8(2) (1960), 300-304.
 
 .. minigallery:: ../../examples/abstract_algebra/codes/plot_01_reed_solomon_erasures.py
+
+1965 -- Buchberger's Gröbner Bases
+----------------------------------
+
+Bruno Buchberger's 1965 thesis, supervised by Wolfgang Gröbner, gave
+the first algorithm for computing in quotients of multivariate
+polynomial rings. Division by several polynomials generally gives a
+remainder that depends on their order. Buchberger defined the bases for
+which it does not, Gröbner bases, and computed them by adding the
+remainder of every S-polynomial (a combination that cancels two leading
+terms) until all such remainders vanish. A Gröbner basis decides ideal
+membership, and in lexicographic order it is triangular, which solves
+systems of polynomial equations by elimination. Gröbner bases are the
+engine of every computer algebra system's polynomial solver.
+
+*Implementation:* :class:`mathematicskit.abstract_algebra.core.base.MultivariatePolynomial`
+represents polynomials over :math:`\mathbb Q` or
+:math:`\mathrm{GF}(p)` with lex, grlex and grevlex orders.
+:func:`mathematicskit.abstract_algebra.systems.groebner.groebner_basis`
+runs Buchberger's algorithm and returns the reduced basis,
+:func:`~mathematicskit.abstract_algebra.systems.groebner.multivariate_divide`
+performs the division, and
+:func:`~mathematicskit.abstract_algebra.systems.groebner.in_ideal` tests
+membership. The tests compare the bases with ``sympy.groebner`` when
+SymPy is installed.
+
+*References:* B. Buchberger, *Ein Algorithmus zum Auffinden der
+Basiselemente des Restklassenringes nach einem nulldimensionalen
+Polynomideal* (PhD thesis, Universität Innsbruck, 1965); D. Cox, J.
+Little, and D. O'Shea, *Ideals, Varieties, and Algorithms*, 4th ed.
+(Springer, 2015), Ch. 2.
+
+.. minigallery:: ../../examples/abstract_algebra/groebner/plot_01_buchberger_groebner_basis.py
 
 See Also
 --------

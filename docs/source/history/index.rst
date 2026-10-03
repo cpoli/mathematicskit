@@ -17,6 +17,7 @@ one linked back to the corresponding implementation in the code.
    fractals_chaos_breakthroughs
    geometry_breakthroughs
    graph_theory_breakthroughs
+   information_theory_breakthroughs
    linalg_breakthroughs
    number_theory_breakthroughs
    numerical_analysis_breakthroughs
@@ -26,3 +27,4 @@ one linked back to the corresponding implementation in the code.
    probability_breakthroughs
    special_functions_breakthroughs
    statistics_breakthroughs
+   topology_breakthroughs

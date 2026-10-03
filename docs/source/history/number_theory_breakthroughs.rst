@@ -531,6 +531,66 @@ Journal of Number Theory 12(1) (1980), 128-138.
 
 .. minigallery:: ../../examples/number_theory/primality/plot_01_miller_rabin.py
 
+1982 -- The Lenstra-Lenstra-Lovász Lattice Reduction Algorithm
+--------------------------------------------------------------
+
+Arjen Lenstra, Hendrik Lenstra and László Lovász needed short vectors
+in integer lattices to factor polynomials with rational coefficients in
+polynomial time. Finding the shortest vector is hard, but they showed
+that a basis can always be made *reduced* in polynomial time: each
+vector nearly orthogonal to the earlier ones (the size condition), and
+the Gram-Schmidt lengths never falling too fast (Lovász's condition).
+The first reduced vector is then within a factor :math:`2^{(n-1)/2}` of
+the shortest. LLL soon broke the Merkle-Hellman knapsack cryptosystem,
+finds integer relations among real numbers, and underlies the analysis
+of today's lattice-based cryptography.
+
+*Implementation:* :func:`mathematicskit.number_theory.systems.lattice.lll_reduce`
+reduces an integer basis in exact rational arithmetic, and
+:func:`~mathematicskit.number_theory.systems.lattice.integer_relation`
+uses it to recover minimal polynomials of algebraic numbers from their
+decimal expansions. The tests check that the reduced basis spans the
+same lattice and satisfies both LLL conditions.
+
+*References:* A. K. Lenstra, H. W. Lenstra Jr., and L. Lovász,
+"Factoring Polynomials with Rational Coefficients," Mathematische
+Annalen 261 (1982), 515-534.
+
+.. minigallery:: ../../examples/number_theory/lattice/plot_01_lll_lattice_reduction.py
+
+1987 -- Lenstra's Elliptic-Curve Factorization
+----------------------------------------------
+
+The points of an elliptic curve :math:`y^2 = x^3 + ax + b` over a
+finite field form a group under the chord-and-tangent law, and Helmut
+Hasse proved in 1933 that over :math:`\mathrm{GF}(p)` its order lies
+within :math:`2\sqrt p` of :math:`p + 1`. Hendrik Lenstra turned this
+into a factoring algorithm. Computing a large multiple of a point
+modulo a composite :math:`n` silently computes it modulo each prime
+factor :math:`p`; when the curve's order modulo :math:`p` has only
+small prime factors, the computation hits a non-invertible denominator
+that shares :math:`p` with :math:`n`. If a curve fails, another random
+curve has another order, which is the advantage over Pollard's
+:math:`p - 1` method. Its running time depends on the size of the
+smallest factor, so it remains the method of choice for finding
+factors of up to about 70 digits.
+
+*Implementation:* :class:`mathematicskit.number_theory.systems.elliptic_curves.EllipticCurve`
+implements the group law, point multiplication and point counting over
+:math:`\mathrm{GF}(p)`, and
+:func:`~mathematicskit.number_theory.systems.elliptic_curves.lenstra_ecm`
+implements Lenstra's method. The tests check the group axioms and
+Hasse's bound.
+
+*References:* H. W. Lenstra Jr., "Factoring Integers with Elliptic
+Curves," Annals of Mathematics 126(3) (1987), 649-673; H. Hasse,
+"Beweis des Analogons der Riemannschen Vermutung für die Artinschen und
+F. K. Schmidtschen Kongruenzzetafunktionen in gewissen elliptischen
+Fällen," Nachrichten von der Gesellschaft der Wissenschaften zu
+Göttingen (1933), 253-262.
+
+.. minigallery:: ../../examples/number_theory/elliptic_curves/plot_01_lenstra_elliptic_curve_factorization.py
+
 See Also
 --------
 

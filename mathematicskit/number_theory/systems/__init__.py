@@ -3,7 +3,9 @@
 from mathematicskit.number_theory.systems.continued_fractions import best_rational_approximation, continued_fraction_expansion
 from mathematicskit.number_theory.systems.crt import chinese_remainder_theorem
 from mathematicskit.number_theory.systems.diophantine import solve_linear_diophantine, solve_pell_equation
+from mathematicskit.number_theory.systems.elliptic_curves import EllipticCurve, lenstra_ecm
 from mathematicskit.number_theory.systems.factorization import pollard_rho
+from mathematicskit.number_theory.systems.lattice import integer_relation, lll_reduce
 from mathematicskit.number_theory.systems.modular_arithmetic import extended_gcd, fast_mod_pow, mod_inverse
 from mathematicskit.number_theory.systems.primality import is_prime_miller_rabin, is_prime_trial_division, lucas_lehmer, sieve_of_eratosthenes
 from mathematicskit.number_theory.systems.prime_distribution import logarithmic_integral, prime_counting, primes_in_progression
@@ -39,4 +41,8 @@ __all__ = [
     "prime_counting",
     "logarithmic_integral",
     "primes_in_progression",
+    "EllipticCurve",
+    "lenstra_ecm",
+    "lll_reduce",
+    "integer_relation",
 ]

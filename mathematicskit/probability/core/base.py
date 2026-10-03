@@ -29,6 +29,8 @@ __all__ = [
     "TailBoundResult",
     "BranchingProcessResult",
     "BrownianMotionResult",
+    "MCMCResult",
+    "SDEResult",
 ]
 
 
@@ -203,3 +205,35 @@ class BrownianMotionResult:
 
     paths: np.ndarray
     """ndarray, shape (n_paths, n_steps + 1): Sampled paths ``W(t)``, each starting at ``W(0) = 0``."""
+
+
+@dataclass
+class MCMCResult:
+    """Container for a Markov chain Monte Carlo run."""
+
+    samples: np.ndarray
+    """ndarray, shape (n_samples, dim): The chain's states after burn-in, one row per step."""
+
+    acceptance_rate: float
+    """float: Fraction of proposals accepted (1.0 for a Gibbs sampler, which never rejects)."""
+
+    method: str = ""
+    """str: ``"metropolis_hastings"`` or ``"gibbs"``."""
+
+
+@dataclass
+class SDEResult:
+    """Container for sampled paths of a stochastic differential equation."""
+
+    times: np.ndarray
+    """ndarray, shape (n_steps + 1,): Time grid, starting at 0."""
+
+    paths: np.ndarray
+    """ndarray, shape (n_paths, n_steps + 1): Sampled solution paths ``X(t)``."""
+
+    wiener: np.ndarray
+    """ndarray, shape (n_paths, n_steps + 1): The Brownian paths ``W(t)`` that drove them,
+    so a numerical path can be compared with the exact solution driven by the same noise."""
+
+    method: str = ""
+    """str: e.g. ``"euler_maruyama"`` or ``"exact"``."""

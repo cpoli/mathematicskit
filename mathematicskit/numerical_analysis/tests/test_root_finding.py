@@ -135,3 +135,11 @@ def test_steffensen_converges_where_plain_iteration_diverges():
     # single Aitken step lands on it exactly.
     result = Steffensen(lambda x: 3.0 - 2.0 * x, x0=5.0, tol=1e-12).solve()
     assert result.root == pytest.approx(1.0, abs=1e-12)
+
+
+def test_bisection_records_the_bracket_behind_each_midpoint():
+    result = Bisection(lambda x: x**2 - 2.0, 0.0, 2.0, tol=1e-6).solve()
+    brackets = result.extra["brackets"]
+    assert brackets.shape == (result.iterations, 2)
+    assert np.allclose(brackets.mean(axis=1), result.history)
+    assert np.allclose(np.diff(brackets, axis=1).ravel(), 2.0 / 2.0 ** np.arange(result.iterations))

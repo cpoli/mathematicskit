@@ -17,6 +17,7 @@ examples, and full API reference, all linked from a single page.
    /_generated/subpackages/fractals_chaos
    /_generated/subpackages/geometry
    /_generated/subpackages/graph_theory
+   /_generated/subpackages/information_theory
    /_generated/subpackages/linalg
    /_generated/subpackages/number_theory
    /_generated/subpackages/numerical_analysis
@@ -26,3 +27,4 @@ examples, and full API reference, all linked from a single page.
    /_generated/subpackages/probability
    /_generated/subpackages/special_functions
    /_generated/subpackages/statistics
+   /_generated/subpackages/topology

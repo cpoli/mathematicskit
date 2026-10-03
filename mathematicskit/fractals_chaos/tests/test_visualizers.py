@@ -6,12 +6,14 @@ matplotlib.use("Agg")
 
 import matplotlib.axes
 import numpy as np
+import pytest
+from matplotlib.animation import FuncAnimation, PillowWriter
 
 from mathematicskit.fractals_chaos.systems.box_counting import box_counting_dimension
-from mathematicskit.fractals_chaos.systems.cellular_automata import ElementaryCA
+from mathematicskit.fractals_chaos.systems.cellular_automata import ElementaryCA, GameOfLife
 from mathematicskit.fractals_chaos.systems.ifs import SierpinskiTriangle
 from mathematicskit.fractals_chaos.systems.mandelbrot_julia import mandelbrot_set
-from mathematicskit.fractals_chaos.visualizers.plots import plot_box_counting, plot_ca_spacetime, plot_escape_time, plot_ifs_points
+from mathematicskit.fractals_chaos.visualizers.plots import animate_life, plot_box_counting, plot_ca_spacetime, plot_escape_time, plot_ifs_points
 
 
 def test_plot_escape_time_returns_axes():
@@ -39,3 +41,18 @@ def test_plot_ca_spacetime_returns_axes():
     history = ca.run(20)
     ax = plot_ca_spacetime(history)
     assert isinstance(ax, matplotlib.axes.Axes)
+
+
+def test_animate_life_saves(tmp_path):
+    grid = np.zeros((6, 6), dtype=np.int64)
+    grid[2, 1:4] = 1  # blinker
+    anim = animate_life(GameOfLife(grid).run(3))
+    assert isinstance(anim, FuncAnimation)
+    out = tmp_path / "life.gif"
+    anim.save(out, writer=PillowWriter(fps=5), dpi=40)
+    assert out.stat().st_size > 0
+
+
+def test_animate_life_rejects_1d_history():
+    with pytest.raises(ValueError, match="shape"):
+        animate_life(ElementaryCA(rule=90, width=11).run(3))

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A unified computational mathematics toolkit: 16 domain subpackages (`abstract_algebra`, `calculus`, `combinatorics`, `complex_analysis`, `fractals_chaos`, `geometry`, `graph_theory`, `linalg`, `number_theory`, `numerical_analysis`, `ode_dynamics`, `optimization`, `pde`, `probability`, `special_functions`, `statistics`) sharing common ODE integrators, numerical constants/tolerances, and a consistent NumPy-based API. Conventionally imported as `mk`.
+A unified computational mathematics toolkit: 18 domain subpackages (`abstract_algebra`, `calculus`, `combinatorics`, `complex_analysis`, `fractals_chaos`, `geometry`, `graph_theory`, `information_theory`, `linalg`, `number_theory`, `numerical_analysis`, `ode_dynamics`, `optimization`, `pde`, `probability`, `special_functions`, `statistics`, `topology`) sharing common ODE integrators, numerical constants/tolerances, and a consistent NumPy-based API. Conventionally imported as `mk`.
 
 mathematicskit is a sibling package to `../physicskit` and `../chemistrykit`, cloning their architecture and engineering conventions exactly. When a convention here seems underspecified, check how physicskit (the literal template) or chemistrykit (the proof the template survives a full domain swap) handles the equivalent case, rather than inventing a new one.
 

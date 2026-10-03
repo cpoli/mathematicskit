@@ -1,14 +1,15 @@
 """Plotting helpers for mathematicskit.fractals_chaos: escape-time heatmaps,
-box-counting log-log fits, IFS point clouds, and cellular-automaton
-space-time diagrams.
+box-counting log-log fits, IFS point clouds, cellular-automaton
+space-time diagrams, and an animation of the Game of Life.
 """
 
 from __future__ import annotations
 
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.animation import FuncAnimation
 
-__all__ = ["plot_escape_time", "plot_box_counting", "plot_ifs_points", "plot_ca_spacetime"]
+__all__ = ["plot_escape_time", "plot_box_counting", "plot_ifs_points", "plot_ca_spacetime", "animate_life"]
 
 
 def plot_escape_time(result, ax=None, cmap: str = "viridis"):
@@ -113,3 +114,47 @@ def plot_ca_spacetime(history: np.ndarray, ax=None, cmap: str = "binary"):
     ax.set_ylabel("generation")
     ax.set_title("Cellular automaton space-time diagram")
     return ax
+
+
+def animate_life(history: np.ndarray, interval: int = 120, cmap: str = "binary"):
+    """Animate a 2D cellular automaton's history, one generation per frame.
+
+    Parameters
+    ----------
+    history : ndarray, shape (n_steps + 1, ny, nx)
+        From :meth:`~mathematicskit.fractals_chaos.core.base.CellularAutomaton.run`
+        on a :class:`~mathematicskit.fractals_chaos.systems.cellular_automata.GameOfLife`.
+    interval : int
+        Delay between frames, in milliseconds.
+    cmap : str
+
+    Returns
+    -------
+    matplotlib.animation.FuncAnimation
+
+    Examples
+    --------
+    >>> import numpy as np
+    >>> from mathematicskit.fractals_chaos import GameOfLife
+    >>> grid = np.zeros((8, 8), dtype=np.int64)
+    >>> grid[1, 2] = grid[2, 3] = 1
+    >>> grid[3, 1:4] = 1  # a glider
+    >>> anim = animate_life(GameOfLife(grid).run(4))
+    >>> html = anim.to_jshtml()  # self-contained HTML/JS player, no ffmpeg needed
+    """
+    history = np.asarray(history)
+    if history.ndim != 3:
+        raise ValueError("history must have shape (n_steps + 1, ny, nx)")
+    fig, ax = plt.subplots(figsize=(6, 6 * history.shape[1] / history.shape[2] + 0.4))
+    image = ax.imshow(history[0], cmap=cmap, vmin=0, vmax=1, interpolation="nearest")
+    ax.set_xticks([])
+    ax.set_yticks([])
+    title = ax.set_title("")
+    fig.tight_layout()
+
+    def update(k):
+        image.set_data(history[k])
+        title.set_text(f"generation {k}: {int(history[k].sum())} live cells")
+        return [image, title]
+
+    return FuncAnimation(fig, update, frames=len(history), interval=interval)

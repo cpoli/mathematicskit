@@ -1,6 +1,7 @@
 """Matplotlib visualizers for mathematicskit.ode_dynamics."""
 
 from mathematicskit.ode_dynamics.visualizers.plots import (
+    animate_logistic_cobweb,
     plot_bifurcation_diagram,
     plot_phase_portrait,
     plot_poincare_points,
@@ -8,4 +9,4 @@ from mathematicskit.ode_dynamics.visualizers.plots import (
     plot_vector_field,
 )
 
-__all__ = ["plot_phase_portrait", "plot_vector_field", "plot_bifurcation_diagram", "plot_poincare_points", "plot_stability_regions"]
+__all__ = ["animate_logistic_cobweb", "plot_phase_portrait", "plot_vector_field", "plot_bifurcation_diagram", "plot_poincare_points", "plot_stability_regions"]

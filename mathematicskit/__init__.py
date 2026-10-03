@@ -22,6 +22,7 @@ from mathematicskit import (  # noqa: E402
     fractals_chaos,
     geometry,
     graph_theory,
+    information_theory,
     integrators,
     linalg,
     number_theory,
@@ -32,6 +33,7 @@ from mathematicskit import (  # noqa: E402
     probability,
     special_functions,
     statistics,
+    topology,
 )
 
 __all__ = [
@@ -43,6 +45,7 @@ __all__ = [
     "fractals_chaos",
     "geometry",
     "graph_theory",
+    "information_theory",
     "integrators",
     "linalg",
     "number_theory",
@@ -53,4 +56,5 @@ __all__ = [
     "probability",
     "special_functions",
     "statistics",
+    "topology",
 ]

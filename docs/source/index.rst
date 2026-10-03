@@ -4,8 +4,8 @@ mathematicskit
 .. include:: /_generated/vars.rst
 
 **mathematicskit** is a unified toolkit for computational mathematics, spanning
-|num_subpackages| domains -- from abstract algebra to statistical
-inference -- under one NumPy-based API. It's built for mathematics
+|num_subpackages| domains -- from abstract algebra and information theory
+to statistical inference and topology -- under one NumPy-based API. It's built for mathematics
 students working through a textbook problem, curious learners exploring
 a topic on their own, and educators building a demonstration. Under the
 hood, it calls `numpy`/`scipy` directly for anything they already
@@ -16,7 +16,8 @@ tests, and examples wrapped around those calls, not reinventing
 numerical primitives that are already correct and well-tested upstream.
 Algorithms are hand-rolled from first principles only where no
 `numpy`/`scipy` equivalent exists (e.g. Dijkstra/Kruskal, finite
-fields, modular arithmetic), or where the algorithm's own iterate
+fields, modular arithmetic, Huffman and LDPC codes, the Smith normal
+form, persistent homology), or where the algorithm's own iterate
 behavior is itself the pedagogical subject (e.g. Newton's method's
 convergence history, forward/reverse-mode autodiff). No hard dependency
 on `networkx`, `cvxpy`, or SageMath.
@@ -104,6 +105,15 @@ teaching resource such as *Numerical Recipes* or the
      :alt: Spectral bipartition, A* search, and a four-colored map
      :width: 100%
 
+- :mod:`mathematicskit.information_theory` -- entropy and mutual
+  information, Shannon-Fano, Huffman and arithmetic coding, Lempel-Ziv,
+  channel capacity and rate-distortion, and Hamming, convolutional
+  (Viterbi) and LDPC codes.
+
+  .. image:: _static/images/readme_information_theory.png
+     :alt: A Huffman code tree, an information diagram, and bit error rates of Hamming and convolutional codes
+     :width: 100%
+
 - :mod:`mathematicskit.linalg` -- LU/QR/Cholesky decompositions, symmetric
   eigenvalue algorithms, SVD, iterative Krylov solvers, and least-squares
   numerical stability.
@@ -138,20 +148,20 @@ teaching resource such as *Numerical Recipes* or the
      :alt: Pendulum phase portrait, the Lorenz attractor, and a Poincaré section of the Duffing oscillator
      :width: 100%
 
-- :mod:`mathematicskit.pde` -- heat, wave, advection, and Poisson/Laplace
-  problems: the method of lines, Crank-Nicolson, CFL and von Neumann
-  stability, and Fourier/Chebyshev spectral methods.
-
-  .. image:: _static/images/readme_pde.png
-     :alt: 2D heat equation, wave-equation space-time diagram, and a Burgers shock
-     :width: 100%
-
 - :mod:`mathematicskit.optimization` -- gradient descent, nonlinear conjugate
   gradient, Newton/BFGS, Lagrange/KKT constrained optimization, the
   penalty method, and linear programming.
 
   .. image:: _static/images/readme_optimization.png
      :alt: Optimizer paths on Rosenbrock's function, CG vs. gradient descent convergence, and a linear program
+     :width: 100%
+
+- :mod:`mathematicskit.pde` -- heat, wave, advection, and Poisson/Laplace
+  problems: the method of lines, Crank-Nicolson, CFL and von Neumann
+  stability, and Fourier/Chebyshev spectral methods.
+
+  .. image:: _static/images/readme_pde.png
+     :alt: 2D heat equation, wave-equation space-time diagram, and a Burgers shock
      :width: 100%
 
 - :mod:`mathematicskit.probability` -- discrete/continuous distributions, Monte
@@ -175,6 +185,14 @@ teaching resource such as *Numerical Recipes* or the
 
   .. image:: _static/images/readme_statistics.png
      :alt: Regression fit, OLS residuals, and group box plots
+     :width: 100%
+
+- :mod:`mathematicskit.topology` -- simplicial complexes, integer homology
+  by the Smith normal form, the fundamental group, the classification of
+  surfaces, fixed-point theorems, and persistent homology of point clouds.
+
+  .. image:: _static/images/readme_topology.png
+     :alt: Critical points on a torus, a Vietoris-Rips complex of a noisy circle, and its persistence diagram
      :width: 100%
 
 

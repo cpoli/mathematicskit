@@ -32,7 +32,11 @@ Sections
 - **least_squares** -- Levenberg-Marquardt nonlinear least squares.
 - **constrained** -- Lagrange multipliers, KKT verification, the
   penalty method, and the Frank-Wolfe method.
-- **linear_programming** -- linear programming via ``scipy.optimize.linprog``
-  and integer programming by branch and bound via ``scipy.optimize.milp``.
+- **linear_programming** -- linear programming via ``scipy.optimize.linprog``,
+  integer programming by branch and bound via ``scipy.optimize.milp``,
+  and the central path of an interior-point method.
 - **game_theory** -- zero-sum matrix games and the minimax theorem.
 - **dynamic_programming** -- Bellman's recursion for the knapsack problem.
+- **annealing** -- simulated annealing on a rugged landscape.
+- **tsp** -- the travelling salesman problem: nearest neighbour, 2-opt,
+  and the exact Held-Karp algorithm.
