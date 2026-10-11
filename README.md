@@ -2,7 +2,7 @@
 
 | | |
 |:--|:-:|
-| Package | [![PyPI version](https://img.shields.io/pypi/v/mathematicskit)](https://pypi.org/project/mathematicskit/) [![Python versions](https://img.shields.io/pypi/pyversions/mathematicskit)](https://pypi.org/project/mathematicskit/) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23116267.svg)](https://doi.org/10.5281/zenodo.23116267) |
+| Package | [![PyPI version](https://badgen.net/pypi/v/mathematicskit)](https://pypi.org/project/mathematicskit/) [![Python versions](https://img.shields.io/pypi/pyversions/mathematicskit)](https://pypi.org/project/mathematicskit/) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23116267.svg)](https://doi.org/10.5281/zenodo.23116267) |
 | Quality | [![License](https://img.shields.io/badge/license-MIT-blue)](https://github.com/cpoli/mathematicskit/blob/main/LICENSE) [![CI](https://github.com/cpoli/mathematicskit/actions/workflows/ci.yml/badge.svg)](https://github.com/cpoli/mathematicskit/actions/workflows/ci.yml) [![Coverage](https://codecov.io/gh/cpoli/mathematicskit/branch/main/graph/badge.svg)](https://codecov.io/gh/cpoli/mathematicskit) |
 | Documentation | [![Docs](https://img.shields.io/badge/docs-cpoli.github.io%2Fmathematicskit-blue)](https://cpoli.github.io/mathematicskit/) |
 | Code style | [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff) |
