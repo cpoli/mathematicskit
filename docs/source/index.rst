@@ -1,3 +1,7 @@
+.. Google Search Console ownership check.
+.. meta::
+   :google-site-verification: HahFPQi2xaPBLET0Fp9jRVKVsYmsPsFsSixUONPrtp0
+
 mathematicskit
 ==============
 
@@ -208,6 +212,12 @@ Install and try it
 
    pip install "mathematicskit[fast]"   # with numba JIT acceleration (recommended)
    pip install mathematicskit           # pure numpy/scipy/matplotlib, e.g. for Pyodide
+
+or with conda (conda has no extras, so name numba to get the JIT):
+
+.. code-block:: bash
+
+   conda install -c conda-forge mathematicskit numba
 
 The ``fast`` extra adds `numba <https://numba.pydata.org/>`_, which compiles
 the inner loops of ``ode_dynamics``, ``fractals_chaos``, ``pde``, and

@@ -2,7 +2,7 @@
 
 | | |
 |:--|:-:|
-| Package | [![PyPI version](https://badgen.net/pypi/v/mathematicskit)](https://pypi.org/project/mathematicskit/) [![Python versions](https://badgen.net/pypi/python/mathematicskit)](https://pypi.org/project/mathematicskit/) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23116267.svg)](https://doi.org/10.5281/zenodo.23116267) |
+| Package | [![PyPI version](https://badgen.net/pypi/v/mathematicskit)](https://pypi.org/project/mathematicskit/) [![conda-forge](https://img.shields.io/conda/vn/conda-forge/mathematicskit)](https://anaconda.org/conda-forge/mathematicskit) [![Python versions](https://badgen.net/pypi/python/mathematicskit)](https://pypi.org/project/mathematicskit/) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23116267.svg)](https://doi.org/10.5281/zenodo.23116267) |
 | Quality | [![License](https://badgen.net/badge/license/MIT/blue)](https://github.com/cpoli/mathematicskit/blob/main/LICENSE) [![CI](https://github.com/cpoli/mathematicskit/actions/workflows/ci.yml/badge.svg)](https://github.com/cpoli/mathematicskit/actions/workflows/ci.yml) [![Coverage](https://codecov.io/gh/cpoli/mathematicskit/branch/main/graph/badge.svg)](https://codecov.io/gh/cpoli/mathematicskit) |
 | Documentation | [![Docs](https://badgen.net/badge/docs/cpoli.github.io%2Fmathematicskit/blue)](https://cpoli.github.io/mathematicskit/) |
 | Code style | [![Ruff](https://badgen.net/badge/code%20style/ruff/purple)](https://github.com/astral-sh/ruff) |
@@ -41,6 +41,12 @@ the same architecture, API conventions, and history-driven documentation.
 ```bash
 pip install "mathematicskit[fast]"   # with numba JIT acceleration (recommended)
 pip install mathematicskit           # pure numpy/scipy/matplotlib, e.g. for Pyodide/JupyterLite
+```
+
+or with conda (conda has no extras, so name numba to get the JIT):
+
+```bash
+conda install -c conda-forge mathematicskit numba
 ```
 
 Then `import mathematicskit as mk`. (The shorter name `mathkit` was
