@@ -2,8 +2,8 @@
 .. meta::
    :google-site-verification: HahFPQi2xaPBLET0Fp9jRVKVsYmsPsFsSixUONPrtp0
 
-mathematicskit
-==============
+mathematicskit: Computational Mathematics in Python
+===================================================
 
 .. include:: /_generated/vars.rst
 
@@ -271,3 +271,14 @@ Conventionally imported as ``mk``:
    :hidden:
 
    api/index
+
+.. rubric:: Related toolkits
+
+Sibling Python toolkits for learning and teaching, built the same way:
+
+- `blockchainkit <https://cpoli.github.io/blockchainkit/>`__ -- cryptography, consensus and blockchain systems
+- `chemistrykit <https://cpoli.github.io/chemistrykit/>`__ -- computational chemistry
+- `engineeringkit <https://cpoli.github.io/engineeringkit/>`__ -- computational engineering
+- `financialkit <https://cpoli.github.io/financialkit/>`__ -- quantitative finance
+- `physicskit <https://cpoli.github.io/physicskit/>`__ -- computational physics
+- `tbkit <https://cpoli.github.io/tbkit/>`__ -- tight-binding models, band topology and quantum transport
