@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-10-16
+
 ### Added
 
 - `mathematicskit.topology`, an 18th domain:
@@ -119,6 +121,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Bisection` records the bracket behind each midpoint in
   `extra["brackets"]`, and `power_iteration` records every iterate in
   `extra["vectors"]`.
+- The README and the docs home page show how to install from
+  conda-forge (`conda install -c conda-forge mathematicskit numba`).
 
 ## [0.5.1] - 2026-10-02
 
@@ -479,7 +483,8 @@ All 14 planned domain subpackages are now implemented. Docs polish
   optimizer, eigenvalues in linear algebra/graph theory/dynamical
   systems, and more).
 
-[Unreleased]: https://github.com/cpoli/mathematicskit/compare/v0.5.1...HEAD
+[Unreleased]: https://github.com/cpoli/mathematicskit/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/cpoli/mathematicskit/compare/v0.5.1...v0.6.0
 [0.5.1]: https://github.com/cpoli/mathematicskit/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/cpoli/mathematicskit/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/cpoli/mathematicskit/compare/v0.3.0...v0.4.0
