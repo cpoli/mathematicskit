@@ -133,6 +133,36 @@ Random Sampling," Philosophical Magazine Series 5, 50(302) (1900),
 
 .. minigallery:: ../../examples/statistics/hypothesis_tests/plot_02_chi_square_tests.py
 
+1901-1933 -- Pearson, Hotelling, and Principal Components
+---------------------------------------------------------
+
+Karl Pearson asked in 1901 for the line or plane that best fits a cloud
+of points when every coordinate carries error. Least-squares regression
+minimizes vertical distances and so treats one variable as exact;
+Pearson minimized perpendicular distances instead, and found the
+answer along the leading eigenvectors of the covariance matrix. Harold
+Hotelling, analysing batteries of school tests in 1933, used the same
+eigenvectors to replace many correlated variables by a few uncorrelated
+"principal components" that carry most of their variance. Principal
+component analysis is now the first step of exploratory analysis in
+almost every field that collects many measurements per subject.
+
+*Implementation:* :func:`mathematicskit.statistics.systems.pca.principal_component_analysis`
+computes the components as right singular vectors of the centred data
+with :func:`numpy.linalg.svd`, which avoids forming the covariance
+matrix, and returns them in a
+:class:`~mathematicskit.statistics.core.base.PCAResult`. The tests
+check them against :func:`numpy.linalg.eigh` of the covariance and
+correlation matrices and verify Pearson's least-squares property.
+
+*References:* K. Pearson, "On Lines and Planes of Closest Fit to Systems
+of Points in Space," Philosophical Magazine 2(11) (1901), 559-572; H.
+Hotelling, "Analysis of a Complex of Statistical Variables into
+Principal Components," Journal of Educational Psychology 24(6) (1933),
+417-441.
+
+.. minigallery:: ../../examples/statistics/pca/plot_01_pearson_hotelling_pca.py
+
 1904 -- Spearman's Rank Correlation
 -----------------------------------
 
@@ -244,6 +274,42 @@ is cross-checked against :func:`scipy.stats.f_oneway`.
 (Edinburgh: Oliver and Boyd, 1925), Ch. 7.
 
 .. minigallery:: ../../examples/statistics/hypothesis_tests/plot_04_one_way_anova.py
+
+1927 -- Yule's Autoregressive Model
+-----------------------------------
+
+The sunspot record rises and falls with a period of about eleven years,
+but too irregularly for a sine wave plus noise. George Udny Yule
+proposed in 1927 that the disturbances enter the dynamics themselves,
+like peas shot at a swinging pendulum, and fitted
+
+.. math::
+
+   X_t = \phi_1 X_{t-1} + \phi_2 X_{t-2} + \varepsilon_t,
+
+the first autoregressive model. Multiplying by :math:`X_{t-k}` and
+taking expectations gives linear equations between the coefficients and
+the autocorrelations, which Gilbert Walker generalized in 1931: the
+Yule-Walker equations. Autoregressive models became the foundation of
+time-series analysis, from Box-Jenkins forecasting to speech coding.
+
+*Implementation:* :func:`mathematicskit.statistics.systems.time_series.yule_walker`
+solves the Yule-Walker equations, a symmetric Toeplitz system, with
+:func:`scipy.linalg.solve_toeplitz`.
+:func:`~mathematicskit.statistics.systems.time_series.autocorrelation`
+estimates the sample autocorrelation,
+:func:`~mathematicskit.statistics.systems.time_series.ar_autocorrelation`
+gives the theoretical one, and
+:func:`~mathematicskit.statistics.systems.time_series.simulate_ar`
+simulates a model with :func:`scipy.signal.lfilter`.
+
+*References:* G. U. Yule, "On a Method of Investigating Periodicities in
+Disturbed Series, with Special Reference to Wolfer's Sunspot Numbers,"
+Philosophical Transactions of the Royal Society A 226 (1927), 267-298;
+G. Walker, "On Periodicity in Series of Related Terms," Proceedings of
+the Royal Society A 131 (1931), 518-532.
+
+.. minigallery:: ../../examples/statistics/time_series/plot_01_yule_autoregression.py
 
 1933-1939 -- Kolmogorov, Smirnov, and Distribution-Free Goodness of Fit
 -----------------------------------------------------------------------

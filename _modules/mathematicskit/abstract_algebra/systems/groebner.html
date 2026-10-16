@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mathematicskit.abstract_algebra.systems.groebner &#8212; mathematicskit 0.6.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Vibur" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/jupyterlite_sphinx.css?v=f676e775" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=c83e6b79" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=18bd87630a240e9c25be"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be" />
+
+    <script src="../../../../_static/documentation_options.js?v=dda85ae5"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../../../../_static/jupyterlite_sphinx.js?v=96e329c5"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/mathematicskit/abstract_algebra/systems/groebner';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../../../_static/searchtools.js"></script>
+    <script src="../../../../_static/language_data.js"></script>
+    <script src="../../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/mathematicskit_logo_transparent.png" class="logo__image only-light" alt="mathematicskit logo"/>
+    <img src="../../../../_static/mathematicskit_logo_transparent.png" class="logo__image only-dark pst-js-only" alt="mathematicskit logo"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/mathematicskit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/mathematicskit/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i><span class="visually-hidden">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/mathematicskit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/mathematicskit/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i><span class="visually-hidden">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">mathematicskit.abstract_algebra.systems.groebner</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for mathematicskit.abstract_algebra.systems.groebner</h1><div class="highlight"><pre>
+<span></span><span class="sa">r</span><span class="sd">"""Gröbner bases by Buchberger's algorithm, and multivariate division.</span>
+
+<span class="sd">Dividing a polynomial by several others, term by term, generalizes long</span>
+<span class="sd">division, but the remainder depends on the order of the divisors and</span>
+<span class="sd">can be nonzero even for members of the ideal they generate. Buchberger</span>
+<span class="sd">(1965) called a generating set a Gröbner basis when every member of the</span>
+<span class="sd">ideal has remainder zero, and showed how to complete any generating set</span>
+<span class="sd">to one: add the remainder of every S-polynomial</span>
+
+<span class="sd">.. math::</span>
+
+<span class="sd">   S(f, g) = \frac{L}{\operatorname{LT}(f)}\,f - \frac{L}{\operatorname{LT}(g)}\,g,</span>
+<span class="sd">   \qquad L = \operatorname{lcm}(\operatorname{LM}(f), \operatorname{LM}(g)),</span>
+
+<span class="sd">which cancels the two leading terms, until all of them reduce to zero.</span>
+<span class="sd">A lexicographic Gröbner basis is triangular, like the echelon form of a</span>
+<span class="sd">linear system, which makes it an elimination method for polynomial</span>
+<span class="sd">systems. Hand-rolled on</span>
+<span class="sd">:class:`~mathematicskit.abstract_algebra.core.base.MultivariatePolynomial`,</span>
+<span class="sd">in exact arithmetic over :math:`\mathbb Q` or :math:`\mathrm{GF}(p)`.</span>
+<span class="sd">See B. Buchberger, *Ein Algorithmus zum Auffinden der Basiselemente des</span>
+<span class="sd">Restklassenringes nach einem nulldimensionalen Polynomideal* (PhD</span>
+<span class="sd">thesis, Universität Innsbruck, 1965), and Cox, Little &amp; O'Shea, *Ideals,</span>
+<span class="sd">Varieties, and Algorithms*, 4th ed. (2015), Ch. 2-3.</span>
+<span class="sd">"""</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequence</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.abstract_algebra.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">_MONOMIAL_ORDERS</span><span class="p">,</span> <span class="n">GroebnerResult</span><span class="p">,</span> <span class="n">MultivariatePolynomial</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"multivariate_divide"</span><span class="p">,</span> <span class="s2">"s_polynomial"</span><span class="p">,</span> <span class="s2">"groebner_basis"</span><span class="p">,</span> <span class="s2">"in_ideal"</span><span class="p">]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_divides</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="n">y</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_monomial</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">MultivariatePolynomial</span><span class="p">,</span> <span class="n">exponent</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">coefficient</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MultivariatePolynomial</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">MultivariatePolynomial</span><span class="p">({</span><span class="n">exponent</span><span class="p">:</span> <span class="n">coefficient</span><span class="p">},</span> <span class="n">f</span><span class="o">.</span><span class="n">n_vars</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">modulus</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="multivariate_divide">
+<a class="viewcode-back" href="../../../../api/abstract_algebra.html#mathematicskit.abstract_algebra.multivariate_divide">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">multivariate_divide</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">MultivariatePolynomial</span><span class="p">,</span> <span class="n">divisors</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">MultivariatePolynomial</span><span class="p">],</span> <span class="n">order</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"lex"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Divide ``f`` by ``divisors``: :math:`f = \sum_i q_i g_i + r`.</span>
+
+<span class="sd">    The standard algorithm (Cox, Little &amp; O'Shea, Sec. 2.3): repeatedly</span>
+<span class="sd">    take the leading term of what is left; if some :math:`\operatorname{LT}(g_i)`</span>
+<span class="sd">    divides it, cancel it with a multiple of :math:`g_i` (first such</span>
+<span class="sd">    :math:`i`), otherwise move it to the remainder. No term of :math:`r`</span>
+<span class="sd">    is divisible by any :math:`\operatorname{LT}(g_i)`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    f : MultivariatePolynomial</span>
+<span class="sd">    divisors : sequence of MultivariatePolynomial</span>
+<span class="sd">    order : {"lex", "grlex", "grevlex"}</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tuple of (list of MultivariatePolynomial, MultivariatePolynomial)</span>
+<span class="sd">        The quotients :math:`q_i` and the remainder :math:`r`.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; x, y = MultivariatePolynomial.variables(2)</span>
+<span class="sd">    &gt;&gt;&gt; quotients, r = multivariate_divide(x**2 * y + x * y**2 + y**2, [x * y - 1, y**2 - 1])</span>
+<span class="sd">    &gt;&gt;&gt; quotients, r</span>
+<span class="sd">    ([x0 + x1, 1], x0 + x1 + 1)</span>
+<span class="sd">    """</span>
+    <span class="n">zero</span> <span class="o">=</span> <span class="n">f</span> <span class="o">*</span> <span class="mi">0</span>
+    <span class="n">quotients</span> <span class="o">=</span> <span class="p">[</span><span class="n">zero</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">divisors</span><span class="p">]</span>
+    <span class="n">leads</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">leading_term</span><span class="p">(</span><span class="n">order</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">divisors</span><span class="p">]</span>
+    <span class="n">remainder</span> <span class="o">=</span> <span class="n">zero</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">f</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">p</span><span class="o">.</span><span class="n">is_zero</span><span class="p">():</span>
+        <span class="n">e</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">leading_term</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">eg</span><span class="p">,</span> <span class="n">cg</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">leads</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">_divides</span><span class="p">(</span><span class="n">eg</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
+                <span class="n">factor</span> <span class="o">=</span> <span class="n">_monomial</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">eg</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)),</span> <span class="n">c</span> <span class="o">*</span> <span class="n">divisors</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">_inverse</span><span class="p">(</span><span class="n">cg</span><span class="p">))</span>
+                <span class="n">quotients</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">quotients</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">factor</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="n">p</span> <span class="o">-</span> <span class="n">factor</span> <span class="o">*</span> <span class="n">divisors</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">lead</span> <span class="o">=</span> <span class="n">_monomial</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+            <span class="n">remainder</span> <span class="o">=</span> <span class="n">remainder</span> <span class="o">+</span> <span class="n">lead</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">p</span> <span class="o">-</span> <span class="n">lead</span>
+    <span class="k">return</span> <span class="n">quotients</span><span class="p">,</span> <span class="n">remainder</span></div>
+
+
+
+<div class="viewcode-block" id="s_polynomial">
+<a class="viewcode-back" href="../../../../api/abstract_algebra.html#mathematicskit.abstract_algebra.s_polynomial">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">s_polynomial</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">MultivariatePolynomial</span><span class="p">,</span> <span class="n">g</span><span class="p">:</span> <span class="n">MultivariatePolynomial</span><span class="p">,</span> <span class="n">order</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"lex"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MultivariatePolynomial</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""The S-polynomial :math:`S(f, g)`, in which the leading terms of ``f`` and ``g`` cancel.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    f, g : MultivariatePolynomial</span>
+<span class="sd">    order : {"lex", "grlex", "grevlex"}</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    MultivariatePolynomial</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; x, y = MultivariatePolynomial.variables(2)</span>
+<span class="sd">    &gt;&gt;&gt; s_polynomial(x**3 * y**2 - x**2 * y**3 + x, 3 * x**4 * y + y**2, "grlex")</span>
+<span class="sd">    -x0^3*x1^3 - 1/3*x1^3 + x0^2</span>
+<span class="sd">    """</span>
+    <span class="p">(</span><span class="n">ef</span><span class="p">,</span> <span class="n">cf</span><span class="p">),</span> <span class="p">(</span><span class="n">eg</span><span class="p">,</span> <span class="n">cg</span><span class="p">)</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">leading_term</span><span class="p">(</span><span class="n">order</span><span class="p">),</span> <span class="n">g</span><span class="o">.</span><span class="n">leading_term</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+    <span class="n">lcm</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ef</span><span class="p">,</span> <span class="n">eg</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="n">left</span> <span class="o">=</span> <span class="n">_monomial</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">lcm</span><span class="p">,</span> <span class="n">ef</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)),</span> <span class="n">f</span><span class="o">.</span><span class="n">_inverse</span><span class="p">(</span><span class="n">cf</span><span class="p">))</span>
+    <span class="n">right</span> <span class="o">=</span> <span class="n">_monomial</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">lcm</span><span class="p">,</span> <span class="n">eg</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)),</span> <span class="n">g</span><span class="o">.</span><span class="n">_inverse</span><span class="p">(</span><span class="n">cg</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">left</span> <span class="o">*</span> <span class="n">f</span> <span class="o">-</span> <span class="n">right</span> <span class="o">*</span> <span class="n">g</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_reduce_basis</span><span class="p">(</span><span class="n">basis</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">order</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+    <span class="n">monic</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">monic</span><span class="p">(</span><span class="n">order</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">basis</span><span class="p">]</span>
+    <span class="n">minimal</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">monic</span><span class="p">):</span>  <span class="c1"># drop elements whose leading monomial another one's divides</span>
+        <span class="n">eg</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">leading_term</span><span class="p">(</span><span class="n">order</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">_divides</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">leading_term</span><span class="p">(</span><span class="n">order</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">eg</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">leading_term</span><span class="p">(</span><span class="n">order</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">eg</span> <span class="ow">or</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">monic</span><span class="p">)</span> <span class="k">if</span> <span class="n">j</span> <span class="o">!=</span> <span class="n">i</span><span class="p">):</span>
+            <span class="n">minimal</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+    <span class="n">reduced</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">minimal</span><span class="p">):</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">multivariate_divide</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">minimal</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">minimal</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">:],</span> <span class="n">order</span><span class="p">)</span>
+        <span class="n">reduced</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">monic</span><span class="p">(</span><span class="n">order</span><span class="p">))</span>
+    <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">reduced</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">h</span><span class="p">:</span> <span class="n">_order_key</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">order</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_order_key</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">MultivariatePolynomial</span><span class="p">,</span> <span class="n">order</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">_MONOMIAL_ORDERS</span><span class="p">[</span><span class="n">order</span><span class="p">](</span><span class="n">f</span><span class="o">.</span><span class="n">leading_term</span><span class="p">(</span><span class="n">order</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+
+
+<div class="viewcode-block" id="groebner_basis">
+<a class="viewcode-back" href="../../../../api/abstract_algebra.html#mathematicskit.abstract_algebra.groebner_basis">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">groebner_basis</span><span class="p">(</span><span class="n">polynomials</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">MultivariatePolynomial</span><span class="p">],</span> <span class="n">order</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"lex"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GroebnerResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""The reduced Gröbner basis of the ideal generated by ``polynomials``.</span>
+
+<span class="sd">    Buchberger's algorithm: keep a queue of pairs; reduce each pair's</span>
+<span class="sd">    S-polynomial by the current basis, and if the remainder is nonzero,</span>
+<span class="sd">    add it and queue its pairs with every existing element. Pairs whose</span>
+<span class="sd">    leading monomials are coprime are skipped, since their S-polynomial</span>
+<span class="sd">    always reduces to zero (Buchberger's first criterion). The result is</span>
+<span class="sd">    then made reduced, hence unique.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    polynomials : sequence of MultivariatePolynomial</span>
+<span class="sd">    order : {"lex", "grlex", "grevlex"}</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    GroebnerResult</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; x, y = MultivariatePolynomial.variables(2)</span>
+<span class="sd">    &gt;&gt;&gt; # A circle meets a parabola: lex order eliminates x, leaving a polynomial in y alone.</span>
+<span class="sd">    &gt;&gt;&gt; groebner_basis([x**2 + y**2 - 1, y - x**2], "lex").basis</span>
+<span class="sd">    [x0^2 - x1, x1^2 + x1 - 1]</span>
+<span class="sd">    """</span>
+    <span class="n">basis</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">polynomials</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">p</span><span class="o">.</span><span class="n">is_zero</span><span class="p">()]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">basis</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"need at least one nonzero polynomial"</span><span class="p">)</span>
+    <span class="n">pairs</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">basis</span><span class="p">))</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span>
+    <span class="n">s_pairs</span> <span class="o">=</span> <span class="n">zero_reductions</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">pairs</span><span class="p">:</span>
+        <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">pairs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">ei</span><span class="p">,</span> <span class="n">ej</span> <span class="o">=</span> <span class="n">basis</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">leading_term</span><span class="p">(</span><span class="n">order</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">basis</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">leading_term</span><span class="p">(</span><span class="n">order</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ei</span><span class="p">,</span> <span class="n">ej</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)):</span>
+            <span class="k">continue</span>
+        <span class="n">s_pairs</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">multivariate_divide</span><span class="p">(</span><span class="n">s_polynomial</span><span class="p">(</span><span class="n">basis</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">basis</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">order</span><span class="p">),</span> <span class="n">basis</span><span class="p">,</span> <span class="n">order</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">is_zero</span><span class="p">():</span>
+            <span class="n">zero_reductions</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">continue</span>
+        <span class="n">basis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+        <span class="n">pairs</span><span class="o">.</span><span class="n">extend</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">basis</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">basis</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">GroebnerResult</span><span class="p">(</span><span class="n">basis</span><span class="o">=</span><span class="n">_reduce_basis</span><span class="p">(</span><span class="n">basis</span><span class="p">,</span> <span class="n">order</span><span class="p">),</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span> <span class="n">s_pairs</span><span class="o">=</span><span class="n">s_pairs</span><span class="p">,</span> <span class="n">zero_reductions</span><span class="o">=</span><span class="n">zero_reductions</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="in_ideal">
+<a class="viewcode-back" href="../../../../api/abstract_algebra.html#mathematicskit.abstract_algebra.in_ideal">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">in_ideal</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">MultivariatePolynomial</span><span class="p">,</span> <span class="n">groebner</span><span class="p">:</span> <span class="n">GroebnerResult</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Whether ``f`` lies in the ideal: its remainder on division by a Gröbner basis is zero.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    f : MultivariatePolynomial</span>
+<span class="sd">    groebner : GroebnerResult</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bool</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; x, y = MultivariatePolynomial.variables(2)</span>
+<span class="sd">    &gt;&gt;&gt; g = groebner_basis([x * y - 1, y**2 - 1])</span>
+<span class="sd">    &gt;&gt;&gt; in_ideal(x - y, g), in_ideal(x + y, g)</span>
+<span class="sd">    (True, False)</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">multivariate_divide</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">groebner</span><span class="o">.</span><span class="n">basis</span><span class="p">,</span> <span class="n">groebner</span><span class="o">.</span><span class="n">order</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">is_zero</span><span class="p">()</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, mathematicskit contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.23.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -127,6 +127,33 @@ Theory 1736-1936* (Oxford: Clarendon Press, 1976), Ch. 2.
 
 .. minigallery:: ../../examples/graph_theory/hamiltonian/plot_01_icosian_game.py
 
+1873 -- Hierholzer's Eulerian Circuits
+--------------------------------------
+
+Euler had shown that a walk crossing every edge once requires at most
+two vertices of odd degree, but he did not prove that the condition is
+enough. Carl Hierholzer did, in a paper published in 1873 after his
+early death, and his proof is an algorithm. Walk along unused edges
+until you are stuck: with every degree even, that can only happen back
+at the start. If edges remain, some vertex of the walk still touches
+one, and a second closed walk from there can be spliced into the
+first. Repeating this builds the whole circuit in time proportional to
+the number of edges. The same construction underlies de Bruijn
+sequences and the assembly of DNA sequences from overlapping reads.
+
+*Implementation:* :func:`mathematicskit.graph_theory.systems.eulerian.eulerian_circuit`
+and :func:`~mathematicskit.graph_theory.systems.eulerian.eulerian_trail`
+implement Hierholzer's algorithm with an explicit stack, for undirected
+and directed graphs, and return ``None`` when the degree condition or
+connectivity fails. The tests build a de Bruijn sequence from a
+directed circuit.
+
+*References:* C. Hierholzer, "Ueber die Möglichkeit, einen Linienzug
+ohne Wiederholung und ohne Unterbrechung zu umfahren," Mathematische
+Annalen 6 (1873), 30-32.
+
+.. minigallery:: ../../examples/graph_theory/eulerian/plot_02_hierholzer_circuit.py
+
 1927-1956 -- Menger, Ford, Fulkerson, and Max-Flow Min-Cut
 ----------------------------------------------------------
 

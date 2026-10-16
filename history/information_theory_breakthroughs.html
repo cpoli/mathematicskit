@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Breakthroughs in Information Theory &#8212; mathematicskit 0.6.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Vibur" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyterlite_sphinx.css?v=f676e775" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=c83e6b79" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=18bd87630a240e9c25be"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be" />
+
+    <script src="../_static/documentation_options.js?v=dda85ae5"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../_static/jupyterlite_sphinx.js?v=96e329c5"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'history/information_theory_breakthroughs';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Breakthroughs in Numerical Linear Algebra" href="linalg_breakthroughs.html" />
+    <link rel="prev" title="Breakthroughs in Graph Theory" href="graph_theory_breakthroughs.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/mathematicskit_logo_transparent.png" class="logo__image only-light" alt="mathematicskit logo"/>
+    <img src="../_static/mathematicskit_logo_transparent.png" class="logo__image only-dark pst-js-only" alt="mathematicskit logo"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/mathematicskit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/mathematicskit/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i><span class="visually-hidden">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button type="button" class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/mathematicskit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/mathematicskit/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i><span class="visually-hidden">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button type="button" id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar">
+  <svg class="pst-icon" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="abstract_algebra_breakthroughs.html">Breakthroughs in Abstract Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calculus_breakthroughs.html">Breakthroughs in Numerical Calculus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="combinatorics_breakthroughs.html">Breakthroughs in Combinatorics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="complex_analysis_breakthroughs.html">Breakthroughs in Complex Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fractals_chaos_breakthroughs.html">Breakthroughs in Fractals and Chaos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geometry_breakthroughs.html">Breakthroughs in Computational Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graph_theory_breakthroughs.html">Breakthroughs in Graph Theory</a></li>
+<li class="toctree-l1 current active"><a aria-current="page" class="current reference internal" href="#">Breakthroughs in Information Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linalg_breakthroughs.html">Breakthroughs in Numerical Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="number_theory_breakthroughs.html">Breakthroughs in Number Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_analysis_breakthroughs.html">Breakthroughs in Numerical Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ode_dynamics_breakthroughs.html">Breakthroughs in Dynamical Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimization_breakthroughs.html">Breakthroughs in Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pde_breakthroughs.html">Breakthroughs in Partial Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability_breakthroughs.html">Breakthroughs in Probability Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="special_functions_breakthroughs.html">Breakthroughs in Special Functions and Transforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statistics_breakthroughs.html">Breakthroughs in Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topology_breakthroughs.html">Breakthroughs in Topology</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">History</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Breakthroughs in Information Theory</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="breakthroughs-in-information-theory">
+<h1>Breakthroughs in Information Theory<a class="headerlink" href="#breakthroughs-in-information-theory" title="Link to this heading">#</a></h1>
+<div class="subpkg-nav docutils container">
+<p><a class="reference internal" href="../_generated/subpackages/information_theory.html"><span class="doc">mathematicskit.information_theory hub</span></a> · <a class="reference internal" href="#"><span class="doc">History</span></a> · <a class="reference internal" href="../api/gallery/information_theory/index.html"><span class="doc">Examples</span></a> · <a class="reference internal" href="../api/information_theory.html"><span class="doc">API reference</span></a></p>
+</div>
+<blockquote class="epigraph">
+<div><p>“The fundamental problem of communication is that of reproducing at
+one point either exactly or approximately a message selected at
+another point.”
+– Claude E. Shannon, 1948</p>
+</div></blockquote>
+<p>Information theory is unusual among mathematical subjects in having a
+birth certificate: Claude Shannon’s 1948 paper “A Mathematical Theory of
+Communication,” which defined entropy, proved what compression and
+error correction can and cannot achieve, and left the next fifty years
+of engineers to find codes that live up to its promises. This
+chronology traces the ideas behind
+<a class="reference internal" href="../api/information_theory.html#module-mathematicskit.information_theory" title="mathematicskit.information_theory"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.information_theory</span></code></a>, from Hartley’s logarithm and
+Shannon’s theorems to Huffman’s optimal code, Hamming’s and Gallager’s
+error-correcting codes, and the universal compressors of Elias, Ziv and
+Lempel.</p>
+<nav class="contents local" id="timeline">
+<p class="topic-title">Timeline</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#hartley-s-measure-of-information" id="id1">1928 – Hartley’s Measure of Information</a></p></li>
+<li><p><a class="reference internal" href="#shannon-entropy" id="id2">1948 – Shannon Entropy</a></p></li>
+<li><p><a class="reference internal" href="#mutual-information" id="id3">1948 – Mutual Information</a></p></li>
+<li><p><a class="reference internal" href="#the-source-coding-theorem-and-the-typical-set" id="id4">1948 – The Source Coding Theorem and the Typical Set</a></p></li>
+<li><p><a class="reference internal" href="#capacity-of-the-binary-symmetric-channel" id="id5">1948 – Capacity of the Binary Symmetric Channel</a></p></li>
+<li><p><a class="reference internal" href="#the-noisy-channel-coding-theorem" id="id6">1948 – The Noisy-Channel Coding Theorem</a></p></li>
+<li><p><a class="reference internal" href="#shannon-fano-coding" id="id7">1948-1949 – Shannon-Fano Coding</a></p></li>
+<li><p><a class="reference internal" href="#the-shannon-hartley-theorem" id="id8">1949 – The Shannon-Hartley Theorem</a></p></li>
+<li><p><a class="reference internal" href="#the-kraft-mcmillan-inequality" id="id9">1949, 1956 – The Kraft-McMillan Inequality</a></p></li>
+<li><p><a class="reference internal" href="#hamming-codes" id="id10">1950 – Hamming Codes</a></p></li>
+<li><p><a class="reference internal" href="#the-kullback-leibler-divergence" id="id11">1951 – The Kullback-Leibler Divergence</a></p></li>
+<li><p><a class="reference internal" href="#huffman-coding" id="id12">1952 – Huffman Coding</a></p></li>
+<li><p><a class="reference internal" href="#convolutional-codes" id="id13">1955 – Convolutional Codes</a></p></li>
+<li><p><a class="reference internal" href="#rate-distortion-theory" id="id14">1959 – Rate-Distortion Theory</a></p></li>
+<li><p><a class="reference internal" href="#gallager-s-low-density-parity-check-codes" id="id15">1962-1963 – Gallager’s Low-Density Parity-Check Codes</a></p></li>
+<li><p><a class="reference internal" href="#the-viterbi-algorithm" id="id16">1967 – The Viterbi Algorithm</a></p></li>
+<li><p><a class="reference internal" href="#the-blahut-arimoto-algorithm" id="id17">1972 – The Blahut-Arimoto Algorithm</a></p></li>
+<li><p><a class="reference internal" href="#elias-universal-codes-for-the-integers" id="id18">1975 – Elias’ Universal Codes for the Integers</a></p></li>
+<li><p><a class="reference internal" href="#arithmetic-coding" id="id19">1976 – Arithmetic Coding</a></p></li>
+<li><p><a class="reference internal" href="#lempel-ziv-compression" id="id20">1977-1978 – Lempel-Ziv Compression</a></p></li>
+<li><p><a class="reference internal" href="#see-also" id="id21">See Also</a></p></li>
+</ul>
+</nav>
+<section id="hartley-s-measure-of-information">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">1928 – Hartley’s Measure of Information</a><a class="headerlink" href="#hartley-s-measure-of-information" title="Link to this heading">#</a></h2>
+<p>Ralph Hartley, an engineer at Bell Labs, set out in 1928 to measure
+information without reference to its meaning. A sender who makes
+<span class="math notranslate nohighlight">\(L\)</span> successive selections from an alphabet of <span class="math notranslate nohighlight">\(n\)</span> symbols
+picks one of <span class="math notranslate nohighlight">\(n^L\)</span> possible messages, and Hartley took the
+logarithm, <span class="math notranslate nohighlight">\(H_0 = L\log n\)</span>, so that the information in a message
+grows in proportion to its length. Building on Harry Nyquist’s 1924
+study of telegraph speed, he concluded that the information a line can
+carry is proportional to its bandwidth and to the time it is used. His
+measure treats all messages as equally likely, which is the gap Shannon
+filled twenty years later; the unit of <span class="math notranslate nohighlight">\(\log_{10}\)</span>, the hartley,
+still carries his name.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.information_theory.systems.entropy.hartley_information()</span></code>
+computes <span class="math notranslate nohighlight">\(L\log n\)</span> in any base, and the tests check that it equals
+the Shannon entropy of the uniform distribution.</p>
+<p><em>References:</em> R. V. L. Hartley, “Transmission of Information,” Bell
+System Technical Journal 7(3) (1928), 535-563.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Hartley measured the information in a message of L symbols from an alphabet of n as L\log n: the logarithm makes information add up when messages are concatenated. The plot compares alphabets by the bits each symbol carries, and the number of symbols needed to send one of a million equally likely messages."><img alt="" src="../_images/sphx_glr_plot_01_hartley_information_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/information_theory/entropy/plot_01_hartley_information.html"><span class="doc">Hartley’s measure of information (1928)</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Hartley's measure of information (1928)</div>
+</div></div></section>
+<section id="shannon-entropy">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">1948 – Shannon Entropy</a><a class="headerlink" href="#shannon-entropy" title="Link to this heading">#</a></h2>
+<p>Claude Shannon’s 1948 paper replaced Hartley’s count of messages with an
+average over their probabilities. He asked for a measure of
+uncertainty that is continuous in the probabilities, increasing in the
+number of equally likely outcomes, and additive over successive
+choices, and proved that only one function qualifies:
+<span class="math notranslate nohighlight">\(H = -\sum_i p_i \log p_i\)</span>. With base-2 logarithms it is counted
+in <em>bits</em>, a word Shannon credited to John Tukey. The name came,
+according to a story Shannon told later, from John von Neumann, who
+pointed out the formula’s resemblance to entropy in statistical
+mechanics. Shannon applied it to English and estimated the entropy of
+its letters, which is well below the <span class="math notranslate nohighlight">\(\log_2 26\)</span> bits a uniform
+alphabet would carry.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.information_theory.systems.entropy.entropy()</span></code>
+wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.entropy.html#scipy.stats.entropy" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.stats.entropy()</span></code></a>, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">binary_entropy()</span></code>
+gives <span class="math notranslate nohighlight">\(h(p)\)</span> with <code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.entr()</span></code>. The tests check the
+bounds <span class="math notranslate nohighlight">\(0 \le H \le \log_2 n\)</span> and the change of base.</p>
+<p><em>References:</em> C. E. Shannon, “A Mathematical Theory of Communication,”
+Bell System Technical Journal 27 (1948), 379-423 and 623-656.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Shannon replaced Hartley&#x27;s count of messages with an average over their probabilities, H = -\sum p\log_2 p: the expected surprise of the next symbol. The binary entropy function peaks at one bit for a fair coin, and the entropy of English letter frequencies (about 4.2 bits) falls short of Hartley&#x27;s \log_2 26 = 4.7."><img alt="" src="../_images/sphx_glr_plot_02_shannon_entropy_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/information_theory/entropy/plot_02_shannon_entropy.html"><span class="doc">Shannon entropy (1948)</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Shannon entropy (1948)</div>
+</div></div></section>
+<section id="mutual-information">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">1948 – Mutual Information</a><a class="headerlink" href="#mutual-information" title="Link to this heading">#</a></h2>
+<p>To measure what a noisy channel delivers, Shannon subtracted the
+uncertainty that remains about the input <span class="math notranslate nohighlight">\(X\)</span> once the output
+<span class="math notranslate nohighlight">\(Y\)</span> is seen: the rate of transmission
+<span class="math notranslate nohighlight">\(I(X;Y) = H(X) - H(X\mid Y)\)</span>, later named the mutual information.
+It is symmetric in <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>, never negative, and zero
+exactly when the two are independent. Together with the chain rule
+<span class="math notranslate nohighlight">\(H(X,Y) = H(X) + H(Y\mid X)\)</span>, it fits into a diagram of two
+overlapping circles whose overlap is the shared information. Its
+maximum over input distributions is the channel capacity.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.information_theory.systems.entropy.mutual_information()</span></code>,
+<code class="xref py py-func docutils literal notranslate"><span class="pre">joint_entropy()</span></code>
+and <code class="xref py py-func docutils literal notranslate"><span class="pre">conditional_entropy()</span></code>
+work from a joint probability table, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">plot_information_diagram()</span></code>
+draws the diagram. The tests check the chain rule, the symmetry, and
+that <span class="math notranslate nohighlight">\(I(X;Y)\)</span> equals the divergence of the joint distribution from
+the product of its marginals.</p>
+<p><em>References:</em> Shannon (1948), Part II; T. M. Cover and J. A. Thomas,
+<em>Elements of Information Theory</em>, 2nd ed. (Hoboken: Wiley, 2006), Ch. 2.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Shannon measured what the output Y of a noisy channel tells about its input X by I(X;Y) = H(X) - H(X\mid Y), the uncertainty removed by observing the output. The information diagram shows the decomposition for a binary symmetric channel, and the curve shows I(X;Y) against the input bias for several noise levels."><img alt="" src="../_images/sphx_glr_plot_03_mutual_information_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/information_theory/entropy/plot_03_mutual_information.html"><span class="doc">Mutual information (1948)</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Mutual information (1948)</div>
+</div></div></section>
+<section id="the-source-coding-theorem-and-the-typical-set">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">1948 – The Source Coding Theorem and the Typical Set</a><a class="headerlink" href="#the-source-coding-theorem-and-the-typical-set" title="Link to this heading">#</a></h2>
+<p>Shannon showed that entropy is the limit of lossless compression. For a
+long sequence of <span class="math notranslate nohighlight">\(n\)</span> independent symbols,
+<span class="math notranslate nohighlight">\(-\tfrac1n\log_2 p(x^n)\)</span> is almost always close to <span class="math notranslate nohighlight">\(H\)</span>, so
+the sequences split into a “typical” set of about <span class="math notranslate nohighlight">\(2^{nH}\)</span> nearly
+equally likely members, which carries almost all the probability, and
+the rest. Indexing the typical set takes about <span class="math notranslate nohighlight">\(nH\)</span> bits, and no
+code can use fewer on average. Brockway McMillan extended this
+asymptotic equipartition property to stationary ergodic sources in
+1953, and Leo Breiman strengthened it to almost-sure convergence in
+1957.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.information_theory.systems.source_coding.typical_set()</span></code>
+computes the size and probability of the typical set exactly, summing
+over symbol counts with multinomial coefficients. The tests compare it
+with brute-force enumeration and check the bounds
+<span class="math notranslate nohighlight">\((1-\varepsilon)2^{n(H-\varepsilon)} \le |A_\varepsilon^{(n)}| \le 2^{n(H+\varepsilon)}\)</span>.</p>
+<p><em>References:</em> Shannon (1948), Theorems 3 and 9; B. McMillan, “The Basic
+Theorems of Information Theory,” Annals of Mathematical Statistics
+24(2) (1953), 196-219.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="For long i.i.d. sequences, -\tfrac1n\log_2 p(x^n) concentrates at the entropy H (the asymptotic equipartition property). Almost all the probability then sits on about 2^{nH} &quot;typical&quot; sequences out of 2^n, so nH bits suffice to describe the source, and no lossless code can do better on average."><img alt="" src="../_images/sphx_glr_plot_01_source_coding_theorem_typical_set_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/information_theory/source_coding/plot_01_source_coding_theorem_typical_set.html"><span class="doc">Shannon’s source coding theorem: the typical set (1948)</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Shannon's source coding theorem: the typical set (1948)</div>
+</div></div></section>
+<section id="capacity-of-the-binary-symmetric-channel">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">1948 – Capacity of the Binary Symmetric Channel</a><a class="headerlink" href="#capacity-of-the-binary-symmetric-channel" title="Link to this heading">#</a></h2>
+<p>The simplest noisy channel flips each transmitted bit independently
+with probability <span class="math notranslate nohighlight">\(p\)</span>. Shannon worked through it as his first
+example: at 1000 bits per second with <span class="math notranslate nohighlight">\(p = 0.01\)</span>, the rate of
+transmission is not 990 bits per second, as subtracting the errors
+would suggest, but <span class="math notranslate nohighlight">\(1000\,(1 - h(0.01)) \approx 919\)</span>, since the
+receiver does not know which bits are wrong. The capacity
+<span class="math notranslate nohighlight">\(C = 1 - h(p)\)</span>, reached by a uniform input, falls to zero at
+<span class="math notranslate nohighlight">\(p = 1/2\)</span>, where the output is independent of the input.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.information_theory.systems.channels.bsc_capacity()</span></code>
+evaluates <span class="math notranslate nohighlight">\(1 - h(p)\)</span>, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">bsc_transmit()</span></code>
+simulates the channel. The tests check the symmetry
+<span class="math notranslate nohighlight">\(C(p) = C(1-p)\)</span> and that the mutual information of a uniform
+input equals the capacity.</p>
+<p><em>References:</em> Shannon (1948), Section 13.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="A binary symmetric channel flips each bit with probability p. Shannon showed its capacity is C = 1 - h(p) bits per use, the largest mutual information over input distributions, reached by a fair coin. At p = 0.11 half of every bit survives; at p = 1/2 the output is independent of the input."><img alt="" src="../_images/sphx_glr_plot_01_binary_symmetric_channel_capacity_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/information_theory/channels/plot_01_binary_symmetric_channel_capacity.html"><span class="doc">Capacity of the binary symmetric channel (1948)</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Capacity of the binary symmetric channel (1948)</div>
+</div></div></section>
+<section id="the-noisy-channel-coding-theorem">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">1948 – The Noisy-Channel Coding Theorem</a><a class="headerlink" href="#the-noisy-channel-coding-theorem" title="Link to this heading">#</a></h2>
+<p>Shannon’s most surprising result was that noise limits the rate of
+communication, not its reliability: every rate below the capacity
+<span class="math notranslate nohighlight">\(C\)</span> can be sent with an error probability as small as desired,
+and no rate above it can. His proof did not construct a good code. It
+averaged over codes whose <span class="math notranslate nohighlight">\(2^{nR}\)</span> codewords are drawn at random,
+showed that the average error probability tends to zero with the block
+length when <span class="math notranslate nohighlight">\(R &lt; C\)</span>, and concluded that some code must do at
+least as well. Engineers took half a century to find practical codes
+that come close, through turbo codes (1993) and the rediscovery of
+LDPC codes.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.information_theory.systems.channels.random_code_error_rate()</span></code>
+reproduces the random-coding experiment on a binary symmetric channel
+with nearest-codeword decoding. The tests check that the error rate
+falls with the block length below capacity and exceeds 0.8 above it.</p>
+<p><em>References:</em> Shannon (1948), Theorem 11; R. G. Gallager, <em>Information
+Theory and Reliable Communication</em> (New York: Wiley, 1968), Ch. 5.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Shannon proved that every rate below capacity can be sent with error probability as small as desired, and no rate above it can. His proof used random codes: draw 2^{nR} codewords at random and decode to the nearest one. Here the rate is fixed at R = 1/4 and the block length grows: below capacity the error falls toward zero, above capacity it rises toward one."><img alt="" src="../_images/sphx_glr_plot_02_noisy_channel_coding_theorem_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/information_theory/channels/plot_02_noisy_channel_coding_theorem.html"><span class="doc">The noisy-channel coding theorem (1948)</span></a></p>
+  <div class="sphx-glr-thumbnail-title">The noisy-channel coding theorem (1948)</div>
+</div></div></section>
+<section id="shannon-fano-coding">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">1948-1949 – Shannon-Fano Coding</a><a class="headerlink" href="#shannon-fano-coding" title="Link to this heading">#</a></h2>
+<p>The first codes built on Shannon’s theory came from Shannon himself and
+from Robert Fano at MIT. Shannon gave the <span class="math notranslate nohighlight">\(i\)</span>-th most likely
+symbol <span class="math notranslate nohighlight">\(\lceil -\log_2 p_i\rceil\)</span> bits, read from the binary
+expansion of the cumulative probability of the more likely symbols.
+Fano sorted the symbols and split them recursively into two groups of
+nearly equal total probability, labelling the groups <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">1</span></code>.
+Both methods give a prefix code whose average length is within one bit
+of the entropy, which is enough to prove the source coding theorem, but
+neither is always optimal.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.information_theory.systems.source_coding.shannon_fano_code()</span></code>
+implements both constructions (<code class="docutils literal notranslate"><span class="pre">method=&quot;shannon&quot;</span></code> and
+<code class="docutils literal notranslate"><span class="pre">method=&quot;fano&quot;</span></code>), returning a
+<a class="reference internal" href="../api/information_theory.html#mathematicskit.information_theory.PrefixCode" title="mathematicskit.information_theory.core.base.PrefixCode"><code class="xref py py-class docutils literal notranslate"><span class="pre">PrefixCode</span></code></a>. The
+tests check the bound <span class="math notranslate nohighlight">\(H \le \bar L &lt; H + 1\)</span> and Shannon’s
+codeword lengths.</p>
+<p><em>References:</em> Shannon (1948), Section 9; R. M. Fano, <em>The Transmission
+of Information</em>, Technical Report 65, MIT Research Laboratory of
+Electronics (1949).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Shannon gave each symbol \lceil -\log_2 p\rceil bits, read off the binary expansion of the cumulative probability; Fano split the sorted symbols into two halves of nearly equal probability, recursively. Both land within one bit of the entropy -- the first practical codes built on Shannon&#x27;s theory -- but neither is always optimal."><img alt="" src="../_images/sphx_glr_plot_02_shannon_fano_coding_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/information_theory/source_coding/plot_02_shannon_fano_coding.html"><span class="doc">Shannon-Fano coding (1948-1949)</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Shannon-Fano coding (1948-1949)</div>
+</div></div></section>
+<section id="the-shannon-hartley-theorem">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">1949 – The Shannon-Hartley Theorem</a><a class="headerlink" href="#the-shannon-hartley-theorem" title="Link to this heading">#</a></h2>
+<p>In “Communication in the Presence of Noise,” Shannon turned to
+continuous signals. Using the sampling theorem to represent a signal of
+bandwidth <span class="math notranslate nohighlight">\(B\)</span> by <span class="math notranslate nohighlight">\(2B\)</span> samples per second, and a geometric
+argument about packing spheres in many dimensions, he proved that a
+channel with average power <span class="math notranslate nohighlight">\(S\)</span> and white Gaussian noise of power
+<span class="math notranslate nohighlight">\(N\)</span> carries at most <span class="math notranslate nohighlight">\(C = B\log_2(1 + S/N)\)</span> bits per second.
+Capacity grows only logarithmically with power. Per bit, it sets a
+floor: no code communicates reliably below <span class="math notranslate nohighlight">\(E_b/N_0 = \ln 2\)</span>, or
+<span class="math notranslate nohighlight">\(-1.59\)</span> dB, the Shannon limit that modern codes are measured
+against.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.information_theory.systems.channels.awgn_capacity()</span></code>
+evaluates the formula, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">minimum_ebn0()</span></code>
+gives the smallest <span class="math notranslate nohighlight">\(E_b/N_0\)</span> for a spectral efficiency. The tests
+check the limit <span class="math notranslate nohighlight">\(\ln 2\)</span>.</p>
+<p><em>References:</em> C. E. Shannon, “Communication in the Presence of Noise,”
+Proceedings of the IRE 37(1) (1949), 10-21.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="A channel of bandwidth B with Gaussian noise carries at most C = B\log_2(1 + S/N) bits per second. Capacity grows only logarithmically with power, and dividing by the bit rate gives the Shannon limit: no code works below E_b/N_0 = \ln 2, or -1.59 dB."><img alt="" src="../_images/sphx_glr_plot_03_shannon_hartley_theorem_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/information_theory/channels/plot_03_shannon_hartley_theorem.html"><span class="doc">The Shannon-Hartley theorem (1949)</span></a></p>
+  <div class="sphx-glr-thumbnail-title">The Shannon-Hartley theorem (1949)</div>
+</div></div></section>
+<section id="the-kraft-mcmillan-inequality">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">1949, 1956 – The Kraft-McMillan Inequality</a><a class="headerlink" href="#the-kraft-mcmillan-inequality" title="Link to this heading">#</a></h2>
+<p>Leon Kraft’s 1949 master’s thesis at MIT answered which codeword
+lengths a prefix code can have: lengths <span class="math notranslate nohighlight">\(\ell_i\)</span> are possible if
+and only if <span class="math notranslate nohighlight">\(\sum_i 2^{-\ell_i} \le 1\)</span>. Each codeword of length
+<span class="math notranslate nohighlight">\(\ell\)</span> claims a <span class="math notranslate nohighlight">\(2^{-\ell}\)</span> share of the binary tree, and
+prefix-freeness forbids the shares to overlap. In 1956 Brockway
+McMillan proved that the same inequality holds for every uniquely
+decodable code, so nothing is lost by insisting on prefix codes. The
+inequality turns code design into the choice of lengths, and with
+<span class="math notranslate nohighlight">\(\ell_i \approx -\log_2 p_i\)</span> it gives the entropy bound.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.information_theory.systems.source_coding.kraft_sum()</span></code>
+evaluates the sum, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">canonical_code()</span></code>
+constructs a prefix code with any admissible lengths. The tests check
+the construction and the rejection of lengths whose sum exceeds 1.</p>
+<p><em>References:</em> L. G. Kraft, <em>A Device for Quantizing, Grouping, and
+Coding Amplitude-Modulated Pulses</em>, MS thesis, MIT (1949); B. McMillan,
+“Two Inequalities Implied by Unique Decipherability,” IRE Transactions
+on Information Theory 2(4) (1956), 115-116.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="A binary prefix code with codeword lengths \ell_i exists if and only if \sum_i 2^{-\ell_i} \le 1 (Kraft 1949); McMillan (1956) showed every uniquely decodable code obeys the same bound. Each codeword of length \ell claims a 2^{-\ell} share of the unit interval, and prefix-freeness means the shares cannot overlap."><img alt="" src="../_images/sphx_glr_plot_03_kraft_mcmillan_inequality_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/information_theory/source_coding/plot_03_kraft_mcmillan_inequality.html"><span class="doc">The Kraft-McMillan inequality (1949, 1956)</span></a></p>
+  <div class="sphx-glr-thumbnail-title">The Kraft-McMillan inequality (1949, 1956)</div>
+</div></div></section>
+<section id="hamming-codes">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">1950 – Hamming Codes</a><a class="headerlink" href="#hamming-codes" title="Link to this heading">#</a></h2>
+<p>Richard Hamming ran his programs over weekends on Bell Labs’ relay
+computers, which stopped a job whenever they detected an error. His
+frustration led him to codes that correct errors as well as detect
+them. The (7,4) Hamming code adds three parity bits to four data bits;
+each parity bit checks the positions whose binary expansion contains
+its own bit, so the pattern of failed checks, the <em>syndrome</em>, spells
+out the position of a single error. Hamming also introduced the
+distance between binary words that bears his name and showed that a
+minimum distance of <span class="math notranslate nohighlight">\(2t+1\)</span> corrects <span class="math notranslate nohighlight">\(t\)</span> errors.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.information_theory.systems.channel_codes.hamming_encode()</span></code>
+and <code class="xref py py-func docutils literal notranslate"><span class="pre">hamming_decode()</span></code>
+implement the <span class="math notranslate nohighlight">\((2^r-1, 2^r-r-1)\)</span> codes with syndrome decoding.
+The tests check that every single error is corrected and that the
+(7,4) code has minimum distance 3.</p>
+<p><em>References:</em> R. W. Hamming, “Error Detecting and Error Correcting
+Codes,” Bell System Technical Journal 29(2) (1950), 147-160.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Tired of weekend jobs on the Bell Labs relay computers stopping at every error, Hamming designed codes that correct them. The (7,4) code adds three parity bits so that the syndrome -- which checks fail -- spells out the position of a single flipped bit in binary. Over a binary symmetric channel it trades rate 4/7 for a much lower bit error rate when errors are rare."><img alt="" src="../_images/sphx_glr_plot_01_hamming_codes_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/information_theory/channel_codes/plot_01_hamming_codes.html"><span class="doc">Hamming codes (1950)</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Hamming codes (1950)</div>
+</div></div></section>
+<section id="the-kullback-leibler-divergence">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">1951 – The Kullback-Leibler Divergence</a><a class="headerlink" href="#the-kullback-leibler-divergence" title="Link to this heading">#</a></h2>
+<p>Solomon Kullback and Richard Leibler, cryptanalysts at the US National
+Security Agency, defined the mean information per observation for
+discriminating between two hypotheses,
+<span class="math notranslate nohighlight">\(D(p\,\|\,q) = \sum p\log(p/q)\)</span>. It is never negative, by Gibbs’
+inequality, and vanishes only when <span class="math notranslate nohighlight">\(p = q\)</span>, but it is not
+symmetric and so not a distance. In coding terms it is the number of
+extra bits per symbol paid for compressing a <span class="math notranslate nohighlight">\(p\)</span>-source with a
+code designed for <span class="math notranslate nohighlight">\(q\)</span>. It became the common currency of
+information theory, statistics and machine learning: mutual
+information, likelihood ratio tests and variational inference are all
+built on it.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.information_theory.systems.entropy.kl_divergence()</span></code>
+wraps <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.entropy.html#scipy.stats.entropy" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.stats.entropy()</span></code></a> with two arguments. The tests check
+Gibbs’ inequality on random distributions, the asymmetry, and the
+infinite value when <span class="math notranslate nohighlight">\(q\)</span> misses part of the support of <span class="math notranslate nohighlight">\(p\)</span>.</p>
+<p><em>References:</em> S. Kullback and R. A. Leibler, “On Information and
+Sufficiency,” Annals of Mathematical Statistics 22(1) (1951), 79-86.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Kullback and Leibler defined D(p\,\|\,q) = \sum p\log(p/q) as the mean information per observation for telling p from q. It is never negative (Gibbs&#x27; inequality) and vanishes only at p = q, but it is not symmetric. It is also the extra bits per symbol paid for coding a p-source with a code built for q."><img alt="" src="../_images/sphx_glr_plot_04_kullback_leibler_divergence_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/information_theory/entropy/plot_04_kullback_leibler_divergence.html"><span class="doc">The Kullback-Leibler divergence (1951)</span></a></p>
+  <div class="sphx-glr-thumbnail-title">The Kullback-Leibler divergence (1951)</div>
+</div></div></section>
+<section id="huffman-coding">
+<h2><a class="toc-backref" href="#id12" role="doc-backlink">1952 – Huffman Coding</a><a class="headerlink" href="#huffman-coding" title="Link to this heading">#</a></h2>
+<p>David Huffman was a graduate student in Robert Fano’s information theory
+class at MIT in 1951 when Fano offered the class a choice between a
+final exam and a term paper on finding the most efficient binary code,
+a problem Fano and Shannon had not solved. Huffman found the answer by
+building the code tree from the bottom up instead of the top down:
+merge the two least likely symbols into one node, and repeat. The
+result is optimal among all prefix codes, and Huffman codes are still
+part of JPEG, MP3 and the DEFLATE format used by <code class="docutils literal notranslate"><span class="pre">zip</span></code> and PNG.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.information_theory.systems.source_coding.huffman_code()</span></code>
+builds the code with a priority queue (<a class="reference external" href="https://docs.python.org/3/library/heapq.html#module-heapq" title="(in Python v3.15)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">heapq</span></code></a>), and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">plot_code_tree()</span></code>
+draws its tree. The tests check optimality against a brute-force
+search over all admissible lengths, and that no Shannon-Fano code is
+shorter.</p>
+<p><em>References:</em> D. A. Huffman, “A Method for the Construction of
+Minimum-Redundancy Codes,” Proceedings of the IRE 40(9) (1952),
+1098-1101.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Huffman, then a student in Fano&#x27;s class, found the optimal prefix code by building the tree bottom-up: repeatedly merge the two least likely symbols. The resulting code has the smallest possible average length, between H and H+1 bits, and is never worse than Shannon-Fano."><img alt="" src="../_images/sphx_glr_plot_04_huffman_coding_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/information_theory/source_coding/plot_04_huffman_coding.html"><span class="doc">Huffman coding (1952)</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Huffman coding (1952)</div>
+</div></div></section>
+<section id="convolutional-codes">
+<h2><a class="toc-backref" href="#id13" role="doc-backlink">1955 – Convolutional Codes</a><a class="headerlink" href="#convolutional-codes" title="Link to this heading">#</a></h2>
+<p>Peter Elias proposed encoding a stream of bits continuously rather than
+in blocks. A convolutional encoder slides a short window, the
+constraint length <span class="math notranslate nohighlight">\(K\)</span>, along the input, and outputs several
+parities of each window position, so each input bit influences several
+consecutive outputs. Elias showed that such codes, with random
+generators, achieve the same error exponents as random block codes. In
+the same paper he introduced the binary erasure channel, whose capacity
+is <span class="math notranslate nohighlight">\(1 - \varepsilon\)</span>. With Viterbi decoding, convolutional codes
+became the workhorse of deep-space and mobile communication.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.information_theory.systems.channel_codes.convolutional_encode()</span></code>
+implements a feed-forward encoder with arbitrary generators (default
+<span class="math notranslate nohighlight">\((7, 5)_8\)</span>, <span class="math notranslate nohighlight">\(K=3\)</span>), and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">bec_capacity()</span></code>
+gives the erasure channel’s capacity. The tests check linearity and the
+free distance of 5.</p>
+<p><em>References:</em> P. Elias, “Coding for Noisy Channels,” IRE Convention
+Record 3(4) (1955), 37-46.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Elias proposed encoding a bit stream continuously instead of in blocks: each output pair is the parity of a sliding window of input bits. The rate-1/2 code with generators (7, 5)_8 and constraint length 3 spreads every input bit over six output bits, and its free distance -- the lightest nonzero output -- is 5."><img alt="" src="../_images/sphx_glr_plot_02_convolutional_codes_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/information_theory/channel_codes/plot_02_convolutional_codes.html"><span class="doc">Convolutional codes (1955)</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Convolutional codes (1955)</div>
+</div></div></section>
+<section id="rate-distortion-theory">
+<h2><a class="toc-backref" href="#id14" role="doc-backlink">1959 – Rate-Distortion Theory</a><a class="headerlink" href="#rate-distortion-theory" title="Link to this heading">#</a></h2>
+<p>Lossless compression cannot go below the entropy, and a continuous
+source has no finite lossless description at all. Shannon’s 1959 paper
+asked how few bits suffice when the reconstruction may differ from the
+source by an average distortion <span class="math notranslate nohighlight">\(D\)</span>. The answer is the
+rate-distortion function <span class="math notranslate nohighlight">\(R(D)\)</span>, the least mutual information
+between source and reconstruction among all reconstructions within
+distortion <span class="math notranslate nohighlight">\(D\)</span>. For a fair coin with Hamming distortion it is
+<span class="math notranslate nohighlight">\(1 - h(D)\)</span>; for a Gaussian source with squared error it is
+<span class="math notranslate nohighlight">\(\tfrac12\log_2(\sigma^2/D)\)</span>, so each extra bit divides the error
+by four. It is the theoretical basis of lossy compression of audio,
+images and video.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.information_theory.systems.channels.rate_distortion_binary()</span></code>
+and <code class="xref py py-func docutils literal notranslate"><span class="pre">rate_distortion_gaussian()</span></code>
+evaluate the two closed forms. The tests check the endpoints and the
+half bit gained per halving of the Gaussian distortion.</p>
+<p><em>References:</em> C. E. Shannon, “Coding Theorems for a Discrete Source
+with a Fidelity Criterion,” IRE National Convention Record 7(4)
+(1959), 142-163.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="If some error is allowed, fewer bits are needed. Shannon&#x27;s rate-distortion function R(D) is the fewest bits per symbol that reproduce a source within average distortion D: for a fair coin with Hamming distortion R(D) = 1 - h(D), and for a Gaussian with squared error R(D) = \tfrac12\log_2(\sigma^2/D), 6.02 dB of quality per bit."><img alt="" src="../_images/sphx_glr_plot_04_rate_distortion_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/information_theory/channels/plot_04_rate_distortion.html"><span class="doc">Rate-distortion theory (1959)</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Rate-distortion theory (1959)</div>
+</div></div></section>
+<section id="gallager-s-low-density-parity-check-codes">
+<h2><a class="toc-backref" href="#id15" role="doc-backlink">1962-1963 – Gallager’s Low-Density Parity-Check Codes</a><a class="headerlink" href="#gallager-s-low-density-parity-check-codes" title="Link to this heading">#</a></h2>
+<p>Robert Gallager’s doctoral thesis at MIT defined codes by a random
+parity-check matrix with only a few ones in each row and column, and
+decoded them iteratively: each bit looks at the checks it takes part
+in and flips if most of them fail, and the process repeats. He proved
+that such codes have good distance and that iterative decoding
+corrects many errors, but the computers of the 1960s could not run the
+decoders at useful block lengths, and the codes were largely forgotten.
+David MacKay and Radford Neal rediscovered them in 1996, showing that
+with belief-propagation decoding they come within a fraction of a
+decibel of capacity. LDPC codes are now part of Wi-Fi, 5G and
+digital television standards.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.information_theory.systems.channel_codes.gallager_ldpc_matrix()</span></code>
+builds Gallager’s regular random matrices, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">bit_flip_decode()</span></code>
+runs the hard-decision bit-flipping decoder, returning a
+<a class="reference internal" href="../api/information_theory.html#mathematicskit.information_theory.BitFlipResult" title="mathematicskit.information_theory.core.base.BitFlipResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">BitFlipResult</span></code></a>.
+The tests check the row and column weights and that sparse errors are
+corrected.</p>
+<p><em>References:</em> R. G. Gallager, “Low-Density Parity-Check Codes,” IRE
+Transactions on Information Theory 8(1) (1962), 21-28; R. G. Gallager,
+<em>Low-Density Parity-Check Codes</em> (Cambridge, MA: MIT Press, 1963);
+D. J. C. MacKay and R. M. Neal, “Near Shannon Limit Performance of Low
+Density Parity Check Codes,” Electronics Letters 32(18) (1996), 1645.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Gallager&#x27;s thesis proposed codes defined by a sparse random parity-check matrix, decoded iteratively: flip the bits that sit in the most failed checks, and repeat. Too costly for the computers of the time, LDPC codes were forgotten until MacKay and Neal rediscovered them in 1996; they now operate close to capacity in Wi-Fi, 5G, and satellite television."><img alt="" src="../_images/sphx_glr_plot_04_gallager_ldpc_bit_flipping_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/information_theory/channel_codes/plot_04_gallager_ldpc_bit_flipping.html"><span class="doc">Gallager’s low-density parity-check codes (1962-1963)</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Gallager's low-density parity-check codes (1962-1963)</div>
+</div></div></section>
+<section id="the-viterbi-algorithm">
+<h2><a class="toc-backref" href="#id16" role="doc-backlink">1967 – The Viterbi Algorithm</a><a class="headerlink" href="#the-viterbi-algorithm" title="Link to this heading">#</a></h2>
+<p>Andrew Viterbi introduced his algorithm as a tool for bounding the error
+probability of convolutional codes. Decoding by exhaustive search costs
+time exponential in the message length, but the encoder has only
+<span class="math notranslate nohighlight">\(2^{K-1}\)</span> states, and among all paths that reach a state at a
+given time only the one closest to the received sequence can be part
+of the best overall path. Keeping one survivor per state makes
+maximum-likelihood decoding linear in the message length. David Forney
+showed in 1973 that it is exactly dynamic programming on the trellis of
+states. The algorithm decoded the Voyager and Galileo missions, mobile
+phones, and later speech recognition with hidden Markov models; Viterbi
+went on to co-found Qualcomm.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.information_theory.systems.channel_codes.viterbi_decode()</span></code>
+performs hard-decision Viterbi decoding of a terminated convolutional
+code. The tests check that every pattern of two errors in a short block
+is corrected, and that the decoded bit error rate on a binary symmetric
+channel is well below the uncoded one.</p>
+<p><em>References:</em> A. J. Viterbi, “Error Bounds for Convolutional Codes and
+an Asymptotically Optimum Decoding Algorithm,” IEEE Transactions on
+Information Theory 13(2) (1967), 260-269; G. D. Forney, “The Viterbi
+Algorithm,” Proceedings of the IEEE 61(3) (1973), 268-278.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Viterbi decoded convolutional codes by dynamic programming on the trellis of encoder states: at every step each state keeps only its best incoming path, so maximum-likelihood decoding costs time linear in the message length instead of exponential. It went on to decode deep-space probes, mobile phones, and hidden Markov models."><img alt="" src="../_images/sphx_glr_plot_03_viterbi_decoding_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/information_theory/channel_codes/plot_03_viterbi_decoding.html"><span class="doc">The Viterbi algorithm (1967)</span></a></p>
+  <div class="sphx-glr-thumbnail-title">The Viterbi algorithm (1967)</div>
+</div></div></section>
+<section id="the-blahut-arimoto-algorithm">
+<h2><a class="toc-backref" href="#id17" role="doc-backlink">1972 – The Blahut-Arimoto Algorithm</a><a class="headerlink" href="#the-blahut-arimoto-algorithm" title="Link to this heading">#</a></h2>
+<p>The capacity of a channel is a maximum of mutual information over input
+distributions, and only symmetric channels give it in closed form.
+Richard Blahut and Suguru Arimoto independently published, in the same
+volume of the IEEE Transactions on Information Theory, an alternating
+algorithm that computes it for any discrete memoryless channel. Each
+step reweights the input distribution by the exponential of each
+input’s divergence from the current output distribution. Every
+iteration brackets the capacity between a lower and an upper bound,
+which converge, so the algorithm certifies its own accuracy. Blahut’s
+paper also gave the analogous algorithm for the rate-distortion
+function.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.information_theory.systems.channels.blahut_arimoto()</span></code>
+returns a <a class="reference internal" href="../api/information_theory.html#mathematicskit.information_theory.ChannelCapacityResult" title="mathematicskit.information_theory.core.base.ChannelCapacityResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChannelCapacityResult</span></code></a>
+with the capacity, the optimal input distribution, and both bounds at
+every iteration. The tests check it against the closed forms for the
+binary symmetric, binary erasure and Z channels.</p>
+<p><em>References:</em> R. E. Blahut, “Computation of Channel Capacity and
+Rate-Distortion Functions,” IEEE Transactions on Information Theory
+18(4) (1972), 460-473; S. Arimoto, “An Algorithm for Computing the
+Capacity of Arbitrary Discrete Memoryless Channels,” IEEE Transactions
+on Information Theory 18(1) (1972), 14-20.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Most channels have no closed-form capacity. Blahut and Arimoto independently found an alternating maximization that converges to it, with upper and lower bounds that squeeze together at every step. Here it recovers 1 - h(p) for the binary symmetric channel and finds the capacity and skewed optimal input of the Z channel, and \log_2 3 for the noisy typewriter (send every other letter)."><img alt="" src="../_images/sphx_glr_plot_05_blahut_arimoto_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/information_theory/channels/plot_05_blahut_arimoto.html"><span class="doc">The Blahut-Arimoto algorithm (1972)</span></a></p>
+  <div class="sphx-glr-thumbnail-title">The Blahut-Arimoto algorithm (1972)</div>
+</div></div></section>
+<section id="elias-universal-codes-for-the-integers">
+<h2><a class="toc-backref" href="#id18" role="doc-backlink">1975 – Elias’ Universal Codes for the Integers</a><a class="headerlink" href="#elias-universal-codes-for-the-integers" title="Link to this heading">#</a></h2>
+<p>Huffman’s code needs the source probabilities in advance. Peter Elias
+asked how to code positive integers whose distribution is unknown,
+needing only that larger values are no more likely than smaller ones.
+His gamma code writes <span class="math notranslate nohighlight">\(\lfloor\log_2 n\rfloor\)</span> zeros followed by
+<span class="math notranslate nohighlight">\(n\)</span> in binary, so the zeros announce how many digits follow. It is
+a prefix code for all positive integers at once, with length
+<span class="math notranslate nohighlight">\(2\lfloor\log_2 n\rfloor + 1\)</span>, and on every decreasing
+distribution its average length is within a constant factor of the
+entropy, a property Elias called universality. His delta and omega
+codes refine the same idea, and such codes are still used to compress
+the integer lists in search-engine indexes.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.information_theory.systems.source_coding.elias_gamma_encode()</span></code>
+and <code class="xref py py-func docutils literal notranslate"><span class="pre">elias_gamma_decode()</span></code>
+encode single integers and decode concatenated streams. The tests check
+the round trip and the codeword lengths.</p>
+<p><em>References:</em> P. Elias, “Universal Codeword Sets and Representations of
+the Integers,” IEEE Transactions on Information Theory 21(2) (1975),
+194-203.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="To send a positive integer of unknown size, Elias&#x27; gamma code writes \lfloor\log_2 n\rfloor zeros, then n in binary: the zeros announce the length. It is a prefix code for all integers at once, at most twice the optimal length, and universal: on any decreasing distribution it codes within a constant factor of the entropy."><img alt="" src="../_images/sphx_glr_plot_05_elias_gamma_code_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/information_theory/source_coding/plot_05_elias_gamma_code.html"><span class="doc">Elias’ universal code for the integers (1975)</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Elias' universal code for the integers (1975)</div>
+</div></div></section>
+<section id="arithmetic-coding">
+<h2><a class="toc-backref" href="#id19" role="doc-backlink">1976 – Arithmetic Coding</a><a class="headerlink" href="#arithmetic-coding" title="Link to this heading">#</a></h2>
+<p>Huffman codes waste up to a bit per symbol, which is costly when one
+symbol is very likely. Jorma Rissanen at IBM and Richard Pasco at
+Stanford independently showed in 1976 how to code an entire message as
+a single number. Each symbol narrows an interval in proportion to its
+probability, and the codeword is the shortest binary fraction inside
+the final interval, within two bits of
+<span class="math notranslate nohighlight">\(-\log_2 p(\text{message})\)</span>. The idea, which had been sketched
+by Elias and others without a practical finite-precision form, became
+practical with the integer implementation of Ian Witten, Radford Neal
+and John Cleary (1987), and is now used in JPEG 2000 and H.264/H.265
+video.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.information_theory.systems.source_coding.arithmetic_encode()</span></code>,
+<code class="xref py py-func docutils literal notranslate"><span class="pre">arithmetic_decode()</span></code>
+and <code class="xref py py-func docutils literal notranslate"><span class="pre">arithmetic_intervals()</span></code>
+use exact rational arithmetic (<a class="reference external" href="https://docs.python.org/3/library/fractions.html#fractions.Fraction" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">fractions.Fraction</span></code></a>), so the
+interval narrowing is visible without the rescaling tricks practical
+coders need. The tests check the round trip and the length bound.</p>
+<p><em>References:</em> J. Rissanen, “Generalized Kraft Inequality and Arithmetic
+Coding,” IBM Journal of Research and Development 20(3) (1976),
+198-203; R. C. Pasco, <em>Source Coding Algorithms for Fast Data
+Compression</em>, PhD thesis, Stanford University (1976); I. H. Witten,
+R. M. Neal and J. G. Cleary, “Arithmetic Coding for Data Compression,”
+Communications of the ACM 30(6) (1987), 520-540.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Rissanen and Pasco coded a whole message as a single number: each symbol narrows an interval in proportion to its probability, and the codeword is the shortest binary fraction inside the final interval. The length is within two bits of -\log_2 p(\text{message}), so unlike Huffman coding there is no rounding up to whole bits per symbol."><img alt="" src="../_images/sphx_glr_plot_06_arithmetic_coding_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/information_theory/source_coding/plot_06_arithmetic_coding.html"><span class="doc">Arithmetic coding (1976)</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Arithmetic coding (1976)</div>
+</div></div></section>
+<section id="lempel-ziv-compression">
+<h2><a class="toc-backref" href="#id20" role="doc-backlink">1977-1978 – Lempel-Ziv Compression</a><a class="headerlink" href="#lempel-ziv-compression" title="Link to this heading">#</a></h2>
+<p>Abraham Lempel and Jacob Ziv, at the Technion, designed compressors
+that need no model of the source at all. Their 1977 algorithm (LZ77)
+replaces repeated strings by pointers back into a sliding window; the
+1978 algorithm (LZ78) parses the input into phrases, each the longest
+earlier phrase plus one new symbol, and sends a phrase index and a
+symbol. Ziv and Lempel proved that, for any stationary ergodic source,
+the compressed length per symbol approaches the entropy rate, so a
+single algorithm is asymptotically optimal for every such source.
+Terry Welch’s 1984 variant, LZW, was used in Unix <code class="docutils literal notranslate"><span class="pre">compress</span></code> and GIF
+images, and LZ77 lives on in DEFLATE, the format of <code class="docutils literal notranslate"><span class="pre">zip</span></code>, <code class="docutils literal notranslate"><span class="pre">gzip</span></code>
+and PNG.</p>
+<p><em>Implementation:</em> <code class="xref py py-func docutils literal notranslate"><span class="pre">mathematicskit.information_theory.systems.source_coding.lz78_encode()</span></code>
+and <code class="xref py py-func docutils literal notranslate"><span class="pre">lz78_decode()</span></code>
+implement the LZ78 parsing, and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">lz78_compressed_bits()</span></code>
+counts the bits of the encoded phrases. The tests check the round trip
+and the compression of a low-entropy source.</p>
+<p><em>References:</em> J. Ziv and A. Lempel, “A Universal Algorithm for
+Sequential Data Compression,” IEEE Transactions on Information Theory
+23(3) (1977), 337-343; J. Ziv and A. Lempel, “Compression of Individual
+Sequences via Variable-Rate Coding,” IEEE Transactions on Information
+Theory 24(5) (1978), 530-536.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Ziv and Lempel&#x27;s LZ78 parses a sequence into phrases, each the longest earlier phrase plus one new symbol, and sends (phrase index, symbol) pairs. It knows nothing about the source, yet for any stationary ergodic source its rate approaches the entropy rate: a universal code, the ancestor of LZW, GIF and zip."><img alt="" src="../_images/sphx_glr_plot_07_lempel_ziv_compression_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/information_theory/source_coding/plot_07_lempel_ziv_compression.html"><span class="doc">Lempel-Ziv compression (1977-1978)</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Lempel-Ziv compression (1977-1978)</div>
+</div></div></section>
+<section id="see-also">
+<h2><a class="toc-backref" href="#id21" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../api/information_theory.html"><span class="doc">mathematicskit.information_theory</span></a></p></li>
+<li><p><a class="reference internal" href="probability_breakthroughs.html"><span class="doc">Breakthroughs in Probability Theory</span></a></p></li>
+<li><p><a class="reference internal" href="abstract_algebra_breakthroughs.html"><span class="doc">Breakthroughs in Abstract Algebra</span></a> (Reed-Solomon codes)</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="graph_theory_breakthroughs.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Breakthroughs in Graph Theory</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="linalg_breakthroughs.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Breakthroughs in Numerical Linear Algebra</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hartley-s-measure-of-information">1928 – Hartley’s Measure of Information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shannon-entropy">1948 – Shannon Entropy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mutual-information">1948 – Mutual Information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-source-coding-theorem-and-the-typical-set">1948 – The Source Coding Theorem and the Typical Set</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#capacity-of-the-binary-symmetric-channel">1948 – Capacity of the Binary Symmetric Channel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-noisy-channel-coding-theorem">1948 – The Noisy-Channel Coding Theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shannon-fano-coding">1948-1949 – Shannon-Fano Coding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-shannon-hartley-theorem">1949 – The Shannon-Hartley Theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-kraft-mcmillan-inequality">1949, 1956 – The Kraft-McMillan Inequality</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hamming-codes">1950 – Hamming Codes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-kullback-leibler-divergence">1951 – The Kullback-Leibler Divergence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#huffman-coding">1952 – Huffman Coding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convolutional-codes">1955 – Convolutional Codes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rate-distortion-theory">1959 – Rate-Distortion Theory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gallager-s-low-density-parity-check-codes">1962-1963 – Gallager’s Low-Density Parity-Check Codes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-viterbi-algorithm">1967 – The Viterbi Algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-blahut-arimoto-algorithm">1972 – The Blahut-Arimoto Algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#elias-universal-codes-for-the-integers">1975 – Elias’ Universal Codes for the Integers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arithmetic-coding">1976 – Arithmetic Coding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lempel-ziv-compression">1977-1978 – Lempel-Ziv Compression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#see-also">See Also</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/history/information_theory_breakthroughs.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, mathematicskit contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.23.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

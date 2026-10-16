@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mathematicskit.topology.systems.homology &#8212; mathematicskit 0.6.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Vibur" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/jupyterlite_sphinx.css?v=f676e775" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=c83e6b79" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=18bd87630a240e9c25be"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be" />
+
+    <script src="../../../../_static/documentation_options.js?v=dda85ae5"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../../../../_static/jupyterlite_sphinx.js?v=96e329c5"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/mathematicskit/topology/systems/homology';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../../../_static/searchtools.js"></script>
+    <script src="../../../../_static/language_data.js"></script>
+    <script src="../../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/mathematicskit_logo_transparent.png" class="logo__image only-light" alt="mathematicskit logo"/>
+    <img src="../../../../_static/mathematicskit_logo_transparent.png" class="logo__image only-dark pst-js-only" alt="mathematicskit logo"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/mathematicskit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/mathematicskit/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i><span class="visually-hidden">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/mathematicskit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/mathematicskit/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i><span class="visually-hidden">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">mathematicskit.topology.systems.homology</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for mathematicskit.topology.systems.homology</h1><div class="highlight"><pre>
+<span></span><span class="sa">r</span><span class="sd">"""Simplicial homology: the Smith normal form, Betti numbers, torsion, and the Mayer-Vietoris sequence.</span>
+
+<span class="sd">The :math:`k`-th homology group of a complex is</span>
+<span class="sd">:math:`H_k = \ker \partial_k / \operatorname{im} \partial_{k+1}`. Over a</span>
+<span class="sd">field it is a vector space, and its dimension, the Betti number</span>
+<span class="sd">:math:`\beta_k = f_k - \operatorname{rk}\partial_k - \operatorname{rk}\partial_{k+1}`,</span>
+<span class="sd">needs only matrix ranks. Over the integers it can also have torsion,</span>
+<span class="sd">which the Smith normal form of :math:`\partial_{k+1}` exposes as its</span>
+<span class="sd">invariant factors greater than 1 (H. J. S. Smith 1861; H. Poincaré,</span>
+<span class="sd">"Complément à l'Analysis Situs," 1900). Ranks over :math:`\mathbb{Q}`</span>
+<span class="sd">come from :func:`numpy.linalg.matrix_rank` and cycle spaces from</span>
+<span class="sd">:func:`scipy.linalg.null_space`; the Smith normal form is hand-rolled in</span>
+<span class="sd">exact integer arithmetic, which neither numpy nor scipy offers. See</span>
+<span class="sd">J. R. Munkres, *Elements of Algebraic Topology* (Menlo Park:</span>
+<span class="sd">Addison-Wesley, 1984), Secs. 11 and 33.</span>
+<span class="sd">"""</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.linalg</span><span class="w"> </span><span class="kn">import</span> <span class="n">null_space</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.topology.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">HomologyResult</span><span class="p">,</span> <span class="n">MayerVietorisResult</span><span class="p">,</span> <span class="n">SimplicialComplex</span><span class="p">,</span> <span class="n">SmithNormalFormResult</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.topology.utils.modular</span><span class="w"> </span><span class="kn">import</span> <span class="n">rank_mod_p</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"smith_normal_form"</span><span class="p">,</span> <span class="s2">"betti_numbers"</span><span class="p">,</span> <span class="s2">"homology"</span><span class="p">,</span> <span class="s2">"mayer_vietoris"</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="smith_normal_form">
+<a class="viewcode-back" href="../../../../api/topology.html#mathematicskit.topology.smith_normal_form">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">smith_normal_form</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SmithNormalFormResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""The Smith normal form :math:`D = UAV` of an integer matrix.</span>
+
+<span class="sd">    Repeatedly moves the smallest nonzero entry to the pivot, clears its</span>
+<span class="sd">    row and column by integer row and column operations (the Euclidean</span>
+<span class="sd">    algorithm in matrix form), and adds a row back whenever the pivot does</span>
+<span class="sd">    not divide the rest, until :math:`D` is diagonal with</span>
+<span class="sd">    :math:`d_1 \mid d_2 \mid \cdots`. The invariant factors classify the</span>
+<span class="sd">    finitely generated abelian group :math:`\mathbb{Z}^m / A\mathbb{Z}^n`.</span>
+<span class="sd">    Arithmetic is in exact Python integers. See H. J. S. Smith, "On</span>
+<span class="sd">    systems of linear indeterminate equations and congruences,"</span>
+<span class="sd">    Philosophical Transactions of the Royal Society 151 (1861), 293-326.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    A : array_like of int, shape (m, n)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    SmithNormalFormResult</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; result = smith_normal_form([[2, 4, 4], [-6, 6, 12], [10, -4, -16]])</span>
+<span class="sd">    &gt;&gt;&gt; result.invariant_factors</span>
+<span class="sd">    [2, 6, 12]</span>
+<span class="sd">    &gt;&gt;&gt; bool(np.array_equal(result.U @ np.array([[2, 4, 4], [-6, 6, 12], [10, -4, -16]]) @ result.V, result.D))</span>
+<span class="sd">    True</span>
+<span class="sd">    """</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">))</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="p">[[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">row</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">]</span>
+    <span class="n">U</span> <span class="o">=</span> <span class="p">[[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">)]</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="p">[[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">swap_rows</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+        <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">swap_cols</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">X</span><span class="p">:</span>
+            <span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">)):</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">entries</span> <span class="o">=</span> <span class="p">[(</span><span class="nb">abs</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]),</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">if</span> <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">entries</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">entries</span><span class="p">)</span>
+            <span class="n">swap_rows</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">swap_rows</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">swap_cols</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+            <span class="n">swap_cols</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="n">t</span><span class="p">]</span>
+            <span class="n">clean</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+                <span class="n">q</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">t</span><span class="p">]</span> <span class="o">//</span> <span class="n">p</span>
+                <span class="k">if</span> <span class="n">q</span><span class="p">:</span>
+                    <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="o">-</span> <span class="n">q</span> <span class="o">*</span> <span class="n">b</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">M</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)]</span>
+                    <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="o">-</span> <span class="n">q</span> <span class="o">*</span> <span class="n">b</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">U</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)]</span>
+                <span class="n">clean</span> <span class="o">&amp;=</span> <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">t</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+                <span class="n">q</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">//</span> <span class="n">p</span>
+                <span class="k">if</span> <span class="n">q</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">X</span> <span class="ow">in</span> <span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">V</span><span class="p">):</span>
+                        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">X</span><span class="p">:</span>
+                            <span class="n">row</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-=</span> <span class="n">q</span> <span class="o">*</span> <span class="n">row</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+                <span class="n">clean</span> <span class="o">&amp;=</span> <span class="n">M</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">clean</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">bad</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span> <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">%</span> <span class="n">p</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">))),</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">bad</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="n">M</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">M</span><span class="p">[</span><span class="n">bad</span><span class="p">],</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)]</span>
+            <span class="n">U</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">U</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">U</span><span class="p">[</span><span class="n">bad</span><span class="p">],</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">m</span> <span class="ow">and</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="ow">and</span> <span class="n">M</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="n">t</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">M</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">M</span><span class="p">[</span><span class="n">t</span><span class="p">]]</span>
+            <span class="n">U</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">U</span><span class="p">[</span><span class="n">t</span><span class="p">]]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">as_array</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">shape</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">SmithNormalFormResult</span><span class="p">(</span><span class="n">D</span><span class="o">=</span><span class="n">as_array</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">)),</span> <span class="n">U</span><span class="o">=</span><span class="n">as_array</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">m</span><span class="p">)),</span> <span class="n">V</span><span class="o">=</span><span class="n">as_array</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">)))</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_boundary_rank_gf2</span><span class="p">(</span><span class="n">K</span><span class="p">:</span> <span class="n">SimplicialComplex</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Rank of the boundary map mod 2, eliminating bit-set columns built straight from the simplices (no dense matrix)."""</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="n">K</span><span class="o">.</span><span class="n">dimension</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="n">pivots</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">K</span><span class="o">.</span><span class="n">simplices</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+        <span class="n">bits</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">bits</span> <span class="o">^=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">K</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">s</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">:])</span>
+        <span class="k">while</span> <span class="n">bits</span><span class="p">:</span>
+            <span class="n">low</span> <span class="o">=</span> <span class="n">bits</span><span class="o">.</span><span class="n">bit_length</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">low</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">pivots</span><span class="p">:</span>
+                <span class="n">pivots</span><span class="p">[</span><span class="n">low</span><span class="p">]</span> <span class="o">=</span> <span class="n">bits</span>
+                <span class="k">break</span>
+            <span class="n">bits</span> <span class="o">^=</span> <span class="n">pivots</span><span class="p">[</span><span class="n">low</span><span class="p">]</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">pivots</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_rank</span><span class="p">(</span><span class="n">d</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">field</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)))</span> <span class="k">if</span> <span class="n">field</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">rank_mod_p</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">field</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="betti_numbers">
+<a class="viewcode-back" href="../../../../api/topology.html#mathematicskit.topology.betti_numbers">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">betti_numbers</span><span class="p">(</span><span class="n">K</span><span class="p">:</span> <span class="n">SimplicialComplex</span><span class="p">,</span> <span class="n">field</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""The Betti numbers :math:`\beta_k = f_k - \operatorname{rk}\partial_k - \operatorname{rk}\partial_{k+1}`.</span>
+
+<span class="sd">    Enrico Betti's connectivity numbers (1871), in Poincaré's homological</span>
+<span class="sd">    form. Over :math:`\mathbb{Q}` (``field=0``) they count the free part</span>
+<span class="sd">    of integer homology; over :math:`\mathbb{Z}/p` they also pick up</span>
+<span class="sd">    :math:`p`-torsion, so the Klein bottle has :math:`\beta_1 = 1` over</span>
+<span class="sd">    :math:`\mathbb{Q}` but 2 over :math:`\mathbb{Z}/2`. See E. Betti,</span>
+<span class="sd">    "Sopra gli spazi di un numero qualunque di dimensioni," Annali di</span>
+<span class="sd">    Matematica Pura ed Applicata 4 (1871), 140-158.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    K : SimplicialComplex</span>
+<span class="sd">    field : int</span>
+<span class="sd">        0 for the rationals (via :func:`numpy.linalg.matrix_rank`), or a prime ``p``.</span>
+<span class="sd">        ``field=2`` never builds a dense matrix, and is the fast choice for</span>
+<span class="sd">        large complexes such as Vietoris-Rips complexes.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tuple of int</span>
+<span class="sd">        :math:`(\beta_0, \dots, \beta_{\dim K})`.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from mathematicskit.topology.systems.complexes import sphere, torus</span>
+<span class="sd">    &gt;&gt;&gt; betti_numbers(sphere(2)), betti_numbers(torus())</span>
+<span class="sd">    ((1, 0, 1), (1, 2, 1))</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">field</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">ranks</span> <span class="o">=</span> <span class="p">[</span><span class="n">_boundary_rank_gf2</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">K</span><span class="o">.</span><span class="n">dimension</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ranks</span> <span class="o">=</span> <span class="p">[</span><span class="n">_rank</span><span class="p">(</span><span class="n">K</span><span class="o">.</span><span class="n">boundary_matrix</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="n">field</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">K</span><span class="o">.</span><span class="n">dimension</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">f</span> <span class="o">-</span> <span class="n">ranks</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">ranks</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">K</span><span class="o">.</span><span class="n">f_vector</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="homology">
+<a class="viewcode-back" href="../../../../api/topology.html#mathematicskit.topology.homology">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">homology</span><span class="p">(</span><span class="n">K</span><span class="p">:</span> <span class="n">SimplicialComplex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HomologyResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Integer homology :math:`H_k(K; \mathbb{Z}) \cong \mathbb{Z}^{\beta_k} \oplus \mathbb{Z}/t_1 \oplus \cdots` by Smith normal form.</span>
+
+<span class="sd">    The rank of each boundary matrix gives the Betti numbers; the</span>
+<span class="sd">    invariant factors of :math:`\partial_{k+1}` that exceed 1 are the</span>
+<span class="sd">    torsion coefficients of :math:`H_k`, which Poincaré introduced in</span>
+<span class="sd">    1900 after Heegaard showed that Betti numbers alone miss them. The</span>
+<span class="sd">    alternating sum of the Betti numbers equals that of the simplex</span>
+<span class="sd">    counts (the Euler-Poincaré formula).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    K : SimplicialComplex</span>
+<span class="sd">        Small enough for exact integer elimination (hundreds of simplices).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    HomologyResult</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from mathematicskit.topology.systems.complexes import klein_bottle, projective_plane</span>
+<span class="sd">    &gt;&gt;&gt; str(homology(projective_plane()))</span>
+<span class="sd">    'H_0 = Z, H_1 = Z/2, H_2 = 0'</span>
+<span class="sd">    &gt;&gt;&gt; homology(klein_bottle(3, 3)).group(1)</span>
+<span class="sd">    'Z + Z/2'</span>
+<span class="sd">    """</span>
+    <span class="n">factors</span> <span class="o">=</span> <span class="p">[</span><span class="n">smith_normal_form</span><span class="p">(</span><span class="n">K</span><span class="o">.</span><span class="n">boundary_matrix</span><span class="p">(</span><span class="n">k</span><span class="p">))</span><span class="o">.</span><span class="n">invariant_factors</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">K</span><span class="o">.</span><span class="n">dimension</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)]</span>
+    <span class="n">ranks</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">factors</span><span class="p">]</span>
+    <span class="n">betti</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">f</span> <span class="o">-</span> <span class="n">ranks</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">ranks</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">K</span><span class="o">.</span><span class="n">f_vector</span><span class="p">))</span>
+    <span class="n">torsion</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">factors</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">d</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">K</span><span class="o">.</span><span class="n">dimension</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">HomologyResult</span><span class="p">(</span><span class="n">betti_numbers</span><span class="o">=</span><span class="n">betti</span><span class="p">,</span> <span class="n">torsion</span><span class="o">=</span><span class="n">torsion</span><span class="p">)</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_inclusion</span><span class="p">(</span><span class="n">sub</span><span class="p">:</span> <span class="n">SimplicialComplex</span><span class="p">,</span> <span class="n">K</span><span class="p">:</span> <span class="n">SimplicialComplex</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="n">J</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">K</span><span class="o">.</span><span class="n">simplices</span><span class="p">(</span><span class="n">k</span><span class="p">)),</span> <span class="nb">len</span><span class="p">(</span><span class="n">sub</span><span class="o">.</span><span class="n">simplices</span><span class="p">(</span><span class="n">k</span><span class="p">))))</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sub</span><span class="o">.</span><span class="n">simplices</span><span class="p">(</span><span class="n">k</span><span class="p">)):</span>
+        <span class="n">J</span><span class="p">[</span><span class="n">K</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="k">return</span> <span class="n">J</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_matrix_rank</span><span class="p">(</span><span class="n">M</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">M</span><span class="p">))</span> <span class="k">if</span> <span class="n">M</span><span class="o">.</span><span class="n">size</span> <span class="k">else</span> <span class="mi">0</span>
+
+
+<div class="viewcode-block" id="mayer_vietoris">
+<a class="viewcode-back" href="../../../../api/topology.html#mathematicskit.topology.mayer_vietoris">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">mayer_vietoris</span><span class="p">(</span><span class="n">A</span><span class="p">:</span> <span class="n">SimplicialComplex</span><span class="p">,</span> <span class="n">B</span><span class="p">:</span> <span class="n">SimplicialComplex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MayerVietorisResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""The ranks in the Mayer-Vietoris sequence of :math:`A \cup B`, over :math:`\mathbb{Q}`.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \cdots \to H_k(A \cap B) \xrightarrow{i_k} H_k(A) \oplus H_k(B) \to H_k(A \cup B) \xrightarrow{\delta} H_{k-1}(A \cap B) \to \cdots</span>
+
+<span class="sd">    The rank of :math:`i_k` is computed directly: the cycles of</span>
+<span class="sd">    :math:`A \cap B` (a basis from :func:`scipy.linalg.null_space`)</span>
+<span class="sd">    pushed into :math:`A` and :math:`B`, counted modulo the boundaries</span>
+<span class="sd">    there. Exactness then predicts the Betti numbers of the union from</span>
+<span class="sd">    those of the pieces (:attr:`MayerVietorisResult.predicted_union`),</span>
+<span class="sd">    which the result also computes directly. See W. Mayer, "Über</span>
+<span class="sd">    abstrakte Topologie," Monatshefte für Mathematik und Physik 36 (1929),</span>
+<span class="sd">    1-42; L. Vietoris, "Über die Homologiegruppen der Vereinigung zweier</span>
+<span class="sd">    Komplexe," ibid. 37 (1930), 159-162.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    A, B : SimplicialComplex</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    MayerVietorisResult</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from mathematicskit.topology.systems.complexes import circle</span>
+<span class="sd">    &gt;&gt;&gt; C = circle(6)</span>
+<span class="sd">    &gt;&gt;&gt; upper, lower = C.induced_subcomplex([0, 1, 2, 3]), C.induced_subcomplex([3, 4, 5, 0])</span>
+<span class="sd">    &gt;&gt;&gt; result = mayer_vietoris(upper, lower)</span>
+<span class="sd">    &gt;&gt;&gt; result.betti_intersection, result.betti_union, result.predicted_union</span>
+<span class="sd">    ((2,), (1, 1), (1, 1))</span>
+<span class="sd">    """</span>
+    <span class="n">union</span><span class="p">,</span> <span class="n">inter</span> <span class="o">=</span> <span class="n">A</span> <span class="o">|</span> <span class="n">B</span><span class="p">,</span> <span class="n">A</span> <span class="o">&amp;</span> <span class="n">B</span>
+    <span class="n">top</span> <span class="o">=</span> <span class="n">union</span><span class="o">.</span><span class="n">dimension</span>
+    <span class="n">pad</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">0</span><span class="p">,)</span> <span class="o">*</span> <span class="p">(</span><span class="n">top</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>  <span class="c1"># noqa: E731</span>
+    <span class="n">ranks</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">top</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">inter</span><span class="o">.</span><span class="n">simplices</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+            <span class="n">ranks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">continue</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">inter</span><span class="o">.</span><span class="n">boundary_matrix</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">cycles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">inter</span><span class="o">.</span><span class="n">simplices</span><span class="p">(</span><span class="n">k</span><span class="p">)))</span> <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">null_space</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">_inclusion</span><span class="p">(</span><span class="n">inter</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">@</span> <span class="n">cycles</span><span class="p">,</span> <span class="n">_inclusion</span><span class="p">(</span><span class="n">inter</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">@</span> <span class="n">cycles</span><span class="p">])</span>
+        <span class="n">bd_a</span><span class="p">,</span> <span class="n">bd_b</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">boundary_matrix</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">),</span> <span class="n">B</span><span class="o">.</span><span class="n">boundary_matrix</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">boundaries</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">bd_a</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">bd_b</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="n">boundaries</span><span class="p">[:</span> <span class="n">bd_a</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">:</span> <span class="n">bd_a</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">bd_a</span>
+        <span class="n">boundaries</span><span class="p">[</span><span class="n">bd_a</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">:,</span> <span class="n">bd_a</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">bd_b</span>
+        <span class="n">ranks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_matrix_rank</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">boundaries</span><span class="p">,</span> <span class="n">image</span><span class="p">]))</span> <span class="o">-</span> <span class="n">_matrix_rank</span><span class="p">(</span><span class="n">boundaries</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">MayerVietorisResult</span><span class="p">(</span>
+        <span class="n">betti_a</span><span class="o">=</span><span class="n">pad</span><span class="p">(</span><span class="n">betti_numbers</span><span class="p">(</span><span class="n">A</span><span class="p">)),</span>
+        <span class="n">betti_b</span><span class="o">=</span><span class="n">pad</span><span class="p">(</span><span class="n">betti_numbers</span><span class="p">(</span><span class="n">B</span><span class="p">)),</span>
+        <span class="n">betti_intersection</span><span class="o">=</span><span class="n">betti_numbers</span><span class="p">(</span><span class="n">inter</span><span class="p">),</span>
+        <span class="n">betti_union</span><span class="o">=</span><span class="n">pad</span><span class="p">(</span><span class="n">betti_numbers</span><span class="p">(</span><span class="n">union</span><span class="p">)),</span>
+        <span class="n">rank_inclusion</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">ranks</span><span class="p">),</span>
+    <span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, mathematicskit contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.23.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

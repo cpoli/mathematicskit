@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mathematicskit.information_theory.systems.channel_codes &#8212; mathematicskit 0.6.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Vibur" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/jupyterlite_sphinx.css?v=f676e775" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=c83e6b79" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=18bd87630a240e9c25be"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be" />
+
+    <script src="../../../../_static/documentation_options.js?v=dda85ae5"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../../../../_static/jupyterlite_sphinx.js?v=96e329c5"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/mathematicskit/information_theory/systems/channel_codes';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../../../_static/searchtools.js"></script>
+    <script src="../../../../_static/language_data.js"></script>
+    <script src="../../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/mathematicskit_logo_transparent.png" class="logo__image only-light" alt="mathematicskit logo"/>
+    <img src="../../../../_static/mathematicskit_logo_transparent.png" class="logo__image only-dark pst-js-only" alt="mathematicskit logo"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/mathematicskit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/mathematicskit/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i><span class="visually-hidden">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/mathematicskit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/mathematicskit/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i><span class="visually-hidden">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">mathematicskit.information_theory.systems.channel_codes</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for mathematicskit.information_theory.systems.channel_codes</h1><div class="highlight"><pre>
+<span></span><span class="sa">r</span><span class="sd">"""Binary error-correcting codes: Hamming codes with syndrome decoding,</span>
+<span class="sd">convolutional codes with Viterbi decoding, and Gallager's low-density</span>
+<span class="sd">parity-check codes with bit-flipping decoding.</span>
+
+<span class="sd">All hand-rolled over :math:`\mathrm{GF}(2)` with numpy integer arrays;</span>
+<span class="sd">numpy/scipy have no channel codes. Reed-Solomon codes over larger</span>
+<span class="sd">fields live in :mod:`mathematicskit.abstract_algebra`. See S. Lin and</span>
+<span class="sd">D. J. Costello, *Error Control Coding*, 2nd ed. (Pearson, 2004).</span>
+<span class="sd">"""</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">mathematicskit.information_theory.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">BitFlipResult</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"hamming_parity_check_matrix"</span><span class="p">,</span>
+    <span class="s2">"hamming_encode"</span><span class="p">,</span>
+    <span class="s2">"hamming_decode"</span><span class="p">,</span>
+    <span class="s2">"convolutional_encode"</span><span class="p">,</span>
+    <span class="s2">"viterbi_decode"</span><span class="p">,</span>
+    <span class="s2">"gallager_ldpc_matrix"</span><span class="p">,</span>
+    <span class="s2">"bit_flip_decode"</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_bits</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"expected bits (0 or 1)"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_hamming_sizes</span><span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"r must be at least 2"</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="n">r</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">n</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="n">r</span>
+
+
+<div class="viewcode-block" id="hamming_parity_check_matrix">
+<a class="viewcode-back" href="../../../../api/information_theory.html#mathematicskit.information_theory.hamming_parity_check_matrix">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">hamming_parity_check_matrix</span><span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Parity-check matrix of the :math:`(2^r-1,\ 2^r-r-1)` Hamming code.</span>
+
+<span class="sd">    Column :math:`j` (1-based) is the binary expansion of :math:`j`, least</span>
+<span class="sd">    significant bit in row 0, so the syndrome of a single error spells</span>
+<span class="sd">    out its position.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    r : int</span>
+<span class="sd">        Number of parity bits, at least 2.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray of uint8, shape (r, 2**r - 1)</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; hamming_parity_check_matrix(3)</span>
+<span class="sd">    array([[1, 0, 1, 0, 1, 0, 1],</span>
+<span class="sd">           [0, 1, 1, 0, 0, 1, 1],</span>
+<span class="sd">           [0, 0, 0, 1, 1, 1, 1]], dtype=uint8)</span>
+<span class="sd">    """</span>
+    <span class="n">n</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">_hamming_sizes</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+    <span class="n">positions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">((</span><span class="n">positions</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span> <span class="o">&gt;&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">r</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">])</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="hamming_encode">
+<a class="viewcode-back" href="../../../../api/information_theory.html#mathematicskit.information_theory.hamming_encode">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">hamming_encode</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">r</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Encode `message` with the Hamming code, block by block.</span>
+
+<span class="sd">    Data bits fill the positions that are not powers of two; the parity</span>
+<span class="sd">    bit at position :math:`2^i` makes every check (row of</span>
+<span class="sd">    :func:`hamming_parity_check_matrix`) even. R. W. Hamming, "Error</span>
+<span class="sd">    Detecting and Error Correcting Codes," Bell System Technical Journal</span>
+<span class="sd">    29(2) (1950), 147-160.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    message : array_like of {0, 1}</span>
+<span class="sd">        Length a multiple of :math:`k = 2^r - r - 1`.</span>
+<span class="sd">    r : int</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray of uint8</span>
+<span class="sd">        Length ``len(message) / k * (2**r - 1)``.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; hamming_encode([1, 0, 1, 1]).tolist()</span>
+<span class="sd">    [0, 1, 1, 0, 0, 1, 1]</span>
+<span class="sd">    """</span>
+    <span class="n">n</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">_hamming_sizes</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="n">_bits</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">message</span><span class="o">.</span><span class="n">size</span> <span class="o">%</span> <span class="n">k</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"message length must be a multiple of k = </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">blocks</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+    <span class="n">positions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">is_parity</span> <span class="o">=</span> <span class="p">(</span><span class="n">positions</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">positions</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="n">codewords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">blocks</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">n</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+    <span class="n">codewords</span><span class="p">[:,</span> <span class="o">~</span><span class="n">is_parity</span><span class="p">]</span> <span class="o">=</span> <span class="n">blocks</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">hamming_parity_check_matrix</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+    <span class="n">syndromes</span> <span class="o">=</span> <span class="p">(</span><span class="n">codewords</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="o">@</span> <span class="n">H</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">))</span> <span class="o">%</span> <span class="mi">2</span>
+    <span class="n">codewords</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">flatnonzero</span><span class="p">(</span><span class="n">is_parity</span><span class="p">)]</span> <span class="o">=</span> <span class="n">syndromes</span>
+    <span class="k">return</span> <span class="n">codewords</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="hamming_decode">
+<a class="viewcode-back" href="../../../../api/information_theory.html#mathematicskit.information_theory.hamming_decode">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">hamming_decode</span><span class="p">(</span><span class="n">received</span><span class="p">,</span> <span class="n">r</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Correct up to one error per block by syndrome decoding and return the message bits.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    received : array_like of {0, 1}</span>
+<span class="sd">        Length a multiple of :math:`2^r - 1`.</span>
+<span class="sd">    r : int</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray of uint8</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; word = hamming_encode([1, 0, 1, 1])</span>
+<span class="sd">    &gt;&gt;&gt; word[4] ^= 1  # one error</span>
+<span class="sd">    &gt;&gt;&gt; hamming_decode(word).tolist()</span>
+<span class="sd">    [1, 0, 1, 1]</span>
+<span class="sd">    """</span>
+    <span class="n">n</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">_hamming_sizes</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+    <span class="n">received</span> <span class="o">=</span> <span class="n">_bits</span><span class="p">(</span><span class="n">received</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">received</span><span class="o">.</span><span class="n">size</span> <span class="o">%</span> <span class="n">n</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"received length must be a multiple of n = </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="n">received</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">hamming_parity_check_matrix</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+    <span class="n">syndromes</span> <span class="o">=</span> <span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="o">@</span> <span class="n">H</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">))</span> <span class="o">%</span> <span class="mi">2</span>
+    <span class="n">error_positions</span> <span class="o">=</span> <span class="n">syndromes</span> <span class="o">@</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flatnonzero</span><span class="p">(</span><span class="n">error_positions</span><span class="p">)</span>
+    <span class="n">words</span><span class="p">[</span><span class="n">rows</span><span class="p">,</span> <span class="n">error_positions</span><span class="p">[</span><span class="n">rows</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">^=</span> <span class="mi">1</span>
+    <span class="n">positions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">words</span><span class="p">[:,</span> <span class="p">(</span><span class="n">positions</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">positions</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_conv_outputs</span><span class="p">(</span><span class="n">register</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">generators</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nb">bin</span><span class="p">(</span><span class="n">register</span> <span class="o">&amp;</span> <span class="n">g</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">"1"</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">generators</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="convolutional_encode">
+<a class="viewcode-back" href="../../../../api/information_theory.html#mathematicskit.information_theory.convolutional_encode">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">convolutional_encode</span><span class="p">(</span><span class="n">bits</span><span class="p">,</span> <span class="n">generators</span><span class="o">=</span><span class="p">(</span><span class="mo">0o7</span><span class="p">,</span> <span class="mo">0o5</span><span class="p">),</span> <span class="n">constraint_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Rate-:math:`1/m` feed-forward convolutional encoder, terminated with :math:`K-1` zeros.</span>
+
+<span class="sd">    Each input bit shifts into a :math:`K`-bit register (newest bit most</span>
+<span class="sd">    significant); output :math:`j` is the parity of the register masked</span>
+<span class="sd">    by ``generators[j]``. The default is the :math:`(7, 5)_8`, :math:`K=3`</span>
+<span class="sd">    code with free distance 5. P. Elias, "Coding for Noisy Channels," IRE</span>
+<span class="sd">    Convention Record 3(4) (1955), 37-46.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    bits : array_like of {0, 1}</span>
+<span class="sd">    generators : sequence of int</span>
+<span class="sd">        Tap masks, conventionally written in octal.</span>
+<span class="sd">    constraint_length : int</span>
+<span class="sd">        :math:`K`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray of uint8</span>
+<span class="sd">        Length ``len(generators) * (len(bits) + K - 1)``.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; convolutional_encode([1, 0, 1, 1]).tolist()</span>
+<span class="sd">    [1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1]</span>
+<span class="sd">    """</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="n">constraint_length</span>
+    <span class="n">state</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="p">[</span><span class="o">*</span><span class="n">_bits</span><span class="p">(</span><span class="n">bits</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="o">*</span><span class="p">([</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">K</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))]:</span>
+        <span class="n">register</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">K</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">|</span> <span class="n">state</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">_conv_outputs</span><span class="p">(</span><span class="n">register</span><span class="p">,</span> <span class="n">generators</span><span class="p">))</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">register</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="viterbi_decode">
+<a class="viewcode-back" href="../../../../api/information_theory.html#mathematicskit.information_theory.viterbi_decode">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">viterbi_decode</span><span class="p">(</span><span class="n">received</span><span class="p">,</span> <span class="n">generators</span><span class="o">=</span><span class="p">(</span><span class="mo">0o7</span><span class="p">,</span> <span class="mo">0o5</span><span class="p">),</span> <span class="n">constraint_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Maximum-likelihood decoding of a terminated convolutional code by the Viterbi algorithm.</span>
+
+<span class="sd">    Dynamic programming over the :math:`2^{K-1}`-state trellis: keep, for</span>
+<span class="sd">    every state, the input path with the smallest Hamming distance to</span>
+<span class="sd">    the received bits, then trace back from the all-zero final state.</span>
+<span class="sd">    A. J. Viterbi, "Error Bounds for Convolutional Codes and an</span>
+<span class="sd">    Asymptotically Optimum Decoding Algorithm," IEEE Transactions on</span>
+<span class="sd">    Information Theory 13(2) (1967), 260-269.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    received : array_like of {0, 1}</span>
+<span class="sd">        Hard-decision channel output of :func:`convolutional_encode`.</span>
+<span class="sd">    generators : sequence of int</span>
+<span class="sd">    constraint_length : int</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray of uint8</span>
+<span class="sd">        The decoded input bits (termination bits removed).</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; word = convolutional_encode([1, 0, 1, 1])</span>
+<span class="sd">    &gt;&gt;&gt; word[[2, 7]] ^= 1  # two errors, far apart</span>
+<span class="sd">    &gt;&gt;&gt; viterbi_decode(word).tolist()</span>
+<span class="sd">    [1, 0, 1, 1]</span>
+<span class="sd">    """</span>
+    <span class="n">K</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">constraint_length</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">generators</span><span class="p">)</span>
+    <span class="n">received</span> <span class="o">=</span> <span class="n">_bits</span><span class="p">(</span><span class="n">received</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">received</span><span class="o">.</span><span class="n">size</span> <span class="o">%</span> <span class="n">m</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"received length must be a multiple of </span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">steps</span> <span class="o">=</span> <span class="n">received</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+    <span class="n">n_states</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="n">K</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">transitions</span> <span class="o">=</span> <span class="p">[[</span><span class="n">_conv_outputs</span><span class="p">((</span><span class="n">b</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">K</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">|</span> <span class="n">s</span><span class="p">,</span> <span class="n">generators</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_states</span><span class="p">)]</span>
+    <span class="n">metric</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">n_states</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
+    <span class="n">metric</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">history</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">steps</span><span class="p">:</span>
+        <span class="n">new_metric</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">n_states</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
+        <span class="n">back</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_states</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_states</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">metric</span><span class="p">[</span><span class="n">s</span><span class="p">]):</span>
+                <span class="k">continue</span>
+            <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">nxt</span> <span class="o">=</span> <span class="p">((</span><span class="n">b</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">K</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">|</span> <span class="n">s</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span>
+                <span class="n">cost</span> <span class="o">=</span> <span class="n">metric</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">transitions</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="n">b</span><span class="p">])</span> <span class="o">!=</span> <span class="n">y</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">cost</span> <span class="o">&lt;</span> <span class="n">new_metric</span><span class="p">[</span><span class="n">nxt</span><span class="p">]:</span>
+                    <span class="n">new_metric</span><span class="p">[</span><span class="n">nxt</span><span class="p">]</span> <span class="o">=</span> <span class="n">cost</span>
+                    <span class="n">back</span><span class="p">[</span><span class="n">nxt</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+        <span class="n">metric</span> <span class="o">=</span> <span class="n">new_metric</span>
+        <span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">back</span><span class="p">)</span>
+    <span class="n">state</span><span class="p">,</span> <span class="n">decoded</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">back</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">history</span><span class="p">):</span>
+        <span class="n">state</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">back</span><span class="p">[</span><span class="n">state</span><span class="p">]</span>
+        <span class="n">decoded</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">decoded</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">decoded</span><span class="p">[:</span> <span class="nb">len</span><span class="p">(</span><span class="n">decoded</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">K</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="gallager_ldpc_matrix">
+<a class="viewcode-back" href="../../../../api/information_theory.html#mathematicskit.information_theory.gallager_ldpc_matrix">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">gallager_ldpc_matrix</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">column_weight</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">row_weight</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Gallager's random regular low-density parity-check matrix.</span>
+
+<span class="sd">    The first band of :math:`n/w_r` rows has :math:`w_r` consecutive ones</span>
+<span class="sd">    each; the other :math:`w_c - 1` bands are random column permutations</span>
+<span class="sd">    of it. Every column then has weight :math:`w_c` and every row weight</span>
+<span class="sd">    :math:`w_r`, for a design rate of :math:`1 - w_c/w_r`. R. G. Gallager,</span>
+<span class="sd">    "Low-Density Parity-Check Codes," IRE Transactions on Information</span>
+<span class="sd">    Theory 8(1) (1962), 21-28; *Low-Density Parity-Check Codes* (MIT</span>
+<span class="sd">    Press, 1963).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    n : int</span>
+<span class="sd">        Block length, a multiple of `row_weight`.</span>
+<span class="sd">    column_weight, row_weight : int</span>
+<span class="sd">    seed : int or numpy.random.Generator, optional</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray of uint8, shape (n * column_weight / row_weight, n)</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; H = gallager_ldpc_matrix(12, column_weight=3, row_weight=4, seed=0)</span>
+<span class="sd">    &gt;&gt;&gt; H.shape, set(H.sum(axis=0).tolist()), set(H.sum(axis=1).tolist())</span>
+<span class="sd">    ((9, 12), {3}, {4})</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="n">row_weight</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"n must be a multiple of row_weight"</span><span class="p">)</span>
+    <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">band</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span> <span class="o">//</span> <span class="n">row_weight</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">//</span> <span class="n">row_weight</span><span class="p">):</span>
+        <span class="n">band</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">*</span> <span class="n">row_weight</span> <span class="p">:</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">row_weight</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">band</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">band</span><span class="p">[:,</span> <span class="n">rng</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">column_weight</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)])</span></div>
+
+
+
+<div class="viewcode-block" id="bit_flip_decode">
+<a class="viewcode-back" href="../../../../api/information_theory.html#mathematicskit.information_theory.bit_flip_decode">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">bit_flip_decode</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">received</span><span class="p">,</span> <span class="n">max_iter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BitFlipResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Gallager's bit-flipping decoder for a low-density parity-check code.</span>
+
+<span class="sd">    While some parity check fails, flip every bit that takes part in the</span>
+<span class="sd">    largest number of failed checks (Gallager 1963, Section 4.1, decoding</span>
+<span class="sd">    algorithm A in its simplest hard-decision form).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    H : array_like of {0, 1}, shape (m, n)</span>
+<span class="sd">        Parity-check matrix.</span>
+<span class="sd">    received : array_like of {0, 1}, shape (n,)</span>
+<span class="sd">    max_iter : int</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    BitFlipResult</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; H = hamming_parity_check_matrix(3)</span>
+<span class="sd">    &gt;&gt;&gt; r = bit_flip_decode(H, [0, 0, 0, 0, 0, 0, 1])</span>
+<span class="sd">    &gt;&gt;&gt; r.codeword.tolist(), r.converged</span>
+<span class="sd">    ([0, 0, 0, 0, 0, 0, 0], True)</span>
+<span class="sd">    """</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">_bits</span><span class="p">(</span><span class="n">H</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+    <span class="n">word</span> <span class="o">=</span> <span class="n">_bits</span><span class="p">(</span><span class="n">received</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">syndrome</span> <span class="o">=</span> <span class="p">(</span><span class="n">H</span> <span class="o">@</span> <span class="n">word</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">syndrome</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">BitFlipResult</span><span class="p">(</span><span class="n">codeword</span><span class="o">=</span><span class="n">word</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="n">iteration</span><span class="p">,</span> <span class="n">converged</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">iteration</span> <span class="o">==</span> <span class="n">max_iter</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">unsatisfied</span> <span class="o">=</span> <span class="n">syndrome</span> <span class="o">@</span> <span class="n">H</span>
+        <span class="n">word</span><span class="p">[</span><span class="n">unsatisfied</span> <span class="o">==</span> <span class="n">unsatisfied</span><span class="o">.</span><span class="n">max</span><span class="p">()]</span> <span class="o">^=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">BitFlipResult</span><span class="p">(</span><span class="n">codeword</span><span class="o">=</span><span class="n">word</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="n">max_iter</span><span class="p">,</span> <span class="n">converged</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, mathematicskit contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.23.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

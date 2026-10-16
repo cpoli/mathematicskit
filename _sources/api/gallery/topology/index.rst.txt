@@ -1,0 +1,590 @@
+:orphan:
+
+Examples
+========
+
+This gallery walks through every public feature of ``mathematicskit.topology``:
+simplicial complexes and their homology, the fundamental group, the
+classification of surfaces, fixed-point theorems, invariants of curves,
+and the topological analysis of point clouds.
+
+Each script in this gallery is self-contained and can be run directly with
+``python examples/topology/<section>/<script>.py``.
+
+Sections
+--------
+
+- **curves** -- Gauss's linking number and Hopf's turning number.
+- **surfaces** -- the Möbius strip, the Klein bottle, the classification
+  of surfaces, and critical points of height functions.
+- **homology** -- the Smith normal form, Betti numbers, Poincaré's
+  homology and the Euler-Poincaré formula, and the fundamental group.
+- **complexes** -- barycentric subdivision, products and the Künneth
+  formula, and the Mayer-Vietoris sequence.
+- **fixed_points** -- the Poincaré-Hopf index, Brouwer's fixed-point
+  theorem, the Lefschetz number, and Sperner's lemma.
+- **data** -- Vietoris-Rips and Čech complexes, persistent homology, its
+  stability, and Mapper.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Complexes
+---------
+
+Constructions on simplicial complexes: subdivision, products, and gluing.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Is homology a property of the space or of the chosen triangulation? Brouwer&#x27;s simplicial approximation (1911) answers it. Any continuous map is close to a simplicial one after subdividing finely enough. Alexander (1915) used this to prove that homology is a topological invariant. Barycentric subdivision replaces every simplex by the chains of its faces. The simplex counts grow about sixfold per round for surfaces, while the Betti numbers do not change.">
+
+.. only:: html
+
+  .. image:: /api/gallery/topology/complexes/images/thumb/sphx_glr_plot_01_barycentric_subdivision_invariance_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/topology/complexes/plot_01_barycentric_subdivision_invariance`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Brouwer, Alexander, and the invariance of homology under subdivision (1911-1915)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Hermann Künneth showed that the Betti numbers of a product are a convolution: \beta_k(X \times Y) = \sum_{i+j=k} \beta_i(X)\,\beta_j(Y), the coefficients of the product of the two Poincaré polynomials. The product of two simplicial complexes is triangulated by staircase paths through each product of simplices. Circle times circle is the torus, (1 + t)^2 = 1 + 2t + t^2, and circle times sphere gives (1 + t)(1 + t^2).">
+
+.. only:: html
+
+  .. image:: /api/gallery/topology/complexes/images/thumb/sphx_glr_plot_02_kunneth_formula_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/topology/complexes/plot_02_kunneth_formula`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Künneth formula for products (1923)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Walther Mayer and Leopold Vietoris computed the homology of a union from its pieces through the long exact sequence">
+
+.. only:: html
+
+  .. image:: /api/gallery/topology/complexes/images/thumb/sphx_glr_plot_03_mayer_vietoris_sequence_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/topology/complexes/plot_03_mayer_vietoris_sequence`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Mayer-Vietoris sequence (1929-1930)</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Curves
+------
+
+Topological invariants of closed curves: linking and turning numbers.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Gauss&#x27;s double integral \frac{1}{4\pi}\oint\oint \frac{(r_1 - r_2)\cdot(dr_1 \times dr_2)}{|r_1 - r_2|^3} counts how many times one closed curve winds around another. It is an integer that no deformation can change without passing one curve through the other. Below: the unlink (0), the Hopf link (\pm 1, the sign set by the orientations), and torus links whose components wind n times around each other.">
+
+.. only:: html
+
+  .. image:: /api/gallery/topology/curves/images/thumb/sphx_glr_plot_01_gauss_linking_number_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/topology/curves/plot_01_gauss_linking_number`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Gauss's linking number (1833)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="As you walk once around a closed plane curve, your heading turns by a whole number of full turns. Hopf proved that for every simple closed curve that number is \pm 1. Curves that cross themselves can have any turning number: 0 for a figure eight, 2 for a limaçon with an inner loop, 4 for a circle carrying three small inner loops.">
+
+.. only:: html
+
+  .. image:: /api/gallery/topology/curves/images/thumb/sphx_glr_plot_02_hopf_umlaufsatz_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/topology/curves/plot_02_hopf_umlaufsatz`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Hopf's Umlaufsatz: the turning number of a closed curve (1935)</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Topological data analysis
+-------------------------
+
+Complexes built from point clouds, persistent homology, and Mapper.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="To define homology for any compact metric space, Leopold Vietoris joined every set of points that are pairwise close. Today this is the Vietoris-Rips complex: at scale r (balls of radius r), a simplex for every set of points at most 2r apart. Sampled from a figure eight, the complex at small scales is dust. At the right scale it has \beta = (1, 2), the figure eight&#x27;s two loops. At large scales everything fills in. Triangles are enough to count loops, and mod-2 coefficients keep the rank computation fast.">
+
+.. only:: html
+
+  .. image:: /api/gallery/topology/data/images/thumb/sphx_glr_plot_01_vietoris_rips_complex_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/topology/data/plot_01_vietoris_rips_complex`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Vietoris's complex of a point cloud (1927)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Eduard Čech built homology from the nerve of a cover: a simplex for every set of cover sets that share a point. Borsuk&#x27;s nerve theorem (1948) says that when every intersection is contractible, as for round discs, the nerve has the homotopy type of the union. Below, the Čech complex of discs around noisy samples of two touching rings has the same Betti numbers as the union of the discs, counted independently from a pixel image. The Vietoris-Rips complex at the same radius also fills in triangles whose three discs meet pairwise but share no common point. At r = 0.6 that closes the small ring&#x27;s hole while the discs still leave it open.">
+
+.. only:: html
+
+  .. image:: /api/gallery/topology/data/images/thumb/sphx_glr_plot_02_cech_nerve_theorem_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/topology/data/plot_02_cech_nerve_theorem`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Čech complexes and the nerve theorem (1932-1948)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="No single scale is right for a noisy sample, so persistent homology tracks all scales at once. As the radius grows, each homology class is born at some radius and dies at a larger one. One reduction of the filtration&#x27;s boundary matrix pairs every birth with its death. Short bars are noise. The long bars are the shape: two loops for this sample of two circles of different sizes, each dying when its disc fills in.">
+
+.. only:: html
+
+  .. image:: /api/gallery/topology/data/images/thumb/sphx_glr_plot_03_persistent_homology_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/topology/data/plot_03_persistent_homology`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Persistent homology (Edelsbrunner, Letscher and Zomorodian 2002)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Persistence is useful because it is stable. Change a function by at most \varepsilon everywhere, and its persistence diagram moves by at most \varepsilon in the bottleneck distance: d_B(\mathrm{Dgm} f, \mathrm{Dgm}\, g) \le \|f - g\|_\infty. Noise creates new points, but only near the diagonal. Below, a signal&#x27;s sublevel-set diagram (its minima paired with the maxima that merge them) is compared with noisy copies at growing noise levels. The bottleneck distance always stays below the noise amplitude.">
+
+.. only:: html
+
+  .. image:: /api/gallery/topology/data/images/thumb/sphx_glr_plot_04_persistence_stability_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/topology/data/plot_04_persistence_stability`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Stability of persistence diagrams (Cohen-Steiner, Edelsbrunner and Harer 2007)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Mapper summarizes a data set as a graph. Slice the data by a lens function, cluster each slice, and join clusters that share points. It is a discrete Reeb graph. Here 3-dimensional data sampled near a circle with a dangling branch are seen through their height. Mapper recovers one loop and one flare, and the graph&#x27;s Betti numbers (1, 1) match the loop.">
+
+.. only:: html
+
+  .. image:: /api/gallery/topology/data/images/thumb/sphx_glr_plot_05_mapper_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/topology/data/plot_05_mapper`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Mapper (Singh, Mémoli and Carlsson 2007)</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Fixed points
+------------
+
+Vector-field indices, Brouwer, Lefschetz, and Sperner.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Walk around a small circle enclosing a zero of a planar vector field, and the field&#x27;s direction turns a whole number of times. That number is the zero&#x27;s index: +1 for sources, sinks and centres, -1 for saddles. Poincaré (1885) proved that on a closed surface the indices sum to the Euler characteristic, and Hopf (1927) extended this to all dimensions. For a disc, with the field pointing outward on the boundary, the sum is \chi(\text{disc}) = 1. Below, a field with two sources and a saddle gives 1 + 1 - 1 = 1.">
+
+.. only:: html
+
+  .. image:: /api/gallery/topology/fixed_points/images/thumb/sphx_glr_plot_01_poincare_hopf_index_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/topology/fixed_points/plot_01_poincare_hopf_index`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Poincaré-Hopf index theorem (1885-1927)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Every continuous map of a disc (or triangle) to itself has a fixed point. The proof here is constructive. Label each vertex of a fine triangulation with a coordinate the map does not increase. That labelling obeys Sperner&#x27;s rule, so some small triangle carries all three labels, and on it the map nearly fixes every coordinate. Refining the grid closes in on a fixed point, which matches a Newton-type solve with scipy.optimize.fsolve.">
+
+.. only:: html
+
+  .. image:: /api/gallery/topology/fixed_points/images/thumb/sphx_glr_plot_02_brouwer_fixed_point_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/topology/fixed_points/plot_02_brouwer_fixed_point`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Brouwer's fixed-point theorem (1911)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Solomon Lefschetz assigned to every self-map f of a complex the number L(f) = \sum_k (-1)^k \operatorname{tr}(f_*: H_k \to H_k), and proved that L(f) \ne 0 forces a fixed point. Hopf showed the same alternating trace can be computed on chains, where it counts the simplices f maps to themselves. The identity has L = \chi. A rotation of the circle has L = 0 and indeed moves every point. A reflection has L = 2: its two fixed points. The antipodal map of the sphere has L = 1 + (-1)^3 = 0. The converse fails: L = 0 does not rule fixed points out, as the identity of the torus shows.">
+
+.. only:: html
+
+  .. image:: /api/gallery/topology/fixed_points/images/thumb/sphx_glr_plot_03_lefschetz_fixed_point_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/topology/fixed_points/plot_03_lefschetz_fixed_point`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Lefschetz's fixed-point theorem and Hopf's trace formula (1926-1929)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Subdivide a triangle and label each vertex 0, 1 or 2, with the corners labelled 0, 1, 2 and each side vertex labelled like one of its side&#x27;s endpoints (interior labels are free). Emanuel Sperner proved that an odd number of small triangles carry all three labels. Picture labels 0-1 edges as doors: one enters from the bottom side, and following doors from room to room can only stop in a fully labelled room.">
+
+.. only:: html
+
+  .. image:: /api/gallery/topology/fixed_points/images/thumb/sphx_glr_plot_04_sperner_lemma_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/topology/fixed_points/plot_04_sperner_lemma`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Sperner's lemma (1928)</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Homology
+--------
+
+The Smith normal form, Betti numbers, homology with torsion, and the fundamental group.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="H. J. S. Smith showed that integer row and column operations bring any integer matrix to a diagonal D = UAV with d_1 \mid d_2 \mid \cdots. The invariant factors classify the abelian group \mathbb{Z}^m / A\mathbb{Z}^n: a factor 1 kills a generator, d &gt; 1 leaves a cyclic group \mathbb{Z}/d, and missing factors leave free \mathbb{Z} summands. The same reduction applied to a boundary matrix gives a space&#x27;s torsion.">
+
+.. only:: html
+
+  .. image:: /api/gallery/topology/homology/images/thumb/sphx_glr_plot_01_smith_normal_form_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/topology/homology/plot_01_smith_normal_form`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Smith's normal form of an integer matrix (1861)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Enrico Betti counted the independent closed curves, surfaces, and so on, that do not bound in a space. In Poincaré&#x27;s later algebra these are the ranks \beta_k = \dim\ker\partial_k - \operatorname{rk}\partial_{k+1}: cycles minus boundaries. \beta_0 counts pieces, \beta_1 independent loops, and \beta_2 enclosed cavities. The bars show the bookkeeping for each space: chains f_k, cycles, and boundaries.">
+
+.. only:: html
+
+  .. image:: /api/gallery/topology/homology/images/thumb/sphx_glr_plot_02_betti_numbers_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/topology/homology/plot_02_betti_numbers`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Betti's connectivity numbers (1871)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Poincaré made Betti&#x27;s numbers a theory. Chains of simplices, their boundaries, and the homology groups H_k = \ker\partial_k / \operatorname{im}\partial_{k+1}, together with torsion coefficients. One consequence generalizes Euler: the alternating count of simplices equals the alternating sum of Betti numbers,">
+
+.. only:: html
+
+  .. image:: /api/gallery/topology/homology/images/thumb/sphx_glr_plot_03_poincare_homology_euler_formula_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/topology/homology/plot_03_poincare_homology_euler_formula`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Poincaré's Analysis Situs: homology and the Euler-Poincaré formula (1895-1900)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Loops from a base point, up to deformation, form a group, \pi_1. For a complex it can be read off combinatorially: contract a spanning tree of the edges, keep one generator per remaining edge, and impose one relation per triangle. Tietze moves then shrink the presentation. The torus gives \langle a, b \mid aba^{-1}b^{-1}\rangle (up to naming), the projective plane \langle a \mid a^2\rangle, and abelianizing gives back H_1.">
+
+.. only:: html
+
+  .. image:: /api/gallery/topology/homology/images/thumb/sphx_glr_plot_04_fundamental_group_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/topology/homology/plot_04_fundamental_group`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Poincaré's fundamental group (1895)</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Surfaces
+--------
+
+One-sided surfaces, the Klein bottle, the classification theorem, and critical points.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Glue the ends of a strip with a half twist and the surface has only one side. In triangle terms, its triangles cannot all be oriented so that neighbours traverse their shared edge in opposite directions. Propagating orientations around the strip comes back reversed. The untwisted band (an annulus) has no such obstruction. Both have \chi = 0, so orientability is what tells them apart, along with the number of boundary circles: one for the Möbius strip, two for the annulus.">
+
+.. only:: html
+
+  .. image:: /api/gallery/topology/surfaces/images/thumb/sphx_glr_plot_01_mobius_one_sided_surface_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/topology/surfaces/plot_01_mobius_one_sided_surface`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Möbius and Listing: the one-sided surface (1858-1865)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Felix Klein&#x27;s bottle glues a cylinder&#x27;s ends with a reflection. It is a closed surface with one side and no edge. It cannot sit in \mathbb{R}^3 without crossing itself, as the figure-8 immersion below does. Its first homology group is \mathbb{Z} \oplus \mathbb{Z}/2: a loop that is not a boundary but whose double is. The \mathbb{Z}/2 torsion hides from rational Betti numbers and shows up mod 2.">
+
+.. only:: html
+
+  .. image:: /api/gallery/topology/surfaces/images/thumb/sphx_glr_plot_02_klein_bottle_torsion_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/topology/surfaces/plot_02_klein_bottle_torsion`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Klein's bottle and torsion in homology (1882)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Every compact connected surface is a sphere with handles or with cross-caps, minus some discs. Three numbers decide which: orientability, the Euler characteristic, and the number of boundary circles. Here classify_surface names nine triangulated surfaces from those invariants alone.">
+
+.. only:: html
+
+  .. image:: /api/gallery/topology/surfaces/images/thumb/sphx_glr_plot_03_classification_of_surfaces_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/topology/surfaces/plot_03_classification_of_surfaces`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The classification of surfaces (Dehn and Heegaard 1907, Brahana 1921)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Morse related the critical points of a function on a manifold to its topology: the alternating count of minima, saddles and maxima is the Euler characteristic. Banchoff found the polyhedral version. Charge each simplex to its highest vertex, and a vertex&#x27;s index is the alternating count of what it receives. On an upright torus the height has one minimum, two saddles and one maximum (1 - 2 + 1 = 0). A wobblier height function has more critical points, but the alternating sum stays at 0.">
+
+.. only:: html
+
+  .. image:: /api/gallery/topology/surfaces/images/thumb/sphx_glr_plot_04_morse_banchoff_critical_points_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/topology/surfaces/plot_04_morse_banchoff_critical_points`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Morse theory and Banchoff's critical points (1925-1967)</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+   :includehidden:
+
+
+   /api/gallery/topology/complexes/index.rst
+   /api/gallery/topology/curves/index.rst
+   /api/gallery/topology/data/index.rst
+   /api/gallery/topology/fixed_points/index.rst
+   /api/gallery/topology/homology/index.rst
+   /api/gallery/topology/surfaces/index.rst
+
+
+.. only:: html
+
+  .. container:: sphx-glr-footer sphx-glr-footer-gallery
+
+    .. container:: sphx-glr-download sphx-glr-download-python
+
+      :download:`Download all examples in Python source code: topology_python.zip </api/gallery/topology/topology_python.zip>`
+
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download all examples in Jupyter notebooks: topology_jupyter.zip </api/gallery/topology/topology_jupyter.zip>`
+
+
+.. only:: html
+
+ .. rst-class:: sphx-glr-signature
+
+    `Gallery generated by Sphinx-Gallery <https://sphinx-gallery.github.io>`_

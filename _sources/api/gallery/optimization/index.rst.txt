@@ -34,10 +34,14 @@ Sections
 - **least_squares** -- Levenberg-Marquardt nonlinear least squares.
 - **constrained** -- Lagrange multipliers, KKT verification, the
   penalty method, and the Frank-Wolfe method.
-- **linear_programming** -- linear programming via ``scipy.optimize.linprog``
-  and integer programming by branch and bound via ``scipy.optimize.milp``.
+- **linear_programming** -- linear programming via ``scipy.optimize.linprog``,
+  integer programming by branch and bound via ``scipy.optimize.milp``,
+  and the central path of an interior-point method.
 - **game_theory** -- zero-sum matrix games and the minimax theorem.
 - **dynamic_programming** -- Bellman's recursion for the knapsack problem.
+- **annealing** -- simulated annealing on a rugged landscape.
+- **tsp** -- the travelling salesman problem: nearest neighbour, 2-opt,
+  and the exact Held-Karp algorithm.
 
 
 .. raw:: html
@@ -57,10 +61,51 @@ Sections
 
     </div>
 
+Simulated annealing
+---------------------
+
+Metropolis sampling at a falling temperature, for rugged landscapes.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Gradient methods slide into the nearest valley. Kirkpatrick, Gelatt and Vecchi (1983) borrowed the Metropolis rule from statistical physics: accept any downhill move, and an uphill move of size \Delta f with probability e^{-\Delta f/T}, while the temperature T is lowered slowly, as in annealing a metal.">
+
+.. only:: html
+
+  .. image:: /api/gallery/optimization/annealing/images/thumb/sphx_glr_plot_01_simulated_annealing_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/optimization/annealing/plot_01_simulated_annealing`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Kirkpatrick, Gelatt and Vecchi's simulated annealing</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
 Nonlinear conjugate gradient
 ------------------------------
 
-Fletcher-Reeves and Polak-Ribiere nonlinear CG.
+Fletcher-Reeves and Polak-Ribiere nonlinear CG. An animation races CG
+against gradient descent down Rosenbrock's valley.
 
 
 .. raw:: html
@@ -88,6 +133,23 @@ Fletcher-Reeves and Polak-Ribiere nonlinear CG.
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">Nonlinear conjugate gradient vs. gradient descent</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Rosenbrock&#x27;s function (1 - x)^2 + 100(y - x^2)^2 has its minimum at (1, 1) at the bottom of a long, curved, flat-floored valley. Steepest descent, even with a line search, zig-zags across the valley because each new gradient is orthogonal to the last step. Nonlinear conjugate gradient (Polak-Ribiere) mixes the previous direction into the next, so it follows the valley floor. Frames are spaced geometrically in the iteration count, so the title shows how long each method has been walking.">
+
+.. only:: html
+
+  .. image:: /api/gallery/optimization/conjugate_gradient/images/thumb/sphx_glr_plot_02_cg_vs_gradient_descent_rosenbrock_animation_thumb.gif
+    :alt:
+
+  :doc:`/api/gallery/optimization/conjugate_gradient/plot_02_cg_vs_gradient_descent_rosenbrock_animation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Animated: conjugate gradient against gradient descent in Rosenbrock's valley</div>
     </div>
 
 
@@ -375,7 +437,8 @@ Curve fitting with the Levenberg-Marquardt method.
 Linear programming
 ---------------------
 
-Dantzig's simplex method and branch and bound for integer programs.
+Dantzig's simplex method, branch and bound for integer programs, and
+Karmarkar's interior-point approach.
 
 
 .. raw:: html
@@ -420,6 +483,23 @@ Dantzig's simplex method and branch and bound for integer programs.
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">Branch and bound: integer versus relaxed optimum</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The simplex method walks the edges of the feasible polygon. Karmarkar (1984) cut through its interior instead, with an algorithm that was both polynomial-time and fast in practice. Its descendants, the primal-dual path-following methods used by every modern LP solver, track the central path: the points where every product x_i s_i of a primal variable and its dual slack equals the same \mu. As \mu \to 0 the path ends at the optimal vertex.">
+
+.. only:: html
+
+  .. image:: /api/gallery/optimization/linear_programming/images/thumb/sphx_glr_plot_03_interior_point_central_path_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/optimization/linear_programming/plot_03_interior_point_central_path`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Karmarkar's interior-point method: the central path</div>
     </div>
 
 
@@ -647,12 +727,54 @@ Rosenbrock's banana function, the standard stress test for optimizers.
 
     </div>
 
+The travelling salesman problem
+---------------------------------
+
+Nearest-neighbour and 2-opt heuristics against the exact Held-Karp
+algorithm.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="A salesman must visit n cities and return home by the shortest route. Trying all (n-1)!/2 tours is hopeless beyond a dozen cities; Held and Karp (1962) found the optimum in O(n^2 2^n) steps by dynamic programming over the set of cities visited so far, still the best worst-case bound known. Heuristics are faster but inexact: the nearest-neighbour tour, and Croes&#x27;s 2-opt move, which reverses a segment whenever that removes a crossing.">
+
+.. only:: html
+
+  .. image:: /api/gallery/optimization/tsp/images/thumb/sphx_glr_plot_01_held_karp_travelling_salesman_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/optimization/tsp/plot_01_held_karp_travelling_salesman`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The travelling salesman: Held and Karp's exact algorithm</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
 
 .. toctree::
    :hidden:
    :includehidden:
 
 
+   /api/gallery/optimization/annealing/index.rst
    /api/gallery/optimization/conjugate_gradient/index.rst
    /api/gallery/optimization/constrained/index.rst
    /api/gallery/optimization/direct_search/index.rst
@@ -666,6 +788,7 @@ Rosenbrock's banana function, the standard stress test for optimizers.
    /api/gallery/optimization/scalar_search/index.rst
    /api/gallery/optimization/stochastic/index.rst
    /api/gallery/optimization/test_functions/index.rst
+   /api/gallery/optimization/tsp/index.rst
 
 
 .. only:: html

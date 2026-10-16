@@ -6,8 +6,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content="HahFPQi2xaPBLET0Fp9jRVKVsYmsPsFsSixUONPrtp0" name="google-site-verification" />
 
-    <title>mathematicskit &#8212; mathematicskit 0.5.1 documentation</title>
+    <title>mathematicskit &#8212; mathematicskit 0.6.0 documentation</title>
   
   
   
@@ -26,8 +27,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=64cc4de3f052d77215f0" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=64cc4de3f052d77215f0" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Vibur" />
@@ -39,12 +40,12 @@
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="_static/scripts/fontawesome.js?digest=64cc4de3f052d77215f0"></script>
+  <script defer src="_static/scripts/fontawesome.js?digest=18bd87630a240e9c25be"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be" />
 
-    <script src="_static/documentation_options.js?v=d9b85e4f"></script>
+    <script src="_static/documentation_options.js?v=dda85ae5"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/sg-tags.js?v=d80f6fa4"></script>
@@ -56,6 +57,7 @@
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Subpackages" href="subpackages/index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="color-scheme" content="light dark"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
   
@@ -393,8 +395,8 @@
   <section id="mathematicskit">
 <h1>mathematicskit<a class="headerlink" href="#mathematicskit" title="Link to this heading">#</a></h1>
 <p><strong>mathematicskit</strong> is a unified toolkit for computational mathematics, spanning
-16 domains – from abstract algebra to statistical
-inference – under one NumPy-based API. It’s built for mathematics
+18 domains – from abstract algebra and information theory
+to statistical inference and topology – under one NumPy-based API. It’s built for mathematics
 students working through a textbook problem, curious learners exploring
 a topic on their own, and educators building a demonstration. Under the
 hood, it calls <cite>numpy</cite>/<cite>scipy</cite> directly for anything they already
@@ -405,7 +407,8 @@ tests, and examples wrapped around those calls, not reinventing
 numerical primitives that are already correct and well-tested upstream.
 Algorithms are hand-rolled from first principles only where no
 <cite>numpy</cite>/<cite>scipy</cite> equivalent exists (e.g. Dijkstra/Kruskal, finite
-fields, modular arithmetic), or where the algorithm’s own iterate
+fields, modular arithmetic, Huffman and LDPC codes, the Smith normal
+form, persistent homology), or where the algorithm’s own iterate
 behavior is itself the pedagogical subject (e.g. Newton’s method’s
 convergence history, forward/reverse-mode autodiff). No hard dependency
 on <cite>networkx</cite>, <cite>cvxpy</cite>, or SageMath.</p>
@@ -416,7 +419,7 @@ coded against it: public functions carry runnable, CI-checked examples,
 and each subpackage’s <a class="reference internal" href="history/index.html"><span class="doc">history</span></a> page traces the
 breakthroughs behind it – from Euclid’s algorithm to the fast Fourier
 transform – each one linked to the code that reproduces it.</p>
-<p>In short, mathematicskit is 16 domains behind one
+<p>In short, mathematicskit is 18 domains behind one
 consistent API, plus a history-of-mathematics narrative in which every
 milestone links to runnable gallery code. It is closest in spirit to a
 teaching resource such as <em>Numerical Recipes</em> or the
@@ -475,6 +478,13 @@ maximum flow/minimum cut, graph coloring, and spectral graph theory.</p>
 <a class="reference internal image-reference" href="_images/readme_graph_theory.png"><img alt="Spectral bipartition, A* search, and a four-colored map" src="_images/readme_graph_theory.png" style="width: 100%;" />
 </a>
 </li>
+<li><p><a class="reference internal" href="api/information_theory.html#module-mathematicskit.information_theory" title="mathematicskit.information_theory"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.information_theory</span></code></a> – entropy and mutual
+information, Shannon-Fano, Huffman and arithmetic coding, Lempel-Ziv,
+channel capacity and rate-distortion, and Hamming, convolutional
+(Viterbi) and LDPC codes.</p>
+<a class="reference internal image-reference" href="_images/readme_information_theory.png"><img alt="A Huffman code tree, an information diagram, and bit error rates of Hamming and convolutional codes" src="_images/readme_information_theory.png" style="width: 100%;" />
+</a>
+</li>
 <li><p><a class="reference internal" href="api/linalg.html#module-mathematicskit.linalg" title="mathematicskit.linalg"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.linalg</span></code></a> – LU/QR/Cholesky decompositions, symmetric
 eigenvalue algorithms, SVD, iterative Krylov solvers, and least-squares
 numerical stability.</p>
@@ -501,16 +511,16 @@ sections.</p>
 <a class="reference internal image-reference" href="_images/readme_ode_dynamics.png"><img alt="Pendulum phase portrait, the Lorenz attractor, and a Poincaré section of the Duffing oscillator" src="_images/readme_ode_dynamics.png" style="width: 100%;" />
 </a>
 </li>
-<li><p><a class="reference internal" href="api/pde.html#module-mathematicskit.pde" title="mathematicskit.pde"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.pde</span></code></a> – heat, wave, advection, and Poisson/Laplace
-problems: the method of lines, Crank-Nicolson, CFL and von Neumann
-stability, and Fourier/Chebyshev spectral methods.</p>
-<a class="reference internal image-reference" href="_images/readme_pde.png"><img alt="2D heat equation, wave-equation space-time diagram, and a Burgers shock" src="_images/readme_pde.png" style="width: 100%;" />
-</a>
-</li>
 <li><p><a class="reference internal" href="api/optimization.html#module-mathematicskit.optimization" title="mathematicskit.optimization"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.optimization</span></code></a> – gradient descent, nonlinear conjugate
 gradient, Newton/BFGS, Lagrange/KKT constrained optimization, the
 penalty method, and linear programming.</p>
 <a class="reference internal image-reference" href="_images/readme_optimization.png"><img alt="Optimizer paths on Rosenbrock's function, CG vs. gradient descent convergence, and a linear program" src="_images/readme_optimization.png" style="width: 100%;" />
+</a>
+</li>
+<li><p><a class="reference internal" href="api/pde.html#module-mathematicskit.pde" title="mathematicskit.pde"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.pde</span></code></a> – heat, wave, advection, and Poisson/Laplace
+problems: the method of lines, Crank-Nicolson, CFL and von Neumann
+stability, and Fourier/Chebyshev spectral methods.</p>
+<a class="reference internal image-reference" href="_images/readme_pde.png"><img alt="2D heat equation, wave-equation space-time diagram, and a Burgers shock" src="_images/readme_pde.png" style="width: 100%;" />
 </a>
 </li>
 <li><p><a class="reference internal" href="api/probability.html#module-mathematicskit.probability" title="mathematicskit.probability"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.probability</span></code></a> – discrete/continuous distributions, Monte
@@ -530,6 +540,12 @@ confidence intervals, OLS regression, and bootstrap resampling.</p>
 <a class="reference internal image-reference" href="_images/readme_statistics.png"><img alt="Regression fit, OLS residuals, and group box plots" src="_images/readme_statistics.png" style="width: 100%;" />
 </a>
 </li>
+<li><p><a class="reference internal" href="api/topology.html#module-mathematicskit.topology" title="mathematicskit.topology"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mathematicskit.topology</span></code></a> – simplicial complexes, integer homology
+by the Smith normal form, the fundamental group, the classification of
+surfaces, fixed-point theorems, and persistent homology of point clouds.</p>
+<a class="reference internal image-reference" href="_images/readme_topology.png"><img alt="Critical points on a torus, a Vietoris-Rips complex of a noisy circle, and its persistence diagram" src="_images/readme_topology.png" style="width: 100%;" />
+</a>
+</li>
 </ul>
 <p><strong>mathematicskit</strong> is part of a family of packages –
 <a class="reference external" href="https://cpoli.github.io/physicskit/">physicskit</a>, <strong>mathematicskit</strong>
@@ -539,6 +555,10 @@ the same architecture, API conventions, and history-driven documentation.</p>
 <h2>Install and try it<a class="headerlink" href="#install-and-try-it" title="Link to this heading">#</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">"mathematicskit[fast]"</span><span class="w">   </span><span class="c1"># with numba JIT acceleration (recommended)</span>
 pip<span class="w"> </span>install<span class="w"> </span>mathematicskit<span class="w">           </span><span class="c1"># pure numpy/scipy/matplotlib, e.g. for Pyodide</span>
+</pre></div>
+</div>
+<p>or with conda (conda has no extras, so name numba to get the JIT):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>mathematicskit<span class="w"> </span>numba
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">fast</span></code> extra adds <a class="reference external" href="https://numba.pydata.org/">numba</a>, which compiles
@@ -639,8 +659,8 @@ scripts and notebooks. The public API follows a documented
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0"></script>
-<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -673,7 +693,7 @@ scripts and notebooks. The public API follows a documented
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.22.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.23.0.
 </p></div>
       
     </div>

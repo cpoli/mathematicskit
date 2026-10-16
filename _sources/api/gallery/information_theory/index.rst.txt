@@ -1,0 +1,507 @@
+:orphan:
+
+Examples
+========
+
+This gallery walks through every public feature of ``mathematicskit.information_theory``:
+entropy, mutual information and divergence; lossless source codes from
+Shannon-Fano and Huffman to arithmetic coding and Lempel-Ziv; channel
+capacity, the noisy-channel coding theorem and rate-distortion; and
+error-correcting codes from Hamming to Gallager's LDPC codes.
+
+Each script in this gallery is self-contained and can be run directly with
+``python examples/information_theory/<section>/<script>.py``.
+
+Sections
+--------
+
+- **entropy** -- Hartley's measure, Shannon entropy, mutual information,
+  and the Kullback-Leibler divergence.
+- **source_coding** -- the typical set, Shannon-Fano and Huffman codes,
+  the Kraft-McMillan inequality, Elias gamma codes, arithmetic coding,
+  and LZ78.
+- **channels** -- capacity of the binary symmetric and Gaussian
+  channels, random codes, rate-distortion, and Blahut-Arimoto.
+- **channel_codes** -- Hamming codes, convolutional codes and Viterbi
+  decoding, and LDPC codes with bit flipping.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Channel codes
+-------------
+
+Error-correcting codes and their decoders.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Tired of weekend jobs on the Bell Labs relay computers stopping at every error, Hamming designed codes that correct them. The (7,4) code adds three parity bits so that the syndrome -- which checks fail -- spells out the position of a single flipped bit in binary. Over a binary symmetric channel it trades rate 4/7 for a much lower bit error rate when errors are rare.">
+
+.. only:: html
+
+  .. image:: /api/gallery/information_theory/channel_codes/images/thumb/sphx_glr_plot_01_hamming_codes_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/information_theory/channel_codes/plot_01_hamming_codes`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Hamming codes (1950)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Elias proposed encoding a bit stream continuously instead of in blocks: each output pair is the parity of a sliding window of input bits. The rate-1/2 code with generators (7, 5)_8 and constraint length 3 spreads every input bit over six output bits, and its free distance -- the lightest nonzero output -- is 5.">
+
+.. only:: html
+
+  .. image:: /api/gallery/information_theory/channel_codes/images/thumb/sphx_glr_plot_02_convolutional_codes_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/information_theory/channel_codes/plot_02_convolutional_codes`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Convolutional codes (1955)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Viterbi decoded convolutional codes by dynamic programming on the trellis of encoder states: at every step each state keeps only its best incoming path, so maximum-likelihood decoding costs time linear in the message length instead of exponential. It went on to decode deep-space probes, mobile phones, and hidden Markov models.">
+
+.. only:: html
+
+  .. image:: /api/gallery/information_theory/channel_codes/images/thumb/sphx_glr_plot_03_viterbi_decoding_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/information_theory/channel_codes/plot_03_viterbi_decoding`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Viterbi algorithm (1967)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Gallager&#x27;s thesis proposed codes defined by a sparse random parity-check matrix, decoded iteratively: flip the bits that sit in the most failed checks, and repeat. Too costly for the computers of the time, LDPC codes were forgotten until MacKay and Neal rediscovered them in 1996; they now operate close to capacity in Wi-Fi, 5G, and satellite television.">
+
+.. only:: html
+
+  .. image:: /api/gallery/information_theory/channel_codes/images/thumb/sphx_glr_plot_04_gallager_ldpc_bit_flipping_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/information_theory/channel_codes/plot_04_gallager_ldpc_bit_flipping`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Gallager's low-density parity-check codes (1962-1963)</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Channels
+--------
+
+Channel capacity, the noisy-channel coding theorem, and rate-distortion.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="A binary symmetric channel flips each bit with probability p. Shannon showed its capacity is C = 1 - h(p) bits per use, the largest mutual information over input distributions, reached by a fair coin. At p = 0.11 half of every bit survives; at p = 1/2 the output is independent of the input.">
+
+.. only:: html
+
+  .. image:: /api/gallery/information_theory/channels/images/thumb/sphx_glr_plot_01_binary_symmetric_channel_capacity_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/information_theory/channels/plot_01_binary_symmetric_channel_capacity`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Capacity of the binary symmetric channel (1948)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Shannon proved that every rate below capacity can be sent with error probability as small as desired, and no rate above it can. His proof used random codes: draw 2^{nR} codewords at random and decode to the nearest one. Here the rate is fixed at R = 1/4 and the block length grows: below capacity the error falls toward zero, above capacity it rises toward one.">
+
+.. only:: html
+
+  .. image:: /api/gallery/information_theory/channels/images/thumb/sphx_glr_plot_02_noisy_channel_coding_theorem_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/information_theory/channels/plot_02_noisy_channel_coding_theorem`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The noisy-channel coding theorem (1948)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="A channel of bandwidth B with Gaussian noise carries at most C = B\log_2(1 + S/N) bits per second. Capacity grows only logarithmically with power, and dividing by the bit rate gives the Shannon limit: no code works below E_b/N_0 = \ln 2, or -1.59 dB.">
+
+.. only:: html
+
+  .. image:: /api/gallery/information_theory/channels/images/thumb/sphx_glr_plot_03_shannon_hartley_theorem_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/information_theory/channels/plot_03_shannon_hartley_theorem`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Shannon-Hartley theorem (1949)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="If some error is allowed, fewer bits are needed. Shannon&#x27;s rate-distortion function R(D) is the fewest bits per symbol that reproduce a source within average distortion D: for a fair coin with Hamming distortion R(D) = 1 - h(D), and for a Gaussian with squared error R(D) = \tfrac12\log_2(\sigma^2/D), 6.02 dB of quality per bit.">
+
+.. only:: html
+
+  .. image:: /api/gallery/information_theory/channels/images/thumb/sphx_glr_plot_04_rate_distortion_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/information_theory/channels/plot_04_rate_distortion`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Rate-distortion theory (1959)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Most channels have no closed-form capacity. Blahut and Arimoto independently found an alternating maximization that converges to it, with upper and lower bounds that squeeze together at every step. Here it recovers 1 - h(p) for the binary symmetric channel and finds the capacity and skewed optimal input of the Z channel, and \log_2 3 for the noisy typewriter (send every other letter).">
+
+.. only:: html
+
+  .. image:: /api/gallery/information_theory/channels/images/thumb/sphx_glr_plot_05_blahut_arimoto_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/information_theory/channels/plot_05_blahut_arimoto`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Blahut-Arimoto algorithm (1972)</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Entropy
+-------
+
+Measures of information: Hartley, Shannon, mutual information, and divergence.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Hartley measured the information in a message of L symbols from an alphabet of n as L\log n: the logarithm makes information add up when messages are concatenated. The plot compares alphabets by the bits each symbol carries, and the number of symbols needed to send one of a million equally likely messages.">
+
+.. only:: html
+
+  .. image:: /api/gallery/information_theory/entropy/images/thumb/sphx_glr_plot_01_hartley_information_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/information_theory/entropy/plot_01_hartley_information`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Hartley's measure of information (1928)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Shannon replaced Hartley&#x27;s count of messages with an average over their probabilities, H = -\sum p\log_2 p: the expected surprise of the next symbol. The binary entropy function peaks at one bit for a fair coin, and the entropy of English letter frequencies (about 4.2 bits) falls short of Hartley&#x27;s \log_2 26 = 4.7.">
+
+.. only:: html
+
+  .. image:: /api/gallery/information_theory/entropy/images/thumb/sphx_glr_plot_02_shannon_entropy_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/information_theory/entropy/plot_02_shannon_entropy`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Shannon entropy (1948)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Shannon measured what the output Y of a noisy channel tells about its input X by I(X;Y) = H(X) - H(X\mid Y), the uncertainty removed by observing the output. The information diagram shows the decomposition for a binary symmetric channel, and the curve shows I(X;Y) against the input bias for several noise levels.">
+
+.. only:: html
+
+  .. image:: /api/gallery/information_theory/entropy/images/thumb/sphx_glr_plot_03_mutual_information_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/information_theory/entropy/plot_03_mutual_information`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Mutual information (1948)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Kullback and Leibler defined D(p\,\|\,q) = \sum p\log(p/q) as the mean information per observation for telling p from q. It is never negative (Gibbs&#x27; inequality) and vanishes only at p = q, but it is not symmetric. It is also the extra bits per symbol paid for coding a p-source with a code built for q.">
+
+.. only:: html
+
+  .. image:: /api/gallery/information_theory/entropy/images/thumb/sphx_glr_plot_04_kullback_leibler_divergence_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/information_theory/entropy/plot_04_kullback_leibler_divergence`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Kullback-Leibler divergence (1951)</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Source coding
+-------------
+
+Lossless compression: from the typical set to Huffman, arithmetic, and Lempel-Ziv codes.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="For long i.i.d. sequences, -\tfrac1n\log_2 p(x^n) concentrates at the entropy H (the asymptotic equipartition property). Almost all the probability then sits on about 2^{nH} &quot;typical&quot; sequences out of 2^n, so nH bits suffice to describe the source, and no lossless code can do better on average.">
+
+.. only:: html
+
+  .. image:: /api/gallery/information_theory/source_coding/images/thumb/sphx_glr_plot_01_source_coding_theorem_typical_set_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/information_theory/source_coding/plot_01_source_coding_theorem_typical_set`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Shannon's source coding theorem: the typical set (1948)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Shannon gave each symbol \lceil -\log_2 p\rceil bits, read off the binary expansion of the cumulative probability; Fano split the sorted symbols into two halves of nearly equal probability, recursively. Both land within one bit of the entropy -- the first practical codes built on Shannon&#x27;s theory -- but neither is always optimal.">
+
+.. only:: html
+
+  .. image:: /api/gallery/information_theory/source_coding/images/thumb/sphx_glr_plot_02_shannon_fano_coding_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/information_theory/source_coding/plot_02_shannon_fano_coding`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Shannon-Fano coding (1948-1949)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="A binary prefix code with codeword lengths \ell_i exists if and only if \sum_i 2^{-\ell_i} \le 1 (Kraft 1949); McMillan (1956) showed every uniquely decodable code obeys the same bound. Each codeword of length \ell claims a 2^{-\ell} share of the unit interval, and prefix-freeness means the shares cannot overlap.">
+
+.. only:: html
+
+  .. image:: /api/gallery/information_theory/source_coding/images/thumb/sphx_glr_plot_03_kraft_mcmillan_inequality_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/information_theory/source_coding/plot_03_kraft_mcmillan_inequality`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Kraft-McMillan inequality (1949, 1956)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Huffman, then a student in Fano&#x27;s class, found the optimal prefix code by building the tree bottom-up: repeatedly merge the two least likely symbols. The resulting code has the smallest possible average length, between H and H+1 bits, and is never worse than Shannon-Fano.">
+
+.. only:: html
+
+  .. image:: /api/gallery/information_theory/source_coding/images/thumb/sphx_glr_plot_04_huffman_coding_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/information_theory/source_coding/plot_04_huffman_coding`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Huffman coding (1952)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="To send a positive integer of unknown size, Elias&#x27; gamma code writes \lfloor\log_2 n\rfloor zeros, then n in binary: the zeros announce the length. It is a prefix code for all integers at once, at most twice the optimal length, and universal: on any decreasing distribution it codes within a constant factor of the entropy.">
+
+.. only:: html
+
+  .. image:: /api/gallery/information_theory/source_coding/images/thumb/sphx_glr_plot_05_elias_gamma_code_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/information_theory/source_coding/plot_05_elias_gamma_code`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Elias' universal code for the integers (1975)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Rissanen and Pasco coded a whole message as a single number: each symbol narrows an interval in proportion to its probability, and the codeword is the shortest binary fraction inside the final interval. The length is within two bits of -\log_2 p(\text{message}), so unlike Huffman coding there is no rounding up to whole bits per symbol.">
+
+.. only:: html
+
+  .. image:: /api/gallery/information_theory/source_coding/images/thumb/sphx_glr_plot_06_arithmetic_coding_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/information_theory/source_coding/plot_06_arithmetic_coding`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Arithmetic coding (1976)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Ziv and Lempel&#x27;s LZ78 parses a sequence into phrases, each the longest earlier phrase plus one new symbol, and sends (phrase index, symbol) pairs. It knows nothing about the source, yet for any stationary ergodic source its rate approaches the entropy rate: a universal code, the ancestor of LZW, GIF and zip.">
+
+.. only:: html
+
+  .. image:: /api/gallery/information_theory/source_coding/images/thumb/sphx_glr_plot_07_lempel_ziv_compression_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/information_theory/source_coding/plot_07_lempel_ziv_compression`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Lempel-Ziv compression (1977-1978)</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+   :includehidden:
+
+
+   /api/gallery/information_theory/channel_codes/index.rst
+   /api/gallery/information_theory/channels/index.rst
+   /api/gallery/information_theory/entropy/index.rst
+   /api/gallery/information_theory/source_coding/index.rst
+
+
+.. only:: html
+
+  .. container:: sphx-glr-footer sphx-glr-footer-gallery
+
+    .. container:: sphx-glr-download sphx-glr-download-python
+
+      :download:`Download all examples in Python source code: information_theory_python.zip </api/gallery/information_theory/information_theory_python.zip>`
+
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download all examples in Jupyter notebooks: information_theory_jupyter.zip </api/gallery/information_theory/information_theory_jupyter.zip>`
+
+
+.. only:: html
+
+ .. rst-class:: sphx-glr-signature
+
+    `Gallery generated by Sphinx-Gallery <https://sphinx-gallery.github.io>`_

@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>mathematicskit.statistics.core.base &#8212; mathematicskit 0.5.1 documentation</title>
+    <title>mathematicskit.statistics.core.base &#8212; mathematicskit 0.6.0 documentation</title>
   
   
   
@@ -25,8 +25,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=64cc4de3f052d77215f0" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=64cc4de3f052d77215f0" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Vibur" />
@@ -38,12 +38,12 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=64cc4de3f052d77215f0"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=18bd87630a240e9c25be"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be" />
 
-    <script src="../../../../_static/documentation_options.js?v=d9b85e4f"></script>
+    <script src="../../../../_static/documentation_options.js?v=dda85ae5"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../../_static/sg-tags.js?v=d80f6fa4"></script>
@@ -54,6 +54,7 @@
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="color-scheme" content="light dark"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
   
@@ -445,6 +446,8 @@
     <span class="s2">"MaximumLikelihoodResult"</span><span class="p">,</span>
     <span class="s2">"JackknifeResult"</span><span class="p">,</span>
     <span class="s2">"MultipleTestingResult"</span><span class="p">,</span>
+    <span class="s2">"PCAResult"</span><span class="p">,</span>
+    <span class="s2">"ARModelResult"</span><span class="p">,</span>
 <span class="p">]</span>
 
 
@@ -720,6 +723,56 @@
     <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
 <span class="w">    </span><span class="sd">"""str: ``"bonferroni"`` or ``"benjamini_hochberg"``."""</span></div>
 
+
+
+<div class="viewcode-block" id="PCAResult">
+<a class="viewcode-back" href="../../../../api/statistics.html#mathematicskit.statistics.PCAResult">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">PCAResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Container for a principal component analysis."""</span>
+
+    <span class="n">components</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sd">"""ndarray, shape (k, p): The principal axes as *rows*, unit vectors in</span>
+<span class="sd">    order of decreasing variance (the right singular vectors of the</span>
+<span class="sd">    centered data)."""</span>
+
+    <span class="n">explained_variance</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sd">"""ndarray, shape (k,): Variance of the data along each component</span>
+<span class="sd">    (eigenvalues of the sample covariance matrix, ``ddof=1``)."""</span>
+
+    <span class="n">explained_variance_ratio</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sd">"""ndarray, shape (k,): `explained_variance` as a fraction of the total variance."""</span>
+
+    <span class="n">scores</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sd">"""ndarray, shape (n, k): Coordinates of each observation along the components."""</span>
+
+    <span class="n">mean</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sd">"""ndarray, shape (p,): Column means subtracted before the decomposition."""</span>
+
+    <span class="n">singular_values</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sd">"""ndarray, shape (k,): Singular values of the centered data matrix."""</span></div>
+
+
+
+<div class="viewcode-block" id="ARModelResult">
+<a class="viewcode-back" href="../../../../api/statistics.html#mathematicskit.statistics.ARModelResult">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ARModelResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Container for an autoregressive model fitted by the Yule-Walker equations."""</span>
+
+    <span class="n">coefficients</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sd">"""ndarray, shape (p,): :math:`\\phi_1, \\dots, \\phi_p` in</span>
+<span class="sd">    :math:`X_t = \\mu + \\sum_k \\phi_k (X_{t-k} - \\mu) + \\varepsilon_t`."""</span>
+
+    <span class="n">noise_variance</span><span class="p">:</span> <span class="nb">float</span>
+<span class="w">    </span><span class="sd">"""float: Estimated innovation variance :math:`\\sigma^2`."""</span>
+
+    <span class="n">mean</span><span class="p">:</span> <span class="nb">float</span>
+<span class="w">    </span><span class="sd">"""float: Sample mean :math:`\\mu`, subtracted before fitting."""</span>
+
+    <span class="n">autocorrelation</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sd">"""ndarray, shape (p + 1,): Sample autocorrelations at lags ``0..p`` used in the fit."""</span></div>
+
 </pre></div>
 
                 </article>
@@ -749,8 +802,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -783,7 +836,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.22.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.23.0.
 </p></div>
       
     </div>
