@@ -2,6 +2,9 @@
 .. meta::
    :google-site-verification: HahFPQi2xaPBLET0Fp9jRVKVsYmsPsFsSixUONPrtp0
 
+.. meta::
+   :google-site-verification: Apib7-x98H0j5cPqHWwSMm6dNU4GmODRoqxLiDzdx9I
+
 mathematicskit: Computational Mathematics in Python
 ===================================================
 
