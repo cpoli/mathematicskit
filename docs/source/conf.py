@@ -241,6 +241,9 @@ sphinx_gallery_conf = {
         "use_jupyter_lab": True,
         "notebook_modification_function": _jupyterlite_install_cell,
     },
+    # Run the examples in one worker process per core; MATHEMATICSKIT_GALLERY_JOBS=1
+    # runs them one at a time in the Sphinx process instead.
+    "parallel": int(os.environ.get("MATHEMATICSKIT_GALLERY_JOBS", os.cpu_count() or 1)),
 }
 
 # Many domains share common attribute names (e.g. "x", "n") across unrelated
